@@ -31,6 +31,8 @@ namespace Br3D
         private Memo lastMemo = null;
         Design design => hDesign;
         Dictionary<NavElement, Action> functionByElement = new Dictionary<NavElement, Action>();
+        string opendFilePath = "";
+        bool isDwg => string.IsNullOrEmpty(opendFilePath) ? false : Path.GetExtension(opendFilePath).ToLower().EndsWith("dwg");
         public FormMain()
         {
             InitializeComponent();
@@ -486,6 +488,7 @@ namespace Br3D
             functionByElement.Add(tileNavItemSaveAs, SaveAs);
             functionByElement.Add(tileNavItemSaveImage, SaveImage);
             functionByElement.Add(tileNavItemExit, Close);
+            functionByElement.Add(tileNavItemRegenAll, RegenAll);
             functionByElement.Add(tileNavItemCoordinates, Coorindates);
             functionByElement.Add(tileNavItemDistance, Distance);
             functionByElement.Add(tileNavItemMemo, Memo);
@@ -522,6 +525,23 @@ namespace Br3D
 
 
 
+        void RegenAll()
+        {
+            if (isDwg)
+                hDesign.Set2DView();
+            else
+                hDesign.Set3DView();
+
+            // zoom fit
+            foreach (Viewport v in design.Viewports)
+                v.ZoomFit();
+
+            
+            // object tree 갱신
+            ObjectTreeListHelper.RegenAsync(treeListObject, design, isDwg);
+
+            RefreshDataSource();
+        }
         async void SketchLine()
         {
             ActionSketchLine ac = new ActionSketchLine(design);
@@ -677,21 +697,9 @@ namespace Br3D
                 // viewport에 추가한다.
                 rfa.AddToScene(design);
 
-                // zoom fit
-                foreach (Viewport v in design.Viewports)
-                    v.ZoomFit();
+                opendFilePath = rfa.FileName;
 
-                // dwg를 불러오면 2D로 뷰를 강제로 변환
-                bool isDwg = Path.GetExtension(rfa.FileName).ToLower().EndsWith("dwg");
-                if (isDwg)
-                    ToolBarButton2DMode_Click(sender, EventArgs.Empty);
-                else
-                    ToolBarButton3DMode_Click(sender, EventArgs.Empty);
-
-                // object tree 갱신
-                ObjectTreeListHelper.RegenAsync(treeListObject, design, isDwg);
-
-                RefreshDataSource();
+                RegenAll();
             }
         }
 

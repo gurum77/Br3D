@@ -36,6 +36,7 @@ namespace Br3D
             DevExpress.XtraEditors.TileItemElement tileItemElement2 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement3 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement4 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement5 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement11 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement7 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement8 = new DevExpress.XtraEditors.TileItemElement();
@@ -256,7 +257,7 @@ namespace Br3D
             toolBar8}, new devDept.Eyeshot.Legend[0], histogram4, devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
             grid4}, new devDept.Eyeshot.OriginSymbol[] {
             originSymbol4}, false, rotateSettings4, zoomSettings4, panSettings4, navigationSettings4, coordinateSystemIcon4, viewCubeIcon4, savedViewsManager4, devDept.Eyeshot.viewType.Right);
-            DevExpress.XtraEditors.TileItemElement tileItemElement5 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement37 = new DevExpress.XtraEditors.TileItemElement();
             this.tileNavPaneViewport = new DevExpress.XtraBars.Navigation.TileNavPane();
             this.navButtonHome = new DevExpress.XtraBars.Navigation.NavButton();
             this.tileNavCategorySketch = new DevExpress.XtraBars.Navigation.TileNavCategory();
@@ -264,6 +265,7 @@ namespace Br3D
             this.tileNavItemSaveSketch = new DevExpress.XtraBars.Navigation.TileNavItem();
             this.tileNavItemSketchSlot = new DevExpress.XtraBars.Navigation.TileNavItem();
             this.tileNavItemSketchCircle = new DevExpress.XtraBars.Navigation.TileNavItem();
+            this.tileNavItemSketchLine = new DevExpress.XtraBars.Navigation.TileNavItem();
             this.tileNavCategoryAnnotation = new DevExpress.XtraBars.Navigation.TileNavCategory();
             this.tileNavItemCoordinates = new DevExpress.XtraBars.Navigation.TileNavItem();
             this.tileNavItemDistance = new DevExpress.XtraBars.Navigation.TileNavItem();
@@ -305,7 +307,7 @@ namespace Br3D
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.propertyGridControl1 = new DevExpress.XtraVerticalGrid.PropertyGridControl();
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
-            this.tileNavItemSketchLine = new DevExpress.XtraBars.Navigation.TileNavItem();
+            this.tileNavItemRegenAll = new DevExpress.XtraBars.Navigation.TileNavItem();
             ((System.ComponentModel.ISupportInitialize)(this.tileNavPaneViewport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hDesign)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -334,7 +336,8 @@ namespace Br3D
             this.tileNavItemOpen,
             this.tileNavItemSaveAs,
             this.tileNavItemSaveImage,
-            this.tileNavItemExit});
+            this.tileNavItemExit,
+            this.tileNavItemRegenAll});
             this.tileNavPaneViewport.DefaultCategory.Name = "tileNavCategory1";
             // 
             // 
@@ -424,6 +427,18 @@ namespace Br3D
             tileItemElement4.Text = "Circle";
             this.tileNavItemSketchCircle.Tile.Elements.Add(tileItemElement4);
             this.tileNavItemSketchCircle.Tile.Name = "tileBarItem1";
+            // 
+            // tileNavItemSketchLine
+            // 
+            this.tileNavItemSketchLine.Caption = "Line";
+            this.tileNavItemSketchLine.Name = "tileNavItemSketchLine";
+            // 
+            // 
+            // 
+            this.tileNavItemSketchLine.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
+            tileItemElement5.Text = "Line";
+            this.tileNavItemSketchLine.Tile.Elements.Add(tileItemElement5);
+            this.tileNavItemSketchLine.Tile.Name = "tileBarItem1";
             // 
             // tileNavCategoryAnnotation
             // 
@@ -967,17 +982,17 @@ namespace Br3D
             this.propertyGridControl1.Size = new System.Drawing.Size(217, 246);
             this.propertyGridControl1.TabIndex = 0;
             // 
-            // tileNavItemSketchLine
+            // tileNavItemRegenAll
             // 
-            this.tileNavItemSketchLine.Caption = "Line";
-            this.tileNavItemSketchLine.Name = "tileNavItemSketchLine";
+            this.tileNavItemRegenAll.Caption = "RegenAll";
+            this.tileNavItemRegenAll.Name = "tileNavItemRegenAll";
             // 
             // tileBarItem1
             // 
-            this.tileNavItemSketchLine.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement5.Text = "Line";
-            this.tileNavItemSketchLine.Tile.Elements.Add(tileItemElement5);
-            this.tileNavItemSketchLine.Tile.Name = "tileBarItem1";
+            this.tileNavItemRegenAll.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
+            tileItemElement37.Text = "RegenAll";
+            this.tileNavItemRegenAll.Tile.Elements.Add(tileItemElement37);
+            this.tileNavItemRegenAll.Tile.Name = "tileBarItem1";
             // 
             // FormMain
             // 
@@ -1057,5 +1072,6 @@ namespace Br3D
         private DevExpress.XtraBars.Navigation.TileNavItem tileNavItemSaveSketch;
         private DevExpress.XtraBars.Navigation.TileNavItem tileNavItemSketchCircle;
         private DevExpress.XtraBars.Navigation.TileNavItem tileNavItemSketchLine;
+        private DevExpress.XtraBars.Navigation.TileNavItem tileNavItemRegenAll;
     }
 }

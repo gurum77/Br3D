@@ -1,6 +1,4 @@
-﻿using devDept.Eyeshot;
-using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
+﻿using devDept.Eyeshot.Entities;
 using devDept.Geometry;
 using devDept.Graphics;
 using System;
@@ -153,7 +151,7 @@ namespace hanee.ThreeD
             if (snapPoints == null || snapPoints.Length == 0)
                 return null;
 
-            
+
             double minDist = double.MaxValue;
 
             int i = 0;
@@ -314,7 +312,7 @@ namespace hanee.ThreeD
         }
 
         // linePath 객체 스냅 찾기
-        SnapPoint[] GetSnapPoints_LinearPath(LinearPath polyline, Entity otherEnt=null)
+        SnapPoint[] GetSnapPoints_LinearPath(LinearPath polyline, Entity otherEnt = null)
         {
             List<SnapPoint> polyLineSnapPoints = new List<SnapPoint>();
 
@@ -346,7 +344,7 @@ namespace hanee.ThreeD
                         }
                     }
                 }
-                
+
             }
 
 
@@ -522,7 +520,7 @@ namespace hanee.ThreeD
                     meshSnapPoints.Add(new SnapPoint((pt1 + pt2) / 2, objectSnapType.Mid, mesh));
                 }
             }
-            
+
 
             return meshSnapPoints.ToArray();
         }
@@ -532,61 +530,47 @@ namespace hanee.ThreeD
         /// </summary>
         public SnapPoint[] GetSnapPoints(System.Drawing.Point mouseLocation)
         {
-            
+
             SnapPoint[] snapPoints = new SnapPoint[0];
             if (activeObjectSnap == objectSnapType.None)
                 return snapPoints;
 
             //changed PickBoxSize to define a range for display snapPoints
             int oldSize = environment.PickBoxSize;
-            environment.PickBoxSize = 10;
+            environment.PickBoxSize = 20;
+
 
             try
             {
 
                 //select the entity under mouse cursor
-                environment.SetCurrent(null);
+                if (!environment.IsOpenRootLevel)
+                    environment.ResetOpenBlocks(false);
 
-                Entity entity = null, entity2 = null;
-
-                // inter가 있으면 걸리는거 다 찾아서 2개 선택
-                if (activeObjectSnap.HasFlag(objectSnapType.Intersect))
-                {
-                    var entities = environment.GetAllEntitiesUnderMouseCursor(mouseLocation);
-                    if (entities != null)
-                    {
-                        if (entities.Count() > 0)
-                            entity = entities[0] > -1 ? environment.Entities[entities[0]] : null;
-                        if (entities.Count() > 1)
-                            entity2 = entities[1] > -1 ? environment.Entities[entities[1]] : null;
-                    }
-                }
-                // int가 없으면 객체 1개만 선택
-                else
-                {
-                    int entityIndex = environment.GetEntityUnderMouseCursor(mouseLocation);
-                    if (entityIndex < 0)
-                        return snapPoints;
-
-                    entity = environment.Entities[entityIndex];
-                }
-                
-                if (entity == null)
+                var entities = environment.GetAllEntitiesUnderMouseCursor(mouseLocation);
+                if (entities == null || entities.Length == 0)
                     return snapPoints;
 
 
+                var entity = environment.Entities[entities[0]];
+                var entity2 = entities.Length > 1 ? environment.Entities[entities[1]] : null;
+                // 
                 //exctract the entity selected with GetEntityUnderMouseCursor
                 // BlockReference이면 BlockReference 내부에서 다시 검색
                 if (entity is BlockReference)
                 {
                     BlockReference br = entity as BlockReference;
-                    environment.SetCurrent(br);
+                    entity.Selected = true;
+                    environment.SetSelectionAsCurrent(false);
+                    //environment.SetCurrent(br);
                     var entityIndex = environment.GetEntityUnderMouseCursor(mouseLocation);
                     if (entityIndex > -1)
                         entity = environment.Entities[entityIndex];
-                    environment.SetCurrent(null);
+                    environment.ResetOpenBlocks(false);
+                    //environment.SetCurrent(null);
 
-                    snapPoints = GetSnapPointsFromEntity(entity, mouseLocation, entity2);
+                    var curSnapPoints = GetSnapPointsFromEntity(entity, mouseLocation, entity2);
+
 
                     // block이면 transform해야함
                     var trans = br.GetFullTransformation(environment.Blocks);
@@ -605,9 +589,9 @@ namespace hanee.ThreeD
             }
             catch (Exception)
             {
-                
+
             }
-            
+
 
             // 그리드 스냅 on이고, 다른 스냅을 찾지 못 한 경우
             if (snapPoints != null && snapPoints.Count() == 0 && activeObjectSnap.HasFlag(objectSnapType.Grid))
@@ -627,7 +611,7 @@ namespace hanee.ThreeD
             return snapPoints;
         }
 
-        private SnapPoint[] GetSnapPointsFromEntity(Entity ent, System.Drawing.Point mouseLocation, Entity otherEnt=null)
+        private SnapPoint[] GetSnapPointsFromEntity(Entity ent, System.Drawing.Point mouseLocation, Entity otherEnt = null)
         {
             if (ent == null)
                 return null;

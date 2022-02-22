@@ -1,10 +1,9 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
 using devDept.Eyeshot.Translators;
 using devDept.Geometry;
+using devDept.Geometry.Entities;
 using devDept.Graphics;
-using hanee.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -25,18 +24,26 @@ namespace hanee.ThreeD
             unselectedOnly  // 비선택객체만 투명
         };
 
-        public static Color drawingColor = Color.Black;
+        public Color drawingColor
+        {
+            get
+            {
+                if (IsDarkBackground())
+                    return Color.White;
+                return Color.Black;
+            }
+        }
         public static Font drawingFont = new Font("Tahoma", 10.0f, FontStyle.Bold);
         public System.Drawing.Point cursorPoint;
-        System.Drawing.Point lastMouseDownPoint{ get; set; }
+        System.Drawing.Point lastMouseDownPoint { get; set; }
         public bool displayHelp = true;
         public bool TopViewOnly = false;
         public Snapping Snapping = null;
 
         // property grid를 지정하면 객체 선택시 property grid에 속성이 표시됨
         public PropertyGridHelper propertyGridHelper { get; set; }
-        
-        
+
+
         // 배경색
         Color backgroundTopColor { get; set; }
         Color backgroundBottomColor { get; set; }
@@ -62,6 +69,11 @@ namespace hanee.ThreeD
         public event EventHandler<DrawSceneParams> AfterDrawOverlay;
         #endregion
 
+        // 배경색이 어두운지?
+        public bool IsDarkBackground()
+        {
+            return ActiveViewport.Background.IsDark;
+        }
         protected override void OnKeyUp(KeyEventArgs e)
         {
             if (ActionBase.IsUserInputting())
@@ -86,7 +98,7 @@ namespace hanee.ThreeD
                 }
             }
         }
-     
+
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -384,7 +396,7 @@ namespace hanee.ThreeD
             }
         }
 
-     
+
 
         #region 액션중 미리 보기
         // 마우스 옆에 따라 다니는 text를 그린다.
@@ -399,6 +411,7 @@ namespace hanee.ThreeD
 
             renderContext.EnableXOR(true);
         }
+
 
         // vertices를 screen 2d point로 변환한다.
         public Point2D[] GetScreenVertices(IList<Point3D> vertices)
@@ -733,15 +746,15 @@ namespace hanee.ThreeD
                 //        ent.Selected = false;
                 //        UpdateVisibleSelection();
                 //    }
-                        
 
-                    
+
+
 
                 //}
-                
-                
 
-                
+
+
+
 
                 Snapping.OnMouseMoveForSnap(e);
             }
@@ -877,11 +890,11 @@ namespace hanee.ThreeD
             filter = filter.Remove(0, 1);
             return filter;
         }
-        
+
 
         protected override void DrawOverlay(HDesign.DrawSceneParams myParams)
         {
-            
+
             if (ActionBase.IsUserInputting() == true)
             {
                 // 사용자 입력중일때만 draw overlay
@@ -1134,6 +1147,6 @@ namespace hanee.ThreeD
             return wf;
         }
 
-       
+
     }
 }

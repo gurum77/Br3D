@@ -15,6 +15,10 @@ namespace Br3D
             
         }
 
+        [CategoryEx(" ")]
+        [DisplayNameEx("Type")]
+        public string entityType { get => entity.GetType().Name; }
+
         [CategoryEx("General")]
         [DisplayNameEx("Layer")]
         public string layer { get => entity.LayerName; set => entity.LayerName = value; }
