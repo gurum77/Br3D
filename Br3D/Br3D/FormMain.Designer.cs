@@ -67,6 +67,7 @@ namespace Br3D
             DevExpress.XtraEditors.TileItemElement tileItemElement34 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement35 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement36 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement37 = new DevExpress.XtraEditors.TileItemElement();
             devDept.Eyeshot.CancelToolBarButton cancelToolBarButton1 = new devDept.Eyeshot.CancelToolBarButton("Cancel", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
             devDept.Eyeshot.ProgressBar progressBar1 = new devDept.Eyeshot.ProgressBar(devDept.Eyeshot.ProgressBar.styleType.Circular, 0, "Idle", System.Drawing.Color.Black, System.Drawing.Color.Transparent, System.Drawing.Color.Green, 1D, true, cancelToolBarButton1, false, 0.1D, 0.333D, true);
             devDept.Graphics.BackgroundSettings backgroundSettings1 = new devDept.Graphics.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(82)))), ((int)(((byte)(103))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(41))))), 0.75D, null, devDept.Graphics.colorThemeType.Auto, 0.33D);
@@ -257,7 +258,6 @@ namespace Br3D
             toolBar8}, new devDept.Eyeshot.Legend[0], histogram4, devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
             grid4}, new devDept.Eyeshot.OriginSymbol[] {
             originSymbol4}, false, rotateSettings4, zoomSettings4, panSettings4, navigationSettings4, coordinateSystemIcon4, viewCubeIcon4, savedViewsManager4, devDept.Eyeshot.viewType.Right);
-            DevExpress.XtraEditors.TileItemElement tileItemElement37 = new DevExpress.XtraEditors.TileItemElement();
             this.tileNavPaneViewport = new DevExpress.XtraBars.Navigation.TileNavPane();
             this.navButtonHome = new DevExpress.XtraBars.Navigation.NavButton();
             this.tileNavCategorySketch = new DevExpress.XtraBars.Navigation.TileNavCategory();
@@ -297,6 +297,7 @@ namespace Br3D
             this.tileNavItemSaveAs = new DevExpress.XtraBars.Navigation.TileNavItem();
             this.tileNavItemSaveImage = new DevExpress.XtraBars.Navigation.TileNavItem();
             this.tileNavItemExit = new DevExpress.XtraBars.Navigation.TileNavItem();
+            this.tileNavItemRegenAll = new DevExpress.XtraBars.Navigation.TileNavItem();
             this.hDesign = new hanee.ThreeD.HDesign();
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.panelContainer1 = new DevExpress.XtraBars.Docking.DockPanel();
@@ -306,8 +307,13 @@ namespace Br3D
             this.dockPanelRight = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.propertyGridControl1 = new DevExpress.XtraVerticalGrid.PropertyGridControl();
+            this.repositoryItemComboBoxTextStyle = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.categoryGeneral = new DevExpress.XtraVerticalGrid.Rows.CategoryRow();
+            this.rowColor = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
+            this.categoryText = new DevExpress.XtraVerticalGrid.Rows.CategoryRow();
+            this.rowTextStyle = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
+            this.categoryLineType = new DevExpress.XtraVerticalGrid.Rows.CategoryRow();
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
-            this.tileNavItemRegenAll = new DevExpress.XtraBars.Navigation.TileNavItem();
             ((System.ComponentModel.ISupportInitialize)(this.tileNavPaneViewport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hDesign)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -318,6 +324,7 @@ namespace Br3D
             this.dockPanelRight.SuspendLayout();
             this.dockPanel1_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.propertyGridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBoxTextStyle)).BeginInit();
             this.SuspendLayout();
             // 
             // tileNavPaneViewport
@@ -874,10 +881,22 @@ namespace Br3D
             this.tileNavItemExit.Tile.Elements.Add(tileItemElement36);
             this.tileNavItemExit.Tile.Name = "tileBarItem2";
             // 
+            // tileNavItemRegenAll
+            // 
+            this.tileNavItemRegenAll.Caption = "RegenAll";
+            this.tileNavItemRegenAll.Name = "tileNavItemRegenAll";
+            // 
+            // 
+            // 
+            this.tileNavItemRegenAll.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
+            tileItemElement37.Text = "RegenAll";
+            this.tileNavItemRegenAll.Tile.Elements.Add(tileItemElement37);
+            this.tileNavItemRegenAll.Tile.Name = "tileBarItem1";
+            // 
             // hDesign
             // 
             this.hDesign.AskForAntiAliasing = true;
-            this.hDesign.Cursor = System.Windows.Forms.Cursors.Default;
+            this.hDesign.Cursor = System.Windows.Forms.Cursors.Cross;
             this.hDesign.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hDesign.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.hDesign.Location = new System.Drawing.Point(224, 43);
@@ -974,25 +993,58 @@ namespace Br3D
             // 
             // propertyGridControl1
             // 
-            this.propertyGridControl1.ActiveViewType = DevExpress.XtraVerticalGrid.PropertyGridView.Office;
+            this.propertyGridControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.propertyGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propertyGridControl1.Location = new System.Drawing.Point(0, 0);
             this.propertyGridControl1.Name = "propertyGridControl1";
             this.propertyGridControl1.OptionsView.AllowReadOnlyRowAppearance = DevExpress.Utils.DefaultBoolean.True;
+            this.propertyGridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemComboBoxTextStyle});
+            this.propertyGridControl1.Rows.AddRange(new DevExpress.XtraVerticalGrid.Rows.BaseRow[] {
+            this.categoryGeneral,
+            this.categoryText,
+            this.categoryLineType});
             this.propertyGridControl1.Size = new System.Drawing.Size(217, 246);
             this.propertyGridControl1.TabIndex = 0;
             // 
-            // tileNavItemRegenAll
+            // repositoryItemComboBoxTextStyle
             // 
-            this.tileNavItemRegenAll.Caption = "RegenAll";
-            this.tileNavItemRegenAll.Name = "tileNavItemRegenAll";
+            this.repositoryItemComboBoxTextStyle.AutoHeight = false;
+            this.repositoryItemComboBoxTextStyle.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBoxTextStyle.Name = "repositoryItemComboBoxTextStyle";
             // 
-            // tileBarItem1
+            // categoryGeneral
             // 
-            this.tileNavItemRegenAll.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement37.Text = "RegenAll";
-            this.tileNavItemRegenAll.Tile.Elements.Add(tileItemElement37);
-            this.tileNavItemRegenAll.Tile.Name = "tileBarItem1";
+            this.categoryGeneral.ChildRows.AddRange(new DevExpress.XtraVerticalGrid.Rows.BaseRow[] {
+            this.rowColor});
+            this.categoryGeneral.Name = "categoryGeneral";
+            this.categoryGeneral.Properties.Caption = "General";
+            // 
+            // rowColor
+            // 
+            this.rowColor.Name = "rowColor";
+            this.rowColor.Properties.Caption = "Color";
+            this.rowColor.Properties.FieldName = "color";
+            // 
+            // categoryText
+            // 
+            this.categoryText.ChildRows.AddRange(new DevExpress.XtraVerticalGrid.Rows.BaseRow[] {
+            this.rowTextStyle});
+            this.categoryText.Name = "categoryText";
+            this.categoryText.Properties.Caption = "Text";
+            // 
+            // rowTextStyle
+            // 
+            this.rowTextStyle.Name = "rowTextStyle";
+            this.rowTextStyle.Properties.Caption = "TextStyle";
+            this.rowTextStyle.Properties.FieldName = "textStyle";
+            this.rowTextStyle.Properties.RowEdit = this.repositoryItemComboBoxTextStyle;
+            // 
+            // categoryLineType
+            // 
+            this.categoryLineType.Name = "categoryLineType";
+            this.categoryLineType.Properties.Caption = "LineType";
             // 
             // FormMain
             // 
@@ -1017,6 +1069,7 @@ namespace Br3D
             this.dockPanelRight.ResumeLayout(false);
             this.dockPanel1_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.propertyGridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBoxTextStyle)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1073,5 +1126,11 @@ namespace Br3D
         private DevExpress.XtraBars.Navigation.TileNavItem tileNavItemSketchCircle;
         private DevExpress.XtraBars.Navigation.TileNavItem tileNavItemSketchLine;
         private DevExpress.XtraBars.Navigation.TileNavItem tileNavItemRegenAll;
+        private DevExpress.XtraVerticalGrid.Rows.CategoryRow categoryGeneral;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowColor;
+        private DevExpress.XtraVerticalGrid.Rows.CategoryRow categoryText;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowTextStyle;
+        private DevExpress.XtraVerticalGrid.Rows.CategoryRow categoryLineType;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBoxTextStyle;
     }
 }

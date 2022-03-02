@@ -4,6 +4,7 @@ using devDept.Eyeshot.Translators;
 using devDept.Geometry;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
+using DevExpress.XtraVerticalGrid.Rows;
 using hanee.Cad.Tool;
 using hanee.ThreeD;
 using System;
@@ -65,7 +66,8 @@ namespace Br3D
             InitToolbar();
             Translate();
 
-
+            hDesign.ActionMode = actionType.None;
+            
         }
 
         // sketch manager 초기화
@@ -288,10 +290,15 @@ namespace Br3D
 
         void RefreshPropertyGridControl(object selectedObj)
         {
-            if (selectedObj is Entity)
+            if (selectedObj is Text)
             {
-                EntityProperties ep = new EntityProperties(selectedObj as Entity);
-                propertyGridControl1.SelectedObject = ep;
+                var prop = new TextProperties(selectedObj as Entity);
+                propertyGridControl1.SelectedObject = prop;
+            }
+            else if (selectedObj is Entity)
+            {
+                var prop = new EntityProperties(selectedObj as Entity);
+                propertyGridControl1.SelectedObject = prop;
                 
             }
             else
@@ -300,6 +307,29 @@ namespace Br3D
 
             }
 
+            // field가 있는 경우에만 row 를 표시한다.
+            foreach (BaseRow row in propertyGridControl1.Rows)
+            {
+                if (row is CategoryRow)
+                {
+                    var cate = row as CategoryRow;
+                    foreach (EditorRow inRow in cate.ChildRows)
+                    {
+                        if (propertyGridControl1.SelectedObject == null)
+                            inRow.Visible = false;
+                        else
+                        {
+                            var type = propertyGridControl1.SelectedObject.GetType();
+                            var prop = type.GetProperty(inRow.Properties.FieldName);
+                            if (prop == null)
+                                inRow.Visible = false;
+                            else
+                                inRow.Visible = true;
+                        }
+
+                    }
+                }
+            }
             propertyGridControl1.BestFit();
 
         }
@@ -340,6 +370,17 @@ namespace Br3D
         private void InitPropertyGrid()
         {
             propertyGridControl1.CellValueChanged += PropertyGridControl1_CellValueChanged;
+            propertyGridControl1.ShowingEditor += PropertyGridControl1_ShowingEditor;
+            
+        }
+
+        private void PropertyGridControl1_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            repositoryItemComboBoxTextStyle.Items.Clear();
+            foreach (var ts in hDesign.TextStyles)
+            {
+                repositoryItemComboBoxTextStyle.Items.Add(ts.Name);
+            }
         }
 
         private void PropertyGridControl1_CellValueChanged(object sender, DevExpress.XtraVerticalGrid.Events.CellValueChangedEventArgs e)
@@ -355,6 +396,12 @@ namespace Br3D
                 if (e.Row.Name == "rowlineType")
                 {
                     if (!design.LineTypes.Contains(e.Value.ToString()))
+                        return;
+                }
+                // 문자 스타일 변경시 문자 스타일이 있어야 변경해준다.
+                if (e.Row.Name == "rowstyle")
+                {
+                    if (!design.TextStyles.Contains(e.Value.ToString()))
                         return;
                 }
                 design.Entities.Regen();

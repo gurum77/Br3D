@@ -61,6 +61,7 @@ namespace hanee.ThreeD
         public HDesign()
         {
             Snapping = new Snapping(this);
+            CursorTypes[devDept.Eyeshot.cursorType.Default] = Cursors.Cross;
         }
 
 
