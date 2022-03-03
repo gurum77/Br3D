@@ -290,48 +290,10 @@ namespace Br3D
 
         void RefreshPropertyGridControl(object selectedObj)
         {
-            if (selectedObj is Text)
-            {
-                var prop = new TextProperties(selectedObj as Entity);
-                propertyGridControl1.SelectedObject = prop;
-            }
-            else if (selectedObj is Entity)
-            {
-                var prop = new EntityProperties(selectedObj as Entity);
-                propertyGridControl1.SelectedObject = prop;
-                
-            }
-            else
-            {
-                propertyGridControl1.SelectedObject = selectedObj;
+            propertyGridControl1.SelectedObject = selectedObj;
+            propertyGridControl1.SetVisibleExistPropertiyOnly();
 
-            }
-
-            // field가 있는 경우에만 row 를 표시한다.
-            foreach (BaseRow row in propertyGridControl1.Rows)
-            {
-                if (row is CategoryRow)
-                {
-                    var cate = row as CategoryRow;
-                    foreach (EditorRow inRow in cate.ChildRows)
-                    {
-                        if (propertyGridControl1.SelectedObject == null)
-                            inRow.Visible = false;
-                        else
-                        {
-                            var type = propertyGridControl1.SelectedObject.GetType();
-                            var prop = type.GetProperty(inRow.Properties.FieldName);
-                            if (prop == null)
-                                inRow.Visible = false;
-                            else
-                                inRow.Visible = true;
-                        }
-
-                    }
-                }
-            }
             propertyGridControl1.BestFit();
-
         }
 
         private void Design_MouseUp(object sender, MouseEventArgs e)
@@ -371,7 +333,7 @@ namespace Br3D
         {
             propertyGridControl1.CellValueChanged += PropertyGridControl1_CellValueChanged;
             propertyGridControl1.ShowingEditor += PropertyGridControl1_ShowingEditor;
-            
+            RefreshPropertyGridControl(null);
         }
 
         private void PropertyGridControl1_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
@@ -380,6 +342,12 @@ namespace Br3D
             foreach (var ts in hDesign.TextStyles)
             {
                 repositoryItemComboBoxTextStyle.Items.Add(ts.Name);
+            }
+
+            repositoryItemComboBoxLayerName.Items.Clear();
+            foreach (var la in hDesign.Layers)
+            {
+                repositoryItemComboBoxLayerName.Items.Add(la.Name);
             }
         }
 
