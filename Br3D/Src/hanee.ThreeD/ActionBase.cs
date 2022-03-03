@@ -377,22 +377,21 @@ namespace hanee.ThreeD
         }
 
         // mouse event args로 Point 좌표를 설정한다.
-        static void SetPointByMouseEventArgs(Workspace viewportLayout, MouseEventArgs e)
+        static void SetPointByMouseEventArgs(Workspace ws, MouseEventArgs e)
         {
             point = e.Location;
         }
 
-        // mouse event args로 Point3D 좌표를 설정한다.
-        static void SetPoint3DByMouseEventArgs(Workspace viewportLayout, MouseEventArgs e)
+        // snap을 고려한 3D 좌표 리턴
+        static public Point3D GetPoint3DWithSnapping(Workspace ws, MouseEventArgs e)
         {
             // snapPoint 우선
-            if (viewportLayout is devDept.Eyeshot.Design)
+            if (ws is devDept.Eyeshot.Design)
             {
-                hanee.ThreeD.HDesign vp = (hanee.ThreeD.HDesign)viewportLayout;
+                hanee.ThreeD.HDesign vp = (hanee.ThreeD.HDesign)ws;
                 if (vp.Snapping.CurrentlySnapping)
                 {
-                    point3D = vp.Snapping.GetSnapPoint();
-                    return;
+                    return vp.Snapping.GetSnapPoint();
                 }
             }
             //else if (viewportLayout is BRDrawings)
@@ -406,21 +405,25 @@ namespace hanee.ThreeD
             //}
 
 
-            point3D = GetPoint3DByMouseLocation(viewportLayout, e.Location);
-
+            return GetPoint3DByMouseLocation(ws, e.Location);
+        }
+        // mouse event args로 Point3D 좌표를 설정한다.
+        static void SetPoint3DByMouseEventArgs(Workspace ws, MouseEventArgs e)
+        {
+            point3D = GetPoint3DWithSnapping(ws, e);
         }
 
         // mouse 위치의 Point3D 좌표를 리턴
-        static public Point3D GetPoint3DByMouseLocation(Workspace viewportLayout, System.Drawing.Point location)
+        static public Point3D GetPoint3DByMouseLocation(Workspace ws, System.Drawing.Point location)
         {
-            Point3D point3D = viewportLayout.ScreenToWorld(location);
+            Point3D point3D = ws.ScreenToWorld(location);
             // null 이면 camere 가 바라보는 평면을 기준으로 좌표를 계산한다
             if(point3D == null)
             {
-                Design model = viewportLayout as Design;
+                Design model = ws as Design;
                 if(model != null)
                 {
-                    viewportLayout.ScreenToPlane(location, model.ActiveViewport.Camera.NearPlane, out point3D);
+                    ws.ScreenToPlane(location, model.ActiveViewport.Camera.NearPlane, out point3D);
                 }
             }
             //if (point3D == null && WorkingPlane != null)
@@ -434,7 +437,13 @@ namespace hanee.ThreeD
             //}
 
             if (point3D != null)
+            {
+                if (ws.IsTopViewOnly())
+                    point3D.Z = 0;
+
                 ActionBase.ModifyPointBySnap(ref point3D);
+            }
+
 
             return point3D;
         }
@@ -474,45 +483,45 @@ namespace hanee.ThreeD
         }
 
         // mouse click 이벤트 처리
-        static public void MouseDownHandler(Workspace viewportLayout, MouseEventArgs e)
+        static public void MouseDownHandler(Workspace ws, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                MouseDownHandler_LeftButton(viewportLayout, e);
+                MouseDownHandler_LeftButton(ws, e);
             }
             else if(e.Button == MouseButtons.Right)
             {
-                MouseDownHandler_RightButton(viewportLayout, e);
+                MouseDownHandler_RightButton(ws, e);
             }
 
         }
 
         // 마우스 오른키를 누르면 입력 완료로 처리한다.
-        private static void MouseDownHandler_RightButton(Workspace viewportLayout, MouseEventArgs e)
+        private static void MouseDownHandler_RightButton(Workspace ws, MouseEventArgs e)
         {
             Entered = true;
         }
 
-        private static void MouseDownHandler_LeftButton(Workspace viewportLayout, MouseEventArgs e)
+        private static void MouseDownHandler_LeftButton(Workspace ws, MouseEventArgs e)
         {
             if (userInputting[(int)UserInput.GettingPoint] == true)
             {
-                SetPointByMouseEventArgs(viewportLayout, e);
+                SetPointByMouseEventArgs(ws, e);
 
                 userInputting[(int)UserInput.GettingPoint] = false;
             }
 
             if (userInputting[(int)UserInput.GettingPoint3D] == true)
             {
-                SetPoint3DByMouseEventArgs(viewportLayout, e);
+                SetPoint3DByMouseEventArgs(ws, e);
 
                 userInputting[(int)UserInput.GettingPoint3D] = false;
             }
 
             if (userInputting[(int)UserInput.SelectingLabel] == true)
             {
-                Design model = viewportLayout as Design;
-                int idx = viewportLayout.GetLabelUnderMouseCursor(e.Location);
+                Design model = ws as Design;
+                int idx = ws.GetLabelUnderMouseCursor(e.Location);
                 if (model != null && idx > -1 && idx < model.ActiveViewport.Labels.Count)
                 {
 
@@ -524,7 +533,7 @@ namespace hanee.ThreeD
 
             if (userInputting[(int)UserInput.SelectingEntity] == true)
             {
-                devDept.Eyeshot.Design.SelectedItem item = viewportLayout.GetItemUnderMouseCursor(e.Location);
+                devDept.Eyeshot.Design.SelectedItem item = ws.GetItemUnderMouseCursor(e.Location);
                 if (item != null)
                 {
                     Entity entityTmp = item.Item as Entity;
@@ -539,7 +548,7 @@ namespace hanee.ThreeD
 
             if (userInputting[(int)UserInput.SelectingSubEntity] == true)
             {
-                devDept.Eyeshot.Design.SelectedItem item = viewportLayout.GetItemUnderMouseCursor(e.Location);
+                devDept.Eyeshot.Design.SelectedItem item = ws.GetItemUnderMouseCursor(e.Location);
                 if (item != null)
                 {
                     // sub 객체를 탐색한다.
@@ -548,9 +557,9 @@ namespace hanee.ThreeD
                         try
                         {
                             BlockReference br = item.Item as BlockReference;
-                            if (viewportLayout.Blocks.Contains(br.BlockName))
-                                viewportLayout.SetCurrent(item.Item as BlockReference);
-                            item = viewportLayout.GetItemUnderMouseCursor(e.Location);
+                            if (ws.Blocks.Contains(br.BlockName))
+                                ws.SetCurrent(item.Item as BlockReference);
+                            item = ws.GetItemUnderMouseCursor(e.Location);
                             if (item == null)
                                 break;
                         }

@@ -105,6 +105,7 @@ namespace Br3D
 
         private void Design_MouseMove(object sender, MouseEventArgs e)
         {
+            UpdateCoordinatesControl(e);
             if (e.Button != MouseButtons.None)
                 return;
 
@@ -121,6 +122,21 @@ namespace Br3D
 
             if (lastMemo == null)
                 toolTipController1.HideHint();
+        }
+
+        private void UpdateCoordinatesControl(MouseEventArgs e)
+        {
+
+            var point = ActionBase.GetPoint3DWithSnapping(hDesign, e);
+            if (point == null)
+                return;
+
+            var text = "";
+            if (hDesign.TopViewOnly)
+                text = Units.GetPointString(point.X, point.Y);
+            else
+                text = Units.GetPointString(point.X, point.Y, point.Z);
+            toolStripStatusLabelCoordinates.Text = text;
         }
 
         // 마우스 커서 아래에 있는 memo를 리턴한다.

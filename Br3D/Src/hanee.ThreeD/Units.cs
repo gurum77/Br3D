@@ -11,6 +11,23 @@ namespace hanee.ThreeD
 {
     public class Units
     {
+        public static string GetPointString(double pos)
+        {
+            return $"{pos:0.000}";
+        }
+
+        // point를 문자열로
+        public static string GetPointString(double x, double y)
+        {
+            return $"X:{GetPointString(x)} Y:{GetPointString(y)}";
+        }
+
+        // point를 문자열로
+        public static string GetPointString(double x, double y, double z)
+        {
+            return $"X:{GetPointString(x)} Y:{GetPointString(y)} Z:{GetPointString(z)}";
+        }
+
         // 길이단위 문자열 리턴
         public static string GetLengthUnitsString(linearUnitsType type)
         {

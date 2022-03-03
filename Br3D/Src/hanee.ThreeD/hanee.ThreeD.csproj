@@ -114,6 +114,7 @@
     <Compile Include="Snapping.cs" />
     <Compile Include="SystemValue.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="WorkspaceHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
