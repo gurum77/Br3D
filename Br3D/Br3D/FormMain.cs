@@ -4,7 +4,6 @@ using devDept.Eyeshot.Translators;
 using devDept.Geometry;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
-using DevExpress.XtraVerticalGrid.Rows;
 using hanee.Cad.Tool;
 using hanee.ThreeD;
 using System;
@@ -67,7 +66,7 @@ namespace Br3D
             Translate();
 
             hDesign.ActionMode = actionType.None;
-            
+
         }
 
         // sketch manager 초기화
@@ -298,32 +297,41 @@ namespace Br3D
 
         private void Design_MouseUp(object sender, MouseEventArgs e)
         {
-            // tree에서 선택
-            if (!treeListObject.Visible)
-                return;
             if (design.ActionMode != actionType.None)
                 return;
 
             if (e.Button == MouseButtons.Left)
             {
-                treeListObject.ClearSelection();
                 var item = design.GetItemUnderMouseCursor(e.Location);
-                if (item == null)
+                if (item != null)
+                    item.Item.Selected = true;
+                // 속성창 갱신
+                if (propertyGridControl1.Visible)
                 {
-                    RefreshPropertyGridControl(null);
-                    return;
+                    if (item == null)
+                    {
+                        RefreshPropertyGridControl(null);
+                    }
+                    else
+                    {
+                        RefreshPropertyGridControl(item.Item);
+                    }
                 }
 
-                RefreshPropertyGridControl(item.Item);
+                // tree에서 선택
+                if (treeListObject.Visible)
+                {
+                    treeListObject.ClearSelection();
+                    var node = treeListObject.FindNode(x => x.Tag == item.Item);
+                    if (node == null)
+                        return;
+                    if (node.ParentNode != null)
+                        node.ParentNode.Expand();
 
-                var node = treeListObject.FindNode(x => x.Tag == item.Item);
-                if (node == null)
-                    return;
-                if (node.ParentNode != null)
-                    node.ParentNode.Expand();
+                    treeListObject.SelectNode(node);
+                    treeListObject.TopVisibleNodeIndex = node.Id;
 
-                treeListObject.SelectNode(node);
-                treeListObject.TopVisibleNodeIndex = node.Id;
+                }
 
             }
         }
@@ -338,44 +346,53 @@ namespace Br3D
 
         private void PropertyGridControl1_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            repositoryItemComboBoxTextStyle.Items.Clear();
-            foreach (var ts in hDesign.TextStyles)
+            if (propertyGridControl1.FocusedRow.Properties.RowEdit == repositoryItemComboBoxTextStyle)
             {
-                repositoryItemComboBoxTextStyle.Items.Add(ts.Name);
+                repositoryItemComboBoxTextStyle.Items.Clear();
+                foreach (var ts in hDesign.TextStyles)
+                {
+                    repositoryItemComboBoxTextStyle.Items.Add(ts.Name);
+                }
+            }
+            else if (propertyGridControl1.FocusedRow.Properties.RowEdit == repositoryItemComboBoxLayerName)
+            {
+                repositoryItemComboBoxLayerName.Items.Clear();
+                foreach (var la in hDesign.Layers)
+                {
+                    repositoryItemComboBoxLayerName.Items.Add(la.Name);
+                }
+            }
+            else if (propertyGridControl1.FocusedRow.Properties.RowEdit == repositoryItemComboBoxLineType)
+            {
+
+                repositoryItemComboBoxLineType.Items.Clear();
+                foreach (var lt in hDesign.LineTypes)
+                {
+                    repositoryItemComboBoxLineType.Items.Add(lt.Name);
+                }
+            }
+            else if (propertyGridControl1.FocusedRow.Properties.RowEdit == repositoryItemComboBoxBlock)
+            {
+                repositoryItemComboBoxBlock.Items.Clear();
+                foreach (var b in hDesign.Blocks)
+                {
+                    repositoryItemComboBoxBlock.Items.Add(b.Name);
+                }
             }
 
-            repositoryItemComboBoxLayerName.Items.Clear();
-            foreach (var la in hDesign.Layers)
-            {
-                repositoryItemComboBoxLayerName.Items.Add(la.Name);
-            }
         }
 
         private void PropertyGridControl1_CellValueChanged(object sender, DevExpress.XtraVerticalGrid.Events.CellValueChangedEventArgs e)
         {
-            var entProperties = propertyGridControl1.SelectedObject as EntityProperties;
-            if (entProperties == null)
+            var ent = propertyGridControl1.SelectedObject as Entity;
+            if (ent == null)
                 return;
 
-            var ent = entProperties.entity;
             try
             {
-                // 선타입 변경시 해당 선타입이 있어야 변경해준다.
-                if (e.Row.Name == "rowlineType")
-                {
-                    if (!design.LineTypes.Contains(e.Value.ToString()))
-                        return;
-                }
-                // 문자 스타일 변경시 문자 스타일이 있어야 변경해준다.
-                if (e.Row.Name == "rowstyle")
-                {
-                    if (!design.TextStyles.Contains(e.Value.ToString()))
-                        return;
-                }
                 design.Entities.Regen();
                 propertyGridControl1.UpdateData();
                 design.Invalidate();
-
             }
             catch (Exception ex)
             {
@@ -551,7 +568,7 @@ namespace Br3D
             foreach (Viewport v in design.Viewports)
                 v.ZoomFit();
 
-            
+
             // object tree 갱신
             ObjectTreeListHelper.RegenAsync(treeListObject, design, isDwg);
 
