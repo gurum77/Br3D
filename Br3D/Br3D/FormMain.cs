@@ -194,6 +194,37 @@ namespace Br3D
 
             // control
             dockPanelObjectTree.Text = LanguageHelper.Tr("Object Tree");
+            dockPanelProperties.Text = LanguageHelper.Tr("Properties");
+
+            // propertygrid
+            categoryGeneral.Properties.Caption = LanguageHelper.Tr("General");
+            categoryBlock.Properties.Caption = LanguageHelper.Tr("Block");
+            categoryLineType.Properties.Caption = LanguageHelper.Tr("Line Type");
+            categoryText.Properties.Caption = LanguageHelper.Tr("Text");
+
+            rowEntityType.Properties.Caption = LanguageHelper.Tr("Entity Type");
+            rowVisible.Properties.Caption = LanguageHelper.Tr("Visible");
+            rowBoxMax.Properties.Caption = LanguageHelper.Tr("Max");
+            rowBoxMin.Properties.Caption = LanguageHelper.Tr("Min");
+            rowLayerName.Properties.Caption = LanguageHelper.Tr("Layer");
+            rowColor.Properties.Caption = LanguageHelper.Tr("Color");
+            rowColorMethod.Properties.Caption = LanguageHelper.Tr("Color Type");
+            rowGroupIndex.Properties.Caption = LanguageHelper.Tr("Group Index");
+            rowLineTypeName.Properties.Caption = LanguageHelper.Tr("Line Type Name");
+            rowLineTypeScale.Properties.Caption = LanguageHelper.Tr("Scale");
+            rowLineWeight.Properties.Caption = LanguageHelper.Tr("Weight");
+            rowLineWeightMethod.Properties.Caption = LanguageHelper.Tr("Weight Type");
+            rowBlockName.Properties.Caption = LanguageHelper.Tr("Block Name");
+            rowTextString.Properties.Caption = LanguageHelper.Tr("Contents");
+            rowStyleName.Properties.Caption = LanguageHelper.Tr("Style");
+            rowHeight.Properties.Caption = LanguageHelper.Tr("Height");
+            rowBillboard.Properties.Caption = LanguageHelper.Tr("Billboard");
+            rowWidthFactor.Properties.Caption = LanguageHelper.Tr("Width Factor");
+            rowInsertionPoint.Properties.Caption = LanguageHelper.Tr("Insertion Point");
+            rowBackward.Properties.Caption = LanguageHelper.Tr("Backward");
+            rowUpsideDown.Properties.Caption = LanguageHelper.Tr("Upside Down");
+            rowAlignment.Properties.Caption = LanguageHelper.Tr("Alignment");
+
         }
 
         private void SetTileText(TileNavItem tileNavItem, string text)
@@ -305,7 +336,16 @@ namespace Br3D
 
         void RefreshPropertyGridControl(object selectedObj)
         {
-            propertyGridControl1.SelectedObject = selectedObj;
+            if (selectedObj is Entity)
+            {
+                EntityProperties entityProperties = new EntityProperties(selectedObj as Entity);
+                propertyGridControl1.SelectedObject = entityProperties;
+            }
+            else
+            {
+                propertyGridControl1.SelectedObject = selectedObj;
+
+            }
             propertyGridControl1.SetVisibleExistPropertiyOnly();
 
             propertyGridControl1.BestFit();
@@ -400,8 +440,8 @@ namespace Br3D
 
         private void PropertyGridControl1_CellValueChanged(object sender, DevExpress.XtraVerticalGrid.Events.CellValueChangedEventArgs e)
         {
-            var ent = propertyGridControl1.SelectedObject as Entity;
-            if (ent == null)
+            var entProp = propertyGridControl1.SelectedObject as EntityProperties;
+            if (entProp == null)
                 return;
 
             try
