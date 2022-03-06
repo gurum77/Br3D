@@ -39,6 +39,7 @@ namespace hanee.ThreeD
         public bool displayHelp = true;
         public bool TopViewOnly = false;
         public Snapping Snapping = null;
+        public GripManager gripManager = null;
 
         // property grid를 지정하면 객체 선택시 property grid에 속성이 표시됨
         public PropertyGridHelper propertyGridHelper { get; set; }
@@ -61,6 +62,7 @@ namespace hanee.ThreeD
         public HDesign()
         {
             Snapping = new Snapping(this);
+            gripManager = new GripManager(this);
             CursorTypes[devDept.Eyeshot.cursorType.Default] = Cursors.Cross;
         }
 
@@ -94,6 +96,7 @@ namespace hanee.ThreeD
                         ActionBase.runningAction = null;
                     }
                     Entities.ClearSelection();
+                    gripManager.ClearGripPoints();
                     UpdatePropertyGridControl(null);
                     Invalidate();
                 }
@@ -436,6 +439,12 @@ namespace hanee.ThreeD
             Point2D pt2 = WorldToScreen(new Point3D(len, 0, 0));
 
             return (float)Math.Abs(pt1.X - pt2.X);
+        }
+
+        public System.Drawing.Point GetMouseLocationFromWorldPoint(Point3D pt)
+        {
+            var points = GetMouseLocationsFromWorldPoints(new List<Point3D>() { pt });
+            return points != null && points.Length > 0 ? points[0] : new System.Drawing.Point(0, 0);
         }
 
         // vertices를 마우스 위치로 변환한다.

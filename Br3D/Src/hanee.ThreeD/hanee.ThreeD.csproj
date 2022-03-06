@@ -94,14 +94,19 @@
     <Compile Include="EntityColor.cs" />
     <Compile Include="EventParams.cs" />
     <Compile Include="FileHelper.cs" />
+    <Compile Include="GripManager.cs" />
+    <Compile Include="GripPoint.cs" />
     <Compile Include="HDesignProperties.cs" />
     <Compile Include="EnvironmentHelper.cs" />
     <Compile Include="EyeshotConverter.cs" />
     <Compile Include="HDesign.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="IEntityGripManager.cs" />
     <Compile Include="LanguageHelper.cs" />
     <Compile Include="LanguageOptionsHelper.cs" />
+    <Compile Include="LinearPathGripManager.cs" />
+    <Compile Include="LineGripManager.cs" />
     <Compile Include="LineTypeHelper.cs" />
     <Compile Include="MaterialHelper.cs" />
     <Compile Include="DesignHelper.cs" />

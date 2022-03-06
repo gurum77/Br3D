@@ -33,6 +33,7 @@ namespace Br3D
         Dictionary<NavElement, Action> functionByElement = new Dictionary<NavElement, Action>();
         string opendFilePath = "";
         bool isDwg => string.IsNullOrEmpty(opendFilePath) ? false : Path.GetExtension(opendFilePath).ToLower().EndsWith("dwg");
+        
         public FormMain()
         {
             InitializeComponent();
@@ -66,7 +67,6 @@ namespace Br3D
             Translate();
 
             hDesign.ActionMode = actionType.None;
-
         }
 
         // sketch manager 초기화
@@ -105,6 +105,8 @@ namespace Br3D
 
         private void Design_MouseMove(object sender, MouseEventArgs e)
         {
+            hDesign.gripManager.MouseMove(e);
+
             UpdateCoordinatesControl(e);
             if (e.Button != MouseButtons.None)
                 return;
@@ -361,18 +363,15 @@ namespace Br3D
                 var item = design.GetItemUnderMouseCursor(e.Location);
                 if (item != null)
                     item.Item.Selected = true;
+
+                // 그림 관련
+                if (hDesign?.gripManager != null)
+                    hDesign?.gripManager.MouseUp(e);
+                    
+
                 // 속성창 갱신
                 if (propertyGridControl1.Visible)
-                {
-                    if (item == null)
-                    {
-                        RefreshPropertyGridControl(null);
-                    }
-                    else
-                    {
-                        RefreshPropertyGridControl(item.Item);
-                    }
-                }
+                    RefreshPropertyGridControl(item?.Item);
 
                 // tree에서 선택
                 if (treeListObject.Visible)
