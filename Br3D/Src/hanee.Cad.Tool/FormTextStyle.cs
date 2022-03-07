@@ -5,8 +5,8 @@ namespace hanee.Cad.Tool
 {
     public partial class FormTextStyle : DevExpress.XtraEditors.XtraForm
     {
-        Design design;
-        public FormTextStyle(Design design)
+        Model design;
+        public FormTextStyle(Model design)
         {
             InitializeComponent();
 
@@ -36,7 +36,7 @@ namespace hanee.Cad.Tool
                 return;
 
             string newName = "New Text Style";
-            int num = 1; 
+            int num = 1;
             while (true)
             {
                 newName = $"New Text Style{num++}";

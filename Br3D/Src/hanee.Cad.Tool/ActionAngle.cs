@@ -1,12 +1,11 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using hanee.Geometry;
 using hanee.ThreeD;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,7 +14,7 @@ namespace hanee.Cad.Tool
     public class ActionAngle : ActionBase
     {
         Point3D ptCen, pt1, pt2;
-        public ActionAngle(devDept.Eyeshot.Design vp) : base(vp)
+        public ActionAngle(Model vp) : base(vp)
         {
             ptCen = null;
             pt1 = null;
@@ -28,7 +27,7 @@ namespace hanee.Cad.Tool
         public async Task<bool> RunAsync()
         {
             StartAction();
-            while(true)
+            while (true)
             {
                 ptCen = null;
                 pt1 = null;
@@ -41,7 +40,7 @@ namespace hanee.Cad.Tool
                 pt1 = await GetPoint3D("Pick first point");
                 if (IsCanceled())
                     break;
-                
+
                 pt2 = await GetPoint3D("Pick second point");
                 if (IsCanceled())
                     break;
@@ -67,23 +66,23 @@ namespace hanee.Cad.Tool
                 break;
             }
 
-        
+
             EndAction();
             return true;
         }
 
 
-        protected override void OnMouseMove(devDept.Eyeshot.Workspace vp, MouseEventArgs e)
+        protected override void OnMouseMove(devDept.Eyeshot.Environment vp, MouseEventArgs e)
         {
             EntityList entities = new EntityList();
-            if(ptCen != null)
+            if (ptCen != null)
             {
                 // 현재 그리는 선
                 Line l = new Line(ptCen, point3D);
                 entities.Add(l);
             }
 
-            if(pt1 != null)
+            if (pt1 != null)
             {
                 // line1
                 Line l = new Line(ptCen, pt1);

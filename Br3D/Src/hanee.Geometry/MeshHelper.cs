@@ -1,9 +1,7 @@
 ﻿using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
 using devDept.Geometry;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace hanee.Geometry
 {
@@ -40,23 +38,23 @@ namespace hanee.Geometry
         /// <returns></returns>
         public static bool IsSharedEdge(this Mesh mesh, IndexTriangle tri, int v1, int v2)
         {
-            for(int i = 0; i < 2; ++i)
+            for (int i = 0; i < 2; ++i)
             {
                 if (mesh.Vertices[i == 0 ? v1 : v2].Equals(new Point3D(-25.24502, 51.42133, 0), 0.1))
                 {
 
                 }
             }
-            
-            for(int i = 0; i < mesh.Triangles.Length; ++i)
+
+            for (int i = 0; i < mesh.Triangles.Length; ++i)
             {
                 IndexTriangle tri2 = mesh.Triangles[i];
                 if (tri2 == tri)
                     continue;
 
-                if(tri2.V1 == 63 || tri2.V2 == 63 || tri2.V3 == 63)
+                if (tri2.V1 == 63 || tri2.V2 == 63 || tri2.V3 == 63)
                 {
-                    
+
                 }
 
                 if ((v1 == tri2.V1 || v1 == tri2.V2 || v1 == tri2.V3) &&
@@ -107,7 +105,7 @@ namespace hanee.Geometry
                 return null;
 
             Dictionary<Point3D, bool> dic = new Dictionary<Point3D, bool>();
-            foreach(var edge in unshardEdges)
+            foreach (var edge in unshardEdges)
             {
                 dic[mesh.Vertices[edge.Key]] = true;
                 dic[mesh.Vertices[edge.Value]] = true;
@@ -127,7 +125,7 @@ namespace hanee.Geometry
                 return null;
 
             List<KeyValuePair<int, int>> unsharedEdges = new List<KeyValuePair<int, int>>();
-            for(int i = 0; i < mesh.Triangles.Length; ++i)
+            for (int i = 0; i < mesh.Triangles.Length; ++i)
             {
                 IndexTriangle tri = mesh.Triangles[i];
 
@@ -152,7 +150,7 @@ namespace hanee.Geometry
 
             // 중복 체크
             {
-                for(int i = 0; i < unsharedEdges.Count; ++i)
+                for (int i = 0; i < unsharedEdges.Count; ++i)
                 {
                     var e1 = unsharedEdges[i];
                     for (int j = 0; j < unsharedEdges.Count; ++j)
@@ -173,11 +171,11 @@ namespace hanee.Geometry
                     }
                 }
             }
-            
+
 
             return unsharedEdges;
         }
-            
+
 
 
         /// <summary>
@@ -194,7 +192,7 @@ namespace hanee.Geometry
             // 서로 공유하지 않는 edge를 추출
             List<KeyValuePair<int, int>> unsharedEdges = mesh.GetUnsharedEdges();
 
-            
+
             // 공유하지 않는 edge들을 연결
             return MakeRegionByEdges(mesh, unsharedEdges);
         }

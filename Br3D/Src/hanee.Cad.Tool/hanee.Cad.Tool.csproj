@@ -54,15 +54,18 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="devDept.Eyeshot.Control.Win.v2022, Version=2022.1.271.0, Culture=neutral, PublicKeyToken=5385d83d2fb4d7d9, processorArchitecture=MSIL">
+    <Reference Include="devDept.Eyeshot.Control.Win.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=5385d83d2fb4d7d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2022\Bin\devDept.Eyeshot.Control.Win.v2022.dll</HintPath>
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\devDept.Eyeshot.Control.Win.v2021.dll</HintPath>
     </Reference>
-    <Reference Include="devDept.Geometry.v2022, Version=2022.1.271.0, Culture=neutral, PublicKeyToken=9440825e8b4733bc, processorArchitecture=MSIL">
+    <Reference Include="devDept.Geometry.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=9440825e8b4733bc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2022\Bin\devDept.Geometry.v2022.dll</HintPath>
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\devDept.Geometry.v2021.dll</HintPath>
     </Reference>
-    <Reference Include="devDept.Graphics.Win.v2022, Version=2022.1.271.0, Culture=neutral, PublicKeyToken=f3cd437f0d8061b5, processorArchitecture=MSIL" />
+    <Reference Include="devDept.Graphics.Win.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=f3cd437f0d8061b5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\devDept.Graphics.Win.v2021.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Images.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -98,12 +101,6 @@
     <Compile Include="ActionLineType.cs" />
     <Compile Include="ActionList.cs" />
     <Compile Include="ActionMemo.cs" />
-    <Compile Include="ActionNewSketch.cs" />
-    <Compile Include="ActionSaveSketch.cs" />
-    <Compile Include="ActionSketchBase.cs" />
-    <Compile Include="ActionSketchCircle.cs" />
-    <Compile Include="ActionSketchLine.cs" />
-    <Compile Include="ActionSketchSlot.cs" />
     <Compile Include="ActionTextStyle.cs" />
     <Compile Include="LineTypeControl.cs">
       <SubType>UserControl</SubType>
@@ -163,7 +160,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
-    <Compile Include="SketchManagerHelper.cs" />
     <Compile Include="TextStyleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

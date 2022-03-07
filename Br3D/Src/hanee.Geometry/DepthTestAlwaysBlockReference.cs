@@ -1,6 +1,5 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
 using devDept.Geometry;
 using devDept.Graphics;
 

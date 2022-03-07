@@ -6,8 +6,8 @@ namespace hanee.Cad.Tool
 {
     public partial class FormLayer : DevExpress.XtraEditors.XtraForm
     {
-        Design design;
-        public FormLayer(Design design)
+        Model design;
+        public FormLayer(Model design)
         {
             InitializeComponent();
             this.design = design;

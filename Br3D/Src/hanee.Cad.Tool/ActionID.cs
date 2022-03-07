@@ -15,7 +15,7 @@ namespace hanee.Cad.Tool
         }
 
         ShowResult showResult = ShowResult.form;
-        public ActionID(devDept.Eyeshot.Design vp, ShowResult showResult=ShowResult.form) : base(vp)
+        public ActionID(devDept.Eyeshot.Model vp, ShowResult showResult=ShowResult.form) : base(vp)
         {
             this.showResult = showResult;
         }
@@ -44,8 +44,8 @@ namespace hanee.Cad.Tool
                     value = "Point : " + pt.ToString();
                     LeaderAndTextAndBox label = new LeaderAndTextAndBox(pt, value, Define.DefaultFont, Define.DefaultTextColor, new Vector2D(60, 60));
                     label.FillColor = Color.GreenYellow;
-                    GetDesign().ActiveViewport.Labels.Add(label);
-                    GetDesign().Invalidate();
+                    GetModel().ActiveViewport.Labels.Add(label);
+                    GetModel().Invalidate();
                 }
             }
 

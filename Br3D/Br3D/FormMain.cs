@@ -29,7 +29,7 @@ namespace Br3D
         List<Viewport> viewports = new List<Viewport>();
 
         private Memo lastMemo = null;
-        Design design => hDesign;
+        Model model => hModel;
         Dictionary<NavElement, Action> functionByElement = new Dictionary<NavElement, Action>();
         string opendFilePath = "";
         bool isDwg => string.IsNullOrEmpty(opendFilePath) ? false : Path.GetExtension(opendFilePath).ToLower().EndsWith("dwg");
@@ -37,16 +37,16 @@ namespace Br3D
         public FormMain()
         {
             InitializeComponent();
-            design.MouseDoubleClick += Design_MouseDoubleClick;
-            design.WorkCompleted += Design_WorkCompleted;
-            design.WorkFailed += Design_WorkFailed;
-            design.MouseUp += Design_MouseUp;
-            design.MouseMove += Design_MouseMove;
-            design.SketchManager.EditStarted += SketchManager_EditStarted;
-            design.SketchManager.EditEnded += SketchManager_EditEnded;
-            hDesign.SaveBackgroundColor();
+            model.Unlock("US21-D8G5N-12J8F-5F65-RD3W");
 
-            foreach (Viewport vp in design.Viewports)
+            model.MouseDoubleClick += Model_MouseDoubleClick;
+            model.WorkCompleted += Model_WorkCompleted;
+            model.WorkFailed += Model_WorkFailed;
+            model.MouseUp += Model_MouseUp;
+            model.MouseMove += Model_MouseMove;
+            hModel.SaveBackgroundColor();
+
+            foreach (Viewport vp in model.Viewports)
                 viewports.Add(vp);
 
             Options.Instance.appName = "Br3D";
@@ -61,33 +61,14 @@ namespace Br3D
             InitTileElementStatus();
             InitObjectTreeList();
             InitPropertyGrid();
-            InitSketchManager();
 
             InitToolbar();
             Translate();
 
-            hDesign.ActionMode = actionType.None;
+            hModel.ActionMode = actionType.None;
         }
 
-        // sketch manager 초기화
-        private void InitSketchManager()
-        {
-            design.SketchManager.ShowFilledRegion = true;
-            tileNavItemSaveSketch.Tile.Enabled = false;
-        }
-
-        private void SketchManager_EditEnded(object source, EventArgs e)
-        {
-            tileNavItemNewSketch.Tile.Enabled = true;
-            tileNavItemSaveSketch.Tile.Enabled = false;
-        }
-
-        // 편집시작하면 new를 가리고, save를 활성화
-        private void SketchManager_EditStarted(object source, EventArgs e)
-        {
-            tileNavItemNewSketch.Tile.Enabled = false;
-            tileNavItemSaveSketch.Tile.Enabled = true;
-        }
+       
 
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -96,16 +77,16 @@ namespace Br3D
             // test
             Text t = new Text(new Point3D(0, 0, 0), "asdf", 12);
 
-            design.TextStyles[0].FontFamilyName = "Arial";
+            model.TextStyles[0].FontFamilyName = "Arial";
 
-            design.Entities.Regen();
-            design.Entities.Add(t);
+            model.Entities.Regen();
+            model.Entities.Add(t);
         }
 
 
-        private void Design_MouseMove(object sender, MouseEventArgs e)
+        private void Model_MouseMove(object sender, MouseEventArgs e)
         {
-            hDesign.gripManager.MouseMove(e);
+            hModel.gripManager.MouseMove(e);
 
             UpdateCoordinatesControl(e);
             if (e.Button != MouseButtons.None)
@@ -129,12 +110,12 @@ namespace Br3D
         private void UpdateCoordinatesControl(MouseEventArgs e)
         {
 
-            var point = ActionBase.GetPoint3DWithSnapping(hDesign, e);
+            var point = ActionBase.GetPoint3DWithSnapping(hModel, e);
             if (point == null)
                 return;
 
             var text = "";
-            if (hDesign.TopViewOnly)
+            if (hModel.TopViewOnly)
                 text = Units.GetPointString(point.X, point.Y);
             else
                 text = Units.GetPointString(point.X, point.Y, point.Z);
@@ -144,11 +125,11 @@ namespace Br3D
         // 마우스 커서 아래에 있는 memo를 리턴한다.
         private Memo GetMemoUnderMouseCursor(System.Drawing.Point location)
         {
-            int index = design.GetLabelUnderMouseCursor(location);
+            int index = model.GetLabelUnderMouseCursor(location);
             if (index != -1)
             {
                 //get the entity
-                var label = design.ActiveViewport.Labels[index];
+                var label = model.ActiveViewport.Labels[index];
                 return label as Memo;
             }
             return null;
@@ -240,7 +221,7 @@ namespace Br3D
 
         private void InitToolbar()
         {
-            foreach (Viewport vp in design.Viewports)
+            foreach (Viewport vp in model.Viewports)
             {
                 if (vp.ToolBars.Length > 1)
                 {
@@ -281,26 +262,26 @@ namespace Br3D
         // 3d 모드로 변경
         private void ToolBarButton3DMode_Click(object sender, EventArgs e)
         {
-            hDesign.Set3DView();
+            hModel.Set3DView();
         }
 
         private void ToolBarButton2DMode_Click(object sender, EventArgs e)
         {
-            hDesign.Set2DView();
+            hModel.Set2DView();
         }
 
         private void ToolBarButtonOrthographicMode_Click(object sender, EventArgs e)
         {
-            design.ActiveViewport.Camera.ProjectionMode = devDept.Graphics.projectionType.Orthographic;
-            design.ActiveViewport.ZoomFit();
-            design.ActiveViewport.Invalidate();
+            model.ActiveViewport.Camera.ProjectionMode = devDept.Graphics.projectionType.Orthographic;
+            model.ActiveViewport.ZoomFit();
+            model.ActiveViewport.Invalidate();
         }
 
         private void ToolBarButtonPerspectiveMode_Click(object sender, EventArgs e)
         {
-            design.ActiveViewport.Camera.ProjectionMode = devDept.Graphics.projectionType.Perspective;
-            design.ActiveViewport.ZoomFit();
-            design.ActiveViewport.Invalidate();
+            model.ActiveViewport.Camera.ProjectionMode = devDept.Graphics.projectionType.Perspective;
+            model.ActiveViewport.ZoomFit();
+            model.ActiveViewport.Invalidate();
         }
 
         private void ToolBarButtonDisplayMode_Click(object sender, EventArgs e)
@@ -308,32 +289,32 @@ namespace Br3D
 
             var toolBar = sender as ToolBarButton;
             if (toolBar == toolBarButtonWireframe)
-                design.ActiveViewport.DisplayMode = displayType.Wireframe;
+                model.ActiveViewport.DisplayMode = displayType.Wireframe;
             else if (toolBar == toolBarButtonHiddenLine)
-                design.ActiveViewport.DisplayMode = displayType.HiddenLines;
+                model.ActiveViewport.DisplayMode = displayType.HiddenLines;
             else if (toolBar == toolBarButtonShaded)
-                design.ActiveViewport.DisplayMode = displayType.Shaded;
+                model.ActiveViewport.DisplayMode = displayType.Shaded;
             else if (toolBar == toolBarButtonRendered)
-                design.ActiveViewport.DisplayMode = displayType.Rendered;
+                model.ActiveViewport.DisplayMode = displayType.Rendered;
 
-            design.Invalidate();
+            model.Invalidate();
         }
 
         private void InitGraphics()
         {
-            design.AntiAliasing = true;
-            design.AntiAliasingSamples = devDept.Graphics.antialiasingSamplesNumberType.x4;
-            design.AskForAntiAliasing = true;
+            model.AntiAliasing = true;
+            model.AntiAliasingSamples = devDept.Graphics.antialiasingSamplesNumberType.x4;
+            model.AskForAntiAliasing = true;
         }
 
         private void InitDisplayMode()
         {
-            design.Shaded.ShowInternalWires = false;
-            design.Shaded.EdgeColorMethod = edgeColorMethodType.SingleColor;
-            design.Shaded.EdgeThickness = 1;
+            model.Shaded.ShowInternalWires = false;
+            model.Shaded.EdgeColorMethod = edgeColorMethodType.SingleColor;
+            model.Shaded.EdgeThickness = 1;
 
-            design.Rendered.SilhouettesDrawingMode = silhouettesDrawingType.Never;
-            design.Rendered.ShadowMode = devDept.Graphics.shadowType.None;
+            model.Rendered.SilhouettesDrawingMode = silhouettesDrawingType.Never;
+            model.Rendered.ShadowMode = devDept.Graphics.shadowType.None;
         }
 
         void RefreshPropertyGridControl(object selectedObj)
@@ -353,20 +334,20 @@ namespace Br3D
             propertyGridControl1.BestFit();
         }
 
-        private void Design_MouseUp(object sender, MouseEventArgs e)
+        private void Model_MouseUp(object sender, MouseEventArgs e)
         {
-            if (design.ActionMode != actionType.None)
+            if (model.ActionMode != actionType.None)
                 return;
 
             if (e.Button == MouseButtons.Left)
             {
-                var item = design.GetItemUnderMouseCursor(e.Location);
+                var item = model.GetItemUnderMouseCursor(e.Location);
                 if (item != null)
                     item.Item.Selected = true;
 
                 // 그림 관련
-                if (hDesign?.gripManager != null)
-                    hDesign?.gripManager.MouseUp(e);
+                if (hModel?.gripManager != null)
+                    hModel?.gripManager.MouseUp(e);
                     
 
                 // 속성창 갱신
@@ -404,7 +385,7 @@ namespace Br3D
             if (propertyGridControl1.FocusedRow.Properties.RowEdit == repositoryItemComboBoxTextStyle)
             {
                 repositoryItemComboBoxTextStyle.Items.Clear();
-                foreach (var ts in hDesign.TextStyles)
+                foreach (var ts in hModel.TextStyles)
                 {
                     repositoryItemComboBoxTextStyle.Items.Add(ts.Name);
                 }
@@ -412,7 +393,7 @@ namespace Br3D
             else if (propertyGridControl1.FocusedRow.Properties.RowEdit == repositoryItemComboBoxLayerName)
             {
                 repositoryItemComboBoxLayerName.Items.Clear();
-                foreach (var la in hDesign.Layers)
+                foreach (var la in hModel.Layers)
                 {
                     repositoryItemComboBoxLayerName.Items.Add(la.Name);
                 }
@@ -421,7 +402,7 @@ namespace Br3D
             {
 
                 repositoryItemComboBoxLineType.Items.Clear();
-                foreach (var lt in hDesign.LineTypes)
+                foreach (var lt in hModel.LineTypes)
                 {
                     repositoryItemComboBoxLineType.Items.Add(lt.Name);
                 }
@@ -429,7 +410,7 @@ namespace Br3D
             else if (propertyGridControl1.FocusedRow.Properties.RowEdit == repositoryItemComboBoxBlock)
             {
                 repositoryItemComboBoxBlock.Items.Clear();
-                foreach (var b in hDesign.Blocks)
+                foreach (var b in hModel.Blocks)
                 {
                     repositoryItemComboBoxBlock.Items.Add(b.Name);
                 }
@@ -445,9 +426,9 @@ namespace Br3D
 
             try
             {
-                design.Entities.Regen();
+                model.Entities.Regen();
                 propertyGridControl1.UpdateData();
-                design.Invalidate();
+                model.Invalidate();
             }
             catch (Exception ex)
             {
@@ -469,7 +450,7 @@ namespace Br3D
                 return;
 
             AfterCheckNode(node);
-            design.Invalidate();
+            model.Invalidate();
         }
 
         private void AfterCheckNode(DevExpress.XtraTreeList.Nodes.TreeListNode node)
@@ -496,9 +477,9 @@ namespace Br3D
             if (entities == null)
                 return;
 
-            design.Entities.ClearSelection();
+            model.Entities.ClearSelection();
             entities.ForEach(x => x.Selected = true);
-            design.Invalidate();
+            model.Invalidate();
         }
 
         private List<Entity> GetAllEntitiesByNode(DevExpress.XtraTreeList.Nodes.TreeListNode node, bool subEntities)
@@ -507,35 +488,35 @@ namespace Br3D
             if (node.Tag is Layer)
             {
                 var layerName = ((Layer)node.Tag).Name;
-                var result = design.Entities.FindAll(x => x.LayerName == layerName);
+                var result = model.Entities.FindAll(x => x.LayerName == layerName);
                 if (result != null)
                     entities.AddRange(result);
             }
             else if (node.Tag is Block)
             {
                 var blockName = ((Block)node.Tag).Name;
-                var result = design.Entities.FindAll(x => x is BlockReferenceEx && ((BlockReference)x).BlockName == blockName);
+                var result = model.Entities.FindAll(x => x is BlockReferenceEx && ((BlockReference)x).BlockName == blockName);
                 if (result != null)
                     entities.AddRange(result);
             }
             else if (node.Tag is LineType)
             {
                 var lineTypeName = ((LineType)node.Tag).Name;
-                var result = design.Entities.FindAll(x => x.LineTypeName == lineTypeName);
+                var result = model.Entities.FindAll(x => x.LineTypeName == lineTypeName);
                 if (result != null)
                     entities.AddRange(result);
             }
             else if (node.Tag is HatchPattern)
             {
                 var hatchPatternName = ((HatchPattern)node.Tag).Name;
-                var result = design.Entities.FindAll(x => x is Hatch && ((Hatch)x).PatternName == hatchPatternName);
+                var result = model.Entities.FindAll(x => x is Hatch && ((Hatch)x).PatternName == hatchPatternName);
                 if (result != null)
                     entities.AddRange(result);
             }
             else if (node.Tag is TextStyle)
             {
                 var textStyleName = ((TextStyle)node.Tag).Name;
-                var result = design.Entities.FindAll(x => x is Text && ((Text)x).StyleName == textStyleName);
+                var result = model.Entities.FindAll(x => x is Text && ((Text)x).StyleName == textStyleName);
                 if (result != null)
                     entities.AddRange(result);
             }
@@ -601,13 +582,6 @@ namespace Br3D
             functionByElement.Add(tileNavItemLayer, Layer);
             functionByElement.Add(tileNavItemTextStyle, TextStyle);
             functionByElement.Add(tileNavItemLineType, LineType);
-
-
-            functionByElement.Add(tileNavItemNewSketch, NewSketch);
-            functionByElement.Add(tileNavItemSaveSketch, SaveSketch);
-            functionByElement.Add(tileNavItemSketchSlot, SketchSlot);
-            functionByElement.Add(tileNavItemSketchCircle, SketchCircle);
-            functionByElement.Add(tileNavItemSketchLine, SketchLine);
         }
 
 
@@ -615,66 +589,37 @@ namespace Br3D
         void RegenAll()
         {
             if (isDwg)
-                hDesign.Set2DView();
+                hModel.Set2DView();
             else
-                hDesign.Set3DView();
+                hModel.Set3DView();
 
             // zoom fit
-            foreach (Viewport v in design.Viewports)
+            foreach (Viewport v in model.Viewports)
                 v.ZoomFit();
 
 
             // object tree 갱신
-            ObjectTreeListHelper.RegenAsync(treeListObject, design, isDwg);
+            ObjectTreeListHelper.RegenAsync(treeListObject, model, isDwg);
 
             RefreshDataSource();
         }
-        async void SketchLine()
-        {
-            ActionSketchLine ac = new ActionSketchLine(design);
-            await ac.RunAsync();
-        }
-        async void SketchCircle()
-        {
-            ActionSketchCircle ac = new ActionSketchCircle(design);
-            await ac.RunAsync();
-        }
-
-        async void SketchSlot()
-        {
-            ActionSketchSlot ac = new ActionSketchSlot(design);
-            await ac.RunAsync();
-        }
-
-        void NewSketch()
-        {
-            ActionNewSketch ac = new ActionNewSketch(design);
-            ac.Run();
-
-            ObjectTreeListHelper.RegenAsync(treeListObject, design, false);
-        }
-
-        void SaveSketch()
-        {
-            ActionSaveSketch ac = new ActionSaveSketch(design);
-            ac.Run();
-        }
+        
 
         void LineType()
         {
-            ActionLineType ac = new ActionLineType(design, this);
+            ActionLineType ac = new ActionLineType(model, this);
             ac.Run();
         }
 
         void TextStyle()
         {
-            ActionTextStyle ac = new ActionTextStyle(design, this);
+            ActionTextStyle ac = new ActionTextStyle(model, this);
             ac.Run();
         }
 
         void Layer()
         {
-            ActionLayer ac = new ActionLayer(design, this);
+            ActionLayer ac = new ActionLayer(model, this);
             ac.Run();
         }
 
@@ -723,26 +668,26 @@ namespace Br3D
         }
         private void InitSnapping()
         {
-            if (design is HDesign)
+            if (model is HModel)
             {
-                HDesign vp = (HDesign)design;
+                HModel vp = (HModel)model;
                 vp.Snapping.SetActiveObjectSnap(Snapping.objectSnapType.None, true);
                 vp.Snapping.objectSnapEnabled = true;
             }
         }
 
-        private void Design_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void Model_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Middle)
             {
-                design.ZoomFit();
+                model.ZoomFit();
                 return;
             }
 
             // zoom all
             if (e.Button == MouseButtons.Middle)
             {
-                design.ZoomFit();
+                model.ZoomFit();
                 return;
             }
 
@@ -751,38 +696,34 @@ namespace Br3D
                 return;
             }
 
-            if (design.ObjectManipulator.Visible == false)
+            if (model.ObjectManipulator.Visible == false)
             {
                 devDept.Geometry.Transformation trans = new devDept.Geometry.Transformation();
-                IList<Entity> selectedEntities = ((HDesign)design).GetAllSelectedEntities();
+                IList<Entity> selectedEntities = ((HModel)model).GetAllSelectedEntities();
                 trans.Identity();
-                design.ObjectManipulator.Enable(trans, true, selectedEntities);
+                model.ObjectManipulator.Enable(trans, true, selectedEntities);
             }
             else
             {
-                design.ObjectManipulator.Apply();
-                design.Entities.Regen();
+                model.ObjectManipulator.Apply();
+                model.Entities.Regen();
             }
         }
 
-        //TODO devDept 2022: devDept.Eyeshot.WorkFailedEventArgs has been moved to devDept namespace.
-        //private void Model_WorkFailed(object sender, WorkFailedEventArgs e)
-        private void Design_WorkFailed(object sender, devDept.WorkFailedEventArgs e)
+        private void Model_WorkFailed(object sender, WorkFailedEventArgs e)
         {
             MessageBox.Show(e.Error);
 
         }
 
-        //TODO devDept 2022: devDept.Eyeshot.WorkCompletedEventArgs has been moved to devDept namespace.
-        //private void Model_WorkCompleted(object sender, devDept.Eyeshot.WorkCompletedEventArgs e)
-        private void Design_WorkCompleted(object sender, devDept.WorkCompletedEventArgs e)
+        private void Model_WorkCompleted(object sender, WorkCompletedEventArgs e)
         {
             if (e.WorkUnit is ReadFileAsync)
             {
                 ReadFileAsync rfa = (ReadFileAsync)e.WorkUnit;
 
                 // viewport에 추가한다.
-                rfa.AddToScene(design);
+                rfa.AddToScene(model);
 
                 opendFilePath = rfa.FileName;
 
@@ -825,7 +766,7 @@ namespace Br3D
         // 
         void FlagOsnap(DevExpress.XtraBars.Navigation.TileNavItem tile, Snapping.objectSnapType snapType)
         {
-            HDesign hModel = design as HDesign;
+            HModel hModel = model as HModel;
             if (hModel == null)
                 return;
 
@@ -835,50 +776,50 @@ namespace Br3D
 
         void ViewportSingle()
         {
-            if (design.Viewports.Contains(viewports[1]))
-                design.Viewports.Remove(viewports[1]);
-            if (design.Viewports.Contains(viewports[2]))
-                design.Viewports.Remove(viewports[2]);
-            if (design.Viewports.Contains(viewports[3]))
-                design.Viewports.Remove(viewports[3]);
-            design.Invalidate();
+            if (model.Viewports.Contains(viewports[1]))
+                model.Viewports.Remove(viewports[1]);
+            if (model.Viewports.Contains(viewports[2]))
+                model.Viewports.Remove(viewports[2]);
+            if (model.Viewports.Contains(viewports[3]))
+                model.Viewports.Remove(viewports[3]);
+            model.Invalidate();
         }
 
         void Viewport1x1()
         {
-            if (!design.Viewports.Contains(viewports[1]))
-                design.Viewports.Add(viewports[1]);
-            if (design.Viewports.Contains(viewports[2]))
-                design.Viewports.Remove(viewports[2]);
-            if (design.Viewports.Contains(viewports[3]))
-                design.Viewports.Remove(viewports[3]);
-            foreach (Viewport vp in design.Viewports)
+            if (!model.Viewports.Contains(viewports[1]))
+                model.Viewports.Add(viewports[1]);
+            if (model.Viewports.Contains(viewports[2]))
+                model.Viewports.Remove(viewports[2]);
+            if (model.Viewports.Contains(viewports[3]))
+                model.Viewports.Remove(viewports[3]);
+            foreach (Viewport vp in model.Viewports)
                 vp.ZoomFit();
-            design.Invalidate();
+            model.Invalidate();
         }
         void Viewport1x2()
         {
-            if (!design.Viewports.Contains(viewports[1]))
-                design.Viewports.Add(viewports[1]);
-            if (!design.Viewports.Contains(viewports[2]))
-                design.Viewports.Add(viewports[2]);
-            if (design.Viewports.Contains(viewports[3]))
-                design.Viewports.Remove(viewports[3]);
-            foreach (Viewport vp in design.Viewports)
+            if (!model.Viewports.Contains(viewports[1]))
+                model.Viewports.Add(viewports[1]);
+            if (!model.Viewports.Contains(viewports[2]))
+                model.Viewports.Add(viewports[2]);
+            if (model.Viewports.Contains(viewports[3]))
+                model.Viewports.Remove(viewports[3]);
+            foreach (Viewport vp in model.Viewports)
                 vp.ZoomFit();
-            design.Invalidate();
+            model.Invalidate();
         }
         void Viewport2x2()
         {
-            if (!design.Viewports.Contains(viewports[1]))
-                design.Viewports.Add(viewports[1]);
-            if (!design.Viewports.Contains(viewports[2]))
-                design.Viewports.Add(viewports[2]);
-            if (!design.Viewports.Contains(viewports[3]))
-                design.Viewports.Add(viewports[3]);
-            foreach (Viewport vp in design.Viewports)
+            if (!model.Viewports.Contains(viewports[1]))
+                model.Viewports.Add(viewports[1]);
+            if (!model.Viewports.Contains(viewports[2]))
+                model.Viewports.Add(viewports[2]);
+            if (!model.Viewports.Contains(viewports[3]))
+                model.Viewports.Add(viewports[3]);
+            foreach (Viewport vp in model.Viewports)
                 vp.ZoomFit();
-            design.Invalidate();
+            model.Invalidate();
         }
 
         void End() => FlagOsnap(tileNavItemEnd, Snapping.objectSnapType.End);
@@ -889,26 +830,26 @@ namespace Br3D
 
         async void Coorindates()
         {
-            ActionID ac = new ActionID(design, ActionID.ShowResult.label);
+            ActionID ac = new ActionID(model, ActionID.ShowResult.label);
             await ac.RunAsync();
         }
 
         async void Distance()
         {
-            ActionDist ac = new ActionDist(design, ActionDist.ShowResult.label);
+            ActionDist ac = new ActionDist(model, ActionDist.ShowResult.label);
             await ac.RunAsync();
         }
 
         async void Memo()
         {
-            ActionMemo ac = new ActionMemo(design);
+            ActionMemo ac = new ActionMemo(model);
             await ac.RunAsync();
         }
 
         void ClearAnnotations()
         {
-            design.ActiveViewport.Labels.Clear();
-            design.Invalidate();
+            model.ActiveViewport.Labels.Clear();
+            model.Invalidate();
         }
 
         private void SaveImage()
@@ -929,16 +870,16 @@ namespace Br3D
                 {
 
                     case 1:
-                        design.WriteToFileRaster(2, dlg.FileName, System.Drawing.Imaging.ImageFormat.Bmp);
+                        model.WriteToFileRaster(2, dlg.FileName, System.Drawing.Imaging.ImageFormat.Bmp);
                         break;
                     case 2:
-                        design.WriteToFileRaster(2, dlg.FileName, System.Drawing.Imaging.ImageFormat.Png);
+                        model.WriteToFileRaster(2, dlg.FileName, System.Drawing.Imaging.ImageFormat.Png);
                         break;
                     case 3:
-                        design.WriteToFileRaster(2, dlg.FileName, System.Drawing.Imaging.ImageFormat.Wmf);
+                        model.WriteToFileRaster(2, dlg.FileName, System.Drawing.Imaging.ImageFormat.Wmf);
                         break;
                     case 4:
-                        design.WriteToFileRaster(2, dlg.FileName, System.Drawing.Imaging.ImageFormat.Emf);
+                        model.WriteToFileRaster(2, dlg.FileName, System.Drawing.Imaging.ImageFormat.Emf);
                         break;
 
                 }
@@ -988,7 +929,7 @@ namespace Br3D
                 if (rf == null)
                     return;
 
-                design.StartWork(rf);
+                model.StartWork(rf);
             }
             catch (Exception ex)
             {
@@ -1002,11 +943,11 @@ namespace Br3D
         {
             try
             {
-                devDept.Eyeshot.Translators.WriteFileAsync wf = FileHelper.GetWriteFileAsync(design, pathFileName);
+                devDept.Eyeshot.Translators.WriteFileAsync wf = FileHelper.GetWriteFileAsync(model, pathFileName);
                 if (wf == null)
                     return;
 
-                design.StartWork(wf);
+                model.StartWork(wf);
             }
             catch (Exception ex)
             {
@@ -1017,8 +958,8 @@ namespace Br3D
 
         void NewFile()
         {
-            design.Clear();
-            design.Invalidate();
+            model.Clear();
+            model.Invalidate();
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)

@@ -1,9 +1,5 @@
 ﻿using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
 using devDept.Geometry;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace hanee.Geometry
 {

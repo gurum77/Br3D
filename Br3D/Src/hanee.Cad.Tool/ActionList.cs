@@ -10,7 +10,7 @@ namespace hanee.Cad.Tool
 {
     public class ActionList : ActionBase
     {
-        public ActionList(devDept.Eyeshot.Workspace environment) : base(environment)
+        public ActionList(devDept.Eyeshot.Environment environment) : base(environment)
         {
         }
 

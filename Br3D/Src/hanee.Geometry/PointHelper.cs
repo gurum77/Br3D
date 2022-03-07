@@ -1,15 +1,11 @@
 ﻿using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
 using devDept.Geometry;
-using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace hanee.Geometry
 {
     static public class PointHelper
-    {  
+    {
         public static bool Equals2D(this Point3D pt, Point3D ptOther, double tol)
         {
             double dist = pt.To2D().DistanceTo(ptOther.To2D());
@@ -34,13 +30,13 @@ namespace hanee.Geometry
             return false;
         }
 
-       /// <summary>
-       /// Point3D에 대한 scale 적용(실제로는 위치만 이동됨)
-       /// </summary>
-       /// <param name="pt"></param>
-       /// <param name="sx"></param>
-       /// <param name="sy"></param>
-       /// <param name="sz"></param>
+        /// <summary>
+        /// Point3D에 대한 scale 적용(실제로는 위치만 이동됨)
+        /// </summary>
+        /// <param name="pt"></param>
+        /// <param name="sx"></param>
+        /// <param name="sy"></param>
+        /// <param name="sz"></param>
         public static void Scale(this Point3D pt, Point3D basePoint, double sx, double sy, double sz)
         {
             pt.X = basePoint.X + ((pt.X - basePoint.X) * sx);
@@ -89,7 +85,7 @@ namespace hanee.Geometry
             if (regions == null)
                 return false;
 
-            foreach(var r in regions)
+            foreach (var r in regions)
             {
                 if (r.IsPointInside(pt))
                     return true;
@@ -98,6 +94,6 @@ namespace hanee.Geometry
             return false;
         }
 
-        
+
     }
 }

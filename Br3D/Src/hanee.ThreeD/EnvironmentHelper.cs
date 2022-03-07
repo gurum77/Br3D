@@ -1,25 +1,26 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
 using devDept.Geometry;
-using devDept.Graphics;
-using System;
+using hanee.Geometry;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-//TODO devDept 2022: Eyeshot.Environment class has been renamed in Eyeshot.Workspace.
-//using Environment = devDept.Eyeshot.Workspace;
-using Environment = devDept.Eyeshot.Workspace;
-using hanee.Geometry;
+using Environment = devDept.Eyeshot.Environment;
 namespace hanee.ThreeD
 {
     // Model, Drawings 모두를 위한 헬퍼
     public static class EnvironmentHelper
     {
+        static public bool IsTopViewOnly(this devDept.Eyeshot.Environment environment)
+        {
+            HModel hDesign = environment as HModel;
+            if (hDesign == null)
+                return false;
+
+            return hDesign.TopViewOnly;
+        }
+
         // text를 모두 regen한다.
-        static public void RegenAllTexts(this Environment environment, double deviation=0.001)
+        static public void RegenAllTexts(this Environment environment, double deviation = 0.001)
         {
             var regenParams = new RegenParams(deviation, environment);
             foreach (var ent in environment.Entities)

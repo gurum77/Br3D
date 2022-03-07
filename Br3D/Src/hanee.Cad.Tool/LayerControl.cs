@@ -31,7 +31,7 @@ namespace hanee.Cad.Tool
             lineTypeName
         }
 
-        Design design;
+        Model design;
         internal void RefreshDataSource()
         {
             gridControl1.RefreshDataSource();
@@ -47,7 +47,7 @@ namespace hanee.Cad.Tool
         
 
         
-        public void SetDesign(Design design)
+        public void SetDesign(Model design)
         {
             this.design = design;
             gridControl1.DataSource = design.Layers;

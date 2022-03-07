@@ -1,12 +1,10 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
 using devDept.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 
 namespace hanee.Geometry
 {
@@ -15,12 +13,12 @@ namespace hanee.Geometry
         [Flags]
         public enum Border
         {
-            none    = 0x00000000,
-            left    = 0x00000001,
-            top     = 0x00000002,
-            right   = 0x00000004,
-            bottom  = 0x00000008,
-            all     = 0x0000ffff
+            none = 0x00000000,
+            left = 0x00000001,
+            top = 0x00000002,
+            right = 0x00000004,
+            bottom = 0x00000008,
+            all = 0x0000ffff
         }
         // 수평선을 만든다.
         static public LinearPath CreateHorizontalLine(Point3D center, double width)
@@ -83,7 +81,7 @@ namespace hanee.Geometry
                 entities.Add(new Line(points[2], points[3]));
             }
 
-            foreach(var ent in entities)
+            foreach (var ent in entities)
             {
                 ent.Color = Color.White;
                 ent.ColorMethod = colorMethodType.byEntity;
@@ -93,13 +91,13 @@ namespace hanee.Geometry
         }
 
         // 사각형을 만든다.
-        static public LinearPath CreateRectangle(double x, double y, double z, double w, double h, bool centered=true)
+        static public LinearPath CreateRectangle(double x, double y, double z, double w, double h, bool centered = true)
         {
             List<Point3D> points = GetRectanlePoints(x, y, z, w, h, centered);
             if (points == null)
                 return null;
 
-            
+
             return new LinearPath(points)
             {
                 Color = Color.White,
@@ -114,9 +112,9 @@ namespace hanee.Geometry
         static public LinearPath FromLines(List<Line> lines)
         {
             // 길이가 거의 0인 선은 제외
-            for(int i = 0; i < lines.Count(); ++i)
+            for (int i = 0; i < lines.Count(); ++i)
             {
-                if(lines[i].Length() < 0.001)
+                if (lines[i].Length() < 0.001)
                 {
                     lines.RemoveAt(i);
                     i--;
@@ -163,7 +161,7 @@ namespace hanee.Geometry
             foreach (var c in sortedLines)
             {
                 // 연속된 같은 점은 추가하지 않는다.
-                if(points.Count == 0 || !points.Last().Equals(c.StartPoint, 0.0001))
+                if (points.Count == 0 || !points.Last().Equals(c.StartPoint, 0.0001))
                     points.Add(c.StartPoint);
             }
             // 마지막 좌표도 추가
@@ -196,7 +194,7 @@ namespace hanee.Geometry
             foreach (var sc in sortedLines)
             {
                 // 맨 뒤에 연결할 수 있는걸 찾는다.
-                if(atLast)
+                if (atLast)
                 {
                     // 정상연결
                     if (sc.EndPoint.Equals(line.StartPoint, 0.001))
@@ -227,7 +225,7 @@ namespace hanee.Geometry
                         return lineNew;
                     }
                 }
-                
+
             }
 
             return null;

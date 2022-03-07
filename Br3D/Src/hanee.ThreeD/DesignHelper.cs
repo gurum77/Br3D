@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using devDept.Eyeshot;
+﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
 using devDept.Geometry;
 using hanee.Geometry;
+using System;
+using System.Collections.Generic;
 
 namespace hanee.ThreeD
 {
     public static class DesignHelper
     {
         // 기본 라인 타입을 만든다.
-        static public void AddDefaultLineTypes(this Design design)
+        static public void AddDefaultLineTypes(this Model design)
         {
             // hidden
             if (!design.LineTypes.Contains("hidden"))
@@ -33,7 +32,7 @@ namespace hanee.ThreeD
 
         }
         // 선택한 모든 객체 리턴
-        static public List<Entity> GetAllSelectedEntities(this Design design)
+        static public List<Entity> GetAllSelectedEntities(this Model design)
         {
             List<Entity> selectedEntity = new List<Entity>();
             foreach (Entity ent in design.Entities)
@@ -44,7 +43,7 @@ namespace hanee.ThreeD
             return selectedEntity;
         }
 
-        static public void UnselectEntity(this Design design, Entity ent)
+        static public void UnselectEntity(this Model design, Entity ent)
         {
             if (ent == null)
                 return;
@@ -61,7 +60,7 @@ namespace hanee.ThreeD
             }
         }
 
-        static public void UnselectAll(this Design design)
+        static public void UnselectAll(this Model design)
         {
             design.SetCurrent(null);
             foreach (var ent in design.Entities)
@@ -76,12 +75,12 @@ namespace hanee.ThreeD
         }
 
         // jittering 제거용 block 이름 리턴
-        static public String GetElementJitteringBlockName(this Design design, Element element)
+        static public String GetElementJitteringBlockName(this Model design, Element element)
         {
             return $"ElementJitteringBlock_{element.id.id.ToString()}";
         }
 
-        static public Point3D GetInsertPointByElement(this Design design, Element element)
+        static public Point3D GetInsertPointByElement(this Model design, Element element)
         {
             var br = design.FindBlockReferenceByElement(element);
             if (br == null)
@@ -90,13 +89,13 @@ namespace hanee.ThreeD
             return br.InsertionPoint;
         }
 
-        static public BlockReference FindBlockReferenceByElement(this Design design, Element element)
+        static public BlockReference FindBlockReferenceByElement(this Model design, Element element)
         {
             string blockName = design.GetElementJitteringBlockName(element);
 
-            foreach(var ent in design.Entities)
+            foreach (var ent in design.Entities)
             {
-                if(ent is BlockReference)
+                if (ent is BlockReference)
                 {
                     BlockReference br = ent as BlockReference;
                     if (br.BlockName == blockName)
@@ -107,9 +106,9 @@ namespace hanee.ThreeD
             return null;
         }
 
-       
+
         // element에 대해서 remove jittering을 한다.
-        static public BlockReference RemoveJittering(this Design design, Element element)
+        static public BlockReference RemoveJittering(this Model design, Element element)
         {
             var entities = hanee.ThreeD.Util.GetElementEntities(design, element);
             if (entities == null || entities.Count == 0)
@@ -129,13 +128,13 @@ namespace hanee.ThreeD
             string blockName = design.GetElementJitteringBlockName(element);
 
             // 이미 블럭이 있으면 블럭을 제거하고 다시 만들어야 한다.
-            if(design.Blocks.Contains(blockName))
+            if (design.Blocks.Contains(blockName))
             {
                 design.Blocks.Remove(blockName);
             }
 
             var br = design.RemoveJittering(blockName);
-            if(br != null)
+            if (br != null)
             {
                 element.Attach(br);
             }

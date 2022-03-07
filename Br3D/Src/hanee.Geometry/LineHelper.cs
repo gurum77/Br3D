@@ -1,9 +1,5 @@
 ﻿using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
 using devDept.Geometry;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace hanee.Geometry
 {
@@ -27,7 +23,7 @@ namespace hanee.Geometry
         /// <returns></returns>
         static public Line CreateOneDirVerticalInfinitLine(double x, double y, bool toUpper)
         {
-            if(toUpper)
+            if (toUpper)
                 return new Line(x, y, x, infiniteLength);
             else
                 return new Line(x, -infiniteLength, x, y);
@@ -85,7 +81,7 @@ namespace hanee.Geometry
         // lineTar에 z방향으로 교차되는 점을 찾는다.
         public static Point3D FindMatchPointOnLineByOtherLineByZAxis(Line lineTar, Line lineSrc)
         {
-            
+
             Line lineTar2D = lineTar.Clone() as Line;
             lineTar2D.StartPoint.Z = 0;
             lineTar2D.EndPoint.Z = 0;
@@ -95,11 +91,11 @@ namespace hanee.Geometry
             lineSrc2D.EndPoint.Z = 0;
 
             // 끝점이 line상에 있는지 본다.
-            if(lineTar2D.StartPoint.IsOnCurve(lineSrc2D, 0.001))
+            if (lineTar2D.StartPoint.IsOnCurve(lineSrc2D, 0.001))
             {
                 return lineTar.StartPoint.Clone() as Point3D;
             }
-            if(lineTar2D.EndPoint.IsOnCurve(lineSrc2D, 0.001))
+            if (lineTar2D.EndPoint.IsOnCurve(lineSrc2D, 0.001))
             {
                 return lineTar.EndPoint.Clone() as Point3D;
             }

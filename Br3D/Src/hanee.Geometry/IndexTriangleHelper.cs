@@ -1,9 +1,6 @@
 ﻿using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
 using devDept.Geometry;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace hanee.Geometry
 {
@@ -22,7 +19,7 @@ namespace hanee.Geometry
                 return null;
 
             Point3D yMaxPoint = null;
-            foreach(var p in points)
+            foreach (var p in points)
             {
                 if (yMaxPoint == null || yMaxPoint.Y < p.Y)
                 {

@@ -14,7 +14,7 @@ namespace hanee.Cad.Tool
     public class ActionArea : ActionBase
     {
         List<Point3D> points;
-        public ActionArea(devDept.Eyeshot.Design vp) : base(vp)
+        public ActionArea(devDept.Eyeshot.Model vp) : base(vp)
         {
             points = null;
         }
@@ -63,7 +63,7 @@ namespace hanee.Cad.Tool
         }
 
 
-        protected override void OnMouseMove(devDept.Eyeshot.Workspace vp, MouseEventArgs e)
+        protected override void OnMouseMove(devDept.Eyeshot.Environment vp, MouseEventArgs e)
         {
             if(points != null && points.Count > 0)
             {

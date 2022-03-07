@@ -31,7 +31,7 @@ namespace hanee.Cad.Tool
             length
         }
 
-        Design design;
+        Model design;
         public LineTypeControl()
         {
             InitializeComponent();
@@ -45,7 +45,7 @@ namespace hanee.Cad.Tool
             gridControl1.RefreshDataSource();
         }
 
-        public void SetDesign(Design design)
+        public void SetDesign(Model design)
         {
             this.design = design;
             gridControl1.DataSource = design.LineTypes;

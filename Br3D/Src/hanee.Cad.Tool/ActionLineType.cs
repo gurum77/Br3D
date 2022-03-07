@@ -1,10 +1,6 @@
 ﻿using devDept.Eyeshot;
 using hanee.ThreeD;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace hanee.Cad.Tool
@@ -13,7 +9,7 @@ namespace hanee.Cad.Tool
     {
         static public FormLineType formLineType;
         Form owner;
-        public ActionLineType(Workspace environment, Form owner) : base(environment)
+        public ActionLineType(devDept.Eyeshot.Environment environment, Form owner) : base(environment)
         {
             this.owner = owner;
         }
@@ -22,7 +18,7 @@ namespace hanee.Cad.Tool
         {
             if (formLineType == null)
             {
-                formLineType = new FormLineType(GetDesign());
+                formLineType = new FormLineType(GetModel());
                 formLineType.FormClosed += FormLayer_FormClosed;
             }
 

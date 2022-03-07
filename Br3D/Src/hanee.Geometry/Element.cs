@@ -1,13 +1,9 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
 using devDept.Eyeshot.Labels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace hanee.Geometry
 {
@@ -39,7 +35,7 @@ namespace hanee.Geometry
             Serialize(info, true);
         }
 
-        public ElementID id{ get; set; }
+        public ElementID id { get; set; }
         public string name { get; set; }
         public bool doingTransation { get; set; }
         public event EventHandler AfterEndTransaction;
@@ -64,7 +60,7 @@ namespace hanee.Geometry
         // 편집 시작
         virtual public void StartTransation()
         {
-            if(doingTransation)
+            if (doingTransation)
             {
                 System.Diagnostics.Debug.Assert(false);
             }
@@ -73,9 +69,9 @@ namespace hanee.Geometry
         }
 
         // 편집 끝
-        virtual public void EndTransation() 
+        virtual public void EndTransation()
         {
-            if(!doingTransation)
+            if (!doingTransation)
             {
                 System.Diagnostics.Debug.Assert(false);
             }
@@ -83,7 +79,7 @@ namespace hanee.Geometry
             doingTransation = false;
 
             // event handler
-            if(AfterEndTransaction != null)
+            if (AfterEndTransaction != null)
                 AfterEndTransaction(this, EventArgs.Empty);
         }
 
@@ -92,11 +88,11 @@ namespace hanee.Geometry
         virtual public void SyncAfterDeserialize()
         {
         }
-    
+
         // element를 entities 에 부착한다.
         public void Attach(EntityList entities)
         {
-            foreach(var ent in entities)
+            foreach (var ent in entities)
             {
                 Attach(ent);
             }
@@ -113,5 +109,5 @@ namespace hanee.Geometry
         }
     }
 
-    
+
 }

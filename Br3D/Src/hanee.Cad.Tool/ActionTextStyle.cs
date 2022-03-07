@@ -8,7 +8,7 @@ namespace hanee.Cad.Tool
     {
         static public FormTextStyle formTextStyle;
         Form owner;
-        public ActionTextStyle(Workspace environment, Form owner) : base(environment)
+        public ActionTextStyle(Environment environment, Form owner) : base(environment)
         {
             this.owner = owner;
         }
@@ -17,7 +17,7 @@ namespace hanee.Cad.Tool
         {
             if (formTextStyle == null)
             {
-                formTextStyle = new FormTextStyle(GetDesign());
+                formTextStyle = new FormTextStyle(GetModel());
                 formTextStyle.FormClosed += FormLayer_FormClosed;
             }
 

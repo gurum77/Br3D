@@ -50,28 +50,21 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
-  <ItemGroup Condition="'$(Platform)' == 'x64'">
-    <Reference Include="devDept.Eyeshot.Control.x64.Win.v2022">
-      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2022\\Bin\x64\devDept.Eyeshot.Control.x64.Win.v2022.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(Platform)' == 'x86'">
-    <Reference Include="devDept.Eyeshot.Control.x86.Win.v2022">
-      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2022\\Bin\x86\devDept.Eyeshot.Control.x86.Win.v2022.dll</HintPath>
-    </Reference>
-  </ItemGroup>
   <ItemGroup>
-    <Reference Include="devDept.Eyeshot.Control.Win.v2022">
+    <Reference Include="devDept.Eyeshot.Control.Win.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=5385d83d2fb4d7d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2022\\Bin\devDept.Eyeshot.Control.Win.v2022.dll</HintPath>
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\devDept.Eyeshot.Control.Win.v2021.dll</HintPath>
     </Reference>
-    <Reference Include="devDept.Geometry.v2022">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2022\\Bin\devDept.Geometry.v2022.dll</HintPath>
+    <Reference Include="devDept.Eyeshot.Control.x86.Win.v2021">
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\x86\devDept.Eyeshot.Control.x86.Win.v2021.dll</HintPath>
     </Reference>
-    <Reference Include="devDept.Graphics.Win.v2022">
+    <Reference Include="devDept.Geometry.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=9440825e8b4733bc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2022\\Bin\devDept.Graphics.Win.v2022.dll</HintPath>
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\devDept.Geometry.v2021.dll</HintPath>
+    </Reference>
+    <Reference Include="devDept.Graphics.Win.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=f3cd437f0d8061b5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\devDept.Graphics.Win.v2021.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NGettext, Version=0.6.1.0, Culture=neutral, PublicKeyToken=08d3d1c89dfd2985, processorArchitecture=MSIL">
@@ -99,7 +92,7 @@
     <Compile Include="HDesignProperties.cs" />
     <Compile Include="EnvironmentHelper.cs" />
     <Compile Include="EyeshotConverter.cs" />
-    <Compile Include="HDesign.cs">
+    <Compile Include="HModel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="IEntityGripManager.cs" />
@@ -119,7 +112,6 @@
     <Compile Include="Snapping.cs" />
     <Compile Include="SystemValue.cs" />
     <Compile Include="Util.cs" />
-    <Compile Include="WorkspaceHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
-using devDept.Eyeshot;
+﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
-//TODO devDept 2022: Eyeshot.Environment class has been renamed in Eyeshot.Workspace.
-//using Environment = devDept.Eyeshot.Workspace;
-using Environment = devDept.Eyeshot.Workspace;
+using System;
+using System.Windows.Forms;
+using Environment = devDept.Eyeshot.Environment;
 
 namespace hanee.ThreeD
 {
@@ -14,11 +11,11 @@ namespace hanee.ThreeD
     {
         Environment environment { get; set; }
 
-        Design model { get; set; }
+        Model model { get; set; }
 
         private PropertyGrid propertyGrid { get; set; }
 
-        public PropertyGridHelper(Design model, PropertyGrid propertyGrid)
+        public PropertyGridHelper(Model model, PropertyGrid propertyGrid)
         {
             this.environment = model;
             this.model = model;

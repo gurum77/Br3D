@@ -1,5 +1,4 @@
 ﻿using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
 using devDept.Eyeshot.Translators;
 using devDept.Graphics;
 using System.Collections.Generic;
@@ -137,9 +136,7 @@ namespace hanee.ThreeD
                 Dictionary<string, Stream> textureStreams;
 
                 Get3DModelStreams(filename, out stream, out matStream, out textureStreams);
-                //TODO devDept 2022: Mesh.edgeStyleType Enum has been moved to devDept.Geometry.Entities.GMesh namespace.
-                //rf = new devDept.Eyeshot.Translators.ReadOBJ(stream, matStream, textureStreams, Mesh.edgeStyleType.Free);
-                rf = new devDept.Eyeshot.Translators.ReadOBJ(stream, matStream, textureStreams, GMesh.edgeStyleType.Free);
+                rf = new devDept.Eyeshot.Translators.ReadOBJ(stream, matStream, textureStreams, Mesh.edgeStyleType.Free);
             }
             else if (ext == ".LAS")
             {
@@ -242,15 +239,12 @@ namespace hanee.ThreeD
         }
 
         // 파일이름을 받아서 WriteFileAsync를 리턴한다.
-        static public WriteFileAsync GetWriteFileAsync(devDept.Eyeshot.Design model, string filename, bool ascii = false)
+        static public WriteFileAsync GetWriteFileAsync(devDept.Eyeshot.Model model, string filename, bool ascii = false)
         {
             string ext = System.IO.Path.GetExtension(filename);
             ext = ext.ToUpper();
 
-            //TODO devDept 2022: The Drawings class has been renamed in Drawing.
-            //WriteParamsWithDrawings writeParam = new WriteParamsWithDrawings(model, drawings);
-            WriteParamsWithDrawing writeParam = new WriteParamsWithDrawing(model, null);
-
+            WriteParamsWithDrawings writeParam = new WriteParamsWithDrawings(model, null);
             WriteFileAsync wf = null;
             if (ext == ".IGES" || ext == ".IGS")
             {
@@ -279,7 +273,7 @@ namespace hanee.ThreeD
                 writeParamTmp.Materials = model.Materials;
 
                 wf = new WriteWebGL(writeParamTmp, Material.Aluminium, filename);
-                
+
             }
             else if (ext == ".XML")
             {

@@ -1,8 +1,6 @@
 ﻿using devDept.Eyeshot;
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace hanee.Geometry
 {
@@ -50,7 +48,7 @@ namespace hanee.Geometry
         /// mode에 있는 환경을 여기에 추가하거나 교체한다.
         /// </summary>
         /// <param name="model"></param>
-        public void AddOrReplaceFromModel(Design model)
+        public void AddOrReplaceFromModel(Model model)
         {
             foreach (var lt in model.LineTypes)
                 lineTypes.AddOrReplace(lt);
@@ -71,15 +69,15 @@ namespace hanee.Geometry
 
                 blocks.AddOrReplace(b);
             }
-                
-       
+
+
         }
 
         /// <summary>
         /// model에 환경을 넣어준다.
         /// </summary>
         /// <param name="model"></param>
-        public void FillToModel(Design model)
+        public void FillToModel(Model model)
         {
             foreach (var lt in lineTypes)
                 model.LineTypes.AddOrReplace(lt);

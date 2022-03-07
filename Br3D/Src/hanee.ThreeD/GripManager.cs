@@ -10,10 +10,10 @@ namespace hanee.ThreeD
     {
         static public Dictionary<Type, Type> entityGripManagers { get; set; } = new Dictionary<Type, Type>();
         static public float gripSize = 15;
-        Design design;
-        HDesign hDesign => design as HDesign;
+        Model design;
+        HModel hDesign => design as HModel;
 
-        public GripManager(Design design)
+        public GripManager(Model design)
         {
             this.design = design;
 

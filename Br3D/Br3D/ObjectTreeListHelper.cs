@@ -12,7 +12,7 @@ namespace Br3D
 {
     public static class ObjectTreeListHelper
     {
-        async static public void RegenAsync(DevExpress.XtraTreeList.TreeList treeList, devDept.Eyeshot.Design model, bool isDwg)
+        async static public void RegenAsync(DevExpress.XtraTreeList.TreeList treeList, devDept.Eyeshot.Model model, bool isDwg)
         {
             SetOptionsAsElementTreeList(treeList);
             treeList.TreeViewFieldName = "Name";
@@ -55,12 +55,12 @@ namespace Br3D
             return nodes;
         }
 
-        static Task<BindingList<TreeListNodeOption>> RunTaskGenerateDataSourceAsync(devDept.Eyeshot.Design model, bool isDwg)
+        static Task<BindingList<TreeListNodeOption>> RunTaskGenerateDataSourceAsync(devDept.Eyeshot.Model model, bool isDwg)
         {
             return Task.Run(() => GenerateDataSource(model, isDwg));
         }
         // element를 tree로 만들기 위한 data source를 만든다.
-        static private BindingList<TreeListNodeOption> GenerateDataSource(devDept.Eyeshot.Design model, bool isDwg)
+        static private BindingList<TreeListNodeOption> GenerateDataSource(devDept.Eyeshot.Model model, bool isDwg)
         {
             if (isDwg)
             {
@@ -115,7 +115,7 @@ namespace Br3D
         }
 
         // dwg는 속성만 트리로 구성한다.
-        private static BindingList<TreeListNodeOption> GenerateDataSourceDwg(Design model)
+        private static BindingList<TreeListNodeOption> GenerateDataSourceDwg(Model model)
         {
             int id = -1;
             TreeData rootData = new TreeData(id++, -1, "root");
@@ -172,7 +172,7 @@ namespace Br3D
             return ConvertTreeDataToTreeOptions(rootData);
         }
 
-        private static BindingList<TreeListNodeOption> GenerateDataSource3D(Design model)
+        private static BindingList<TreeListNodeOption> GenerateDataSource3D(Model model)
         {
             int id = -1;
             TreeData rootData = new TreeData(id++, -1, "root");

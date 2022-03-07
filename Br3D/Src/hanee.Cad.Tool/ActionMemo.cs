@@ -11,7 +11,7 @@ namespace hanee.Cad.Tool
 {
     public class ActionMemo : ActionBase
     {
-        public ActionMemo(devDept.Eyeshot.Design vp) : base(vp)
+        public ActionMemo(devDept.Eyeshot.Model vp) : base(vp)
         {
 
         }
@@ -29,10 +29,10 @@ namespace hanee.Cad.Tool
                 FormInputMessage form = new FormInputMessage();
 
                 // 만약 선택한 label이 있다면 richtextbox에 내용을 넣어준다.
-                int idx = GetDesign().GetLabelUnderMouseCursor(CurrentMousePoint);
+                int idx = GetModel().GetLabelUnderMouseCursor(CurrentMousePoint);
                 if (idx != -1)
                 {
-                    var label = GetDesign().ActiveViewport.Labels[idx];
+                    var label = GetModel().ActiveViewport.Labels[idx];
                     if(label is Memo)
                     {
                         Memo memo = label as Memo;
@@ -44,7 +44,7 @@ namespace hanee.Cad.Tool
                 {
                     if (idx > -1)
                     {
-                        var label = GetDesign().ActiveViewport.Labels[idx];
+                        var label = GetModel().ActiveViewport.Labels[idx];
                         if (label is Memo)
                         {
                             Memo memo = label as Memo;
@@ -54,7 +54,7 @@ namespace hanee.Cad.Tool
                     else
                     {
                         Memo memo = new Memo(pt, hanee.Cad.Tool.Resources.Resource1.caution_label, Color.Red, new devDept.Geometry.Vector2D(10, 10), form.RichTextBox.Lines);
-                        GetDesign().ActiveViewport.Labels.Add(memo);
+                        GetModel().ActiveViewport.Labels.Add(memo);
                     }
                     
                 }

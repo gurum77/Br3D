@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 //TODO devDept 2022: Eyeshot.Environment class has been renamed in Eyeshot.Workspace.
-//using Environment = devDept.Eyeshot.Workspace;
-using Environment = devDept.Eyeshot.Workspace;
+//using Environment = devDept.Eyeshot.Environment;
+using Environment = devDept.Eyeshot.Environment;
 
 namespace hanee.ThreeD
 {

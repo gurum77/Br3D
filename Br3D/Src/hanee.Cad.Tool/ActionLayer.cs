@@ -8,7 +8,7 @@ namespace hanee.Cad.Tool
     {
         static public FormLayer formLayer;
         Form owner;
-        public ActionLayer(Workspace environment, Form owner) : base(environment)
+        public ActionLayer(Environment environment, Form owner) : base(environment)
         {
             this.owner = owner;
         }
@@ -17,7 +17,7 @@ namespace hanee.Cad.Tool
         {
             if (formLayer == null)
             {
-                formLayer = new FormLayer(GetDesign());
+                formLayer = new FormLayer(GetModel());
                 formLayer.FormClosed += FormLayer_FormClosed;
             }
 

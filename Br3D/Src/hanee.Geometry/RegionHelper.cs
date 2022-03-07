@@ -1,17 +1,12 @@
 ﻿using devDept.Eyeshot.Entities;
-using devDept.Geometry.Entities;
-using devDept.Geometry;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace hanee.Geometry
 {
     static public class RegionHelper
     {
         // region을 x좌표 기준으로 trim한다.
-        public static List<Region> TrimByX(this Region region , double x, bool trimLeft)
+        public static List<Region> TrimByX(this Region region, double x, bool trimLeft)
         {
             List<ICurve> trimCurves = new List<ICurve>();
             trimCurves.Add(LineHelper.CreateVerticalInfinitLine(x));

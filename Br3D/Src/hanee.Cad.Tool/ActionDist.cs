@@ -2,7 +2,6 @@
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
 using hanee.ThreeD;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,7 +21,7 @@ namespace hanee.Cad.Tool
             label,
             form
         }
-        readonly HDesign brModel;
+        readonly HModel brModel;
         Point3D pt1, pt2, ptText;
         List<Point3D> points;
         Step step;
@@ -30,9 +29,9 @@ namespace hanee.Cad.Tool
 
 
 
-        public ActionDist(devDept.Eyeshot.Design vp, ShowResult showResult=ShowResult.form) : base(vp)
+        public ActionDist(devDept.Eyeshot.Model vp, ShowResult showResult = ShowResult.form) : base(vp)
         {
-            brModel = vp as HDesign;
+            brModel = vp as HModel;
             this.showResult = showResult;
             points = new List<Point3D>();
         }
@@ -41,7 +40,7 @@ namespace hanee.Cad.Tool
         public override async void Run()
         { await RunAsync(); }
 
-        protected override void OnMouseMove(devDept.Eyeshot.Workspace vp, MouseEventArgs e)
+        protected override void OnMouseMove(devDept.Eyeshot.Environment vp, MouseEventArgs e)
         {
             if (step != Step.secondPoint || point3D == null)
             {
@@ -63,9 +62,9 @@ namespace hanee.Cad.Tool
 
         DistanceText CreateDistanceText()
         {
-            if (workspace is HDesign)
+            if (environment is HModel)
             {
-                DistanceText dt = new DistanceText((Design)workspace, pt1, pt2, pt1.DistanceTo(pt2).ToString("0.000"), Define.DefaultFont, Define.DefaultTextColor, new Vector2D(0, 0))
+                DistanceText dt = new DistanceText((Model)environment, pt1, pt2, pt1.DistanceTo(pt2).ToString("0.000"), Define.DefaultFont, Define.DefaultTextColor, new Vector2D(0, 0))
                 {
                     Alignment = System.Drawing.ContentAlignment.MiddleCenter,
                     FillColor = System.Drawing.Color.Yellow
@@ -143,15 +142,15 @@ namespace hanee.Cad.Tool
         {
             StartAction();
 
-            Design model = workspace as Design;
+            var model = environment as Model;
             if (model != null)
             {
-                if(showResult == ShowResult.form)
+                if (showResult == ShowResult.form)
                 {
 
                     while (true)
                     {
-                        if(points.Count == 0)
+                        if (points.Count == 0)
                         {
                             step = Step.firstPoint;
                             pt1 = await GetPoint3D("Pick first point");
@@ -170,24 +169,24 @@ namespace hanee.Cad.Tool
                             points.Add(pt2);
                             pt1 = pt2;
                         }
-                        
+
                     }
 
                     // show result
                     List<string> results = new List<string>();
                     double dist = GetTotalDist(points);
                     results.Add($"Distance = {dist:0.0000}");
-                    for(int i = 1; i < points.Count; ++i)
+                    for (int i = 1; i < points.Count; ++i)
                     {
                         var pt1 = points[i - 1];
                         var pt2 = points[i];
-                        results.Add($"  △X{i} = {pt2.X-pt1.X:0.0000}, △Y{i} = {pt2.Y - pt1.Y:0.0000}, △Z{i} = {pt2.Z - pt1.Z:0.0000}");
+                        results.Add($"  △X{i} = {pt2.X - pt1.X:0.0000}, △Y{i} = {pt2.Y - pt1.Y:0.0000}, △Z{i} = {pt2.Z - pt1.Z:0.0000}");
                     }
 
                     FormResult formResult = new FormResult();
                     formResult.RichTextBox.Lines = results.ToArray();
                     formResult.ShowDialog();
-                    
+
                 }
                 else
                 {
@@ -217,7 +216,7 @@ namespace hanee.Cad.Tool
                         ActionBase.previewEntity = null;
                     }
                 }
-                
+
             }
 
 
@@ -229,7 +228,7 @@ namespace hanee.Cad.Tool
         private double GetTotalDist(List<Point3D> points)
         {
             double dist = 0;
-            for(int i = 1; i < points.Count; ++i)
+            for (int i = 1; i < points.Count; ++i)
             {
                 dist += points[i].DistanceTo(points[i - 1]);
             }

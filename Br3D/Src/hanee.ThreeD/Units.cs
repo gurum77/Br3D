@@ -119,7 +119,7 @@ namespace hanee.ThreeD
         }
 
         // 읽어온 파일에 있는 객체의 단위계를 viewport에 맞춘다.
-        public static void AdjustUnitsForEntitiesRead(Design vp, ReadFileAsync rf)
+        public static void AdjustUnitsForEntitiesRead(Model vp, ReadFileAsync rf)
         {
             double factor = 1;
          
