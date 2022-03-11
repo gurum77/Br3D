@@ -4,8 +4,15 @@ using System.Collections.Generic;
 
 namespace hanee.Geometry
 {
-    static public class PointHelper
+    static public class Point3DHelper
     {
+        public static void CopyFrom(this Point3D pt, Point3D fromPt)
+        {
+            pt.X = fromPt.X;
+            pt.Y = fromPt.Y;
+            pt.Z = fromPt.Z;
+        }
+
         public static bool Equals2D(this Point3D pt, Point3D ptOther, double tol)
         {
             double dist = pt.To2D().DistanceTo(ptOther.To2D());

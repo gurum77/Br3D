@@ -582,9 +582,16 @@ namespace Br3D
             functionByElement.Add(tileNavItemLayer, Layer);
             functionByElement.Add(tileNavItemTextStyle, TextStyle);
             functionByElement.Add(tileNavItemLineType, LineType);
+
+            functionByElement.Add(tileNavItemLine, Line);
         }
 
 
+        async void Line()
+        {
+            ActionLine ac = new ActionLine(model);
+            await ac.RunAsync();
+        }
 
         void RegenAll()
         {

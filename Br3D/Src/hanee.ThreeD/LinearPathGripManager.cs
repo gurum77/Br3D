@@ -1,15 +1,31 @@
-﻿using devDept.Eyeshot.Entities;
-using System;
+﻿using devDept.Eyeshot;
+using devDept.Eyeshot.Entities;
+using hanee.Geometry;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace hanee.ThreeD
 {
     public class LinearPathGripManager : IEntityGripManager
     {
-        public List<GripPoint> GetGripPoints(Entity entity)
+        public bool EndEdit(Entity entity, Entity originEntity)
+        {
+            var lp = entity as LinearPath;
+            var originLp = originEntity as LinearPath;
+            if (lp == null || originLp == null)
+                return false;
+
+            if (lp.Vertices.Length != originLp.Vertices.Length)
+                return false;
+
+            for (int i = 0; i < lp.Vertices.Length; i++)
+            {
+                originLp.Vertices[i].CopyFrom(lp.Vertices[i]);
+            }
+
+            return true;
+        }
+
+        public List<GripPoint> GetGripPoints(Entity entity, Model model)
         {
             var lp = entity as LinearPath;
             if (lp == null)

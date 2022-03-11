@@ -1,5 +1,7 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
+using devDept.Eyeshot.Translators;
+using devDept.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -10,28 +12,31 @@ namespace hanee.ThreeD
     {
         static public Dictionary<Type, Type> entityGripManagers { get; set; } = new Dictionary<Type, Type>();
         static public float gripSize = 15;
-        Model design;
-        HModel hDesign => design as HModel;
+        Model model;
+        HModel hModel => model as HModel;
 
         public GripManager(Model design)
         {
-            this.design = design;
+            this.model = design;
 
             GripManager.entityGripManagers.Add(typeof(Line), typeof(LineGripManager));
             GripManager.entityGripManagers.Add(typeof(LinearPath), typeof(LinearPathGripManager));
+            GripManager.entityGripManagers.Add(typeof(Text), typeof(TextGripManager));
+            GripManager.entityGripManagers.Add(typeof(BlockReference), typeof(BlockReferenceGripManager));
+            GripManager.entityGripManagers.Add(typeof(BlockReferenceEx), typeof(BlockReferenceGripManager));
         }
 
         // grip point를 모두 지운다.
         public void ClearGripPoints()
         {
-            design.TempEntities.RemoveAll(x => x is GripPoint || x.EntityData is Entity);
-            design.Invalidate();
+            model.TempEntities.Clear();
+            model.Invalidate();
         }
 
         // 이미 grip이 만들어진 객체인지?
         public bool HasGripPoint(Entity ent)
         {
-            return design.TempEntities.Exists(x => x.EntityData == ent);
+            return model.TempEntities.Exists(x => x.EntityData == ent);
         }
 
 
@@ -52,14 +57,37 @@ namespace hanee.ThreeD
             cloneEnt.ColorMethod = colorMethodType.byEntity;
             cloneEnt.EntityData = ent;
             cloneEnt.Selected = true;
-
-            var gripPoints = gm.GetGripPoints(cloneEnt);
+            
+            var gripPoints = gm.GetGripPoints(cloneEnt, model);
             if (gripPoints == null)
                 return;
 
-            design.TempEntities.Add(cloneEnt);
-            design.TempEntities.AddRange(gripPoints);
-            design.Invalidate();
+            // block인 경우 explode 한 객체만 추가한다.
+            var br = cloneEnt as BlockReference;
+            if (br != null)
+            {
+                foreach (var gp in gripPoints)
+                {
+                    if (gp.explodedEntities == null)
+                        continue;
+                    
+                    foreach (var ee in gp.explodedEntities)
+                    {
+                        ee.Color = System.Drawing.Color.Yellow;
+                        ee.ColorMethod = colorMethodType.byEntity;
+                        ee.Selected = true;
+                        model.TempEntities.Add(ee);
+
+                    }
+                
+                }
+            }
+            else
+            {
+                model.TempEntities.Add(cloneEnt);
+            }
+            model.TempEntities.AddRange(gripPoints);
+            model.Invalidate();
         }
 
         private IEntityGripManager GetEntityGripManager(Entity ent)
@@ -78,14 +106,14 @@ namespace hanee.ThreeD
         {
             List<GripPoint> points = new List<GripPoint>();
             // 마우스 위치에 gripPoint가 있으면 gripPoint를 선택한다.
-            foreach (var te in design.TempEntities)
+            foreach (var te in model.TempEntities)
             {
                 GripPoint gp = te as GripPoint;
                 if (gp == null)
                     continue;
 
                 // grip point의 screen 좌표
-                var gripPointScreenPos = hDesign.GetMouseLocationFromWorldPoint(gp.StartPoint);
+                var gripPointScreenPos = hModel.GetMouseLocationFromWorldPoint(gp.StartPoint);
 
                 // grip point와 마우스 좌표와의 거리
                 var gripPointScreenPos2D = new devDept.Geometry.Point2D(gripPointScreenPos.X, gripPointScreenPos.Y);
@@ -108,41 +136,38 @@ namespace hanee.ThreeD
         // 선택된 그립이 있다면 편집중이다.
         public bool EditingGripPoints()
         {
-            return design.TempEntities.Exists(x => x is GripPoint && x.Selected);
+            return model.TempEntities.Exists(x => x is GripPoint && x.Selected);
         }
 
         // 그립 편집을 종료한다.
         public void EndEdit()
         {
             // 객체 편집된 내용을 원본에 반영한다.
-            design.TempEntities.ForEach(x =>
+            model.TempEntities.ForEach(x =>
             {
-                if (x is GripPoint)
+                var gp = x as GripPoint;
+                if (gp == null)
                     return;
 
-                var ent = x as Entity;
+                var ent = gp.entity;
                 if (ent == null)
                     return;
-
+                
                 var originEnt = ent.EntityData as Entity;
                 if (originEnt == null)
                     return;
 
-                if (ent.Vertices.Length != originEnt.Vertices.Length)
+                var mng = GetEntityGripManager(ent);
+                if (mng == null)
                     return;
 
-                for (int i = 0; i < ent.Vertices.Length; ++i)
-                {
-                    originEnt.Vertices[i].X = ent.Vertices[i].X;
-                    originEnt.Vertices[i].Y = ent.Vertices[i].Y;
-                    originEnt.Vertices[i].Z = ent.Vertices[i].Z;
-                }
+                mng.EndEdit(ent, originEnt);
 
-                originEnt.Regen(new RegenParams(0.001, design));
+                originEnt.Regen(new RegenParams(0.001, model));
             });
 
             // 그립의 선택을 해제
-            design.TempEntities.ForEach(x =>
+            model.TempEntities.ForEach(x =>
             {
                 if (x is GripPoint)
                 {
@@ -152,8 +177,8 @@ namespace hanee.ThreeD
                 }
             });
 
-            design.Entities.Regen();
-            design.Invalidate();
+            model.Entities.Regen();
+            model.Invalidate();
         }
 
         public void MouseUp(MouseEventArgs e)
@@ -175,7 +200,7 @@ namespace hanee.ThreeD
 
 
             // 아니면 그립을 생성함.
-            var item = design.GetItemUnderMouseCursor(e.Location);
+            var item = model.GetItemUnderMouseCursor(e.Location);
             MakeGripPoints(item?.Item as Entity);
         }
 
@@ -192,24 +217,48 @@ namespace hanee.ThreeD
             if (!EditingGripPoints())
                 return;
 
-            var newPt = ActionBase.GetPoint3DByMouseLocation(design, e.Location);
+            var newPt = ActionBase.GetPoint3DByMouseLocation(model, e.Location);
             if (newPt == null)
                 return;
 
-            design.TempEntities.ForEach(x =>
+            var regenParams = new RegenParams(0.001, model);
+            model.TempEntities.ForEach(x =>
             {
                 var gp = x as GripPoint;
                 if (gp == null || !gp.Selected || gp.entity == null)
                     return;
+
+                var vec = (newPt - gp.Position).AsVector;
                 gp.Position.X = newPt.X;
                 gp.Position.Y = newPt.Y;
                 gp.Position.Z = newPt.Z;
 
-                gp.entity.Regen(0.001);
+                // grip point에 연결된 객체 regen
+                if (gp.entity is Text)
+                {
+                    gp.entity.Regen(regenParams);
+                }
+                // 블럭은 explode해서 추가했기 때문에 나머지 객체들을 regen한다.
+                else if (gp.entity is BlockReference)
+                {
+                    var br = gp.entity as BlockReference;
+                    br.InsertionPoint = newPt;
+                    foreach (var ent in gp.explodedEntities)
+                    {
+                        ent.Translate(vec);
+                        ent.Regen(regenParams);
+                    }
+                }
+                else
+                {
+                    gp.entity.Regen(regenParams);
+                }
+                
+                // grip point regen
                 gp.Regen(0.001);
             });
 
-            design.Invalidate();
+            model.Invalidate();
         }
     }
 }

@@ -98,6 +98,7 @@
     <Compile Include="ActionFilter.cs" />
     <Compile Include="ActionID.cs" />
     <Compile Include="ActionLayer.cs" />
+    <Compile Include="ActionLine.cs" />
     <Compile Include="ActionLineType.cs" />
     <Compile Include="ActionList.cs" />
     <Compile Include="ActionMemo.cs" />
