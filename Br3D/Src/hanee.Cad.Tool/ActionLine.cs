@@ -34,8 +34,6 @@ namespace hanee.Cad.Tool
             line.Regen(0.001);
             environment.TempEntities.Add(line);
             environment.Invalidate();
-
-
         }
 
         Line MakeLine()
@@ -51,10 +49,10 @@ namespace hanee.Cad.Tool
 
             startPoint = await GetPoint3D(LanguageHelper.Tr("First point"));
             
-            while (!IsCanceled())
+            while (!IsCanceled() && !IsEntered())
             {
                 endPoint = await GetPoint3D(LanguageHelper.Tr("Next point"));
-                if (IsCanceled())
+                if (IsCanceled() || IsEntered())
                     break;
 
                 Line line = MakeLine();

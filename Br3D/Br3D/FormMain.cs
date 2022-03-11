@@ -584,8 +584,14 @@ namespace Br3D
             functionByElement.Add(tileNavItemLineType, LineType);
 
             functionByElement.Add(tileNavItemLine, Line);
+            functionByElement.Add(tileNavItemCircle, Circle);
         }
 
+        async void Circle()
+        {
+            ActionCircle ac = new ActionCircle(model);
+            await ac.RunAsync();
+        }
 
         async void Line()
         {

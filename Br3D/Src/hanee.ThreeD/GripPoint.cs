@@ -8,6 +8,7 @@ namespace hanee.ThreeD
         public enum GripType
         {
             self,
+            circleRadius
         }
 
         public Entity entity { get; set; }

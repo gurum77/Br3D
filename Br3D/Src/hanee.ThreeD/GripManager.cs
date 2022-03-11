@@ -20,6 +20,7 @@ namespace hanee.ThreeD
             this.model = design;
 
             GripManager.entityGripManagers.Add(typeof(Line), typeof(LineGripManager));
+            GripManager.entityGripManagers.Add(typeof(Circle), typeof(CircleGripManager));
             GripManager.entityGripManagers.Add(typeof(LinearPath), typeof(LinearPathGripManager));
             GripManager.entityGripManagers.Add(typeof(Text), typeof(TextGripManager));
             GripManager.entityGripManagers.Add(typeof(BlockReference), typeof(BlockReferenceGripManager));
@@ -57,6 +58,9 @@ namespace hanee.ThreeD
             cloneEnt.ColorMethod = colorMethodType.byEntity;
             cloneEnt.EntityData = ent;
             cloneEnt.Selected = true;
+
+            var regenParams = new RegenParams(0.001, model);
+            cloneEnt.Regen(regenParams);
             
             var gripPoints = gm.GetGripPoints(cloneEnt, model);
             if (gripPoints == null)
@@ -179,6 +183,8 @@ namespace hanee.ThreeD
 
             model.Entities.Regen();
             model.Invalidate();
+
+            
         }
 
         public void MouseUp(MouseEventArgs e)
