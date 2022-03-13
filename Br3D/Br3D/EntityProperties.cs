@@ -9,7 +9,8 @@ namespace Br3D
         Entity ent;
         public BlockReference AsBlockReference => ent as BlockReference;
         public Text AsText => ent as Text;
-
+        public Circle AsCircle => ent as Circle;
+        
         public EntityProperties(Entity ent)
         {
             this.ent = ent;
@@ -39,6 +40,20 @@ namespace Br3D
         public float LineTypeScale { get => ent.LineTypeScale; set => ent.LineTypeScale = value; }
         public float LineWeight  { get => ent.LineWeight; set => ent.LineWeight = value; }
         public colorMethodType LineWeightMethod { get => ent.LineWeightMethod; set => ent.LineWeightMethod = value; }
+
+
+        public bool enableRadius => AsCircle!= null;
+        public double Radius
+        {
+            get => AsCircle == null ? 0 : AsCircle.Radius;
+            set
+            {
+                if (AsCircle == null)
+                    return;
+
+                AsCircle.Radius = value;
+            }
+        }
 
         public bool enableTextString => AsText != null;
         public string TextString

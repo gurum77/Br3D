@@ -14,12 +14,13 @@ namespace hanee.ThreeD
         static public float gripSize = 15;
         Model model;
         HModel hModel => model as HModel;
-        RegenParams regenParams;
+        RegenParams regenParams = null; 
         public GripManager(Model design)
         {
             this.model = design;
             regenParams = new RegenParams(0.001, this.model);
 
+            GripManager.entityGripManagers.Clear();
             GripManager.entityGripManagers.Add(typeof(Line), typeof(LineGripManager));
             GripManager.entityGripManagers.Add(typeof(Circle), typeof(CircleGripManager));
             GripManager.entityGripManagers.Add(typeof(Arc), typeof(ArcGripManager));
@@ -58,9 +59,11 @@ namespace hanee.ThreeD
 
             cloneEnt.Color = System.Drawing.Color.Yellow;
             cloneEnt.ColorMethod = colorMethodType.byEntity;
-            cloneEnt.EntityData = ent;
+            cloneEnt.EntityData = ent;  
             cloneEnt.Selected = true;
 
+            // regenParams는 그립을 만들때 생성해야함
+            regenParams = new RegenParams(0.001, this.model);
             cloneEnt.Regen(regenParams);
             
             var gripPoints = gm.GetGripPoints(cloneEnt, model);
@@ -78,6 +81,9 @@ namespace hanee.ThreeD
                     
                     foreach (var ee in gp.explodedEntities)
                     {
+                        if (ee is BlockReference)
+                            continue;
+
                         ee.Color = System.Drawing.Color.Yellow;
                         ee.ColorMethod = colorMethodType.byEntity;
                         ee.Selected = true;
@@ -181,9 +187,8 @@ namespace hanee.ThreeD
             });
 
             model.Entities.Regen();
+            model.TempEntities.Clear();
             model.Invalidate();
-
-            
         }
 
         public void MouseUp(MouseEventArgs e)
@@ -238,12 +243,12 @@ namespace hanee.ThreeD
                 if (mng == null)
                     continue;
 
+                // 객체를 편집한다.
+                mng.MouseMove(model, gp, newPt);
+
                 gp.Position.X = newPt.X;
                 gp.Position.Y = newPt.Y;
                 gp.Position.Z = newPt.Z;
-
-                // 객체를 편집한다.
-                mng.MouseMove(model, gp, newPt);
 
                 // grip point regen
                 gp.Regen(0.001);

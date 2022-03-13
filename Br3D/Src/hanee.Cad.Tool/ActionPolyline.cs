@@ -48,7 +48,6 @@ namespace hanee.Cad.Tool
 
                 if (IsEntered())
                 {
-                    points.Add(pt);
                     if (points.Count > 1)
                     {
                         var pline = MakePolyline(points);

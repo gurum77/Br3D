@@ -346,7 +346,7 @@ namespace Br3D
                 if (hModel?.gripManager != null)
                     hModel?.gripManager.MouseUp(e);
 
-                if (gripEditing)
+                if (!gripEditing)
                 {
                     var item = model.GetItemUnderMouseCursor(e.Location);
                     if (item != null)
@@ -429,8 +429,11 @@ namespace Br3D
 
             try
             {
+                model.TempEntities.Clear();
                 model.Entities.Regen();
+
                 propertyGridControl1.UpdateData();
+
                 model.Invalidate();
             }
             catch (Exception ex)
@@ -589,8 +592,11 @@ namespace Br3D
             functionByElement.Add(tileNavItemLine, Line);
             functionByElement.Add(tileNavItemCircle, Circle);
             functionByElement.Add(tileNavItemArc, Arc);
+            functionByElement.Add(tileNavSubItemArcFirstSecondThird, ArcFirstSecondThird);
+            functionByElement.Add(tileNavSubItemArcCenterStartEnd, ArcCenterStartEnd);
             functionByElement.Add(tileNavItemCylinder, Cylinder);
             functionByElement.Add(tileNavItemPolyline, Polyline);
+
         }
 
         async void Polyline()
@@ -605,9 +611,20 @@ namespace Br3D
             await ac.RunAsync();
         }
 
+        async void ArcCenterStartEnd()
+        {
+            ActionArc ac = new ActionArc(model, ActionArc.Method.centerStartEnd);
+            await ac.RunAsync();
+        }
+        async void ArcFirstSecondThird()
+        {
+            ActionArc ac = new ActionArc(model, ActionArc.Method.firstSecondThird);
+            await ac.RunAsync();
+        }
+
         async void Arc()
         {
-            ActionArc ac = new ActionArc(model);
+            ActionArc ac = new ActionArc(model, ActionArc.Method.firstSecondThird);
             await ac.RunAsync();
         }
 
@@ -791,6 +808,8 @@ namespace Br3D
             if (functionByElement.TryGetValue(e.Element, out Action act))
             {
                 act();
+                tileNavPaneViewport.HideDropDownWindow();
+                
             }
             else
             {
