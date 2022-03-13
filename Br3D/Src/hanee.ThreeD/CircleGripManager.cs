@@ -1,5 +1,6 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
+using devDept.Geometry;
 using hanee.Geometry;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,18 @@ namespace hanee.ThreeD
             GripPoint ep = new GripPoint(circle, GripPoint.GripType.circleRadius, circle.StartPoint);
 
             return new List<GripPoint>() { sp, ep };
+        }
+
+        public void MouseMove(Model model, GripPoint gp, Point3D newPt)
+        {
+            var regenParams = new RegenParams(0.001, model);
+            if (gp.gripType == GripPoint.GripType.circleRadius)
+            {
+                var circle = gp.entity as Circle;
+                circle.Radius = circle.Center.DistanceTo(gp.Position);
+            }
+
+            gp.entity.Regen(regenParams);
         }
     }
 }

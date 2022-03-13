@@ -2,33 +2,40 @@
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
 using hanee.Geometry;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace hanee.ThreeD
 {
-    public class TextGripManager : IEntityGripManager
+    public class ArcGripManager : IEntityGripManager
     {
         public bool EndEdit(Entity entity, Entity originEntity)
         {
-            var text = entity as Text;
-            var originText = originEntity as Text;
-            if (text == null || originText == null)
+            var arc = entity as Arc;
+            var originArc = originEntity as Arc;
+            if (arc == null || originArc == null)
                 return false;
 
-            originText.InsertionPoint.CopyFrom(text.InsertionPoint);
+            originArc.Center.CopyFrom(arc.Center);
+            
+           
             return true;
         }
 
         public List<GripPoint> GetGripPoints(Entity entity, Model model)
         {
-            Text text = entity as Text;
-            if (text == null)
+            var arc = entity as Arc;
+            if (arc == null)
                 return null;
 
+            GripPoint cp = new GripPoint(arc, GripPoint.GripType.self, arc.Center);
+            
 
-            GripPoint gp = new GripPoint(text, GripPoint.GripType.self, text.InsertionPoint);
+            return new List<GripPoint>() { cp};
 
-            return new List<GripPoint>() { gp };
         }
 
         public void MouseMove(Model model, GripPoint gp, Point3D newPt)

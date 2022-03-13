@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionBase.cs" />
+    <Compile Include="ArcGripManager.cs" />
     <Compile Include="BlockReferenceGripManager.cs" />
     <Compile Include="CategoryEx.cs" />
     <Compile Include="CircleGripManager.cs" />
@@ -91,7 +92,7 @@
     <Compile Include="FileHelper.cs" />
     <Compile Include="GripManager.cs" />
     <Compile Include="GripPoint.cs" />
-    <Compile Include="HDesignProperties.cs" />
+    <Compile Include="HModelProperties.cs" />
     <Compile Include="EnvironmentHelper.cs" />
     <Compile Include="EyeshotConverter.cs" />
     <Compile Include="HModel.cs">

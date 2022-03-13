@@ -118,42 +118,42 @@ namespace hanee.ThreeD
             }
             else
             {
-                if (e.Button == MouseButtons.Left)
-                {
+                //if (e.Button == MouseButtons.Left)
+                //{
 
-                    try
-                    {
-                        // 객체 선택 해제
-                        Entities.ClearSelection();
+                //    try
+                //    {
+                //        // 객체 선택 해제
+                //        Entities.ClearSelection();
 
-                        // 객체 선택
-                        var item = GetItemUnderMouseCursor(e.Location, true);
-                        if (item != null)
-                        {
-                            item.Select(this, true);
-                            UpdatePropertyGridControl(item.Item);
-                        }
-                        else
-                        {
-                            UpdatePropertyGridControl(this);
-                        }
+                //        // 객체 선택
+                //        var item = GetItemUnderMouseCursor(e.Location, true);
+                //        if (item != null)
+                //        {
+                //            item.Select(this, true);
+                //            UpdatePropertyGridControl(item.Item);
+                //        }
+                //        else
+                //        {
+                //            UpdatePropertyGridControl(this);
+                //        }
 
-                        // label 선택
-                        //int[] labelIndexes = GetAllLabelsUnderMouseCursor(e.Location);
-                        //foreach (var i in labelIndexes)
-                        //{
-                        //    ActiveViewport.Labels[i].Selected = true;
-                        //}
+                //        // label 선택
+                //        //int[] labelIndexes = GetAllLabelsUnderMouseCursor(e.Location);
+                //        //foreach (var i in labelIndexes)
+                //        //{
+                //        //    ActiveViewport.Labels[i].Selected = true;
+                //        //}
 
-                        // 투명설정 업데이트
-                        UpdateTransparency();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+                //        // 투명설정 업데이트
+                //        UpdateTransparency();
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        MessageBox.Show(ex.Message);
+                //    }
 
-                }
+                //}
             }
         }
 

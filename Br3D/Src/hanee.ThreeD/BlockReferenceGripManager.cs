@@ -1,5 +1,6 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
+using devDept.Geometry;
 using hanee.Geometry;
 using System.Collections.Generic;
 
@@ -34,6 +35,22 @@ namespace hanee.ThreeD
             foreach (var ee in gp.explodedEntities)
                 ee.Regen(regenParams);
             return new List<GripPoint>() { gp };
+        }
+
+        public void MouseMove(Model model, GripPoint gp, Point3D newPt)
+        {
+            var br = gp.entity as BlockReference;
+            if (br == null)
+                return;
+
+            var regenParams = new RegenParams(0.001, model);
+            var vec = (newPt - gp.Position).AsVector;
+            br.InsertionPoint = newPt;
+            foreach (var ent in gp.explodedEntities)
+            {
+                ent.Translate(vec);
+                ent.Regen(regenParams);
+            }
         }
     }
 }

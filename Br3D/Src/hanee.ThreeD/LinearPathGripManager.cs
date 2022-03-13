@@ -40,5 +40,11 @@ namespace hanee.ThreeD
 
             return points;
         }
+
+        public void MouseMove(Model model, GripPoint gp, devDept.Geometry.Point3D newPt)
+        {
+            var regenParams = new RegenParams(0.001, model);
+            gp.entity.Regen(regenParams);
+        }
     }
 }

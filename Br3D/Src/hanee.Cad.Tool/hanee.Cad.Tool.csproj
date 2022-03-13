@@ -93,8 +93,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionAngle.cs" />
+    <Compile Include="ActionArc.cs" />
     <Compile Include="ActionArea.cs" />
     <Compile Include="ActionCircle.cs" />
+    <Compile Include="ActionCylinder.cs" />
     <Compile Include="ActionDist.cs" />
     <Compile Include="ActionFilter.cs" />
     <Compile Include="ActionID.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="ActionLineType.cs" />
     <Compile Include="ActionList.cs" />
     <Compile Include="ActionMemo.cs" />
+    <Compile Include="ActionPolyline.cs" />
     <Compile Include="ActionTextStyle.cs" />
     <Compile Include="LineTypeControl.cs">
       <SubType>UserControl</SubType>

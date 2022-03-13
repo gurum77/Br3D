@@ -33,7 +33,7 @@ namespace Br3D
         Dictionary<NavElement, Action> functionByElement = new Dictionary<NavElement, Action>();
         string opendFilePath = "";
         bool isDwg => string.IsNullOrEmpty(opendFilePath) ? false : Path.GetExtension(opendFilePath).ToLower().EndsWith("dwg");
-        
+        GripManager gripManager => hModel?.gripManager;
         public FormMain()
         {
             InitializeComponent();
@@ -341,39 +341,42 @@ namespace Br3D
 
             if (e.Button == MouseButtons.Left)
             {
-                var item = model.GetItemUnderMouseCursor(e.Location);
-                if (item != null)
-                    item.Item.Selected = true;
-
+                bool gripEditing = gripManager != null && gripManager.EditingGripPoints();
                 // 그림 관련
                 if (hModel?.gripManager != null)
                     hModel?.gripManager.MouseUp(e);
-                    
 
-                // 속성창 갱신
-                if (propertyGridControl1.Visible)
-                    RefreshPropertyGridControl(item?.Item);
-
-                // tree에서 선택
-                if (treeListObject.Visible)
+                if (gripEditing)
                 {
-                    treeListObject.ClearSelection();
-                    var node = treeListObject.FindNode(x => x.Tag == item.Item);
-                    if (node == null)
-                        return;
-                    if (node.ParentNode != null)
-                        node.ParentNode.Expand();
+                    var item = model.GetItemUnderMouseCursor(e.Location);
+                    if (item != null)
+                        item.Item.Selected = true;
 
-                    treeListObject.SelectNode(node);
-                    treeListObject.TopVisibleNodeIndex = node.Id;
+                    // 속성창 갱신
+                    if (propertyGridControl1.Visible)
+                        RefreshPropertyGridControl(item?.Item);
+
+                    // tree에서 선택
+                    if (treeListObject.Visible)
+                    {
+                        treeListObject.ClearSelection();
+                        var node = treeListObject.FindNode(x => x.Tag == item.Item);
+                        if (node == null)
+                            return;
+                        if (node.ParentNode != null)
+                            node.ParentNode.Expand();
+
+                        treeListObject.SelectNode(node);
+                        treeListObject.TopVisibleNodeIndex = node.Id;
+
+                    }
 
                 }
-
+                }
             }
-        }
 
 
-        private void InitPropertyGrid()
+            private void InitPropertyGrid()
         {
             propertyGridControl1.CellValueChanged += PropertyGridControl1_CellValueChanged;
             propertyGridControl1.ShowingEditor += PropertyGridControl1_ShowingEditor;
@@ -585,6 +588,27 @@ namespace Br3D
 
             functionByElement.Add(tileNavItemLine, Line);
             functionByElement.Add(tileNavItemCircle, Circle);
+            functionByElement.Add(tileNavItemArc, Arc);
+            functionByElement.Add(tileNavItemCylinder, Cylinder);
+            functionByElement.Add(tileNavItemPolyline, Polyline);
+        }
+
+        async void Polyline()
+        {
+            ActionPolyline ac = new ActionPolyline(model);
+            await ac.RunAsync();
+        }
+
+        async void Cylinder()
+        {
+            ActionCylinder ac = new ActionCylinder(model);
+            await ac.RunAsync();
+        }
+
+        async void Arc()
+        {
+            ActionArc ac = new ActionArc(model);
+            await ac.RunAsync();
         }
 
         async void Circle()

@@ -38,11 +38,16 @@ namespace hanee.Cad.Tool
 
         Circle MakeCircle()
         {
-            Circle circle = new Circle(startPoint, startPoint.DistanceTo(endPoint));
+            var radius = startPoint.DistanceTo(endPoint);
+            if (radius <= 0)
+                return null;
+
+            Circle circle = new Circle(startPoint, radius);
             circle.Color = System.Drawing.Color.Yellow;
             circle.ColorMethod = colorMethodType.byEntity;
             return circle;
         }
+
         public async Task<bool> RunAsync()
         {
             StartAction();
@@ -58,6 +63,8 @@ namespace hanee.Cad.Tool
 
                 Circle circle = MakeCircle();
                 environment.Entities.Add(circle);
+                environment.TempEntities.Clear();
+                environment.Invalidate();
 
                 startPoint = null;
                 endPoint = null;

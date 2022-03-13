@@ -23,15 +23,15 @@ namespace hanee.ThreeD
         [Flags]
         public enum objectSnapType
         {
-            None = 1,
-            Point = 2,
-            End = 4,
-            Mid = 8,
-            Center = 10,
-            Quad = 20,
-            Grid = 40,    // 가장 우선순위가 낮음(객체에 스냅이 걸리지 않을경우 여기를 검사한다)
-            Intersect = 80,
-            All = 100
+            None = 0,
+            Point = 1 << 2,
+            End = 1 << 3,
+            Mid = 1 << 4,
+            Center = 1 << 5,
+            Quad = 1 << 6,
+            Grid = 1 << 7,    // 가장 우선순위가 낮음(객체에 스냅이 걸리지 않을경우 여기를 검사한다)
+            Intersect = 1 << 8,
+            All = Point | End | Mid | Center | Quad | Grid | Intersect
         }
 
         // Current snapped point, which is one of the vertex from model
@@ -330,22 +330,22 @@ namespace hanee.ThreeD
                 }
             }
 
-            if (activeObjectSnap.HasFlag(objectSnapType.Intersect) && otherEnt != null)
-            {
-                ICurve otherCurve = otherEnt as ICurve;
-                if (otherCurve != null)
-                {
-                    var matchPoints = polyline.IntersectWith(otherCurve);
-                    if (matchPoints != null)
-                    {
-                        foreach (var mp in matchPoints)
-                        {
-                            polyLineSnapPoints.Add(new SnapPoint(mp, objectSnapType.Intersect, polyline));
-                        }
-                    }
-                }
+            //if (activeObjectSnap.HasFlag(objectSnapType.Intersect) && otherEnt != null)
+            //{
+            //    ICurve otherCurve = otherEnt as ICurve;
+            //    if (otherCurve != null)
+            //    {
+            //        var matchPoints = polyline.IntersectWith(otherCurve);
+            //        if (matchPoints != null)
+            //        {
+            //            foreach (var mp in matchPoints)
+            //            {
+            //                polyLineSnapPoints.Add(new SnapPoint(mp, objectSnapType.Intersect, polyline));
+            //            }
+            //        }
+            //    }
 
-            }
+            //}
 
 
             return polyLineSnapPoints.ToArray();
@@ -616,57 +616,73 @@ namespace hanee.ThreeD
             if (ent == null)
                 return null;
 
+            SnapPoint[] curSnapPoints = null;
             //check wich type of entity is it and then,identify snap points
             if (ent is devDept.Eyeshot.Entities.Point)
             {
                 devDept.Eyeshot.Entities.Point point = (devDept.Eyeshot.Entities.Point)ent;
-                return GetSnapPoints_Point(point);
+                curSnapPoints =  GetSnapPoints_Point(point);
             }
+            
             else if (ent is Line) //line
             {
                 Line line = (Line)ent;
-                return GetSnapPoints_Line(line);
+                curSnapPoints = GetSnapPoints_Line(line);
             }
             else if (ent is LinearPath)//polyline
             {
                 LinearPath polyline = (LinearPath)ent;
-                return GetSnapPoints_LinearPath(polyline, otherEnt);
+                curSnapPoints = GetSnapPoints_LinearPath(polyline);
             }
             else if (ent is CompositeCurve)//composite
             {
                 CompositeCurve composite = (CompositeCurve)ent;
-                return GetSnapPoints_CompositeCurve(composite);
+                curSnapPoints = GetSnapPoints_CompositeCurve(composite);
             }
             else if (ent is Arc) //Arc
             {
                 Arc arc = (Arc)ent;
-                return GetSnapPoints_Arc(arc);
+                curSnapPoints = GetSnapPoints_Arc(arc);
             }
             else if (ent is Circle) //Circle
             {
                 Circle circle = (Circle)ent;
-                return GetSnapPoints_Circle(circle);
+                curSnapPoints = GetSnapPoints_Circle(circle);
             }
             else if (ent is Curve) // Spline
             {
                 Curve curve = (Curve)ent;
-                return GetSnapPoints_Curve(curve);
+                curSnapPoints = GetSnapPoints_Curve(curve);
             }
             else if (ent is EllipticalArc) //Elliptical Arc
             {
                 EllipticalArc elArc = (EllipticalArc)ent;
-                return GetSnapPoints_EllipticalArc(elArc);
+                curSnapPoints = GetSnapPoints_EllipticalArc(elArc);
             }
             else if (ent is Ellipse) //Ellipse
             {
                 Ellipse ellipse = (Ellipse)ent;
-                return GetSnapPoints_Ellipse(ellipse);
+                curSnapPoints = GetSnapPoints_Ellipse(ellipse);
 
             }
             else if (ent is Mesh) //Mesh
             {
                 Mesh mesh = (Mesh)ent;
-                return GetSnapPoints_Mesh(mesh, mouseLocation);
+                curSnapPoints = GetSnapPoints_Mesh(mesh, mouseLocation);
+            }
+            else if (ent is devDept.Eyeshot.Entities.Brep)
+            {
+                List<SnapPoint> snapPoints = new List<SnapPoint>();
+                var brep = ent as Brep;
+                foreach(var edge in brep.Edges)
+                {
+                    SnapPoint[] points = GetSnapPointsFromEntity(edge.Curve as Entity, mouseLocation);
+                    if (points == null)
+                        continue;
+
+                    snapPoints.AddRange(points);
+                }
+                curSnapPoints = snapPoints.ToArray();
             }
             else if (ent is BlockReference)
             {
@@ -676,20 +692,40 @@ namespace hanee.ThreeD
                 foreach (var subEnt in br.GetEntities(environment.Blocks))
                 {
                     SnapPoint[] points = GetSnapPointsFromEntity(subEnt, mouseLocation);
-                    if (points != null)
-                    {
-                        foreach (var p in points)
-                            p.TransformBy(trans);
+                    if (points == null)
+                        continue;
+                    
+                    foreach (var p in points)
+                        p.TransformBy(trans);
 
-                        snapPoints.AddRange(points);
-                    }
-
+                    snapPoints.AddRange(points);
                 }
-
-                return snapPoints.ToArray();
+                curSnapPoints = snapPoints.ToArray();
             }
 
-            return new SnapPoint[0];
+            // 교점 검색
+            if (activeObjectSnap.HasFlag(objectSnapType.Intersect) && otherEnt != null)
+            {
+                List<SnapPoint> intersectSnapPoints = new List<SnapPoint>();
+                var curve = ent as ICurve;
+                var otherCurve = otherEnt as ICurve;
+                if (curve != null && otherCurve != null)
+                {
+                    var matchPoints = curve.IntersectWith(otherCurve);
+                    if (matchPoints != null)
+                    {
+                        foreach (var mp in matchPoints)
+                        {
+                            intersectSnapPoints.Add(new SnapPoint(mp, objectSnapType.Intersect, ent));
+                        }
+                    }
+                }
+
+                intersectSnapPoints.AddRange(curSnapPoints);
+                curSnapPoints = intersectSnapPoints.ToArray();
+            }
+
+            return curSnapPoints;
         }
         #endregion
 

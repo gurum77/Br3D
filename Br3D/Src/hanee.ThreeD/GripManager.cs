@@ -14,13 +14,15 @@ namespace hanee.ThreeD
         static public float gripSize = 15;
         Model model;
         HModel hModel => model as HModel;
-
+        RegenParams regenParams;
         public GripManager(Model design)
         {
             this.model = design;
+            regenParams = new RegenParams(0.001, this.model);
 
             GripManager.entityGripManagers.Add(typeof(Line), typeof(LineGripManager));
             GripManager.entityGripManagers.Add(typeof(Circle), typeof(CircleGripManager));
+            GripManager.entityGripManagers.Add(typeof(Arc), typeof(ArcGripManager));
             GripManager.entityGripManagers.Add(typeof(LinearPath), typeof(LinearPathGripManager));
             GripManager.entityGripManagers.Add(typeof(Text), typeof(TextGripManager));
             GripManager.entityGripManagers.Add(typeof(BlockReference), typeof(BlockReferenceGripManager));
@@ -59,7 +61,6 @@ namespace hanee.ThreeD
             cloneEnt.EntityData = ent;
             cloneEnt.Selected = true;
 
-            var regenParams = new RegenParams(0.001, model);
             cloneEnt.Regen(regenParams);
             
             var gripPoints = gm.GetGripPoints(cloneEnt, model);
@@ -81,9 +82,7 @@ namespace hanee.ThreeD
                         ee.ColorMethod = colorMethodType.byEntity;
                         ee.Selected = true;
                         model.TempEntities.Add(ee);
-
                     }
-                
                 }
             }
             else
@@ -167,7 +166,7 @@ namespace hanee.ThreeD
 
                 mng.EndEdit(ent, originEnt);
 
-                originEnt.Regen(new RegenParams(0.001, model));
+                originEnt.Regen(regenParams);
             });
 
             // 그립의 선택을 해제
@@ -227,42 +226,28 @@ namespace hanee.ThreeD
             if (newPt == null)
                 return;
 
-            var regenParams = new RegenParams(0.001, model);
-            model.TempEntities.ForEach(x =>
-            {
-                var gp = x as GripPoint;
-                if (gp == null || !gp.Selected || gp.entity == null)
-                    return;
 
-                var vec = (newPt - gp.Position).AsVector;
+            foreach (var ent in model.TempEntities)
+            {
+                var gp = ent as GripPoint;
+                if (gp == null || !gp.Selected || gp.entity == null)
+                    continue;
+
+
+                var mng = GetEntityGripManager(gp.entity);
+                if (mng == null)
+                    continue;
+
                 gp.Position.X = newPt.X;
                 gp.Position.Y = newPt.Y;
                 gp.Position.Z = newPt.Z;
 
-                // grip point에 연결된 객체 regen
-                if (gp.entity is Text)
-                {
-                    gp.entity.Regen(regenParams);
-                }
-                // 블럭은 explode해서 추가했기 때문에 나머지 객체들을 regen한다.
-                else if (gp.entity is BlockReference)
-                {
-                    var br = gp.entity as BlockReference;
-                    br.InsertionPoint = newPt;
-                    foreach (var ent in gp.explodedEntities)
-                    {
-                        ent.Translate(vec);
-                        ent.Regen(regenParams);
-                    }
-                }
-                else
-                {
-                    gp.entity.Regen(regenParams);
-                }
-                
+                // 객체를 편집한다.
+                mng.MouseMove(model, gp, newPt);
+
                 // grip point regen
                 gp.Regen(0.001);
-            });
+            }
 
             model.Invalidate();
         }
