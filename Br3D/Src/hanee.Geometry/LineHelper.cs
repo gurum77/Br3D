@@ -58,6 +58,19 @@ namespace hanee.Geometry
         }
 
         /// <summary>
+        /// 거의 무한대의 선을 만든다.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        static public Line CreateInfinitLine(Point3D ptBase, Vector3D dir)
+        {
+            Point3D pt1 = ptBase + dir * -infiniteLength;
+            Point3D pt2 = ptBase + dir * infiniteLength;
+            Line line = new Line(pt1.X, pt1.Y, pt1.Z, pt2.X, pt2.Y, pt2.Z);
+            return line;
+        }
+
+        /// <summary>
         /// 거의 무한대의 수평선을 만든다.
         /// </summary>
         /// <param name="y"></param>

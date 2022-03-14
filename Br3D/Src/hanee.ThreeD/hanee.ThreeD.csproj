@@ -109,6 +109,7 @@
     <Compile Include="ObjectManipulatorHelper.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="OptionsHelper.cs" />
+    <Compile Include="OrthoModeManager.cs" />
     <Compile Include="PropertyGridHelper.cs" />
     <Compile Include="TextGripManager.cs" />
     <Compile Include="Units.cs" />

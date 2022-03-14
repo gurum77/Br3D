@@ -48,13 +48,16 @@ namespace hanee.Cad.Tool
             StartAction();
 
             startPoint = await GetPoint3D(LanguageHelper.Tr("First point"));
-            
+            SetOrthoModeStartPoint(startPoint);
+
+
             while (!IsCanceled() && !IsEntered())
             {
                 endPoint = await GetPoint3D(LanguageHelper.Tr("Next point"));
                 if (IsCanceled() || IsEntered())
                     break;
 
+                SetOrthoModeStartPoint(endPoint);
                 Line line = MakeLine();
                 environment.Entities.Add(line);
 

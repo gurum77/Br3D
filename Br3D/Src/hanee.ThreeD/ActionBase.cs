@@ -28,8 +28,8 @@ namespace hanee.ThreeD
         }
 
         // 스냅 간격
-        static public float Snap = 0.001f;
-        static public void ModifyPointBySnap(ref Point3D point3D)
+        static public float GridSnap = 0.001f;
+        static public void ModifyPointByGridSnap(ref Point3D point3D)
         {
             if (Point3D == null)
                 return;
@@ -37,12 +37,12 @@ namespace hanee.ThreeD
             if (point3D == null)
                 return;
 
-            if (ActionBase.Snap == 0)
+            if (ActionBase.GridSnap == 0)
                 return;
 
-            point3D.X = (int)(point3D.X / ActionBase.Snap) * Snap;
-            point3D.Y = (int)(point3D.Y / ActionBase.Snap) * Snap;
-            point3D.Z = (int)(point3D.Z / ActionBase.Snap) * Snap;
+            point3D.X = (int)(point3D.X / ActionBase.GridSnap) * GridSnap;
+            point3D.Y = (int)(point3D.Y / ActionBase.GridSnap) * GridSnap;
+            point3D.Z = (int)(point3D.Z / ActionBase.GridSnap) * GridSnap;
         }
 
         // end action할때 unselect all을 할지?
@@ -367,36 +367,36 @@ namespace hanee.ThreeD
             point = e.Location;
         }
 
-        // snap을 고려한 3D 좌표 리턴
-        static public Point3D GetPoint3DWithSnapping(Environment environment, MouseEventArgs e)
+        // snap / ortho mode를 고려한 3D 좌표 리턴
+        static public Point3D GetPoint3DWithSnapAndOrthoMode(Environment environment, MouseEventArgs e)
         {
             // snapPoint 우선
-            if (environment is devDept.Eyeshot.Model)
+            var model = environment as HModel;
+            if (model != null)
             {
-                hanee.ThreeD.HModel model = (hanee.ThreeD.HModel)environment;
                 if (model.Snapping.CurrentlySnapping)
                 {
                     return model.Snapping.GetSnapPoint();
                 }
             }
-            //else if (viewportLayout is BRDrawings)
-            //{
-            //    BRDrawings vp = (BRDrawings)viewportLayout;
-            //    if (vp.Snapping.CurrentlySnapping)
-            //    {
-            //        point3D = vp.Snapping.GetSnapPoint();
-            //        return;
-            //    }
-            //}
+            
+            // 그다음이 ortho mode
+            var pt = GetPoint3DByMouseLocation(environment, e.Location);
+            if (model != null)
+            {
+                pt = model.orthoModeManager.GetOrthoPoint3D(e, pt);
+            }
+            
 
-
-            return GetPoint3DByMouseLocation(environment, e.Location);
+            return pt;
         }
         // mouse event args로 Point3D 좌표를 설정한다.
         static void SetPoint3DByMouseEventArgs(Environment environment, MouseEventArgs e)
         {
-            point3D = GetPoint3DWithSnapping(environment, e);
+            point3D = GetPoint3DWithSnapAndOrthoMode(environment, e);
         }
+
+  
 
         // mouse 위치의 Point3D 좌표를 리턴
         static public Point3D GetPoint3DByMouseLocation(Environment environment, System.Drawing.Point location)
@@ -426,7 +426,7 @@ namespace hanee.ThreeD
                 if (environment.IsTopViewOnly())
                     point3D.Z = 0;
 
-                ActionBase.ModifyPointBySnap(ref point3D);
+                ActionBase.ModifyPointByGridSnap(ref point3D);
             }
 
 
@@ -889,6 +889,20 @@ namespace hanee.ThreeD
         abstract public void Run();
 
 
+
+        protected OrthoModeManager orthoModeManager => (GetModel() as HModel)?.orthoModeManager;
+        protected void SetOrthoModeStartPoint(Point3D startPoint)
+        {
+            if (orthoModeManager == null)
+                return;
+            orthoModeManager.startPoint = startPoint;
+        }
+        protected Point3D GetOrthoPoint3D(MouseEventArgs e, Point3D curPoint)
+        {
+            if (orthoModeManager == null)
+                return curPoint;
+            return orthoModeManager.GetOrthoPoint3D(e, curPoint);
+        }
         #region 생성자
         protected devDept.Eyeshot.Environment environment;
         protected devDept.Eyeshot.Model GetModel() { return environment as devDept.Eyeshot.Model; }
@@ -978,6 +992,10 @@ namespace hanee.ThreeD
             {
                 design.SelectionFilterMode = selectionFilterType.Entity;
             }
+
+            if (orthoModeManager != null)
+                orthoModeManager.startPoint = null;
+
 
             environment.Cursor = System.Windows.Forms.Cursors.Default;
             ActionBase.runningAction = null;

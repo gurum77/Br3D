@@ -110,7 +110,7 @@ namespace Br3D
         private void UpdateCoordinatesControl(MouseEventArgs e)
         {
 
-            var point = ActionBase.GetPoint3DWithSnapping(hModel, e);
+            var point = ActionBase.GetPoint3DWithSnapAndOrthoMode(hModel, e);
             if (point == null)
                 return;
 

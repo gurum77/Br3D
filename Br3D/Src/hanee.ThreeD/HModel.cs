@@ -38,6 +38,7 @@ namespace hanee.ThreeD
         public bool displayHelp = true;
         public bool TopViewOnly = false;
         public Snapping Snapping = null;
+        public OrthoModeManager orthoModeManager = null;
         public GripManager gripManager = null;
 
         // property grid를 지정하면 객체 선택시 property grid에 속성이 표시됨
@@ -61,6 +62,7 @@ namespace hanee.ThreeD
         public HModel()
         {
             Snapping = new Snapping(this);
+            orthoModeManager = new OrthoModeManager(this);
             gripManager = new GripManager(this);
             CursorTypes[devDept.Eyeshot.cursorType.Default] = Cursors.Cross;
         }
@@ -739,38 +741,10 @@ namespace hanee.ThreeD
             // If ObjectSnap is ON, we need to find closest vertex (if any)
             if (ActionBase.IsNeedSnapping())
             {
-                //// 객체를 먼저 select 한다.
-                //var item = GetItemUnderMouseCursor(e.Location);
-                //if( item != null)
-                //{
-                //    Entity ent = item.Item as Entity;
-                //    if (ent != null)
-                //    {
-                //        ent.Selected = true;
-                //        UpdateVisibleSelection();
-                //        Rectangle selectionBox = new Rectangle(e.Location, new Size(10, 10));
-                //        SelectionChangedEventArgs args = new SelectionChangedEventArgs(this);
-                //        base.ProcessSelectionVisibleOnly(selectionBox, true, false, args);
-
-                //        ent.Selected = false;
-                //        UpdateVisibleSelection();
-                //    }
-
-
-
-
-                //}
-
-
-
-
-
                 Snapping.OnMouseMoveForSnap(e);
             }
 
-
             // draw overlay가 호출된다.(back buffer에 그림)
-
             PaintBackBuffer();
 
             // back buffer를 화면에 표시
@@ -909,6 +883,8 @@ namespace hanee.ThreeD
                 // 사용자 입력중일때만 draw overlay
                 //DrawOverlayForSnap();
                 Snapping.DrawOverlayForSnap();
+                if(orthoModeManager != null)
+                    orthoModeManager.DrawOverlayForOrthoMode();
 
                 renderContext.EnableXOR(true);
 
