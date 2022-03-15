@@ -342,11 +342,12 @@ namespace Br3D
             if (e.Button == MouseButtons.Left)
             {
                 bool gripEditing = gripManager != null && gripManager.EditingGripPoints();
+                
                 // 그림 관련
-                if (hModel?.gripManager != null)
+                if (hModel?.gripManager != null && ActionBase.runningAction == null)
                     hModel?.gripManager.MouseUp(e);
 
-                if (!gripEditing)
+                if (!gripEditing && ActionBase.runningAction == null)
                 {
                     var item = model.GetItemUnderMouseCursor(e.Location);
                     if (item != null)

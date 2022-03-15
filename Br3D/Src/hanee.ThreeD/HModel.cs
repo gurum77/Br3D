@@ -434,12 +434,24 @@ namespace hanee.ThreeD
         }
 
         // 길이를 screen 2d 길이로 변환
-        public float GetScreenLength(float len)
+        // 3D뷰에서는 원근에 의해서 기준 좌표마다 길이가 다르게 계산되므로 basePoint가 있어야 함.
+        public float GetScreenLength(Point3D basePoint, float len)
         {
-            Point2D pt1 = WorldToScreen(new Point3D(0, 0, 0));
-            Point2D pt2 = WorldToScreen(new Point3D(len, 0, 0));
+            Point2D pt1 =  WorldToScreen(basePoint);
+            Point2D pt2 = WorldToScreen(basePoint + new Point3D(len, 0, 0));
+            var dist1 = pt1.DistanceTo(pt2);
 
-            return (float)Math.Abs(pt1.X - pt2.X);
+            pt1 = WorldToScreen(basePoint);
+            pt2 = WorldToScreen(basePoint + new Point3D(0, len, 0));
+            var dist2 = pt1.DistanceTo(pt2);
+
+            pt1 = WorldToScreen(basePoint);
+            pt2 = WorldToScreen(basePoint + new Point3D(0, 0, len));
+            var dist3 = pt1.DistanceTo(pt2);
+
+            var dist = Math.Max(dist1, dist2);
+            dist = Math.Max(dist, dist3);
+            return (float)dist;
         }
 
         public System.Drawing.Point GetMouseLocationFromWorldPoint(Point3D pt)
