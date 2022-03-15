@@ -1099,5 +1099,14 @@ namespace Br3D
             Settings.Default.LastAutoCheckForUpdate = DateTime.Today.Date;
             Settings.Default.Save();
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.F8)
+            {
+                OrthoMode();
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }

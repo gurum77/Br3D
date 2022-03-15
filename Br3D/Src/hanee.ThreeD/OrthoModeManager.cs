@@ -111,7 +111,7 @@ namespace hanee.ThreeD
             return result;
         }
 
-        internal void DrawOverlayForOrthoMode()
+        public void DrawOverlayForOrthoMode()
         {
             if (axis == Axis.none)
                 return;
