@@ -25,5 +25,20 @@ namespace Br3D.Properties
                 return defaultInstance;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2022-03-01")]
+        public global::System.DateTime LastAutoCheckForUpdate
+        {
+            get
+            {
+                return ((global::System.DateTime)(this["LastAutoCheckForUpdate"]));
+            }
+            set
+            {
+                this["LastAutoCheckForUpdate"] = value;
+            }
+        }
     }
 }

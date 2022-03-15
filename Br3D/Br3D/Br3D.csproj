@@ -13,25 +13,6 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -51,6 +32,9 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>br3d_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -72,17 +56,22 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>br3d_icon.ico</ApplicationIcon>
-  </PropertyGroup>
+  <ItemGroup Condition="$(Platform) == x64">
+    <Reference Include="devDept.Eyeshot.Control.x64.Win.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=c8a727666e3c0a09, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\x64\devDept.Eyeshot.Control.x64.Win.v2021.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition="$(Platform) == x86">
+    <Reference Include="devDept.Eyeshot.Control.x86.Win.v2021">
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\x86\devDept.Eyeshot.Control.x86.Win.v2021.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="devDept.Eyeshot.Control.Win.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=5385d83d2fb4d7d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\devDept.Eyeshot.Control.Win.v2021.dll</HintPath>
-    </Reference>
-    <Reference Include="devDept.Eyeshot.Control.x64.Win.v2021">
-      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\x64\devDept.Eyeshot.Control.x64.Win.v2021.dll</HintPath>
     </Reference>
     <Reference Include="devDept.Geometry.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=9440825e8b4733bc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -129,11 +118,15 @@
     <Compile Include="Define.cs" />
     <Compile Include="DisplayModeButton.cs" />
     <Compile Include="EntityProperties.cs" />
-    <Compile Include="FormAbout.cs" />
+    <Compile Include="FormAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormAbout.Designer.cs">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMain.cs" />
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>

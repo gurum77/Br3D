@@ -1,4 +1,5 @@
-﻿using devDept.Eyeshot;
+﻿using Br3D.Properties;
+using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Eyeshot.Translators;
 using devDept.Geometry;
@@ -700,17 +701,9 @@ namespace Br3D
             form.ShowDialog();
 
         }
-        void CheckForUpdate()
-        {
-            // 업데이트 체크
-            var filePath = Path.Combine(hanee.ThreeD.Util.GetExePath(), "wyUpdate.exe");
-            if (File.Exists(filePath))
-            {
-                System.Diagnostics.Process.Start(filePath);
-            }
-            else
-                XtraMessageBox.Show(LanguageHelper.Tr("Update check failed! - wyUpdate.exe not found!"));
-        }
+
+     
+
 
         void Homepage()
         {
@@ -1049,8 +1042,62 @@ namespace Br3D
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             Options.Instance.SaveOptions();
+
+            // 업데이트 체크
+            if (!IsCheckedAutoForUpdateToday())
+            {
+                CheckForUpdate();
+                SaveLastAutoCheckForUpdate();
+            }
         }
 
+        void CheckForUpdate()
+        {
+            this.Cursor = Cursors.WaitCursor;
 
+            var filePath = Path.Combine(hanee.ThreeD.Util.GetExePath(), "wyUpdate.exe");
+            if (File.Exists(filePath))
+            {
+                var pi = System.Diagnostics.Process.Start(filePath, "/quickcheck /justcheck /noerr");
+                pi.WaitForExit(5000);
+                if (pi.ExitCode == 2)
+                {
+                    if (XtraMessageBox.Show(LanguageHelper.Tr("Install now?"), LanguageHelper.Tr("InsideFolder update available"), MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(filePath);
+                        Close();
+                    }
+                }
+            }
+            else
+            {
+
+                XtraMessageBox.Show(LanguageHelper.Tr("Update check failed! - wyUpdate.exe not found!"));
+            }
+
+            this.Cursor = Cursors.Default;
+        }
+
+        // 오늘 자동 업데이트 체크를 했는지?
+        bool IsCheckedAutoForUpdateToday()
+        {
+            var checkedDate = Settings.Default.LastAutoCheckForUpdate;
+            if (checkedDate == null)
+                return false;
+
+            // 오늘 체크했다면 true
+            if (DateTime.Today.Date == checkedDate.Date)
+                return true;
+
+            return false;
+
+        }
+
+        // 마지막으로 자동으로 업데이트 체크한 날짜 기록
+        private void SaveLastAutoCheckForUpdate()
+        {
+            Settings.Default.LastAutoCheckForUpdate = DateTime.Today.Date;
+            Settings.Default.Save();
+        }
     }
 }

@@ -50,14 +50,25 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
+  <ItemGroup Condition="$(Platform) == x64">
+  <Reference Include="devDept.Eyeshot.Control.x64.Win.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=c8a727666e3c0a09, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\x64\devDept.Eyeshot.Control.x64.Win.v2021.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition="$(Platform) == x86">
+  <Reference Include="devDept.Eyeshot.Control.x86.Win.v2021">
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\x86\devDept.Eyeshot.Control.x86.Win.v2021.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
   <ItemGroup>
     <Reference Include="devDept.Eyeshot.Control.Win.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=5385d83d2fb4d7d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\devDept.Eyeshot.Control.Win.v2021.dll</HintPath>
     </Reference>
-    <Reference Include="devDept.Eyeshot.Control.x64.Win.v2021">
-      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\x64\devDept.Eyeshot.Control.x64.Win.v2021.dll</HintPath>
-    </Reference>
+    
+    
     <Reference Include="devDept.Geometry.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=9440825e8b4733bc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\devDept.Geometry.v2021.dll</HintPath>
@@ -66,6 +77,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\devDept.Graphics.Win.v2021.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v21.2.Core, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NGettext, Version=0.6.1.0, Culture=neutral, PublicKeyToken=08d3d1c89dfd2985, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\..\MyProjects\C#\Br3D\Br3D\packages\NGettext.0.6.7\lib\net46\NGettext.dll</HintPath>
@@ -95,7 +111,9 @@
     <Compile Include="HModelProperties.cs" />
     <Compile Include="EnvironmentHelper.cs" />
     <Compile Include="EyeshotConverter.cs" />
-    <Compile Include="HModel.cs" />
+    <Compile Include="HModel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="IEntityGripManager.cs" />
     <Compile Include="LanguageHelper.cs" />
     <Compile Include="LanguageOptionsHelper.cs" />
