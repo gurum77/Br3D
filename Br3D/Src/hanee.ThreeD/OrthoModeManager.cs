@@ -21,7 +21,7 @@ namespace hanee.ThreeD
             z
         }
         public Point3D startPoint { get; set; } = null;
-        public bool enabled { get; set; } = true;
+        public bool enabled { get; set; } = false;
         HModel model { get; set; }
         public Axis axis { get; private set; }
         public Point3D lastOrthoPoint { get; set; } = null;
@@ -114,6 +114,8 @@ namespace hanee.ThreeD
         internal void DrawOverlayForOrthoMode()
         {
             if (axis == Axis.none)
+                return;
+            if (startPoint == null)
                 return;
 
             // Draw in 2D the parts of the lines before the near camera plane

@@ -46,6 +46,7 @@ namespace hanee.Cad.Tool
                 if (IsCanceled())
                     break;
 
+                SetOrthoModeStartPoint(pt);
                 if (IsEntered())
                 {
                     if (points.Count > 1)

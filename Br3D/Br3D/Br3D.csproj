@@ -81,8 +81,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\devDept.Eyeshot.Control.Win.v2021.dll</HintPath>
     </Reference>
-    <Reference Include="devDept.Eyeshot.Control.x86.Win.v2021">
-      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\x86\devDept.Eyeshot.Control.x86.Win.v2021.dll</HintPath>
+    <Reference Include="devDept.Eyeshot.Control.x64.Win.v2021">
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\x64\devDept.Eyeshot.Control.x64.Win.v2021.dll</HintPath>
     </Reference>
     <Reference Include="devDept.Geometry.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=9440825e8b4733bc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -129,15 +129,11 @@
     <Compile Include="Define.cs" />
     <Compile Include="DisplayModeButton.cs" />
     <Compile Include="EntityProperties.cs" />
-    <Compile Include="FormAbout.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FormAbout.cs" />
     <Compile Include="FormAbout.Designer.cs">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FormMain.cs" />
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>

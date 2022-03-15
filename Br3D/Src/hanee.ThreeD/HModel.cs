@@ -437,6 +437,9 @@ namespace hanee.ThreeD
         // 3D뷰에서는 원근에 의해서 기준 좌표마다 길이가 다르게 계산되므로 basePoint가 있어야 함.
         public float GetScreenLength(Point3D basePoint, float len)
         {
+            if (basePoint == null)
+                return len;
+
             Point2D pt1 =  WorldToScreen(basePoint);
             Point2D pt2 = WorldToScreen(basePoint + new Point3D(len, 0, 0));
             var dist1 = pt1.DistanceTo(pt2);

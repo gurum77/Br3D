@@ -57,14 +57,19 @@ namespace hanee.Cad.Tool
                 startPoint = await GetPoint3D(LanguageHelper.Tr("Center point"));
                 if (IsCanceled() || IsEntered())
                     break;
+                SetOrthoModeStartPoint(startPoint);
                 endPoint = await GetPoint3D(LanguageHelper.Tr("Radius point"));
                 if (IsCanceled() || IsEntered())
                     break;
-
+                SetOrthoModeStartPoint(null);
                 Circle circle = MakeCircle();
-                environment.Entities.Add(circle);
-                environment.TempEntities.Clear();
-                environment.Invalidate();
+                if (circle != null)
+                {
+                    environment.Entities.Add(circle);
+                    environment.TempEntities.Clear();
+                    environment.Invalidate();
+
+                }
 
                 startPoint = null;
                 endPoint = null;

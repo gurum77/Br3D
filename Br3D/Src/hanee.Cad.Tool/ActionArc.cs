@@ -37,12 +37,15 @@ namespace hanee.Cad.Tool
                     pt1 = await GetPoint3D(LanguageHelper.Tr("First point"));
                     if (IsCanceled())
                         break;
+                    SetOrthoModeStartPoint(pt1);
                     pt2 = await GetPoint3D(LanguageHelper.Tr("Second point"));
                     if (IsCanceled())
                         break;
+                    SetOrthoModeStartPoint(pt2);
                     pt3 = await GetPoint3D(LanguageHelper.Tr("Third point"));
                     if (IsCanceled())
                         break;
+                    SetOrthoModeStartPoint(null);
 
                     var arc = MakeArc();
                     GetModel().Entities.Add(arc);
@@ -60,15 +63,19 @@ namespace hanee.Cad.Tool
                     pt1 = await GetPoint3D(LanguageHelper.Tr("Center point"));
                     if (IsCanceled())
                         break;
+                    SetOrthoModeStartPoint(pt1);
                     pt2 = await GetPoint3D(LanguageHelper.Tr("Start point"));
                     if (IsCanceled())
                         break;
+                    SetOrthoModeStartPoint(pt1);
                     pt3 = await GetPoint3D(LanguageHelper.Tr("End point"));
                     if (IsCanceled())
                         break;
 
+                    SetOrthoModeStartPoint(null);
                     var arc = MakeArc();
-                    GetModel().Entities.Add(arc);
+                    if(arc != null)
+                        GetModel().Entities.Add(arc);
 
                     pt1 = null;
                     pt2 = null;
@@ -91,15 +98,25 @@ namespace hanee.Cad.Tool
             if (pt2.Equals(pt3))
                 return null;
 
-            Arc arc = null;
-            if (method == Method.firstSecondThird)
-                arc = new Arc(pt1, pt2, pt3, false);
-            else if (method == Method.centerStartEnd)
-                arc = new Arc(pt1, pt2, pt3);
+            try
+            {
 
-            arc.Color = System.Drawing.Color.Yellow;
-            arc.ColorMethod = colorMethodType.byEntity;
-            return arc;
+
+                Arc arc = null;
+                if (method == Method.firstSecondThird)
+                    arc = new Arc(pt1, pt2, pt3, false);
+                else if (method == Method.centerStartEnd)
+                    arc = new Arc(pt1, pt2, pt3);
+
+                arc.Color = System.Drawing.Color.Yellow;
+                arc.ColorMethod = colorMethodType.byEntity;
+
+                return arc;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         protected override void OnMouseMove(Environment environment, MouseEventArgs e)

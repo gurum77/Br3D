@@ -68,7 +68,7 @@ namespace Br3D
             hModel.ActionMode = actionType.None;
         }
 
-       
+
 
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -147,6 +147,7 @@ namespace Br3D
             tileNavCategoryAnnotation.Caption = LanguageHelper.Tr("Annotation");
             tileNavCategoryViewport.Caption = LanguageHelper.Tr("Viewport");
             tileNavCategoryTools.Caption = LanguageHelper.Tr("Tools");
+            tileNavCategoryDraw.Caption = LanguageHelper.Tr("Draw");
 
 
             //tile
@@ -154,6 +155,7 @@ namespace Br3D
             SetTileText(tileNavItemSaveAs, LanguageHelper.Tr("Save As"));
             SetTileText(tileNavItemSaveImage, LanguageHelper.Tr("Save Image"));
             SetTileText(tileNavItemExit, LanguageHelper.Tr("Exit"));
+            SetTileText(tileNavItemOrthoMode, LanguageHelper.Tr("Ortho mode(F8)"));
             SetTileText(tileNavItemEnd, LanguageHelper.Tr("End Point"));
             SetTileText(tileNavItemIntersection, LanguageHelper.Tr("Intersection Point"));
             SetTileText(tileNavItemCenter, LanguageHelper.Tr("Center Point"));
@@ -173,7 +175,14 @@ namespace Br3D
             SetTileText(tileNavItemLineType, LanguageHelper.Tr("Line Type"));
             SetTileText(tileNavItemTextStyle, LanguageHelper.Tr("Text Style"));
 
+            SetTileText(tileNavItemLine, LanguageHelper.Tr("Line"));
+            SetTileText(tileNavItemArc, LanguageHelper.Tr("Arc"));
+            SetTileText(tileNavItemCircle, LanguageHelper.Tr("Circle"));
+            SetTileText(tileNavItemPolyline, LanguageHelper.Tr("Polyline"));
+
             // sub tile
+            SetTileText(tileNavSubItemArcCenterStartEnd, LanguageHelper.Tr("Center, start, end point"));
+            SetTileText(tileNavSubItemArcFirstSecondThird, LanguageHelper.Tr("First, second, third point"));
 
             // control
             dockPanelObjectTree.Text = LanguageHelper.Tr("Object Tree");
@@ -212,11 +221,16 @@ namespace Br3D
 
         private void SetTileText(TileNavItem tileNavItem, string text)
         {
-
-
             tileNavItem.TileText = text;
             tileNavItem.Caption = text;
         }
+        
+        private void SetTileText(TileNavSubItem tileNavSubItem, string text)
+        {
+            tileNavSubItem.TileText = text;
+            tileNavSubItem.Caption = text;
+        }
+
 
 
         private void InitToolbar()
@@ -342,7 +356,7 @@ namespace Br3D
             if (e.Button == MouseButtons.Left)
             {
                 bool gripEditing = gripManager != null && gripManager.EditingGripPoints();
-                
+
                 // 그림 관련
                 if (hModel?.gripManager != null && ActionBase.runningAction == null)
                     hModel?.gripManager.MouseUp(e);
@@ -373,11 +387,11 @@ namespace Br3D
                     }
 
                 }
-                }
             }
+        }
 
 
-            private void InitPropertyGrid()
+        private void InitPropertyGrid()
         {
             propertyGridControl1.CellValueChanged += PropertyGridControl1_CellValueChanged;
             propertyGridControl1.ShowingEditor += PropertyGridControl1_ShowingEditor;
@@ -568,6 +582,8 @@ namespace Br3D
             functionByElement.Add(tileNavItemDistance, Distance);
             functionByElement.Add(tileNavItemMemo, Memo);
             functionByElement.Add(tileNavItemClearAnnotations, ClearAnnotations);
+
+            functionByElement.Add(tileNavItemOrthoMode, OrthoMode);
             functionByElement.Add(tileNavItemEnd, End);
             functionByElement.Add(tileNavItemIntersection, Intersection);
             functionByElement.Add(tileNavItemMiddle, Middle);
@@ -658,7 +674,7 @@ namespace Br3D
 
             RefreshDataSource();
         }
-        
+
 
         void LineType()
         {
@@ -809,8 +825,8 @@ namespace Br3D
             if (functionByElement.TryGetValue(e.Element, out Action act))
             {
                 act();
+
                 tileNavPaneViewport.HideDropDownWindow();
-                
             }
             else
             {
@@ -818,6 +834,16 @@ namespace Br3D
                 MessageBox.Show("undefined function");
 #endif
             }
+        }
+
+        void FlagOrthoMode(DevExpress.XtraBars.Navigation.TileNavItem tile)
+        {
+            HModel hModel = model as HModel;
+            if (hModel == null)
+                return;
+
+            hModel.orthoModeManager.enabled = !hModel.orthoModeManager.enabled;
+            tile.Tile.Checked = hModel.orthoModeManager.enabled;
         }
 
         // 
@@ -879,6 +905,7 @@ namespace Br3D
             model.Invalidate();
         }
 
+        void OrthoMode() => FlagOrthoMode(tileNavItemOrthoMode);
         void End() => FlagOsnap(tileNavItemEnd, Snapping.objectSnapType.End);
         void Middle() => FlagOsnap(tileNavItemMiddle, Snapping.objectSnapType.Mid);
         void Point() => FlagOsnap(tileNavItemPoint, Snapping.objectSnapType.Point);
