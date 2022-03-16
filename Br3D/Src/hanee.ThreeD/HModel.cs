@@ -40,6 +40,7 @@ namespace hanee.ThreeD
         public Snapping Snapping = null;
         public OrthoModeManager orthoModeManager = null;
         public GripManager gripManager = null;
+        public FormDynamicInput formDynamicInput;
 
         // property grid를 지정하면 객체 선택시 property grid에 속성이 표시됨
         public PropertyGridHelper propertyGridHelper { get; set; }
@@ -83,6 +84,8 @@ namespace hanee.ThreeD
             if (ActionBase.IsUserInputting())
             {
                 ActionBase.KeyUpHandler(e);
+
+                DynamicInputManager.OnKeyUp(e);
             }
             else
             {
@@ -101,6 +104,7 @@ namespace hanee.ThreeD
                     UpdatePropertyGridControl(null);
                     Invalidate();
                 }
+        
             }
         }
 
@@ -908,12 +912,18 @@ namespace hanee.ThreeD
                 if (ActionBase.cursorText != null)
                     DrawMouseText(ActionBase.cursorText, cursorPoint);
 
+                DynamicInputManager.ShowDynamicInput();
+
                 // preview entity가 있다면 그걸 그린다.
                 if (ActionBase.PreviewEntities != null)
                     DrawPreviewEntity();
 
 
                 renderContext.EnableXOR(false);
+            }
+            else
+            {
+                DynamicInputManager.HideDynamicInput();
             }
 
             RenderNavigationHelp();
@@ -926,6 +936,8 @@ namespace hanee.ThreeD
 
             base.DrawOverlay(myParams);
         }
+
+ 
         #endregion
 
         // ReadFileAsync에서 열었던 stream을 닫는다.
