@@ -2,7 +2,6 @@
 using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Eyeshot.Translators;
-using devDept.Geometry;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
 using hanee.Cad.Tool;
@@ -75,13 +74,6 @@ namespace Br3D
         {
             ViewportSingle();
 
-            // test
-            Text t = new Text(new Point3D(0, 0, 0), "asdf", 12);
-
-            model.TextStyles[0].FontFamilyName = "Arial";
-
-            model.Entities.Regen();
-            model.Entities.Add(t);
         }
 
 
@@ -225,7 +217,7 @@ namespace Br3D
             tileNavItem.TileText = text;
             tileNavItem.Caption = text;
         }
-        
+
         private void SetTileText(TileNavSubItem tileNavSubItem, string text)
         {
             tileNavSubItem.TileText = text;
@@ -702,7 +694,7 @@ namespace Br3D
 
         }
 
-     
+
 
 
         void Homepage()
@@ -1044,11 +1036,14 @@ namespace Br3D
             Options.Instance.SaveOptions();
 
             // 업데이트 체크
+#if DEBUG
+#else
             if (!IsCheckedAutoForUpdateToday())
             {
                 CheckForUpdate();
                 SaveLastAutoCheckForUpdate();
             }
+#endif
         }
 
         void CheckForUpdate()
@@ -1062,7 +1057,7 @@ namespace Br3D
                 pi.WaitForExit(5000);
                 if (pi.ExitCode == 2)
                 {
-                    if (XtraMessageBox.Show(LanguageHelper.Tr("Install now?"), LanguageHelper.Tr("InsideFolder update available"), MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (XtraMessageBox.Show(LanguageHelper.Tr("Install now?"), LanguageHelper.Tr("Br3D update available"), MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         System.Diagnostics.Process.Start(filePath);
                         Close();

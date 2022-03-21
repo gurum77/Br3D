@@ -14,7 +14,8 @@ namespace hanee.ThreeD
         public string appName { get; set; } = "hanee.ThreeD";
         public string language { get; set; } = defaultLanguage;
         public float dimTextHeight { get; set; } = 2.0f;
-
+        public int decimals { get; set; } = 5;  // 좌표, 길이값등의 허용 소수점 자릿수
+        
         // 즐겨찾기 저장하는 파일 경로
         string GetOptionsFIlePath()
         {

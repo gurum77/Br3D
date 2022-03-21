@@ -912,7 +912,7 @@ namespace hanee.ThreeD
                 if (ActionBase.cursorText != null)
                     DrawMouseText(ActionBase.cursorText, cursorPoint);
 
-                DynamicInputManager.ShowDynamicInput();
+                
 
                 // preview entity가 있다면 그걸 그린다.
                 if (ActionBase.PreviewEntities != null)
@@ -921,10 +921,7 @@ namespace hanee.ThreeD
 
                 renderContext.EnableXOR(false);
             }
-            else
-            {
-                DynamicInputManager.HideDynamicInput();
-            }
+           
 
             RenderNavigationHelp();
 

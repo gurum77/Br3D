@@ -60,6 +60,8 @@ namespace hanee.Cad.Tool
                 SetOrthoModeStartPoint(endPoint);
                 Line line = MakeLine();
                 environment.Entities.Add(line);
+                environment.Entities.RegenAllCurved();
+                environment.Invalidate();
 
                 startPoint = endPoint;
             }

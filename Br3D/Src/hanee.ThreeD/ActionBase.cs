@@ -13,7 +13,7 @@ namespace hanee.ThreeD
 {
     abstract public class ActionBase
     {
-        enum UserInput
+        public enum UserInput
         {
             GettingPoint3D, // Point3D 를 입력받고 있는지?
             GettingPoint,   // Point를 입력받고 있는지?
@@ -28,7 +28,8 @@ namespace hanee.ThreeD
         }
 
         // 스냅 간격
-        static public float GridSnap = 0.001f;
+        static public double GridSnap = 0.001;  // float로 하면 안됨(좌표 계산시 소수점 쓰레기가 발생함)
+        
         static public void ModifyPointByGridSnap(ref Point3D point3D)
         {
             if (Point3D == null)
@@ -53,7 +54,7 @@ namespace hanee.ThreeD
         static public bool IsModified
         { get; set; }
 
-        static private bool[] userInputting = new bool[(int)UserInput.Count];
+        static public bool[] userInputting = new bool[(int)UserInput.Count];
 
         static protected Point3D point3D = new Point3D();
         static public Point3D Point3D
@@ -308,57 +309,69 @@ namespace hanee.ThreeD
                 SetPoint3DByMouseEventArgs(environment, e);
 
             // 객체 선택중이고 dynamic highlight 해야하는 경우
-            if (IsSelectingEntity() && dynamicHighlight && e.Button != MouseButtons.Middle)
-            {
-                environment.SetCurrent(null);
+            DynamicHighlight(environment, e);
 
-                devDept.Eyeshot.Model.SelectedItem item = environment.GetItemUnderMouseCursor(e.Location);
-                if (item != null && item.Item != null && selectableType != null && selectableType.Count() > 0 && !selectableType.ContainsKey(item.Item.GetType()))
-                {
-                    item = null;
-                }
-
-                // sub entity 선택중이면..
-                if (item != null && userInputting[(int)UserInput.SelectingSubEntity])
-                {
-                    // sub 객체를 탐색한다.
-                    while (item.Item is BlockReference)
-                    {
-                        try
-                        {
-                            BlockReference br = item.Item as BlockReference;
-                            if (environment.Blocks.Contains(br.BlockName))
-                                environment.SetCurrent(item.Item as BlockReference);
-                            item = environment.GetItemUnderMouseCursor(e.Location);
-                            if (item == null)
-                                break;
-                        }
-                        catch
-                        {
-                            break;
-                        }
-
-                    }
-                }
-
-                // 현재 선택된 item이 마지막 선택과 다르면 갱신한다.
-                if (LastSelectedItem != item)
-                {
-                    if (LastSelectedItem != null)
-                        LastSelectedItem.Select(environment, false);
-
-                    LastSelectedItem = item;
-
-                    if (LastSelectedItem != null)
-                        LastSelectedItem.Select(environment, true);
-
-                    environment.Invalidate();
-                }
-            }
+            // dynamic input
+            if(ActionBase.IsUserInputting())
+                DynamicInputManager.ShowDynamicInput();
+            else
+                DynamicInputManager.HideDynamicInput();
 
 
             if (runningAction != null)
                 runningAction.OnMouseMove(environment, e);
+        }
+        // 마우스 위치에서의 dynamic highlight
+        private static void DynamicHighlight(Environment environment, MouseEventArgs e)
+        {
+            if (!IsSelectingEntity() || !dynamicHighlight || e.Button == MouseButtons.Middle)
+                return;
+
+
+            environment.SetCurrent(null);
+
+            devDept.Eyeshot.Model.SelectedItem item = environment.GetItemUnderMouseCursor(e.Location);
+            if (item != null && item.Item != null && selectableType != null && selectableType.Count() > 0 && !selectableType.ContainsKey(item.Item.GetType()))
+            {
+                item = null;
+            }
+
+            // sub entity 선택중이면..
+            if (item != null && userInputting[(int)UserInput.SelectingSubEntity])
+            {
+                // sub 객체를 탐색한다.
+                while (item.Item is BlockReference)
+                {
+                    try
+                    {
+                        BlockReference br = item.Item as BlockReference;
+                        if (environment.Blocks.Contains(br.BlockName))
+                            environment.SetCurrent(item.Item as BlockReference);
+                        item = environment.GetItemUnderMouseCursor(e.Location);
+                        if (item == null)
+                            break;
+                    }
+                    catch
+                    {
+                        break;
+                    }
+
+                }
+            }
+
+            // 현재 선택된 item이 마지막 선택과 다르면 갱신한다.
+            if (LastSelectedItem != item)
+            {
+                if (LastSelectedItem != null)
+                    LastSelectedItem.Select(environment, false);
+
+                LastSelectedItem = item;
+
+                if (LastSelectedItem != null)
+                    LastSelectedItem.Select(environment, true);
+
+                environment.Invalidate();
+            }
         }
 
         // mouse event args로 Point 좌표를 설정한다.
@@ -423,14 +436,26 @@ namespace hanee.ThreeD
 
             if (point3D != null)
             {
+                // 허용 소수점 자릿수로 조정(우선순위는 제일 낮다. snap, grid등에 의해서 조정되는 소수점은 허용한다)
+                ActionBase.ModifyPointByDecimals(ref point3D);
+
                 if (environment.IsTopViewOnly())
                     point3D.Z = 0;
 
+                //
                 ActionBase.ModifyPointByGridSnap(ref point3D);
             }
 
 
             return point3D;
+        }
+
+        // 허용 소수점 자릿수로 잘라낸다.
+        private static void ModifyPointByDecimals(ref Point3D point3D)
+        {
+            point3D.X = Math.Round(point3D.X, Options.Instance.decimals);
+            point3D.Y = Math.Round(point3D.Y, Options.Instance.decimals);
+            point3D.Z = Math.Round(point3D.Z, Options.Instance.decimals);
         }
 
         static public void CameraMoveEndHandler(devDept.Eyeshot.Model model, object sender, devDept.Eyeshot.Model.CameraMoveEventArgs e)

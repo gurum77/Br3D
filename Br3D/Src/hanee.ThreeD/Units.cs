@@ -13,7 +13,9 @@ namespace hanee.ThreeD
     {
         public static string GetPointString(double pos)
         {
-            return $"{pos:0.000}";
+            // 정밀도로 끝어낸다.
+            pos = Math.Round(pos, Options.Instance.decimals);
+            return pos.ToString();
         }
 
         // point를 문자열로

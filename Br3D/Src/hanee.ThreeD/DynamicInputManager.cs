@@ -24,6 +24,7 @@ namespace hanee.ThreeD
             var loc = Cursor.Position;
             loc.X += 50;
             formDynamicInput.Location = loc;
+            formDynamicInput.UpdateControls();
         }
 
         static public void HideDynamicInput()

@@ -21,7 +21,7 @@ namespace hanee.Cad.Tool
             label,
             form
         }
-        readonly HModel2 brModel;
+        readonly HModel brModel;
         Point3D pt1, pt2, ptText;
         List<Point3D> points;
         Step step;
@@ -31,7 +31,7 @@ namespace hanee.Cad.Tool
 
         public ActionDist(devDept.Eyeshot.Model vp, ShowResult showResult = ShowResult.form) : base(vp)
         {
-            brModel = vp as HModel2;
+            brModel = vp as HModel;
             this.showResult = showResult;
             points = new List<Point3D>();
         }
@@ -62,7 +62,7 @@ namespace hanee.Cad.Tool
 
         DistanceText CreateDistanceText()
         {
-            if (environment is HModel2)
+            if (environment is HModel)
             {
                 DistanceText dt = new DistanceText((Model)environment, pt1, pt2, pt1.DistanceTo(pt2).ToString("0.000"), Define.DefaultFont, Define.DefaultTextColor, new Vector2D(0, 0))
                 {
