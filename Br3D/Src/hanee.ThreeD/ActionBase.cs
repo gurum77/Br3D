@@ -399,7 +399,12 @@ namespace hanee.ThreeD
             {
                 pt = model.orthoModeManager.GetOrthoPoint3D(e, pt);
             }
-            
+
+            // dynamic input
+            if (DynamicInputManager.fixedX != null)
+                pt.X = DynamicInputManager.fixedX.Value;
+            if (DynamicInputManager.fixedY != null)
+                pt.Y = DynamicInputManager.fixedY.Value;
 
             return pt;
         }
@@ -473,7 +478,7 @@ namespace hanee.ThreeD
                     if (item is devDept.Eyeshot.Model.SelectedFace)
                     {
                         selectedFace = (devDept.Eyeshot.Model.SelectedFace)item;
-                        userInputting[(int)UserInput.SelectingFace] = false;
+                        ActionBase.EndInput(UserInput.SelectingFace);
                     }
                 }
             }
@@ -486,7 +491,7 @@ namespace hanee.ThreeD
                     if (item is devDept.Eyeshot.Model.SelectedEdge)
                     {
                         selectedEdge = (devDept.Eyeshot.Model.SelectedEdge)item;
-                        userInputting[(int)UserInput.SelectingEdge] = false;
+                        ActionBase.EndInput(UserInput.SelectingEdge);
                     }
                 }
             }
@@ -518,14 +523,14 @@ namespace hanee.ThreeD
             {
                 SetPointByMouseEventArgs(environment, e);
 
-                userInputting[(int)UserInput.GettingPoint] = false;
+                ActionBase.EndInput(UserInput.GettingPoint);
             }
 
             if (userInputting[(int)UserInput.GettingPoint3D] == true)
             {
                 SetPoint3DByMouseEventArgs(environment, e);
 
-                userInputting[(int)UserInput.GettingPoint3D] = false;
+                ActionBase.EndInput(UserInput.GettingPoint3D);
             }
 
             if (userInputting[(int)UserInput.SelectingLabel] == true)
@@ -536,8 +541,7 @@ namespace hanee.ThreeD
                 {
 
                     selectedLabel = model.ActiveViewport.Labels[idx];
-                    userInputting[(int)UserInput.SelectingLabel] = false;
-
+                    ActionBase.EndInput(UserInput.SelectingLabel);
                 }
             }
 
@@ -550,7 +554,7 @@ namespace hanee.ThreeD
                     if (entityTmp != null)
                     {
                         selectedEntity = entityTmp;
-                        userInputting[(int)UserInput.SelectingEntity] = false;
+                        ActionBase.EndInput(UserInput.SelectingEntity);
                     }
                 }
             }
@@ -588,7 +592,7 @@ namespace hanee.ThreeD
                         if (entityTmp != null)
                         {
                             selectedEntity = entityTmp;
-                            userInputting[(int)UserInput.SelectingSubEntity] = false;
+                            ActionBase.EndInput(UserInput.SelectingSubEntity);
 
                             //if(viewportLayout.Entities.CurrentBlockReference != null)
                             //    viewportLayout.Entities.SetCurrent(null);
@@ -616,7 +620,7 @@ namespace hanee.ThreeD
             {
                 key = e;
 
-                userInputting[(int)UserInput.GettingKey] = false;
+                ActionBase.EndInput(UserInput.GettingKey);
             }
         }
 
@@ -640,16 +644,14 @@ namespace hanee.ThreeD
         // 마우스로 point3D를 입력받는다.
         public async Task<Point3D> GetPoint3D(string message = null, int stepID = -1)
         {
-            ActionBase.StepID = stepID;
-            ActionBase.cursorText = message;
-            ActionBase.userInputting[(int)UserInput.GettingPoint3D] = true;
-            ActionBase.IsStopedCurrentStep = false;
+            ActionBase.StartInput(message, stepID, UserInput.GettingPoint3D);
+
             while (ActionBase.userInputting[(int)UserInput.GettingPoint3D] == true)
             {
                 // 스탭이 중지되었다면 그냥 보낸다.
                 if (ActionBase.IsStopedCurrentStep)
                 {
-                    ActionBase.userInputting[(int)UserInput.GettingPoint3D] = false;
+                    ActionBase.EndInput(UserInput.GettingPoint3D);
                     break;
                 }
 
@@ -667,16 +669,13 @@ namespace hanee.ThreeD
         // 마우스로 point를 입력받는다.
         public async Task<System.Drawing.Point> GetPoint(string message = null, int stepID = -1)
         {
-            ActionBase.StepID = StepID;
-            ActionBase.cursorText = message;
-            ActionBase.userInputting[(int)UserInput.GettingPoint] = true;
-            ActionBase.IsStopedCurrentStep = false;
+            ActionBase.StartInput(message, stepID, UserInput.GettingPoint);
             while (ActionBase.userInputting[(int)UserInput.GettingPoint] == true)
             {
                 // 스탭이 중지되었다면 그냥 보낸다.
                 if (ActionBase.IsStopedCurrentStep)
                 {
-                    ActionBase.userInputting[(int)UserInput.GettingPoint] = false;
+                    ActionBase.EndInput(UserInput.GettingPoint);
                     break;
                 }
 
@@ -690,7 +689,7 @@ namespace hanee.ThreeD
         // edge 1개를 선택받는다
         public async Task<devDept.Eyeshot.Model.SelectedEdge> GetEdge(string message = null, int stepID = -1)
         {
-
+            ActionBase.StartInput(message, stepID, UserInput.SelectingEdge);
             actionType oldActionType = environment.ActionMode;
             selectionFilterType oldSelectionFilterType = selectionFilterType.Entity;
 
@@ -703,16 +702,12 @@ namespace hanee.ThreeD
 
             environment.ActionMode = actionType.SelectVisibleByPickDynamic;
 
-            ActionBase.StepID = StepID;
-            ActionBase.cursorText = message;
-            ActionBase.userInputting[(int)UserInput.SelectingEdge] = true;
-            ActionBase.IsStopedCurrentStep = false;
             while (ActionBase.userInputting[(int)UserInput.SelectingEdge] == true)
             {
                 // 스탭이 중지되었다면 그냥 보낸다.
                 if (ActionBase.IsStopedCurrentStep)
                 {
-                    ActionBase.userInputting[(int)UserInput.SelectingEdge] = false;
+                    ActionBase.EndInput(UserInput.SelectingEdge);
                     break;
                 }
 
@@ -739,6 +734,7 @@ namespace hanee.ThreeD
         // face 1개를 선택받는다
         public async Task<devDept.Eyeshot.Model.SelectedFace> GetFace(string message = null, int stepID = -1)
         {
+            ActionBase.StartInput(message, stepID, UserInput.SelectingFace);
             actionType oldActionType = environment.ActionMode;
             selectionFilterType oldSelectionFilterType = selectionFilterType.Entity;
 
@@ -749,20 +745,14 @@ namespace hanee.ThreeD
                 model.SelectionFilterMode = selectionFilterType.Face;
             }
 
-
             environment.ActionMode = actionType.SelectVisibleByPickDynamic;
 
-
-            ActionBase.StepID = StepID;
-            ActionBase.cursorText = message;
-            ActionBase.userInputting[(int)UserInput.SelectingFace] = true;
-            ActionBase.IsStopedCurrentStep = false;
             while (ActionBase.userInputting[(int)UserInput.SelectingFace] == true)
             {
                 // 스탭이 중지되었다면 그냥 보낸다.
                 if (ActionBase.IsStopedCurrentStep)
                 {
-                    ActionBase.userInputting[(int)UserInput.SelectingFace] = false;
+                    ActionBase.EndInput(UserInput.SelectingFace);
                     break;
                 }
 
@@ -787,19 +777,36 @@ namespace hanee.ThreeD
             return selectedFace;
         }
 
-        // 키보드로 char를 입력 받는다.
-        public async Task<KeyEventArgs> GetKey(string message = null, int stepID = -1)
+        // input 시작
+        public static void StartInput(string message, int stepID, UserInput userInput)
         {
             ActionBase.StepID = StepID;
             ActionBase.cursorText = message;
-            ActionBase.userInputting[(int)UserInput.GettingKey] = true;
+            ActionBase.userInputting[(int)userInput] = true;
             ActionBase.IsStopedCurrentStep = false;
+
+            DynamicInputManager.ShowDynamicInput();
+        }
+
+        // input 끝
+        public static void EndInput(UserInput userInput)
+        {
+            ActionBase.userInputting[(int)userInput] = false;
+
+            DynamicInputManager.HideDynamicInput();
+        }
+
+
+        // 키보드로 char를 입력 받는다.
+        public async Task<KeyEventArgs> GetKey(string message = null, int stepID = -1)
+        {
+            ActionBase.StartInput(message, stepID, UserInput.GettingKey);
             while (ActionBase.userInputting[(int)UserInput.GettingKey] == true)
             {
                 // 스탭이 중지되었다면 그냥 보낸다.
                 if (ActionBase.IsStopedCurrentStep)
                 {
-                    ActionBase.userInputting[(int)UserInput.GettingKey] = false;
+                    ActionBase.EndInput(UserInput.GettingKey);
                     break;
                 }
 
@@ -813,19 +820,16 @@ namespace hanee.ThreeD
         // label 1개를 선택받는다. 
         public async Task<Label> GetLabel(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null)
         {
-            ActionBase.StepID = StepID;
-            ActionBase.cursorText = message;
-            ActionBase.userInputting[(int)UserInput.SelectingLabel] = true;
+            ActionBase.StartInput(message, stepID, UserInput.SelectingLabel);
             ActionBase.dynamicHighlight = dynamicHighlight;
             ActionBase.selectableType = selectableType;
-            ActionBase.IsStopedCurrentStep = false;
 
             while (ActionBase.userInputting[(int)UserInput.SelectingLabel] == true)
             {
                 // 스탭이 중지되었다면 그냥 보낸다.
                 if (ActionBase.IsStopedCurrentStep)
                 {
-                    ActionBase.userInputting[(int)UserInput.SelectingLabel] = false;
+                    ActionBase.EndInput(UserInput.SelectingLabel);
                     break;
                 }
 
@@ -845,19 +849,16 @@ namespace hanee.ThreeD
         // 객체 1개를 선택받거나 키를 입력받는다.
         public async Task<Entity> GetEntity(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null)
         {
-            ActionBase.StepID = StepID;
-            ActionBase.cursorText = message;
-            ActionBase.userInputting[(int)UserInput.SelectingEntity] = true;
+            ActionBase.StartInput(message, stepID, UserInput.SelectingEntity);
             ActionBase.dynamicHighlight = dynamicHighlight;
             ActionBase.selectableType = selectableType;
-            ActionBase.IsStopedCurrentStep = false;
 
             while (ActionBase.userInputting[(int)UserInput.SelectingEntity] == true)
             {
                 // 스탭이 중지되었다면 그냥 보낸다.
                 if (ActionBase.IsStopedCurrentStep)
                 {
-                    ActionBase.userInputting[(int)UserInput.SelectingEntity] = false;
+                    ActionBase.EndInput(UserInput.SelectingEntity);
                     break;
                 }
 
@@ -877,10 +878,7 @@ namespace hanee.ThreeD
         // 서브 객체 1개를 선택받거나 키를 입력받는다.
         public async Task<Entity> GetSubEntity(string message = null, int stepID = -1, bool dynamicHighlight = true)
         {
-            ActionBase.StepID = StepID;
-            ActionBase.cursorText = message;
-            ActionBase.userInputting[(int)UserInput.SelectingSubEntity] = true;
-            ActionBase.IsStopedCurrentStep = false;
+            ActionBase.StartInput(message, stepID, UserInput.SelectingSubEntity);
             ActionBase.dynamicHighlight = dynamicHighlight;
             ActionBase.LastSelectedItem = null;
 
@@ -891,7 +889,7 @@ namespace hanee.ThreeD
                 // 스탭이 중지되었다면 그냥 보낸다.
                 if (ActionBase.IsStopedCurrentStep)
                 {
-                    ActionBase.userInputting[(int)UserInput.SelectingSubEntity] = false;
+                    ActionBase.EndInput(UserInput.SelectingSubEntity);
                     break;
                 }
 

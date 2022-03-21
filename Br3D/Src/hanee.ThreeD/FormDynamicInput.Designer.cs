@@ -30,6 +30,7 @@ namespace hanee.ThreeD
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDynamicInput));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.textEditX = new DevExpress.XtraEditors.TextEdit();
             this.textEditY = new DevExpress.XtraEditors.TextEdit();
@@ -62,21 +63,21 @@ namespace hanee.ThreeD
             // 
             // textEditX
             // 
-            this.textEditX.Location = new System.Drawing.Point(32, 12);
+            this.textEditX.Location = new System.Drawing.Point(53, 12);
             this.textEditX.Name = "textEditX";
-            this.textEditX.Size = new System.Drawing.Size(142, 20);
+            this.textEditX.Size = new System.Drawing.Size(121, 20);
             this.textEditX.StyleController = this.layoutControl1;
             this.textEditX.TabIndex = 4;
-            this.textEditX.EditValueChanged += new System.EventHandler(this.textEditX_EditValueChanged);
+            this.textEditX.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textEditX_KeyDown);
             // 
             // textEditY
             // 
-            this.textEditY.Location = new System.Drawing.Point(198, 12);
+            this.textEditY.Location = new System.Drawing.Point(219, 12);
             this.textEditY.Name = "textEditY";
-            this.textEditY.Size = new System.Drawing.Size(150, 20);
+            this.textEditY.Size = new System.Drawing.Size(129, 20);
             this.textEditY.StyleController = this.layoutControl1;
             this.textEditY.TabIndex = 5;
-            this.textEditY.EditValueChanged += new System.EventHandler(this.textEditY_EditValueChanged);
+            this.textEditY.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textEditY_KeyDown);
             // 
             // Root
             // 
@@ -92,28 +93,31 @@ namespace hanee.ThreeD
             // layoutControlItemX
             // 
             this.layoutControlItemX.Control = this.textEditX;
+            this.layoutControlItemX.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("layoutControlItemX.ImageOptions.SvgImage")));
             this.layoutControlItemX.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
             this.layoutControlItemX.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItemX.Name = "layoutControlItemX";
             this.layoutControlItemX.Size = new System.Drawing.Size(166, 29);
             this.layoutControlItemX.Text = "X";
-            this.layoutControlItemX.TextSize = new System.Drawing.Size(8, 14);
+            this.layoutControlItemX.TextSize = new System.Drawing.Size(29, 16);
             this.layoutControlItemX.CustomDraw += new System.EventHandler<DevExpress.XtraLayout.ItemCustomDrawEventArgs>(this.layoutControlItemX_CustomDraw);
             // 
             // layoutControlItemY
             // 
             this.layoutControlItemY.Control = this.textEditY;
+            this.layoutControlItemY.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("layoutControlItemY.ImageOptions.SvgImage")));
+            this.layoutControlItemY.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
             this.layoutControlItemY.Location = new System.Drawing.Point(166, 0);
             this.layoutControlItemY.Name = "layoutControlItemY";
             this.layoutControlItemY.Size = new System.Drawing.Size(174, 29);
             this.layoutControlItemY.Text = "Y";
-            this.layoutControlItemY.TextSize = new System.Drawing.Size(8, 14);
-            this.layoutControlItemY.CustomDraw += new System.EventHandler<DevExpress.XtraLayout.ItemCustomDrawEventArgs>(this.layoutControlItem2_CustomDraw);
+            this.layoutControlItemY.TextSize = new System.Drawing.Size(29, 16);
+            this.layoutControlItemY.CustomDraw += new System.EventHandler<DevExpress.XtraLayout.ItemCustomDrawEventArgs>(this.layoutControlItemY_CustomDraw);
             // 
             // svgImageCollection1
             // 
-            this.svgImageCollection1.Add("security_unlock", "image://svgimages/icon builder/security_unlock.svg");
-            this.svgImageCollection1.Add("private", "image://svgimages/outlook inspired/private.svg");
+            this.svgImageCollection1.Add("unlock", "image://svgimages/icon builder/security_unlock.svg");
+            this.svgImageCollection1.Add("lock", "image://svgimages/outlook inspired/private.svg");
             // 
             // FormDynamicInput
             // 

@@ -73,7 +73,7 @@ namespace Br3D
         private void FormMain_Load(object sender, EventArgs e)
         {
             ViewportSingle();
-
+            hModel.Set2DView();
         }
 
 

@@ -9,6 +9,13 @@ namespace hanee.ThreeD
 {
     public class DynamicInputManager
     {
+        static public void Init()
+        {
+            fixedX = null;
+            fixedY = null;
+        }
+        static public double? fixedX { get; set; }
+        static public double? fixedY { get; set; }
         static FormDynamicInput formDynamicInput;
         static public void ShowDynamicInput()
         {
@@ -29,6 +36,8 @@ namespace hanee.ThreeD
 
         static public void HideDynamicInput()
         {
+            Init();
+
             if (formDynamicInput == null)
                 return;
             if (formDynamicInput.Visible)

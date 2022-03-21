@@ -115,11 +115,11 @@
     <Compile Include="GripPoint.cs" />
     <Compile Include="HModelProperties.cs" />
     <Compile Include="EnvironmentHelper.cs" />
-    <Compile Include="EyeshotConverter.cs" />
     <Compile Include="HModel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="IEntityGripManager.cs" />
+    <Compile Include="KeysHelper.cs" />
     <Compile Include="LanguageHelper.cs" />
     <Compile Include="LanguageOptionsHelper.cs" />
     <Compile Include="LinearPathGripManager.cs" />
