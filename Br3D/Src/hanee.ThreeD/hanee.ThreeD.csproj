@@ -105,17 +105,17 @@
     <Compile Include="EntityColor.cs" />
     <Compile Include="EventParams.cs" />
     <Compile Include="FileHelper.cs" />
-    <Compile Include="FormPoint3DDynamicInput.cs">
+    <Compile Include="FormXyzDynamicInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPoint3DDynamicInput.Designer.cs">
-      <DependentUpon>FormPoint3DDynamicInput.cs</DependentUpon>
+    <Compile Include="FormXyzDynamicInput.Designer.cs">
+      <DependentUpon>FormXyzDynamicInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPoint3DDynamicInputByLengthAngle.cs">
+    <Compile Include="FormLengthAngleDynamicInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPoint3DDynamicInputByLengthAngle.Designer.cs">
-      <DependentUpon>FormPoint3DDynamicInputByLengthAngle.cs</DependentUpon>
+    <Compile Include="FormLengthAngleDynamicInput.Designer.cs">
+      <DependentUpon>FormLengthAngleDynamicInput.cs</DependentUpon>
     </Compile>
     <Compile Include="GripManager.cs" />
     <Compile Include="GripPoint.cs" />
@@ -125,6 +125,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="IDynamicInput.cs" />
+    <Compile Include="IDynamicInputPoint3D.cs" />
     <Compile Include="IEntityGripManager.cs" />
     <Compile Include="KeysHelper.cs" />
     <Compile Include="LanguageHelper.cs" />
@@ -164,11 +165,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormPoint3DDynamicInput.resx">
-      <DependentUpon>FormPoint3DDynamicInput.cs</DependentUpon>
+    <EmbeddedResource Include="FormXyzDynamicInput.resx">
+      <DependentUpon>FormXyzDynamicInput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPoint3DDynamicInputByLengthAngle.resx">
-      <DependentUpon>FormPoint3DDynamicInputByLengthAngle.cs</DependentUpon>
+    <EmbeddedResource Include="FormLengthAngleDynamicInput.resx">
+      <DependentUpon>FormLengthAngleDynamicInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

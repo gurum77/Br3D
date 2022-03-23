@@ -1,7 +1,7 @@
 ﻿
 namespace hanee.ThreeD
 {
-    partial class FormPoint3DDynamicInput
+    partial class FormXyzDynamicInput
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace hanee.ThreeD
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPoint3DDynamicInput));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormXyzDynamicInput));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.textEditX = new DevExpress.XtraEditors.TextEdit();
             this.textEditY = new DevExpress.XtraEditors.TextEdit();

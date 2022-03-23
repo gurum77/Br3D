@@ -7,8 +7,8 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Label = devDept.Eyeshot.Labels.Label;
 using Environment = devDept.Eyeshot.Environment;
+using Label = devDept.Eyeshot.Labels.Label;
 namespace hanee.ThreeD
 {
     abstract public class ActionBase
@@ -29,7 +29,7 @@ namespace hanee.ThreeD
 
         // 스냅 간격
         static public double GridSnap = 0.001;  // float로 하면 안됨(좌표 계산시 소수점 쓰레기가 발생함)
-        
+
         static public void ModifyPointByGridSnap(ref Point3D point3D)
         {
             if (Point3D == null)
@@ -312,8 +312,8 @@ namespace hanee.ThreeD
             DynamicHighlight(environment, e);
 
             // dynamic input
-            if(ActionBase.IsUserInputting())
-                DynamicInputManager.ShowDynamicInput();
+            if (ActionBase.IsUserInputting())
+                DynamicInputManager.ShowDynamicInput(environment);
             else
                 DynamicInputManager.HideDynamicInput();
 
@@ -392,7 +392,7 @@ namespace hanee.ThreeD
                     return model.Snapping.GetSnapPoint();
                 }
             }
-            
+
             // 그다음이 ortho mode
             var pt = GetPoint3DByMouseLocation(environment, e.Location);
             if (model != null)
@@ -400,11 +400,9 @@ namespace hanee.ThreeD
                 pt = model.orthoModeManager.GetOrthoPoint3D(e, pt);
             }
 
-            // dynamic input
-            if (DynamicInputManager.fixedX != null)
-                pt.X = DynamicInputManager.fixedX.Value;
-            if (DynamicInputManager.fixedY != null)
-                pt.Y = DynamicInputManager.fixedY.Value;
+            // dynamic input에 의한 좌표 조정
+            DynamicInputManager.ModifyPoint3D(environment, ref pt);
+            
 
             return pt;
         }
@@ -414,7 +412,7 @@ namespace hanee.ThreeD
             point3D = GetPoint3DWithSnapAndOrthoMode(environment, e);
         }
 
-  
+
 
         // mouse 위치의 Point3D 좌표를 리턴
         static public Point3D GetPoint3DByMouseLocation(Environment environment, System.Drawing.Point location)
@@ -644,7 +642,7 @@ namespace hanee.ThreeD
         // 마우스로 point3D를 입력받는다.
         public async Task<Point3D> GetPoint3D(string message = null, int stepID = -1)
         {
-            ActionBase.StartInput(message, stepID, UserInput.GettingPoint3D);
+            ActionBase.StartInput(environment, message, stepID, UserInput.GettingPoint3D);
 
             while (ActionBase.userInputting[(int)UserInput.GettingPoint3D] == true)
             {
@@ -669,7 +667,7 @@ namespace hanee.ThreeD
         // 마우스로 point를 입력받는다.
         public async Task<System.Drawing.Point> GetPoint(string message = null, int stepID = -1)
         {
-            ActionBase.StartInput(message, stepID, UserInput.GettingPoint);
+            ActionBase.StartInput(environment, message, stepID, UserInput.GettingPoint);
             while (ActionBase.userInputting[(int)UserInput.GettingPoint] == true)
             {
                 // 스탭이 중지되었다면 그냥 보낸다.
@@ -689,7 +687,7 @@ namespace hanee.ThreeD
         // edge 1개를 선택받는다
         public async Task<devDept.Eyeshot.Model.SelectedEdge> GetEdge(string message = null, int stepID = -1)
         {
-            ActionBase.StartInput(message, stepID, UserInput.SelectingEdge);
+            ActionBase.StartInput(environment, message, stepID, UserInput.SelectingEdge);
             actionType oldActionType = environment.ActionMode;
             selectionFilterType oldSelectionFilterType = selectionFilterType.Entity;
 
@@ -734,7 +732,7 @@ namespace hanee.ThreeD
         // face 1개를 선택받는다
         public async Task<devDept.Eyeshot.Model.SelectedFace> GetFace(string message = null, int stepID = -1)
         {
-            ActionBase.StartInput(message, stepID, UserInput.SelectingFace);
+            ActionBase.StartInput(environment, message, stepID, UserInput.SelectingFace);
             actionType oldActionType = environment.ActionMode;
             selectionFilterType oldSelectionFilterType = selectionFilterType.Entity;
 
@@ -778,14 +776,14 @@ namespace hanee.ThreeD
         }
 
         // input 시작
-        public static void StartInput(string message, int stepID, UserInput userInput)
+        public static void StartInput(Environment environment, string message, int stepID, UserInput userInput)
         {
             ActionBase.StepID = StepID;
             ActionBase.cursorText = message;
             ActionBase.userInputting[(int)userInput] = true;
             ActionBase.IsStopedCurrentStep = false;
 
-            DynamicInputManager.ShowDynamicInput();
+            DynamicInputManager.ShowDynamicInput(environment);
         }
 
         // input 끝
@@ -800,7 +798,7 @@ namespace hanee.ThreeD
         // 키보드로 char를 입력 받는다.
         public async Task<KeyEventArgs> GetKey(string message = null, int stepID = -1)
         {
-            ActionBase.StartInput(message, stepID, UserInput.GettingKey);
+            ActionBase.StartInput(environment, message, stepID, UserInput.GettingKey);
             while (ActionBase.userInputting[(int)UserInput.GettingKey] == true)
             {
                 // 스탭이 중지되었다면 그냥 보낸다.
@@ -820,7 +818,7 @@ namespace hanee.ThreeD
         // label 1개를 선택받는다. 
         public async Task<Label> GetLabel(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null)
         {
-            ActionBase.StartInput(message, stepID, UserInput.SelectingLabel);
+            ActionBase.StartInput(environment, message, stepID, UserInput.SelectingLabel);
             ActionBase.dynamicHighlight = dynamicHighlight;
             ActionBase.selectableType = selectableType;
 
@@ -849,7 +847,7 @@ namespace hanee.ThreeD
         // 객체 1개를 선택받거나 키를 입력받는다.
         public async Task<Entity> GetEntity(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null)
         {
-            ActionBase.StartInput(message, stepID, UserInput.SelectingEntity);
+            ActionBase.StartInput(environment, message, stepID, UserInput.SelectingEntity);
             ActionBase.dynamicHighlight = dynamicHighlight;
             ActionBase.selectableType = selectableType;
 
@@ -878,7 +876,7 @@ namespace hanee.ThreeD
         // 서브 객체 1개를 선택받거나 키를 입력받는다.
         public async Task<Entity> GetSubEntity(string message = null, int stepID = -1, bool dynamicHighlight = true)
         {
-            ActionBase.StartInput(message, stepID, UserInput.SelectingSubEntity);
+            ActionBase.StartInput(environment, message, stepID, UserInput.SelectingSubEntity);
             ActionBase.dynamicHighlight = dynamicHighlight;
             ActionBase.LastSelectedItem = null;
 

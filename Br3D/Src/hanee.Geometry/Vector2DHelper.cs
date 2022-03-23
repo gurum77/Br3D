@@ -27,6 +27,10 @@ namespace hanee.Geometry
             vec.Y = Math.Sin(rad);
         }
 
+        public static double ToDegree(this Vector2D vec)
+        {
+            return vec.ToRadian().ToDegree();
+        }
         /// <summary>
         /// vector2d 를 radian으로 리턴
         /// </summary>

@@ -1,35 +1,29 @@
-﻿using hanee.Geometry;
+﻿using devDept.Geometry;
+using hanee.Geometry;
 using System;
 using System.Windows.Forms;
+using Environment = hanee.Geometry.Environment;
 
 namespace hanee.ThreeD
 {
-    public partial class FormPoint3DDynamicInput : DevExpress.XtraEditors.XtraForm, IDynamicInput
+    public partial class FormXyzDynamicInput : DevExpress.XtraEditors.XtraForm, IDynamicInputPoint3D
     {
         System.Drawing.Brush foreBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
-        public FormPoint3DDynamicInput()
+        public FormXyzDynamicInput()
         {
             InitializeComponent();
-         
         }
 
-        private void FormDynamicInput_MouseEnter(object sender, EventArgs e)
-        {
-            var loc = Cursor.Position;
-            loc = PointToScreen(loc);
-            loc.X += 50;
-            this.Location = loc;
-        }
 
         public void Init()
         {
             textEditX.Focus();
             textEditX.SelectAll();
         }
-        
+
 
         // 현재 상황에 맞게 control을 업데이트 한다.
-        public void UpdateControls()
+        public void UpdateControls(devDept.Eyeshot.Environment environment)
         {
             textEditX.Text = ActionBase.Point3D.X.ToString();
             textEditY.Text = ActionBase.Point3D.Y.ToString();
@@ -72,6 +66,11 @@ namespace hanee.ThreeD
                     textEditZ.SelectAll();
                     return true;
                 }
+            }
+            else if (keyData == Keys.Oem3)
+            {
+                DynamicInputManager.FlagPoint3DType();
+                
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -142,6 +141,16 @@ namespace hanee.ThreeD
                 e.Cache.DrawImage(svgImageCollection1.GetImage(idx), new System.Drawing.Point(e.Bounds.X, e.Bounds.Y));
             e.Cache.DrawString("Z", DefaultFont, foreBrush, e.Bounds.X + 20, e.Bounds.Y + 7);
             e.Handled = true;
+        }
+
+        public void ModifyPoint3D(devDept.Eyeshot.Environment environment, ref Point3D pt)
+        {
+            if (DynamicInputManager.fixedX != null)
+                pt.X = DynamicInputManager.fixedX.Value;
+            if (DynamicInputManager.fixedY != null)
+                pt.Y = DynamicInputManager.fixedY.Value;
+            if (DynamicInputManager.fixedZ != null)
+                pt.Z = DynamicInputManager.fixedZ.Value;
         }
     }
 }
