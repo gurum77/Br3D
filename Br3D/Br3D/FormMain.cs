@@ -66,9 +66,24 @@ namespace Br3D
             Translate();
 
             hModel.ActionMode = actionType.None;
+            hModel.BoundingBoxChanged += HModel_BoundingBoxChanged;
+            
         }
 
-
+        private void HModel_BoundingBoxChanged(object sender)
+        {
+            var boxSize = hModel.Entities.BoxSize;
+            if (boxSize == null || boxSize.X < 100 || boxSize.Y < 100)
+            {
+                hModel.ActiveViewport.Grid.AutoSize = false;
+                hModel.ActiveViewport.Grid.Min = new devDept.Geometry.Point2D(-100, -100);
+                hModel.ActiveViewport.Grid.Max = new devDept.Geometry.Point2D(100, 100);
+            }
+            else
+            {
+                hModel.ActiveViewport.Grid.AutoSize = true;
+            }
+        }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -365,7 +380,7 @@ namespace Br3D
                         RefreshPropertyGridControl(item?.Item);
 
                     // tree에서 선택
-                    if (treeListObject.Visible)
+                    if (treeListObject.Visible && item != null)
                     {
                         treeListObject.ClearSelection();
                         var node = treeListObject.FindNode(x => x.Tag == item.Item);

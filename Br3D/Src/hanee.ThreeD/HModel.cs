@@ -40,7 +40,7 @@ namespace hanee.ThreeD
         public Snapping Snapping = null;
         public OrthoModeManager orthoModeManager = null;
         public GripManager gripManager = null;
-        public FormDynamicInput formDynamicInput;
+        public FormPoint3DDynamicInput formDynamicInput;
 
         // property grid를 지정하면 객체 선택시 property grid에 속성이 표시됨
         public PropertyGridHelper propertyGridHelper { get; set; }

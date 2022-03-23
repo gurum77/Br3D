@@ -105,11 +105,17 @@
     <Compile Include="EntityColor.cs" />
     <Compile Include="EventParams.cs" />
     <Compile Include="FileHelper.cs" />
-    <Compile Include="FormDynamicInput.cs">
+    <Compile Include="FormPoint3DDynamicInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormDynamicInput.Designer.cs">
-      <DependentUpon>FormDynamicInput.cs</DependentUpon>
+    <Compile Include="FormPoint3DDynamicInput.Designer.cs">
+      <DependentUpon>FormPoint3DDynamicInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPoint3DDynamicInputByLengthAngle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPoint3DDynamicInputByLengthAngle.Designer.cs">
+      <DependentUpon>FormPoint3DDynamicInputByLengthAngle.cs</DependentUpon>
     </Compile>
     <Compile Include="GripManager.cs" />
     <Compile Include="GripPoint.cs" />
@@ -118,6 +124,7 @@
     <Compile Include="HModel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="IDynamicInput.cs" />
     <Compile Include="IEntityGripManager.cs" />
     <Compile Include="KeysHelper.cs" />
     <Compile Include="LanguageHelper.cs" />
@@ -157,8 +164,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormDynamicInput.resx">
-      <DependentUpon>FormDynamicInput.cs</DependentUpon>
+    <EmbeddedResource Include="FormPoint3DDynamicInput.resx">
+      <DependentUpon>FormPoint3DDynamicInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPoint3DDynamicInputByLengthAngle.resx">
+      <DependentUpon>FormPoint3DDynamicInputByLengthAngle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
