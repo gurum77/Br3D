@@ -8,7 +8,10 @@ namespace hanee.ThreeD
 {
     public partial class FormXyzDynamicInput : DevExpress.XtraEditors.XtraForm, IDynamicInputPoint3D
     {
-        System.Drawing.Brush foreBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+        double? fixedX { get; set; }
+        double? fixedY { get; set; }
+        double? fixedZ { get; set; }
+
         public FormXyzDynamicInput()
         {
             InitializeComponent();
@@ -17,6 +20,10 @@ namespace hanee.ThreeD
 
         public void Init()
         {
+            fixedX = null;
+            fixedY = null;
+            fixedZ = null;
+
             textEditX.Focus();
             textEditX.SelectAll();
         }
@@ -36,16 +43,19 @@ namespace hanee.ThreeD
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             // enter 키 입력시 입력 완료
-            if (keyData == Keys.Enter)
+            if (keyData == Keys.Enter || keyData == Keys.Space)
             {
-                ActionBase.Point3D = new devDept.Geometry.Point3D(textEditX.Text.ToDouble(), textEditY.Text.ToDouble(), textEditZ.Text.ToDouble());
+                var pt3D = ActionBase.Point3D;
+                ModifyPoint3D(DynamicInputManager.environment, ref pt3D);
+                ActionBase.Point3D = pt3D;
+
                 ActionBase.EndInput(ActionBase.UserInput.GettingPoint3D);
             }
             else if (keyData == Keys.Escape)
             {
-                if (DynamicInputManager.fixedX != null || DynamicInputManager.fixedY != null || DynamicInputManager.fixedZ != null)
+                if (fixedX != null || fixedY != null || fixedZ != null)
                 {
-                    DynamicInputManager.Init();
+                    Init();
                 }
                 else
                 {
@@ -82,7 +92,7 @@ namespace hanee.ThreeD
 
             BeginInvoke(new Action(() =>
             {
-                DynamicInputManager.fixedX = textEditX.Text.ToDouble();
+                fixedX = textEditX.Text.ToDouble();
                 Invalidate();
             }));
         }
@@ -96,7 +106,7 @@ namespace hanee.ThreeD
 
             BeginInvoke(new Action(() =>
             {
-                DynamicInputManager.fixedY = textEditY.Text.ToDouble();
+                fixedY = textEditY.Text.ToDouble();
                 Invalidate();
             }));
         }
@@ -109,7 +119,7 @@ namespace hanee.ThreeD
 
             BeginInvoke(new Action(() =>
             {
-                DynamicInputManager.fixedZ = textEditZ.Text.ToDouble();
+                fixedZ = textEditZ.Text.ToDouble();
                 Invalidate();
             }));
 
@@ -117,40 +127,31 @@ namespace hanee.ThreeD
 
         private void layoutControlItemX_CustomDraw(object sender, DevExpress.XtraLayout.ItemCustomDrawEventArgs e)
         {
-            var idx = DynamicInputManager.fixedX == null ? 0 : 1;
-            if (DynamicInputManager.fixedX != null)
-                e.Cache.DrawImage(svgImageCollection1.GetImage(idx), new System.Drawing.Point(e.Bounds.X, e.Bounds.Y));
-            e.Cache.DrawString("X", DefaultFont, foreBrush, e.Bounds.X + 20, e.Bounds.Y + 7);
-            e.Handled = true;
+            var idx = fixedX == null ? 0 : 1;
+            DynamicInputManager.DrawLayoutControl(ref e, "X", idx);
 
         }
 
         private void layoutControlItemY_CustomDraw(object sender, DevExpress.XtraLayout.ItemCustomDrawEventArgs e)
         {
-            var idx = DynamicInputManager.fixedY == null ? 0 : 1;
-            if (DynamicInputManager.fixedY != null)
-                e.Cache.DrawImage(svgImageCollection1.GetImage(idx), new System.Drawing.Point(e.Bounds.X, e.Bounds.Y));
-            e.Cache.DrawString("Y", DefaultFont, foreBrush, e.Bounds.X + 20, e.Bounds.Y + 7);
-            e.Handled = true;
+            var idx = fixedY == null ? 0 : 1;
+            DynamicInputManager.DrawLayoutControl(ref e, "Y", idx);
         }
 
         private void layoutControlItemZ_CustomDraw(object sender, DevExpress.XtraLayout.ItemCustomDrawEventArgs e)
         {
-            var idx = DynamicInputManager.fixedZ == null ? 0 : 1;
-            if (DynamicInputManager.fixedZ != null)
-                e.Cache.DrawImage(svgImageCollection1.GetImage(idx), new System.Drawing.Point(e.Bounds.X, e.Bounds.Y));
-            e.Cache.DrawString("Z", DefaultFont, foreBrush, e.Bounds.X + 20, e.Bounds.Y + 7);
-            e.Handled = true;
+            var idx = fixedZ == null ? 0 : 1;
+            DynamicInputManager.DrawLayoutControl(ref e, "Z", idx);
         }
 
         public void ModifyPoint3D(devDept.Eyeshot.Environment environment, ref Point3D pt)
         {
-            if (DynamicInputManager.fixedX != null)
-                pt.X = DynamicInputManager.fixedX.Value;
-            if (DynamicInputManager.fixedY != null)
-                pt.Y = DynamicInputManager.fixedY.Value;
-            if (DynamicInputManager.fixedZ != null)
-                pt.Z = DynamicInputManager.fixedZ.Value;
+            if (fixedX != null)
+                pt.X = fixedX.Value;
+            if (fixedY != null)
+                pt.Y = fixedY.Value;
+            if (fixedZ != null)
+                pt.Z = fixedZ.Value;
         }
     }
 }

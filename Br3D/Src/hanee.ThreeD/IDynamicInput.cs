@@ -1,6 +1,4 @@
-﻿using devDept.Geometry;
-
-namespace hanee.ThreeD
+﻿namespace hanee.ThreeD
 {
     interface IDynamicInput
     {
@@ -9,6 +7,6 @@ namespace hanee.ThreeD
 
         // dynamic input 초기 상황으로 초기화
         void Init();
-        
+
     }
 }

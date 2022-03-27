@@ -1,4 +1,6 @@
 ﻿using devDept.Geometry;
+using DevExpress.Utils;
+using DevExpress.XtraLayout;
 using System;
 using System.Windows.Forms;
 
@@ -11,22 +13,36 @@ namespace hanee.ThreeD
             xyz,
             lengthAngle
         }
-        static public void Init()
-        {
-            fixedX = null;
-            fixedY = null;
-            fixedZ = null;
-        }
-        static public double? fixedX { get; set; }
-        static public double? fixedY { get; set; }
-        static public double? fixedZ { get; set; }
-
-        static public double? fixedLength { get; set; }
-        static public double? fixedAngle { get; set; }
+        
+        static public devDept.Eyeshot.Environment environment { get; set; }
         static FormXyzDynamicInput formDynamicInput;
         static FormLengthAngleDynamicInput formPoint3DDynamicInputByLengthLength;
 
         static public Point3DType point3DType { get; set; } = Point3DType.xyz;
+        static SvgImageCollection svgImageCollection { get; set; }
+        static public System.Drawing.Brush foreBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+
+        // 이미지 콜렉션
+        // 
+        static public SvgImageCollection GetSvgImageCollection()
+        {
+            if(svgImageCollection == null)
+            {
+                svgImageCollection = new SvgImageCollection();
+                svgImageCollection.Add("unlock", "image://svgimages/actions/cleartablestyle.svg");
+                svgImageCollection.Add("lock", "image://svgimages/outlook inspired/private.svg");
+            }
+
+            return svgImageCollection;
+        }
+
+        // lock, unlock 아이콘을 그린다.
+        static public void DrawLayoutControl(ref ItemCustomDrawEventArgs e, string title, int imageIdx)
+        {
+            e.Cache.DrawImage(DynamicInputManager.GetSvgImageCollection().GetImage(imageIdx), new System.Drawing.Point(e.Bounds.X+4, e.Bounds.Y+4));
+            e.Cache.DrawString(title, Control.DefaultFont, DynamicInputManager.foreBrush, e.Bounds.X + 20, e.Bounds.Y + 7);
+            e.Handled = true;
+        }
 
         // 현재 사용중인 dynamic input form을 리턴
         static Form GetFormPoint3DDynamicInput()
@@ -55,6 +71,7 @@ namespace hanee.ThreeD
 
         static public void ShowDynamicInput(devDept.Eyeshot.Environment environment)
         {
+            DynamicInputManager.environment = environment;
             var form = GetFormPoint3DDynamicInput();
             if (form == null)
                 return;
@@ -79,8 +96,6 @@ namespace hanee.ThreeD
 
         static public void HideDynamicInput()
         {
-            Init();
-
             var form = GetFormPoint3DDynamicInput();
             if (form == null)
                 return;

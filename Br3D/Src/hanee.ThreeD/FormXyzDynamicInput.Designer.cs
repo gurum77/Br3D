@@ -150,10 +150,10 @@ namespace hanee.ThreeD
             // 
             // svgImageCollection1
             // 
-            this.svgImageCollection1.Add("unlock", "image://svgimages/icon builder/security_unlock.svg");
+            this.svgImageCollection1.Add("unlock", "image://svgimages/actions/cleartablestyle.svg");
             this.svgImageCollection1.Add("lock", "image://svgimages/outlook inspired/private.svg");
             // 
-            // FormPoint3DDynamicInput
+            // FormXyzDynamicInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -161,7 +161,7 @@ namespace hanee.ThreeD
             this.ControlBox = false;
             this.Controls.Add(this.layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormPoint3DDynamicInput";
+            this.Name = "FormXyzDynamicInput";
             this.Text = "Dynamic input(ESC : Unlock)";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -185,8 +185,8 @@ namespace hanee.ThreeD
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItemX;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItemY;
-        private DevExpress.Utils.SvgImageCollection svgImageCollection1;
         private DevExpress.XtraEditors.TextEdit textEditZ;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        public DevExpress.Utils.SvgImageCollection svgImageCollection1;
     }
 }

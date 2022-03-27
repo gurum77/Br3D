@@ -1,12 +1,16 @@
 ﻿using devDept.Geometry;
 using DevExpress.XtraEditors;
+using DevExpress.XtraLayout;
 using hanee.Geometry;
+using System;
 using System.Windows.Forms;
 
 namespace hanee.ThreeD
 {
     public partial class FormLengthAngleDynamicInput : XtraForm, IDynamicInputPoint3D
     {
+        double? fixedLength { get; set; }
+        double? fixedAngle { get; set; }
         public FormLengthAngleDynamicInput()
         {
             InitializeComponent();
@@ -16,32 +20,58 @@ namespace hanee.ThreeD
 
         private void TextEditLength_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            DynamicInputManager.fixedLength = textEditLength.Text.ToDouble();
+            if (!e.KeyCode.IsDigit())
+                return;
+
+            BeginInvoke(new Action(() =>
+            {
+                fixedLength = textEditLength.Text.ToDouble();
+                Invalidate();
+            }));
         }
 
         private void TextEditAngle_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            DynamicInputManager.fixedAngle = textEditAngle.Text.ToDouble();
+            if (!e.KeyCode.IsDigit())
+                return;
+
+            BeginInvoke(new Action(() =>
+            {
+                fixedAngle = textEditAngle.Text.ToDouble();
+                Invalidate();
+            }));
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             // enter 키 입력시 입력 완료
-            if (keyData == Keys.Enter)
+            if (keyData == Keys.Enter || keyData == Keys.Space)
             {
-                //ActionBase.Point3D = new devDept.Geometry.Point3D(textEditX.Text.ToDouble(), textEditY.Text.ToDouble(), textEditZ.Text.ToDouble());
+                var pt3D = ActionBase.Point3D;
+                ModifyPoint3D(DynamicInputManager.environment, ref pt3D);
+                ActionBase.Point3D = pt3D;
+
                 ActionBase.EndInput(ActionBase.UserInput.GettingPoint3D);
             }
             
             else if (keyData == Keys.Escape)
             {
-                if (DynamicInputManager.fixedX != null || DynamicInputManager.fixedY != null || DynamicInputManager.fixedZ != null)
+                if (fixedLength != null || fixedAngle != null)
                 {
-                    DynamicInputManager.Init();
+                    Init();
                 }
                 else
                 {
                     ActionBase.Canceled = true;
+                }
+            }
+            else if (keyData == Keys.Oemcomma)
+            {
+                if (textEditLength.IsEditorActive)
+                {
+                    textEditAngle.Focus();
+                    textEditAngle.SelectAll();
+                    return true;
                 }
             }
             else if (keyData == Keys.Oem3)
@@ -54,8 +84,8 @@ namespace hanee.ThreeD
 
         public void Init()
         {
-            DynamicInputManager.fixedLength = null;
-            DynamicInputManager.fixedAngle = null;
+            fixedLength = null;
+            fixedAngle = null;
 
             textEditAngle.SelectAll();
             textEditLength.SelectAll();
@@ -90,16 +120,29 @@ namespace hanee.ThreeD
             if (mng == null || mng.startPoint == null)
                 return;
 
-            if (DynamicInputManager.fixedLength == null &&
-                DynamicInputManager.fixedAngle == null)
+            if (fixedLength == null &&
+                fixedAngle == null)
                 return;
 
-            double len = DynamicInputManager.fixedLength == null ? pt.DistanceTo(mng.startPoint) : DynamicInputManager.fixedLength.Value;
-            double ang = DynamicInputManager.fixedAngle == null ? (pt - mng.startPoint).AsVector.ToDegree() : DynamicInputManager.fixedAngle.Value;
+            double len = fixedLength == null ? pt.DistanceTo(mng.startPoint) : fixedLength.Value;
+            double ang = fixedAngle == null ? (pt - mng.startPoint).AsVector.ToDegree() : fixedAngle.Value;
 
             var newPt = mng.startPoint + ang.ToRadians().ToVector() * len;
             pt.X = newPt.X;
             pt.Y = newPt.Y;
+        }
+
+        private void layoutControlItemLength_CustomDraw(object sender, DevExpress.XtraLayout.ItemCustomDrawEventArgs e)
+        {
+            var idx = fixedLength == null ? 0 : 1;
+            DynamicInputManager.DrawLayoutControl(ref e, "Length", idx);
+        }
+
+      
+        private void layoutControlItemAngle_CustomDraw(object sender, DevExpress.XtraLayout.ItemCustomDrawEventArgs e)
+        {
+            var idx = fixedAngle == null ? 0 : 1;
+            DynamicInputManager.DrawLayoutControl(ref e, "Angle", idx);
         }
     }
 }

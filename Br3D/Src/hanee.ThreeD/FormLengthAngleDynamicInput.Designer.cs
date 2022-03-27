@@ -29,6 +29,7 @@ namespace hanee.ThreeD
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLengthAngleDynamicInput));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.textEditLength = new DevExpress.XtraEditors.TextEdit();
             this.textEditAngle = new DevExpress.XtraEditors.TextEdit();
@@ -56,24 +57,24 @@ namespace hanee.ThreeD
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(187, 50);
+            this.layoutControl1.Size = new System.Drawing.Size(203, 49);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // textEditLength
             // 
             this.textEditLength.EditValue = "";
-            this.textEditLength.Location = new System.Drawing.Point(53, 2);
+            this.textEditLength.Location = new System.Drawing.Point(74, 2);
             this.textEditLength.Name = "textEditLength";
-            this.textEditLength.Size = new System.Drawing.Size(87, 20);
+            this.textEditLength.Size = new System.Drawing.Size(63, 20);
             this.textEditLength.StyleController = this.layoutControl1;
             this.textEditLength.TabIndex = 4;
             // 
             // textEditAngle
             // 
-            this.textEditAngle.Location = new System.Drawing.Point(53, 26);
+            this.textEditAngle.Location = new System.Drawing.Point(74, 26);
             this.textEditAngle.Name = "textEditAngle";
-            this.textEditAngle.Size = new System.Drawing.Size(87, 20);
+            this.textEditAngle.Size = new System.Drawing.Size(63, 20);
             this.textEditAngle.StyleController = this.layoutControl1;
             this.textEditAngle.TabIndex = 5;
             // 
@@ -88,53 +89,59 @@ namespace hanee.ThreeD
             this.simpleLabelItemAngle});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.Root.Size = new System.Drawing.Size(187, 50);
+            this.Root.Size = new System.Drawing.Size(203, 49);
             this.Root.TextVisible = false;
             // 
             // layoutControlItemLength
             // 
             this.layoutControlItemLength.Control = this.textEditLength;
+            this.layoutControlItemLength.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("layoutControlItemLength.ImageOptions.SvgImage")));
+            this.layoutControlItemLength.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
             this.layoutControlItemLength.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItemLength.Name = "layoutControlItemLength";
-            this.layoutControlItemLength.Size = new System.Drawing.Size(142, 24);
+            this.layoutControlItemLength.Size = new System.Drawing.Size(139, 24);
             this.layoutControlItemLength.Text = "Length";
-            this.layoutControlItemLength.TextSize = new System.Drawing.Size(39, 14);
+            this.layoutControlItemLength.TextSize = new System.Drawing.Size(60, 16);
+            this.layoutControlItemLength.CustomDraw += new System.EventHandler<DevExpress.XtraLayout.ItemCustomDrawEventArgs>(this.layoutControlItemLength_CustomDraw);
             // 
             // layoutControlItemAngle
             // 
             this.layoutControlItemAngle.Control = this.textEditAngle;
+            this.layoutControlItemAngle.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("layoutControlItemAngle.ImageOptions.SvgImage")));
+            this.layoutControlItemAngle.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
             this.layoutControlItemAngle.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItemAngle.Name = "layoutControlItemAngle";
-            this.layoutControlItemAngle.Size = new System.Drawing.Size(142, 26);
+            this.layoutControlItemAngle.Size = new System.Drawing.Size(139, 25);
             this.layoutControlItemAngle.Text = "Angle";
-            this.layoutControlItemAngle.TextSize = new System.Drawing.Size(39, 14);
+            this.layoutControlItemAngle.TextSize = new System.Drawing.Size(60, 16);
+            this.layoutControlItemAngle.CustomDraw += new System.EventHandler<DevExpress.XtraLayout.ItemCustomDrawEventArgs>(this.layoutControlItemAngle_CustomDraw);
             // 
             // simpleLabelItemLength
             // 
             this.simpleLabelItemLength.AllowHotTrack = false;
-            this.simpleLabelItemLength.Location = new System.Drawing.Point(142, 0);
+            this.simpleLabelItemLength.Location = new System.Drawing.Point(139, 0);
             this.simpleLabelItemLength.Name = "simpleLabelItemLength";
-            this.simpleLabelItemLength.Size = new System.Drawing.Size(45, 24);
+            this.simpleLabelItemLength.Size = new System.Drawing.Size(64, 24);
             this.simpleLabelItemLength.Text = "m";
-            this.simpleLabelItemLength.TextSize = new System.Drawing.Size(39, 14);
+            this.simpleLabelItemLength.TextSize = new System.Drawing.Size(60, 14);
             // 
             // simpleLabelItemAngle
             // 
             this.simpleLabelItemAngle.AllowHotTrack = false;
-            this.simpleLabelItemAngle.Location = new System.Drawing.Point(142, 24);
+            this.simpleLabelItemAngle.Location = new System.Drawing.Point(139, 24);
             this.simpleLabelItemAngle.Name = "simpleLabelItemAngle";
-            this.simpleLabelItemAngle.Size = new System.Drawing.Size(45, 26);
+            this.simpleLabelItemAngle.Size = new System.Drawing.Size(64, 25);
             this.simpleLabelItemAngle.Text = "도";
-            this.simpleLabelItemAngle.TextSize = new System.Drawing.Size(39, 14);
+            this.simpleLabelItemAngle.TextSize = new System.Drawing.Size(60, 14);
             // 
-            // FormPoint3DDynamicInputByLengthAngle
+            // FormLengthAngleDynamicInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(187, 50);
+            this.ClientSize = new System.Drawing.Size(203, 49);
             this.Controls.Add(this.layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormPoint3DDynamicInputByLengthAngle";
+            this.Name = "FormLengthAngleDynamicInput";
             this.Text = "FormPoint3DDynamicInputByLengthAngle";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
