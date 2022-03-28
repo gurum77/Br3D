@@ -2,7 +2,6 @@
 using hanee.Geometry;
 using System;
 using System.Windows.Forms;
-using Environment = hanee.Geometry.Environment;
 
 namespace hanee.ThreeD
 {
@@ -80,7 +79,7 @@ namespace hanee.ThreeD
             else if (keyData == Keys.Oem3)
             {
                 DynamicInputManager.FlagPoint3DType();
-                
+
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -94,6 +93,11 @@ namespace hanee.ThreeD
             {
                 fixedX = textEditX.Text.ToDouble();
                 Invalidate();
+                if (ActionBase.runningAction != null)
+                {
+                    var me = new MouseEventArgs(MouseButtons.None, 0, Cursor.Position.X, Cursor.Position.Y, 0);
+                    ActionBase.MouseMoveHandler(DynamicInputManager.environment, me, true);
+                }
             }));
         }
 

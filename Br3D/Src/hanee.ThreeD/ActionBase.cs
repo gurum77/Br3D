@@ -295,10 +295,13 @@ namespace hanee.ThreeD
             return false;
         }
         // mouse move 이벤트 처리
-        static public void MouseMoveHandler(Environment environment, MouseEventArgs e)
+        static public void MouseMoveHandler(Environment environment, MouseEventArgs e, bool fromDynamicInput = false)
         {
-            if (ActionBase.currentMousePoint == e.Location)
-                return;
+            if (!fromDynamicInput)
+            {
+                if (ActionBase.currentMousePoint == e.Location)
+                    return;
+            }
 
             // 현재 마우스 좌표는 스냅찾을때 사용되므로 mouse move 때마다 설정한다.
             ActionBase.currentMousePoint = e.Location;
@@ -312,10 +315,13 @@ namespace hanee.ThreeD
             DynamicHighlight(environment, e);
 
             // dynamic input
-            if (ActionBase.IsUserInputting())
-                DynamicInputManager.ShowDynamicInput(environment);
-            else
-                DynamicInputManager.HideDynamicInput();
+            if (!fromDynamicInput)
+            {
+                if (ActionBase.IsUserInputting())
+                    DynamicInputManager.ShowDynamicInput(environment);
+                else
+                    DynamicInputManager.HideDynamicInput();
+            }
 
 
             if (runningAction != null)
@@ -402,7 +408,7 @@ namespace hanee.ThreeD
 
             // dynamic input에 의한 좌표 조정
             DynamicInputManager.ModifyPoint3D(environment, ref pt);
-            
+
 
             return pt;
         }
