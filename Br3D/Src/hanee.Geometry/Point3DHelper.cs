@@ -51,10 +51,27 @@ namespace hanee.Geometry
             pt.Z = basePoint.Z + ((pt.Z - basePoint.Z) * sz);
         }
 
+
         public static Point2D GetSwap(this Point2D pt)
         {
             return new Point2D(pt.Y, pt.X);
         }
+
+        public static Vector2D ToDir(this Point2D pt)
+        {
+            var dir = pt.AsVector;
+            dir.Normalize();
+            return dir;
+        }
+
+
+        public static Vector3D ToDir(this Point3D pt)
+        {
+            var dir = pt.AsVector;
+            dir.Normalize();
+            return dir;
+        }
+
         /// <summary>
         /// 2D좌표를 3D좌표로 리턴 
         /// </summary>

@@ -106,6 +106,7 @@
     <Compile Include="ActionList.cs" />
     <Compile Include="ActionMemo.cs" />
     <Compile Include="ActionPolyline.cs" />
+    <Compile Include="ActionText.cs" />
     <Compile Include="ActionTextStyle.cs" />
     <Compile Include="LineTypeControl.cs">
       <SubType>UserControl</SubType>
