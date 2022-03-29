@@ -628,8 +628,19 @@ namespace Br3D
             functionByElement.Add(tileNavItemText, DrawText);   // Text는 formmain의 properties여서 이름을 drawtext로함
             functionByElement.Add(tileNavSubItemText, DrawText);
             functionByElement.Add(tileNavSubItemMText, MText);
+
+            functionByElement.Add(tileNavItemMove, MoveEntity);
+
+
         }
         
+
+        async void MoveEntity()
+        {
+            ActionMove ac = new ActionMove(model);
+            await ac.RunAsync();
+        }
+
         async void MText()
         {
             ActionText ac = new ActionText(model);

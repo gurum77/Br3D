@@ -105,6 +105,7 @@
     <Compile Include="ActionLineType.cs" />
     <Compile Include="ActionList.cs" />
     <Compile Include="ActionMemo.cs" />
+    <Compile Include="ActionMove.cs" />
     <Compile Include="ActionPolyline.cs" />
     <Compile Include="ActionText.cs" />
     <Compile Include="ActionTextStyle.cs" />

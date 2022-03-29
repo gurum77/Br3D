@@ -40,6 +40,8 @@ namespace hanee.ThreeD
         public Snapping Snapping = null;
         public OrthoModeManager orthoModeManager = null;
         public GripManager gripManager = null;
+        public SelectionManager selectionManager = null;
+        public EntityPropertiesManager entityPropertiesManager = null;
         public FormXyzDynamicInput formDynamicInput;
 
         // property grid를 지정하면 객체 선택시 property grid에 속성이 표시됨
@@ -65,6 +67,8 @@ namespace hanee.ThreeD
             Snapping = new Snapping(this);
             orthoModeManager = new OrthoModeManager(this);
             gripManager = new GripManager(this);
+            selectionManager = new SelectionManager(this);
+            entityPropertiesManager = new EntityPropertiesManager(this);
             CursorTypes[devDept.Eyeshot.cursorType.Default] = Cursors.Cross;
         }
 
@@ -101,6 +105,7 @@ namespace hanee.ThreeD
                     }
                     Entities.ClearSelection();
                     gripManager.ClearGripPoints();
+                    selectionManager.ClearSelection();
                     UpdatePropertyGridControl(null);
                     Invalidate();
                 }
@@ -117,6 +122,9 @@ namespace hanee.ThreeD
 
             if (this.ActionMode != actionType.None)
                 return;
+
+            // selection 
+            selectionManager.OnMouseDown(e);
 
             if (ActionBase.IsUserInputting())
             {
@@ -757,6 +765,8 @@ namespace hanee.ThreeD
 
             ActionBase.MouseMoveHandler(this, e);
 
+            selectionManager.OnMouseMove(e);
+
             // If ObjectSnap is ON, we need to find closest vertex (if any)
             if (ActionBase.IsNeedSnapping())
             {
@@ -896,6 +906,7 @@ namespace hanee.ThreeD
 
         protected override void DrawOverlay(HModel.DrawSceneParams myParams)
         {
+            selectionManager.DrawOvery();
 
             if (ActionBase.IsUserInputting() == true)
             {

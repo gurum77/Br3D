@@ -933,6 +933,7 @@ namespace hanee.ThreeD
         #region 생성자
         protected devDept.Eyeshot.Environment environment;
         protected devDept.Eyeshot.Model GetModel() { return environment as devDept.Eyeshot.Model; }
+        protected HModel GetHModel() { return environment as HModel; }
 
 
         // 액션이 취소 되었는지?

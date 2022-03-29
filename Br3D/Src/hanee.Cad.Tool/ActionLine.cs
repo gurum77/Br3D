@@ -39,8 +39,7 @@ namespace hanee.Cad.Tool
         Line MakeLine()
         {
             Line line = new Line(startPoint.Clone() as Point3D, endPoint.Clone() as Point3D);
-            line.Color = System.Drawing.Color.Yellow;
-            line.ColorMethod = colorMethodType.byEntity;
+            GetHModel()?.entityPropertiesManager?.SetDefaultProperties(line);
             return line;
         }
         public async Task<bool> RunAsync()
