@@ -1137,5 +1137,37 @@ namespace Br3D
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            HModel hModel = model as HModel;
+            if (hModel == null)
+                return;
+
+            endPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.End);
+            intersectionPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Intersect);
+            middlePointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Mid);
+            centerPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Center);
+        }
+
+        private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem == endPointToolStripMenuItem)
+            {
+                End();
+            }
+            else if (e.ClickedItem == intersectionPointToolStripMenuItem)
+            {
+                Intersection();
+            }
+            else if (e.ClickedItem == middlePointToolStripMenuItem)
+            {
+                Middle();
+            }
+            else if (e.ClickedItem == centerPointToolStripMenuItem)
+            {
+                Center();
+            }
+        }
     }
 }
