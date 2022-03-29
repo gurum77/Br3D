@@ -25,7 +25,7 @@ namespace hanee.Cad.Tool
         public async Task<bool> RunAsync()
         {
             StartAction();
-            var pt = await GetPoint3D("Pick point");
+            var pt = await GetPoint3D(LanguageHelper.Tr("Pick point"));
             if (!IsCanceled())
             {
                 if (showResult == ShowResult.form)
@@ -41,7 +41,7 @@ namespace hanee.Cad.Tool
                 else if (showResult == ShowResult.label)
                 {
                     string value;
-                    value = "Point : " + pt.ToString();
+                    value = LanguageHelper.Tr("Point : ") + pt.ToString();
                     LeaderAndTextAndBox label = new LeaderAndTextAndBox(pt, value, Define.DefaultFont, Define.DefaultTextColor, new Vector2D(60, 60));
                     label.FillColor = Color.GreenYellow;
                     GetModel().ActiveViewport.Labels.Add(label);

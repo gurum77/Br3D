@@ -187,10 +187,14 @@ namespace Br3D
             SetTileText(tileNavItemArc, LanguageHelper.Tr("Arc"));
             SetTileText(tileNavItemCircle, LanguageHelper.Tr("Circle"));
             SetTileText(tileNavItemPolyline, LanguageHelper.Tr("Polyline"));
+            SetTileText(tileNavItemText, LanguageHelper.Tr("Text"));
+            
 
             // sub tile
             SetTileText(tileNavSubItemArcCenterStartEnd, LanguageHelper.Tr("Center, start, end point"));
             SetTileText(tileNavSubItemArcFirstSecondThird, LanguageHelper.Tr("First, second, third point"));
+            SetTileText(tileNavSubItemText, LanguageHelper.Tr("Text"));
+            SetTileText(tileNavSubItemMText, LanguageHelper.Tr("Multiline text"));
 
             // control
             dockPanelObjectTree.Text = LanguageHelper.Tr("Object Tree");
@@ -622,6 +626,7 @@ namespace Br3D
             functionByElement.Add(tileNavItemCylinder, Cylinder);
             functionByElement.Add(tileNavItemPolyline, Polyline);
             functionByElement.Add(tileNavItemText, DrawText);   // Text는 formmain의 properties여서 이름을 drawtext로함
+            functionByElement.Add(tileNavSubItemText, DrawText);
             functionByElement.Add(tileNavSubItemMText, MText);
         }
         

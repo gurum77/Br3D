@@ -9,13 +9,20 @@ namespace hanee.ThreeD
 {
     public partial class FormLengthAngleDynamicInput : XtraForm, IDynamicInputPoint3D
     {
-        double? fixedLength { get; set; }
-        double? fixedAngle { get; set; }
+        public double? fixedLength { get; set; }
+        public double? fixedAngle { get; set; }
         public FormLengthAngleDynamicInput()
         {
             InitializeComponent();
             textEditAngle.KeyDown += TextEditAngle_KeyDown;
             textEditLength.KeyDown += TextEditLength_KeyDown;
+
+            Translate();
+        }
+        void Translate()
+        {
+            layoutControlItemLength.Text = LanguageHelper.Tr("Length");
+            layoutControlItemAngle.Text = LanguageHelper.Tr("Angle");
         }
 
         private void TextEditLength_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)

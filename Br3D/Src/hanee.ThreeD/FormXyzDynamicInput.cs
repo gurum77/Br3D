@@ -14,8 +14,12 @@ namespace hanee.ThreeD
         public FormXyzDynamicInput()
         {
             InitializeComponent();
+            Translate();
         }
 
+        void Translate()
+        {
+        }
 
         public void Init()
         {

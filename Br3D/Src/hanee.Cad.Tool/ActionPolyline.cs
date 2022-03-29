@@ -42,7 +42,7 @@ namespace hanee.Cad.Tool
 
             while (true)
             {
-                var pt = await GetPoint3D("Point");
+                var pt = await GetPoint3D(LanguageHelper.Tr("Point"));
                 if (IsCanceled())
                     break;
 

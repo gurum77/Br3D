@@ -17,7 +17,7 @@ namespace hanee.ThreeD
         static public devDept.Eyeshot.Environment environment { get; set; }
         static FormXyzDynamicInput formDynamicInput;
         static FormLengthAngleDynamicInput formPoint3DDynamicInputByLengthLength;
-
+        static public bool disableFlagDynamicInput { get; set; } = false;
         static public Point3DType point3DType { get; set; } = Point3DType.xyz;
         static SvgImageCollection svgImageCollection { get; set; }
         static public System.Drawing.Brush foreBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
@@ -45,7 +45,7 @@ namespace hanee.ThreeD
         }
 
         // 현재 사용중인 dynamic input form을 리턴
-        static Form GetFormPoint3DDynamicInput()
+        static public Form GetFormPoint3DDynamicInput()
         {
             if (point3DType == Point3DType.xyz)
             {
@@ -114,11 +114,14 @@ namespace hanee.ThreeD
 
         internal static void FlagPoint3DType()
         {
+            if (disableFlagDynamicInput)
+                return;
+
             HideDynamicInput();
-            if (DynamicInputManager.point3DType == Point3DType.xyz)
-                DynamicInputManager.point3DType = DynamicInputManager.Point3DType.lengthAngle;
+            if (point3DType == Point3DType.xyz)
+                point3DType = Point3DType.lengthAngle;
             else
-                DynamicInputManager.point3DType = DynamicInputManager.Point3DType.xyz;
+                point3DType = Point3DType.xyz;
         }
 
         // dynamic input에서 fixed 된거 고려해서 좌표 조정

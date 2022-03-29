@@ -62,25 +62,38 @@ namespace hanee.Cad.Tool
             while (true)
             {
                 // 삽입점
-                insPoint = await GetPoint3D("Insertion point");
+                insPoint = await GetPoint3D(LanguageHelper.Tr("Insertion point"));
                 SetOrthoModeStartPoint(insPoint);
                 if (IsCanceled())
                     break;
 
                 // 높이
-                heightPoint = await GetPoint3D("Height");
+                DynamicInputManager.point3DType = DynamicInputManager.Point3DType.lengthAngle;
+                var formDi = DynamicInputManager.GetFormPoint3DDynamicInput() as FormLengthAngleDynamicInput;
+                if (formDi != null)
+                {
+                    DynamicInputManager.ShowDynamicInput(environment);
+                    formDi.fixedAngle = 90;
+                }
+                    
+                heightPoint = await GetPoint3D(LanguageHelper.Tr("Height"));
                 SetOrthoModeStartPoint(insPoint);
                 if (IsCanceled())
                     break;
 
                 // 방향
-                dirPoint = await GetPoint3D("Direction");
+                if (formDi != null)
+                {
+                    DynamicInputManager.ShowDynamicInput(environment);
+                    formDi.fixedLength = 10000;
+                }
+                dirPoint = await GetPoint3D(LanguageHelper.Tr("Direction"));
                 if (IsCanceled())
                     break;
                 SetOrthoModeStartPoint(null);
 
                 // text
-                FormInputMessage form = new FormInputMessage("Contents");
+                FormInputMessage form = new FormInputMessage(LanguageHelper.Tr("Contents"));
                 form.RichTextBox.Multiline = multilineText;
                 if (form.ShowDialog() == DialogResult.OK)
                 {
