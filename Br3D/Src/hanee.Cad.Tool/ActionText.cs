@@ -61,15 +61,23 @@ namespace hanee.Cad.Tool
 
             while (true)
             {
-
                 // 삽입점
                 insPoint = await GetPoint3D("Insertion point");
+                SetOrthoModeStartPoint(insPoint);
+                if (IsCanceled())
+                    break;
 
                 // 높이
                 heightPoint = await GetPoint3D("Height");
+                SetOrthoModeStartPoint(insPoint);
+                if (IsCanceled())
+                    break;
 
                 // 방향
                 dirPoint = await GetPoint3D("Direction");
+                if (IsCanceled())
+                    break;
+                SetOrthoModeStartPoint(null);
 
                 // text
                 FormInputMessage form = new FormInputMessage("Contents");
@@ -84,13 +92,12 @@ namespace hanee.Cad.Tool
                     plane.Rotate(angle, Vector3D.AxisZ, insPoint);
 
                     var text = new Text(plane, textString, height);
-                    if(form.RichTextBox.Multiline)
+                    if (form.RichTextBox.Multiline)
                         text = new MultilineText(plane, textString, 10, height, height * 1.2);
                     text.Color = System.Drawing.Color.White;
                     text.ColorMethod = colorMethodType.byEntity;
                     environment.Entities.Add(text);
-
-                                    }
+                }
                 else
                     break;
 

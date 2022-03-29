@@ -622,7 +622,14 @@ namespace Br3D
             functionByElement.Add(tileNavItemCylinder, Cylinder);
             functionByElement.Add(tileNavItemPolyline, Polyline);
             functionByElement.Add(tileNavItemText, DrawText);   // Text는 formmain의 properties여서 이름을 drawtext로함
-
+            functionByElement.Add(tileNavSubItemMText, MText);
+        }
+        
+        async void MText()
+        {
+            ActionText ac = new ActionText(model);
+            ac.multilineText = true;
+            await ac.RunAsync();
         }
 
         async void DrawText()
