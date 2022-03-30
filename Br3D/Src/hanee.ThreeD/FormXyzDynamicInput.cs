@@ -45,14 +45,21 @@ namespace hanee.ThreeD
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            // enter 키 입력시 입력 완료
+            // enter 키 입력시 입력 완료(fixed 된 값이 없으면 action에서 enter친걸로 하고, 아니면 클릭한걸로 친다)
             if (keyData == Keys.Enter || keyData == Keys.Space)
             {
-                var pt3D = ActionBase.Point3D;
-                ModifyPoint3D(DynamicInputManager.environment, ref pt3D);
-                ActionBase.Point3D = pt3D;
+                if (fixedX != null || fixedY != null || fixedZ != null)
+                {
+                    var pt3D = ActionBase.Point3D;
+                    ModifyPoint3D(DynamicInputManager.environment, ref pt3D);
+                    ActionBase.Point3D = pt3D;
 
-                ActionBase.EndInput(ActionBase.UserInput.GettingPoint3D);
+                    ActionBase.EndInput(ActionBase.UserInput.GettingPoint3D);
+                }
+                else
+                {
+                    ActionBase.Entered = true;
+                }
             }
             else if (keyData == Keys.Escape)
             {

@@ -1,4 +1,6 @@
-﻿using devDept.Geometry;
+﻿using devDept.Eyeshot;
+using devDept.Eyeshot.Entities;
+using devDept.Geometry;
 using devDept.Graphics;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ namespace hanee.ThreeD
 {
     public class SelectionManager
     {
-        private enum Step
+        public enum Step
         {
             firstPoint,
             secondPoint
@@ -19,7 +21,7 @@ namespace hanee.ThreeD
         System.Drawing.Point initialLocation;
         System.Drawing.Point currentLocation;
         bool isCrossing { get => currentLocation.X < initialLocation.X; }
-        Step step = Step.firstPoint;
+        public Step step = Step.firstPoint;
         RenderContextBase renderContext { get { return hModel.renderContext; } }
 
         public SelectionManager(HModel hModel)
@@ -71,17 +73,25 @@ namespace hanee.ThreeD
             currentLocation = e.Location;
         }
 
-        public void OnMouseDown(MouseEventArgs e)
+        // return 이번에 선택된 객체
+        public List<Entity> OnMouseDown(MouseEventArgs e)
         {
             if (!IsSelectable())
-                return;
+                return null;
 
             if (e.Button != MouseButtons.Left)
-                return;
+                return null;
+
+            var entities = new List<Entity>();
 
             // 처음 클릭시 객체 선택
             if (step == Step.firstPoint)
             {
+                // 그립을 선택한 경우는 리턴
+                var grips = hModel.gripManager?.GetAllGripPointsUnderMouse(e);
+                if (grips != null && grips.Count > 0)
+                    return null;
+
                 var ent = hModel.GetEntityUnderMouseCursor(e.Location);
                 // 선택된게 없으면 다음으로 넘어감
                 if (ent < 0)
@@ -94,6 +104,7 @@ namespace hanee.ThreeD
                 else
                 {
                     hModel.Entities[ent].Selected = true;
+                    entities.Add(hModel.Entities[ent]);
                 }
             }
             // 두번째 클릭시 객체를 enclosing / crossing으로 선택
@@ -104,8 +115,8 @@ namespace hanee.ThreeD
                 int dx = currentLocation.X - initialLocation.X;
                 int dy = currentLocation.Y - initialLocation.Y;
 
-                Point p1 = initialLocation;
-                Point p2 = currentLocation;
+                System.Drawing.Point p1 = initialLocation;
+                System.Drawing.Point p2 = currentLocation;
                 NormalizeBox(ref p1, ref p2);
 
                 var rect = new System.Drawing.Rectangle(p1, new Size(Math.Abs(dx), Math.Abs(dy)));
@@ -121,6 +132,7 @@ namespace hanee.ThreeD
                     foreach (var ent in ents)
                     {
                         hModel.Entities[ent].Selected = true;
+                        entities.Add(hModel.Entities[ent]);
                     }
                 }
                 else
@@ -129,11 +141,13 @@ namespace hanee.ThreeD
                     foreach (var ent in ents)
                     {
                         hModel.Entities[ent].Selected = true;
+                        entities.Add(hModel.Entities[ent]);
                     }
                 }
             }
 
             hModel.Invalidate();
+            return entities;
         }
 
         void DrawSelectionBox(System.Drawing.Point p1, System.Drawing.Point p2, Color transparentColor, bool drawBorder, bool dottedBorder)

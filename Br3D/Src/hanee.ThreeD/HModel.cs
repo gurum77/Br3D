@@ -125,54 +125,25 @@ namespace hanee.ThreeD
 
             base.OnMouseDown(e);
 
+            // eyeshot액션이 동작중이면 리턴
             if (this.ActionMode != actionType.None)
                 return;
 
-            // selection 
-            selectionManager.OnMouseDown(e);
+            if (e.Button == MouseButtons.Left)
+            {
+                // selection 
+                SelectionManager.Step step = selectionManager.step;
+                var selectedEntities = selectionManager.OnMouseDown(e);
 
+                // 그립
+                gripManager.OnMouseDown(e, selectedEntities, step);
+            }
+            
+
+            // 
             if (ActionBase.IsUserInputting())
             {
                 ActionBase.MouseDownHandler(this, e);
-            }
-            else
-            {
-                //if (e.Button == MouseButtons.Left)
-                //{
-
-                //    try
-                //    {
-                //        // 객체 선택 해제
-                //        Entities.ClearSelection();
-
-                //        // 객체 선택
-                //        var item = GetItemUnderMouseCursor(e.Location, true);
-                //        if (item != null)
-                //        {
-                //            item.Select(this, true);
-                //            UpdatePropertyGridControl(item.Item);
-                //        }
-                //        else
-                //        {
-                //            UpdatePropertyGridControl(this);
-                //        }
-
-                //        // label 선택
-                //        //int[] labelIndexes = GetAllLabelsUnderMouseCursor(e.Location);
-                //        //foreach (var i in labelIndexes)
-                //        //{
-                //        //    ActiveViewport.Labels[i].Selected = true;
-                //        //}
-
-                //        // 투명설정 업데이트
-                //        UpdateTransparency();
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        MessageBox.Show(ex.Message);
-                //    }
-
-                //}
             }
         }
 
@@ -770,6 +741,7 @@ namespace hanee.ThreeD
 
             ActionBase.MouseMoveHandler(this, e);
 
+            gripManager.MouseMove(e);
             selectionManager.OnMouseMove(e);
 
             // If ObjectSnap is ON, we need to find closest vertex (if any)

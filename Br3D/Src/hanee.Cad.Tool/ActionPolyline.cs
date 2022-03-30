@@ -43,11 +43,10 @@ namespace hanee.Cad.Tool
             while (true)
             {
                 var pt = await GetPoint3D(LanguageHelper.Tr("Point"));
-                if (IsCanceled())
-                    break;
-
                 SetOrthoModeStartPoint(pt);
-                if (IsEntered())
+
+                // pline은 취소를 눌러도 입력 완료로 한다.
+                if (IsEntered() || IsCanceled())
                 {
                     if (points.Count > 1)
                     {

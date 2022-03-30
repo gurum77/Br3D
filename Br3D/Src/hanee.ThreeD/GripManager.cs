@@ -1,7 +1,6 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Eyeshot.Translators;
-using devDept.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -14,7 +13,7 @@ namespace hanee.ThreeD
         static public float gripSize = 15;
         Model model;
         HModel hModel => model as HModel;
-        RegenParams regenParams = null; 
+        RegenParams regenParams = null;
         public GripManager(Model design)
         {
             this.model = design;
@@ -59,13 +58,13 @@ namespace hanee.ThreeD
 
             cloneEnt.Color = System.Drawing.Color.Yellow;
             cloneEnt.ColorMethod = colorMethodType.byEntity;
-            cloneEnt.EntityData = ent;  
+            cloneEnt.EntityData = ent;
             cloneEnt.Selected = true;
 
             // regenParams는 그립을 만들때 생성해야함
             regenParams = new RegenParams(0.001, this.model);
             cloneEnt.Regen(regenParams);
-            
+
             var gripPoints = gm.GetGripPoints(cloneEnt, model);
             if (gripPoints == null)
                 return;
@@ -78,7 +77,7 @@ namespace hanee.ThreeD
                 {
                     if (gp.explodedEntities == null)
                         continue;
-                    
+
                     foreach (var ee in gp.explodedEntities)
                     {
                         if (ee is BlockReference)
@@ -161,7 +160,7 @@ namespace hanee.ThreeD
                 var ent = gp.entity;
                 if (ent == null)
                     return;
-                
+
                 var originEnt = ent.EntityData as Entity;
                 if (originEnt == null)
                     return;
@@ -191,8 +190,14 @@ namespace hanee.ThreeD
             model.Invalidate();
         }
 
-        public void MouseUp(MouseEventArgs e)
+        public void OnMouseDown(MouseEventArgs e, List<Entity> selectedEntities = null, SelectionManager.Step step = default)
         {
+            if (ActionBase.runningAction != null)
+                return;
+
+           
+            
+
             // 이미 그립이 잡혀 있다면 편집 종료
             if (EditingGripPoints())
             {
@@ -201,17 +206,30 @@ namespace hanee.ThreeD
             }
 
             // 그림을 클릭했다면 그립 편집 시작
-            var gripPoints = GetAllGripPointsUnderMouse(e);
-            if (gripPoints != null && gripPoints.Count > 0)
+            // box 로 선택중일때는 grip이 선택 안되도록 해야함
+            if (step != SelectionManager.Step.secondPoint)
             {
-                StartEdit(gripPoints);
-                return;
+                var gripPoints = GetAllGripPointsUnderMouse(e);
+                if (gripPoints != null && gripPoints.Count > 0)
+                {
+                    StartEdit(gripPoints);
+                    return;
+                }
             }
-
-
+            
             // 아니면 그립을 생성함.
-            var item = model.GetItemUnderMouseCursor(e.Location);
-            MakeGripPoints(item?.Item as Entity);
+            if (selectedEntities != null)
+            {
+                foreach (var ent in selectedEntities)
+                {
+                    MakeGripPoints(ent);
+                }
+            }
+            else
+            {
+                var item = model.GetItemUnderMouseCursor(e.Location);
+                MakeGripPoints(item?.Item as Entity);
+            }
         }
 
         // 그립편집을시작한다.

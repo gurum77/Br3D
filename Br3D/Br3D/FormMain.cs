@@ -94,8 +94,6 @@ namespace Br3D
 
         private void Model_MouseMove(object sender, MouseEventArgs e)
         {
-            hModel.gripManager.MouseMove(e);
-
             UpdateCoordinatesControl(e);
             if (e.Button != MouseButtons.None)
                 return;
@@ -368,18 +366,10 @@ namespace Br3D
             if (e.Button == MouseButtons.Left)
             {
                 bool gripEditing = gripManager != null && gripManager.EditingGripPoints();
-
-                
-                // 그림 관련
-                if (hModel?.gripManager != null && ActionBase.runningAction == null)
-                    hModel?.gripManager.MouseUp(e);
-
                 if (!gripEditing && ActionBase.runningAction == null)
                 {
                     var item = model.GetItemUnderMouseCursor(e.Location);
-                    if (item != null)
-                        item.Item.Selected = true;
-
+                    
                     // 속성창 갱신
                     if (propertyGridControl1.Visible)
                         RefreshPropertyGridControl(item?.Item);

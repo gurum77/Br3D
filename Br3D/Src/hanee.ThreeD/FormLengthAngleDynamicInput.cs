@@ -1,6 +1,5 @@
 ﻿using devDept.Geometry;
 using DevExpress.XtraEditors;
-using DevExpress.XtraLayout;
 using hanee.Geometry;
 using System;
 using System.Windows.Forms;
@@ -54,13 +53,20 @@ namespace hanee.ThreeD
             // enter 키 입력시 입력 완료
             if (keyData == Keys.Enter || keyData == Keys.Space)
             {
-                var pt3D = ActionBase.Point3D;
-                ModifyPoint3D(DynamicInputManager.environment, ref pt3D);
-                ActionBase.Point3D = pt3D;
+                if (fixedAngle != null || fixedLength != null)
+                {
+                    var pt3D = ActionBase.Point3D;
+                    ModifyPoint3D(DynamicInputManager.environment, ref pt3D);
+                    ActionBase.Point3D = pt3D;
 
-                ActionBase.EndInput(ActionBase.UserInput.GettingPoint3D);
+                    ActionBase.EndInput(ActionBase.UserInput.GettingPoint3D);
+                }
+                else
+                {
+                    ActionBase.Entered = true;
+                }
             }
-            
+
             else if (keyData == Keys.Escape)
             {
                 if (fixedLength != null || fixedAngle != null)
@@ -113,7 +119,7 @@ namespace hanee.ThreeD
 
             textEditLength.Text = ActionBase.Point3D.DistanceTo(mng.startPoint).ToString();
             textEditAngle.Text = (ActionBase.Point3D - mng.startPoint).AsVector.ToDegree().ToString();
-            
+
             textEditLength.SelectAll();
             textEditAngle.SelectAll();
 
@@ -145,7 +151,7 @@ namespace hanee.ThreeD
             DynamicInputManager.DrawLayoutControl(ref e, "Length", idx);
         }
 
-      
+
         private void layoutControlItemAngle_CustomDraw(object sender, DevExpress.XtraLayout.ItemCustomDrawEventArgs e)
         {
             var idx = fixedAngle == null ? 0 : 1;
