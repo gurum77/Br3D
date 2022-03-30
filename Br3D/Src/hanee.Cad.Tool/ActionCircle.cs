@@ -27,7 +27,7 @@ namespace hanee.Cad.Tool
             endPoint = point3D;
             environment.TempEntities.Clear();
 
-            var circle = MakeCircle();
+            var circle = MakeCircle(true);
             if (circle == null)
                 return;
 
@@ -36,15 +36,15 @@ namespace hanee.Cad.Tool
             environment.Invalidate();
         }
 
-        Circle MakeCircle()
+        Circle MakeCircle(bool tempEntity=false)
         {
             var radius = startPoint.DistanceTo(endPoint);
             if (radius <= 0)
                 return null;
 
             Circle circle = new Circle(startPoint, radius);
-            circle.Color = System.Drawing.Color.Yellow;
-            circle.ColorMethod = colorMethodType.byEntity;
+            GetHModel()?.entityPropertiesManager?.SetDefaultProperties(circle, tempEntity);
+            
             return circle;
         }
 

@@ -64,6 +64,11 @@ namespace hanee.ThreeD
 
         public HModel()
         {
+            DefaultColor = System.Drawing.Color.White;
+            foreach (var la in Layers)
+            {
+                la.Color = DefaultColor;
+            }
             Snapping = new Snapping(this);
             orthoModeManager = new OrthoModeManager(this);
             gripManager = new GripManager(this);

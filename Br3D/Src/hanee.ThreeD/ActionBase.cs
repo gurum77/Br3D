@@ -518,6 +518,12 @@ namespace hanee.ThreeD
         // 마우스 오른키를 누르면 입력 완료로 처리한다.
         private static void MouseDownHandler_RightButton(Environment environment, MouseEventArgs e)
         {
+            // control / shift / alt을 같이 누르면 완료 아님
+            if ((Control.ModifierKeys & Keys.Control) == Keys.Control ||
+                (Control.ModifierKeys & Keys.Alt) == Keys.Alt ||
+                (Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+                return;
+            
             Entered = true;
         }
 

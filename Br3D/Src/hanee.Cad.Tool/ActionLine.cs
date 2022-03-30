@@ -27,7 +27,7 @@ namespace hanee.Cad.Tool
             endPoint = point3D;
             environment.TempEntities.Clear();
 
-            var line = MakeLine();
+            var line = MakeLine(true);
             if (line == null)
                 return;
 
@@ -36,10 +36,10 @@ namespace hanee.Cad.Tool
             environment.Invalidate();
         }
 
-        Line MakeLine()
+        Line MakeLine(bool tempEntity=false)
         {
             Line line = new Line(startPoint.Clone() as Point3D, endPoint.Clone() as Point3D);
-            GetHModel()?.entityPropertiesManager?.SetDefaultProperties(line);
+            GetHModel()?.entityPropertiesManager?.SetDefaultProperties(line, tempEntity);
             return line;
         }
         public async Task<bool> RunAsync()

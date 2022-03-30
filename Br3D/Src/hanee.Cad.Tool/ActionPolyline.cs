@@ -30,7 +30,7 @@ namespace hanee.Cad.Tool
             cutPoints.AddRange(points);
             cutPoints.Add(point3D.Clone() as Point3D);
 
-            var lp = MakePolyline(cutPoints);
+            var lp = MakePolyline(cutPoints, true);
             lp.Regen(0.001);
             GetModel().TempEntities.Clear();
             GetModel().TempEntities.Add(lp);
@@ -69,14 +69,13 @@ namespace hanee.Cad.Tool
             return true;
         }
 
-        LinearPath MakePolyline(List<Point3D> curPoints)
+        LinearPath MakePolyline(List<Point3D> curPoints, bool tempEntity=false)
         {
             if (curPoints == null || curPoints.Count < 2)
                 return null;
 
             var lp = new LinearPath(curPoints);
-            lp.Color = System.Drawing.Color.Yellow;
-            lp.ColorMethod = colorMethodType.byEntity;
+            GetHModel()?.entityPropertiesManager?.SetDefaultProperties(lp, tempEntity);
             return lp;
         }
     }

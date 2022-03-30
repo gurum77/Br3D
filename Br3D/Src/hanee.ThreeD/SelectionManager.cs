@@ -27,8 +27,26 @@ namespace hanee.ThreeD
             this.hModel = hModel;
         }
 
+        // 선택 가능한지?
+        bool IsSelectable()
+        {
+            // 그림 편집중에는 선택 불가
+            if (hModel.gripManager.EditingGripPoints())
+                return false;
+
+            // 액션 실행중일 때는 선택할 때만 선택 가능
+            if (ActionBase.runningAction != null && !ActionBase.IsSelectingEntity())
+                return false;
+
+
+            return true;
+        }
+
         public void DrawOvery()
         {
+            if (!IsSelectable())
+                return;
+
             if (step != Step.secondPoint)
                 return;
 
@@ -44,6 +62,9 @@ namespace hanee.ThreeD
 
         public void OnMouseMove(MouseEventArgs e)
         {
+            if (!IsSelectable())
+                return;
+
             if (step != Step.secondPoint)
                 return;
 
@@ -52,6 +73,9 @@ namespace hanee.ThreeD
 
         public void OnMouseDown(MouseEventArgs e)
         {
+            if (!IsSelectable())
+                return;
+
             if (e.Button != MouseButtons.Left)
                 return;
 
@@ -193,7 +217,6 @@ namespace hanee.ThreeD
 
         internal static void NormalizeBox(ref System.Drawing.Point p1, ref System.Drawing.Point p2)
         {
-
             int firstX = Math.Min(p1.X, p2.X);
             int firstY = Math.Min(p1.Y, p2.Y);
             int secondX = Math.Max(p1.X, p2.X);
@@ -203,7 +226,6 @@ namespace hanee.ThreeD
             p1.Y = firstY;
             p2.X = secondX;
             p2.Y = secondY;
-
         }
     }
 }

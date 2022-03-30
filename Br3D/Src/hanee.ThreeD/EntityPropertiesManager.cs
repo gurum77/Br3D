@@ -11,7 +11,7 @@ namespace hanee.ThreeD
             this.model = model;
         }
 
-        public void SetDefaultProperties(Entity ent)
+        public void SetDefaultProperties(Entity ent, bool tempEntity=false)
         {
             if (!model.Layers.Contains(currentLayerName))
             {
@@ -20,6 +20,14 @@ namespace hanee.ThreeD
 
             ent.LayerName = currentLayerName;
             ent.ColorMethod = colorMethodType.byLayer;
+
+            // temp entity는 layer참조 못함(직접 지정해야함)
+            if(tempEntity)
+            {
+                ent.Color = model.Layers[currentLayerName].Color;
+                ent.ColorMethod = colorMethodType.byEntity;
+            }
+            
         }
     }
 }

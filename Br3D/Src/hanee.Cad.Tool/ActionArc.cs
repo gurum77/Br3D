@@ -86,7 +86,7 @@ namespace hanee.Cad.Tool
             return true;
         }
 
-        private Arc MakeArc()
+        private Arc MakeArc(bool tempEntity=false)
         {
             if (pt1 == null || pt2 == null || pt3 == null)
                 return null;
@@ -108,9 +108,7 @@ namespace hanee.Cad.Tool
                 else if (method == Method.centerStartEnd)
                     arc = new Arc(pt1, pt2, pt3);
 
-                arc.Color = System.Drawing.Color.Yellow;
-                arc.ColorMethod = colorMethodType.byEntity;
-
+                GetHModel()?.entityPropertiesManager?.SetDefaultProperties(arc, tempEntity);
                 return arc;
             }
             catch
@@ -134,14 +132,13 @@ namespace hanee.Cad.Tool
             if (pt2 == null)
             {
                 var line = new Line(pt1.Clone() as Point3D, Point3D.Clone() as Point3D);
-                line.Color = System.Drawing.Color.Yellow;
-                line.ColorMethod = colorMethodType.byEntity;
+                GetHModel()?.entityPropertiesManager?.SetDefaultProperties(line, true);
                 line.Regen(0.001);
                 environment.TempEntities.Add(line);
             }
             else
             {
-                var arc = MakeArc();
+                var arc = MakeArc(true);
                 if (arc == null)
                     return;
 
