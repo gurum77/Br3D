@@ -47,6 +47,10 @@ namespace hanee.ThreeD
         // 현재 사용중인 dynamic input form을 리턴
         static public Form GetFormPoint3DDynamicInput()
         {
+            // 객체 선택중일때는 form을 리턴하지 않는다.
+            if (ActionBase.IsSelectingEntity())
+                return null;
+
             if (point3DType == Point3DType.xyz)
             {
                 if (formDynamicInput == null)

@@ -535,6 +535,10 @@ namespace hanee.ThreeD
             if (activeObjectSnap == objectSnapType.None)
                 return snapPoints;
 
+            // 선택 액션중일때는 snap 찾지 않는다.
+            if (ActionBase.IsSelectingEntity())
+                return snapPoints;
+
             //changed PickBoxSize to define a range for display snapPoints
             int oldSize = environment.PickBoxSize;
             environment.PickBoxSize = 20;

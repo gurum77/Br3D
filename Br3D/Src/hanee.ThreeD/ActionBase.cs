@@ -22,7 +22,7 @@ namespace hanee.ThreeD
             SelectingSubEntity,    // 서브 객체를 선택하고 있는지?
             SelectingFace,
             SelectingEdge,
-
+            SelectingEntities, // 2개 이상의 객체를 선택한다.
             GettingKey,    // key 를 입력받는다.
             Count
         }
@@ -86,7 +86,9 @@ namespace hanee.ThreeD
             set { key = value; }
         }
 
-        static private Entity selectedEntity = null;
+        static private Entity selectedEntity = null;    // 객체 1개 선택시
+        private List<Entity> selectedEntities => GetHModel().GetAllSelectedEntities();  // 여러개 객체 선택시
+
         static private Label selectedLabel = null;
         static private devDept.Eyeshot.Model.SelectedFace selectedFace = null;
         static private devDept.Eyeshot.Model.SelectedEdge selectedEdge = null;
@@ -289,7 +291,9 @@ namespace hanee.ThreeD
         {
             if (userInputting[(int)UserInput.SelectingSubEntity] ||
                 userInputting[(int)UserInput.SelectingEntity] ||
-                userInputting[(int)UserInput.SelectingLabel])
+                userInputting[(int)UserInput.SelectingLabel] ||
+                userInputting[(int)UserInput.SelectingEntities]
+                )
                 return true;
 
             return false;
@@ -569,7 +573,6 @@ namespace hanee.ThreeD
                 }
             }
 
-
             if (userInputting[(int)UserInput.SelectingSubEntity] == true)
             {
                 devDept.Eyeshot.Model.SelectedItem item = environment.GetItemUnderMouseCursor(e.Location);
@@ -589,8 +592,6 @@ namespace hanee.ThreeD
                         }
                         catch
                         {
-
-
                             break;
                         }
 
@@ -855,6 +856,30 @@ namespace hanee.ThreeD
 
             return selectedLabel;
         }
+
+        // 객체 여러개를 선택받는다.
+        public async Task<List<Entity>> GetEntities(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null)
+        {
+            ActionBase.StartInput(environment, message, stepID, UserInput.SelectingEntities);
+            ActionBase.dynamicHighlight = dynamicHighlight;
+            ActionBase.selectableType = selectableType;
+
+            while (ActionBase.userInputting[(int)UserInput.SelectingEntities] == true)
+            {
+                // 스탭이 중지되었다면 그냥 보낸다.
+                if (ActionBase.IsStopedCurrentStep)
+                {
+                    ActionBase.EndInput(UserInput.SelectingEntities);
+                    break;
+                }
+
+                await Task.Delay(100);
+            }
+
+            ActionBase.cursorText = null;
+            return selectedEntities;
+        }
+
 
         // 객체 1개를 선택받거나 키를 입력받는다.
         public async Task<Entity> GetEntity(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null)
