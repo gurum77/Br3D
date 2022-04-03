@@ -10,9 +10,9 @@ namespace hanee.Cad.Tool
 {
     public class ActionMove : ActionBase
     {
-        Point3D fromPoint = null;
-        Point3D toPoint = null;
-        Point3D lastPoint = null;
+        protected Point3D fromPoint = null;
+        protected Point3D toPoint = null;
+        protected Point3D lastPoint = null;
 
         public ActionMove(Environment environment) : base(environment)
         {

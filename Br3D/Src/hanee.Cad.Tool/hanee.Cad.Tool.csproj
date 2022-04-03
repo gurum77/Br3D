@@ -108,6 +108,7 @@
     <Compile Include="ActionMemo.cs" />
     <Compile Include="ActionMove.cs" />
     <Compile Include="ActionPolyline.cs" />
+    <Compile Include="ActionScale.cs" />
     <Compile Include="ActionText.cs" />
     <Compile Include="ActionTextStyle.cs" />
     <Compile Include="LineTypeControl.cs">

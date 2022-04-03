@@ -622,8 +622,15 @@ namespace Br3D
 
             functionByElement.Add(tileNavItemMove, MoveEntity);
             functionByElement.Add(tileNavItemCopy, CopyEntity);
+            functionByElement.Add(tileNavItemScale, ScaleEntity);
 
 
+        }
+        
+        async void ScaleEntity()
+        {
+            ActionScale ac = new ActionScale(model);
+            await ac.RunAsync();
         }
 
         async void CopyEntity()

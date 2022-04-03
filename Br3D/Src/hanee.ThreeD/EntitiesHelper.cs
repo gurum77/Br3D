@@ -35,7 +35,7 @@ namespace hanee.ThreeD
                             if (layer != null)
                                 color = layer.Color;
                         }
-                        tempEnt.Color = System.Drawing.Color.FromArgb(50, color);
+                        tempEnt.Color = System.Drawing.Color.FromArgb(150, color);
                         tempEnt.Regen(regenParams);
                         environment.TempEntities.Add(tempEnt);
                     }
@@ -50,7 +50,7 @@ namespace hanee.ThreeD
                         if (layer != null)
                             color = layer.Color;
                     }
-                    tempEnt.Color = System.Drawing.Color.FromArgb(50, color);
+                    tempEnt.Color = System.Drawing.Color.FromArgb(150, color);
                     tempEnt.Regen(regenParams);
                     environment.TempEntities.Add(tempEnt);
                 }
