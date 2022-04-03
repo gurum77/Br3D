@@ -621,10 +621,16 @@ namespace Br3D
             functionByElement.Add(tileNavSubItemMText, MText);
 
             functionByElement.Add(tileNavItemMove, MoveEntity);
+            functionByElement.Add(tileNavItemCopy, CopyEntity);
 
 
         }
-        
+
+        async void CopyEntity()
+        {
+            ActionCopy ac = new ActionCopy(model);
+            await ac.RunAsync();
+        }
 
         async void MoveEntity()
         {

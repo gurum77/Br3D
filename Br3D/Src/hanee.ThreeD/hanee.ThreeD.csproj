@@ -99,6 +99,7 @@
     <Compile Include="BlockReferenceGripManager.cs" />
     <Compile Include="CategoryEx.cs" />
     <Compile Include="CircleGripManager.cs" />
+    <Compile Include="EntitiesHelper.cs" />
     <Compile Include="EntityPropertiesManager.cs" />
     <Compile Include="DimensionOptionsHelper.cs" />
     <Compile Include="DisplayNameEx.cs" />

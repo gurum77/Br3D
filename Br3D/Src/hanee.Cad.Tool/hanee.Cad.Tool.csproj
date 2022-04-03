@@ -96,6 +96,7 @@
     <Compile Include="ActionArc.cs" />
     <Compile Include="ActionArea.cs" />
     <Compile Include="ActionCircle.cs" />
+    <Compile Include="ActionCopy.cs" />
     <Compile Include="ActionCylinder.cs" />
     <Compile Include="ActionDist.cs" />
     <Compile Include="ActionFilter.cs" />

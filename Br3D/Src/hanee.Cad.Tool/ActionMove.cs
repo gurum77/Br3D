@@ -2,6 +2,7 @@
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
 using hanee.ThreeD;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -55,31 +56,8 @@ namespace hanee.Cad.Tool
                 if (IsCanceled())
                     break;
 
-                foreach (var ent in entities)
-                {
-                    // block이면 explode해서 넣는다.
-                    if (ent is BlockReference)
-                    {
-                        var br = ent as BlockReference;
-                        var explodedEntities = br.Explode(GetModel().Blocks);
-                        foreach (var ee in explodedEntities)
-                        {
-                            if (ee is BlockReference)
-                                continue;
-
-                            var tempEnt = ee.Clone() as Entity;
-                            tempEnt.Color = System.Drawing.Color.FromArgb(50, tempEnt.Color);
-                            environment.TempEntities.Add(tempEnt);
-                        }
-                    }
-                    else
-                    {
-                        var tempEnt = ent.Clone() as Entity;
-                        tempEnt.Color = System.Drawing.Color.FromArgb(50, tempEnt.Color);
-                        environment.TempEntities.Add(tempEnt);
-
-                    }
-                }
+                // temp entities로 설정
+                entities.ToTempEntities(GetModel());
 
                 lastPoint = fromPoint.Clone() as Point3D;
 
@@ -88,16 +66,23 @@ namespace hanee.Cad.Tool
                     break;
 
                 var vec = toPoint - fromPoint;
-                var entityList = new EntityList();
-                entityList.AddRange(entities);
-                entityList.Translate(vec.X, vec.Y, vec.Z);
-                GetModel().Entities.Regen();
-                GetModel().Invalidate();
+
+                Finish(entities, vec.AsVector);
+                
                 break;
             }
 
             EndAction();
             return true;
+        }
+
+        virtual protected void Finish(List<Entity> entities, Vector3D vec)
+        {
+            var entityList = new EntityList();
+            entityList.AddRange(entities);
+            entityList.Translate(vec.X, vec.Y, vec.Z);
+            GetModel().Entities.Regen();
+            GetModel().Invalidate();
         }
     }
 }
