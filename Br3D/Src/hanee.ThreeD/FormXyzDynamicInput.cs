@@ -39,12 +39,23 @@ namespace hanee.ThreeD
             if (ActionBase.Point3D == null)
                 return;
 
-            textEditX.Text = ActionBase.Point3D.X.ToString();
-            textEditY.Text = ActionBase.Point3D.Y.ToString();
-            textEditZ.Text = ActionBase.Point3D.Z.ToString();
-            textEditX.SelectAll();
-            textEditY.SelectAll();
-            textEditZ.SelectAll();
+            if (fixedX == null)
+            {
+                textEditX.Text = ActionBase.Point3D.X.ToString();
+                textEditX.SelectAll();
+            }
+
+            if (fixedY == null)
+            {
+                textEditY.Text = ActionBase.Point3D.Y.ToString();
+                textEditY.SelectAll();
+            }
+
+            if (fixedZ == null)
+            {
+                textEditZ.Text = ActionBase.Point3D.Z.ToString();
+                textEditZ.SelectAll();
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -96,7 +107,7 @@ namespace hanee.ThreeD
                 DynamicInputManager.FlagPoint3DType();
 
             }
-            else if(keyData.IsAlphabet())
+            else if (keyData.IsAlphabet())
             {
                 if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingKey] == true)
                 {

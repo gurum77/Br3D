@@ -67,6 +67,8 @@ namespace hanee.ThreeD
 
         public void UpdateControls(devDept.Eyeshot.Environment environment)
         {
+
+
             HModel hModel = environment as HModel;
             if (hModel == null)
                 return;
@@ -77,9 +79,13 @@ namespace hanee.ThreeD
                 return;
             }
 
-            var factor = ActionBase.Point3D.DistanceTo(mng.startPoint) / baseLength;
-            textEditFactor.Text = factor.ToString();
-            textEditFactor.SelectAll();
+            if (fixedFactor == null)
+            {
+                var factor = ActionBase.Point3D.DistanceTo(mng.startPoint) / baseLength;
+                textEditFactor.Text = factor.ToString();
+                textEditFactor.SelectAll();
+
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -124,6 +130,6 @@ namespace hanee.ThreeD
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        
+
     }
 }

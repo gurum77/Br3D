@@ -121,15 +121,24 @@ namespace hanee.ThreeD
                 return;
             }
 
-            textEditLength.Text = ActionBase.Point3D.DistanceTo(mng.startPoint).ToString();
-            textEditAngle.Text = (ActionBase.Point3D - mng.startPoint).AsVector.ToDegree().ToString();
 
-            textEditLength.SelectAll();
-            textEditAngle.SelectAll();
+            if (fixedLength == null)
+            {
+
+                textEditLength.Text = ActionBase.Point3D.DistanceTo(mng.startPoint).ToString();
+                textEditLength.SelectAll();
+            }
+
+            if (fixedAngle == null)
+            {
+                textEditAngle.Text = (ActionBase.Point3D - mng.startPoint).AsVector.ToDegree().ToString();
+                textEditAngle.SelectAll();
+            }
+
         }
 
-        
-        
+
+
 
         public void ModifyPoint3D(devDept.Eyeshot.Environment environment, ref Point3D pt)
         {
