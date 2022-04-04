@@ -88,9 +88,7 @@ namespace hanee.Cad.Tool
                 if (IsCanceled())
                     break;
 
-                var vec = toPoint - fromPoint;
-
-                Finish(entities, vec.AsVector);
+                Finish(entities);
 
                 break;
             }
@@ -101,7 +99,6 @@ namespace hanee.Cad.Tool
 
         private void CalcBaseLength()
         {
-
             // 객체를 선택하면 baseLength을 계산한다.
             Point3D boxMin = null, boxMax = null;
             foreach (var ent in environment.TempEntities)
@@ -163,7 +160,7 @@ namespace hanee.Cad.Tool
             lastPoint = point3D.Clone() as Point3D;
         }
 
-        protected void Finish(List<devDept.Eyeshot.Entities.Entity> entities, Vector3D vec)
+        protected void Finish(List<devDept.Eyeshot.Entities.Entity> entities)
         {
             var factor = GetFactor();
             if (factor == 0)
