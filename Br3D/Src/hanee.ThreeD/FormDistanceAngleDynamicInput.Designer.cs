@@ -1,7 +1,7 @@
 ﻿
 namespace hanee.ThreeD
 {
-    partial class FormLengthAngleDynamicInput
+    partial class FormDistanceAngleDynamicInput
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace hanee.ThreeD
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLengthAngleDynamicInput));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDistanceAngleDynamicInput));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.textEditLength = new DevExpress.XtraEditors.TextEdit();
             this.textEditAngle = new DevExpress.XtraEditors.TextEdit();

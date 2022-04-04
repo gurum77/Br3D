@@ -1083,12 +1083,13 @@ namespace hanee.ThreeD
             ActionBase.SetTempEtt(environment, null);
             ActionBase.IsModified = true;
 
+            // dynamic input manager 초기화
+            DynamicInputManager.Init();
+
             environment.ActionMode = actionType.None;
             devDept.Eyeshot.Model design = environment as devDept.Eyeshot.Model;
             if (design != null)
-            {
                 design.SelectionFilterMode = selectionFilterType.Entity;
-            }
 
             if (orthoModeManager != null)
                 orthoModeManager.startPoint = null;

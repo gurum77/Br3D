@@ -108,7 +108,12 @@ namespace hanee.Cad.Tool
 
                 lastPoint = fromPoint.Clone() as Point3D;
 
-                toPoint = await GetPoint3D("To point");
+                // 회전 각도
+                if (baseAngle == 0)
+                {
+                    DynamicInputManager.ActiveLengthAndAngle(fromPoint, null, 10000);
+                }
+                toPoint = await GetPoint3D("Angle");
                 if (IsCanceled())
                     break;
 

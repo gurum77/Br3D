@@ -6,11 +6,15 @@ using System.Windows.Forms;
 
 namespace hanee.ThreeD
 {
-    public partial class FormLengthAngleDynamicInput : XtraForm, IDynamicInputPoint3D
+    public partial class FormDistanceAngleDynamicInput : XtraForm, IDynamicInputPoint3D
     {
         public double? fixedLength { get; set; }
         public double? fixedAngle { get; set; }
-        public FormLengthAngleDynamicInput()
+
+        public TextEdit TextEditLength => textEditLength;
+        public TextEdit TextEditAngle => textEditAngle;
+
+        public FormDistanceAngleDynamicInput()
         {
             InitializeComponent();
             textEditAngle.KeyDown += TextEditAngle_KeyDown;
@@ -122,9 +126,10 @@ namespace hanee.ThreeD
 
             textEditLength.SelectAll();
             textEditAngle.SelectAll();
-
-
         }
+
+        
+        
 
         public void ModifyPoint3D(devDept.Eyeshot.Environment environment, ref Point3D pt)
         {

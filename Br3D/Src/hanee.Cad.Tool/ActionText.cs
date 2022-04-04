@@ -68,8 +68,8 @@ namespace hanee.Cad.Tool
                     break;
 
                 // 높이
-                DynamicInputManager.point3DType = DynamicInputManager.Point3DType.lengthAngle;
-                var formDi = DynamicInputManager.GetFormPoint3DDynamicInput() as FormLengthAngleDynamicInput;
+                DynamicInputManager.point3DType = DynamicInputManager.Point3DType.distanceAngle;
+                var formDi = DynamicInputManager.GetFormPoint3DDynamicInput() as FormDistanceAngleDynamicInput;
                 if (formDi != null)
                 {
                     DynamicInputManager.ShowDynamicInput(environment);
