@@ -48,44 +48,40 @@ namespace hanee.Cad.Tool
                 if (IsCanceled())
                     break;
 
-                fromPoint = await GetPoint3D("From point");
+                // temp entities로 설정
+                entities.ToTempEntities(GetModel());
+                CalcBaseLength();
+
+                var pointOrKey = await GetPoint3DOrKey("From point(R : Reference)");
                 if (IsCanceled())
                     break;
 
-                // temp entities로 설정
-                entities.ToTempEntities(GetModel());
-
-                // 객체를 선택하면 baseLength을 계산한다.
-                Point3D boxMin = null, boxMax = null;
-                foreach (var ent in environment.TempEntities)
+                // 참조인 경우
+                if(pointOrKey.Key == null)
                 {
-                    if (boxMin == null)
-                        boxMin = ent.BoxMin.Clone() as Point3D;
-                    else
-                    {
-                        boxMin.X = Math.Min(boxMin.X, ent.BoxMin.X);
-                        boxMin.Y = Math.Min(boxMin.Y, ent.BoxMin.Y);
-                        boxMin.Z = Math.Min(boxMin.Z, ent.BoxMin.Z);
-                    }
-                        
-                    
-                    if (boxMax == null)
-                        boxMax = ent.BoxMax.Clone() as Point3D;
-                    else
-                    {
-                        boxMax.X = Math.Max(boxMax.X, ent.BoxMax.X);
-                        boxMax.Y = Math.Max(boxMax.Y, ent.BoxMax.Y);
-                        boxMax.Z = Math.Max(boxMax.Z, ent.BoxMax.Z);
-                    }
+                    var refPt1 = await GetPoint3D("From reference point");
+                    if (IsCanceled())
+                        break;
+                    var refPt2 = await GetPoint3D("From reference point");
+                    if (IsCanceled())
+                        break;
+
+                    baseLength = refPt1.DistanceTo(refPt2);
+
+                    // 다시 from point 입력
+                    fromPoint = await GetPoint3D("From point");
+                    if (IsCanceled())
+                        break;
+                }
+                else
+                {
+                    fromPoint = pointOrKey.Key;
                 }
 
-                if (boxMin != null && boxMax != null)
-                {
-                    baseLength = boxMax.X - boxMin.X;
-                    baseLength = Math.Max(baseLength, boxMax.Y - boxMin.Y);
-                    baseLength = Math.Max(baseLength, boxMax.Z - boxMin.Z);
-                }
-                baseLength /= 2;
+                if (fromPoint == null)
+                    break;
+                
+               
                 lastPoint = fromPoint.Clone() as Point3D;
 
                 toPoint = await GetPoint3D("To point");
@@ -101,6 +97,43 @@ namespace hanee.Cad.Tool
 
             EndAction();
             return true;
+        }
+
+        private void CalcBaseLength()
+        {
+
+            // 객체를 선택하면 baseLength을 계산한다.
+            Point3D boxMin = null, boxMax = null;
+            foreach (var ent in environment.TempEntities)
+            {
+                if (boxMin == null)
+                    boxMin = ent.BoxMin.Clone() as Point3D;
+                else
+                {
+                    boxMin.X = Math.Min(boxMin.X, ent.BoxMin.X);
+                    boxMin.Y = Math.Min(boxMin.Y, ent.BoxMin.Y);
+                    boxMin.Z = Math.Min(boxMin.Z, ent.BoxMin.Z);
+                }
+
+
+                if (boxMax == null)
+                    boxMax = ent.BoxMax.Clone() as Point3D;
+                else
+                {
+                    boxMax.X = Math.Max(boxMax.X, ent.BoxMax.X);
+                    boxMax.Y = Math.Max(boxMax.Y, ent.BoxMax.Y);
+                    boxMax.Z = Math.Max(boxMax.Z, ent.BoxMax.Z);
+                }
+            }
+
+            if (boxMin != null && boxMax != null)
+            {
+                baseLength = boxMax.X - boxMin.X;
+                baseLength = Math.Max(baseLength, boxMax.Y - boxMin.Y);
+                baseLength = Math.Max(baseLength, boxMax.Z - boxMin.Z);
+            }
+            baseLength /= 2;
+
         }
 
         protected override void OnMouseMove(devDept.Eyeshot.Environment environment, MouseEventArgs e)

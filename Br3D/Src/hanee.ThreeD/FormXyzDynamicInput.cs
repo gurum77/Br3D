@@ -32,9 +32,13 @@ namespace hanee.ThreeD
         }
 
 
+
         // 현재 상황에 맞게 control을 업데이트 한다.
         public void UpdateControls(devDept.Eyeshot.Environment environment)
         {
+            if (ActionBase.Point3D == null)
+                return;
+
             textEditX.Text = ActionBase.Point3D.X.ToString();
             textEditY.Text = ActionBase.Point3D.Y.ToString();
             textEditZ.Text = ActionBase.Point3D.Z.ToString();
@@ -91,6 +95,15 @@ namespace hanee.ThreeD
             {
                 DynamicInputManager.FlagPoint3DType();
 
+            }
+            else if(keyData.IsAlphabet())
+            {
+                if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingKey] == true)
+                {
+                    ActionBase.Key = new KeyEventArgs(keyData);
+                    ActionBase.EndInput(ActionBase.UserInput.GettingKey);
+                    return true;
+                }
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }

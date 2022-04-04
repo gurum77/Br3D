@@ -9,6 +9,15 @@ namespace hanee.ThreeD
 {
     static public class KeysHelper
     {
+        // alphabet인지?
+        static public bool IsAlphabet(this Keys keys)
+        {
+            if (keys >= Keys.A || keys <= Keys.Z)
+                return true;
+
+            return false;
+        }
+
         // 숫자입력인지?
         static public bool IsDigit(this Keys keys)
         {

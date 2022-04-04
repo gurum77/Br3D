@@ -674,6 +674,44 @@ namespace hanee.ThreeD
 
             return point3D;
         }
+
+        // 마우스로 point3D를 입력받거나 key를 입력받는다.
+        public async Task<KeyValuePair<Point3D, KeyEventArgs>> GetPoint3DOrKey(string message = null, int stepID = -1)
+        {
+            ActionBase.StartInput(environment, message, stepID, UserInput.GettingPoint3D);
+            ActionBase.StartInput(environment, message, stepID, UserInput.GettingKey);
+
+            while (ActionBase.userInputting[(int)UserInput.GettingPoint3D] == true &&
+                ActionBase.userInputting[(int)UserInput.GettingKey] == true
+                )
+            {
+                // 스탭이 중지되었다면 그냥 보낸다.
+                if (ActionBase.IsStopedCurrentStep)
+                {
+                    ActionBase.EndInput(UserInput.GettingPoint3D);
+                    ActionBase.EndInput(UserInput.GettingKey);
+                    break;
+                }
+
+                await Task.Delay(100);
+            }
+
+            ActionBase.cursorText = null;
+
+            // 정상 입력이 아닌 경우라면 null을 준다.
+            // 그래야 사용하는 곳에서 어떤 값이 입력 되었는지 알수 있다.
+            var resultPoint3D = point3D;
+            var resultKey = key;
+            if (ActionBase.userInputting[(int)UserInput.GettingPoint3D])
+                resultPoint3D = null;
+            if (ActionBase.userInputting[(int)UserInput.GettingKey])
+                resultKey = null;
+
+            ActionBase.userInputting[(int)UserInput.GettingPoint3D] = false;
+            ActionBase.userInputting[(int)UserInput.GettingKey] = false;
+            return new KeyValuePair<Point3D, KeyEventArgs>(resultPoint3D, resultKey);
+        }
+
         #endregion
 
 
