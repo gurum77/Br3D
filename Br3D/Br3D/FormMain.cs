@@ -620,6 +620,7 @@ namespace Br3D
             functionByElement.Add(tileNavSubItemText, DrawText);
             functionByElement.Add(tileNavSubItemMText, MText);
 
+            functionByElement.Add(tileNavItemErase, EraseEntity);
             functionByElement.Add(tileNavItemMove, MoveEntity);
             functionByElement.Add(tileNavItemCopy, CopyEntity);
             functionByElement.Add(tileNavItemScale, ScaleEntity);
@@ -649,6 +650,12 @@ namespace Br3D
         async void MoveEntity()
         {
             ActionMove ac = new ActionMove(model);
+            await ac.RunAsync();
+        }
+        
+        async void EraseEntity()
+        {
+            ActionErase ac = new ActionErase(model);
             await ac.RunAsync();
         }
 

@@ -99,6 +99,7 @@
     <Compile Include="ActionCopy.cs" />
     <Compile Include="ActionCylinder.cs" />
     <Compile Include="ActionDist.cs" />
+    <Compile Include="ActionErase.cs" />
     <Compile Include="ActionFilter.cs" />
     <Compile Include="ActionID.cs" />
     <Compile Include="ActionLayer.cs" />
