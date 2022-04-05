@@ -625,8 +625,15 @@ namespace Br3D
             functionByElement.Add(tileNavItemCopy, CopyEntity);
             functionByElement.Add(tileNavItemScale, ScaleEntity);
             functionByElement.Add(tileNavItemRotate, RotateEntity);
+            functionByElement.Add(tileNavItemOffset, OffsetEntity);
 
 
+        }
+
+        async void OffsetEntity()
+        {
+            ActionOffset ac = new ActionOffset(model);
+            await ac.RunAsync();
         }
 
         async void RotateEntity()

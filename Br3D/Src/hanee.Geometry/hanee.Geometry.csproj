@@ -119,6 +119,7 @@
     <Compile Include="TableGeometry.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Vector2DHelper.cs" />
+    <Compile Include="Vector3DHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
