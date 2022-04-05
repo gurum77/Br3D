@@ -56,12 +56,15 @@ namespace hanee.Cad.Tool
                     if (curve == null)
                         continue;
 
-                    // offset 방향 지정
+                    // offset 방향 
                     var offsetPoint = await GetPoint3D("Offset point");
                     if (IsCanceled())
                         break;
 
+                    // 선택한 객체 선택 해제
                     entity.Selected = false;
+
+                    // offset 방향 정하기
                     curve.ClosestPointTo(offsetPoint, out double t);
                     
                     var dir2D = curve.TangentAt(t).To2D();
