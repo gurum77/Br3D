@@ -100,6 +100,7 @@
     <Compile Include="ActionCylinder.cs" />
     <Compile Include="ActionDist.cs" />
     <Compile Include="ActionErase.cs" />
+    <Compile Include="ActionExplode.cs" />
     <Compile Include="ActionFilter.cs" />
     <Compile Include="ActionID.cs" />
     <Compile Include="ActionLayer.cs" />

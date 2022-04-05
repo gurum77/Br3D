@@ -67,7 +67,7 @@ namespace Br3D
 
             hModel.ActionMode = actionType.None;
             hModel.BoundingBoxChanged += HModel_BoundingBoxChanged;
-            
+
         }
 
         private void HModel_BoundingBoxChanged(object sender)
@@ -186,7 +186,7 @@ namespace Br3D
             SetTileText(tileNavItemCircle, LanguageHelper.Tr("Circle"));
             SetTileText(tileNavItemPolyline, LanguageHelper.Tr("Polyline"));
             SetTileText(tileNavItemText, LanguageHelper.Tr("Text"));
-            
+
 
             // sub tile
             SetTileText(tileNavSubItemArcCenterStartEnd, LanguageHelper.Tr("Center, start, end point"));
@@ -369,7 +369,7 @@ namespace Br3D
                 if (!gripEditing && ActionBase.runningAction == null)
                 {
                     var item = model.GetItemUnderMouseCursor(e.Location);
-                    
+
                     // 속성창 갱신
                     if (propertyGridControl1.Visible)
                         RefreshPropertyGridControl(item?.Item);
@@ -626,100 +626,32 @@ namespace Br3D
             functionByElement.Add(tileNavItemScale, ScaleEntity);
             functionByElement.Add(tileNavItemRotate, RotateEntity);
             functionByElement.Add(tileNavItemOffset, OffsetEntity);
+            functionByElement.Add(tileNavItemExplode, ExplodeEntity);
 
 
         }
 
-        async void OffsetEntity()
-        {
-            ActionOffset ac = new ActionOffset(model);
-            await ac.RunAsync();
-        }
-
-        async void RotateEntity()
-        {
-            ActionRotate ac = new ActionRotate(model);
-            await ac.RunAsync();
-        }
-
-        async void ScaleEntity()
-        {
-            ActionScale ac = new ActionScale(model);
-            await ac.RunAsync();
-        }
-
-        async void CopyEntity()
-        {
-            ActionCopy ac = new ActionCopy(model);
-            await ac.RunAsync();
-        }
-
-        async void MoveEntity()
-        {
-            ActionMove ac = new ActionMove(model);
-            await ac.RunAsync();
-        }
-        
-        async void EraseEntity()
-        {
-            ActionErase ac = new ActionErase(model);
-            await ac.RunAsync();
-        }
-
+        async void ExplodeEntity() => await new ActionExplode(model).RunAsync();
+        async void OffsetEntity() => await new ActionOffset(model).RunAsync();
+        async void RotateEntity() => await new ActionRotate(model).RunAsync();
+        async void ScaleEntity() => await new ActionScale(model).RunAsync();
+        async void CopyEntity() => await new ActionCopy(model).RunAsync();
+        async void MoveEntity() => await new ActionMove(model).RunAsync();
+        async void EraseEntity() => await new ActionErase(model).RunAsync();
         async void MText()
         {
-            ActionText ac = new ActionText(model);
+            var ac = new ActionText(model);
             ac.multilineText = true;
             await ac.RunAsync();
         }
-
-        async void DrawText()
-        {
-            ActionText ac = new ActionText(model);
-            await ac.RunAsync();
-        }
-
-        async void Polyline()
-        {
-            ActionPolyline ac = new ActionPolyline(model);
-            await ac.RunAsync();
-        }
-
-        async void Cylinder()
-        {
-            ActionCylinder ac = new ActionCylinder(model);
-            await ac.RunAsync();
-        }
-
-        async void ArcCenterStartEnd()
-        {
-            ActionArc ac = new ActionArc(model, ActionArc.Method.centerStartEnd);
-            await ac.RunAsync();
-        }
-        async void ArcFirstSecondThird()
-        {
-            ActionArc ac = new ActionArc(model, ActionArc.Method.firstSecondThird);
-            await ac.RunAsync();
-        }
-
-        async void Arc()
-        {
-            ActionArc ac = new ActionArc(model, ActionArc.Method.firstSecondThird);
-            await ac.RunAsync();
-        }
-
-        async void Circle()
-        {
-            ActionCircle ac = new ActionCircle(model);
-            await ac.RunAsync();
-        }
-
-        async void Line()
-        {
-            ActionLine ac = new ActionLine(model);
-            await ac.RunAsync();
-        }
-
+        async void DrawText() => await new ActionText(model).RunAsync();
+        async void Polyline() => await new ActionPolyline(model).RunAsync();
+        async void Cylinder() => await new ActionCylinder(model).RunAsync();
+        async void ArcCenterStartEnd() => await new ActionArc(model, ActionArc.Method.centerStartEnd).RunAsync();
+        async void ArcFirstSecondThird() => await new ActionArc(model, ActionArc.Method.firstSecondThird).RunAsync();
+        async void Arc() => await new ActionArc(model, ActionArc.Method.firstSecondThird).RunAsync();
+        async void Circle() => await new ActionCircle(model).RunAsync();
+        async void Line() => await new ActionLine(model).RunAsync();
         void RegenAll()
         {
             if (isDwg)
@@ -737,41 +669,11 @@ namespace Br3D
 
             RefreshDataSource();
         }
-
-
-        void LineType()
-        {
-            ActionLineType ac = new ActionLineType(model, this);
-            ac.Run();
-        }
-
-        void TextStyle()
-        {
-            ActionTextStyle ac = new ActionTextStyle(model, this);
-            ac.Run();
-        }
-
-        void Layer()
-        {
-            ActionLayer ac = new ActionLayer(model, this);
-            ac.Run();
-        }
-
-        void About()
-        {
-            FormAbout form = new FormAbout();
-            form.ShowDialog();
-
-        }
-
-
-
-
-        void Homepage()
-        {
-            System.Diagnostics.Process.Start("http://hileejaeho.cafe24.com/kr-br3d/");
-        }
-
+        void LineType() => new ActionLineType(model, this).Run();
+        void TextStyle() => new ActionTextStyle(model, this).Run();
+        void Layer() => new ActionLayer(model, this).Run();
+        void About() => new FormAbout().ShowDialog();
+        void Homepage() => System.Diagnostics.Process.Start("http://hileejaeho.cafe24.com/kr-br3d/");
         void Language()
         {
             tileNavItemLanguage.Tile.ShowDropDown();
