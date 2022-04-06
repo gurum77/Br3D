@@ -11,12 +11,15 @@ namespace hanee.ThreeD
     static public class EntitiesHelper
     {
         // 선택한 객체를 temp entities로 설정
-        static public void ToTempEntities(this List<Entity> entities, devDept.Eyeshot.Environment environment)
+        static public void ToTempEntities(this List<Entity> entities, devDept.Eyeshot.Environment environment, bool clone=true)
         {
             var regenParams = new RegenParams(0.001, environment);
 
             foreach (var ent in entities)
             {
+                if (ent == null)
+                    continue;
+
                 // block이면 explode해서 넣는다.
                 if (ent is BlockReference)
                 {
@@ -27,7 +30,7 @@ namespace hanee.ThreeD
                         if (ee is BlockReference)
                             continue;
 
-                        var tempEnt = ee.Clone() as Entity;
+                        var tempEnt = !clone ? ee : ee.Clone() as Entity;
                         var color = tempEnt.Color;
                         if (tempEnt.ColorMethod == colorMethodType.byLayer)
                         {
@@ -42,7 +45,7 @@ namespace hanee.ThreeD
                 }
                 else
                 {
-                    var tempEnt = ent.Clone() as Entity;
+                    var tempEnt = !clone ? ent : ent.Clone() as Entity;
                     var color = tempEnt.Color;
                     if (tempEnt.ColorMethod == colorMethodType.byLayer)
                     {
