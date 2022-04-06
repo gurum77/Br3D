@@ -98,6 +98,7 @@
     <Compile Include="FloatHelper.cs" />
     <Compile Include="HaneeCollection.cs" />
     <Compile Include="IBX.cs" />
+    <Compile Include="ICurveHelper.cs" />
     <Compile Include="IndexTriangleHelper.cs" />
     <Compile Include="LegendHelper.cs" />
     <Compile Include="LinearDimHelper.cs" />
