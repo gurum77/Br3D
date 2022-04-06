@@ -918,8 +918,48 @@ namespace hanee.ThreeD
             return selectedEntities;
         }
 
+        // 객체 1개를 선택받는다.
+        public async Task<KeyValuePair<Entity, KeyEventArgs>> GetEntityOrKey(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null)
+        {
+            ActionBase.StartInput(environment, message, stepID, UserInput.SelectingEntity);
+            ActionBase.StartInput(environment, message, stepID, UserInput.GettingKey);
 
-        // 객체 1개를 선택받거나 키를 입력받는다.
+            ActionBase.dynamicHighlight = dynamicHighlight;
+            ActionBase.selectableType = selectableType;
+
+            while (ActionBase.userInputting[(int)UserInput.SelectingEntity] == true &&
+                ActionBase.userInputting[(int)UserInput.GettingKey] == true
+                )
+            {
+                // 스탭이 중지되었다면 그냥 보낸다.
+                if (ActionBase.IsStopedCurrentStep)
+                {
+                    ActionBase.EndInput(UserInput.SelectingEntity);
+                    ActionBase.EndInput(UserInput.GettingKey);
+                    break;
+                }
+
+                await Task.Delay(100);
+            }
+
+            ActionBase.cursorText = null;
+            if (selectedEntity != null)
+            {
+                selectedEntity.Selected = true;
+                environment.Invalidate();
+            }
+
+            var resultEntity = selectedEntity;
+            var resultKey = key;
+            if (ActionBase.userInputting[(int)UserInput.SelectingEntity])
+                resultEntity = null;
+            if (ActionBase.userInputting[(int)UserInput.GettingKey])
+                resultKey = null;
+
+            return new KeyValuePair<Entity, KeyEventArgs>(resultEntity, resultKey);
+        }
+
+        // 객체 1개를 선택받는다.
         public async Task<Entity> GetEntity(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null)
         {
             ActionBase.StartInput(environment, message, stepID, UserInput.SelectingEntity);

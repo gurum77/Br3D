@@ -628,8 +628,10 @@ namespace Br3D
             functionByElement.Add(tileNavItemOffset, OffsetEntity);
             functionByElement.Add(tileNavItemExplode, ExplodeEntity);
             functionByElement.Add(tileNavItemTrim, TrimEntity);
+            functionByElement.Add(tileNavItemFillet, FilletEntity);
         }
 
+        async void FilletEntity() => await new ActionFillet(model).RunAsync();
         async void TrimEntity() => await new ActionTrim(model).RunAsync();
         async void ExplodeEntity() => await new ActionExplode(model).RunAsync();
         async void OffsetEntity() => await new ActionOffset(model).RunAsync();

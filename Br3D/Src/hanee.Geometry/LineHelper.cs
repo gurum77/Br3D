@@ -44,6 +44,11 @@ namespace hanee.Geometry
                 return new Line(x, y, x + infiniteLength, y);
         }
 
+        static public Line CreateOneDirInfiniteLine(Point3D pt, Vector3D dir)
+        {
+            return new Line(pt, pt + dir * infiniteLength);
+        }
+
         /// <summary>
         /// 거의 무한대의 선을 만든다.
         /// </summary>

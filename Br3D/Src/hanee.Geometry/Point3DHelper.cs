@@ -6,6 +6,15 @@ namespace hanee.Geometry
 {
     static public class Point3DHelper
     {
+
+        public static Point3D IntersectionWith(this Point3D pt, Vector3D dir, Point3D otherPt, Vector3D otherDir)
+        {
+            var l1 = LineHelper.CreateInfinitLine(pt, dir);
+            var l2 = LineHelper.CreateInfinitLine(otherPt, otherDir);
+            var matchPoints = l1.IntersectWith(l2);
+            return matchPoints != null && matchPoints.Length > 0 ? matchPoints[0] : null;
+        }
+
         public static void CopyFrom(this Point3D pt, Point3D fromPt)
         {
             pt.X = fromPt.X;
