@@ -626,6 +626,8 @@ namespace Br3D
             functionByElement.Add(tileNavItemScale, ScaleEntity);
             functionByElement.Add(tileNavItemRotate, RotateEntity);
             functionByElement.Add(tileNavItemOffset, OffsetEntity);
+            functionByElement.Add(tileNavItemMirror, MirrorEntity);
+
             functionByElement.Add(tileNavItemExplode, ExplodeEntity);
             functionByElement.Add(tileNavItemTrim, TrimEntity);
             functionByElement.Add(tileNavItemFillet, FilletEntity);
@@ -634,6 +636,7 @@ namespace Br3D
         async void FilletEntity() => await new ActionFillet(model).RunAsync();
         async void TrimEntity() => await new ActionTrim(model).RunAsync();
         async void ExplodeEntity() => await new ActionExplode(model).RunAsync();
+        async void MirrorEntity() => await new ActionMirror(model).RunAsync();
         async void OffsetEntity() => await new ActionOffset(model).RunAsync();
         async void RotateEntity() => await new ActionRotate(model).RunAsync();
         async void ScaleEntity() => await new ActionScale(model).RunAsync();

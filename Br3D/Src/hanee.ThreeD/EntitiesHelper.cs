@@ -43,6 +43,7 @@ namespace hanee.ThreeD
                         environment.TempEntities.Add(tempEnt);
                     }
                 }
+              
                 else
                 {
                     var tempEnt = !clone ? ent : ent.Clone() as Entity;
