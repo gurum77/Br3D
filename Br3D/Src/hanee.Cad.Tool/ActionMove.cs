@@ -33,6 +33,7 @@ namespace hanee.Cad.Tool
             {
                 ent.Translate(vec.X, vec.Y, vec.Z);
             }
+            environment.TempEntities.RegenAfterModify();
 
             lastPoint = point3D.Clone() as Point3D;
         }
