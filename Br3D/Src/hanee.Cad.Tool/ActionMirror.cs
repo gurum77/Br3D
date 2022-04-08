@@ -90,7 +90,7 @@ namespace hanee.Cad.Tool
                     ent.TransformBy(lastMirror);
                 ent.TransformBy(mirror);
             }
-
+            environment.TempEntities.RegenAfterModify();
             lastMirror = mirror;
 
             previewEntity = new Line(firstPoint, point3D);

@@ -12,8 +12,9 @@ namespace hanee.ThreeD
         {
             foreach (Entity ent in entities)
             {
-                if (ent is CompositeCurve)
+                if (ent is ICurve)
                     ent.Regen(0.001);
+                
             }
         }
     }

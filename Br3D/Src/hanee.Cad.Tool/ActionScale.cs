@@ -106,7 +106,12 @@ namespace hanee.Cad.Tool
             Point3D boxMin = null, boxMax = null;
             foreach (var ent in environment.TempEntities)
             {
-                if (boxMin == null)
+                if (ent.BoxMin == null || ent.BoxMax == null)
+                    ent.Regen(0.001);
+                if (ent.BoxMin == null || ent.BoxMax == null)
+                    continue;
+
+                    if (boxMin == null)
                     boxMin = ent.BoxMin.Clone() as Point3D;
                 else
                 {
