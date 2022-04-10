@@ -616,6 +616,7 @@ namespace Br3D
             functionByElement.Add(tileNavSubItemArcCenterStartEnd, ArcCenterStartEnd);
             functionByElement.Add(tileNavItemCylinder, Cylinder);
             functionByElement.Add(tileNavItemPolyline, Polyline);
+            functionByElement.Add(tileNavItemSpline, Spline);
             functionByElement.Add(tileNavItemText, DrawText);   // Text는 formmain의 properties여서 이름을 drawtext로함
             functionByElement.Add(tileNavSubItemText, DrawText);
             functionByElement.Add(tileNavSubItemMText, MText);
@@ -630,10 +631,14 @@ namespace Br3D
 
             functionByElement.Add(tileNavItemExplode, ExplodeEntity);
             functionByElement.Add(tileNavItemTrim, TrimEntity);
+            //functionByElement.Add(tileNavItemExtend, ExtendEntity);
             functionByElement.Add(tileNavItemFillet, FilletEntity);
+            functionByElement.Add(tileNavSubItemChamfer, ChamferEntity);
         }
 
+        async void ChamferEntity() => await new ActionFillet(model) { chamfer = true}.RunAsync();
         async void FilletEntity() => await new ActionFillet(model).RunAsync();
+        //async void ExtendEntity() => await new ActionExtend(model).RunAsync();
         async void TrimEntity() => await new ActionTrim(model).RunAsync();
         async void ExplodeEntity() => await new ActionExplode(model).RunAsync();
         async void MirrorEntity() => await new ActionMirror(model).RunAsync();
@@ -651,6 +656,7 @@ namespace Br3D
         }
         async void DrawText() => await new ActionText(model).RunAsync();
         async void Polyline() => await new ActionPolyline(model).RunAsync();
+        async void Spline() => await new ActionPolyline(model) { spline = true }.RunAsync();
         async void Cylinder() => await new ActionCylinder(model).RunAsync();
         async void ArcCenterStartEnd() => await new ActionArc(model, ActionArc.Method.centerStartEnd).RunAsync();
         async void ArcFirstSecondThird() => await new ActionArc(model, ActionArc.Method.firstSecondThird).RunAsync();

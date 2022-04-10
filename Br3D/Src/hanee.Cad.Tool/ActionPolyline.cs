@@ -11,6 +11,7 @@ namespace hanee.Cad.Tool
     public class ActionPolyline : ActionBase
     {
         List<Point3D> points = new List<Point3D>();
+        public bool spline { get; set; } = false;
         public ActionPolyline(Environment environment) : base(environment)
         {
         }
@@ -31,9 +32,10 @@ namespace hanee.Cad.Tool
             cutPoints.Add(point3D.Clone() as Point3D);
 
             var lp = MakePolyline(cutPoints, true);
-            lp.Regen(0.001);
+
+            //lp.Regen(0.001);
             GetModel().TempEntities.Clear();
-            GetModel().TempEntities.Add(lp);
+            GetModel().TempEntities.Add((Entity)lp);
             GetModel().Invalidate();
         }
         public async Task<bool> RunAsync()
@@ -53,7 +55,7 @@ namespace hanee.Cad.Tool
                         var pline = MakePolyline(points);
                         if (pline != null)
                         {
-                            GetModel().Entities.Add(pline);
+                            GetModel().Entities.Add((Entity)pline);
                         }
                     }
                     break;
@@ -68,14 +70,44 @@ namespace hanee.Cad.Tool
             return true;
         }
 
-        LinearPath MakePolyline(List<Point3D> curPoints, bool tempEntity=false)
+        ICurve MakePolyline(List<Point3D> curPoints, bool tempEntity = false)
         {
             if (curPoints == null || curPoints.Count < 2)
                 return null;
 
-            var lp = new LinearPath(curPoints);
-            GetHModel()?.entityPropertiesManager?.SetDefaultProperties(lp, tempEntity);
-            return lp;
+            if (spline && curPoints.Count > 2)
+            {
+                var sp = Curve.CubicSplineInterpolation(curPoints);
+
+                // spline은 미리보기 불가
+                if (tempEntity)
+                {
+                    var subd = 100;
+                    Point3D[] pts = new Point3D[subd + 1];
+
+                    for (int i = 0; i <= subd; i++)
+                    {
+                        pts[i] = sp.PointAt(sp.Domain.ParameterAt((double)i / subd));
+                    }
+                    var lp = new LinearPath(pts);
+                    GetHModel()?.entityPropertiesManager?.SetDefaultProperties(lp, tempEntity);
+                    return lp;
+                }
+                else
+                {
+                    var lp = new LinearPath(curPoints);
+                    GetHModel()?.entityPropertiesManager?.SetDefaultProperties(sp, tempEntity);
+                    return sp;
+
+                }
+            }
+            else
+            {
+
+                var lp = new LinearPath(curPoints);
+                GetHModel()?.entityPropertiesManager?.SetDefaultProperties(lp, tempEntity);
+                return lp;
+            }
         }
     }
 }

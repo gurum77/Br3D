@@ -11,6 +11,7 @@ namespace hanee.Cad.Tool
 {
     public class ActionFillet : ActionBase
     {
+        public bool chamfer { get; set; } = false;
         List<Entity> filletCurves = new List<Entity>();
         double radius = 1.0;
         public ActionFillet(devDept.Eyeshot.Environment environment) : base(environment)
@@ -121,7 +122,7 @@ namespace hanee.Cad.Tool
                     MessageBox.Show(LanguageHelper.Tr("Select different entities"));
                     continue;
                 }
-                
+
 
                 var firstCurve = firstEntity as ICurve;
                 var secondCurve = secondEntity as ICurve;
@@ -130,24 +131,50 @@ namespace hanee.Cad.Tool
 
                 try
                 {
-                    Curve.Fillet(firstCurve, secondCurve, radius, true, true, false, false, out Arc filletArc1);
-                    filletArc1?.CopyAttributes(firstEntity);
-                    filletCurves.Add(filletArc1);
+                    if (chamfer)
+                    {
+                        Curve.Chamfer(firstCurve, secondCurve, radius, true, true, false, false, out Line filletArc1);
+                        filletArc1?.CopyAttributes(firstEntity);
+                        filletCurves.Add(filletArc1);
 
-                    Curve.Fillet(firstCurve, secondCurve, radius, true, false, false, false, out Arc filletArc2);
-                    filletArc2?.CopyAttributes(firstEntity);
-                    filletCurves.Add(filletArc2);
+                        Curve.Chamfer(firstCurve, secondCurve, radius, true, false, false, false, out Line filletArc2);
+                        filletArc2?.CopyAttributes(firstEntity);
+                        filletCurves.Add(filletArc2);
 
-                    Curve.Fillet(firstCurve, secondCurve, radius, false, true, false, false, out Arc filletArc3);
-                    filletArc3?.CopyAttributes(firstEntity);
-                    filletCurves.Add(filletArc3);
+                        Curve.Chamfer(firstCurve, secondCurve, radius, false, true, false, false, out Line filletArc3);
+                        filletArc3?.CopyAttributes(firstEntity);
+                        filletCurves.Add(filletArc3);
 
-                    Curve.Fillet(firstCurve, secondCurve, radius, false, false, false, false, out Arc filletArc4);
-                    filletArc4?.CopyAttributes(firstEntity);
-                    filletCurves.Add(filletArc4);
+                        Curve.Chamfer(firstCurve, secondCurve, radius, false, false, false, false, out Line filletArc4);
+                        filletArc4?.CopyAttributes(firstEntity);
+                        filletCurves.Add(filletArc4);
 
-                    environment.TempEntities.Clear();
-                    filletCurves.ToTempEntities(environment, false);
+                        environment.TempEntities.Clear();
+                        filletCurves.ToTempEntities(environment, false);
+                    }
+                    else
+                    {
+
+                        Curve.Fillet(firstCurve, secondCurve, radius, true, true, false, false, out Arc filletArc1);
+                        filletArc1?.CopyAttributes(firstEntity);
+                        filletCurves.Add(filletArc1);
+
+                        Curve.Fillet(firstCurve, secondCurve, radius, true, false, false, false, out Arc filletArc2);
+                        filletArc2?.CopyAttributes(firstEntity);
+                        filletCurves.Add(filletArc2);
+
+                        Curve.Fillet(firstCurve, secondCurve, radius, false, true, false, false, out Arc filletArc3);
+                        filletArc3?.CopyAttributes(firstEntity);
+                        filletCurves.Add(filletArc3);
+
+                        Curve.Fillet(firstCurve, secondCurve, radius, false, false, false, false, out Arc filletArc4);
+                        filletArc4?.CopyAttributes(firstEntity);
+                        filletCurves.Add(filletArc4);
+
+                        environment.TempEntities.Clear();
+                        filletCurves.ToTempEntities(environment, false);
+                    }
+
                 }
                 catch (Exception e)
                 {
@@ -172,16 +199,35 @@ namespace hanee.Cad.Tool
                 {
                     // circle은 trim 을 할수 없음.
                     bool trim = firstCurve.IsClosed || secondCurve.IsClosed ? false : true;
-                    Curve.Fillet(firstCurve, secondCurve, radius, flip1, flip2, trim, trim, out Arc filletArc);
-                    if (filletArc != null)
+                    if (chamfer)
                     {
-                        var entities = new EntityList();
-                        entities.Add(firstEntity);
-                        entities.Add(secondEntity);
-                        entities.Add(filletArc);
-                        entities.Regen(regenOptions);
+                        Curve.Chamfer(firstCurve, secondCurve, radius, flip1, flip2, trim, trim, out Line filletLine);
+                        if (filletLine != null)
+                        {
+                            var entities = new EntityList();
+                            entities.Add(firstEntity);
+                            entities.Add(secondEntity);
+                            entities.Add(filletLine);
+                            entities.Regen(regenOptions);
 
-                        environment.Entities.AddRange(entities);
+                            environment.Entities.AddRange(entities);
+
+                        }
+                        else
+                        {
+
+                            Curve.Fillet(firstCurve, secondCurve, radius, flip1, flip2, trim, trim, out Arc filletArc);
+                            if (filletArc != null)
+                            {
+                                var entities = new EntityList();
+                                entities.Add(firstEntity);
+                                entities.Add(secondEntity);
+                                entities.Add(filletArc);
+                                entities.Regen(regenOptions);
+
+                                environment.Entities.AddRange(entities);
+                            }
+                        }
                     }
                 }
                 catch (Exception e)
