@@ -634,8 +634,17 @@ namespace Br3D
             //functionByElement.Add(tileNavItemExtend, ExtendEntity);
             functionByElement.Add(tileNavItemFillet, FilletEntity);
             functionByElement.Add(tileNavSubItemChamfer, ChamferEntity);
+
+            // dimension
+            functionByElement.Add(tileNavItemDiameter, DimDiameter);
+            functionByElement.Add(tileNavItemRadius, DimRadius);
+            functionByElement.Add(tileNavItemDimHorizontal, DimHorizontal);
+
         }
 
+        async void DimHorizontal() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.horizontal}.RunAsync();
+        async void DimRadius() => await new ActionDimDiameter(model) { radius = true}.RunAsync();
+        async void DimDiameter() => await new ActionDimDiameter(model).RunAsync();
         async void ChamferEntity() => await new ActionFillet(model) { chamfer = true}.RunAsync();
         async void FilletEntity() => await new ActionFillet(model).RunAsync();
         //async void ExtendEntity() => await new ActionExtend(model).RunAsync();

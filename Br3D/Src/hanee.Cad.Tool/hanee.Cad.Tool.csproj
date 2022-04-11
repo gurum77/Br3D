@@ -98,6 +98,8 @@
     <Compile Include="ActionCircle.cs" />
     <Compile Include="ActionCopy.cs" />
     <Compile Include="ActionCylinder.cs" />
+    <Compile Include="ActionDimDiameter.cs" />
+    <Compile Include="ActionDimLinear.cs" />
     <Compile Include="ActionDist.cs" />
     <Compile Include="ActionErase.cs" />
     <Compile Include="ActionExplode.cs" />

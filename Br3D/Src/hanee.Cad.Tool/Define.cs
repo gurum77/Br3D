@@ -8,7 +8,7 @@ namespace hanee.Cad.Tool
         static public string DefaultLayer = "0";
         static public string Only2DLayer = "Only2D";
         static public string Only3DLayer = "Only3D";
-        static public float DefaultTextHeight = 12.0f;
+        static public float DefaultTextHeight = 3.0f;
         static private System.Drawing.Font defaultFont;
         static public System.Drawing.Font DefaultFont
         {
