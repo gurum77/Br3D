@@ -639,9 +639,13 @@ namespace Br3D
             functionByElement.Add(tileNavItemDiameter, DimDiameter);
             functionByElement.Add(tileNavItemRadius, DimRadius);
             functionByElement.Add(tileNavItemDimHorizontal, DimHorizontal);
+            functionByElement.Add(tileNavItemDimVertical, DimVertical);
+            functionByElement.Add(tileNavItemDimAlign, DimAlign);
 
         }
 
+        async void DimAlign() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.aligned}.RunAsync();
+        async void DimVertical() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.vertical }.RunAsync();
         async void DimHorizontal() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.horizontal}.RunAsync();
         async void DimRadius() => await new ActionDimDiameter(model) { radius = true}.RunAsync();
         async void DimDiameter() => await new ActionDimDiameter(model).RunAsync();
