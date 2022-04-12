@@ -5,6 +5,19 @@ namespace hanee.Geometry
 {
     static public class LinearDimHelper
     {
+        static public LinearPath PreviewEntity(this LinearDim ld)
+        {
+            var axisX = ld.Plane.AxisX;
+            var axisY = ld.Plane.AxisY;
+            var pt1 = ld.ExtLine1.IntersectionWith(axisY, ld.DimLinePosition, axisX);
+            var pt2 = ld.ExtLine2.IntersectionWith(axisY, ld.DimLinePosition, axisX);
+
+            var lp = new LinearPath(ld.ExtLine1, pt1, ld.DimLinePosition, pt2, ld.ExtLine2);
+            lp.CopyAttributes(ld);
+                        
+            return lp;
+        }
+
         /// <summary>
         /// 지시선의 끝 좌표
         /// </summary>

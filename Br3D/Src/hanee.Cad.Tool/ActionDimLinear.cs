@@ -157,9 +157,11 @@ namespace hanee.Cad.Tool
                 GetDimInfo(textPoint, out Vector3D axisX, out Point3D extPt1, out Point3D extPt2, out Point3D pt1, out Point3D pt2);
                 var axisY = Vector3D.Cross(Vector3D.AxisZ, axisX);
                 var plane = new Plane(new Point3D(0, 0, 0), axisX, axisY);
-                var dim = new LinearDim(plane, extPt1, extPt2, textPoint, Define.DefaultTextHeight);
+                var dim = new LinearDim(plane, firstPoint, secondPoint, textPoint, Define.DefaultTextHeight);
                 environment.Entities.Add(dim);
                 environment.Entities.Regen();
+
+                environment.TempEntities.Clear();
                 environment.Invalidate();
 
             }

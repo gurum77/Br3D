@@ -138,6 +138,8 @@
     <Compile Include="KeysHelper.cs" />
     <Compile Include="LanguageHelper.cs" />
     <Compile Include="LanguageOptionsHelper.cs" />
+    <Compile Include="LeaderGripManager.cs" />
+    <Compile Include="LinearDimGripManager.cs" />
     <Compile Include="LinearPathGripManager.cs" />
     <Compile Include="LineGripManager.cs" />
     <Compile Include="LineTypeHelper.cs" />
@@ -153,6 +155,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="PropertyGridHelper.cs" />
+    <Compile Include="RadialDimGripManager.cs" />
     <Compile Include="SelectionManager.cs" />
     <Compile Include="TempEntityListHelper.cs" />
     <Compile Include="TextGripManager.cs" />

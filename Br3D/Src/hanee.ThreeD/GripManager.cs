@@ -27,6 +27,11 @@ namespace hanee.ThreeD
             GripManager.entityGripManagers.Add(typeof(Text), typeof(TextGripManager));
             GripManager.entityGripManagers.Add(typeof(BlockReference), typeof(BlockReferenceGripManager));
             GripManager.entityGripManagers.Add(typeof(BlockReferenceEx), typeof(BlockReferenceGripManager));
+            GripManager.entityGripManagers.Add(typeof(Leader), typeof(LeaderGripManager));
+            GripManager.entityGripManagers.Add(typeof(RadialDim), typeof(RadialDimGripManager));
+            GripManager.entityGripManagers.Add(typeof(DiametricDim), typeof(RadialDimGripManager));
+            GripManager.entityGripManagers.Add(typeof(LinearDim), typeof(LinearDimGripManager));
+            
         }
 
         // grip point를 모두 지운다.
@@ -70,8 +75,8 @@ namespace hanee.ThreeD
                 return;
 
             // block인 경우 explode 한 객체만 추가한다.
-            var br = cloneEnt as BlockReference;
-            if (br != null)
+            bool existExplodedEntities = gripPoints[0].explodedEntities?.Length > 0;
+            if (existExplodedEntities)
             {
                 foreach (var gp in gripPoints)
                 {
