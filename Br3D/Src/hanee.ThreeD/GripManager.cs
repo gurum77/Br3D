@@ -21,8 +21,8 @@ namespace hanee.ThreeD
 
             GripManager.entityGripManagers.Clear();
             GripManager.entityGripManagers.Add(typeof(Line), typeof(LineGripManager));
+            GripManager.entityGripManagers.Add(typeof(Arc), typeof(ArcGripManager)); 
             GripManager.entityGripManagers.Add(typeof(Circle), typeof(CircleGripManager));
-            GripManager.entityGripManagers.Add(typeof(Arc), typeof(ArcGripManager));
             GripManager.entityGripManagers.Add(typeof(LinearPath), typeof(LinearPathGripManager));
             GripManager.entityGripManagers.Add(typeof(Text), typeof(TextGripManager));
             GripManager.entityGripManagers.Add(typeof(BlockReference), typeof(BlockReferenceGripManager));

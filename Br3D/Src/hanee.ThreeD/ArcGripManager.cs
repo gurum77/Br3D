@@ -20,6 +20,7 @@ namespace hanee.ThreeD
                 return false;
 
             originArc.Center.CopyFrom(arc.Center);
+            originArc.Radius = arc.Radius;
             
            
             return true;
@@ -32,14 +33,19 @@ namespace hanee.ThreeD
                 return null;
 
             GripPoint cp = new GripPoint(arc, GripPoint.GripType.self, arc.Center);
-            
+            GripPoint mp = new GripPoint(arc, GripPoint.GripType.circleRadius, arc.MidPoint);
 
-            return new List<GripPoint>() { cp};
+
+            return new List<GripPoint>() { cp, mp};
 
         }
 
         public void MouseMove(Model model, GripPoint gp, Point3D newPt)
         {
+            var arc = gp.entity as Arc;
+            if (gp.gripType == GripPoint.GripType.circleRadius)
+                arc.Radius = gp.Position.DistanceTo(arc.Center);
+           
             var regenParams = new RegenParams(0.001, model);
             gp.entity.Regen(regenParams);
         }
