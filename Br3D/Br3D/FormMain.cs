@@ -641,15 +641,17 @@ namespace Br3D
             functionByElement.Add(tileNavItemDimHorizontal, DimHorizontal);
             functionByElement.Add(tileNavItemDimVertical, DimVertical);
             functionByElement.Add(tileNavItemDimAlign, DimAlign);
+            functionByElement.Add(tileNavItemDimLeader, DimLeader);
 
         }
 
-        async void DimAlign() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.aligned}.RunAsync();
+        async void DimLeader() => await new ActionDimLeader(model).RunAsync();
+        async void DimAlign() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.aligned }.RunAsync();
         async void DimVertical() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.vertical }.RunAsync();
-        async void DimHorizontal() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.horizontal}.RunAsync();
-        async void DimRadius() => await new ActionDimDiameter(model) { radius = true}.RunAsync();
+        async void DimHorizontal() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.horizontal }.RunAsync();
+        async void DimRadius() => await new ActionDimDiameter(model) { radius = true }.RunAsync();
         async void DimDiameter() => await new ActionDimDiameter(model).RunAsync();
-        async void ChamferEntity() => await new ActionFillet(model) { chamfer = true}.RunAsync();
+        async void ChamferEntity() => await new ActionFillet(model) { chamfer = true }.RunAsync();
         async void FilletEntity() => await new ActionFillet(model).RunAsync();
         //async void ExtendEntity() => await new ActionExtend(model).RunAsync();
         async void TrimEntity() => await new ActionTrim(model).RunAsync();

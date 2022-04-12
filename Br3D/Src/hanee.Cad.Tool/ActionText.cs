@@ -98,17 +98,7 @@ namespace hanee.Cad.Tool
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     var height = insPoint.DistanceTo(heightPoint);
-                    var textString = form.RichTextBox.Text;
-                    textString = textString.Replace("\n", System.Environment.NewLine);
-                    var angle = (dirPoint - insPoint).To2D().ToDir().ToRadian();
-                    var plane = new Plane(insPoint, Vector3D.AxisZ);
-                    plane.Rotate(angle, Vector3D.AxisZ, insPoint);
-
-                    var text = new Text(plane, textString, height);
-                    if (form.RichTextBox.Multiline)
-                        text = new MultilineText(plane, textString, 10, height, height * 1.2);
-                    text.Color = System.Drawing.Color.White;
-                    text.ColorMethod = colorMethodType.byEntity;
+                    var text = MakeText(insPoint, dirPoint, height, form.RichTextBox);
                     environment.Entities.Add(text);
                 }
                 else
@@ -122,5 +112,21 @@ namespace hanee.Cad.Tool
             return true;
         }
 
+        static public Text MakeText(Point3D insPoint, Point3D dirPoint, double height, RichTextBox richTextBox)
+        {
+            var textString = richTextBox.Text;
+            textString = textString.Replace("\n", System.Environment.NewLine);
+            var angle = (dirPoint - insPoint).To2D().ToDir().ToRadian();
+            var plane = new Plane(insPoint, Vector3D.AxisZ);
+            plane.Rotate(angle, Vector3D.AxisZ, insPoint);
+
+            var text = new Text(plane, textString, height);
+            if (richTextBox.Multiline)
+                text = new MultilineText(plane, textString, 10, height, height * 1.2);
+            text.Color = System.Drawing.Color.White;
+            text.ColorMethod = colorMethodType.byEntity;
+
+            return text;
+        }
     }
 }
