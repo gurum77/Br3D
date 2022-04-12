@@ -31,7 +31,8 @@ namespace hanee.ThreeD
             GripManager.entityGripManagers.Add(typeof(RadialDim), typeof(RadialDimGripManager));
             GripManager.entityGripManagers.Add(typeof(DiametricDim), typeof(RadialDimGripManager));
             GripManager.entityGripManagers.Add(typeof(LinearDim), typeof(LinearDimGripManager));
-            
+            GripManager.entityGripManagers.Add(typeof(Curve), typeof(CurveGripManager));
+
         }
 
         // grip point를 모두 지운다.
