@@ -22,7 +22,7 @@ namespace hanee.Cad.Tool
             var regenOptions = new RegenOptions();
             while (true)
             {
-                var entities = await GetEntities("Select entities(Enter : explode)");
+                var entities = await GetEntities(LanguageHelper.Tr("Select entities(Enter : explode)"));
                 if (IsCanceled())
                     break;
 

@@ -1,6 +1,7 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using hanee.Geometry;
 using hanee.ThreeD;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace hanee.Cad.Tool
         public override async void Run()
         { await RunAsync(); }
 
-        protected override void OnMouseMove(Environment environment, MouseEventArgs e)
+        protected override void OnMouseMove(devDept.Eyeshot.Environment environment, MouseEventArgs e)
         {
             var current = point3D;
             if (firstPoint == null || secondPoint == null || current == null)
@@ -157,6 +158,8 @@ namespace hanee.Cad.Tool
                 GetDimInfo(textPoint, out Vector3D axisX, out Point3D extPt1, out Point3D extPt2, out Point3D pt1, out Point3D pt2);
                 var axisY = Vector3D.Cross(Vector3D.AxisZ, axisX);
                 var plane = new Plane(new Point3D(0, 0, 0), axisX, axisY);
+
+                textPoint = ((firstPoint + secondPoint) / 2).IntersectionWith(axisY, textPoint, axisX);
                 var dim = new LinearDim(plane, firstPoint, secondPoint, textPoint, Define.DefaultTextHeight);
                 environment.Entities.Add(dim);
                 environment.Entities.Regen();

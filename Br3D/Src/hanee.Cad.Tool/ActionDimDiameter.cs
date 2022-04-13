@@ -44,7 +44,7 @@ namespace hanee.Cad.Tool
             while (true)
             {
                 selectedCircle = null;
-                var curve = await GetEntity("Select circle, arc", -1, true, entityTypes);
+                var curve = await GetEntity(LanguageHelper.Tr("Select circle, arc"), -1, true, entityTypes);
                 if (IsCanceled())
                     break;
                 selectedCircle = curve as Circle;
@@ -52,9 +52,10 @@ namespace hanee.Cad.Tool
                     continue;
 
 
-                var msg = $"Text point - Diameter : {selectedCircle.Diameter:0.000}";
+                var txt = radius ? LanguageHelper.Tr("Text point - Radius") : LanguageHelper.Tr("Text point - Diameter");
+                var msg = $"{txt} : {selectedCircle.Diameter:0.000}";
                 if(radius)
-                    msg = $"Text point - Radius : {selectedCircle.Radius:0.000}";
+                    msg = $"{txt} : {selectedCircle.Radius:0.000}";
                 var pt = await GetPoint3D(msg);
                 if (IsCanceled())
                     break;

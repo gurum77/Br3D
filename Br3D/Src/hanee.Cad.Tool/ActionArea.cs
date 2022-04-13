@@ -28,7 +28,7 @@ namespace hanee.Cad.Tool
             points = new List<Point3D>();
             while (true)
             {
-                var pt = await GetPoint3D(points.Count == 0 ? "Pick first point" : "Next point or Enter");
+                var pt = await GetPoint3D(points.Count == 0 ? LanguageHelper.Tr("Pick first point") : LanguageHelper.Tr("Next point or Enter"));
                 if (IsCanceled())
                     break;
                 if (IsEntered())

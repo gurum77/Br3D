@@ -23,7 +23,7 @@ namespace hanee.Cad.Tool
 
             while (true)
             {
-                Entity ent = await GetEntity("Select a entity", -1, true);
+                Entity ent = await GetEntity(LanguageHelper.Tr("Select a entity"), -1, true);
                 if (IsCanceled())
                     break;
 
@@ -32,7 +32,7 @@ namespace hanee.Cad.Tool
                 if (ent.EntityData is Element)
                 {
                     Element ele = ent.EntityData as Element;
-                    results.Add($"Element");
+                    results.Add($"{LanguageHelper.Tr("Element")}");
                     results.Add($"  Type : {ele.GetType().ToString()}");
                     results.Add($"  ID : {ele.id.id.ToString()}");
                     results.Add($"  Name : {ele.name}");

@@ -154,6 +154,7 @@ namespace Br3D
             tileNavCategoryViewport.Caption = LanguageHelper.Tr("Viewport");
             tileNavCategoryTools.Caption = LanguageHelper.Tr("Tools");
             tileNavCategoryDraw.Caption = LanguageHelper.Tr("Draw");
+            tileNavCategoryDimension.Caption = LanguageHelper.Tr("Dimension");
 
 
             //tile
@@ -185,7 +186,29 @@ namespace Br3D
             SetTileText(tileNavItemArc, LanguageHelper.Tr("Arc"));
             SetTileText(tileNavItemCircle, LanguageHelper.Tr("Circle"));
             SetTileText(tileNavItemPolyline, LanguageHelper.Tr("Polyline"));
+            SetTileText(tileNavItemSpline, LanguageHelper.Tr("Spline"));
             SetTileText(tileNavItemText, LanguageHelper.Tr("Text"));
+
+            // edit
+            SetTileText(tileNavItemErase, LanguageHelper.Tr("Erase"));
+            SetTileText(tileNavItemMove, LanguageHelper.Tr("Move"));
+            SetTileText(tileNavItemCopy, LanguageHelper.Tr("Copy"));
+            SetTileText(tileNavItemScale, LanguageHelper.Tr("Scale"));
+            SetTileText(tileNavItemRotate, LanguageHelper.Tr("Rotate"));
+            SetTileText(tileNavItemOffset, LanguageHelper.Tr("Offset"));
+            SetTileText(tileNavItemMirror, LanguageHelper.Tr("Mirror"));
+            SetTileText(tileNavItemExplode, LanguageHelper.Tr("Explode"));
+            SetTileText(tileNavItemTrim, LanguageHelper.Tr("Trim"));
+            SetTileText(tileNavItemFillet, LanguageHelper.Tr("Fillet"));
+            SetTileText(tileNavItemMirror, LanguageHelper.Tr("Mirror"));
+
+            // dim
+            SetTileText(tileNavItemDimHorizontal, LanguageHelper.Tr("Horizontal"));
+            SetTileText(tileNavItemDimVertical, LanguageHelper.Tr("Vertical"));
+            SetTileText(tileNavItemDimAlign, LanguageHelper.Tr("Aligned"));
+            SetTileText(tileNavItemDimLeader, LanguageHelper.Tr("Leader"));
+            SetTileText(tileNavItemRadius, LanguageHelper.Tr("Radius"));
+            SetTileText(tileNavItemDiameter, LanguageHelper.Tr("Diameter"));
 
 
             // sub tile
@@ -193,6 +216,10 @@ namespace Br3D
             SetTileText(tileNavSubItemArcFirstSecondThird, LanguageHelper.Tr("First, second, third point"));
             SetTileText(tileNavSubItemText, LanguageHelper.Tr("Text"));
             SetTileText(tileNavSubItemMText, LanguageHelper.Tr("Multiline text"));
+
+            // sub tile - edit
+            SetTileText(tileNavSubItemChamfer, LanguageHelper.Tr("Chamfer"));
+            
 
             // control
             dockPanelObjectTree.Text = LanguageHelper.Tr("Object Tree");

@@ -19,10 +19,10 @@ namespace hanee.Cad.Tool
 
             while (true)
             {
-                var entities = await GetEntities("Select entities(Enter : erase)");
+                var entities = await GetEntities(LanguageHelper.Tr("Select entities(Enter : erase)"));
                 if (IsCanceled())
                     break;
-
+                
                 GetModel().Entities.DeleteSelected();
                 GetModel().Invalidate();
             }
