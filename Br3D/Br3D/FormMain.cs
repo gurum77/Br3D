@@ -154,6 +154,7 @@ namespace Br3D
             tileNavCategoryViewport.Caption = LanguageHelper.Tr("Viewport");
             tileNavCategoryTools.Caption = LanguageHelper.Tr("Tools");
             tileNavCategoryDraw.Caption = LanguageHelper.Tr("Draw");
+            tileNavCategoryEdit.Caption = LanguageHelper.Tr("Edit");
             tileNavCategoryDimension.Caption = LanguageHelper.Tr("Dimension");
 
 

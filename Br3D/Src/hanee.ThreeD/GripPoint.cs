@@ -1,5 +1,8 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
+using devDept.Geometry;
+using devDept.Graphics;
+using System;
 
 namespace hanee.ThreeD
 {
@@ -8,12 +11,15 @@ namespace hanee.ThreeD
         public enum GripType
         {
             self,
-            circleRadius
+            circleRadius,
+            middle
         }
 
         public Entity entity { get; set; }
-        public Entity[] explodedEntities{ get; set; } // block인 경우 exploded한 객체들(움직일때는 이걸 움직인다)
+        public Entity[] explodedEntities { get; set; } // block인 경우 exploded한 객체들(움직일때는 이걸 움직인다)
         public GripType gripType { get; set; }
+
+        GLShader shader;
 
         public GripPoint(Entity entity, GripType gripType, devDept.Geometry.Point3D pt) : base(pt, GripManager.gripSize)
         {
@@ -21,11 +27,22 @@ namespace hanee.ThreeD
             {
                 this.Position = pt;
             }
-            
+
             this.entity = entity;
             this.gripType = gripType;
-            this.Color = System.Drawing.Color.Blue;
+            this.Color = GetColorByGripType(gripType);
             this.ColorMethod = colorMethodType.byEntity;
+            shader = new PointSpriteShader();
+        }
+
+        private System.Drawing.Color GetColorByGripType(GripType gripType)
+        {
+            if (gripType == GripType.circleRadius)
+                return System.Drawing.Color.Green;
+            else if (gripType == GripType.middle)
+                return System.Drawing.Color.Aqua;
+
+            return System.Drawing.Color.Blue;
         }
     }
 }

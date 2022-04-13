@@ -150,6 +150,7 @@
     <Compile Include="Options.cs" />
     <Compile Include="OptionsHelper.cs" />
     <Compile Include="OrthoModeManager.cs" />
+    <Compile Include="PointSpriteShader.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
