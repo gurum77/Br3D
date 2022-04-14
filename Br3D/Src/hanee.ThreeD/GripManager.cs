@@ -79,6 +79,7 @@ namespace hanee.ThreeD
             bool existExplodedEntities = gripPoints[0].explodedEntities?.Length > 0;
             if (existExplodedEntities)
             {
+                cloneEnt.Selected = false;
                 foreach (var gp in gripPoints)
                 {
                     if (gp.explodedEntities == null)

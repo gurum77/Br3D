@@ -1,7 +1,6 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
-using hanee.Geometry;
 using System.Collections.Generic;
 
 namespace hanee.ThreeD
@@ -25,15 +24,19 @@ namespace hanee.ThreeD
             if (br == null)
                 return null;
 
-            
-            
+
+
             GripPoint gp = new GripPoint(br, GripPoint.GripType.self, br.InsertionPoint);
             // block은 explode해서 추가한다.
             gp.explodedEntities = br.Explode(model.Blocks);
+            if (gp.explodedEntities != null)
+            {
 
-            var regenParams = new RegenParams(0.001, model);
-            foreach (var ee in gp.explodedEntities)
-                ee.Regen(regenParams);
+                var regenParams = new RegenParams(0.001, model);
+
+                foreach (var ee in gp.explodedEntities)
+                    ee.Regen(regenParams);
+            }
             return new List<GripPoint>() { gp };
         }
 
