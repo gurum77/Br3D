@@ -158,6 +158,7 @@
     </Compile>
     <Compile Include="PropertyGridHelper.cs" />
     <Compile Include="RadialDimGripManager.cs" />
+    <Compile Include="ReadFileAsyncHelper.cs" />
     <Compile Include="SelectionManager.cs" />
     <Compile Include="TempEntityListHelper.cs" />
     <Compile Include="TextGripManager.cs" />

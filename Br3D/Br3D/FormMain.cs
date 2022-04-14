@@ -637,6 +637,7 @@ namespace Br3D
             functionByElement.Add(tileNavItemTextStyle, TextStyle);
             functionByElement.Add(tileNavItemLineType, LineType);
 
+            // draw
             functionByElement.Add(tileNavItemLine, Line);
             functionByElement.Add(tileNavItemCircle, Circle);
             functionByElement.Add(tileNavItemArc, Arc);
@@ -648,6 +649,7 @@ namespace Br3D
             functionByElement.Add(tileNavItemText, DrawText);   // Text는 formmain의 properties여서 이름을 drawtext로함
             functionByElement.Add(tileNavSubItemText, DrawText);
             functionByElement.Add(tileNavSubItemMText, MText);
+            functionByElement.Add(tileNavItemInsert, Insert);
 
             functionByElement.Add(tileNavItemErase, EraseEntity);
             functionByElement.Add(tileNavItemMove, MoveEntity);
@@ -673,6 +675,7 @@ namespace Br3D
 
         }
 
+        async void Insert() => await new ActionInsert(model).RunAsync();
         async void DimLeader() => await new ActionDimLeader(model).RunAsync();
         async void DimAlign() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.aligned }.RunAsync();
         async void DimVertical() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.vertical }.RunAsync();

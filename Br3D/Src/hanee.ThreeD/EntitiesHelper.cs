@@ -1,5 +1,6 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
+using devDept.Geometry;
 using hanee.Geometry;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,9 @@ namespace hanee.ThreeD
 {
     static public class EntitiesHelper
     {
-        static void SetTempEntityColor(Entity entity, devDept.Eyeshot.Environment environment)
+     
+
+        static public void SetTempEntityColor(Entity entity, devDept.Eyeshot.Environment environment)
         {
             var options = Options.Instance;
             if (options.tempEntityColorMethod == Options.TempEntityColorMethod.byTransparencyColor)
@@ -27,7 +30,31 @@ namespace hanee.ThreeD
                 entity.Color = options.tempEntityColor;
             }
             entity.ColorMethod = colorMethodType.byEntity;
+            
+        }
 
+        // 선택한 객체를 temp entities로 설정
+        static public void ToTempEntities(this Entity[] entities, devDept.Eyeshot.Environment environment, bool clone = true)
+        {
+            try
+            {
+                var regenParams = new RegenParams(0.001, environment);
+                foreach (var ent in entities)
+                {
+                    if (ent == null)
+                        continue;
+                    if (ent.BoxMin == null || ent.BoxMax == null)
+                        ent.Regen(regenParams);
+
+                    AddEntityToTempEntities(ent, environment, clone);
+                }
+
+                environment.TempEntities.RegenAfterModify();
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
         // 선택한 객체를 temp entities로 설정
@@ -35,11 +62,13 @@ namespace hanee.ThreeD
         {
             try
             {
-
+                var regenParams = new RegenParams(0.001, environment);
                 foreach (var ent in entities)
                 {
                     if (ent == null)
                         continue;
+                    if (ent.BoxMin == null || ent.BoxMax == null)
+                        ent.Regen(regenParams);
 
                     AddEntityToTempEntities(ent, environment, clone);
                 }
@@ -70,16 +99,24 @@ namespace hanee.ThreeD
             else if (ent is Text)
             {
                 var text = ent as Text;
+                if (text.Vertices == null || text.Vertices.Length == 0)
+                    return;
                 text.UpdateOrientedBoundingBox(new TraversalParams());
                 var lp = text.OrientedBounding.GetBoundingLinearPath(text.InsertionPoint.Z);
                 if (lp != null)
                     AddEntityToTempEntities(lp, environment, false);
             }
-            else
+            else if(ent is ICurve || ent is Mesh)
             {
+                if(ent is Mesh && (ent.Vertices == null || ent.Vertices.Length == 0))
+                    return;
                 var tempEnt = !clone ? ent : ent.Clone() as Entity;
                 SetTempEntityColor(tempEnt, environment);
                 environment.TempEntities.Add(tempEnt);
+            }
+            else
+            {
+
             }
         }
     }
