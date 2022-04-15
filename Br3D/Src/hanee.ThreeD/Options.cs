@@ -45,6 +45,9 @@ namespace hanee.ThreeD
                         XmlSerializer xml = new XmlSerializer(typeof(Options));
                         var tmpOptions = xml.Deserialize(fileStream) as Options;
                         Options.Reinitialize(tmpOptions);
+
+                        if (Options.Instance.tempEntityColor.A == 0)
+                            Options.Instance.tempEntityColor = System.Drawing.Color.White;
                     }
                 }
             }

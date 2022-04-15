@@ -2,6 +2,7 @@
 using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Eyeshot.Translators;
+using devDept.Geometry;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
 using hanee.Cad.Tool;
@@ -88,7 +89,13 @@ namespace Br3D
         private void FormMain_Load(object sender, EventArgs e)
         {
             ViewportSingle();
+
+            Circle c = new Circle(Plane.XY, 200);
+            hModel.Entities.Add(c);
+
             hModel.Set2DView();
+
+            hModel.Entities.Remove(c);
         }
 
 

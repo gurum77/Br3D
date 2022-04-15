@@ -9,7 +9,11 @@ namespace hanee.ThreeD
 {
     static public class EntitiesHelper
     {
-     
+        static public void Translate(this Entity[] entities, Vector3D vec)
+        {
+            foreach (Entity ent in entities)
+                ent.Translate(vec);
+        }
 
         static public void SetTempEntityColor(Entity entity, devDept.Eyeshot.Environment environment)
         {
@@ -30,7 +34,7 @@ namespace hanee.ThreeD
                 entity.Color = options.tempEntityColor;
             }
             entity.ColorMethod = colorMethodType.byEntity;
-            
+
         }
 
         // 선택한 객체를 temp entities로 설정
@@ -77,7 +81,7 @@ namespace hanee.ThreeD
             }
             catch (Exception e)
             {
-                
+
             }
         }
 
@@ -106,9 +110,9 @@ namespace hanee.ThreeD
                 if (lp != null)
                     AddEntityToTempEntities(lp, environment, false);
             }
-            else if(ent is ICurve || ent is Mesh)
+            else if (ent is ICurve || ent is Mesh)
             {
-                if(ent is Mesh && (ent.Vertices == null || ent.Vertices.Length == 0))
+                if (ent is Mesh && (ent.Vertices == null || ent.Vertices.Length == 0))
                     return;
                 var tempEnt = !clone ? ent : ent.Clone() as Entity;
                 SetTempEntityColor(tempEnt, environment);

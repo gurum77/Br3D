@@ -1,6 +1,4 @@
 ﻿using devDept.Eyeshot;
-using devDept.Eyeshot.Entities;
-using devDept.Eyeshot.Translators;
 using devDept.Geometry;
 using hanee.ThreeD;
 using System.Collections.Generic;
@@ -11,7 +9,7 @@ namespace hanee.Cad.Tool
 {
     public class ActionInsert : ActionBase
     {
-        Point3D lastPoint = null;
+        Vector3D lastVec;
         public ActionInsert(devDept.Eyeshot.Environment environment) : base(environment)
         {
         }
@@ -23,22 +21,24 @@ namespace hanee.Cad.Tool
         {
             base.OnMouseMove(environment, e);
 
-            if (lastPoint != null)
-            {
-                var vec = (point3D - lastPoint).AsVector;
-                environment.TempEntities.Translate(vec);
-                
-                environment.TempEntities.RegenAfterModify();
-            }
+            if (lastVec != null)
+                environment.TempEntities.Translate(lastVec * -1);
 
-            lastPoint = point3D.Clone() as Point3D;
+            var vec = point3D.AsVector;
+            environment.TempEntities.Translate(vec);
+            environment.TempEntities.RegenAfterModify();
+
+            lastVec = vec;
         }
         public async Task<bool> RunAsync()
         {
             StartAction();
 
+
             while (true)
             {
+                lastVec = null;
+
                 OpenFileDialog dlg = new OpenFileDialog();
 
                 var additionalSupportFormats = new Dictionary<string, string>();
@@ -53,32 +53,70 @@ namespace hanee.Cad.Tool
                 devDept.Eyeshot.Translators.ReadFileAsync rf = FileHelper.GetReadFileAsync(dlg.FileName);
                 if (rf == null)
                     break;
-                rf.DoWork();
 
+                
+
+
+                rf.DoWork();
                 rf.FillAllCollectionsData(environment);
                 rf.Entities.ToTempEntities(environment, true);
+                var rfa = rf as devDept.Eyeshot.Translators.ReadAutodesk;
 
                 // 좌측하단
                 var leftBottom = environment.TempEntities.GetLeftBottom();
                 if (leftBottom == null)
                     break;
 
+                var byLeftBottom = true;
                 // 좌측 하단이 0,0이 되도록 이동
                 var vec = leftBottom.AsVector * -1;
                 environment.TempEntities.Translate(vec);
 
-                var pt = await GetPoint3D(LanguageHelper.Tr("Insertion point"));
-                if (IsCanceled())
-                    break;
-                if (IsEntered())
-                    break;
-
-
-                vec = (pt - leftBottom).AsVector;
-                foreach (var ent in rf.Entities)
+                Point3D insertionPoint;
+                while(true)
                 {
-                    ent.Translate(vec);
+                    var ptOrKey = await GetPoint3DOrKey(LanguageHelper.Tr("Insertion point(L : By Left-bottom, B : By Base point")));
+                    if (IsCanceled())
+                        break;
+                    if (IsEntered())
+                        break;
+
+                    if(ptOrKey.Key != null)
+                    {
+                        insertionPoint = ptOrKey.Key;
+                        break;
+                    }
+
+                    // 좌측하단 기준이 아닌데 좌측하단으로 바꾸는 경우
+                    if(ptOrKey.Value.KeyCode == Keys.L && !byLeftBottom)
+                    {
+                        // 우선 초기상태로 되돌리고
+                        environment.TempEntities.Translate(vec);
+
+                        // 좌측하단으로 변경
+                        vec = leftBottom.AsVector * -1;
+                        environment.TempEntities.Translate(vec);
+                    }
+                    else if (ptOrKey.Value.KeyCode == Keys.B && byLeftBottom)
+                    {
+                        // 우선 초기상태로 되돌리고
+                        environment.TempEntities.Translate(vec);
+
+                        // 좌측하단으로 변경
+                        vec = leftBottom.AsVector * -1;
+                        environment.TempEntities.Translate(vec);
+                    }
+
+
+
+
                 }
+                
+
+                // 이동
+                rf.Entities.Translate(baseVec);
+                rf.Entities.Translate(insertionPoint.AsVector);
+
                 rf.AddToScene(environment);
                 environment.Invalidate();
                 break;
