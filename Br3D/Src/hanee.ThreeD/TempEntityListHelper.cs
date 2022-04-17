@@ -15,12 +15,14 @@ namespace hanee.ThreeD
             }
         }
 
-        static public Point3D GetLeftBottom(this TempEntityList entities)
+        static public void GetBoundary(this TempEntityList entities, out Point3D boxMin, out Point3D boxMax)
         {
+            boxMin = null;
+            boxMax = null;
+
             try
             {
                 var regenParams = new RegenParams(0.001);
-                Point3D leftBottom = null;
                 foreach (Entity ent in entities)
                 {
                     if (ent.BoxMin == null || ent.BoxMax == null)
@@ -28,25 +30,43 @@ namespace hanee.ThreeD
                     if (ent.BoxMin == null || ent.BoxMax == null)
                         continue;
 
-                    if (leftBottom == null)
+                    if (boxMin == null || boxMax == null)
                     {
-                        leftBottom = ent.BoxMin.Clone() as Point3D;
+                        boxMin = ent.BoxMin.Clone() as Point3D;
+                        boxMax = ent.BoxMax.Clone() as Point3D;
                     }
                     else
                     {
-                        leftBottom.X = Math.Min(leftBottom.X, ent.BoxMin.X);
-                        leftBottom.Y = Math.Min(leftBottom.Y, ent.BoxMin.Y);
-                        leftBottom.Z = Math.Min(leftBottom.Z, ent.BoxMin.Z);
+                        boxMin.X = Math.Min(boxMin.X, ent.BoxMin.X);
+                        boxMin.Y = Math.Min(boxMin.Y, ent.BoxMin.Y);
+                        boxMin.Z = Math.Min(boxMin.Z, ent.BoxMin.Z);
+
+                        boxMax.X = Math.Max(boxMax.X, ent.BoxMax.X);
+                        boxMax.Y = Math.Max(boxMax.Y, ent.BoxMax.Y);
+                        boxMax.Z = Math.Max(boxMax.Z, ent.BoxMax.Z);
                     }
                 }
-                return leftBottom;
+                
             }
             catch (Exception e)
             {
-                return null;
+                
             }
+        }
 
+        static public Point3D GetCenter(this TempEntityList entities)
+        {
+            entities.GetBoundary(out Point3D boxMin, out Point3D boxMax);
+            if (boxMin == null || boxMax == null)
+                return null;
 
+            return (boxMin + boxMax) / 2;
+        }
+
+        static public Point3D GetLeftBottom(this TempEntityList entities)
+        {
+            entities.GetBoundary(out Point3D boxMin, out Point3D boxMax);
+            return boxMin;
         }
         // template entity 수정후 regen
         // 필요한 객체만 하자.

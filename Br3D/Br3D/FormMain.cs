@@ -53,6 +53,10 @@ namespace Br3D
             Options.Instance.appName = "Br3D";
             Options.Instance.LoadOptions();
 
+            // 테스트 용으로 옵션을 강제적용
+            Options.Instance.tempEntityColorMethod = Options.TempEntityColorMethod.byTransparencyColor;
+
+
             LanguageHelper.Load(Options.Instance.language);
             InitGraphics();
             InitDisplayMode();
@@ -1133,6 +1137,12 @@ namespace Br3D
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            HModel hModel = model as HModel;
+            if(hModel != null)
+            {
+                hModel.KeyEventListener(keyData);
+            }
+
             if (keyData == Keys.F8)
             {
                 OrthoMode();

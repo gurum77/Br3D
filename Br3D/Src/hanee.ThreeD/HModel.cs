@@ -88,8 +88,10 @@ namespace hanee.ThreeD
         {
             return ActiveViewport.Background.IsDark;
         }
-        protected override void OnKeyUp(KeyEventArgs e)
+
+        public void KeyEventListener(Keys keyData)
         {
+            var e = new KeyEventArgs(keyData);
             if (ActionBase.IsUserInputting())
             {
                 ActionBase.KeyUpHandler(e);
@@ -98,8 +100,6 @@ namespace hanee.ThreeD
             }
             else
             {
-                base.OnKeyUp(e);
-
                 if (e.KeyCode == Keys.Escape)
                 {
                     // 입력중이 아니더라도 esc를 누르면 액션을 종료한다.
@@ -114,11 +114,10 @@ namespace hanee.ThreeD
                     UpdatePropertyGridControl(null);
                     Invalidate();
                 }
-        
+
             }
         }
-
-
+       
         protected override void OnMouseDown(MouseEventArgs e)
         {
             lastMouseDownPoint = e.Location;

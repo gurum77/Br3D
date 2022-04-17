@@ -9,6 +9,12 @@ namespace hanee.Cad.Tool
 {
     public class ActionInsert : ActionBase
     {
+        enum BasePoint
+        {
+            basePoint,
+            leftBottom,
+            center
+        }
         Vector3D lastVec;
         public ActionInsert(devDept.Eyeshot.Environment environment) : base(environment)
         {
@@ -54,68 +60,86 @@ namespace hanee.Cad.Tool
                 if (rf == null)
                     break;
 
-                
-
 
                 rf.DoWork();
                 rf.FillAllCollectionsData(environment);
                 rf.Entities.ToTempEntities(environment, true);
                 var rfa = rf as devDept.Eyeshot.Translators.ReadAutodesk;
 
+                Point3D basePoint = rfa != null ? rfa.BasePoint : new Point3D(0, 0, 0);
+
                 // 좌측하단
                 var leftBottom = environment.TempEntities.GetLeftBottom();
                 if (leftBottom == null)
                     break;
 
-                var byLeftBottom = true;
+                // 중심
+                var center = environment.TempEntities.GetCenter();
+                if (center == null)
+                    break;
+
+
+
                 // 좌측 하단이 0,0이 되도록 이동
                 var vec = leftBottom.AsVector * -1;
+                BasePoint basePointType = BasePoint.leftBottom;
                 environment.TempEntities.Translate(vec);
 
-                Point3D insertionPoint;
-                while(true)
+                Point3D insertionPoint = null;
+                while (true)
                 {
-                    var ptOrKey = await GetPoint3DOrKey(LanguageHelper.Tr("Insertion point(L : By Left-bottom, B : By Base point")));
+                    var ptOrKey = await GetPoint3DOrKey(LanguageHelper.Tr("Insertion point([L] By Left-bottom, [C] By Center, [B] By Base point"));
                     if (IsCanceled())
                         break;
                     if (IsEntered())
                         break;
 
-                    if(ptOrKey.Key != null)
+                    if (ptOrKey.Key != null)
                     {
                         insertionPoint = ptOrKey.Key;
                         break;
                     }
 
                     // 좌측하단 기준이 아닌데 좌측하단으로 바꾸는 경우
-                    if(ptOrKey.Value.KeyCode == Keys.L && !byLeftBottom)
+                    Vector3D newVec = null;
+                    if (ptOrKey.Value.KeyCode == Keys.L && basePointType != BasePoint.leftBottom)
                     {
-                        // 우선 초기상태로 되돌리고
-                        environment.TempEntities.Translate(vec);
-
-                        // 좌측하단으로 변경
-                        vec = leftBottom.AsVector * -1;
-                        environment.TempEntities.Translate(vec);
+                        newVec = leftBottom.AsVector * -1;
+                        basePointType = BasePoint.leftBottom;
                     }
-                    else if (ptOrKey.Value.KeyCode == Keys.B && byLeftBottom)
+                    else if (ptOrKey.Value.KeyCode == Keys.C && basePointType != BasePoint.center)
                     {
-                        // 우선 초기상태로 되돌리고
-                        environment.TempEntities.Translate(vec);
-
-                        // 좌측하단으로 변경
-                        vec = leftBottom.AsVector * -1;
-                        environment.TempEntities.Translate(vec);
+                        newVec = center.AsVector * -1;
+                        basePointType = BasePoint.center;
+                    }
+                    else if (ptOrKey.Value.KeyCode == Keys.B && basePointType != BasePoint.basePoint)
+                    {
+                        newVec = basePoint.AsVector * -1;
+                        basePointType = BasePoint.basePoint;
                     }
 
+                    if (newVec == null)
+                        continue;
 
+                    // 우선 초기상태로 되돌리고
+                    environment.TempEntities.Translate(vec * -1);
 
+                    // 다시 이동
+                    environment.TempEntities.Translate(newVec);
+                    environment.TempEntities.RegenAfterModify();
+                    environment.Invalidate();
+
+                    vec = newVec.Clone() as Vector3D;
 
                 }
-                
+
 
                 // 이동
-                rf.Entities.Translate(baseVec);
-                rf.Entities.Translate(insertionPoint.AsVector);
+                if (insertionPoint != null)
+                {
+                    rf.Entities.Translate(vec);
+                    rf.Entities.Translate(insertionPoint.AsVector);
+                }
 
                 rf.AddToScene(environment);
                 environment.Invalidate();

@@ -21,8 +21,9 @@ namespace hanee.ThreeD
         public string appName { get; set; } = "hanee.ThreeD";
         public string language { get; set; } = defaultLanguage;
         public float dimTextHeight { get; set; } = 2.0f;
+        public float annotationTextHeight { get; set; } = 30;   
         public int decimals { get; set; } = 5;  // 좌표, 길이값등의 허용 소수점 자릿수
-        public TempEntityColorMethod tempEntityColorMethod { get; set; } = TempEntityColorMethod.byOneColor;
+        public TempEntityColorMethod tempEntityColorMethod { get; set; } = TempEntityColorMethod.byTransparencyColor;
         public Color tempEntityColor { get; set; } = Color.White;
                 
         // 즐겨찾기 저장하는 파일 경로

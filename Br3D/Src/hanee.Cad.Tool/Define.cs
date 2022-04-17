@@ -9,13 +9,14 @@ namespace hanee.Cad.Tool
         static public string Only2DLayer = "Only2D";
         static public string Only3DLayer = "Only3D";
         static public float DefaultTextHeight = 3.0f;
+        static public float DefaultAnnotationTextHeight = 10.0f;
         static private System.Drawing.Font defaultFont;
         static public System.Drawing.Font DefaultFont
         {
             get
             {
                 if (defaultFont == null)
-                    defaultFont = new Font("Arial", DefaultTextHeight);
+                    defaultFont = new Font("Arial", DefaultAnnotationTextHeight);
                 return defaultFont;
             }
 
