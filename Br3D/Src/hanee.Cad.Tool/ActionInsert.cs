@@ -2,6 +2,7 @@
 using devDept.Geometry;
 using hanee.ThreeD;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -56,6 +57,10 @@ namespace hanee.Cad.Tool
                 if (dlg.ShowDialog() != DialogResult.OK)
                     break;
 
+                Point3D basePoint = null;
+                Point3D leftBottom = null;
+                Point3D center = null;
+
                 devDept.Eyeshot.Translators.ReadFileAsync rf = FileHelper.GetReadFileAsync(dlg.FileName);
                 if (rf == null)
                     break;
@@ -66,15 +71,15 @@ namespace hanee.Cad.Tool
                 rf.Entities.ToTempEntities(environment, true);
                 var rfa = rf as devDept.Eyeshot.Translators.ReadAutodesk;
 
-                Point3D basePoint = rfa != null ? rfa.BasePoint : new Point3D(0, 0, 0);
+                basePoint = rfa != null ? rfa.BasePoint : new Point3D(0, 0, 0);
 
                 // 좌측하단
-                var leftBottom = environment.TempEntities.GetLeftBottom();
+                leftBottom = environment.TempEntities.GetLeftBottom();
                 if (leftBottom == null)
                     break;
 
                 // 중심
-                var center = environment.TempEntities.GetCenter();
+                center = environment.TempEntities.GetCenter();
                 if (center == null)
                     break;
 

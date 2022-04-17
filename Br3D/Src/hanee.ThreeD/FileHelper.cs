@@ -29,6 +29,19 @@ namespace hanee.ThreeD
             return FileHelper.FilterBySupportFormats(supportFormats);
 
         }
+
+        // 이미지파일 filter
+        // ".JPG" || ext == ".PNG" || ext == ".JPEG" || ext == ".BMP")
+        static public string RasterImageFilterForOpenDialog()
+        {
+            Dictionary<string, string> supportFormats = new Dictionary<string, string>();
+            supportFormats.Add("All", "*.*");
+            supportFormats.Add("JPEG", "*.jpeg;*.jpg");
+            supportFormats.Add("PNG", "*.png");
+            supportFormats.Add("BMP", "*.bmp");
+            return FileHelper.FilterBySupportFormats(supportFormats);
+        }
+
         static public string FilterForOpenDialog(Dictionary<string, string> additionalSupportFormats = null)
         {
             Dictionary<string, string> supportFormats = new Dictionary<string, string>();

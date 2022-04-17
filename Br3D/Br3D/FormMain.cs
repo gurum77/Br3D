@@ -231,7 +231,7 @@ namespace Br3D
 
             // sub tile - edit
             SetTileText(tileNavSubItemChamfer, LanguageHelper.Tr("Chamfer"));
-            
+
 
             // control
             dockPanelObjectTree.Text = LanguageHelper.Tr("Object Tree");
@@ -661,6 +661,7 @@ namespace Br3D
             functionByElement.Add(tileNavSubItemText, DrawText);
             functionByElement.Add(tileNavSubItemMText, MText);
             functionByElement.Add(tileNavItemInsert, Insert);
+            functionByElement.Add(tileNavSubItemInsertImage, InsertImage);
 
             functionByElement.Add(tileNavItemErase, EraseEntity);
             functionByElement.Add(tileNavItemMove, MoveEntity);
@@ -686,6 +687,8 @@ namespace Br3D
 
         }
 
+
+        async void InsertImage() => await new ActionInsertImage(model).RunAsync();
         async void Insert() => await new ActionInsert(model).RunAsync();
         async void DimLeader() => await new ActionDimLeader(model).RunAsync();
         async void DimAlign() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.aligned }.RunAsync();
@@ -1138,7 +1141,7 @@ namespace Br3D
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             HModel hModel = model as HModel;
-            if(hModel != null)
+            if (hModel != null)
             {
                 hModel.KeyEventListener(keyData);
             }
