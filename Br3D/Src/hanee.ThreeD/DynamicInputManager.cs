@@ -112,6 +112,13 @@ namespace hanee.ThreeD
             form.Location = loc;
             if (di != null)
                 di.UpdateControls(environment);
+
+            // main form이 항상 focus 되어 있도록 해야 자연스러움
+            var parentForm = environment.FindForm();
+            if (parentForm  != null)
+            {
+                parentForm.Focus();
+            }
         }
 
         // length input을 활성화 한다.
