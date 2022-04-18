@@ -20,11 +20,11 @@ namespace hanee.Cad.Tool
             insPoint = null;
             heightPoint = null;
             dirPoint = null;
+            environment.TempEntities.Clear();
         }
 
         protected override void OnMouseMove(devDept.Eyeshot.Environment environment, MouseEventArgs e)
         {
-            environment.TempEntities.Clear();
             if (insPoint == null)
             {
                 return;
@@ -34,16 +34,19 @@ namespace hanee.Cad.Tool
             var heightLine = new Line(insPoint, heightPoint == null ? point3D : heightPoint);
             heightLine.Color = System.Drawing.Color.Red;
             heightLine.ColorMethod = colorMethodType.byEntity;
-            environment.TempEntities.Add(heightLine);
+            
 
             // 방향선
             if (heightPoint != null)
             {
-
                 var dirLine = new Line(insPoint, dirPoint == null ? point3D : dirPoint);
                 dirLine.Color = System.Drawing.Color.Blue;
                 dirLine.ColorMethod = colorMethodType.byEntity;
-                environment.TempEntities.Add(dirLine);
+                environment.TempEntities.ReplaceEntitiesAndRegen(heightLine, dirLine);
+            }
+            else
+            {
+                environment.TempEntities.ReplaceEntitiesAndRegen(heightLine);
             }
         }
 

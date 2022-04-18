@@ -331,6 +331,32 @@ namespace hanee.ThreeD
             ActiveViewport.Background.BottomColor = Color.Black;
             ActiveViewport.Background.TopColor = Color.Black;
             ActiveViewport.DisplayMode = displayType.Wireframe;
+
+            // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
+            SetLayerColorByBackgroundColor();
+        }
+
+        public void SetLayerColorByBackgroundColor()
+        {
+            // 배경색이 어두우면 layer의 검은색을 흰색으로 변경
+            if (IsDarkBackground())
+            {
+                foreach (var la in Layers)
+                {
+                    if (la.Color == Color.Black)
+                        la.Color = Color.White;
+                }
+            }
+            // 배경색이 밝으면 layer의 흰색을 검은색으로 변경
+            else
+            {
+                foreach (var la in Layers)
+                {
+                    if (la.Color == Color.White)
+                        la.Color = Color.Black;
+                }
+
+            }
         }
 
         // 3D view로 설정한다.
@@ -344,6 +370,9 @@ namespace hanee.ThreeD
             ActiveViewport.Background.BottomColor = backgroundBottomColor;
             ActiveViewport.Background.TopColor = backgroundTopColor;
             ActiveViewport.DisplayMode = displayType.Rendered;
+
+            // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
+            SetLayerColorByBackgroundColor();
         }
 
 

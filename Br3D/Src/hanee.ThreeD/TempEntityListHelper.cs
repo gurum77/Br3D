@@ -1,12 +1,64 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using hanee.Geometry;
 using System;
+using System.Collections.Generic;
 
 namespace hanee.ThreeD
 {
     static public class TempEntityListHelper
     {
+        // temp entity list에 같은 객체가 있다면 교체를 한다.
+        // 없으면 추가한다.
+        static public void ReplaceEntitiesAndRegen(this TempEntityList entities, params Entity[] newEntities)
+        {
+            var exceptEntities = new Dictionary<Entity, bool>();
+            for (int i = 0; i < newEntities.Length; ++i)
+            {
+                var newEntity = newEntities[i];
+                
+                foreach (var ent in entities)
+                {
+                    if (ent.GetType() == newEntity.GetType())
+                    {
+                        // 이미 변경한 객체는 통과
+                        if (exceptEntities.ContainsKey(ent))
+                            continue;
+
+                        ent.CopyFrom(newEntity);
+                        exceptEntities.Add(ent, true);
+                    }
+                }
+
+                // 없으면 추가한다.
+                entities.Add(newEntity);
+            }
+
+            entities.RegenAfterModify();
+        }
+
+        // temp entity list에 같은 객체가 있다면 교체를 한다.
+        // 없으면 추가한다.
+        // 변경된 entity를 리턴
+        static public Entity ReplaceEntityAndRegen(this TempEntityList entities, Entity newEntity)
+        {
+            foreach (var ent in entities)
+            {
+                if (ent.GetType() == newEntity.GetType())
+                {
+                    ent.CopyFrom(newEntity);
+                    entities.RegenAfterModify();
+                    return ent;
+                }
+            }
+
+            // 없으면 추가한다.
+            entities.Add(newEntity);
+            entities.RegenAfterModify();
+            return newEntity;
+        }
+
         static public void Translate(this TempEntityList entities, Vector3D vec)
         {
             foreach (var ent in entities)
@@ -46,11 +98,11 @@ namespace hanee.ThreeD
                         boxMax.Z = Math.Max(boxMax.Z, ent.BoxMax.Z);
                     }
                 }
-                
+
             }
             catch (Exception e)
             {
-                
+
             }
         }
 

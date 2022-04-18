@@ -6,6 +6,52 @@ namespace hanee.Geometry
     // entity helper
     static public class EntityHelper
     {
+        // entity의 제원을 복사한다.
+        // 느린 함수이다.
+        public static void CopyFrom(this Entity ent, Entity source)
+        {
+            ent.CopyAttributes(source);
+
+            // 타입이 다르면 복사할 수 없다.
+            if (ent.GetType() != source.GetType())
+                return;
+
+            if (ent is Line)
+            {
+                var t = (Line)ent;
+                var s = (Line)source;
+                t.StartPoint = s.StartPoint;
+                t.EndPoint = s.EndPoint;
+            }
+            else if(ent is LinearPath)
+            {
+                var t = (LinearPath)ent;
+                var s = (LinearPath)source;
+                t.Vertices = s.Vertices;
+            }
+            else if (ent is Arc)
+            {
+                var t = (Arc)ent;
+                var s = (Arc)source;
+                t.Center.CopyFrom(s.Center);
+                t.Radius = s.Radius;
+                t.StartPoint.CopyFrom(s.StartPoint);
+                t.EndPoint.CopyFrom(s.EndPoint);
+            }
+            else if (ent is Circle)
+            {
+                var t = (Circle)ent;
+                var s = (Circle)source;
+                t.Center.CopyFrom(s.Center);
+                t.Radius = s.Radius;
+            }
+            else
+            {
+                System.Diagnostics.Debug.Assert(false);
+            }
+
+        }
+
         public static bool IsDepthTestAlwaysEntity(this Entity ent)
         {
             if (ent is DepthTestAlwaysBlockReference)

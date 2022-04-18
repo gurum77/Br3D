@@ -425,9 +425,7 @@ namespace Br3D
 
                         treeListObject.SelectNode(node);
                         treeListObject.TopVisibleNodeIndex = node.Id;
-
                     }
-
                 }
             }
         }
@@ -823,6 +821,9 @@ namespace Br3D
 
                 // viewport에 추가한다.
                 rfa.AddToScene(model);
+
+                // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
+                hModel.SetLayerColorByBackgroundColor();
 
                 opendFilePath = rfa.FileName;
 

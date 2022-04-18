@@ -25,14 +25,12 @@ namespace hanee.Cad.Tool
                 return;
 
             endPoint = point3D;
-            environment.TempEntities.Clear();
 
             var line = MakeLine(true);
             if (line == null)
                 return;
 
-            line.Regen(0.001);
-            environment.TempEntities.Add(line);
+            environment.TempEntities.ReplaceEntityAndRegen(line);
             environment.Invalidate();
         }
 

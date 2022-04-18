@@ -25,15 +25,12 @@ namespace hanee.Cad.Tool
                 return;
 
             endPoint = point3D;
-            environment.TempEntities.Clear();
+            
 
             var circle = MakeCircle(true);
             if (circle == null)
                 return;
-
-            circle.Regen(0.001);
-            environment.TempEntities.Add(circle);
-            environment.Invalidate();
+            environment.TempEntities.ReplaceEntityAndRegen(circle);
         }
 
         Circle MakeCircle(bool tempEntity=false)
