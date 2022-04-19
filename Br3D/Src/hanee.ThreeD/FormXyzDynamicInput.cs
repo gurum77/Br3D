@@ -5,8 +5,9 @@ using System.Windows.Forms;
 
 namespace hanee.ThreeD
 {
-    public partial class FormXyzDynamicInput : DevExpress.XtraEditors.XtraForm, IDynamicInputPoint3D
+    public partial class FormXyzDynamicInput : FormDynamicInputBase, IDynamicInputPoint3D
     {
+        devDept.Eyeshot.Environment environment { get; set; }
         double? fixedX { get; set; }
         double? fixedY { get; set; }
         double? fixedZ { get; set; }
@@ -21,8 +22,11 @@ namespace hanee.ThreeD
         {
         }
 
-        public void Init()
+        public void Init(devDept.Eyeshot.Environment environment)
         {
+            this.environment = environment;
+            SetPosition(environment);
+
             fixedX = null;
             fixedY = null;
             fixedZ = null;
@@ -34,7 +38,7 @@ namespace hanee.ThreeD
 
 
         // 현재 상황에 맞게 control을 업데이트 한다.
-        public void UpdateControls(devDept.Eyeshot.Environment environment)
+        public void UpdateControls()
         {
             if (ActionBase.Point3D == null)
                 return;
@@ -80,7 +84,7 @@ namespace hanee.ThreeD
             {
                 if (fixedX != null || fixedY != null || fixedZ != null)
                 {
-                    Init();
+                    Init(environment);
                 }
                 else
                 {
@@ -191,6 +195,10 @@ namespace hanee.ThreeD
                 pt.Y = fixedY.Value;
             if (fixedZ != null)
                 pt.Z = fixedZ.Value;
+
+            //Cursor.Position
         }
+
+    
     }
 }

@@ -100,7 +100,7 @@ namespace hanee.ThreeD
                 }
 
             }
-            catch (Exception e)
+            catch
             {
 
             }

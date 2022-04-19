@@ -114,6 +114,9 @@
     <Compile Include="FormDistanceFactorDynamicInput.Designer.cs">
       <DependentUpon>FormDistanceFactorDynamicInput.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDynamicInputBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormXyzDynamicInput.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,7 +153,6 @@
     <Compile Include="Options.cs" />
     <Compile Include="OptionsHelper.cs" />
     <Compile Include="OrthoModeManager.cs" />
-    <Compile Include="PointSpriteShader.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -183,6 +185,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FormDistanceFactorDynamicInput.resx">
       <DependentUpon>FormDistanceFactorDynamicInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDynamicInputBase.resx">
+      <DependentUpon>FormDynamicInputBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormXyzDynamicInput.resx">
       <DependentUpon>FormXyzDynamicInput.cs</DependentUpon>

@@ -8,6 +8,7 @@ namespace hanee.ThreeD
 {
     public partial class FormDistanceAngleDynamicInput : XtraForm, IDynamicInputPoint3D
     {
+        devDept.Eyeshot.Environment environment { get; set; }
         public double? fixedLength { get; set; }
         public double? fixedAngle { get; set; }
 
@@ -75,7 +76,7 @@ namespace hanee.ThreeD
             {
                 if (fixedLength != null || fixedAngle != null)
                 {
-                    Init();
+                    Init(environment);
                 }
                 else
                 {
@@ -99,8 +100,9 @@ namespace hanee.ThreeD
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        public void Init()
+        public void Init(devDept.Eyeshot.Environment environment)
         {
+            this.environment = environment;
             fixedLength = null;
             fixedAngle = null;
 
@@ -108,7 +110,7 @@ namespace hanee.ThreeD
             textEditLength.SelectAll();
         }
 
-        public void UpdateControls(devDept.Eyeshot.Environment environment)
+        public void UpdateControls()
         {
             HModel hModel = environment as HModel;
             if (hModel == null)

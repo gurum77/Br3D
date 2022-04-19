@@ -9,6 +9,7 @@ namespace hanee.ThreeD
 {
     public partial class FormDistanceFactorDynamicInput : XtraForm, IDynamicInputPoint3D
     {
+        devDept.Eyeshot.Environment environment { get; set; }
         public double baseLength { get; set; } = 1;
         public double? fixedFactor { get; set; }
         public LayoutControlItem LayoutControlItemFactor => layoutControlItemFactor;
@@ -37,8 +38,9 @@ namespace hanee.ThreeD
             }));
         }
 
-        public void Init()
+        public void Init(devDept.Eyeshot.Environment environment)
         {
+            this.environment = environment;
             fixedFactor = null;
             baseLength = 1;
             textEditFactor.SelectAll();
@@ -65,10 +67,8 @@ namespace hanee.ThreeD
             pt.Z = newPt.Z;
         }
 
-        public void UpdateControls(devDept.Eyeshot.Environment environment)
+        public void UpdateControls()
         {
-
-
             HModel hModel = environment as HModel;
             if (hModel == null)
                 return;
@@ -111,7 +111,7 @@ namespace hanee.ThreeD
             {
                 if (fixedFactor != null)
                 {
-                    Init();
+                    Init(environment);
                 }
                 else
                 {

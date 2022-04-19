@@ -42,7 +42,6 @@ namespace hanee.ThreeD
         public GripManager gripManager = null;
         public SelectionManager selectionManager = null;
         public EntityPropertiesManager entityPropertiesManager = null;
-        public FormXyzDynamicInput formDynamicInput;
 
         // property grid를 지정하면 객체 선택시 property grid에 속성이 표시됨
         public PropertyGridHelper propertyGridHelper { get; set; }

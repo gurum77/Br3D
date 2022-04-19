@@ -104,18 +104,18 @@ namespace hanee.ThreeD
 
                 // 숨김상태에서 처음 보여지게 되면 init을 한다.
                 if (di != null)
-                    di.Init();
+                    di.Init(environment);
             }
 
-            var loc = Cursor.Position;
-            loc.X += 50;
-            form.Location = loc;
+            //var loc = Cursor.Position;
+            //loc.X += 50;
+            //form.Location = loc;
             if (di != null)
-                di.UpdateControls(environment);
+                di.UpdateControls();
 
             // main form이 항상 focus 되어 있도록 해야 자연스러움
             var parentForm = environment.FindForm();
-            if (parentForm  != null)
+            if (parentForm != null)
             {
                 parentForm.Focus();
             }

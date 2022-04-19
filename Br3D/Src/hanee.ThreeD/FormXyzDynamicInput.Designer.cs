@@ -62,33 +62,33 @@ namespace hanee.ThreeD
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(708, 0, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(177, 73);
+            this.layoutControl1.Size = new System.Drawing.Size(177, 78);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // textEditX
             // 
-            this.textEditX.Location = new System.Drawing.Point(43, 2);
+            this.textEditX.Location = new System.Drawing.Point(42, 2);
             this.textEditX.Name = "textEditX";
-            this.textEditX.Size = new System.Drawing.Size(132, 20);
+            this.textEditX.Size = new System.Drawing.Size(133, 22);
             this.textEditX.StyleController = this.layoutControl1;
             this.textEditX.TabIndex = 4;
             this.textEditX.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textEditX_KeyDown);
             // 
             // textEditY
             // 
-            this.textEditY.Location = new System.Drawing.Point(43, 27);
+            this.textEditY.Location = new System.Drawing.Point(42, 28);
             this.textEditY.Name = "textEditY";
-            this.textEditY.Size = new System.Drawing.Size(132, 20);
+            this.textEditY.Size = new System.Drawing.Size(133, 22);
             this.textEditY.StyleController = this.layoutControl1;
             this.textEditY.TabIndex = 5;
             this.textEditY.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textEditY_KeyDown);
             // 
             // textEditZ
             // 
-            this.textEditZ.Location = new System.Drawing.Point(43, 51);
+            this.textEditZ.Location = new System.Drawing.Point(42, 54);
             this.textEditZ.Name = "textEditZ";
-            this.textEditZ.Size = new System.Drawing.Size(132, 20);
+            this.textEditZ.Size = new System.Drawing.Size(133, 22);
             this.textEditZ.StyleController = this.layoutControl1;
             this.textEditZ.TabIndex = 6;
             this.textEditZ.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textEditZ_KeyDown);
@@ -103,7 +103,7 @@ namespace hanee.ThreeD
             this.layoutControlItem1});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.Root.Size = new System.Drawing.Size(177, 73);
+            this.Root.Size = new System.Drawing.Size(177, 78);
             this.Root.TextVisible = false;
             // 
             // layoutControlItemX
@@ -112,12 +112,12 @@ namespace hanee.ThreeD
             this.layoutControlItemX.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("layoutControlItemX.ImageOptions.SvgImage")));
             this.layoutControlItemX.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
             this.layoutControlItemX.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItemX.MinSize = new System.Drawing.Size(95, 24);
+            this.layoutControlItemX.MinSize = new System.Drawing.Size(95, 26);
             this.layoutControlItemX.Name = "layoutControlItemX";
-            this.layoutControlItemX.Size = new System.Drawing.Size(177, 25);
+            this.layoutControlItemX.Size = new System.Drawing.Size(177, 26);
             this.layoutControlItemX.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItemX.Text = "X";
-            this.layoutControlItemX.TextSize = new System.Drawing.Size(29, 16);
+            this.layoutControlItemX.TextSize = new System.Drawing.Size(28, 16);
             this.layoutControlItemX.CustomDraw += new System.EventHandler<DevExpress.XtraLayout.ItemCustomDrawEventArgs>(this.layoutControlItemX_CustomDraw);
             // 
             // layoutControlItemY
@@ -125,13 +125,13 @@ namespace hanee.ThreeD
             this.layoutControlItemY.Control = this.textEditY;
             this.layoutControlItemY.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("layoutControlItemY.ImageOptions.SvgImage")));
             this.layoutControlItemY.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.layoutControlItemY.Location = new System.Drawing.Point(0, 25);
-            this.layoutControlItemY.MinSize = new System.Drawing.Size(95, 24);
+            this.layoutControlItemY.Location = new System.Drawing.Point(0, 26);
+            this.layoutControlItemY.MinSize = new System.Drawing.Size(95, 26);
             this.layoutControlItemY.Name = "layoutControlItemY";
-            this.layoutControlItemY.Size = new System.Drawing.Size(177, 24);
+            this.layoutControlItemY.Size = new System.Drawing.Size(177, 26);
             this.layoutControlItemY.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItemY.Text = "Y";
-            this.layoutControlItemY.TextSize = new System.Drawing.Size(29, 16);
+            this.layoutControlItemY.TextSize = new System.Drawing.Size(28, 16);
             this.layoutControlItemY.CustomDraw += new System.EventHandler<DevExpress.XtraLayout.ItemCustomDrawEventArgs>(this.layoutControlItemY_CustomDraw);
             // 
             // layoutControlItem1
@@ -139,13 +139,13 @@ namespace hanee.ThreeD
             this.layoutControlItem1.Control = this.textEditZ;
             this.layoutControlItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("layoutControlItem1.ImageOptions.SvgImage")));
             this.layoutControlItem1.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 49);
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(95, 24);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 52);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(95, 26);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(177, 24);
+            this.layoutControlItem1.Size = new System.Drawing.Size(177, 26);
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.Text = "Z";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(29, 16);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(28, 16);
             this.layoutControlItem1.CustomDraw += new System.EventHandler<DevExpress.XtraLayout.ItemCustomDrawEventArgs>(this.layoutControlItemZ_CustomDraw);
             // 
             // svgImageCollection1
@@ -155,9 +155,9 @@ namespace hanee.ThreeD
             // 
             // FormXyzDynamicInput
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(177, 73);
+            this.ClientSize = new System.Drawing.Size(177, 78);
             this.ControlBox = false;
             this.Controls.Add(this.layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

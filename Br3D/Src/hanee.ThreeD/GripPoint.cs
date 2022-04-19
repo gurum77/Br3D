@@ -19,8 +19,6 @@ namespace hanee.ThreeD
         public Entity[] explodedEntities { get; set; } // block인 경우 exploded한 객체들(움직일때는 이걸 움직인다)
         public GripType gripType { get; set; }
 
-        GLShader shader;
-
         public GripPoint(Entity entity, GripType gripType, devDept.Geometry.Point3D pt) : base(pt, GripManager.gripSize)
         {
             if (gripType == GripType.self)
@@ -32,7 +30,6 @@ namespace hanee.ThreeD
             this.gripType = gripType;
             this.Color = GetColorByGripType(gripType);
             this.ColorMethod = colorMethodType.byEntity;
-            shader = new PointSpriteShader();
         }
 
         private System.Drawing.Color GetColorByGripType(GripType gripType)

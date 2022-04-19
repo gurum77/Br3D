@@ -24,7 +24,7 @@ namespace hanee.ThreeD
 
                 environment.TempEntities.RegenAfterModify();
             }
-            catch (Exception e)
+            catch
             {
 
             }
