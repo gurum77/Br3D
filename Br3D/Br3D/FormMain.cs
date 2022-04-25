@@ -73,6 +73,7 @@ namespace Br3D
             hModel.ActionMode = actionType.None;
             hModel.BoundingBoxChanged += HModel_BoundingBoxChanged;
 
+            DynamicInputManager.parentControls = dockPanelDynamicInput.Controls;
         }
 
         private void HModel_BoundingBoxChanged(object sender)
@@ -1185,5 +1186,7 @@ namespace Br3D
                 Center();
             }
         }
+
+     
     }
 }

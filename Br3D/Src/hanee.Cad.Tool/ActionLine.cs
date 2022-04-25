@@ -44,6 +44,8 @@ namespace hanee.Cad.Tool
         {
             StartAction();
 
+            DisableHideDynamicInput();
+
             startPoint = await GetPoint3D(LanguageHelper.Tr("First point"));
             SetOrthoModeStartPoint(startPoint);
 
@@ -63,6 +65,7 @@ namespace hanee.Cad.Tool
                 startPoint = endPoint;
             }
 
+            
             EndAction();
             return true;
         }

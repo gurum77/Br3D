@@ -32,16 +32,20 @@ namespace hanee.ThreeD
 
         }
 
+        // todo : 포커스주거나 하는 동작은 성능에 영향을 많이 준다.
+        // 다른 방법으로 dynamic input을 처리해야한다.
         public void SetPosition(devDept.Eyeshot.Environment environment)
         {
             if (environment == null)
                 return;
 
-            var loc = environment.Location;
-            loc.X += environment.Size.Width - Size.Width;
-            loc.Y += environment.Size.Height / 2;
-            Location = loc;
-            
+            //var loc = environment.Location;
+            //loc.X += environment.Size.Width - Size.Width;
+            //loc.Y += environment.Size.Height / 2;
+            //Location = loc;
+
+
+            Location = new System.Drawing.Point(0, 0);
         }
 
         private void timer1_Tick(object sender, System.EventArgs e)

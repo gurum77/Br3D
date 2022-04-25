@@ -30,6 +30,16 @@ namespace hanee.ThreeD
         // 스냅 간격
         static public double GridSnap = 0.001;  // float로 하면 안됨(좌표 계산시 소수점 쓰레기가 발생함)
 
+        static public void DisableHideDynamicInput()
+        {
+            DynamicInputManager.disableHideDynamicInput = true;
+        }
+
+        static public void EnableHideDynamicInput()
+        {
+            DynamicInputManager.disableHideDynamicInput = false;
+        }
+
         static public void ModifyPointByGridSnap(ref Point3D point3D)
         {
             if (Point3D == null)

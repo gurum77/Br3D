@@ -1,7 +1,7 @@
 ﻿using devDept.Geometry;
 using DevExpress.Utils;
 using DevExpress.XtraLayout;
-using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace hanee.ThreeD
@@ -14,12 +14,16 @@ namespace hanee.ThreeD
             distanceAngle,
             distanceFactor
         }
-        
+
+        static public Control.ControlCollection parentControls { get; set; }
         static public devDept.Eyeshot.Environment environment { get; set; }
-        static FormXyzDynamicInput formXyzDynamicInput;
+        //static FormXyzDynamicInput formXyzDynamicInput;
         static FormDistanceAngleDynamicInput formDistanceAngleDynamicInput;
         static FormDistanceFactorDynamicInput formDistanceFactorDynamicInput;
+
+        static ControlXyzDynamicInput controlXyzDynamicInput;
         static public bool disableFlagDynamicInput { get; set; } = false;
+        static public bool disableHideDynamicInput { get; set; } = false;   // hide를 멈출지?
         static public Point3DType point3DType { get; set; } = Point3DType.xyz;
         static SvgImageCollection svgImageCollection { get; set; }
         static public System.Drawing.Brush foreBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
@@ -28,7 +32,7 @@ namespace hanee.ThreeD
         // 
         static public SvgImageCollection GetSvgImageCollection()
         {
-            if(svgImageCollection == null)
+            if (svgImageCollection == null)
             {
                 svgImageCollection = new SvgImageCollection();
                 svgImageCollection.Add("unlock", "image://svgimages/actions/cleartablestyle.svg");
@@ -41,18 +45,24 @@ namespace hanee.ThreeD
         public static void Init()
         {
             point3DType = Point3DType.xyz;
+            disableHideDynamicInput = false;
+        }
+
+        static public Image GetImage(int imageIdx)
+        {
+            return DynamicInputManager.GetSvgImageCollection().GetImage(imageIdx);
         }
 
         // lock, unlock 아이콘을 그린다.
         static public void DrawLayoutControl(ref ItemCustomDrawEventArgs e, string title, int imageIdx)
         {
-            e.Cache.DrawImage(DynamicInputManager.GetSvgImageCollection().GetImage(imageIdx), new System.Drawing.Point(e.Bounds.X+4, e.Bounds.Y+4));
+            e.Cache.DrawImage(DynamicInputManager.GetSvgImageCollection().GetImage(imageIdx), new System.Drawing.Point(e.Bounds.X + 4, e.Bounds.Y + 4));
             e.Cache.DrawString(title, Control.DefaultFont, DynamicInputManager.foreBrush, e.Bounds.X + 20, e.Bounds.Y + 7);
             e.Handled = true;
         }
 
         // 현재 사용중인 dynamic input form을 리턴
-        static public Form GetFormPoint3DDynamicInput()
+        static public Control GetFormPoint3DDynamicInput()
         {
             // 객체 선택중일때는 form을 리턴하지 않는다.
             if (ActionBase.IsSelectingEntity())
@@ -60,19 +70,28 @@ namespace hanee.ThreeD
 
             if (point3DType == Point3DType.xyz)
             {
-                if (formXyzDynamicInput == null)
+                if (controlXyzDynamicInput == null)
                 {
-                    formXyzDynamicInput = new FormXyzDynamicInput();
-                    formXyzDynamicInput.TopMost = true;
+                    controlXyzDynamicInput = new ControlXyzDynamicInput();
+
                 }
-                return formXyzDynamicInput;
+                return controlXyzDynamicInput;
+                //if (formXyzDynamicInput == null)
+                //{
+                //    formXyzDynamicInput = new FormXyzDynamicInput();
+                //    formXyzDynamicInput.TopMost = true;
+
+                //}
+
+
+                //return formXyzDynamicInput;
             }
             else if (point3DType == Point3DType.distanceAngle)
             {
                 if (formDistanceAngleDynamicInput == null)
                 {
                     formDistanceAngleDynamicInput = new FormDistanceAngleDynamicInput();
-                    formXyzDynamicInput.TopMost = true;
+                    //formXyzDynamicInput.TopMost = true;
                 }
                 return formDistanceAngleDynamicInput;
             }
@@ -102,23 +121,30 @@ namespace hanee.ThreeD
             {
                 form.Visible = true;
 
+                // parent가 있으면 parent에 dynamic form을 집어 넣는다.
+                if (parentControls != null)
+                    parentControls.Add(form);
+
                 // 숨김상태에서 처음 보여지게 되면 init을 한다.
                 if (di != null)
                     di.Init(environment);
+
+                // main form이 항상 focus 되어 있도록 해야 자연스러움
+                //var parentForm = environment.FindForm();
+                //if (parentForm != null)
+                //{
+                //    parentForm.Focus();
+                //}
             }
 
             //var loc = Cursor.Position;
             //loc.X += 50;
             //form.Location = loc;
+            
             if (di != null)
                 di.UpdateControls();
 
-            // main form이 항상 focus 되어 있도록 해야 자연스러움
-            var parentForm = environment.FindForm();
-            if (parentForm != null)
-            {
-                parentForm.Focus();
-            }
+
         }
 
         // length input을 활성화 한다.
@@ -129,7 +155,7 @@ namespace hanee.ThreeD
             if (formDi == null)
                 return;
 
-            
+
             formDi.Show();
 
             formDi.fixedFactor = null;
@@ -138,7 +164,7 @@ namespace hanee.ThreeD
             {
                 formDi.LayoutControlItemFactor.Text = title;
             }
-            
+
 
             HModel hModel = environment as HModel;
             if (hModel == null)
@@ -147,13 +173,13 @@ namespace hanee.ThreeD
             hModel.orthoModeManager.startPoint = startPoint;
         }
         // length and angle input을 활성화 한다.
-        public static void ActiveLengthAndAngle(Point3D startPoint, double? fixedAngle = null, double ?fixedLength=null)
+        public static void ActiveLengthAndAngle(Point3D startPoint, double? fixedAngle = null, double? fixedLength = null)
         {
             DynamicInputManager.point3DType = DynamicInputManager.Point3DType.distanceAngle;
             var formDi = DynamicInputManager.GetFormPoint3DDynamicInput() as FormDistanceAngleDynamicInput;
             if (formDi == null)
                 return;
-            
+
             formDi.Show();
 
             // show를 하고 나서 fixed값을 설정해야함(show할때 fixed 값을 초기화 하기 때문)
@@ -172,13 +198,21 @@ namespace hanee.ThreeD
             hModel.orthoModeManager.startPoint = startPoint;
         }
 
+        
         static public void HideDynamicInput()
         {
             var form = GetFormPoint3DDynamicInput();
             if (form == null)
                 return;
             if (form.Visible)
-                form.Visible = false;
+            {
+                if(!disableHideDynamicInput)                
+                    form.Visible = false;
+
+                var di = form as IDynamicInput;
+                if (di != null)
+                    di.Init(environment);
+            }
         }
 
         internal static void OnKeyUp(KeyEventArgs e)
@@ -212,7 +246,7 @@ namespace hanee.ThreeD
             var dynamicInput = form as IDynamicInputPoint3D;
             if (dynamicInput == null)
                 return;
-            
+
             dynamicInput.ModifyPoint3D(environment, ref pt);
         }
     }

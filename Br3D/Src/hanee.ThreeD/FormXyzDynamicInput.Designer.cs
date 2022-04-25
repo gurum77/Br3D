@@ -160,6 +160,7 @@ namespace hanee.ThreeD
             this.ClientSize = new System.Drawing.Size(177, 78);
             this.ControlBox = false;
             this.Controls.Add(this.layoutControl1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormXyzDynamicInput";
             this.Text = "Dynamic input(ESC : Unlock)";

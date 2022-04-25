@@ -16,6 +16,7 @@ namespace hanee.ThreeD
         {
             InitializeComponent();
             Translate();
+            TopLevel = false;
         }
 
         void Translate()
@@ -31,8 +32,8 @@ namespace hanee.ThreeD
             fixedY = null;
             fixedZ = null;
 
-            textEditX.Focus();
-            textEditX.SelectAll();
+            //textEditX.Focus();
+            //textEditX.SelectAll();
         }
 
 
@@ -46,19 +47,19 @@ namespace hanee.ThreeD
             if (fixedX == null)
             {
                 textEditX.Text = ActionBase.Point3D.X.ToString();
-                textEditX.SelectAll();
+                //textEditX.SelectAll();
             }
 
             if (fixedY == null)
             {
                 textEditY.Text = ActionBase.Point3D.Y.ToString();
-                textEditY.SelectAll();
+                //textEditY.SelectAll();
             }
 
             if (fixedZ == null)
             {
                 textEditZ.Text = ActionBase.Point3D.Z.ToString();
-                textEditZ.SelectAll();
+                //textEditZ.SelectAll();
             }
         }
 

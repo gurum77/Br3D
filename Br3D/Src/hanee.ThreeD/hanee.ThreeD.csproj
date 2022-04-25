@@ -99,6 +99,18 @@
     <Compile Include="BlockReferenceGripManager.cs" />
     <Compile Include="CategoryEx.cs" />
     <Compile Include="CircleGripManager.cs" />
+    <Compile Include="ControlDynamicInputEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlDynamicInputEdit.Designer.cs">
+      <DependentUpon>ControlDynamicInputEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlXyzDynamicInput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlXyzDynamicInput.Designer.cs">
+      <DependentUpon>ControlXyzDynamicInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="CurveGripManager.cs" />
     <Compile Include="EntitiesHelper.cs" />
     <Compile Include="EntityPropertiesManager.cs" />
@@ -183,6 +195,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ControlDynamicInputEdit.resx">
+      <DependentUpon>ControlDynamicInputEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlXyzDynamicInput.resx">
+      <DependentUpon>ControlXyzDynamicInput.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormDistanceFactorDynamicInput.resx">
       <DependentUpon>FormDistanceFactorDynamicInput.cs</DependentUpon>
     </EmbeddedResource>
