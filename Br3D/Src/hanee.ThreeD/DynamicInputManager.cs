@@ -17,11 +17,11 @@ namespace hanee.ThreeD
 
         static public Control.ControlCollection parentControls { get; set; }
         static public devDept.Eyeshot.Environment environment { get; set; }
-        //static FormXyzDynamicInput formXyzDynamicInput;
-        static FormDistanceAngleDynamicInput formDistanceAngleDynamicInput;
-        static FormDistanceFactorDynamicInput formDistanceFactorDynamicInput;
+        //static FormDistanceFactorDynamicInput formDistanceFactorDynamicInput;
 
         static ControlXyzDynamicInput controlXyzDynamicInput;
+        static ControlDistanceAngleDynamicInput controlDistanceAngleDynamicInput;
+        static ControlDistanceFactorDynamicInput controlDistanceFactorDynamicInput;
         static public bool disableFlagDynamicInput { get; set; } = false;
         static public bool disableHideDynamicInput { get; set; } = false;   // hide를 멈출지?
         static public Point3DType point3DType { get; set; } = Point3DType.xyz;
@@ -71,38 +71,20 @@ namespace hanee.ThreeD
             if (point3DType == Point3DType.xyz)
             {
                 if (controlXyzDynamicInput == null)
-                {
                     controlXyzDynamicInput = new ControlXyzDynamicInput();
-
-                }
                 return controlXyzDynamicInput;
-                //if (formXyzDynamicInput == null)
-                //{
-                //    formXyzDynamicInput = new FormXyzDynamicInput();
-                //    formXyzDynamicInput.TopMost = true;
-
-                //}
-
-
-                //return formXyzDynamicInput;
             }
             else if (point3DType == Point3DType.distanceAngle)
             {
-                if (formDistanceAngleDynamicInput == null)
-                {
-                    formDistanceAngleDynamicInput = new FormDistanceAngleDynamicInput();
-                    //formXyzDynamicInput.TopMost = true;
-                }
-                return formDistanceAngleDynamicInput;
+                if (controlDistanceAngleDynamicInput == null)
+                    controlDistanceAngleDynamicInput = new ControlDistanceAngleDynamicInput();
+                return controlDistanceAngleDynamicInput;
             }
             else if (point3DType == Point3DType.distanceFactor)
             {
-                if (formDistanceFactorDynamicInput == null)
-                {
-                    formDistanceFactorDynamicInput = new FormDistanceFactorDynamicInput();
-                    formDistanceFactorDynamicInput.TopMost = true;
-                }
-                return formDistanceFactorDynamicInput;
+                if (controlDistanceFactorDynamicInput == null)
+                    controlDistanceFactorDynamicInput = new ControlDistanceFactorDynamicInput();
+                return controlDistanceFactorDynamicInput;
             }
 
             return null;
@@ -119,11 +101,21 @@ namespace hanee.ThreeD
 
             if (!form.Visible)
             {
-                form.Visible = true;
-
                 // parent가 있으면 parent에 dynamic form을 집어 넣는다.
                 if (parentControls != null)
-                    parentControls.Add(form);
+                {
+                    for(int i = 0; i < parentControls[0].Controls.Count; ++i)
+                    {
+                        if(parentControls[0].Controls[i] is IDynamicInput)
+                        {
+                            parentControls[0].Controls.RemoveAt(i);
+                            i--;
+                        }
+                    }
+                    parentControls[0].Controls.Add(form);
+                }
+
+                form.Visible = true;
 
                 // 숨김상태에서 처음 보여지게 되면 init을 한다.
                 if (di != null)
@@ -140,7 +132,7 @@ namespace hanee.ThreeD
             //var loc = Cursor.Position;
             //loc.X += 50;
             //form.Location = loc;
-            
+
             if (di != null)
                 di.UpdateControls();
 
@@ -151,18 +143,17 @@ namespace hanee.ThreeD
         public static void ActiveLengthFactor(Point3D startPoint, double baseLength, string title = null)
         {
             DynamicInputManager.point3DType = DynamicInputManager.Point3DType.distanceFactor;
-            var formDi = DynamicInputManager.GetFormPoint3DDynamicInput() as FormDistanceFactorDynamicInput;
+            var formDi = DynamicInputManager.GetFormPoint3DDynamicInput() as ControlDistanceFactorDynamicInput;
             if (formDi == null)
                 return;
 
-
-            formDi.Show();
-
+            ShowDynamicInput(environment);
+            //formDi.Show();
             formDi.fixedFactor = null;
             formDi.baseLength = baseLength;
             if (title != null)
             {
-                formDi.LayoutControlItemFactor.Text = title;
+                formDi.controlDynamicInputEdit1.labelControl1.Text = title;
             }
 
 
@@ -176,7 +167,7 @@ namespace hanee.ThreeD
         public static void ActiveLengthAndAngle(Point3D startPoint, double? fixedAngle = null, double? fixedLength = null)
         {
             DynamicInputManager.point3DType = DynamicInputManager.Point3DType.distanceAngle;
-            var formDi = DynamicInputManager.GetFormPoint3DDynamicInput() as FormDistanceAngleDynamicInput;
+            var formDi = DynamicInputManager.GetFormPoint3DDynamicInput() as ControlDistanceAngleDynamicInput;
             if (formDi == null)
                 return;
 
@@ -187,8 +178,8 @@ namespace hanee.ThreeD
             formDi.fixedLength = fixedLength;
             if (formDi.fixedLength != null)
             {
-                formDi.TextEditAngle.Focus();
-                formDi.TextEditAngle.SelectAll();
+                formDi.textEditAngle.Focus();
+                formDi.textEditAngle.SelectAll();
             }
 
             HModel hModel = environment as HModel;
@@ -198,7 +189,7 @@ namespace hanee.ThreeD
             hModel.orthoModeManager.startPoint = startPoint;
         }
 
-        
+
         static public void HideDynamicInput()
         {
             var form = GetFormPoint3DDynamicInput();
@@ -206,7 +197,7 @@ namespace hanee.ThreeD
                 return;
             if (form.Visible)
             {
-                if(!disableHideDynamicInput)                
+                if (!disableHideDynamicInput)
                     form.Visible = false;
 
                 var di = form as IDynamicInput;
@@ -229,7 +220,11 @@ namespace hanee.ThreeD
             if (disableFlagDynamicInput)
                 return;
 
+            var disableHideDynamicInputOld = disableHideDynamicInput;
+            disableHideDynamicInput = false;
             HideDynamicInput();
+            disableHideDynamicInput = disableHideDynamicInputOld;
+
             if (point3DType == Point3DType.xyz)
                 point3DType = Point3DType.distanceAngle;
             else

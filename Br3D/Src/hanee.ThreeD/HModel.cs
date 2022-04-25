@@ -95,7 +95,15 @@ namespace hanee.ThreeD
             {
                 ActionBase.KeyUpHandler(e);
 
-                DynamicInputManager.OnKeyUp(e);
+                if (keyData == Keys.Oem3)
+                {
+                    DynamicInputManager.FlagPoint3DType();
+                }
+                else
+                {
+                    DynamicInputManager.OnKeyUp(e);
+
+                }
             }
             else
             {
@@ -116,7 +124,7 @@ namespace hanee.ThreeD
 
             }
         }
-       
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
             lastMouseDownPoint = e.Location;
@@ -136,7 +144,7 @@ namespace hanee.ThreeD
                 // 그립
                 gripManager.OnMouseDown(e, selectedEntities, step);
             }
-            
+
 
             // 
             if (ActionBase.IsUserInputting())
@@ -455,7 +463,7 @@ namespace hanee.ThreeD
             if (basePoint == null)
                 return len;
 
-            Point2D pt1 =  WorldToScreen(basePoint);
+            Point2D pt1 = WorldToScreen(basePoint);
             Point2D pt2 = WorldToScreen(basePoint + new Point3D(len, 0, 0));
             var dist1 = pt1.DistanceTo(pt2);
 
@@ -917,7 +925,7 @@ namespace hanee.ThreeD
                 // 사용자 입력중일때만 draw overlay
                 //DrawOverlayForSnap();
                 Snapping.DrawOverlayForSnap();
-                if(orthoModeManager != null)
+                if (orthoModeManager != null)
                     orthoModeManager.DrawOverlayForOrthoMode();
 
                 renderContext.EnableXOR(true);
@@ -927,7 +935,7 @@ namespace hanee.ThreeD
                 if (ActionBase.cursorText != null)
                     DrawMouseText(ActionBase.cursorText, cursorPoint);
 
-                
+
 
                 // preview entity가 있다면 그걸 그린다.
                 if (ActionBase.PreviewEntities != null)
@@ -936,7 +944,7 @@ namespace hanee.ThreeD
 
                 renderContext.EnableXOR(false);
             }
-           
+
 
             RenderNavigationHelp();
 
@@ -949,7 +957,7 @@ namespace hanee.ThreeD
             base.DrawOverlay(myParams);
         }
 
- 
+
         #endregion
 
         // ReadFileAsync에서 열었던 stream을 닫는다.

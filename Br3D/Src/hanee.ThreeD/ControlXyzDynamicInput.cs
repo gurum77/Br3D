@@ -105,9 +105,9 @@ namespace hanee.ThreeD
             fixedY = null;
             fixedZ = null;
 
-            controlDynamicInputEdit1.pictureEdit1.Image = DynamicInputManager.GetImage(0);
-            controlDynamicInputEdit2.pictureEdit1.Image = DynamicInputManager.GetImage(0);
-            controlDynamicInputEdit3.pictureEdit1.Image = DynamicInputManager.GetImage(0);
+            pictureX.Image = DynamicInputManager.GetImage(0);
+            pictureY.Image = DynamicInputManager.GetImage(0);
+            pictureZ.Image = DynamicInputManager.GetImage(0);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -175,8 +175,8 @@ namespace hanee.ThreeD
         {
             if (ActionBase.Point3D == null)
                 return;
-
-            SuspendLayout();
+            
+            //SuspendLayout();
 
             if (fixedX == null) 
             {
@@ -196,7 +196,7 @@ namespace hanee.ThreeD
                     textEditZ.Text = ActionBase.Point3D.Z.ToString();
             }
 
-            ResumeLayout();
+            //ResumeLayout();
         }
 
 

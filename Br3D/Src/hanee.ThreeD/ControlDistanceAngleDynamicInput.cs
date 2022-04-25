@@ -6,42 +6,29 @@ using System.Windows.Forms;
 
 namespace hanee.ThreeD
 {
-    public partial class FormDistanceAngleDynamicInput : XtraForm, IDynamicInputPoint3D
+    public partial class ControlDistanceAngleDynamicInput : DevExpress.XtraEditors.XtraUserControl, IDynamicInputPoint3D
     {
         devDept.Eyeshot.Environment environment { get; set; }
         public double? fixedLength { get; set; }
         public double? fixedAngle { get; set; }
 
-        public TextEdit TextEditLength => textEditLength;
-        public TextEdit TextEditAngle => textEditAngle;
+        public TextEdit textEditLength => controlDynamicInputEdit1.textEdit1;
+        public TextEdit textEditAngle => controlDynamicInputEdit2.textEdit1;
 
-        public FormDistanceAngleDynamicInput()
+        PictureEdit pictureLength => controlDynamicInputEdit1.pictureEdit1;
+        PictureEdit pictureAngle => controlDynamicInputEdit2.pictureEdit1;
+
+        public ControlDistanceAngleDynamicInput()
         {
             InitializeComponent();
-            textEditAngle.KeyDown += TextEditAngle_KeyDown;
+
             textEditLength.KeyDown += TextEditLength_KeyDown;
+            textEditAngle.KeyDown += TextEditAngle_KeyDown;
 
             Translate();
         }
-        void Translate()
-        {
-            layoutControlItemLength.Text = LanguageHelper.Tr("Length");
-            layoutControlItemAngle.Text = LanguageHelper.Tr("Angle");
-        }
 
-        private void TextEditLength_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-        {
-            if (!e.KeyCode.IsDigit())
-                return;
-
-            BeginInvoke(new Action(() =>
-            {
-                fixedLength = textEditLength.Text.ToDouble();
-                Invalidate();
-            }));
-        }
-
-        private void TextEditAngle_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        private void TextEditAngle_KeyDown(object sender, KeyEventArgs e)
         {
             if (!e.KeyCode.IsDigit())
                 return;
@@ -49,8 +36,28 @@ namespace hanee.ThreeD
             BeginInvoke(new Action(() =>
             {
                 fixedAngle = textEditAngle.Text.ToDouble();
+                pictureAngle.Image = DynamicInputManager.GetImage(1);
                 Invalidate();
             }));
+        }
+
+        private void TextEditLength_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!e.KeyCode.IsDigit())
+                return;
+
+            BeginInvoke(new Action(() =>
+            {
+                fixedLength = textEditLength.Text.ToDouble();
+                pictureLength.Image = DynamicInputManager.GetImage(1);
+                Invalidate();
+            }));
+        }
+
+        void Translate()
+        {
+            controlDynamicInputEdit1.labelControl1.Text = LanguageHelper.Tr("Length");
+            controlDynamicInputEdit2.labelControl1.Text = LanguageHelper.Tr("Angle");
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -99,15 +106,34 @@ namespace hanee.ThreeD
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
         public void Init(devDept.Eyeshot.Environment environment)
         {
             this.environment = environment;
+
             fixedLength = null;
             fixedAngle = null;
 
-            textEditAngle.SelectAll();
-            textEditLength.SelectAll();
+            pictureLength.Image = DynamicInputManager.GetImage(0);
+            pictureAngle.Image = DynamicInputManager.GetImage(0);
+        }
+
+        public void ModifyPoint3D(devDept.Eyeshot.Environment environment, ref Point3D pt)
+        {
+            HModel hModel = environment as HModel;
+            var mng = hModel?.orthoModeManager;
+            if (mng == null || mng.startPoint == null)
+                return;
+
+            if (fixedLength == null &&
+                fixedAngle == null)
+                return;
+
+            double len = fixedLength == null ? pt.DistanceTo(mng.startPoint) : fixedLength.Value;
+            double ang = fixedAngle == null ? (pt - mng.startPoint).AsVector.ToDegree() : fixedAngle.Value;
+
+            var newPt = mng.startPoint + ang.ToRadians().ToVector() * len;
+            pt.X = newPt.X;
+            pt.Y = newPt.Y;
         }
 
         public void UpdateControls()
@@ -136,42 +162,6 @@ namespace hanee.ThreeD
                 textEditAngle.Text = (ActionBase.Point3D - mng.startPoint).AsVector.ToDegree().ToString();
                 textEditAngle.SelectAll();
             }
-
-        }
-
-
-
-
-        public void ModifyPoint3D(devDept.Eyeshot.Environment environment, ref Point3D pt)
-        {
-            HModel hModel = environment as HModel;
-            var mng = hModel?.orthoModeManager;
-            if (mng == null || mng.startPoint == null)
-                return;
-
-            if (fixedLength == null &&
-                fixedAngle == null)
-                return;
-
-            double len = fixedLength == null ? pt.DistanceTo(mng.startPoint) : fixedLength.Value;
-            double ang = fixedAngle == null ? (pt - mng.startPoint).AsVector.ToDegree() : fixedAngle.Value;
-
-            var newPt = mng.startPoint + ang.ToRadians().ToVector() * len;
-            pt.X = newPt.X;
-            pt.Y = newPt.Y;
-        }
-
-        private void layoutControlItemLength_CustomDraw(object sender, DevExpress.XtraLayout.ItemCustomDrawEventArgs e)
-        {
-            var idx = fixedLength == null ? 0 : 1;
-            DynamicInputManager.DrawLayoutControl(ref e, "Length", idx);
-        }
-
-
-        private void layoutControlItemAngle_CustomDraw(object sender, DevExpress.XtraLayout.ItemCustomDrawEventArgs e)
-        {
-            var idx = fixedAngle == null ? 0 : 1;
-            DynamicInputManager.DrawLayoutControl(ref e, "Angle", idx);
         }
     }
 }
