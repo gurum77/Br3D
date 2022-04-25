@@ -113,6 +113,8 @@ namespace hanee.ThreeD
             fixedLength = null;
             fixedAngle = null;
 
+            controlDynamicInputEdit1.Visible = true;
+            controlDynamicInputEdit2.Visible = true;
             pictureLength.Image = DynamicInputManager.GetImage(0);
             pictureAngle.Image = DynamicInputManager.GetImage(0);
         }

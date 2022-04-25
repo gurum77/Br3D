@@ -71,24 +71,21 @@ namespace hanee.Cad.Tool
                     break;
 
                 // 높이
-                DynamicInputManager.point3DType = DynamicInputManager.Point3DType.distanceAngle;
-                var formDi = DynamicInputManager.GetFormPoint3DDynamicInput() as ControlDistanceAngleDynamicInput;
-                if (formDi != null)
-                {
-                    DynamicInputManager.ShowDynamicInput(environment);
-                    formDi.fixedAngle = 90;
-                }
-                    
+                DynamicInputManager.ActiveLengthFactor(insPoint, 1, LanguageHelper.Tr("Height"));
+                
                 heightPoint = await GetPoint3D(LanguageHelper.Tr("Height"));
                 SetOrthoModeStartPoint(insPoint);
                 if (IsCanceled())
                     break;
 
                 // 방향
+                DynamicInputManager.point3DType = DynamicInputManager.Point3DType.distanceAngle;
+                var formDi = DynamicInputManager.GetFormPoint3DDynamicInput() as ControlDistanceAngleDynamicInput;
                 if (formDi != null)
                 {
                     DynamicInputManager.ShowDynamicInput(environment);
                     formDi.fixedLength = 10000;
+                    formDi.controlDynamicInputEdit1.Visible = false;
                 }
                 dirPoint = await GetPoint3D(LanguageHelper.Tr("Direction"));
                 if (IsCanceled())

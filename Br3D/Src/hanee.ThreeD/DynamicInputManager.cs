@@ -71,19 +71,28 @@ namespace hanee.ThreeD
             if (point3DType == Point3DType.xyz)
             {
                 if (controlXyzDynamicInput == null)
+                {
                     controlXyzDynamicInput = new ControlXyzDynamicInput();
+                    controlXyzDynamicInput.Visible = false;
+                }
                 return controlXyzDynamicInput;
             }
             else if (point3DType == Point3DType.distanceAngle)
             {
                 if (controlDistanceAngleDynamicInput == null)
+                {
                     controlDistanceAngleDynamicInput = new ControlDistanceAngleDynamicInput();
+                    controlDistanceAngleDynamicInput.Visible = false;
+                }
                 return controlDistanceAngleDynamicInput;
             }
             else if (point3DType == Point3DType.distanceFactor)
             {
                 if (controlDistanceFactorDynamicInput == null)
+                {
                     controlDistanceFactorDynamicInput = new ControlDistanceFactorDynamicInput();
+                    controlDistanceFactorDynamicInput.Visible = false;
+                }
                 return controlDistanceFactorDynamicInput;
             }
 
@@ -101,6 +110,8 @@ namespace hanee.ThreeD
 
             if (!form.Visible)
             {
+                form.Visible = true;
+
                 // parent가 있으면 parent에 dynamic form을 집어 넣는다.
                 if (parentControls != null)
                 {
@@ -112,31 +123,19 @@ namespace hanee.ThreeD
                             i--;
                         }
                     }
+                    form.Dock = DockStyle.Top;
                     parentControls[0].Controls.Add(form);
                 }
 
-                form.Visible = true;
+                
 
                 // 숨김상태에서 처음 보여지게 되면 init을 한다.
                 if (di != null)
-                    di.Init(environment);
-
-                // main form이 항상 focus 되어 있도록 해야 자연스러움
-                //var parentForm = environment.FindForm();
-                //if (parentForm != null)
-                //{
-                //    parentForm.Focus();
-                //}
+                     di.Init(environment);
             }
-
-            //var loc = Cursor.Position;
-            //loc.X += 50;
-            //form.Location = loc;
 
             if (di != null)
                 di.UpdateControls();
-
-
         }
 
         // length input을 활성화 한다.
@@ -148,14 +147,14 @@ namespace hanee.ThreeD
                 return;
 
             ShowDynamicInput(environment);
-            //formDi.Show();
+            
             formDi.fixedFactor = null;
             formDi.baseLength = baseLength;
             if (title != null)
             {
                 formDi.controlDynamicInputEdit1.labelControl1.Text = title;
             }
-
+            formDi.controlDynamicInputEdit1.textEdit1.SelectAll();
 
             HModel hModel = environment as HModel;
             if (hModel == null)
@@ -195,15 +194,15 @@ namespace hanee.ThreeD
             var form = GetFormPoint3DDynamicInput();
             if (form == null)
                 return;
-            if (form.Visible)
-            {
-                if (!disableHideDynamicInput)
-                    form.Visible = false;
+            if (!form.Visible)
+                return;
+            
+            if (!disableHideDynamicInput)
+                form.Visible = false;
 
-                var di = form as IDynamicInput;
-                if (di != null)
-                    di.Init(environment);
-            }
+            var di = form as IDynamicInput;
+            if (di != null)
+                di.Init(environment);
         }
 
         internal static void OnKeyUp(KeyEventArgs e)
@@ -229,6 +228,7 @@ namespace hanee.ThreeD
                 point3DType = Point3DType.distanceAngle;
             else
                 point3DType = Point3DType.xyz;
+            ShowDynamicInput(environment);
         }
 
         // dynamic input에서 fixed 된거 고려해서 좌표 조정

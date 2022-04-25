@@ -128,7 +128,6 @@ namespace hanee.ThreeD
                 var factor = ActionBase.Point3D.DistanceTo(mng.startPoint) / baseLength;
                 textEditFactor.Text = factor.ToString();
                 textEditFactor.SelectAll();
-
             }
         }
 
@@ -137,7 +136,6 @@ namespace hanee.ThreeD
             this.environment = environment;
             fixedFactor = null;
             baseLength = 1;
-            textEditFactor.SelectAll();
             pictureEditFactor.Image = DynamicInputManager.GetImage(0);
         }
     }
