@@ -356,6 +356,8 @@ namespace Br3D
             this.middlePointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.centerPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
+            this.dockPanelDynamicInput = new DevExpress.XtraBars.Docking.DockPanel();
+            this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
             this.panelContainer1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanelProperties = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
@@ -395,17 +397,20 @@ namespace Br3D
             this.dockPanelObjectTree = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel3_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.treeListObject = new DevExpress.XtraTreeList.TreeList();
-            this.dockPanelDynamicInput = new DevExpress.XtraBars.Docking.DockPanel();
-            this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelCoordinates = new System.Windows.Forms.ToolStripStatusLabel();
             this.tileNavSubItemLineBy2Point = new DevExpress.XtraBars.Navigation.TileNavSubItem();
             this.tileNavSubItem2 = new DevExpress.XtraBars.Navigation.TileNavSubItem();
+            this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
+            this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.tileNavPaneViewport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hModel)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
+            this.dockPanelDynamicInput.SuspendLayout();
+            this.controlContainer1.SuspendLayout();
             this.panelContainer1.SuspendLayout();
             this.dockPanelProperties.SuspendLayout();
             this.dockPanel1_Container.SuspendLayout();
@@ -417,8 +422,10 @@ namespace Br3D
             this.dockPanelObjectTree.SuspendLayout();
             this.dockPanel3_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeListObject)).BeginInit();
-            this.dockPanelDynamicInput.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // tileNavPaneViewport
@@ -1436,6 +1443,27 @@ namespace Br3D
             "DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl",
             "DevExpress.XtraBars.ToolbarForm.ToolbarFormControl"});
             // 
+            // dockPanelDynamicInput
+            // 
+            this.dockPanelDynamicInput.Controls.Add(this.controlContainer1);
+            this.dockPanelDynamicInput.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
+            this.dockPanelDynamicInput.ID = new System.Guid("754d9043-9e08-4dbc-87a8-0af55da86043");
+            this.dockPanelDynamicInput.Location = new System.Drawing.Point(846, 43);
+            this.dockPanelDynamicInput.Name = "dockPanelDynamicInput";
+            this.dockPanelDynamicInput.OriginalSize = new System.Drawing.Size(198, 200);
+            this.dockPanelDynamicInput.Size = new System.Drawing.Size(198, 623);
+            this.dockPanelDynamicInput.Text = "Dynamic input";
+            // 
+            // controlContainer1
+            // 
+            this.controlContainer1.Controls.Add(this.searchControl1);
+            this.controlContainer1.Controls.Add(this.comboBoxEdit1);
+            this.controlContainer1.Controls.Add(this.listBoxControl1);
+            this.controlContainer1.Location = new System.Drawing.Point(4, 26);
+            this.controlContainer1.Name = "controlContainer1";
+            this.controlContainer1.Size = new System.Drawing.Size(191, 594);
+            this.controlContainer1.TabIndex = 0;
+            // 
             // panelContainer1
             // 
             this.panelContainer1.ActiveChild = this.dockPanelProperties;
@@ -1756,24 +1784,6 @@ namespace Br3D
             this.treeListObject.Size = new System.Drawing.Size(252, 566);
             this.treeListObject.TabIndex = 0;
             // 
-            // dockPanelDynamicInput
-            // 
-            this.dockPanelDynamicInput.Controls.Add(this.controlContainer1);
-            this.dockPanelDynamicInput.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
-            this.dockPanelDynamicInput.ID = new System.Guid("754d9043-9e08-4dbc-87a8-0af55da86043");
-            this.dockPanelDynamicInput.Location = new System.Drawing.Point(846, 43);
-            this.dockPanelDynamicInput.Name = "dockPanelDynamicInput";
-            this.dockPanelDynamicInput.OriginalSize = new System.Drawing.Size(198, 200);
-            this.dockPanelDynamicInput.Size = new System.Drawing.Size(198, 623);
-            this.dockPanelDynamicInput.Text = "Dynamic input";
-            // 
-            // controlContainer1
-            // 
-            this.controlContainer1.Location = new System.Drawing.Point(4, 26);
-            this.controlContainer1.Name = "controlContainer1";
-            this.controlContainer1.Size = new System.Drawing.Size(191, 594);
-            this.controlContainer1.TabIndex = 0;
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1812,6 +1822,45 @@ namespace Br3D
             tileItemElement64.Text = "tileNavSubItem2";
             this.tileNavSubItem2.Tile.Elements.Add(tileItemElement64);
             // 
+            // listBoxControl1
+            // 
+            this.listBoxControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.listBoxControl1.Items.AddRange(new object[] {
+            "line",
+            "polyline",
+            "circle",
+            "arc"});
+            this.listBoxControl1.Location = new System.Drawing.Point(0, 0);
+            this.listBoxControl1.Name = "listBoxControl1";
+            this.listBoxControl1.Size = new System.Drawing.Size(191, 95);
+            this.listBoxControl1.TabIndex = 1;
+            // 
+            // comboBoxEdit1
+            // 
+            this.comboBoxEdit1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.comboBoxEdit1.Location = new System.Drawing.Point(0, 95);
+            this.comboBoxEdit1.Name = "comboBoxEdit1";
+            this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEdit1.Properties.Items.AddRange(new object[] {
+            "line",
+            "polyline",
+            "circle",
+            "arc"});
+            this.comboBoxEdit1.Size = new System.Drawing.Size(191, 22);
+            this.comboBoxEdit1.TabIndex = 2;
+            // 
+            // searchControl1
+            // 
+            this.searchControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchControl1.Location = new System.Drawing.Point(0, 117);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Repository.ClearButton(),
+            new DevExpress.XtraEditors.Repository.SearchButton()});
+            this.searchControl1.Size = new System.Drawing.Size(191, 22);
+            this.searchControl1.TabIndex = 3;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1831,6 +1880,8 @@ namespace Br3D
             ((System.ComponentModel.ISupportInitialize)(this.hModel)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
+            this.dockPanelDynamicInput.ResumeLayout(false);
+            this.controlContainer1.ResumeLayout(false);
             this.panelContainer1.ResumeLayout(false);
             this.dockPanelProperties.ResumeLayout(false);
             this.dockPanel1_Container.ResumeLayout(false);
@@ -1842,9 +1893,11 @@ namespace Br3D
             this.dockPanelObjectTree.ResumeLayout(false);
             this.dockPanel3_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeListObject)).EndInit();
-            this.dockPanelDynamicInput.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1973,5 +2026,8 @@ namespace Br3D
         private DevExpress.XtraBars.Navigation.TileNavSubItem tileNavSubItemInsertImage;
         private DevExpress.XtraBars.Docking.DockPanel dockPanelDynamicInput;
         private DevExpress.XtraBars.Docking.ControlContainer controlContainer1;
+        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
+        private DevExpress.XtraEditors.ListBoxControl listBoxControl1;
+        private DevExpress.XtraEditors.SearchControl searchControl1;
     }
 }

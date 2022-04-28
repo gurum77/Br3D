@@ -1,5 +1,4 @@
-﻿using devDept.Eyeshot;
-using devDept.Eyeshot.Entities;
+﻿using devDept.Eyeshot.Entities;
 using devDept.Geometry;
 using devDept.Graphics;
 using System;
@@ -24,6 +23,9 @@ namespace hanee.ThreeD
         public Step step = Step.firstPoint;
         RenderContextBase renderContext { get { return hModel.renderContext; } }
 
+        bool enableDynamicHighlight = false;
+        int[] IndexsUnder;
+        float SelectionLineWeightScaleFactor = 10;
         public SelectionManager(HModel hModel)
         {
             this.hModel = hModel;
@@ -46,6 +48,16 @@ namespace hanee.ThreeD
 
         public void DrawOvery()
         {
+            if (IndexsUnder != null)
+            {
+                foreach (int i in IndexsUnder)
+                {
+                    ICurve c = hModel.Entities[i] as ICurve;
+                    if (c != null)
+                        DrawScreenCurve(c, (c as Entity).LineWeight + SelectionLineWeightScaleFactor);
+                }
+            }
+
             if (!IsSelectable())
                 return;
 
@@ -60,6 +72,33 @@ namespace hanee.ThreeD
             {
                 DrawSelectionBox(initialLocation, currentLocation, Color.Green, true, false);
             }
+
+
+
+        }
+
+        public void DrawScreenCurve(ICurve curve, float linesize)
+        {
+            Entity e = curve as Entity;
+            if (e.Vertices != null)
+                DrawOverLayLineStrip(e.Vertices, linesize);
+        }
+        public void DrawOverLayLineStrip(Point3D[] pts, float linesize)
+        {
+            Point3D[] screenpts = new Point3D[pts.Length];
+            for (int ii = 0; ii < pts.Length; ii++)
+                screenpts[ii] = hModel.WorldToScreen(pts[ii]);
+
+            renderContext.EnableXOR(false);
+            renderContext.SetState(devDept.Graphics.depthStencilStateType.DepthTestOff);
+
+            renderContext.SetLineSize(linesize); // This needs to be about 2x the width of the line we're highlight glowing
+            renderContext.SetState(blendStateType.Blend);
+            renderContext.SetState(rasterizerStateType.CCW_PolygonFill_NoCullFace_NoPolygonOffset);
+            renderContext.SetColorWireframe(Color.FromArgb(120, System.Drawing.Color.Red), true);
+            renderContext.DrawLineStrip(screenpts);
+
+            renderContext.SetLineSize(1);
         }
 
         public void OnMouseMove(MouseEventArgs e)
@@ -68,9 +107,20 @@ namespace hanee.ThreeD
                 return;
 
             if (step != Step.secondPoint)
+            {
+                if (enableDynamicHighlight)
+                {
+                    IndexsUnder = hModel.GetAllEntitiesUnderMouseCursor(e.Location);
+                    hModel.Invalidate();
+                }
+
                 return;
+            }
 
             currentLocation = e.Location;
+
+
+
         }
 
         // return 이번에 선택된 객체

@@ -35,6 +35,7 @@ namespace Br3D
         string opendFilePath = "";
         bool isDwg => string.IsNullOrEmpty(opendFilePath) ? false : Path.GetExtension(opendFilePath).ToLower().EndsWith("dwg");
         GripManager gripManager => hModel?.gripManager;
+
         public FormMain()
         {
             InitializeComponent();
@@ -74,6 +75,8 @@ namespace Br3D
             hModel.BoundingBoxChanged += HModel_BoundingBoxChanged;
 
             DynamicInputManager.parentControls = dockPanelDynamicInput.Controls;
+
+            searchControl1.Client = listBoxControl1;
         }
 
         private void HModel_BoundingBoxChanged(object sender)
