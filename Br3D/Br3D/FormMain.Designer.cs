@@ -31,256 +31,256 @@ namespace Br3D
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            DevExpress.XtraEditors.TileItemElement tileItemElement1 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement2 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement5 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement3 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement4 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement6 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement7 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement10 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement8 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement9 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement12 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement11 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement13 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement14 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement15 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement16 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement17 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement18 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement19 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement20 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement21 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement22 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement23 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement24 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement25 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement26 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement27 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement28 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement30 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement29 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement35 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement31 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement32 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement33 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement34 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement42 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement36 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement37 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement38 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement39 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement40 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement41 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement43 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement44 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement45 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement46 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement50 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement47 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement48 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement49 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement57 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement53 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement51 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement52 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement54 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement55 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement56 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement58 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement59 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement60 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement61 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement62 = new DevExpress.XtraEditors.TileItemElement();
-            devDept.Eyeshot.CancelToolBarButton cancelToolBarButton1 = new devDept.Eyeshot.CancelToolBarButton("Cancel", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ProgressBar progressBar1 = new devDept.Eyeshot.ProgressBar(devDept.Eyeshot.ProgressBar.styleType.Circular, 0, "Idle", System.Drawing.Color.Black, System.Drawing.Color.Transparent, System.Drawing.Color.Green, 1D, true, cancelToolBarButton1, false, 0.1D, 0.333D, true);
-            devDept.Graphics.BackgroundSettings backgroundSettings1 = new devDept.Graphics.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(82)))), ((int)(((byte)(103))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(41))))), 0.75D, null, devDept.Graphics.colorThemeType.Auto, 0.33D);
-            devDept.Eyeshot.Camera camera1 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(-1.2598973293902418D, 2.5657311010967412D, 42.261193606378384D), 307.26899936464309D, new devDept.Geometry.Quaternion(0.018434349666532512D, 0.039532590434972065D, 0.42221602280006187D, 0.90544518284475428D), devDept.Graphics.projectionType.Perspective, 40D, 1.9317826595929311D, false, 0.001D);
-            devDept.Eyeshot.HomeToolBarButton homeToolBarButton1 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton1 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton1 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton1 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.PanToolBarButton panToolBarButton1 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton1 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton1 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.ToolBar toolBar1 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.HorizontalTopCenter, true, new devDept.Eyeshot.ToolBarButton[] {
-            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton1)),
-            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton1)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton1)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton1)),
-            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton1)),
-            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton1)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton1))});
-            devDept.Eyeshot.HomeToolBarButton homeToolBarButton2 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton2 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton2 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton2 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.PanToolBarButton panToolBarButton2 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton2 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton2 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.ToolBar toolBar2 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.VerticalTopLeft, true, new devDept.Eyeshot.ToolBarButton[] {
-            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton2)),
-            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton2)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton2)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton2)),
-            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton2)),
-            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton2)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton2))});
-            devDept.Eyeshot.Grid grid1 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
-            devDept.Eyeshot.OriginSymbol originSymbol1 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.Ball, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, null, false);
-            devDept.Eyeshot.RotateSettings rotateSettings1 = new devDept.Eyeshot.RotateSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Ctrl), 10D, true, 1D, devDept.Eyeshot.rotationType.Turntable, devDept.Eyeshot.rotationCenterType.CursorLocation, new devDept.Geometry.Point3D(0D, 0D, 0D), false);
-            devDept.Eyeshot.ZoomSettings zoomSettings1 = new devDept.Eyeshot.ZoomSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Shift), 25, true, devDept.Eyeshot.zoomStyleType.AtCursorLocation, false, 1D, System.Drawing.Color.Empty, devDept.Eyeshot.Camera.perspectiveFitType.Accurate, false, 10, true);
-            devDept.Eyeshot.PanSettings panSettings1 = new devDept.Eyeshot.PanSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.None), 25, true);
-            devDept.Eyeshot.NavigationSettings navigationSettings1 = new devDept.Eyeshot.NavigationSettings(devDept.Eyeshot.Camera.navigationType.Examine, new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Left, devDept.Eyeshot.modifierKeys.None), new devDept.Geometry.Point3D(-1000D, -1000D, -1000D), new devDept.Geometry.Point3D(1000D, 1000D, 1000D), 8D, 50D, 50D);
-            devDept.Eyeshot.CoordinateSystemIcon coordinateSystemIcon1 = new devDept.Eyeshot.CoordinateSystemIcon(new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, devDept.Eyeshot.coordinateSystemPositionType.BottomLeft, 37, null, true);
-            devDept.Eyeshot.ViewCubeIcon viewCubeIcon1 = new devDept.Eyeshot.ViewCubeIcon(devDept.Eyeshot.coordinateSystemPositionType.TopRight, true, System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(20)))), ((int)(((byte)(60))))), true, "FRONT", "BACK", "LEFT", "RIGHT", "TOP", "BOTTOM", System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), 'S', 'N', 'W', 'E', true, null, System.Drawing.Color.White, System.Drawing.Color.Black, 120, true, true, null, null, null, null, null, null, false, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D));
-            devDept.Eyeshot.Viewport.SavedViewsManager savedViewsManager1 = new devDept.Eyeshot.Viewport.SavedViewsManager(8);
-            devDept.Eyeshot.Viewport viewport1 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(0, 0), new System.Drawing.Size(291, 309), backgroundSettings1, camera1, new devDept.Eyeshot.ToolBar[] {
-            toolBar1,
-            toolBar2}, new devDept.Eyeshot.Legend[0], devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
-            grid1}, new devDept.Eyeshot.OriginSymbol[] {
-            originSymbol1}, false, rotateSettings1, zoomSettings1, panSettings1, navigationSettings1, coordinateSystemIcon1, viewCubeIcon1, savedViewsManager1, devDept.Eyeshot.viewType.Trimetric);
-            devDept.Graphics.BackgroundSettings backgroundSettings2 = new devDept.Graphics.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(82)))), ((int)(((byte)(103))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(41))))), 0.75D, null, devDept.Graphics.colorThemeType.Auto, 0.33D);
-            devDept.Eyeshot.Camera camera2 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(-2.0837870570316238E-14D, 5.903590011596604D, 47.596564948558807D), 293.85071937118977D, new devDept.Geometry.Quaternion(0.49999999999999989D, 0.49999999999999994D, 0.49999999999999994D, 0.5D), devDept.Graphics.projectionType.Perspective, 40D, 1.9317826595929311D, false, 0.001D);
-            devDept.Eyeshot.HomeToolBarButton homeToolBarButton3 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton3 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton3 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton3 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.PanToolBarButton panToolBarButton3 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton3 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton3 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.ToolBar toolBar3 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.HorizontalTopCenter, true, new devDept.Eyeshot.ToolBarButton[] {
-            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton3)),
-            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton3)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton3)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton3)),
-            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton3)),
-            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton3)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton3))});
-            devDept.Eyeshot.HomeToolBarButton homeToolBarButton4 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton4 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton4 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton4 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.PanToolBarButton panToolBarButton4 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton4 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton4 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.ToolBar toolBar4 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.VerticalTopLeft, true, new devDept.Eyeshot.ToolBarButton[] {
-            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton4)),
-            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton4)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton4)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton4)),
-            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton4)),
-            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton4)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton4))});
-            devDept.Eyeshot.Grid grid2 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
-            devDept.Eyeshot.OriginSymbol originSymbol2 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.Ball, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, null, false);
-            devDept.Eyeshot.RotateSettings rotateSettings2 = new devDept.Eyeshot.RotateSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Ctrl), 10D, true, 1D, devDept.Eyeshot.rotationType.Turntable, devDept.Eyeshot.rotationCenterType.CursorLocation, new devDept.Geometry.Point3D(0D, 0D, 0D), false);
-            devDept.Eyeshot.ZoomSettings zoomSettings2 = new devDept.Eyeshot.ZoomSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Shift), 25, true, devDept.Eyeshot.zoomStyleType.AtCursorLocation, false, 1D, System.Drawing.Color.Empty, devDept.Eyeshot.Camera.perspectiveFitType.Accurate, false, 10, true);
-            devDept.Eyeshot.PanSettings panSettings2 = new devDept.Eyeshot.PanSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.None), 25, true);
-            devDept.Eyeshot.NavigationSettings navigationSettings2 = new devDept.Eyeshot.NavigationSettings(devDept.Eyeshot.Camera.navigationType.Examine, new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Left, devDept.Eyeshot.modifierKeys.None), new devDept.Geometry.Point3D(-1000D, -1000D, -1000D), new devDept.Geometry.Point3D(1000D, 1000D, 1000D), 8D, 50D, 50D);
-            devDept.Eyeshot.CoordinateSystemIcon coordinateSystemIcon2 = new devDept.Eyeshot.CoordinateSystemIcon(new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.OrangeRed, "Origin", "X", "Y", "Z", true, devDept.Eyeshot.coordinateSystemPositionType.BottomLeft, 37, null, false);
-            devDept.Eyeshot.ViewCubeIcon viewCubeIcon2 = new devDept.Eyeshot.ViewCubeIcon(devDept.Eyeshot.coordinateSystemPositionType.TopRight, true, System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(20)))), ((int)(((byte)(60))))), true, "FRONT", "BACK", "LEFT", "RIGHT", "TOP", "BOTTOM", System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), 'S', 'N', 'W', 'E', true, null, System.Drawing.Color.White, System.Drawing.Color.Black, 120, true, true, null, null, null, null, null, null, false, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D));
-            devDept.Eyeshot.Viewport.SavedViewsManager savedViewsManager2 = new devDept.Eyeshot.Viewport.SavedViewsManager(8);
-            devDept.Eyeshot.Viewport viewport2 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(295, 0), new System.Drawing.Size(292, 309), backgroundSettings2, camera2, new devDept.Eyeshot.ToolBar[] {
-            toolBar3,
-            toolBar4}, new devDept.Eyeshot.Legend[0], devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
-            grid2}, new devDept.Eyeshot.OriginSymbol[] {
-            originSymbol2}, false, rotateSettings2, zoomSettings2, panSettings2, navigationSettings2, coordinateSystemIcon2, viewCubeIcon2, savedViewsManager2, devDept.Eyeshot.viewType.Top);
-            devDept.Graphics.BackgroundSettings backgroundSettings3 = new devDept.Graphics.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(82)))), ((int)(((byte)(103))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(41))))), 0.75D, null, devDept.Graphics.colorThemeType.Auto, 0.33D);
-            devDept.Eyeshot.Camera camera3 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(0D, 0D, 45D), 380D, new devDept.Geometry.Quaternion(0D, 0D, 0.70710678118654746D, 0.70710678118654757D), devDept.Graphics.projectionType.Perspective, 40D, 1.9317826595929311D, false, 0.001D);
-            devDept.Eyeshot.HomeToolBarButton homeToolBarButton5 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton5 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton5 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton5 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.PanToolBarButton panToolBarButton5 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton5 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton5 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.ToolBar toolBar5 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.HorizontalTopCenter, true, new devDept.Eyeshot.ToolBarButton[] {
-            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton5)),
-            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton5)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton5)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton5)),
-            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton5)),
-            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton5)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton5))});
-            devDept.Eyeshot.HomeToolBarButton homeToolBarButton6 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton6 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton6 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton6 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.PanToolBarButton panToolBarButton6 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton6 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton6 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.ToolBar toolBar6 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.VerticalTopLeft, true, new devDept.Eyeshot.ToolBarButton[] {
-            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton6)),
-            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton6)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton6)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton6)),
-            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton6)),
-            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton6)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton6))});
-            devDept.Eyeshot.Grid grid3 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
-            devDept.Eyeshot.OriginSymbol originSymbol3 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.Ball, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, null, false);
-            devDept.Eyeshot.RotateSettings rotateSettings3 = new devDept.Eyeshot.RotateSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Ctrl), 10D, true, 1D, devDept.Eyeshot.rotationType.Turntable, devDept.Eyeshot.rotationCenterType.CursorLocation, new devDept.Geometry.Point3D(0D, 0D, 0D), false);
-            devDept.Eyeshot.ZoomSettings zoomSettings3 = new devDept.Eyeshot.ZoomSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Shift), 25, true, devDept.Eyeshot.zoomStyleType.AtCursorLocation, false, 1D, System.Drawing.Color.Empty, devDept.Eyeshot.Camera.perspectiveFitType.Accurate, false, 10, true);
-            devDept.Eyeshot.PanSettings panSettings3 = new devDept.Eyeshot.PanSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.None), 25, true);
-            devDept.Eyeshot.NavigationSettings navigationSettings3 = new devDept.Eyeshot.NavigationSettings(devDept.Eyeshot.Camera.navigationType.Examine, new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Left, devDept.Eyeshot.modifierKeys.None), new devDept.Geometry.Point3D(-1000D, -1000D, -1000D), new devDept.Geometry.Point3D(1000D, 1000D, 1000D), 8D, 50D, 50D);
-            devDept.Eyeshot.CoordinateSystemIcon coordinateSystemIcon3 = new devDept.Eyeshot.CoordinateSystemIcon(new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.OrangeRed, "Origin", "X", "Y", "Z", true, devDept.Eyeshot.coordinateSystemPositionType.BottomLeft, 37, null, false);
-            devDept.Eyeshot.ViewCubeIcon viewCubeIcon3 = new devDept.Eyeshot.ViewCubeIcon(devDept.Eyeshot.coordinateSystemPositionType.TopRight, true, System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(20)))), ((int)(((byte)(60))))), true, "FRONT", "BACK", "LEFT", "RIGHT", "TOP", "BOTTOM", System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), 'S', 'N', 'W', 'E', true, null, System.Drawing.Color.White, System.Drawing.Color.Black, 120, true, true, null, null, null, null, null, null, false, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D));
-            devDept.Eyeshot.Viewport.SavedViewsManager savedViewsManager3 = new devDept.Eyeshot.Viewport.SavedViewsManager(8);
-            devDept.Eyeshot.Viewport viewport3 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(0, 313), new System.Drawing.Size(291, 310), backgroundSettings3, camera3, new devDept.Eyeshot.ToolBar[] {
-            toolBar5,
-            toolBar6}, new devDept.Eyeshot.Legend[0], devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
-            grid3}, new devDept.Eyeshot.OriginSymbol[] {
-            originSymbol3}, false, rotateSettings3, zoomSettings3, panSettings3, navigationSettings3, coordinateSystemIcon3, viewCubeIcon3, savedViewsManager3, devDept.Eyeshot.viewType.Front);
-            devDept.Graphics.BackgroundSettings backgroundSettings4 = new devDept.Graphics.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(82)))), ((int)(((byte)(103))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(41))))), 0.75D, null, devDept.Graphics.colorThemeType.Auto, 0.33D);
-            devDept.Eyeshot.Camera camera4 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(0D, 0D, 45D), 380D, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D), devDept.Graphics.projectionType.Perspective, 40D, 1.9317826595929311D, false, 0.001D);
-            devDept.Eyeshot.HomeToolBarButton homeToolBarButton7 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton7 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton7 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton7 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.PanToolBarButton panToolBarButton7 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton7 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton7 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.ToolBar toolBar7 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.HorizontalTopCenter, true, new devDept.Eyeshot.ToolBarButton[] {
-            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton7)),
-            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton7)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton7)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton7)),
-            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton7)),
-            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton7)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton7))});
-            devDept.Eyeshot.HomeToolBarButton homeToolBarButton8 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton8 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton8 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton8 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.PanToolBarButton panToolBarButton8 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton8 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
-            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton8 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
-            devDept.Eyeshot.ToolBar toolBar8 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.VerticalTopLeft, true, new devDept.Eyeshot.ToolBarButton[] {
-            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton8)),
-            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton8)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton8)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton8)),
-            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton8)),
-            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton8)),
-            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton8))});
-            devDept.Eyeshot.Grid grid4 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
-            devDept.Eyeshot.OriginSymbol originSymbol4 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.Ball, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, null, false);
-            devDept.Eyeshot.RotateSettings rotateSettings4 = new devDept.Eyeshot.RotateSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Ctrl), 10D, true, 1D, devDept.Eyeshot.rotationType.Turntable, devDept.Eyeshot.rotationCenterType.CursorLocation, new devDept.Geometry.Point3D(0D, 0D, 0D), false);
-            devDept.Eyeshot.ZoomSettings zoomSettings4 = new devDept.Eyeshot.ZoomSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Shift), 25, true, devDept.Eyeshot.zoomStyleType.AtCursorLocation, false, 1D, System.Drawing.Color.Empty, devDept.Eyeshot.Camera.perspectiveFitType.Accurate, false, 10, true);
-            devDept.Eyeshot.PanSettings panSettings4 = new devDept.Eyeshot.PanSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.None), 25, true);
-            devDept.Eyeshot.NavigationSettings navigationSettings4 = new devDept.Eyeshot.NavigationSettings(devDept.Eyeshot.Camera.navigationType.Examine, new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Left, devDept.Eyeshot.modifierKeys.None), new devDept.Geometry.Point3D(-1000D, -1000D, -1000D), new devDept.Geometry.Point3D(1000D, 1000D, 1000D), 8D, 50D, 50D);
-            devDept.Eyeshot.CoordinateSystemIcon coordinateSystemIcon4 = new devDept.Eyeshot.CoordinateSystemIcon(new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.OrangeRed, "Origin", "X", "Y", "Z", true, devDept.Eyeshot.coordinateSystemPositionType.BottomLeft, 37, null, false);
-            devDept.Eyeshot.ViewCubeIcon viewCubeIcon4 = new devDept.Eyeshot.ViewCubeIcon(devDept.Eyeshot.coordinateSystemPositionType.TopRight, true, System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(20)))), ((int)(((byte)(60))))), true, "FRONT", "BACK", "LEFT", "RIGHT", "TOP", "BOTTOM", System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), 'S', 'N', 'W', 'E', true, null, System.Drawing.Color.White, System.Drawing.Color.Black, 120, true, true, null, null, null, null, null, null, false, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D));
-            devDept.Eyeshot.Viewport.SavedViewsManager savedViewsManager4 = new devDept.Eyeshot.Viewport.SavedViewsManager(8);
-            devDept.Eyeshot.Viewport viewport4 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(295, 313), new System.Drawing.Size(292, 310), backgroundSettings4, camera4, new devDept.Eyeshot.ToolBar[] {
-            toolBar7,
-            toolBar8}, new devDept.Eyeshot.Legend[0], devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
-            grid4}, new devDept.Eyeshot.OriginSymbol[] {
-            originSymbol4}, false, rotateSettings4, zoomSettings4, panSettings4, navigationSettings4, coordinateSystemIcon4, viewCubeIcon4, savedViewsManager4, devDept.Eyeshot.viewType.Right);
-            DevExpress.XtraEditors.TileItemElement tileItemElement63 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement64 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement65 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement66 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement69 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement67 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement68 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement70 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement71 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement74 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement72 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement73 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement76 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement75 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement77 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement78 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement79 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement80 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement81 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement82 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement83 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement84 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement85 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement86 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement87 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement88 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement89 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement90 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement91 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement92 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement94 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement93 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement99 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement95 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement96 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement97 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement98 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement106 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement100 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement101 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement102 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement103 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement104 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement105 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement107 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement108 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement109 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement110 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement114 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement111 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement112 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement113 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement121 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement117 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement115 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement116 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement118 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement119 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement120 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement122 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement123 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement124 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement125 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement126 = new DevExpress.XtraEditors.TileItemElement();
+            devDept.Eyeshot.CancelToolBarButton cancelToolBarButton2 = new devDept.Eyeshot.CancelToolBarButton("Cancel", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ProgressBar progressBar2 = new devDept.Eyeshot.ProgressBar(devDept.Eyeshot.ProgressBar.styleType.Circular, 0, "Idle", System.Drawing.Color.Black, System.Drawing.Color.Transparent, System.Drawing.Color.Green, 1D, true, cancelToolBarButton2, false, 0.1D, 0.333D, true);
+            devDept.Graphics.BackgroundSettings backgroundSettings5 = new devDept.Graphics.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(82)))), ((int)(((byte)(103))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(41))))), 0.75D, null, devDept.Graphics.colorThemeType.Auto, 0.33D);
+            devDept.Eyeshot.Camera camera5 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(-1.2598973293902418D, 2.5657311010967412D, 42.261193606378384D), 307.26899936464309D, new devDept.Geometry.Quaternion(0.018434349666532512D, 0.039532590434972065D, 0.42221602280006187D, 0.90544518284475428D), devDept.Graphics.projectionType.Perspective, 40D, 1.3705424631994174D, false, 0.001D);
+            devDept.Eyeshot.HomeToolBarButton homeToolBarButton9 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton9 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton9 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton9 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.PanToolBarButton panToolBarButton9 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton9 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton9 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.ToolBar toolBar9 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.HorizontalTopCenter, true, new devDept.Eyeshot.ToolBarButton[] {
+            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton9)),
+            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton9)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton9)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton9)),
+            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton9)),
+            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton9)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton9))});
+            devDept.Eyeshot.HomeToolBarButton homeToolBarButton10 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton10 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton10 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton10 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.PanToolBarButton panToolBarButton10 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton10 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton10 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.ToolBar toolBar10 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.VerticalTopLeft, true, new devDept.Eyeshot.ToolBarButton[] {
+            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton10)),
+            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton10)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton10)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton10)),
+            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton10)),
+            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton10)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton10))});
+            devDept.Eyeshot.Grid grid5 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
+            devDept.Eyeshot.OriginSymbol originSymbol5 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.Ball, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, null, false);
+            devDept.Eyeshot.RotateSettings rotateSettings5 = new devDept.Eyeshot.RotateSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Ctrl), 10D, true, 1D, devDept.Eyeshot.rotationType.Turntable, devDept.Eyeshot.rotationCenterType.CursorLocation, new devDept.Geometry.Point3D(0D, 0D, 0D), false);
+            devDept.Eyeshot.ZoomSettings zoomSettings5 = new devDept.Eyeshot.ZoomSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Shift), 25, true, devDept.Eyeshot.zoomStyleType.AtCursorLocation, false, 1D, System.Drawing.Color.Empty, devDept.Eyeshot.Camera.perspectiveFitType.Accurate, false, 10, true);
+            devDept.Eyeshot.PanSettings panSettings5 = new devDept.Eyeshot.PanSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.None), 25, true);
+            devDept.Eyeshot.NavigationSettings navigationSettings5 = new devDept.Eyeshot.NavigationSettings(devDept.Eyeshot.Camera.navigationType.Examine, new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Left, devDept.Eyeshot.modifierKeys.None), new devDept.Geometry.Point3D(-1000D, -1000D, -1000D), new devDept.Geometry.Point3D(1000D, 1000D, 1000D), 8D, 50D, 50D);
+            devDept.Eyeshot.CoordinateSystemIcon coordinateSystemIcon5 = new devDept.Eyeshot.CoordinateSystemIcon(new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, devDept.Eyeshot.coordinateSystemPositionType.BottomLeft, 37, null, true);
+            devDept.Eyeshot.ViewCubeIcon viewCubeIcon5 = new devDept.Eyeshot.ViewCubeIcon(devDept.Eyeshot.coordinateSystemPositionType.TopRight, true, System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(20)))), ((int)(((byte)(60))))), true, "FRONT", "BACK", "LEFT", "RIGHT", "TOP", "BOTTOM", System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), 'S', 'N', 'W', 'E', true, null, System.Drawing.Color.White, System.Drawing.Color.Black, 120, true, true, null, null, null, null, null, null, false, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D));
+            devDept.Eyeshot.Viewport.SavedViewsManager savedViewsManager5 = new devDept.Eyeshot.Viewport.SavedViewsManager(8);
+            devDept.Eyeshot.Viewport viewport5 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(0, 0), new System.Drawing.Size(291, 219), backgroundSettings5, camera5, new devDept.Eyeshot.ToolBar[] {
+            toolBar9,
+            toolBar10}, new devDept.Eyeshot.Legend[0], devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
+            grid5}, new devDept.Eyeshot.OriginSymbol[] {
+            originSymbol5}, false, rotateSettings5, zoomSettings5, panSettings5, navigationSettings5, coordinateSystemIcon5, viewCubeIcon5, savedViewsManager5, devDept.Eyeshot.viewType.Trimetric);
+            devDept.Graphics.BackgroundSettings backgroundSettings6 = new devDept.Graphics.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(82)))), ((int)(((byte)(103))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(41))))), 0.75D, null, devDept.Graphics.colorThemeType.Auto, 0.33D);
+            devDept.Eyeshot.Camera camera6 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(-2.0837870570316238E-14D, 5.903590011596604D, 47.596564948558807D), 293.85071937118977D, new devDept.Geometry.Quaternion(0.49999999999999989D, 0.49999999999999994D, 0.49999999999999994D, 0.5D), devDept.Graphics.projectionType.Perspective, 40D, 1.3705424631994174D, false, 0.001D);
+            devDept.Eyeshot.HomeToolBarButton homeToolBarButton11 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton11 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton11 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton11 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.PanToolBarButton panToolBarButton11 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton11 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton11 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.ToolBar toolBar11 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.HorizontalTopCenter, true, new devDept.Eyeshot.ToolBarButton[] {
+            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton11)),
+            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton11)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton11)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton11)),
+            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton11)),
+            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton11)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton11))});
+            devDept.Eyeshot.HomeToolBarButton homeToolBarButton12 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton12 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton12 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton12 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.PanToolBarButton panToolBarButton12 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton12 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton12 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.ToolBar toolBar12 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.VerticalTopLeft, true, new devDept.Eyeshot.ToolBarButton[] {
+            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton12)),
+            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton12)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton12)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton12)),
+            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton12)),
+            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton12)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton12))});
+            devDept.Eyeshot.Grid grid6 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
+            devDept.Eyeshot.OriginSymbol originSymbol6 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.Ball, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, null, false);
+            devDept.Eyeshot.RotateSettings rotateSettings6 = new devDept.Eyeshot.RotateSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Ctrl), 10D, true, 1D, devDept.Eyeshot.rotationType.Turntable, devDept.Eyeshot.rotationCenterType.CursorLocation, new devDept.Geometry.Point3D(0D, 0D, 0D), false);
+            devDept.Eyeshot.ZoomSettings zoomSettings6 = new devDept.Eyeshot.ZoomSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Shift), 25, true, devDept.Eyeshot.zoomStyleType.AtCursorLocation, false, 1D, System.Drawing.Color.Empty, devDept.Eyeshot.Camera.perspectiveFitType.Accurate, false, 10, true);
+            devDept.Eyeshot.PanSettings panSettings6 = new devDept.Eyeshot.PanSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.None), 25, true);
+            devDept.Eyeshot.NavigationSettings navigationSettings6 = new devDept.Eyeshot.NavigationSettings(devDept.Eyeshot.Camera.navigationType.Examine, new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Left, devDept.Eyeshot.modifierKeys.None), new devDept.Geometry.Point3D(-1000D, -1000D, -1000D), new devDept.Geometry.Point3D(1000D, 1000D, 1000D), 8D, 50D, 50D);
+            devDept.Eyeshot.CoordinateSystemIcon coordinateSystemIcon6 = new devDept.Eyeshot.CoordinateSystemIcon(new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.OrangeRed, "Origin", "X", "Y", "Z", true, devDept.Eyeshot.coordinateSystemPositionType.BottomLeft, 37, null, false);
+            devDept.Eyeshot.ViewCubeIcon viewCubeIcon6 = new devDept.Eyeshot.ViewCubeIcon(devDept.Eyeshot.coordinateSystemPositionType.TopRight, true, System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(20)))), ((int)(((byte)(60))))), true, "FRONT", "BACK", "LEFT", "RIGHT", "TOP", "BOTTOM", System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), 'S', 'N', 'W', 'E', true, null, System.Drawing.Color.White, System.Drawing.Color.Black, 120, true, true, null, null, null, null, null, null, false, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D));
+            devDept.Eyeshot.Viewport.SavedViewsManager savedViewsManager6 = new devDept.Eyeshot.Viewport.SavedViewsManager(8);
+            devDept.Eyeshot.Viewport viewport6 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(295, 0), new System.Drawing.Size(292, 219), backgroundSettings6, camera6, new devDept.Eyeshot.ToolBar[] {
+            toolBar11,
+            toolBar12}, new devDept.Eyeshot.Legend[0], devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
+            grid6}, new devDept.Eyeshot.OriginSymbol[] {
+            originSymbol6}, false, rotateSettings6, zoomSettings6, panSettings6, navigationSettings6, coordinateSystemIcon6, viewCubeIcon6, savedViewsManager6, devDept.Eyeshot.viewType.Top);
+            devDept.Graphics.BackgroundSettings backgroundSettings7 = new devDept.Graphics.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(82)))), ((int)(((byte)(103))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(41))))), 0.75D, null, devDept.Graphics.colorThemeType.Auto, 0.33D);
+            devDept.Eyeshot.Camera camera7 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(0D, 0D, 45D), 380D, new devDept.Geometry.Quaternion(0D, 0D, 0.70710678118654746D, 0.70710678118654757D), devDept.Graphics.projectionType.Perspective, 40D, 1.3705424631994174D, false, 0.001D);
+            devDept.Eyeshot.HomeToolBarButton homeToolBarButton13 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton13 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton13 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton13 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.PanToolBarButton panToolBarButton13 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton13 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton13 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.ToolBar toolBar13 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.HorizontalTopCenter, true, new devDept.Eyeshot.ToolBarButton[] {
+            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton13)),
+            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton13)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton13)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton13)),
+            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton13)),
+            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton13)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton13))});
+            devDept.Eyeshot.HomeToolBarButton homeToolBarButton14 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton14 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton14 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton14 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.PanToolBarButton panToolBarButton14 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton14 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton14 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.ToolBar toolBar14 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.VerticalTopLeft, true, new devDept.Eyeshot.ToolBarButton[] {
+            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton14)),
+            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton14)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton14)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton14)),
+            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton14)),
+            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton14)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton14))});
+            devDept.Eyeshot.Grid grid7 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
+            devDept.Eyeshot.OriginSymbol originSymbol7 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.Ball, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, null, false);
+            devDept.Eyeshot.RotateSettings rotateSettings7 = new devDept.Eyeshot.RotateSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Ctrl), 10D, true, 1D, devDept.Eyeshot.rotationType.Turntable, devDept.Eyeshot.rotationCenterType.CursorLocation, new devDept.Geometry.Point3D(0D, 0D, 0D), false);
+            devDept.Eyeshot.ZoomSettings zoomSettings7 = new devDept.Eyeshot.ZoomSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Shift), 25, true, devDept.Eyeshot.zoomStyleType.AtCursorLocation, false, 1D, System.Drawing.Color.Empty, devDept.Eyeshot.Camera.perspectiveFitType.Accurate, false, 10, true);
+            devDept.Eyeshot.PanSettings panSettings7 = new devDept.Eyeshot.PanSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.None), 25, true);
+            devDept.Eyeshot.NavigationSettings navigationSettings7 = new devDept.Eyeshot.NavigationSettings(devDept.Eyeshot.Camera.navigationType.Examine, new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Left, devDept.Eyeshot.modifierKeys.None), new devDept.Geometry.Point3D(-1000D, -1000D, -1000D), new devDept.Geometry.Point3D(1000D, 1000D, 1000D), 8D, 50D, 50D);
+            devDept.Eyeshot.CoordinateSystemIcon coordinateSystemIcon7 = new devDept.Eyeshot.CoordinateSystemIcon(new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.OrangeRed, "Origin", "X", "Y", "Z", true, devDept.Eyeshot.coordinateSystemPositionType.BottomLeft, 37, null, false);
+            devDept.Eyeshot.ViewCubeIcon viewCubeIcon7 = new devDept.Eyeshot.ViewCubeIcon(devDept.Eyeshot.coordinateSystemPositionType.TopRight, true, System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(20)))), ((int)(((byte)(60))))), true, "FRONT", "BACK", "LEFT", "RIGHT", "TOP", "BOTTOM", System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), 'S', 'N', 'W', 'E', true, null, System.Drawing.Color.White, System.Drawing.Color.Black, 120, true, true, null, null, null, null, null, null, false, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D));
+            devDept.Eyeshot.Viewport.SavedViewsManager savedViewsManager7 = new devDept.Eyeshot.Viewport.SavedViewsManager(8);
+            devDept.Eyeshot.Viewport viewport7 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(0, 223), new System.Drawing.Size(291, 219), backgroundSettings7, camera7, new devDept.Eyeshot.ToolBar[] {
+            toolBar13,
+            toolBar14}, new devDept.Eyeshot.Legend[0], devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
+            grid7}, new devDept.Eyeshot.OriginSymbol[] {
+            originSymbol7}, false, rotateSettings7, zoomSettings7, panSettings7, navigationSettings7, coordinateSystemIcon7, viewCubeIcon7, savedViewsManager7, devDept.Eyeshot.viewType.Front);
+            devDept.Graphics.BackgroundSettings backgroundSettings8 = new devDept.Graphics.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(82)))), ((int)(((byte)(103))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(41))))), 0.75D, null, devDept.Graphics.colorThemeType.Auto, 0.33D);
+            devDept.Eyeshot.Camera camera8 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(0D, 0D, 45D), 380D, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D), devDept.Graphics.projectionType.Perspective, 40D, 1.3705424631994174D, false, 0.001D);
+            devDept.Eyeshot.HomeToolBarButton homeToolBarButton15 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton15 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton15 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton15 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.PanToolBarButton panToolBarButton15 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton15 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton15 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.ToolBar toolBar15 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.HorizontalTopCenter, true, new devDept.Eyeshot.ToolBarButton[] {
+            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton15)),
+            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton15)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton15)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton15)),
+            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton15)),
+            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton15)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton15))});
+            devDept.Eyeshot.HomeToolBarButton homeToolBarButton16 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton16 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton16 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomToolBarButton zoomToolBarButton16 = new devDept.Eyeshot.ZoomToolBarButton("Zoom", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.PanToolBarButton panToolBarButton16 = new devDept.Eyeshot.PanToolBarButton("Pan", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.RotateToolBarButton rotateToolBarButton16 = new devDept.Eyeshot.RotateToolBarButton("Rotate", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
+            devDept.Eyeshot.ZoomFitToolBarButton zoomFitToolBarButton16 = new devDept.Eyeshot.ZoomFitToolBarButton("Zoom Fit", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
+            devDept.Eyeshot.ToolBar toolBar16 = new devDept.Eyeshot.ToolBar(devDept.Eyeshot.ToolBar.positionType.VerticalTopLeft, true, new devDept.Eyeshot.ToolBarButton[] {
+            ((devDept.Eyeshot.ToolBarButton)(homeToolBarButton16)),
+            ((devDept.Eyeshot.ToolBarButton)(magnifyingGlassToolBarButton16)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomWindowToolBarButton16)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomToolBarButton16)),
+            ((devDept.Eyeshot.ToolBarButton)(panToolBarButton16)),
+            ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton16)),
+            ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton16))});
+            devDept.Eyeshot.Grid grid8 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
+            devDept.Eyeshot.OriginSymbol originSymbol8 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.Ball, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, null, false);
+            devDept.Eyeshot.RotateSettings rotateSettings8 = new devDept.Eyeshot.RotateSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Ctrl), 10D, true, 1D, devDept.Eyeshot.rotationType.Turntable, devDept.Eyeshot.rotationCenterType.CursorLocation, new devDept.Geometry.Point3D(0D, 0D, 0D), false);
+            devDept.Eyeshot.ZoomSettings zoomSettings8 = new devDept.Eyeshot.ZoomSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Shift), 25, true, devDept.Eyeshot.zoomStyleType.AtCursorLocation, false, 1D, System.Drawing.Color.Empty, devDept.Eyeshot.Camera.perspectiveFitType.Accurate, false, 10, true);
+            devDept.Eyeshot.PanSettings panSettings8 = new devDept.Eyeshot.PanSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.None), 25, true);
+            devDept.Eyeshot.NavigationSettings navigationSettings8 = new devDept.Eyeshot.NavigationSettings(devDept.Eyeshot.Camera.navigationType.Examine, new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Left, devDept.Eyeshot.modifierKeys.None), new devDept.Geometry.Point3D(-1000D, -1000D, -1000D), new devDept.Geometry.Point3D(1000D, 1000D, 1000D), 8D, 50D, 50D);
+            devDept.Eyeshot.CoordinateSystemIcon coordinateSystemIcon8 = new devDept.Eyeshot.CoordinateSystemIcon(new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.OrangeRed, "Origin", "X", "Y", "Z", true, devDept.Eyeshot.coordinateSystemPositionType.BottomLeft, 37, null, false);
+            devDept.Eyeshot.ViewCubeIcon viewCubeIcon8 = new devDept.Eyeshot.ViewCubeIcon(devDept.Eyeshot.coordinateSystemPositionType.TopRight, true, System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(20)))), ((int)(((byte)(60))))), true, "FRONT", "BACK", "LEFT", "RIGHT", "TOP", "BOTTOM", System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), 'S', 'N', 'W', 'E', true, null, System.Drawing.Color.White, System.Drawing.Color.Black, 120, true, true, null, null, null, null, null, null, false, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D));
+            devDept.Eyeshot.Viewport.SavedViewsManager savedViewsManager8 = new devDept.Eyeshot.Viewport.SavedViewsManager(8);
+            devDept.Eyeshot.Viewport viewport8 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(295, 223), new System.Drawing.Size(292, 219), backgroundSettings8, camera8, new devDept.Eyeshot.ToolBar[] {
+            toolBar15,
+            toolBar16}, new devDept.Eyeshot.Legend[0], devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
+            grid8}, new devDept.Eyeshot.OriginSymbol[] {
+            originSymbol8}, false, rotateSettings8, zoomSettings8, panSettings8, navigationSettings8, coordinateSystemIcon8, viewCubeIcon8, savedViewsManager8, devDept.Eyeshot.viewType.Right);
+            DevExpress.XtraEditors.TileItemElement tileItemElement127 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement128 = new DevExpress.XtraEditors.TileItemElement();
             this.tileNavPaneViewport = new DevExpress.XtraBars.Navigation.TileNavPane();
             this.navButtonHome = new DevExpress.XtraBars.Navigation.NavButton();
             this.tileNavCategoryDraw = new DevExpress.XtraBars.Navigation.TileNavCategory();
@@ -402,15 +402,66 @@ namespace Br3D
             this.toolStripStatusLabelCoordinates = new System.Windows.Forms.ToolStripStatusLabel();
             this.tileNavSubItemLineBy2Point = new DevExpress.XtraBars.Navigation.TileNavSubItem();
             this.tileNavSubItem2 = new DevExpress.XtraBars.Navigation.TileNavSubItem();
-            this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
-            this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
+            this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
+            this.barButtonItemDrawCircle = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDrawArc = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDrawPolyline = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDrawSpline = new DevExpress.XtraBars.BarButtonItem();
+            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
+            this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageDraw = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroupDraw = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageDimension = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroupDim = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageEdit = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroupEdit = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageAnnotation = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageOsnap = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageTools = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageOptions = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.repositoryItemRibbonSearchEdit1 = new DevExpress.XtraBars.Ribbon.Internal.RepositoryItemRibbonSearchEdit();
+            this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.barButtonItemDrawLine = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDrawText = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemInsert = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDrawCylinder = new DevExpress.XtraBars.BarButtonItem();
+            this.popupMenuDrawArc = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.barButtonItemDrawArc_FirstSecondThird = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDrawArc_CenterStartEnd = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemOpen = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemSaveAs = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemSaveImage = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemExit = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonPageGroupSystem = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.barButtonItemDimHorizontal = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDimVertical = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDimAlign = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDimDiameter = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDimRadius = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDimLeader = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemErase = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemMove = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemCopy = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemScale = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemRotate = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemOffset = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemMirror = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemExplode = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemTrim = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemFillet = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemChamfer = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.tileNavPaneViewport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hModel)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.dockPanelDynamicInput.SuspendLayout();
-            this.controlContainer1.SuspendLayout();
             this.panelContainer1.SuspendLayout();
             this.dockPanelProperties.SuspendLayout();
             this.dockPanel1_Container.SuspendLayout();
@@ -423,9 +474,9 @@ namespace Br3D
             this.dockPanel3_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeListObject)).BeginInit();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRibbonSearchEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuDrawArc)).BeginInit();
             this.SuspendLayout();
             // 
             // tileNavPaneViewport
@@ -498,8 +549,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemLine.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement1.Text = "Line";
-            this.tileNavItemLine.Tile.Elements.Add(tileItemElement1);
+            tileItemElement65.Text = "Line";
+            this.tileNavItemLine.Tile.Elements.Add(tileItemElement65);
             this.tileNavItemLine.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemCircle
@@ -510,8 +561,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemCircle.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement2.Text = "Circle";
-            this.tileNavItemCircle.Tile.Elements.Add(tileItemElement2);
+            tileItemElement66.Text = "Circle";
+            this.tileNavItemCircle.Tile.Elements.Add(tileItemElement66);
             this.tileNavItemCircle.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemArc
@@ -525,8 +576,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemArc.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement5.Text = "Arc";
-            this.tileNavItemArc.Tile.Elements.Add(tileItemElement5);
+            tileItemElement69.Text = "Arc";
+            this.tileNavItemArc.Tile.Elements.Add(tileItemElement69);
             this.tileNavItemArc.Tile.Name = "tileBarItem1";
             // 
             // tileNavSubItemArcFirstSecondThird
@@ -537,8 +588,8 @@ namespace Br3D
             // 
             // 
             this.tileNavSubItemArcFirstSecondThird.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement3.Text = "First, Second, Third point";
-            this.tileNavSubItemArcFirstSecondThird.Tile.Elements.Add(tileItemElement3);
+            tileItemElement67.Text = "First, Second, Third point";
+            this.tileNavSubItemArcFirstSecondThird.Tile.Elements.Add(tileItemElement67);
             this.tileNavSubItemArcFirstSecondThird.Tile.Name = "tileBarItem1";
             // 
             // tileNavSubItemArcCenterStartEnd
@@ -549,8 +600,8 @@ namespace Br3D
             // 
             // 
             this.tileNavSubItemArcCenterStartEnd.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement4.Text = "Center, Start, End point";
-            this.tileNavSubItemArcCenterStartEnd.Tile.Elements.Add(tileItemElement4);
+            tileItemElement68.Text = "Center, Start, End point";
+            this.tileNavSubItemArcCenterStartEnd.Tile.Elements.Add(tileItemElement68);
             this.tileNavSubItemArcCenterStartEnd.Tile.Name = "tileBarItem2";
             // 
             // tileNavItemPolyline
@@ -561,8 +612,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemPolyline.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement6.Text = "Polyline";
-            this.tileNavItemPolyline.Tile.Elements.Add(tileItemElement6);
+            tileItemElement70.Text = "Polyline";
+            this.tileNavItemPolyline.Tile.Elements.Add(tileItemElement70);
             this.tileNavItemPolyline.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemSpline
@@ -573,8 +624,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemSpline.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement7.Text = "Spline";
-            this.tileNavItemSpline.Tile.Elements.Add(tileItemElement7);
+            tileItemElement71.Text = "Spline";
+            this.tileNavItemSpline.Tile.Elements.Add(tileItemElement71);
             this.tileNavItemSpline.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemText
@@ -588,8 +639,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemText.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement10.Text = "Text";
-            this.tileNavItemText.Tile.Elements.Add(tileItemElement10);
+            tileItemElement74.Text = "Text";
+            this.tileNavItemText.Tile.Elements.Add(tileItemElement74);
             this.tileNavItemText.Tile.Name = "tileBarItem1";
             // 
             // tileNavSubItemText
@@ -600,8 +651,8 @@ namespace Br3D
             // 
             // 
             this.tileNavSubItemText.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement8.Text = "Text";
-            this.tileNavSubItemText.Tile.Elements.Add(tileItemElement8);
+            tileItemElement72.Text = "Text";
+            this.tileNavSubItemText.Tile.Elements.Add(tileItemElement72);
             this.tileNavSubItemText.Tile.Name = "tileBarItem1";
             // 
             // tileNavSubItemMText
@@ -612,8 +663,8 @@ namespace Br3D
             // 
             // 
             this.tileNavSubItemMText.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement9.Text = "Multiline Text";
-            this.tileNavSubItemMText.Tile.Elements.Add(tileItemElement9);
+            tileItemElement73.Text = "Multiline Text";
+            this.tileNavSubItemMText.Tile.Elements.Add(tileItemElement73);
             this.tileNavSubItemMText.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemInsert
@@ -626,8 +677,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemInsert.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement12.Text = "Insert";
-            this.tileNavItemInsert.Tile.Elements.Add(tileItemElement12);
+            tileItemElement76.Text = "Insert";
+            this.tileNavItemInsert.Tile.Elements.Add(tileItemElement76);
             this.tileNavItemInsert.Tile.Name = "tileBarItem1";
             // 
             // tileNavSubItemInsertImage
@@ -638,8 +689,8 @@ namespace Br3D
             // 
             // 
             this.tileNavSubItemInsertImage.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement11.Text = "Image";
-            this.tileNavSubItemInsertImage.Tile.Elements.Add(tileItemElement11);
+            tileItemElement75.Text = "Image";
+            this.tileNavSubItemInsertImage.Tile.Elements.Add(tileItemElement75);
             this.tileNavSubItemInsertImage.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemCylinder
@@ -650,8 +701,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemCylinder.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement13.Text = "Cylinder";
-            this.tileNavItemCylinder.Tile.Elements.Add(tileItemElement13);
+            tileItemElement77.Text = "Cylinder";
+            this.tileNavItemCylinder.Tile.Elements.Add(tileItemElement77);
             this.tileNavItemCylinder.Tile.Name = "tileBarItem1";
             // 
             // tileNavCategoryDimension
@@ -681,8 +732,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemDimHorizontal.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement14.Text = "Horizontal";
-            this.tileNavItemDimHorizontal.Tile.Elements.Add(tileItemElement14);
+            tileItemElement78.Text = "Horizontal";
+            this.tileNavItemDimHorizontal.Tile.Elements.Add(tileItemElement78);
             this.tileNavItemDimHorizontal.Tile.Name = "tileBarItem2";
             // 
             // tileNavItemDimVertical
@@ -693,8 +744,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemDimVertical.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement15.Text = "Vertical";
-            this.tileNavItemDimVertical.Tile.Elements.Add(tileItemElement15);
+            tileItemElement79.Text = "Vertical";
+            this.tileNavItemDimVertical.Tile.Elements.Add(tileItemElement79);
             this.tileNavItemDimVertical.Tile.Name = "tileBarItem3";
             // 
             // tileNavItemDimAlign
@@ -705,8 +756,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemDimAlign.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement16.Text = "Align";
-            this.tileNavItemDimAlign.Tile.Elements.Add(tileItemElement16);
+            tileItemElement80.Text = "Align";
+            this.tileNavItemDimAlign.Tile.Elements.Add(tileItemElement80);
             this.tileNavItemDimAlign.Tile.Name = "tileBarItem4";
             // 
             // tileNavItemDiameter
@@ -717,8 +768,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemDiameter.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement17.Text = "Diameter";
-            this.tileNavItemDiameter.Tile.Elements.Add(tileItemElement17);
+            tileItemElement81.Text = "Diameter";
+            this.tileNavItemDiameter.Tile.Elements.Add(tileItemElement81);
             this.tileNavItemDiameter.Tile.Name = "tileBarItem3";
             // 
             // tileNavItemRadius
@@ -729,8 +780,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemRadius.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement18.Text = "Radius";
-            this.tileNavItemRadius.Tile.Elements.Add(tileItemElement18);
+            tileItemElement82.Text = "Radius";
+            this.tileNavItemRadius.Tile.Elements.Add(tileItemElement82);
             this.tileNavItemRadius.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemDimLeader
@@ -741,8 +792,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemDimLeader.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement19.Text = "Leader";
-            this.tileNavItemDimLeader.Tile.Elements.Add(tileItemElement19);
+            tileItemElement83.Text = "Leader";
+            this.tileNavItemDimLeader.Tile.Elements.Add(tileItemElement83);
             this.tileNavItemDimLeader.Tile.Name = "tileBarItem1";
             // 
             // tileNavCategoryEdit
@@ -776,9 +827,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemErase.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement20.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tileNavItemErase.TileImageOptions.Image")));
-            tileItemElement20.Text = "Erase";
-            this.tileNavItemErase.Tile.Elements.Add(tileItemElement20);
+            tileItemElement84.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tileNavItemErase.TileImageOptions.Image")));
+            tileItemElement84.Text = "Erase";
+            this.tileNavItemErase.Tile.Elements.Add(tileItemElement84);
             this.tileNavItemErase.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemMove
@@ -789,8 +840,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemMove.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement21.Text = "Move";
-            this.tileNavItemMove.Tile.Elements.Add(tileItemElement21);
+            tileItemElement85.Text = "Move";
+            this.tileNavItemMove.Tile.Elements.Add(tileItemElement85);
             this.tileNavItemMove.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemCopy
@@ -801,8 +852,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemCopy.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement22.Text = "Copy";
-            this.tileNavItemCopy.Tile.Elements.Add(tileItemElement22);
+            tileItemElement86.Text = "Copy";
+            this.tileNavItemCopy.Tile.Elements.Add(tileItemElement86);
             this.tileNavItemCopy.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemScale
@@ -813,8 +864,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemScale.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement23.Text = "Scale";
-            this.tileNavItemScale.Tile.Elements.Add(tileItemElement23);
+            tileItemElement87.Text = "Scale";
+            this.tileNavItemScale.Tile.Elements.Add(tileItemElement87);
             this.tileNavItemScale.Tile.Name = "tileBarItem2";
             // 
             // tileNavItemRotate
@@ -825,8 +876,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemRotate.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement24.Text = "Rotate";
-            this.tileNavItemRotate.Tile.Elements.Add(tileItemElement24);
+            tileItemElement88.Text = "Rotate";
+            this.tileNavItemRotate.Tile.Elements.Add(tileItemElement88);
             this.tileNavItemRotate.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemOffset
@@ -837,8 +888,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemOffset.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement25.Text = "Offset";
-            this.tileNavItemOffset.Tile.Elements.Add(tileItemElement25);
+            tileItemElement89.Text = "Offset";
+            this.tileNavItemOffset.Tile.Elements.Add(tileItemElement89);
             this.tileNavItemOffset.Tile.Name = "tileBarItem2";
             // 
             // tileNavItemMirror
@@ -849,8 +900,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemMirror.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement26.Text = "Mirror";
-            this.tileNavItemMirror.Tile.Elements.Add(tileItemElement26);
+            tileItemElement90.Text = "Mirror";
+            this.tileNavItemMirror.Tile.Elements.Add(tileItemElement90);
             this.tileNavItemMirror.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemExplode
@@ -861,8 +912,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemExplode.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement27.Text = "Explode";
-            this.tileNavItemExplode.Tile.Elements.Add(tileItemElement27);
+            tileItemElement91.Text = "Explode";
+            this.tileNavItemExplode.Tile.Elements.Add(tileItemElement91);
             this.tileNavItemExplode.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemTrim
@@ -873,8 +924,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemTrim.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement28.Text = "Trim";
-            this.tileNavItemTrim.Tile.Elements.Add(tileItemElement28);
+            tileItemElement92.Text = "Trim";
+            this.tileNavItemTrim.Tile.Elements.Add(tileItemElement92);
             this.tileNavItemTrim.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemFillet
@@ -887,8 +938,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemFillet.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement30.Text = "Fillet";
-            this.tileNavItemFillet.Tile.Elements.Add(tileItemElement30);
+            tileItemElement94.Text = "Fillet";
+            this.tileNavItemFillet.Tile.Elements.Add(tileItemElement94);
             this.tileNavItemFillet.Tile.Name = "tileBarItem1";
             // 
             // tileNavSubItemChamfer
@@ -899,8 +950,8 @@ namespace Br3D
             // 
             // 
             this.tileNavSubItemChamfer.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement29.Text = "Chamfer";
-            this.tileNavSubItemChamfer.Tile.Elements.Add(tileItemElement29);
+            tileItemElement93.Text = "Chamfer";
+            this.tileNavSubItemChamfer.Tile.Elements.Add(tileItemElement93);
             this.tileNavSubItemChamfer.Tile.Name = "tileBarItem2";
             // 
             // tileNavCategoryAnnotation
@@ -919,8 +970,8 @@ namespace Br3D
             // 
             // 
             this.tileNavCategoryAnnotation.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement35.Text = "Annotation";
-            this.tileNavCategoryAnnotation.Tile.Elements.Add(tileItemElement35);
+            tileItemElement99.Text = "Annotation";
+            this.tileNavCategoryAnnotation.Tile.Elements.Add(tileItemElement99);
             // 
             // tileNavItemCoordinates
             // 
@@ -930,9 +981,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemCoordinates.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement31.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemCoordinates.TileImageOptions.SvgImage")));
-            tileItemElement31.Text = "Coordinates";
-            this.tileNavItemCoordinates.Tile.Elements.Add(tileItemElement31);
+            tileItemElement95.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemCoordinates.TileImageOptions.SvgImage")));
+            tileItemElement95.Text = "Coordinates";
+            this.tileNavItemCoordinates.Tile.Elements.Add(tileItemElement95);
             this.tileNavItemCoordinates.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemDistance
@@ -943,9 +994,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemDistance.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement32.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemDistance.TileImageOptions.SvgImage")));
-            tileItemElement32.Text = "Distance";
-            this.tileNavItemDistance.Tile.Elements.Add(tileItemElement32);
+            tileItemElement96.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemDistance.TileImageOptions.SvgImage")));
+            tileItemElement96.Text = "Distance";
+            this.tileNavItemDistance.Tile.Elements.Add(tileItemElement96);
             this.tileNavItemDistance.Tile.Name = "tileBarItem2";
             // 
             // tileNavItemMemo
@@ -956,9 +1007,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemMemo.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement33.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemMemo.TileImageOptions.SvgImage")));
-            tileItemElement33.Text = "Memo";
-            this.tileNavItemMemo.Tile.Elements.Add(tileItemElement33);
+            tileItemElement97.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemMemo.TileImageOptions.SvgImage")));
+            tileItemElement97.Text = "Memo";
+            this.tileNavItemMemo.Tile.Elements.Add(tileItemElement97);
             this.tileNavItemMemo.Tile.Name = "tileBarItem3";
             // 
             // tileNavItemClearAnnotations
@@ -969,9 +1020,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemClearAnnotations.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement34.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemClearAnnotations.TileImageOptions.SvgImage")));
-            tileItemElement34.Text = "Clear Annotations";
-            this.tileNavItemClearAnnotations.Tile.Elements.Add(tileItemElement34);
+            tileItemElement98.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemClearAnnotations.TileImageOptions.SvgImage")));
+            tileItemElement98.Text = "Clear Annotations";
+            this.tileNavItemClearAnnotations.Tile.Elements.Add(tileItemElement98);
             this.tileNavItemClearAnnotations.Tile.Name = "tileBarItem3";
             // 
             // tileNavCategoryOsnap
@@ -993,8 +1044,8 @@ namespace Br3D
             // 
             // 
             this.tileNavCategoryOsnap.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement42.Text = "Osnap";
-            this.tileNavCategoryOsnap.Tile.Elements.Add(tileItemElement42);
+            tileItemElement106.Text = "Osnap";
+            this.tileNavCategoryOsnap.Tile.Elements.Add(tileItemElement106);
             // 
             // tileNavItemOrthoMode
             // 
@@ -1004,8 +1055,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemOrthoMode.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement36.Text = "OrthoMode(F8)";
-            this.tileNavItemOrthoMode.Tile.Elements.Add(tileItemElement36);
+            tileItemElement100.Text = "OrthoMode(F8)";
+            this.tileNavItemOrthoMode.Tile.Elements.Add(tileItemElement100);
             this.tileNavItemOrthoMode.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemEnd
@@ -1016,9 +1067,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemEnd.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement37.ImageOptions.Image = global::Br3D.Properties.Resources.snap_endpoint_small;
-            tileItemElement37.Text = "End";
-            this.tileNavItemEnd.Tile.Elements.Add(tileItemElement37);
+            tileItemElement101.ImageOptions.Image = global::Br3D.Properties.Resources.snap_endpoint_small;
+            tileItemElement101.Text = "End";
+            this.tileNavItemEnd.Tile.Elements.Add(tileItemElement101);
             this.tileNavItemEnd.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemIntersection
@@ -1029,9 +1080,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemIntersection.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement38.ImageOptions.Image = global::Br3D.Properties.Resources.snap_intersection_small;
-            tileItemElement38.Text = "Intersection";
-            this.tileNavItemIntersection.Tile.Elements.Add(tileItemElement38);
+            tileItemElement102.ImageOptions.Image = global::Br3D.Properties.Resources.snap_intersection_small;
+            tileItemElement102.Text = "Intersection";
+            this.tileNavItemIntersection.Tile.Elements.Add(tileItemElement102);
             this.tileNavItemIntersection.Tile.Name = "tileBarItem5";
             // 
             // tileNavItemMiddle
@@ -1042,9 +1093,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemMiddle.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement39.ImageOptions.Image = global::Br3D.Properties.Resources.snap_middle_small;
-            tileItemElement39.Text = "Middle";
-            this.tileNavItemMiddle.Tile.Elements.Add(tileItemElement39);
+            tileItemElement103.ImageOptions.Image = global::Br3D.Properties.Resources.snap_middle_small;
+            tileItemElement103.Text = "Middle";
+            this.tileNavItemMiddle.Tile.Elements.Add(tileItemElement103);
             this.tileNavItemMiddle.Tile.Name = "tileBarItem2";
             // 
             // tileNavItemCenter
@@ -1055,9 +1106,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemCenter.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement40.ImageOptions.Image = global::Br3D.Properties.Resources.snap_center_small;
-            tileItemElement40.Text = "Center";
-            this.tileNavItemCenter.Tile.Elements.Add(tileItemElement40);
+            tileItemElement104.ImageOptions.Image = global::Br3D.Properties.Resources.snap_center_small;
+            tileItemElement104.Text = "Center";
+            this.tileNavItemCenter.Tile.Elements.Add(tileItemElement104);
             this.tileNavItemCenter.Tile.Name = "tileBarItem3";
             // 
             // tileNavItemPoint
@@ -1068,9 +1119,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemPoint.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement41.ImageOptions.Image = global::Br3D.Properties.Resources.snap_node_small;
-            tileItemElement41.Text = "Point";
-            this.tileNavItemPoint.Tile.Elements.Add(tileItemElement41);
+            tileItemElement105.ImageOptions.Image = global::Br3D.Properties.Resources.snap_node_small;
+            tileItemElement105.Text = "Point";
+            this.tileNavItemPoint.Tile.Elements.Add(tileItemElement105);
             this.tileNavItemPoint.Tile.Name = "tileBarItem4";
             // 
             // tileNavCategoryViewport
@@ -1097,9 +1148,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemViewportsingle.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement43.ImageOptions.Image = global::Br3D.Properties.Resources.view_single;
-            tileItemElement43.Text = "Single";
-            this.tileNavItemViewportsingle.Tile.Elements.Add(tileItemElement43);
+            tileItemElement107.ImageOptions.Image = global::Br3D.Properties.Resources.view_single;
+            tileItemElement107.Text = "Single";
+            this.tileNavItemViewportsingle.Tile.Elements.Add(tileItemElement107);
             this.tileNavItemViewportsingle.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemViewport1x1
@@ -1110,9 +1161,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemViewport1x1.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement44.ImageOptions.Image = global::Br3D.Properties.Resources.view_1x1;
-            tileItemElement44.Text = "1x1";
-            this.tileNavItemViewport1x1.Tile.Elements.Add(tileItemElement44);
+            tileItemElement108.ImageOptions.Image = global::Br3D.Properties.Resources.view_1x1;
+            tileItemElement108.Text = "1x1";
+            this.tileNavItemViewport1x1.Tile.Elements.Add(tileItemElement108);
             this.tileNavItemViewport1x1.Tile.Name = "tileBarItem2";
             // 
             // tileNavItemViewport1x2
@@ -1123,9 +1174,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemViewport1x2.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement45.ImageOptions.Image = global::Br3D.Properties.Resources.view_1x2;
-            tileItemElement45.Text = "1x2";
-            this.tileNavItemViewport1x2.Tile.Elements.Add(tileItemElement45);
+            tileItemElement109.ImageOptions.Image = global::Br3D.Properties.Resources.view_1x2;
+            tileItemElement109.Text = "1x2";
+            this.tileNavItemViewport1x2.Tile.Elements.Add(tileItemElement109);
             this.tileNavItemViewport1x2.Tile.Name = "tileBarItem3";
             // 
             // tileNavItemViewport2x2
@@ -1136,9 +1187,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemViewport2x2.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement46.ImageOptions.Image = global::Br3D.Properties.Resources.view_2x2;
-            tileItemElement46.Text = "2x2";
-            this.tileNavItemViewport2x2.Tile.Elements.Add(tileItemElement46);
+            tileItemElement110.ImageOptions.Image = global::Br3D.Properties.Resources.view_2x2;
+            tileItemElement110.Text = "2x2";
+            this.tileNavItemViewport2x2.Tile.Elements.Add(tileItemElement110);
             this.tileNavItemViewport2x2.Tile.Name = "tileBarItem4";
             // 
             // tileNavCategoryTools
@@ -1155,8 +1206,8 @@ namespace Br3D
             // 
             // 
             this.tileNavCategoryTools.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement50.Text = "Tools";
-            this.tileNavCategoryTools.Tile.Elements.Add(tileItemElement50);
+            tileItemElement114.Text = "Tools";
+            this.tileNavCategoryTools.Tile.Elements.Add(tileItemElement114);
             // 
             // tileNavItemLayer
             // 
@@ -1166,9 +1217,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemLayer.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement47.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemLayer.TileImageOptions.SvgImage")));
-            tileItemElement47.Text = "Layer";
-            this.tileNavItemLayer.Tile.Elements.Add(tileItemElement47);
+            tileItemElement111.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemLayer.TileImageOptions.SvgImage")));
+            tileItemElement111.Text = "Layer";
+            this.tileNavItemLayer.Tile.Elements.Add(tileItemElement111);
             this.tileNavItemLayer.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemTextStyle
@@ -1179,9 +1230,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemTextStyle.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement48.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemTextStyle.TileImageOptions.SvgImage")));
-            tileItemElement48.Text = "Text Style";
-            this.tileNavItemTextStyle.Tile.Elements.Add(tileItemElement48);
+            tileItemElement112.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemTextStyle.TileImageOptions.SvgImage")));
+            tileItemElement112.Text = "Text Style";
+            this.tileNavItemTextStyle.Tile.Elements.Add(tileItemElement112);
             this.tileNavItemTextStyle.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemLineType
@@ -1192,9 +1243,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemLineType.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement49.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemLineType.TileImageOptions.SvgImage")));
-            tileItemElement49.Text = "Line Type";
-            this.tileNavItemLineType.Tile.Elements.Add(tileItemElement49);
+            tileItemElement113.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemLineType.TileImageOptions.SvgImage")));
+            tileItemElement113.Text = "Line Type";
+            this.tileNavItemLineType.Tile.Elements.Add(tileItemElement113);
             this.tileNavItemLineType.Tile.Name = "tileBarItem1";
             // 
             // tileNavCategoryOptions
@@ -1212,8 +1263,8 @@ namespace Br3D
             // 
             // 
             this.tileNavCategoryOptions.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement57.Text = "Options";
-            this.tileNavCategoryOptions.Tile.Elements.Add(tileItemElement57);
+            tileItemElement121.Text = "Options";
+            this.tileNavCategoryOptions.Tile.Elements.Add(tileItemElement121);
             // 
             // tileNavItemLanguage
             // 
@@ -1226,9 +1277,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemLanguage.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement53.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemLanguage.TileImageOptions.SvgImage")));
-            tileItemElement53.Text = "Language";
-            this.tileNavItemLanguage.Tile.Elements.Add(tileItemElement53);
+            tileItemElement117.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemLanguage.TileImageOptions.SvgImage")));
+            tileItemElement117.Text = "Language";
+            this.tileNavItemLanguage.Tile.Elements.Add(tileItemElement117);
             this.tileNavItemLanguage.Tile.Name = "tileBarItem1";
             // 
             // tileNavSubItemKorean
@@ -1239,9 +1290,9 @@ namespace Br3D
             // 
             // 
             this.tileNavSubItemKorean.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement51.ImageOptions.Image = global::Br3D.Properties.Resources.south_korea_16px;
-            tileItemElement51.Text = "한국어";
-            this.tileNavSubItemKorean.Tile.Elements.Add(tileItemElement51);
+            tileItemElement115.ImageOptions.Image = global::Br3D.Properties.Resources.south_korea_16px;
+            tileItemElement115.Text = "한국어";
+            this.tileNavSubItemKorean.Tile.Elements.Add(tileItemElement115);
             this.tileNavSubItemKorean.Tile.Name = "tileBarItem2";
             // 
             // tileNavSubItemEnglish
@@ -1252,9 +1303,9 @@ namespace Br3D
             // 
             // 
             this.tileNavSubItemEnglish.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement52.ImageOptions.Image = global::Br3D.Properties.Resources.usa_16px;
-            tileItemElement52.Text = "English";
-            this.tileNavSubItemEnglish.Tile.Elements.Add(tileItemElement52);
+            tileItemElement116.ImageOptions.Image = global::Br3D.Properties.Resources.usa_16px;
+            tileItemElement116.Text = "English";
+            this.tileNavSubItemEnglish.Tile.Elements.Add(tileItemElement116);
             this.tileNavSubItemEnglish.Tile.Name = "tileBarItem3";
             // 
             // tileNavItemCheckForUpdate
@@ -1265,9 +1316,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemCheckForUpdate.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement54.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemCheckForUpdate.TileImageOptions.SvgImage")));
-            tileItemElement54.Text = "Check For Update";
-            this.tileNavItemCheckForUpdate.Tile.Elements.Add(tileItemElement54);
+            tileItemElement118.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemCheckForUpdate.TileImageOptions.SvgImage")));
+            tileItemElement118.Text = "Check For Update";
+            this.tileNavItemCheckForUpdate.Tile.Elements.Add(tileItemElement118);
             this.tileNavItemCheckForUpdate.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemHomePage
@@ -1278,9 +1329,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemHomePage.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement55.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemHomePage.TileImageOptions.SvgImage")));
-            tileItemElement55.Text = "Homepage";
-            this.tileNavItemHomePage.Tile.Elements.Add(tileItemElement55);
+            tileItemElement119.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemHomePage.TileImageOptions.SvgImage")));
+            tileItemElement119.Text = "Homepage";
+            this.tileNavItemHomePage.Tile.Elements.Add(tileItemElement119);
             this.tileNavItemHomePage.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemAbout
@@ -1291,9 +1342,9 @@ namespace Br3D
             // 
             // 
             this.tileNavItemAbout.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement56.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemAbout.TileImageOptions.SvgImage")));
-            tileItemElement56.Text = "About";
-            this.tileNavItemAbout.Tile.Elements.Add(tileItemElement56);
+            tileItemElement120.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemAbout.TileImageOptions.SvgImage")));
+            tileItemElement120.Text = "About";
+            this.tileNavItemAbout.Tile.Elements.Add(tileItemElement120);
             this.tileNavItemAbout.Tile.Name = "tileBarItem2";
             // 
             // tileNavItemOpen
@@ -1304,10 +1355,10 @@ namespace Br3D
             // 
             // 
             this.tileNavItemOpen.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement58.ImageOptions.Image = global::Br3D.Properties.Resources.view_single;
-            tileItemElement58.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemOpen.TileImageOptions.SvgImage")));
-            tileItemElement58.Text = "Open";
-            this.tileNavItemOpen.Tile.Elements.Add(tileItemElement58);
+            tileItemElement122.ImageOptions.Image = global::Br3D.Properties.Resources.view_single;
+            tileItemElement122.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemOpen.TileImageOptions.SvgImage")));
+            tileItemElement122.Text = "Open";
+            this.tileNavItemOpen.Tile.Elements.Add(tileItemElement122);
             this.tileNavItemOpen.Tile.Name = "tileBarItem4";
             // 
             // tileNavItemSaveAs
@@ -1318,10 +1369,10 @@ namespace Br3D
             // 
             // 
             this.tileNavItemSaveAs.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement59.ImageOptions.Image = global::Br3D.Properties.Resources.view_1x1;
-            tileItemElement59.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemSaveAs.TileImageOptions.SvgImage")));
-            tileItemElement59.Text = "Save As";
-            this.tileNavItemSaveAs.Tile.Elements.Add(tileItemElement59);
+            tileItemElement123.ImageOptions.Image = global::Br3D.Properties.Resources.view_1x1;
+            tileItemElement123.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemSaveAs.TileImageOptions.SvgImage")));
+            tileItemElement123.Text = "Save As";
+            this.tileNavItemSaveAs.Tile.Elements.Add(tileItemElement123);
             this.tileNavItemSaveAs.Tile.Name = "tileBarItem5";
             // 
             // tileNavItemSaveImage
@@ -1332,10 +1383,10 @@ namespace Br3D
             // 
             // 
             this.tileNavItemSaveImage.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement60.ImageOptions.Image = global::Br3D.Properties.Resources.view_1x2;
-            tileItemElement60.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemSaveImage.TileImageOptions.SvgImage")));
-            tileItemElement60.Text = "Save Image";
-            this.tileNavItemSaveImage.Tile.Elements.Add(tileItemElement60);
+            tileItemElement124.ImageOptions.Image = global::Br3D.Properties.Resources.view_1x2;
+            tileItemElement124.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemSaveImage.TileImageOptions.SvgImage")));
+            tileItemElement124.Text = "Save Image";
+            this.tileNavItemSaveImage.Tile.Elements.Add(tileItemElement124);
             this.tileNavItemSaveImage.Tile.Name = "tileBarItem1";
             // 
             // tileNavItemExit
@@ -1346,10 +1397,10 @@ namespace Br3D
             // 
             // 
             this.tileNavItemExit.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement61.ImageOptions.Image = global::Br3D.Properties.Resources.view_2x2;
-            tileItemElement61.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemExit.TileImageOptions.SvgImage")));
-            tileItemElement61.Text = "Exit";
-            this.tileNavItemExit.Tile.Elements.Add(tileItemElement61);
+            tileItemElement125.ImageOptions.Image = global::Br3D.Properties.Resources.view_2x2;
+            tileItemElement125.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tileNavItemExit.TileImageOptions.SvgImage")));
+            tileItemElement125.Text = "Exit";
+            this.tileNavItemExit.Tile.Elements.Add(tileItemElement125);
             this.tileNavItemExit.Tile.Name = "tileBarItem2";
             // 
             // tileNavItemRegenAll
@@ -1360,8 +1411,8 @@ namespace Br3D
             // 
             // 
             this.tileNavItemRegenAll.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement62.Text = "RegenAll";
-            this.tileNavItemRegenAll.Tile.Elements.Add(tileItemElement62);
+            tileItemElement126.Text = "RegenAll";
+            this.tileNavItemRegenAll.Tile.Elements.Add(tileItemElement126);
             this.tileNavItemRegenAll.Tile.Name = "tileBarItem1";
             // 
             // hModel
@@ -1372,20 +1423,20 @@ namespace Br3D
             this.hModel.DefaultColor = System.Drawing.Color.White;
             this.hModel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hModel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.hModel.Location = new System.Drawing.Point(259, 43);
+            this.hModel.Location = new System.Drawing.Point(259, 197);
             this.hModel.Name = "hModel";
-            this.hModel.ProgressBar = progressBar1;
+            this.hModel.ProgressBar = progressBar2;
             this.hModel.propertyGridHelper = null;
             this.hModel.Renderer = devDept.Eyeshot.rendererType.Direct3D;
-            this.hModel.Size = new System.Drawing.Size(587, 623);
+            this.hModel.Size = new System.Drawing.Size(587, 442);
             this.hModel.TabIndex = 3;
             this.hModel.Text = "hModel1";
             this.hModel.Transparency = hanee.ThreeD.HModel.TranparencyMode.untransparency;
             this.hModel.ViewportBorder = new devDept.Eyeshot.BorderSettings(System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130))))), 0, false);
-            this.hModel.Viewports.Add(viewport1);
-            this.hModel.Viewports.Add(viewport2);
-            this.hModel.Viewports.Add(viewport3);
-            this.hModel.Viewports.Add(viewport4);
+            this.hModel.Viewports.Add(viewport5);
+            this.hModel.Viewports.Add(viewport6);
+            this.hModel.Viewports.Add(viewport7);
+            this.hModel.Viewports.Add(viewport8);
             // 
             // contextMenuStrip1
             // 
@@ -1448,20 +1499,17 @@ namespace Br3D
             this.dockPanelDynamicInput.Controls.Add(this.controlContainer1);
             this.dockPanelDynamicInput.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
             this.dockPanelDynamicInput.ID = new System.Guid("754d9043-9e08-4dbc-87a8-0af55da86043");
-            this.dockPanelDynamicInput.Location = new System.Drawing.Point(846, 43);
+            this.dockPanelDynamicInput.Location = new System.Drawing.Point(846, 197);
             this.dockPanelDynamicInput.Name = "dockPanelDynamicInput";
             this.dockPanelDynamicInput.OriginalSize = new System.Drawing.Size(198, 200);
-            this.dockPanelDynamicInput.Size = new System.Drawing.Size(198, 623);
+            this.dockPanelDynamicInput.Size = new System.Drawing.Size(198, 442);
             this.dockPanelDynamicInput.Text = "Dynamic input";
             // 
             // controlContainer1
             // 
-            this.controlContainer1.Controls.Add(this.searchControl1);
-            this.controlContainer1.Controls.Add(this.comboBoxEdit1);
-            this.controlContainer1.Controls.Add(this.listBoxControl1);
             this.controlContainer1.Location = new System.Drawing.Point(4, 26);
             this.controlContainer1.Name = "controlContainer1";
-            this.controlContainer1.Size = new System.Drawing.Size(191, 594);
+            this.controlContainer1.Size = new System.Drawing.Size(191, 413);
             this.controlContainer1.TabIndex = 0;
             // 
             // panelContainer1
@@ -1471,10 +1519,10 @@ namespace Br3D
             this.panelContainer1.Controls.Add(this.dockPanelObjectTree);
             this.panelContainer1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.panelContainer1.ID = new System.Guid("2f55103e-9204-4e48-a94f-fab57b48506c");
-            this.panelContainer1.Location = new System.Drawing.Point(0, 43);
+            this.panelContainer1.Location = new System.Drawing.Point(0, 197);
             this.panelContainer1.Name = "panelContainer1";
             this.panelContainer1.OriginalSize = new System.Drawing.Size(259, 200);
-            this.panelContainer1.Size = new System.Drawing.Size(259, 623);
+            this.panelContainer1.Size = new System.Drawing.Size(259, 442);
             this.panelContainer1.Tabbed = true;
             this.panelContainer1.Text = "panelContainer1";
             // 
@@ -1485,8 +1533,8 @@ namespace Br3D
             this.dockPanelProperties.ID = new System.Guid("c18255af-44ec-4932-9c11-d99e4ddfcd3e");
             this.dockPanelProperties.Location = new System.Drawing.Point(3, 26);
             this.dockPanelProperties.Name = "dockPanelProperties";
-            this.dockPanelProperties.OriginalSize = new System.Drawing.Size(252, 524);
-            this.dockPanelProperties.Size = new System.Drawing.Size(252, 566);
+            this.dockPanelProperties.OriginalSize = new System.Drawing.Size(252, 412);
+            this.dockPanelProperties.Size = new System.Drawing.Size(252, 385);
             this.dockPanelProperties.Text = "Properties";
             // 
             // dockPanel1_Container
@@ -1494,7 +1542,7 @@ namespace Br3D
             this.dockPanel1_Container.Controls.Add(this.propertyGridControl1);
             this.dockPanel1_Container.Location = new System.Drawing.Point(0, 0);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(252, 566);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(252, 385);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // propertyGridControl1
@@ -1518,7 +1566,7 @@ namespace Br3D
             this.categoryBlock,
             this.categoryLineType,
             this.categoryText});
-            this.propertyGridControl1.Size = new System.Drawing.Size(252, 566);
+            this.propertyGridControl1.Size = new System.Drawing.Size(252, 385);
             this.propertyGridControl1.TabIndex = 0;
             // 
             // repositoryItemComboBoxTextStyle
@@ -1764,8 +1812,8 @@ namespace Br3D
             this.dockPanelObjectTree.ID = new System.Guid("c306bba9-1d83-4cca-b897-1e005975cc6f");
             this.dockPanelObjectTree.Location = new System.Drawing.Point(3, 26);
             this.dockPanelObjectTree.Name = "dockPanelObjectTree";
-            this.dockPanelObjectTree.OriginalSize = new System.Drawing.Size(252, 524);
-            this.dockPanelObjectTree.Size = new System.Drawing.Size(252, 566);
+            this.dockPanelObjectTree.OriginalSize = new System.Drawing.Size(252, 412);
+            this.dockPanelObjectTree.Size = new System.Drawing.Size(252, 385);
             this.dockPanelObjectTree.Text = "Object Tree";
             // 
             // dockPanel3_Container
@@ -1773,7 +1821,7 @@ namespace Br3D
             this.dockPanel3_Container.Controls.Add(this.treeListObject);
             this.dockPanel3_Container.Location = new System.Drawing.Point(0, 0);
             this.dockPanel3_Container.Name = "dockPanel3_Container";
-            this.dockPanel3_Container.Size = new System.Drawing.Size(252, 566);
+            this.dockPanel3_Container.Size = new System.Drawing.Size(252, 385);
             this.dockPanel3_Container.TabIndex = 0;
             // 
             // treeListObject
@@ -1781,7 +1829,7 @@ namespace Br3D
             this.treeListObject.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeListObject.Location = new System.Drawing.Point(0, 0);
             this.treeListObject.Name = "treeListObject";
-            this.treeListObject.Size = new System.Drawing.Size(252, 566);
+            this.treeListObject.Size = new System.Drawing.Size(252, 385);
             this.treeListObject.TabIndex = 0;
             // 
             // statusStrip1
@@ -1808,8 +1856,8 @@ namespace Br3D
             // 
             // 
             this.tileNavSubItemLineBy2Point.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement63.Text = "LineBy2Point";
-            this.tileNavSubItemLineBy2Point.Tile.Elements.Add(tileItemElement63);
+            tileItemElement127.Text = "LineBy2Point";
+            this.tileNavSubItemLineBy2Point.Tile.Elements.Add(tileItemElement127);
             // 
             // tileNavSubItem2
             // 
@@ -1819,47 +1867,456 @@ namespace Br3D
             // 
             // 
             this.tileNavSubItem2.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement64.Text = "tileNavSubItem2";
-            this.tileNavSubItem2.Tile.Elements.Add(tileItemElement64);
+            tileItemElement128.Text = "tileNavSubItem2";
+            this.tileNavSubItem2.Tile.Elements.Add(tileItemElement128);
             // 
-            // listBoxControl1
+            // ribbonControl1
             // 
-            this.listBoxControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listBoxControl1.Items.AddRange(new object[] {
-            "line",
-            "polyline",
-            "circle",
-            "arc"});
-            this.listBoxControl1.Location = new System.Drawing.Point(0, 0);
-            this.listBoxControl1.Name = "listBoxControl1";
-            this.listBoxControl1.Size = new System.Drawing.Size(191, 95);
-            this.listBoxControl1.TabIndex = 1;
+            this.ribbonControl1.ExpandCollapseItem.Id = 0;
+            this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.ribbonControl1.ExpandCollapseItem,
+            this.ribbonControl1.SearchEditItem,
+            this.barButtonItemDrawCircle,
+            this.barButtonItemDrawArc,
+            this.barButtonItemDrawPolyline,
+            this.barButtonItemDrawSpline,
+            this.barStaticItem1,
+            this.barStaticItem2,
+            this.barButtonItemDrawLine,
+            this.barButtonItemDrawText,
+            this.barButtonItemInsert,
+            this.barButtonItemDrawCylinder,
+            this.barButtonItemDrawArc_FirstSecondThird,
+            this.barButtonItemDrawArc_CenterStartEnd,
+            this.barButtonItemOpen,
+            this.barButtonItemSaveAs,
+            this.barButtonItemSaveImage,
+            this.barButtonItemExit,
+            this.barButtonItemDimHorizontal,
+            this.barButtonItemDimVertical,
+            this.barButtonItemDimAlign,
+            this.barButtonItemDimDiameter,
+            this.barButtonItemDimRadius,
+            this.barButtonItemDimLeader,
+            this.barButtonItemErase,
+            this.barButtonItemMove,
+            this.barButtonItemCopy,
+            this.barButtonItemScale,
+            this.barButtonItemRotate,
+            this.barButtonItemOffset,
+            this.barButtonItemMirror,
+            this.barButtonItemExplode,
+            this.barButtonItemTrim,
+            this.barButtonItemFillet,
+            this.barButtonItemChamfer});
+            this.ribbonControl1.Location = new System.Drawing.Point(0, 43);
+            this.ribbonControl1.MaxItemId = 37;
+            this.ribbonControl1.Name = "ribbonControl1";
+            this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
+            this.ribbonPageHome,
+            this.ribbonPageDraw,
+            this.ribbonPageDimension,
+            this.ribbonPageEdit,
+            this.ribbonPageAnnotation,
+            this.ribbonPageOsnap,
+            this.ribbonPageTools,
+            this.ribbonPageOptions});
+            this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemRibbonSearchEdit1});
+            this.ribbonControl1.Size = new System.Drawing.Size(1044, 154);
+            this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
+            this.ribbonControl1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ribbonControl1_ItemClick);
             // 
-            // comboBoxEdit1
+            // barButtonItemDrawCircle
             // 
-            this.comboBoxEdit1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.comboBoxEdit1.Location = new System.Drawing.Point(0, 95);
-            this.comboBoxEdit1.Name = "comboBoxEdit1";
-            this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEdit1.Properties.Items.AddRange(new object[] {
-            "line",
-            "polyline",
-            "circle",
-            "arc"});
-            this.comboBoxEdit1.Size = new System.Drawing.Size(191, 22);
-            this.comboBoxEdit1.TabIndex = 2;
+            this.barButtonItemDrawCircle.Caption = "Circle";
+            this.barButtonItemDrawCircle.Id = 2;
+            this.barButtonItemDrawCircle.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDrawCircle.ImageOptions.SvgImage")));
+            this.barButtonItemDrawCircle.Name = "barButtonItemDrawCircle";
             // 
-            // searchControl1
+            // barButtonItemDrawArc
             // 
-            this.searchControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchControl1.Location = new System.Drawing.Point(0, 117);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Repository.ClearButton(),
-            new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl1.Size = new System.Drawing.Size(191, 22);
-            this.searchControl1.TabIndex = 3;
+            this.barButtonItemDrawArc.ActAsDropDown = true;
+            this.barButtonItemDrawArc.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            this.barButtonItemDrawArc.Caption = "Arc";
+            this.barButtonItemDrawArc.DropDownControl = this.popupMenuDrawArc;
+            this.barButtonItemDrawArc.Id = 3;
+            this.barButtonItemDrawArc.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDrawArc.ImageOptions.SvgImage")));
+            this.barButtonItemDrawArc.Name = "barButtonItemDrawArc";
+            // 
+            // barButtonItemDrawPolyline
+            // 
+            this.barButtonItemDrawPolyline.Caption = "Polyline";
+            this.barButtonItemDrawPolyline.Id = 4;
+            this.barButtonItemDrawPolyline.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDrawPolyline.ImageOptions.SvgImage")));
+            this.barButtonItemDrawPolyline.Name = "barButtonItemDrawPolyline";
+            // 
+            // barButtonItemDrawSpline
+            // 
+            this.barButtonItemDrawSpline.Caption = "Spline";
+            this.barButtonItemDrawSpline.Id = 5;
+            this.barButtonItemDrawSpline.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDrawSpline.ImageOptions.SvgImage")));
+            this.barButtonItemDrawSpline.Name = "barButtonItemDrawSpline";
+            // 
+            // barStaticItem1
+            // 
+            this.barStaticItem1.Caption = "barStaticItem1";
+            this.barStaticItem1.Id = 6;
+            this.barStaticItem1.Name = "barStaticItem1";
+            // 
+            // barStaticItem2
+            // 
+            this.barStaticItem2.Caption = "barStaticItem2";
+            this.barStaticItem2.Id = 7;
+            this.barStaticItem2.Name = "barStaticItem2";
+            // 
+            // ribbonPageHome
+            // 
+            this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroupFile,
+            this.ribbonPageGroupSystem});
+            this.ribbonPageHome.Name = "ribbonPageHome";
+            this.ribbonPageHome.Text = "Home";
+            // 
+            // ribbonPageGroupFile
+            // 
+            this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemOpen);
+            this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemSaveAs);
+            this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemSaveImage);
+            this.ribbonPageGroupFile.Name = "ribbonPageGroupFile";
+            this.ribbonPageGroupFile.Text = "File";
+            // 
+            // ribbonPageDraw
+            // 
+            this.ribbonPageDraw.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroupDraw});
+            this.ribbonPageDraw.Name = "ribbonPageDraw";
+            this.ribbonPageDraw.Text = "Draw";
+            // 
+            // ribbonPageGroupDraw
+            // 
+            this.ribbonPageGroupDraw.ItemLinks.Add(this.barButtonItemDrawLine);
+            this.ribbonPageGroupDraw.ItemLinks.Add(this.barButtonItemDrawCircle);
+            this.ribbonPageGroupDraw.ItemLinks.Add(this.barButtonItemDrawArc);
+            this.ribbonPageGroupDraw.ItemLinks.Add(this.barButtonItemDrawPolyline);
+            this.ribbonPageGroupDraw.ItemLinks.Add(this.barButtonItemDrawSpline);
+            this.ribbonPageGroupDraw.ItemLinks.Add(this.barButtonItemDrawText);
+            this.ribbonPageGroupDraw.ItemLinks.Add(this.barButtonItemInsert);
+            this.ribbonPageGroupDraw.ItemLinks.Add(this.barButtonItemDrawCylinder);
+            this.ribbonPageGroupDraw.Name = "ribbonPageGroupDraw";
+            this.ribbonPageGroupDraw.Text = "Draw";
+            // 
+            // ribbonPageDimension
+            // 
+            this.ribbonPageDimension.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroupDim});
+            this.ribbonPageDimension.Name = "ribbonPageDimension";
+            this.ribbonPageDimension.Text = "Dimension";
+            // 
+            // ribbonPageGroupDim
+            // 
+            this.ribbonPageGroupDim.ItemLinks.Add(this.barButtonItemDimHorizontal);
+            this.ribbonPageGroupDim.ItemLinks.Add(this.barButtonItemDimVertical);
+            this.ribbonPageGroupDim.ItemLinks.Add(this.barButtonItemDimAlign);
+            this.ribbonPageGroupDim.ItemLinks.Add(this.barButtonItemDimDiameter);
+            this.ribbonPageGroupDim.ItemLinks.Add(this.barButtonItemDimRadius);
+            this.ribbonPageGroupDim.ItemLinks.Add(this.barButtonItemDimLeader);
+            this.ribbonPageGroupDim.Name = "ribbonPageGroupDim";
+            this.ribbonPageGroupDim.Text = "Dimension";
+            // 
+            // ribbonPageEdit
+            // 
+            this.ribbonPageEdit.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroupEdit});
+            this.ribbonPageEdit.Name = "ribbonPageEdit";
+            this.ribbonPageEdit.Text = "Edit";
+            // 
+            // ribbonPageGroupEdit
+            // 
+            this.ribbonPageGroupEdit.ItemLinks.Add(this.barButtonItemErase);
+            this.ribbonPageGroupEdit.ItemLinks.Add(this.barButtonItemMove);
+            this.ribbonPageGroupEdit.ItemLinks.Add(this.barButtonItemCopy);
+            this.ribbonPageGroupEdit.ItemLinks.Add(this.barButtonItemScale);
+            this.ribbonPageGroupEdit.ItemLinks.Add(this.barButtonItemRotate);
+            this.ribbonPageGroupEdit.ItemLinks.Add(this.barButtonItemOffset);
+            this.ribbonPageGroupEdit.ItemLinks.Add(this.barButtonItemMirror);
+            this.ribbonPageGroupEdit.ItemLinks.Add(this.barButtonItemExplode);
+            this.ribbonPageGroupEdit.ItemLinks.Add(this.barButtonItemTrim);
+            this.ribbonPageGroupEdit.ItemLinks.Add(this.barButtonItemFillet);
+            this.ribbonPageGroupEdit.ItemLinks.Add(this.barButtonItemChamfer);
+            this.ribbonPageGroupEdit.Name = "ribbonPageGroupEdit";
+            this.ribbonPageGroupEdit.Text = "Edit";
+            // 
+            // ribbonPageAnnotation
+            // 
+            this.ribbonPageAnnotation.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup4});
+            this.ribbonPageAnnotation.Name = "ribbonPageAnnotation";
+            this.ribbonPageAnnotation.Text = "Annotation";
+            // 
+            // ribbonPageGroup4
+            // 
+            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
+            this.ribbonPageGroup4.Text = "ribbonPageGroup4";
+            // 
+            // ribbonPageOsnap
+            // 
+            this.ribbonPageOsnap.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup5});
+            this.ribbonPageOsnap.Name = "ribbonPageOsnap";
+            this.ribbonPageOsnap.Text = "Osnap";
+            // 
+            // ribbonPageGroup5
+            // 
+            this.ribbonPageGroup5.Name = "ribbonPageGroup5";
+            this.ribbonPageGroup5.Text = "ribbonPageGroup5";
+            // 
+            // ribbonPageTools
+            // 
+            this.ribbonPageTools.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup6});
+            this.ribbonPageTools.Name = "ribbonPageTools";
+            this.ribbonPageTools.Text = "Tools";
+            // 
+            // ribbonPageGroup6
+            // 
+            this.ribbonPageGroup6.Name = "ribbonPageGroup6";
+            this.ribbonPageGroup6.Text = "ribbonPageGroup6";
+            // 
+            // ribbonPageOptions
+            // 
+            this.ribbonPageOptions.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup7});
+            this.ribbonPageOptions.Name = "ribbonPageOptions";
+            this.ribbonPageOptions.Text = "Options";
+            // 
+            // ribbonPageGroup7
+            // 
+            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
+            this.ribbonPageGroup7.Text = "ribbonPageGroup7";
+            // 
+            // repositoryItemRibbonSearchEdit1
+            // 
+            this.repositoryItemRibbonSearchEdit1.AutoHeight = false;
+            this.repositoryItemRibbonSearchEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemRibbonSearchEdit1.Name = "repositoryItemRibbonSearchEdit1";
+            // 
+            // ribbonStatusBar1
+            // 
+            this.ribbonStatusBar1.ItemLinks.Add(this.ribbonControl1.SearchEditItem);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barStaticItem2);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 639);
+            this.ribbonStatusBar1.Name = "ribbonStatusBar1";
+            this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1044, 27);
+            // 
+            // barButtonItemDrawLine
+            // 
+            this.barButtonItemDrawLine.Caption = "Line";
+            this.barButtonItemDrawLine.Id = 10;
+            this.barButtonItemDrawLine.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDrawLine.ImageOptions.SvgImage")));
+            this.barButtonItemDrawLine.Name = "barButtonItemDrawLine";
+            // 
+            // barButtonItemDrawText
+            // 
+            this.barButtonItemDrawText.Caption = "Text";
+            this.barButtonItemDrawText.Id = 11;
+            this.barButtonItemDrawText.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDrawText.ImageOptions.SvgImage")));
+            this.barButtonItemDrawText.Name = "barButtonItemDrawText";
+            // 
+            // barButtonItemInsert
+            // 
+            this.barButtonItemInsert.Caption = "Insert";
+            this.barButtonItemInsert.Id = 12;
+            this.barButtonItemInsert.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemInsert.ImageOptions.SvgImage")));
+            this.barButtonItemInsert.Name = "barButtonItemInsert";
+            // 
+            // barButtonItemDrawCylinder
+            // 
+            this.barButtonItemDrawCylinder.Caption = "Cylinder";
+            this.barButtonItemDrawCylinder.Id = 13;
+            this.barButtonItemDrawCylinder.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItemDrawCylinder.Name = "barButtonItemDrawCylinder";
+            // 
+            // popupMenuDrawArc
+            // 
+            this.popupMenuDrawArc.ItemLinks.Add(this.barButtonItemDrawArc_FirstSecondThird);
+            this.popupMenuDrawArc.ItemLinks.Add(this.barButtonItemDrawArc_CenterStartEnd);
+            this.popupMenuDrawArc.Name = "popupMenuDrawArc";
+            this.popupMenuDrawArc.Ribbon = this.ribbonControl1;
+            // 
+            // barButtonItemDrawArc_FirstSecondThird
+            // 
+            this.barButtonItemDrawArc_FirstSecondThird.Caption = "First, Second, Third";
+            this.barButtonItemDrawArc_FirstSecondThird.Id = 14;
+            this.barButtonItemDrawArc_FirstSecondThird.Name = "barButtonItemDrawArc_FirstSecondThird";
+            // 
+            // barButtonItemDrawArc_CenterStartEnd
+            // 
+            this.barButtonItemDrawArc_CenterStartEnd.Caption = "Center, Start, End";
+            this.barButtonItemDrawArc_CenterStartEnd.Id = 15;
+            this.barButtonItemDrawArc_CenterStartEnd.Name = "barButtonItemDrawArc_CenterStartEnd";
+            // 
+            // barButtonItemOpen
+            // 
+            this.barButtonItemOpen.Caption = "Open";
+            this.barButtonItemOpen.Id = 16;
+            this.barButtonItemOpen.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemOpen.ImageOptions.SvgImage")));
+            this.barButtonItemOpen.Name = "barButtonItemOpen";
+            // 
+            // barButtonItemSaveAs
+            // 
+            this.barButtonItemSaveAs.Caption = "Save As";
+            this.barButtonItemSaveAs.Id = 17;
+            this.barButtonItemSaveAs.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItemSaveAs.Name = "barButtonItemSaveAs";
+            // 
+            // barButtonItemSaveImage
+            // 
+            this.barButtonItemSaveImage.Caption = "Save Image";
+            this.barButtonItemSaveImage.Id = 18;
+            this.barButtonItemSaveImage.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem3.ImageOptions.SvgImage")));
+            this.barButtonItemSaveImage.Name = "barButtonItemSaveImage";
+            // 
+            // barButtonItemExit
+            // 
+            this.barButtonItemExit.Caption = "Exit";
+            this.barButtonItemExit.Id = 19;
+            this.barButtonItemExit.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem4.ImageOptions.SvgImage")));
+            this.barButtonItemExit.Name = "barButtonItemExit";
+            // 
+            // ribbonPageGroupSystem
+            // 
+            this.ribbonPageGroupSystem.ItemLinks.Add(this.barButtonItemExit);
+            this.ribbonPageGroupSystem.Name = "ribbonPageGroupSystem";
+            this.ribbonPageGroupSystem.Text = "System";
+            // 
+            // barButtonItemDimHorizontal
+            // 
+            this.barButtonItemDimHorizontal.Caption = "Horizontal";
+            this.barButtonItemDimHorizontal.Id = 20;
+            this.barButtonItemDimHorizontal.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDimHorizontal.ImageOptions.SvgImage")));
+            this.barButtonItemDimHorizontal.Name = "barButtonItemDimHorizontal";
+            // 
+            // barButtonItemDimVertical
+            // 
+            this.barButtonItemDimVertical.Caption = "Vertical";
+            this.barButtonItemDimVertical.Id = 21;
+            this.barButtonItemDimVertical.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDimVertical.ImageOptions.SvgImage")));
+            this.barButtonItemDimVertical.Name = "barButtonItemDimVertical";
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "Vertical";
+            this.barButtonItem1.Id = 21;
+            this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage1")));
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barButtonItemDimAlign
+            // 
+            this.barButtonItemDimAlign.Caption = "Align";
+            this.barButtonItemDimAlign.Id = 22;
+            this.barButtonItemDimAlign.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDimAlign.ImageOptions.SvgImage")));
+            this.barButtonItemDimAlign.Name = "barButtonItemDimAlign";
+            // 
+            // barButtonItemDimDiameter
+            // 
+            this.barButtonItemDimDiameter.Caption = "Diameter";
+            this.barButtonItemDimDiameter.Id = 23;
+            this.barButtonItemDimDiameter.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDimDiameter.ImageOptions.SvgImage")));
+            this.barButtonItemDimDiameter.Name = "barButtonItemDimDiameter";
+            // 
+            // barButtonItemDimRadius
+            // 
+            this.barButtonItemDimRadius.Caption = "Radius";
+            this.barButtonItemDimRadius.Id = 24;
+            this.barButtonItemDimRadius.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDimRadius.ImageOptions.SvgImage")));
+            this.barButtonItemDimRadius.Name = "barButtonItemDimRadius";
+            // 
+            // barButtonItemDimLeader
+            // 
+            this.barButtonItemDimLeader.Caption = "Leader";
+            this.barButtonItemDimLeader.Id = 25;
+            this.barButtonItemDimLeader.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDimLeader.ImageOptions.SvgImage")));
+            this.barButtonItemDimLeader.Name = "barButtonItemDimLeader";
+            // 
+            // barButtonItemErase
+            // 
+            this.barButtonItemErase.Caption = "Erase";
+            this.barButtonItemErase.Id = 26;
+            this.barButtonItemErase.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemErase.ImageOptions.SvgImage")));
+            this.barButtonItemErase.Name = "barButtonItemErase";
+            // 
+            // barButtonItemMove
+            // 
+            this.barButtonItemMove.Caption = "Move";
+            this.barButtonItemMove.Id = 27;
+            this.barButtonItemMove.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemMove.ImageOptions.SvgImage")));
+            this.barButtonItemMove.Name = "barButtonItemMove";
+            // 
+            // barButtonItemCopy
+            // 
+            this.barButtonItemCopy.Caption = "Copy";
+            this.barButtonItemCopy.Id = 28;
+            this.barButtonItemCopy.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemCopy.ImageOptions.SvgImage")));
+            this.barButtonItemCopy.Name = "barButtonItemCopy";
+            // 
+            // barButtonItemScale
+            // 
+            this.barButtonItemScale.Caption = "Scale";
+            this.barButtonItemScale.Id = 29;
+            this.barButtonItemScale.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage1")));
+            this.barButtonItemScale.Name = "barButtonItemScale";
+            // 
+            // barButtonItemRotate
+            // 
+            this.barButtonItemRotate.Caption = "Rotate";
+            this.barButtonItemRotate.Id = 30;
+            this.barButtonItemRotate.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemRotate.ImageOptions.SvgImage")));
+            this.barButtonItemRotate.Name = "barButtonItemRotate";
+            // 
+            // barButtonItemOffset
+            // 
+            this.barButtonItemOffset.Caption = "Offset";
+            this.barButtonItemOffset.Id = 31;
+            this.barButtonItemOffset.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemOffset.ImageOptions.SvgImage")));
+            this.barButtonItemOffset.Name = "barButtonItemOffset";
+            // 
+            // barButtonItemMirror
+            // 
+            this.barButtonItemMirror.Caption = "Mirror";
+            this.barButtonItemMirror.Id = 32;
+            this.barButtonItemMirror.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemMirror.ImageOptions.SvgImage")));
+            this.barButtonItemMirror.Name = "barButtonItemMirror";
+            // 
+            // barButtonItemExplode
+            // 
+            this.barButtonItemExplode.Caption = "Explode";
+            this.barButtonItemExplode.Id = 33;
+            this.barButtonItemExplode.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemExplode.ImageOptions.SvgImage")));
+            this.barButtonItemExplode.Name = "barButtonItemExplode";
+            // 
+            // barButtonItemTrim
+            // 
+            this.barButtonItemTrim.Caption = "Trim";
+            this.barButtonItemTrim.Id = 34;
+            this.barButtonItemTrim.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemTrim.ImageOptions.SvgImage")));
+            this.barButtonItemTrim.Name = "barButtonItemTrim";
+            // 
+            // barButtonItemFillet
+            // 
+            this.barButtonItemFillet.Caption = "Fillet";
+            this.barButtonItemFillet.Id = 35;
+            this.barButtonItemFillet.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItemFillet.Name = "barButtonItemFillet";
+            // 
+            // barButtonItemChamfer
+            // 
+            this.barButtonItemChamfer.Caption = "Chamfer";
+            this.barButtonItemChamfer.Id = 36;
+            this.barButtonItemChamfer.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemChamfer.ImageOptions.SvgImage")));
+            this.barButtonItemChamfer.Name = "barButtonItemChamfer";
             // 
             // FormMain
             // 
@@ -1869,6 +2326,8 @@ namespace Br3D
             this.Controls.Add(this.hModel);
             this.Controls.Add(this.panelContainer1);
             this.Controls.Add(this.dockPanelDynamicInput);
+            this.Controls.Add(this.ribbonStatusBar1);
+            this.Controls.Add(this.ribbonControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tileNavPaneViewport);
             this.IconOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("FormMain.IconOptions.SvgImage")));
@@ -1881,7 +2340,6 @@ namespace Br3D
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
             this.dockPanelDynamicInput.ResumeLayout(false);
-            this.controlContainer1.ResumeLayout(false);
             this.panelContainer1.ResumeLayout(false);
             this.dockPanelProperties.ResumeLayout(false);
             this.dockPanel1_Container.ResumeLayout(false);
@@ -1895,9 +2353,9 @@ namespace Br3D
             ((System.ComponentModel.ISupportInitialize)(this.treeListObject)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRibbonSearchEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuDrawArc)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2026,8 +2484,60 @@ namespace Br3D
         private DevExpress.XtraBars.Navigation.TileNavSubItem tileNavSubItemInsertImage;
         private DevExpress.XtraBars.Docking.DockPanel dockPanelDynamicInput;
         private DevExpress.XtraBars.Docking.ControlContainer controlContainer1;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
-        private DevExpress.XtraEditors.ListBoxControl listBoxControl1;
-        private DevExpress.XtraEditors.SearchControl searchControl1;
+        private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageHome;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupFile;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageDraw;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageDimension;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupDim;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageEdit;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupEdit;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageAnnotation;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageOsnap;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageTools;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageOptions;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawCircle;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawArc;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawPolyline;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawSpline;
+        private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar1;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem1;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem2;
+        private DevExpress.XtraBars.Ribbon.Internal.RepositoryItemRibbonSearchEdit repositoryItemRibbonSearchEdit1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupDraw;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawLine;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawText;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemInsert;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawCylinder;
+        private DevExpress.XtraBars.PopupMenu popupMenuDrawArc;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawArc_FirstSecondThird;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawArc_CenterStartEnd;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemOpen;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemSaveAs;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemSaveImage;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemExit;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupSystem;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDimHorizontal;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDimVertical;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDimAlign;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDimDiameter;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDimRadius;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDimLeader;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemErase;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemMove;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemCopy;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemScale;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemRotate;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemOffset;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemMirror;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemExplode;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemTrim;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemFillet;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemChamfer;
     }
 }

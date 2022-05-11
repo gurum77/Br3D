@@ -31,7 +31,7 @@ namespace Br3D
 
         private Memo lastMemo = null;
         Model model => hModel;
-        Dictionary<NavElement, Action> functionByElement = new Dictionary<NavElement, Action>();
+        Dictionary<object, Action> functionByElement = new Dictionary<object, Action>();
         string opendFilePath = "";
         bool isDwg => string.IsNullOrEmpty(opendFilePath) ? false : Path.GetExtension(opendFilePath).ToLower().EndsWith("dwg");
         GripManager gripManager => hModel?.gripManager;
@@ -64,6 +64,7 @@ namespace Br3D
 
             InitSnapping();
             InitTileElementMethod();
+            InitRibbonButtonMethod();
             InitTileElementStatus();
             InitObjectTreeList();
             InitPropertyGrid();
@@ -75,8 +76,6 @@ namespace Br3D
             hModel.BoundingBoxChanged += HModel_BoundingBoxChanged;
 
             DynamicInputManager.parentControls = dockPanelDynamicInput.Controls;
-
-            searchControl1.Client = listBoxControl1;
         }
 
         private void HModel_BoundingBoxChanged(object sender)
@@ -612,6 +611,51 @@ namespace Br3D
                 tileNavSubItemKorean.Tile.Checked = true;
             else if (Options.Instance.language == "en-US")
                 tileNavSubItemEnglish.Tile.Checked = true;
+        }
+
+        // ribbon button별 method 목록 초기화
+        void InitRibbonButtonMethod()
+        {
+            // home
+            functionByElement.Add(barButtonItemOpen, Open);
+            functionByElement.Add(barButtonItemSaveAs, SaveAs);
+            functionByElement.Add(barButtonItemSaveImage, SaveImage);
+            functionByElement.Add(barButtonItemExit, Close);
+
+            // draw
+            functionByElement.Add(barButtonItemDrawLine, Line);
+            functionByElement.Add(barButtonItemDrawCircle, Circle);
+            functionByElement.Add(barButtonItemDrawArc, Arc);
+            functionByElement.Add(barButtonItemDrawArc_FirstSecondThird, ArcFirstSecondThird);
+            functionByElement.Add(barButtonItemDrawArc_CenterStartEnd, ArcCenterStartEnd);
+            functionByElement.Add(barButtonItemDrawPolyline, Polyline);
+            functionByElement.Add(barButtonItemDrawSpline, Spline);
+            functionByElement.Add(barButtonItemDrawText, DrawText);
+            functionByElement.Add(barButtonItemInsert, Insert);
+            functionByElement.Add(barButtonItemDrawCylinder, Cylinder);
+
+            // dimension
+            functionByElement.Add(barButtonItemDimHorizontal, DimHorizontal);
+            functionByElement.Add(barButtonItemDimVertical, DimVertical);
+            functionByElement.Add(barButtonItemDimAlign, DimAlign);
+            functionByElement.Add(barButtonItemDimDiameter, DimDiameter);
+            functionByElement.Add(barButtonItemDimRadius, DimRadius);
+            functionByElement.Add(barButtonItemDimLeader, DimLeader);
+
+            // edit
+            functionByElement.Add(barButtonItemErase, EraseEntity);
+            functionByElement.Add(barButtonItemMove, MoveEntity);
+            functionByElement.Add(barButtonItemCopy, CopyEntity);
+            functionByElement.Add(barButtonItemScale, ScaleEntity);
+            functionByElement.Add(barButtonItemRotate, RotateEntity);
+            functionByElement.Add(barButtonItemOffset, OffsetEntity);
+            functionByElement.Add(barButtonItemMirror, MirrorEntity);
+            functionByElement.Add(barButtonItemExplode, ExplodeEntity);
+            functionByElement.Add(barButtonItemTrim, TrimEntity);
+            functionByElement.Add(barButtonItemFillet, FilletEntity);
+            functionByElement.Add(barButtonItemChamfer, ChamferEntity);
+
+
         }
 
         // element별 method 목록 초기화
@@ -1190,6 +1234,20 @@ namespace Br3D
             }
         }
 
-     
+        private void ribbonControl1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (functionByElement.TryGetValue(e.Item, out Action act))
+            {
+                act();
+
+                tileNavPaneViewport.HideDropDownWindow();
+            }
+            else
+            {
+#if DEBUG
+                MessageBox.Show("undefined function");
+#endif
+            }
+        }
     }
 }
