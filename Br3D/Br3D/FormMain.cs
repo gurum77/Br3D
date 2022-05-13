@@ -76,6 +76,8 @@ namespace Br3D
             hModel.BoundingBoxChanged += HModel_BoundingBoxChanged;
 
             DynamicInputManager.parentControls = dockPanelDynamicInput.Controls;
+
+            tileNavPaneViewport.Visible = false;
         }
 
         private void HModel_BoundingBoxChanged(object sender)
@@ -655,7 +657,37 @@ namespace Br3D
             functionByElement.Add(barButtonItemFillet, FilletEntity);
             functionByElement.Add(barButtonItemChamfer, ChamferEntity);
 
+            // annotation
+            functionByElement.Add(barButtonItemCoordinates, Coorindates);
+            functionByElement.Add(barButtonItemDistance, Distance);
+            functionByElement.Add(barButtonItemMemo, Memo);
+            functionByElement.Add(barButtonItemClearAnnotations, ClearAnnotations);
 
+
+            // osnap
+            functionByElement.Add(barButtonItemOrthoMode, OrthoMode);
+            functionByElement.Add(barButtonItemOsnapend, End);
+            functionByElement.Add(barButtonItemOsnapIntersection, Intersection);
+            functionByElement.Add(barButtonItemOsnapMiddle, Middle);
+            functionByElement.Add(barButtonItemOsnapCenter, Center);
+            functionByElement.Add(barButtonItemOsnapPoint, Point);
+
+            // tools
+            functionByElement.Add(barButtonItemSingleView, ViewportSingle);
+            functionByElement.Add(barButtonItem1x1View, Viewport1x1);
+            functionByElement.Add(barButtonItem1x2View, Viewport1x2);
+            functionByElement.Add(barButtonItem2x2View, Viewport2x2);
+            
+            functionByElement.Add(barButtonItemLayer, Layer);
+            functionByElement.Add(barButtonItemTextStyle, TextStyle);
+            functionByElement.Add(barButtonItemLineType, LineType);
+
+            // options
+            functionByElement.Add(barButtonItemHomepage, Homepage);
+            functionByElement.Add(barButtonItemCheckForUpdate, CheckForUpdate);
+            functionByElement.Add(barButtonItemAbout, About);
+
+            
         }
 
         // element별 method 목록 초기화
