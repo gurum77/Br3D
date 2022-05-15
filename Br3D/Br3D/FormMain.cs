@@ -3,6 +3,7 @@ using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Eyeshot.Translators;
 using devDept.Geometry;
+using DevExpress.XtraBars;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
 using hanee.Cad.Tool;
@@ -63,7 +64,6 @@ namespace Br3D
             InitDisplayMode();
 
             InitSnapping();
-            InitTileElementMethod();
             InitRibbonButtonMethod();
             InitTileElementStatus();
             InitObjectTreeList();
@@ -76,8 +76,6 @@ namespace Br3D
             hModel.BoundingBoxChanged += HModel_BoundingBoxChanged;
 
             DynamicInputManager.parentControls = dockPanelDynamicInput.Controls;
-
-            tileNavPaneViewport.Visible = false;
         }
 
         private void HModel_BoundingBoxChanged(object sender)
@@ -160,82 +158,32 @@ namespace Br3D
 
         private void Translate()
         {
-            // navButton
-            navButtonHome.Caption = LanguageHelper.Tr("Home");
+            InitRibbonButtonMethod();
 
-            // category
-            tileNavCategoryOptions.Caption = LanguageHelper.Tr("Options");
-            tileNavCategoryOsnap.Caption = LanguageHelper.Tr("Osnap");
-            tileNavCategoryAnnotation.Caption = LanguageHelper.Tr("Annotation");
-            tileNavCategoryViewport.Caption = LanguageHelper.Tr("Viewport");
-            tileNavCategoryTools.Caption = LanguageHelper.Tr("Tools");
-            tileNavCategoryDraw.Caption = LanguageHelper.Tr("Draw");
-            tileNavCategoryEdit.Caption = LanguageHelper.Tr("Edit");
-            tileNavCategoryDimension.Caption = LanguageHelper.Tr("Dimension");
+            // page
+            ribbonPageAnnotation.Text = LanguageHelper.Tr("Annotation");
+            ribbonPageDimension.Text = LanguageHelper.Tr("Dimension");
+            ribbonPageDraw.Text = LanguageHelper.Tr("Draw");
+            ribbonPageEdit.Text = LanguageHelper.Tr("Edit");
+            ribbonPageHome.Text = LanguageHelper.Tr("Home");
+            ribbonPageOptions.Text = LanguageHelper.Tr("Options");
+            ribbonPageTools.Text = LanguageHelper.Tr("Tools");
 
+            // group
+            ribbonPageGroupDim.Text = LanguageHelper.Tr("Dimension");
+            ribbonPageGroupDraw.Text = LanguageHelper.Tr("Draw");
+            ribbonPageGroupDrawAnnotation.Text = LanguageHelper.Tr("Annotation");
+            ribbonPageGroupEdit.Text = LanguageHelper.Tr("Edit");
+            ribbonPageGroupFile.Text = LanguageHelper.Tr("File");
+            ribbonPageGroupOptions.Text = LanguageHelper.Tr("Options");
+            ribbonPageGroupOrthoMode.Text = LanguageHelper.Tr("Ortho Mode");
+            ribbonPageGroupOsnap.Text = LanguageHelper.Tr("Osnap");
+            ribbonPageGroupSystem.Text = LanguageHelper.Tr("System");
+            ribbonPageGroupTools.Text = LanguageHelper.Tr("Tools");
+            ribbonPageGroupClearAnnotations.Text = LanguageHelper.Tr("Clear");
+            ribbonPageGroupViewport.Text = LanguageHelper.Tr("Viewports");
 
-            //tile
-            SetTileText(tileNavItemOpen, LanguageHelper.Tr("Open"));
-            SetTileText(tileNavItemSaveAs, LanguageHelper.Tr("Save As"));
-            SetTileText(tileNavItemSaveImage, LanguageHelper.Tr("Save Image"));
-            SetTileText(tileNavItemExit, LanguageHelper.Tr("Exit"));
-            SetTileText(tileNavItemOrthoMode, LanguageHelper.Tr("Ortho mode(F8)"));
-            SetTileText(tileNavItemEnd, LanguageHelper.Tr("End Point"));
-            SetTileText(tileNavItemIntersection, LanguageHelper.Tr("Intersection Point"));
-            SetTileText(tileNavItemCenter, LanguageHelper.Tr("Center Point"));
-            SetTileText(tileNavItemPoint, LanguageHelper.Tr("Point"));
-            SetTileText(tileNavItemMiddle, LanguageHelper.Tr("Middle Point"));
-            SetTileText(tileNavItemCoordinates, LanguageHelper.Tr("Coordinates"));
-            SetTileText(tileNavItemDistance, LanguageHelper.Tr("Distance"));
-            SetTileText(tileNavItemMemo, LanguageHelper.Tr("Memo"));
-            SetTileText(tileNavItemClearAnnotations, LanguageHelper.Tr("Clear Annotations"));
-            SetTileText(tileNavItemLanguage, LanguageHelper.Tr("Language"));
-
-            SetTileText(tileNavItemCheckForUpdate, LanguageHelper.Tr("Check For Update"));
-            SetTileText(tileNavItemHomePage, LanguageHelper.Tr("Homepage"));
-            SetTileText(tileNavItemAbout, LanguageHelper.Tr("About"));
-
-            SetTileText(tileNavItemLayer, LanguageHelper.Tr("Layer"));
-            SetTileText(tileNavItemLineType, LanguageHelper.Tr("Line Type"));
-            SetTileText(tileNavItemTextStyle, LanguageHelper.Tr("Text Style"));
-
-            SetTileText(tileNavItemLine, LanguageHelper.Tr("Line"));
-            SetTileText(tileNavItemArc, LanguageHelper.Tr("Arc"));
-            SetTileText(tileNavItemCircle, LanguageHelper.Tr("Circle"));
-            SetTileText(tileNavItemPolyline, LanguageHelper.Tr("Polyline"));
-            SetTileText(tileNavItemSpline, LanguageHelper.Tr("Spline"));
-            SetTileText(tileNavItemText, LanguageHelper.Tr("Text"));
-
-            // edit
-            SetTileText(tileNavItemErase, LanguageHelper.Tr("Erase"));
-            SetTileText(tileNavItemMove, LanguageHelper.Tr("Move"));
-            SetTileText(tileNavItemCopy, LanguageHelper.Tr("Copy"));
-            SetTileText(tileNavItemScale, LanguageHelper.Tr("Scale"));
-            SetTileText(tileNavItemRotate, LanguageHelper.Tr("Rotate"));
-            SetTileText(tileNavItemOffset, LanguageHelper.Tr("Offset"));
-            SetTileText(tileNavItemMirror, LanguageHelper.Tr("Mirror"));
-            SetTileText(tileNavItemExplode, LanguageHelper.Tr("Explode"));
-            SetTileText(tileNavItemTrim, LanguageHelper.Tr("Trim"));
-            SetTileText(tileNavItemFillet, LanguageHelper.Tr("Fillet"));
-            SetTileText(tileNavItemMirror, LanguageHelper.Tr("Mirror"));
-
-            // dim
-            SetTileText(tileNavItemDimHorizontal, LanguageHelper.Tr("Horizontal"));
-            SetTileText(tileNavItemDimVertical, LanguageHelper.Tr("Vertical"));
-            SetTileText(tileNavItemDimAlign, LanguageHelper.Tr("Aligned"));
-            SetTileText(tileNavItemDimLeader, LanguageHelper.Tr("Leader"));
-            SetTileText(tileNavItemRadius, LanguageHelper.Tr("Radius"));
-            SetTileText(tileNavItemDiameter, LanguageHelper.Tr("Diameter"));
-
-
-            // sub tile
-            SetTileText(tileNavSubItemArcCenterStartEnd, LanguageHelper.Tr("Center, start, end point"));
-            SetTileText(tileNavSubItemArcFirstSecondThird, LanguageHelper.Tr("First, second, third point"));
-            SetTileText(tileNavSubItemText, LanguageHelper.Tr("Text"));
-            SetTileText(tileNavSubItemMText, LanguageHelper.Tr("Multiline text"));
-
-            // sub tile - edit
-            SetTileText(tileNavSubItemChamfer, LanguageHelper.Tr("Chamfer"));
+           
 
 
             // control
@@ -273,20 +221,7 @@ namespace Br3D
 
         }
 
-        private void SetTileText(TileNavItem tileNavItem, string text)
-        {
-            tileNavItem.TileText = text;
-            tileNavItem.Caption = text;
-        }
-
-        private void SetTileText(TileNavSubItem tileNavSubItem, string text)
-        {
-            tileNavSubItem.TileText = text;
-            tileNavSubItem.Caption = text;
-        }
-
-
-
+  
         private void InitToolbar()
         {
             foreach (Viewport vp in model.Viewports)
@@ -607,164 +542,100 @@ namespace Br3D
 
         void InitTileElementStatus()
         {
-            tileNavSubItemKorean.Tile.Checked = false;
-            tileNavSubItemEnglish.Tile.Checked = false;
+            barButtonItemLanguageKorean.Down = false;
+            barButtonItemLanguageEnglish.Down = false;
             if (Options.Instance.language == "ko-KR")
-                tileNavSubItemKorean.Tile.Checked = true;
+                barButtonItemLanguageKorean.Down = true;
             else if (Options.Instance.language == "en-US")
-                tileNavSubItemEnglish.Tile.Checked = true;
+                barButtonItemLanguageEnglish .Down  = true;
+        }
+
+        void SetFunctionByElement(BarButtonItem barButtonItem, Action action, string caption)
+        {
+            if(!functionByElement.ContainsKey(barButtonItem))
+                functionByElement.Add(barButtonItem, action);
+            barButtonItem.Caption = caption;
         }
 
         // ribbon button별 method 목록 초기화
         void InitRibbonButtonMethod()
         {
             // home
-            functionByElement.Add(barButtonItemOpen, Open);
-            functionByElement.Add(barButtonItemSaveAs, SaveAs);
-            functionByElement.Add(barButtonItemSaveImage, SaveImage);
-            functionByElement.Add(barButtonItemExit, Close);
+            SetFunctionByElement(barButtonItemOpen, Open, LanguageHelper.Tr("Open"));
+            SetFunctionByElement(barButtonItemSaveAs, SaveAs, LanguageHelper.Tr("Save As"));
+            SetFunctionByElement(barButtonItemSaveImage, SaveImage, LanguageHelper.Tr("Save Image"));
+            SetFunctionByElement(barButtonItemExit, Close, LanguageHelper.Tr("Exit"));
 
             // draw
-            functionByElement.Add(barButtonItemDrawLine, Line);
-            functionByElement.Add(barButtonItemDrawCircle, Circle);
-            functionByElement.Add(barButtonItemDrawArc, Arc);
-            functionByElement.Add(barButtonItemDrawArc_FirstSecondThird, ArcFirstSecondThird);
-            functionByElement.Add(barButtonItemDrawArc_CenterStartEnd, ArcCenterStartEnd);
-            functionByElement.Add(barButtonItemDrawPolyline, Polyline);
-            functionByElement.Add(barButtonItemDrawSpline, Spline);
-            functionByElement.Add(barButtonItemDrawText, DrawText);
-            functionByElement.Add(barButtonItemInsert, Insert);
-            functionByElement.Add(barButtonItemDrawCylinder, Cylinder);
+            SetFunctionByElement(barButtonItemDrawLine, Line, LanguageHelper.Tr("Line"));
+            SetFunctionByElement(barButtonItemDrawCircle, Circle, LanguageHelper.Tr("Circle"));
+            SetFunctionByElement(barButtonItemDrawArc, Arc, LanguageHelper.Tr("Arc"));
+            SetFunctionByElement(barButtonItemDrawArc_FirstSecondThird, ArcFirstSecondThird, LanguageHelper.Tr("First, second, third point"));
+            SetFunctionByElement(barButtonItemDrawArc_CenterStartEnd, ArcCenterStartEnd, LanguageHelper.Tr("Center, start, end point"));
+            SetFunctionByElement(barButtonItemDrawPolyline, Polyline, LanguageHelper.Tr("Polyline"));
+            SetFunctionByElement(barButtonItemDrawSpline, Spline, LanguageHelper.Tr("Spline"));
+            SetFunctionByElement(barButtonItemDrawText, DrawText, LanguageHelper.Tr("Text"));
+            SetFunctionByElement(barButtonItemMultilineText, MText, LanguageHelper.Tr("Multiline Text"));
+            SetFunctionByElement(barButtonItemInsert, Insert, LanguageHelper.Tr("Insert"));
+            SetFunctionByElement(barButtonItemInsertImage, InsertImage, LanguageHelper.Tr("Insert Image"));
+            SetFunctionByElement(barButtonItemDrawCylinder, Cylinder, LanguageHelper.Tr("Cylinder"));
 
             // dimension
-            functionByElement.Add(barButtonItemDimHorizontal, DimHorizontal);
-            functionByElement.Add(barButtonItemDimVertical, DimVertical);
-            functionByElement.Add(barButtonItemDimAlign, DimAlign);
-            functionByElement.Add(barButtonItemDimDiameter, DimDiameter);
-            functionByElement.Add(barButtonItemDimRadius, DimRadius);
-            functionByElement.Add(barButtonItemDimLeader, DimLeader);
+            SetFunctionByElement(barButtonItemDimHorizontal, DimHorizontal, LanguageHelper.Tr("Horizontal"));
+            SetFunctionByElement(barButtonItemDimVertical, DimVertical, LanguageHelper.Tr("Vertical"));
+            SetFunctionByElement(barButtonItemDimAlign, DimAlign, LanguageHelper.Tr("Aligned"));
+            SetFunctionByElement(barButtonItemDimDiameter, DimDiameter, LanguageHelper.Tr("Diameter"));
+            SetFunctionByElement(barButtonItemDimRadius, DimRadius, LanguageHelper.Tr("Radius"));
+            SetFunctionByElement(barButtonItemDimLeader, DimLeader, LanguageHelper.Tr("Open"));
 
             // edit
-            functionByElement.Add(barButtonItemErase, EraseEntity);
-            functionByElement.Add(barButtonItemMove, MoveEntity);
-            functionByElement.Add(barButtonItemCopy, CopyEntity);
-            functionByElement.Add(barButtonItemScale, ScaleEntity);
-            functionByElement.Add(barButtonItemRotate, RotateEntity);
-            functionByElement.Add(barButtonItemOffset, OffsetEntity);
-            functionByElement.Add(barButtonItemMirror, MirrorEntity);
-            functionByElement.Add(barButtonItemExplode, ExplodeEntity);
-            functionByElement.Add(barButtonItemTrim, TrimEntity);
-            functionByElement.Add(barButtonItemFillet, FilletEntity);
-            functionByElement.Add(barButtonItemChamfer, ChamferEntity);
+            SetFunctionByElement(barButtonItemErase, EraseEntity, LanguageHelper.Tr("Erase"));
+            SetFunctionByElement(barButtonItemMove, MoveEntity, LanguageHelper.Tr("Move"));
+            SetFunctionByElement(barButtonItemCopy, CopyEntity, LanguageHelper.Tr("Copy"));
+            SetFunctionByElement(barButtonItemScale, ScaleEntity, LanguageHelper.Tr("Scale"));
+            SetFunctionByElement(barButtonItemRotate, RotateEntity, LanguageHelper.Tr("Rotate"));
+            SetFunctionByElement(barButtonItemOffset, OffsetEntity, LanguageHelper.Tr("Offset"));
+            SetFunctionByElement(barButtonItemMirror, MirrorEntity, LanguageHelper.Tr("Mirror"));
+            SetFunctionByElement(barButtonItemExplode, ExplodeEntity, LanguageHelper.Tr("Explode"));
+            SetFunctionByElement(barButtonItemTrim, TrimEntity, LanguageHelper.Tr("Trim"));
+            SetFunctionByElement(barButtonItemFillet, FilletEntity, LanguageHelper.Tr("Fillet"));
+            SetFunctionByElement(barButtonItemChamfer, ChamferEntity, LanguageHelper.Tr("Chamfer"));
 
             // annotation
-            functionByElement.Add(barButtonItemCoordinates, Coorindates);
-            functionByElement.Add(barButtonItemDistance, Distance);
-            functionByElement.Add(barButtonItemMemo, Memo);
-            functionByElement.Add(barButtonItemClearAnnotations, ClearAnnotations);
+            SetFunctionByElement(barButtonItemCoordinates, Coorindates, LanguageHelper.Tr("Coordinates"));
+            SetFunctionByElement(barButtonItemDistance, Distance, LanguageHelper.Tr("Distance"));
+            SetFunctionByElement(barButtonItemMemo, Memo, LanguageHelper.Tr("Memo"));
+            SetFunctionByElement(barButtonItemClearAnnotations, ClearAnnotations, LanguageHelper.Tr("Clear annotations"));
 
 
             // osnap
-            functionByElement.Add(barButtonItemOrthoMode, OrthoMode);
-            functionByElement.Add(barButtonItemOsnapend, End);
-            functionByElement.Add(barButtonItemOsnapIntersection, Intersection);
-            functionByElement.Add(barButtonItemOsnapMiddle, Middle);
-            functionByElement.Add(barButtonItemOsnapCenter, Center);
-            functionByElement.Add(barButtonItemOsnapPoint, Point);
+            SetFunctionByElement(barButtonItemOrthoMode, OrthoMode, LanguageHelper.Tr("Ortho mode"));
+            SetFunctionByElement(barButtonItemOsnapend, End, LanguageHelper.Tr("End Point"));
+            SetFunctionByElement(barButtonItemOsnapIntersection, Intersection, LanguageHelper.Tr("Intersection Point"));
+            SetFunctionByElement(barButtonItemOsnapMiddle, Middle, LanguageHelper.Tr("Midle Point"));
+            SetFunctionByElement(barButtonItemOsnapCenter, Center, LanguageHelper.Tr("Center Point"));
+            SetFunctionByElement(barButtonItemOsnapPoint, Point, LanguageHelper.Tr("Point"));
 
             // tools
-            functionByElement.Add(barButtonItemSingleView, ViewportSingle);
-            functionByElement.Add(barButtonItem1x1View, Viewport1x1);
-            functionByElement.Add(barButtonItem1x2View, Viewport1x2);
-            functionByElement.Add(barButtonItem2x2View, Viewport2x2);
-            
-            functionByElement.Add(barButtonItemLayer, Layer);
-            functionByElement.Add(barButtonItemTextStyle, TextStyle);
-            functionByElement.Add(barButtonItemLineType, LineType);
+            SetFunctionByElement(barButtonItemSingleView, ViewportSingle, LanguageHelper.Tr("Single"));
+            SetFunctionByElement(barButtonItem1x1View, Viewport1x1, LanguageHelper.Tr("1x1"));
+            SetFunctionByElement(barButtonItem1x2View, Viewport1x2, LanguageHelper.Tr("1x2"));
+            SetFunctionByElement(barButtonItem2x2View, Viewport2x2, LanguageHelper.Tr("2x2"));
+
+            SetFunctionByElement(barButtonItemLayer, Layer, LanguageHelper.Tr("Layer"));
+            SetFunctionByElement(barButtonItemTextStyle, TextStyle, LanguageHelper.Tr("Text Style"));
+            SetFunctionByElement(barButtonItemLineType, LineType, LanguageHelper.Tr("Line Type"));
 
             // options
-            functionByElement.Add(barButtonItemHomepage, Homepage);
-            functionByElement.Add(barButtonItemCheckForUpdate, CheckForUpdate);
-            functionByElement.Add(barButtonItemAbout, About);
+            SetFunctionByElement(barButtonItemLanguage, null, LanguageHelper.Tr("Language"));
+            SetFunctionByElement(barButtonItemLanguageKorean, Korean, LanguageHelper.Tr("Korean"));
+            SetFunctionByElement(barButtonItemLanguageEnglish, English, LanguageHelper.Tr("English"));
+            SetFunctionByElement(barButtonItemHomepage, Homepage, LanguageHelper.Tr("Homepage"));
+            SetFunctionByElement(barButtonItemCheckForUpdate, CheckForUpdate, LanguageHelper.Tr("Check For Update"));
+            SetFunctionByElement(barButtonItemAbout, About, LanguageHelper.Tr("About"));
 
             
         }
-
-        // element별 method 목록 초기화
-        private void InitTileElementMethod()
-        {
-            functionByElement.Add(tileNavItemOpen, Open);
-            functionByElement.Add(tileNavItemSaveAs, SaveAs);
-            functionByElement.Add(tileNavItemSaveImage, SaveImage);
-            functionByElement.Add(tileNavItemExit, Close);
-            functionByElement.Add(tileNavItemRegenAll, RegenAll);
-            functionByElement.Add(tileNavItemCoordinates, Coorindates);
-            functionByElement.Add(tileNavItemDistance, Distance);
-            functionByElement.Add(tileNavItemMemo, Memo);
-            functionByElement.Add(tileNavItemClearAnnotations, ClearAnnotations);
-
-            functionByElement.Add(tileNavItemOrthoMode, OrthoMode);
-            functionByElement.Add(tileNavItemEnd, End);
-            functionByElement.Add(tileNavItemIntersection, Intersection);
-            functionByElement.Add(tileNavItemMiddle, Middle);
-            functionByElement.Add(tileNavItemCenter, Center);
-            functionByElement.Add(tileNavItemPoint, Point);
-
-            functionByElement.Add(tileNavItemViewportsingle, ViewportSingle);
-            functionByElement.Add(tileNavItemViewport1x1, Viewport1x1);
-            functionByElement.Add(tileNavItemViewport1x2, Viewport1x2);
-            functionByElement.Add(tileNavItemViewport2x2, Viewport2x2);
-
-            functionByElement.Add(tileNavItemLanguage, Language);
-            functionByElement.Add(tileNavSubItemKorean, Korean);
-            functionByElement.Add(tileNavSubItemEnglish, English);
-
-            functionByElement.Add(tileNavItemHomePage, Homepage);
-            functionByElement.Add(tileNavItemCheckForUpdate, CheckForUpdate);
-            functionByElement.Add(tileNavItemAbout, About);
-            functionByElement.Add(tileNavItemLayer, Layer);
-            functionByElement.Add(tileNavItemTextStyle, TextStyle);
-            functionByElement.Add(tileNavItemLineType, LineType);
-
-            // draw
-            functionByElement.Add(tileNavItemLine, Line);
-            functionByElement.Add(tileNavItemCircle, Circle);
-            functionByElement.Add(tileNavItemArc, Arc);
-            functionByElement.Add(tileNavSubItemArcFirstSecondThird, ArcFirstSecondThird);
-            functionByElement.Add(tileNavSubItemArcCenterStartEnd, ArcCenterStartEnd);
-            functionByElement.Add(tileNavItemCylinder, Cylinder);
-            functionByElement.Add(tileNavItemPolyline, Polyline);
-            functionByElement.Add(tileNavItemSpline, Spline);
-            functionByElement.Add(tileNavItemText, DrawText);   // Text는 formmain의 properties여서 이름을 drawtext로함
-            functionByElement.Add(tileNavSubItemText, DrawText);
-            functionByElement.Add(tileNavSubItemMText, MText);
-            functionByElement.Add(tileNavItemInsert, Insert);
-            functionByElement.Add(tileNavSubItemInsertImage, InsertImage);
-
-            functionByElement.Add(tileNavItemErase, EraseEntity);
-            functionByElement.Add(tileNavItemMove, MoveEntity);
-            functionByElement.Add(tileNavItemCopy, CopyEntity);
-            functionByElement.Add(tileNavItemScale, ScaleEntity);
-            functionByElement.Add(tileNavItemRotate, RotateEntity);
-            functionByElement.Add(tileNavItemOffset, OffsetEntity);
-            functionByElement.Add(tileNavItemMirror, MirrorEntity);
-
-            functionByElement.Add(tileNavItemExplode, ExplodeEntity);
-            functionByElement.Add(tileNavItemTrim, TrimEntity);
-            //functionByElement.Add(tileNavItemExtend, ExtendEntity);
-            functionByElement.Add(tileNavItemFillet, FilletEntity);
-            functionByElement.Add(tileNavSubItemChamfer, ChamferEntity);
-
-            // dimension
-            functionByElement.Add(tileNavItemDiameter, DimDiameter);
-            functionByElement.Add(tileNavItemRadius, DimRadius);
-            functionByElement.Add(tileNavItemDimHorizontal, DimHorizontal);
-            functionByElement.Add(tileNavItemDimVertical, DimVertical);
-            functionByElement.Add(tileNavItemDimAlign, DimAlign);
-            functionByElement.Add(tileNavItemDimLeader, DimLeader);
-
-        }
-
 
         async void InsertImage() => await new ActionInsertImage(model).RunAsync();
         async void Insert() => await new ActionInsert(model).RunAsync();
@@ -825,7 +696,6 @@ namespace Br3D
         void Homepage() => System.Diagnostics.Process.Start("http://hileejaeho.cafe24.com/kr-br3d/");
         void Language()
         {
-            tileNavItemLanguage.Tile.ShowDropDown();
         }
 
         void Korean()
@@ -926,44 +796,26 @@ namespace Br3D
 
         }
 
-        private void tileNavPane1_ElementClick(object sender, DevExpress.XtraBars.Navigation.NavElementEventArgs e)
-        {
-            if (!e.IsTile)
-                return;
 
-            if (functionByElement.TryGetValue(e.Element, out Action act))
-            {
-                act();
-
-                tileNavPaneViewport.HideDropDownWindow();
-            }
-            else
-            {
-#if DEBUG
-                MessageBox.Show("undefined function");
-#endif
-            }
-        }
-
-        void FlagOrthoMode(DevExpress.XtraBars.Navigation.TileNavItem tile)
+        void FlagOrthoMode(BarButtonItem barButtonItem)
         {
             HModel hModel = model as HModel;
             if (hModel == null)
                 return;
 
             hModel.orthoModeManager.enabled = !hModel.orthoModeManager.enabled;
-            tile.Tile.Checked = hModel.orthoModeManager.enabled;
+            barButtonItem.Down = hModel.orthoModeManager.enabled;
         }
 
         // 
-        void FlagOsnap(DevExpress.XtraBars.Navigation.TileNavItem tile, Snapping.objectSnapType snapType)
+        void FlagOsnap(BarButtonItem barButtonItem, Snapping.objectSnapType snapType)
         {
             HModel hModel = model as HModel;
             if (hModel == null)
                 return;
 
             hModel.Snapping.FlagActiveObjectSnap(snapType);
-            tile.Tile.Checked = hModel.Snapping.IsActiveObjectSnap(snapType);
+            barButtonItem.Down = hModel.Snapping.IsActiveObjectSnap(snapType);
         }
 
         void ViewportSingle()
@@ -1014,12 +866,12 @@ namespace Br3D
             model.Invalidate();
         }
 
-        void OrthoMode() => FlagOrthoMode(tileNavItemOrthoMode);
-        void End() => FlagOsnap(tileNavItemEnd, Snapping.objectSnapType.End);
-        void Middle() => FlagOsnap(tileNavItemMiddle, Snapping.objectSnapType.Mid);
-        void Point() => FlagOsnap(tileNavItemPoint, Snapping.objectSnapType.Point);
-        void Intersection() => FlagOsnap(tileNavItemIntersection, Snapping.objectSnapType.Intersect);
-        void Center() => FlagOsnap(tileNavItemCenter, Snapping.objectSnapType.Center);
+        void OrthoMode() => FlagOrthoMode(barButtonItemOrthoMode);
+        void End() => FlagOsnap(barButtonItemOsnapend, Snapping.objectSnapType.End);
+        void Middle() => FlagOsnap(barButtonItemOsnapMiddle, Snapping.objectSnapType.Mid);
+        void Point() => FlagOsnap(barButtonItemOsnapPoint, Snapping.objectSnapType.Point);
+        void Intersection() => FlagOsnap(barButtonItemOsnapIntersection, Snapping.objectSnapType.Intersect);
+        void Center() => FlagOsnap(barButtonItemOsnapCenter, Snapping.objectSnapType.Center);
 
         async void Coorindates()
         {
@@ -1270,9 +1122,8 @@ namespace Br3D
         {
             if (functionByElement.TryGetValue(e.Item, out Action act))
             {
-                act();
-
-                tileNavPaneViewport.HideDropDownWindow();
+                if(act != null)
+                    act();
             }
             else
             {
