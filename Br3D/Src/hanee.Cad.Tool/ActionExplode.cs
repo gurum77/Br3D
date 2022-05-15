@@ -27,12 +27,14 @@ namespace hanee.Cad.Tool
                     break;
 
                 var explodedEntities = new EntityList();
+                var entitiesToDelete = new EntityList();  // 삭제할 객체
+               
                 foreach (var ent in entities)
                 {
                     ICurve curve = ent as ICurve;
                     if (curve != null && (ent is LinearPath || ent is CompositeCurve))
                     {
-
+                        entitiesToDelete.Add(ent);
                         var dividedCurves = curve.GetIndividualCurves();
                         if (dividedCurves.Length == 1)
                             continue;
@@ -56,13 +58,16 @@ namespace hanee.Cad.Tool
                         if (tmp == null)
                             continue;
 
+                        entitiesToDelete.Add(ent);
                         explodedEntities.AddRange(tmp);
                         continue;
                     }
                 }
 
-
-                GetModel().Entities.DeleteSelected();
+                foreach (var ed in entitiesToDelete)
+                {
+                    GetModel().Entities.Remove(ed);
+                }
 
                 explodedEntities.Regen(regenOptions);
                 GetModel().Entities.AddRange(explodedEntities);
