@@ -76,6 +76,7 @@ namespace Br3D
             hModel.BoundingBoxChanged += HModel_BoundingBoxChanged;
 
             DynamicInputManager.parentControls = dockPanelDynamicInput.Controls;
+            ribbonControl1.SearchItemShortcut = new BarShortcut(Keys.Control | Keys.F);
         }
 
         private void HModel_BoundingBoxChanged(object sender)
@@ -139,7 +140,7 @@ namespace Br3D
                 text = Units.GetPointString(point.X, point.Y);
             else
                 text = Units.GetPointString(point.X, point.Y, point.Z);
-            toolStripStatusLabelCoordinates.Text = text;
+            barStaticItemCoordinates.Caption = text;
         }
 
         // 마우스 커서 아래에 있는 memo를 리턴한다.
@@ -1128,7 +1129,7 @@ namespace Br3D
             else
             {
 #if DEBUG
-                MessageBox.Show("undefined function");
+                //MessageBox.Show("undefined function");
 #endif
             }
         }

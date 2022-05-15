@@ -44,7 +44,7 @@ namespace hanee.Cad.Tool
                 toPoint = null;
                 lastPoint = null;
 
-                var entities = await GetEntities("Select entities");
+                var entities = await GetEntities(LanguageHelper.Tr("Select entities"));
                 if (IsCanceled())
                     break;
 
@@ -53,24 +53,24 @@ namespace hanee.Cad.Tool
                 CalcBaseLength();
 
                 DynamicInputManager.Init();
-                var pointOrKey = await GetPoint3DOrKey("From point(R : Reference)");
+                var pointOrKey = await GetPoint3DOrKey(LanguageHelper.Tr("From point(R : Reference)"));
                 if (IsCanceled())
                     break;
 
                 // 참조인 경우
                 if(pointOrKey.Key == null)
                 {
-                    var refPt1 = await GetPoint3D("From reference point");
+                    var refPt1 = await GetPoint3D(LanguageHelper.Tr("From reference point"));
                     if (IsCanceled())
                         break;
-                    var refPt2 = await GetPoint3D("From reference point");
+                    var refPt2 = await GetPoint3D(LanguageHelper.Tr("From reference point"));
                     if (IsCanceled())
                         break;
 
                     baseLength = refPt1.DistanceTo(refPt2);
 
                     // 다시 from point 입력
-                    fromPoint = await GetPoint3D("From point");
+                    fromPoint = await GetPoint3D(LanguageHelper.Tr("From point"));
                     if (IsCanceled())
                         break;
                 }
@@ -87,7 +87,7 @@ namespace hanee.Cad.Tool
                 // 배율
                 DynamicInputManager.ActiveLengthFactor(fromPoint.Clone() as Point3D, baseLength, LanguageHelper.Tr("Scale"));
                 DynamicInputManager.disableFlagDynamicInput = true;
-                toPoint = await GetPoint3D("To point");
+                toPoint = await GetPoint3D(LanguageHelper.Tr("To point"));
                 if (IsCanceled())
                     break;
 
@@ -161,7 +161,7 @@ namespace hanee.Cad.Tool
                     ent.Regen(regenParams);
                 }
 
-                ActionBase.cursorText = $"Scale : {factor}";
+                ActionBase.cursorText = $"{LanguageHelper.Tr("Scale")} : {factor}";
                 lastFactor = factor;
             }
 

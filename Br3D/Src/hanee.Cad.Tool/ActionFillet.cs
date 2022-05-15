@@ -90,7 +90,7 @@ namespace hanee.Cad.Tool
                 // 객체를 선택할때까지 반복
                 while (true)
                 {
-                    var firstEntityOrKey = await GetEntityOrKey(LanguageHelper.Tr("Select first curve") + $"(Radius : {radius}, R : Input radius)", -1, true, entityTypes);
+                    var firstEntityOrKey = await GetEntityOrKey(LanguageHelper.Tr("Select first curve") + $"({LanguageHelper.Tr("Radius")} : {radius}, R : {LanguageHelper.Tr("Input radius")})", -1, true, entityTypes);
                     if (IsCanceled())
                         break;
 

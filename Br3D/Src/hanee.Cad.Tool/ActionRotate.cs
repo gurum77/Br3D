@@ -51,7 +51,7 @@ namespace hanee.Cad.Tool
         {
             var curAngle = (point3D - fromPoint).AsVector;
             curAngle.Normalize();
-            return curAngle.ToRadian()- baseAngle;
+            return curAngle.ToRadian() - baseAngle;
         }
 
         public override async void Run()
@@ -68,7 +68,7 @@ namespace hanee.Cad.Tool
                 toPoint = null;
                 lastPoint = null;
 
-                var entities = await GetEntities("Select entities");
+                var entities = await GetEntities(LanguageHelper.Tr("Select entities"));
                 if (IsCanceled())
                     break;
 
@@ -76,24 +76,24 @@ namespace hanee.Cad.Tool
                 entities.ToTempEntities(GetModel());
                 CalcBaseAngle();
 
-                var pointOrKey = await GetPoint3DOrKey("From point(R : Reference)");
+                var pointOrKey = await GetPoint3DOrKey(LanguageHelper.Tr("From point(R : Reference)"));
                 if (IsCanceled())
                     break;
 
                 // 참조인 경우
                 if (pointOrKey.Key == null)
                 {
-                    var refPt1 = await GetPoint3D("From reference point");
+                    var refPt1 = await GetPoint3D(LanguageHelper.Tr("From reference point"));
                     if (IsCanceled())
                         break;
-                    var refPt2 = await GetPoint3D("From reference point");
+                    var refPt2 = await GetPoint3D(LanguageHelper.Tr("From reference point"));
                     if (IsCanceled())
                         break;
 
                     baseAngle = (refPt2 - refPt1).AsVector.ToRadian();
 
                     // 다시 from point 입력
-                    fromPoint = await GetPoint3D("From point");
+                    fromPoint = await GetPoint3D(LanguageHelper.Tr("From point"));
                     if (IsCanceled())
                         break;
                 }
@@ -113,7 +113,7 @@ namespace hanee.Cad.Tool
                 {
                     DynamicInputManager.ActiveLengthAndAngle(fromPoint, null, 10000);
                 }
-                toPoint = await GetPoint3D("Angle");
+                toPoint = await GetPoint3D(LanguageHelper.Tr("Angle"));
                 if (IsCanceled())
                     break;
 

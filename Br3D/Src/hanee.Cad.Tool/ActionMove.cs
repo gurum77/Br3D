@@ -49,11 +49,11 @@ namespace hanee.Cad.Tool
                 toPoint = null;
                 lastPoint = null;
 
-                var entities = await GetEntities("Select entities");
+                var entities = await GetEntities(LanguageHelper.Tr("Select entities"));
                 if (IsCanceled())
                     break;
 
-                fromPoint = await GetPoint3D("From point");
+                fromPoint = await GetPoint3D(LanguageHelper.Tr("From point"));
                 if (IsCanceled())
                     break;
 
@@ -62,7 +62,7 @@ namespace hanee.Cad.Tool
 
                 lastPoint = fromPoint.Clone() as Point3D;
 
-                toPoint = await GetPoint3D("To point");
+                toPoint = await GetPoint3D(LanguageHelper.Tr("To point"));
                 if (IsCanceled())
                     break;
 

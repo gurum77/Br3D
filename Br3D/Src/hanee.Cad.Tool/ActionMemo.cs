@@ -21,7 +21,7 @@ namespace hanee.Cad.Tool
         public async Task<bool> RunAsync()
         {
             StartAction();
-            var pt = await GetPoint3D("Pick point");
+            var pt = await GetPoint3D(LanguageHelper.Tr("Pick point"));
             if (!IsCanceled())
             {
                 

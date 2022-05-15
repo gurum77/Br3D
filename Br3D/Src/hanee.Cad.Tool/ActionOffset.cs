@@ -29,13 +29,13 @@ namespace hanee.Cad.Tool
             while (true)
             {
                 // 간격띄우기 첫번째 점
-                var startPoint = await GetPoint3D("Start point for distance");
+                var startPoint = await GetPoint3D(LanguageHelper.Tr("Start point for offset"));
                 if (IsCanceled())
                     break;
 
 
-                DynamicInputManager.ActiveLengthFactor(startPoint, 1, "Distance");
-                var endPoint = await GetPoint3D("End point for distance");
+                DynamicInputManager.ActiveLengthFactor(startPoint, 1, LanguageHelper.Tr("Distance"));
+                var endPoint = await GetPoint3D(LanguageHelper.Tr("End point for offset"));
                 if (IsCanceled())
                     break;
 
@@ -47,7 +47,7 @@ namespace hanee.Cad.Tool
                 while (true)
                 {
                     // 객체 선택
-                    var entity = await GetEntity("Select entity to offset", -1, true, entityType);
+                    var entity = await GetEntity(LanguageHelper.Tr("Select entity to offset"), -1, true, entityType);
                     if (IsCanceled())
                         break;
 
@@ -57,7 +57,7 @@ namespace hanee.Cad.Tool
                         continue;
 
                     // offset 방향 
-                    var offsetPoint = await GetPoint3D("Offset point");
+                    var offsetPoint = await GetPoint3D(LanguageHelper.Tr("Offset point"));
                     if (IsCanceled())
                         break;
 

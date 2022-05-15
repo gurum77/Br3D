@@ -153,7 +153,7 @@ namespace hanee.Cad.Tool
                         if (points.Count == 0)
                         {
                             step = Step.firstPoint;
-                            pt1 = await GetPoint3D("Pick first point");
+                            pt1 = await GetPoint3D(LanguageHelper.Tr("Pick first point"));
                             if (IsCanceled()) { break; }
                             if (IsEntered()) { break; }
 
@@ -162,7 +162,7 @@ namespace hanee.Cad.Tool
                         else
                         {
                             step = Step.secondPoint;
-                            pt2 = await GetPoint3D("Next point or Enter");
+                            pt2 = await GetPoint3D(LanguageHelper.Tr("Next point or Enter"));
                             if (IsCanceled()) { break; }
                             if (IsEntered()) { break; }
 
@@ -193,11 +193,11 @@ namespace hanee.Cad.Tool
                     while (true)
                     {
                         step = Step.firstPoint;
-                        pt1 = await GetPoint3D("Specify first point");
+                        pt1 = await GetPoint3D(LanguageHelper.Tr("Specify first point"));
                         if (IsCanceled()) { break; }
 
                         step = Step.secondPoint;
-                        pt2 = await GetPoint3D("Specify second point");
+                        pt2 = await GetPoint3D(LanguageHelper.Tr("Specify second point"));
                         if (IsCanceled()) { break; }
 
                         // 가운데에다 바로 기입한다.
