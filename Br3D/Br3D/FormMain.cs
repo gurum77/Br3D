@@ -587,7 +587,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemDimAlign, DimAlign, LanguageHelper.Tr("Aligned"));
             SetFunctionByElement(barButtonItemDimDiameter, DimDiameter, LanguageHelper.Tr("Diameter"));
             SetFunctionByElement(barButtonItemDimRadius, DimRadius, LanguageHelper.Tr("Radius"));
-            SetFunctionByElement(barButtonItemDimLeader, DimLeader, LanguageHelper.Tr("Open"));
+            SetFunctionByElement(barButtonItemDimLeader, DimLeader, LanguageHelper.Tr("Leader"));
 
             // edit
             SetFunctionByElement(barButtonItemErase, EraseEntity, LanguageHelper.Tr("Erase"));

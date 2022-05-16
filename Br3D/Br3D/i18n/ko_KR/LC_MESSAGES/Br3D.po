@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-05-16 08:47+0900\n"
-"PO-Revision-Date: 2022-05-16 08:47+0900\n"
+"POT-Creation-Date: 2022-05-17 08:27+0900\n"
+"PO-Revision-Date: 2022-05-17 08:28+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ko_KR\n"
@@ -214,7 +214,7 @@ msgstr "위 아래 반전"
 msgid "Alignment"
 msgstr "정렬"
 
-#: Br3D/FormMain.cs:565 Br3D/FormMain.cs:590
+#: Br3D/FormMain.cs:565
 msgid "Open"
 msgstr "열기"
 
@@ -294,6 +294,10 @@ msgstr "직경"
 #: Src/hanee.Cad.Tool/ActionFillet.cs:100
 msgid "Radius"
 msgstr "반지름"
+
+#: Br3D/FormMain.cs:590
+msgid "Leader"
+msgstr "지시선"
 
 #: Br3D/FormMain.cs:593
 msgid "Erase"
@@ -662,9 +666,6 @@ msgstr "SHX 파일명"
 #: Src/hanee.Cad.Tool/TextStyleControl.cs:62
 msgid "WidthFactor"
 msgstr "폭 비율"
-
-#~ msgid "Leader"
-#~ msgstr "지시선"
 
 #~ msgid "New"
 #~ msgstr "새로 만들기"

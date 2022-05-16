@@ -247,10 +247,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="br3d_icon.ico" />
+    <None Include="Resources\Edit_Chamfer_Small.png" />
+    <None Include="Resources\Edit_Fillet_Small.png" />
+    <None Include="Resources\Annotation_Leader_Small.png" />
+    <None Include="Resources\Annotation_Dimradius_Small.png" />
+    <None Include="Resources\Annotation_Dimdiameter_Small.png" />
+    <None Include="Resources\Annotation_Dimaligned_Small.png" />
+    <None Include="Resources\Annotation_DimVertical_Small.png" />
+    <None Include="Resources\Annotation_DimHorizontal_Small.png" />
+    <None Include="Resources\Create_Arc_Small1.png" />
+    <None Include="Resources\Create_Arc_Small.png" />
     <None Include="Images\orthographic.png" />
     <None Include="Images\perspective.png" />
     <None Include="Images\2d_32px.png" />
     <None Include="Images\3d_32px.png" />
+    <None Include="Images\circle_32px.png" />
     <Content Include="Install\CertificateFile_pfx\signtool.exe" />
     <Content Include="Install\Setup_Br3D.iss" />
     <None Include="wyUpdate.exe">

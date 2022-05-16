@@ -118,53 +118,65 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="wireframe_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\wireframe_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="view_2x2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\view_2x2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hiddenline_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\hiddenline_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="snap_node_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\snap_node_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="snap_endpoint_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\snap_endpoint_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="shaded_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\shaded_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="rendered_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\rendered_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snap_center_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\snap_center_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="view_1x1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\view_1x1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snap_node_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\snap_node_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snap_intersection_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\snap_intersection_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="view_single" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\view_single.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="view_1x2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\view_1x2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="snap_middle_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\snap_middle_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Annotation_Dimdiameter_Small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Annotation_Dimdiameter_Small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="south_korea_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\south_korea_16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Edit_Fillet_Small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Edit_Fillet_Small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Annotation_Leader_Small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Annotation_Leader_Small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hiddenline_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\hiddenline_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="snap_intersection_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\snap_intersection_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="view_1x2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\view_1x2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="snap_center_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\snap_center_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rendered_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\rendered_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="view_1x1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\view_1x1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="circle_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\circle_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_3d_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\3d_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wireframe_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\wireframe_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="usa_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\usa_16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="orthographic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\orthographic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="view_2x2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\view_2x2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Annotation_DimHorizontal_Small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Annotation_DimHorizontal_Small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="view_single" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\view_single.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shaded_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\shaded_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="perspective" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\perspective.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,7 +184,28 @@
   <data name="_2d_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\2d_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_3d_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\3d_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Annotation_DimVertical_Small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Annotation_DimVertical_Small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Annotation_Dimaligned_Small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Annotation_Dimaligned_Small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="snap_middle_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\snap_middle_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="orthographic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\orthographic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Create_Arc_Small1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Create_Arc_Small1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Create_Arc_Small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Create_Arc_Small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Annotation_Dimradius_Small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Annotation_Dimradius_Small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Edit_Chamfer_Small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Edit_Chamfer_Small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
