@@ -58,6 +58,7 @@ namespace hanee.ThreeD
         {
             controlDynamicInputEdit1.labelControl1.Text = LanguageHelper.Tr("Length");
             controlDynamicInputEdit2.labelControl1.Text = LanguageHelper.Tr("Angle");
+            simpleButtonByXYZ.Text = LanguageHelper.Tr("By XYZ");
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -164,6 +165,11 @@ namespace hanee.ThreeD
                 textEditAngle.Text = (ActionBase.Point3D - mng.startPoint).AsVector.ToDegree().ToString();
                 textEditAngle.SelectAll();
             }
+        }
+
+        private void simpleButtonByXYZ_Click(object sender, EventArgs e)
+        {
+            DynamicInputManager.FlagPoint3DType();
         }
     }
 }

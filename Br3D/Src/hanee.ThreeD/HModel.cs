@@ -337,7 +337,7 @@ namespace hanee.ThreeD
             // 배경을 검은색으로
             ActiveViewport.Background.BottomColor = Color.Black;
             ActiveViewport.Background.TopColor = Color.Black;
-            ActiveViewport.DisplayMode = displayType.Wireframe;
+            ActiveViewport.DisplayMode = displayType.Flat;
 
             // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
             SetLayerColorByBackgroundColor();

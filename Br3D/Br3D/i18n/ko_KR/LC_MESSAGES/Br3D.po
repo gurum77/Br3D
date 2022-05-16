@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-05-17 08:27+0900\n"
-"PO-Revision-Date: 2022-05-17 08:28+0900\n"
+"POT-Creation-Date: 2022-05-17 08:44+0900\n"
+"PO-Revision-Date: 2022-05-17 08:44+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ko_KR\n"
@@ -666,6 +666,14 @@ msgstr "SHX 파일명"
 #: Src/hanee.Cad.Tool/TextStyleControl.cs:62
 msgid "WidthFactor"
 msgstr "폭 비율"
+
+#: Src/hanee.ThreeD/ControlDistanceAngleDynamicInput.cs:61
+msgid "By XYZ"
+msgstr "XYZ"
+
+#: Src/hanee.ThreeD/ControlXyzDynamicInput.cs:48
+msgid "By Length, Angle"
+msgstr "길이, 각도"
 
 #~ msgid "New"
 #~ msgstr "새로 만들기"

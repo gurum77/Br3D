@@ -34,6 +34,7 @@ namespace hanee.ThreeD
             this.controlDynamicInputEdit2 = new hanee.ThreeD.ControlDynamicInputEdit();
             this.controlDynamicInputEdit1 = new hanee.ThreeD.ControlDynamicInputEdit();
             this.svgImageCollection1 = new DevExpress.Utils.SvgImageCollection(this.components);
+            this.simpleButtonByLengthAngle = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.svgImageCollection1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,15 +67,26 @@ namespace hanee.ThreeD
             this.svgImageCollection1.Add("unlock", "image://svgimages/actions/cleartablestyle.svg");
             this.svgImageCollection1.Add("lock", "image://svgimages/outlook inspired/private.svg");
             // 
+            // simpleButtonByDistanceAngle
+            // 
+            this.simpleButtonByLengthAngle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.simpleButtonByLengthAngle.Location = new System.Drawing.Point(0, 63);
+            this.simpleButtonByLengthAngle.Name = "simpleButtonByDistanceAngle";
+            this.simpleButtonByLengthAngle.Size = new System.Drawing.Size(149, 23);
+            this.simpleButtonByLengthAngle.TabIndex = 13;
+            this.simpleButtonByLengthAngle.Text = "By Length, Angle";
+            this.simpleButtonByLengthAngle.Click += new System.EventHandler(this.simpleButtonByDistanceAngle_Click);
+            // 
             // ControlXyzDynamicInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.simpleButtonByLengthAngle);
             this.Controls.Add(this.controlDynamicInputEdit3);
             this.Controls.Add(this.controlDynamicInputEdit2);
             this.Controls.Add(this.controlDynamicInputEdit1);
             this.Name = "ControlXyzDynamicInput";
-            this.Size = new System.Drawing.Size(149, 64);
+            this.Size = new System.Drawing.Size(149, 86);
             ((System.ComponentModel.ISupportInitialize)(this.svgImageCollection1)).EndInit();
             this.ResumeLayout(false);
 
@@ -85,5 +97,6 @@ namespace hanee.ThreeD
         private ControlDynamicInputEdit controlDynamicInputEdit2;
         private ControlDynamicInputEdit controlDynamicInputEdit3;
         public DevExpress.Utils.SvgImageCollection svgImageCollection1;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonByLengthAngle;
     }
 }

@@ -39,6 +39,13 @@ namespace hanee.ThreeD
             textEditX.KeyDown += TextEditX_KeyDown;
             textEditY.KeyDown += TextEditY_KeyDown;
             textEditZ.KeyDown += TextEditZ_KeyDown;
+
+            Translate();
+        }
+
+        private void Translate()
+        {
+            simpleButtonByLengthAngle.Text = LanguageHelper.Tr("By Length, Angle");
         }
 
         private void TextEditZ_KeyDown(object sender, KeyEventArgs e)
@@ -210,6 +217,11 @@ namespace hanee.ThreeD
                 pt.Z = fixedZ.Value;
 
             //Cursor.Position
+        }
+
+        private void simpleButtonByDistanceAngle_Click(object sender, EventArgs e)
+        {
+            DynamicInputManager.FlagPoint3DType();
         }
     }
 }
