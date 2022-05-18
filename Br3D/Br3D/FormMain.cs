@@ -4,7 +4,6 @@ using devDept.Eyeshot.Entities;
 using devDept.Eyeshot.Translators;
 using devDept.Geometry;
 using DevExpress.XtraBars;
-using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
 using hanee.Cad.Tool;
 using hanee.ThreeD;
@@ -184,7 +183,7 @@ namespace Br3D
             ribbonPageGroupClearAnnotations.Text = LanguageHelper.Tr("Clear");
             ribbonPageGroupViewport.Text = LanguageHelper.Tr("Viewports");
 
-           
+
 
 
             // control
@@ -222,7 +221,7 @@ namespace Br3D
 
         }
 
-  
+
         private void InitToolbar()
         {
             foreach (Viewport vp in model.Viewports)
@@ -548,94 +547,100 @@ namespace Br3D
             if (Options.Instance.language == "ko-KR")
                 barButtonItemLanguageKorean.Down = true;
             else if (Options.Instance.language == "en-US")
-                barButtonItemLanguageEnglish .Down  = true;
+                barButtonItemLanguageEnglish.Down = true;
         }
 
-        void SetFunctionByElement(BarButtonItem barButtonItem, Action action, string caption)
+        void SetFunctionByElement(BarButtonItem barButtonItem, Action action, string caption, string command)
         {
-            if(!functionByElement.ContainsKey(barButtonItem))
+            if (!functionByElement.ContainsKey(barButtonItem))
                 functionByElement.Add(barButtonItem, action);
             barButtonItem.Caption = caption;
+
+            if (!string.IsNullOrEmpty(command))
+            {
+                controlCommandBar1.AddCommand(command, action);
+            }
+
         }
 
         // ribbon button별 method 목록 초기화
         void InitRibbonButtonMethod()
         {
             // home
-            SetFunctionByElement(barButtonItemOpen, Open, LanguageHelper.Tr("Open"));
-            SetFunctionByElement(barButtonItemSaveAs, SaveAs, LanguageHelper.Tr("Save As"));
-            SetFunctionByElement(barButtonItemSaveImage, SaveImage, LanguageHelper.Tr("Save Image"));
-            SetFunctionByElement(barButtonItemExit, Close, LanguageHelper.Tr("Exit"));
+            SetFunctionByElement(barButtonItemOpen, Open, LanguageHelper.Tr("Open"), "Open");
+            SetFunctionByElement(barButtonItemSaveAs, SaveAs, LanguageHelper.Tr("Save As"), "SaveAs");
+            SetFunctionByElement(barButtonItemSaveImage, SaveImage, LanguageHelper.Tr("Save Image"), "SaveImage");
+            SetFunctionByElement(barButtonItemExit, Close, LanguageHelper.Tr("Exit"), "Exit");
 
             // draw
-            SetFunctionByElement(barButtonItemDrawLine, Line, LanguageHelper.Tr("Line"));
-            SetFunctionByElement(barButtonItemDrawCircle, Circle, LanguageHelper.Tr("Circle"));
-            SetFunctionByElement(barButtonItemDrawArc, Arc, LanguageHelper.Tr("Arc"));
-            SetFunctionByElement(barButtonItemDrawArc_FirstSecondThird, ArcFirstSecondThird, LanguageHelper.Tr("First, second, third point"));
-            SetFunctionByElement(barButtonItemDrawArc_CenterStartEnd, ArcCenterStartEnd, LanguageHelper.Tr("Center, start, end point"));
-            SetFunctionByElement(barButtonItemDrawPolyline, Polyline, LanguageHelper.Tr("Polyline"));
-            SetFunctionByElement(barButtonItemDrawSpline, Spline, LanguageHelper.Tr("Spline"));
-            SetFunctionByElement(barButtonItemDrawText, DrawText, LanguageHelper.Tr("Text"));
-            SetFunctionByElement(barButtonItemMultilineText, MText, LanguageHelper.Tr("Multiline Text"));
-            SetFunctionByElement(barButtonItemInsert, Insert, LanguageHelper.Tr("Insert"));
-            SetFunctionByElement(barButtonItemInsertImage, InsertImage, LanguageHelper.Tr("Insert Image"));
-            SetFunctionByElement(barButtonItemDrawCylinder, Cylinder, LanguageHelper.Tr("Cylinder"));
+            SetFunctionByElement(barButtonItemDrawLine, Line, LanguageHelper.Tr("Line"), "Line");
+            SetFunctionByElement(barButtonItemDrawCircle, Circle, LanguageHelper.Tr("Circle"), "Circle");
+            SetFunctionByElement(barButtonItemDrawArc, Arc, LanguageHelper.Tr("Arc"), "Arc");
+            SetFunctionByElement(barButtonItemDrawArc_FirstSecondThird, ArcFirstSecondThird, LanguageHelper.Tr("First, second, third point"), null);
+            SetFunctionByElement(barButtonItemDrawArc_CenterStartEnd, ArcCenterStartEnd, LanguageHelper.Tr("Center, start, end point"), null);
+            SetFunctionByElement(barButtonItemDrawPolyline, Polyline, LanguageHelper.Tr("Polyline"), "Polyline");
+            SetFunctionByElement(barButtonItemDrawSpline, Spline, LanguageHelper.Tr("Spline"), "Spline");
+            SetFunctionByElement(barButtonItemDrawText, DrawText, LanguageHelper.Tr("Text"), "Text");
+            SetFunctionByElement(barButtonItemMultilineText, MText, LanguageHelper.Tr("Multiline Text"), "MText");
+            SetFunctionByElement(barButtonItemInsert, Insert, LanguageHelper.Tr("Insert"), "Insert");
+            SetFunctionByElement(barButtonItemInsertImage, InsertImage, LanguageHelper.Tr("Insert Image"), "InsertImage");
+            SetFunctionByElement(barButtonItemDrawCylinder, Cylinder, LanguageHelper.Tr("Cylinder"), "Cylinder");
 
             // dimension
-            SetFunctionByElement(barButtonItemDimHorizontal, DimHorizontal, LanguageHelper.Tr("Horizontal"));
-            SetFunctionByElement(barButtonItemDimVertical, DimVertical, LanguageHelper.Tr("Vertical"));
-            SetFunctionByElement(barButtonItemDimAlign, DimAlign, LanguageHelper.Tr("Aligned"));
-            SetFunctionByElement(barButtonItemDimDiameter, DimDiameter, LanguageHelper.Tr("Diameter"));
-            SetFunctionByElement(barButtonItemDimRadius, DimRadius, LanguageHelper.Tr("Radius"));
-            SetFunctionByElement(barButtonItemDimLeader, DimLeader, LanguageHelper.Tr("Leader"));
+            SetFunctionByElement(barButtonItemDimHorizontal, DimHorizontal, LanguageHelper.Tr("Horizontal"), "Horizontal");
+            SetFunctionByElement(barButtonItemDimVertical, DimVertical, LanguageHelper.Tr("Vertical"), "Vertical");
+            SetFunctionByElement(barButtonItemDimAlign, DimAlign, LanguageHelper.Tr("Aligned"), "Aligned");
+            SetFunctionByElement(barButtonItemDimDiameter, DimDiameter, LanguageHelper.Tr("Diameter"), "Diameter");
+            SetFunctionByElement(barButtonItemDimRadius, DimRadius, LanguageHelper.Tr("Radius"), "Radius");
+            SetFunctionByElement(barButtonItemDimLeader, DimLeader, LanguageHelper.Tr("Leader"), "Leader");
 
             // edit
-            SetFunctionByElement(barButtonItemErase, EraseEntity, LanguageHelper.Tr("Erase"));
-            SetFunctionByElement(barButtonItemMove, MoveEntity, LanguageHelper.Tr("Move"));
-            SetFunctionByElement(barButtonItemCopy, CopyEntity, LanguageHelper.Tr("Copy"));
-            SetFunctionByElement(barButtonItemScale, ScaleEntity, LanguageHelper.Tr("Scale"));
-            SetFunctionByElement(barButtonItemRotate, RotateEntity, LanguageHelper.Tr("Rotate"));
-            SetFunctionByElement(barButtonItemOffset, OffsetEntity, LanguageHelper.Tr("Offset"));
-            SetFunctionByElement(barButtonItemMirror, MirrorEntity, LanguageHelper.Tr("Mirror"));
-            SetFunctionByElement(barButtonItemExplode, ExplodeEntity, LanguageHelper.Tr("Explode"));
-            SetFunctionByElement(barButtonItemTrim, TrimEntity, LanguageHelper.Tr("Trim"));
-            SetFunctionByElement(barButtonItemFillet, FilletEntity, LanguageHelper.Tr("Fillet"));
-            SetFunctionByElement(barButtonItemChamfer, ChamferEntity, LanguageHelper.Tr("Chamfer"));
+            SetFunctionByElement(barButtonItemErase, EraseEntity, LanguageHelper.Tr("Erase"), "Earse");
+            SetFunctionByElement(barButtonItemMove, MoveEntity, LanguageHelper.Tr("Move"), "Move");
+            SetFunctionByElement(barButtonItemCopy, CopyEntity, LanguageHelper.Tr("Copy"), "Copy");
+            SetFunctionByElement(barButtonItemScale, ScaleEntity, LanguageHelper.Tr("Scale"), "Scale");
+            SetFunctionByElement(barButtonItemRotate, RotateEntity, LanguageHelper.Tr("Rotate"), "Rotate");
+            SetFunctionByElement(barButtonItemOffset, OffsetEntity, LanguageHelper.Tr("Offset"), "Offset");
+            SetFunctionByElement(barButtonItemMirror, MirrorEntity, LanguageHelper.Tr("Mirror"), "Mirror");
+            SetFunctionByElement(barButtonItemExplode, ExplodeEntity, LanguageHelper.Tr("Explode"), "Explode");
+            SetFunctionByElement(barButtonItemTrim, TrimEntity, LanguageHelper.Tr("Trim"), "Trim");
+            SetFunctionByElement(barButtonItemFillet, FilletEntity, LanguageHelper.Tr("Fillet"), "Fillet");
+            SetFunctionByElement(barButtonItemChamfer, ChamferEntity, LanguageHelper.Tr("Chamfer"), "Chamfer");
 
             // annotation
-            SetFunctionByElement(barButtonItemCoordinates, Coorindates, LanguageHelper.Tr("Coordinates"));
-            SetFunctionByElement(barButtonItemDistance, Distance, LanguageHelper.Tr("Distance"));
-            SetFunctionByElement(barButtonItemMemo, Memo, LanguageHelper.Tr("Memo"));
-            SetFunctionByElement(barButtonItemClearAnnotations, ClearAnnotations, LanguageHelper.Tr("Clear annotations"));
+            SetFunctionByElement(barButtonItemCoordinates, Coorindates, LanguageHelper.Tr("Coordinates"), "Coordinates");
+            SetFunctionByElement(barButtonItemDistance, Distance, LanguageHelper.Tr("Distance"), "Distance");
+            SetFunctionByElement(barButtonItemMemo, Memo, LanguageHelper.Tr("Memo"), "Memo");
+            SetFunctionByElement(barButtonItemClearAnnotations, ClearAnnotations, LanguageHelper.Tr("Clear annotations"), "ClearAnnotations");
 
 
             // osnap
-            SetFunctionByElement(barButtonItemOrthoMode, OrthoMode, LanguageHelper.Tr("Ortho mode"));
-            SetFunctionByElement(barButtonItemOsnapend, End, LanguageHelper.Tr("End Point"));
-            SetFunctionByElement(barButtonItemOsnapIntersection, Intersection, LanguageHelper.Tr("Intersection Point"));
-            SetFunctionByElement(barButtonItemOsnapMiddle, Middle, LanguageHelper.Tr("Midle Point"));
-            SetFunctionByElement(barButtonItemOsnapCenter, Center, LanguageHelper.Tr("Center Point"));
-            SetFunctionByElement(barButtonItemOsnapPoint, Point, LanguageHelper.Tr("Point"));
+            SetFunctionByElement(barButtonItemOrthoMode, OrthoMode, LanguageHelper.Tr("Ortho mode"), "OrthoMode");
+            SetFunctionByElement(barButtonItemOsnapend, End, LanguageHelper.Tr("End Point"), "End");
+            SetFunctionByElement(barButtonItemOsnapIntersection, Intersection, LanguageHelper.Tr("Intersection Point"), "Int");
+            SetFunctionByElement(barButtonItemOsnapMiddle, Middle, LanguageHelper.Tr("Midle Point"), "Mid");
+            SetFunctionByElement(barButtonItemOsnapCenter, Center, LanguageHelper.Tr("Center Point"), "Cen");
+            SetFunctionByElement(barButtonItemOsnapPoint, Point, LanguageHelper.Tr("Point"), null);
 
             // tools
-            SetFunctionByElement(barButtonItemSingleView, ViewportSingle, LanguageHelper.Tr("Single"));
-            SetFunctionByElement(barButtonItem1x1View, Viewport1x1, LanguageHelper.Tr("1x1"));
-            SetFunctionByElement(barButtonItem1x2View, Viewport1x2, LanguageHelper.Tr("1x2"));
-            SetFunctionByElement(barButtonItem2x2View, Viewport2x2, LanguageHelper.Tr("2x2"));
+            SetFunctionByElement(barButtonItemSingleView, ViewportSingle, LanguageHelper.Tr("Single"), "Single");
+            SetFunctionByElement(barButtonItem1x1View, Viewport1x1, LanguageHelper.Tr("1x1"), "1x1");
+            SetFunctionByElement(barButtonItem1x2View, Viewport1x2, LanguageHelper.Tr("1x2"), "1x2");
+            SetFunctionByElement(barButtonItem2x2View, Viewport2x2, LanguageHelper.Tr("2x2"), "2x2");
 
-            SetFunctionByElement(barButtonItemLayer, Layer, LanguageHelper.Tr("Layer"));
-            SetFunctionByElement(barButtonItemTextStyle, TextStyle, LanguageHelper.Tr("Text Style"));
-            SetFunctionByElement(barButtonItemLineType, LineType, LanguageHelper.Tr("Line Type"));
+            SetFunctionByElement(barButtonItemLayer, Layer, LanguageHelper.Tr("Layer"), "Layer");
+            SetFunctionByElement(barButtonItemTextStyle, TextStyle, LanguageHelper.Tr("Text Style"), "TextStyle");
+            SetFunctionByElement(barButtonItemLineType, LineType, LanguageHelper.Tr("Line Type"), "LineType");
 
             // options
-            SetFunctionByElement(barButtonItemLanguage, null, LanguageHelper.Tr("Language"));
-            SetFunctionByElement(barButtonItemLanguageKorean, Korean, LanguageHelper.Tr("Korean"));
-            SetFunctionByElement(barButtonItemLanguageEnglish, English, LanguageHelper.Tr("English"));
-            SetFunctionByElement(barButtonItemHomepage, Homepage, LanguageHelper.Tr("Homepage"));
-            SetFunctionByElement(barButtonItemCheckForUpdate, CheckForUpdate, LanguageHelper.Tr("Check For Update"));
-            SetFunctionByElement(barButtonItemAbout, About, LanguageHelper.Tr("About"));
+            SetFunctionByElement(barButtonItemLanguage, null, LanguageHelper.Tr("Language"), null);
+            SetFunctionByElement(barButtonItemLanguageKorean, Korean, LanguageHelper.Tr("Korean"), "Korean");
+            SetFunctionByElement(barButtonItemLanguageEnglish, English, LanguageHelper.Tr("English"), "English");
+            SetFunctionByElement(barButtonItemHomepage, Homepage, LanguageHelper.Tr("Homepage"), "Homepage");
+            SetFunctionByElement(barButtonItemCheckForUpdate, CheckForUpdate, LanguageHelper.Tr("Check For Update"), "CheckForUpdate");
+            SetFunctionByElement(barButtonItemAbout, About, LanguageHelper.Tr("About"), "About");
 
-            
+
         }
 
         async void InsertImage() => await new ActionInsertImage(model).RunAsync();
@@ -1123,7 +1128,7 @@ namespace Br3D
         {
             if (functionByElement.TryGetValue(e.Item, out Action act))
             {
-                if(act != null)
+                if (act != null)
                     act();
             }
             else
