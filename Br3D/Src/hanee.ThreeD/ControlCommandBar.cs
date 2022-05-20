@@ -1,13 +1,7 @@
-﻿using DevExpress.XtraBars;
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace hanee.ThreeD
@@ -20,47 +14,95 @@ namespace hanee.ThreeD
             InitializeComponent();
 
             comboBoxEdit1.KeyDown += ComboBoxEdit1_KeyDown;
-            
+            comboBoxEdit1.KeyUp += ComboBoxEdit1_KeyUp;
+            comboBoxEdit1.DrawItem += ComboBoxEdit1_DrawItem;
+        }
+
+        private void ComboBoxEdit1_DrawItem(object sender, ListBoxDrawItemEventArgs e)
+        {
+            e.Handled = true;
+            var commandItem = e.Item as CommandItem;
+            if (commandItem == null)
+                return;
+            if ((e.State & DrawItemState.Selected) > 0)
+            {
+                e.Appearance.FontStyleDelta = FontStyle.Bold | FontStyle.Italic | FontStyle.Underline;
+            }
+
+            var bounds = e.Bounds;
+            bounds.X += comboBoxEdit1.Margin.Left;
+            if (!commandItem.command.Equals(commandItem.displayText))
+            {
+                e.Cache.DrawString($"{commandItem.command}({commandItem.displayText})", e.Appearance.Font, e.Appearance.GetForeBrush(e.Cache), bounds);
+            }
+            else
+            {
+                e.Cache.DrawString($"{commandItem.command}", e.Appearance.Font, e.Appearance.GetForeBrush(e.Cache), bounds);
+            }
+
+
+
+            e.Handled = true;
+        }
+
+        private void ContextMenuStrip1_Opened(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ComboBoxEdit1_KeyUp(object sender, KeyEventArgs e)
+        {
+            comboBoxEdit1.ShowPopup();
         }
 
         private void ComboBoxEdit1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter)
             {
+                if (comboBoxEdit1.SelectedItem == null || string.IsNullOrEmpty(comboBoxEdit1.SelectedItem.ToString()))
+                {
+                    foreach (CommandItem item in comboBoxEdit1.Properties.Items)
+                    {
+                        if (item.command.StartsWith(comboBoxEdit1.AutoSearchText, true, null))
+                        {
+                            comboBoxEdit1.SelectedItem = item;
+                            break;
+                        }
+                    }
+
+                }
                 RunAction();
-            }
-            else
-            {
-                // 팝업 표시할지? 안할지?
-                popupMenu1.AddItem(new BarButtonItem(popupMenu1.Manager, "a"));
-                popupMenu1.AddItem(new BarButtonItem(popupMenu1.Manager, "a"));
-                popupMenu1.AddItem(new BarButtonItem(popupMenu1.Manager, "a"));
-                popupMenu1.AddItem(new BarButtonItem(popupMenu1.Manager, "a"));
-                popupMenu1.ShowPopup(Control.MousePosition);
             }
         }
 
         private void RunAction()
         {
-            var command = comboBoxEdit1.SelectedItem.ToString();
-            if (!commands.ContainsKey(command))
+            var commandItem = comboBoxEdit1.SelectedItem as CommandItem;
+            if (commandItem == null)
                 return;
 
-            if (commands.TryGetValue(command, out Action ac))
-            {
-                ac();
-                comboBoxEdit1.SelectedItem = null;
-                comboBoxEdit1.SelectedText = "";
-            }
+            if (commandItem.act != null)
+                commandItem.act();
+
+            comboBoxEdit1.SelectedItem = null;
+            comboBoxEdit1.SelectedText = "";
         }
 
-        public void AddCommand(string command, Action act)
+        public void AddCommand(string command, string displayText, Action act)
         {
-            if (commands.ContainsKey(command))
-                return;
+            var commandItem = new CommandItem(command, displayText, act);
 
-            commands.Add(command, act);
-            comboBoxEdit1.Properties.Items.Add(command);
+            for (int i = 0; i < comboBoxEdit1.Properties.Items.Count; ++i)
+            {
+                var item = comboBoxEdit1.Properties.Items[i] as CommandItem;
+                if (item.command.CompareTo(commandItem.command) > 0)
+                {
+                    comboBoxEdit1.Properties.Items.Insert(i, commandItem);
+                    return;
+                }
+            }
+
+            comboBoxEdit1.Properties.Items.Add(commandItem);
         }
     }
 }
