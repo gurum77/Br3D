@@ -38,6 +38,9 @@ namespace Br3D
 
         public FormMain()
         {
+            // InitializeComponent 로딩시간 오래 걸림
+            // HModel의 생성자에서 오래 걸림 
+            // 개선해야함
             InitializeComponent();
             model.Unlock("US21-D8G5N-12J8F-5F65-RD3W");
 
