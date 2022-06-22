@@ -56,6 +56,26 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseLT|x64'">
+    <OutputPath>bin\x64\ReleaseLT\</OutputPath>
+    <DefineConstants>TRACE;LT</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseLT|x86'">
+    <OutputPath>bin\x86\ReleaseLT\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup Condition="'$(Platform)' == 'x64'">
     <Reference Include="devDept.Eyeshot.Control.x64.Win.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=c8a727666e3c0a09, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
@@ -74,7 +94,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\devDept.Eyeshot.Control.Win.v2021.dll</HintPath>
     </Reference>
-    
     <Reference Include="devDept.Geometry.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=9440825e8b4733bc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 2021\Bin\devDept.Geometry.v2021.dll</HintPath>
@@ -138,6 +157,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyGridControlHelper.cs" />
     <Compile Include="TreeListNodeOption.cs" />
+    <Compile Include="VersionHelper.cs" />
     <Compile Include="XtraForm1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -74,8 +74,35 @@ namespace Br3D
             hModel.ActionMode = actionType.None;
             hModel.BoundingBoxChanged += HModel_BoundingBoxChanged;
 
+            DynamicInputManager.enabled = true;
             DynamicInputManager.parentControls = dockPanelDynamicInput.Controls;
+            DynamicInputManager.controlCommandBar = controlCommandBar1;
             ribbonControl1.SearchItemShortcut = new BarShortcut(Keys.Control | Keys.F);
+
+            SetLTEnvironment();
+        }
+
+        // lt 버전인 경우 LT 버전에 맞게 환경을 설정한다.
+        private void SetLTEnvironment()
+        {
+            if (!VersionHelper.isLT)
+                return;
+
+            this.Text = "Br3D LT";
+
+            // save 기능 숨김
+            barButtonItemSaveAs.Visibility = BarItemVisibility.Never;
+
+            // command bar 숨김
+            DynamicInputManager.enabled = false;
+            DynamicInputManager.controlCommandBar.enabled = false;
+            dockPanelDynamicInput.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden;
+
+            // 편집 리본탭 숨김
+            ribbonPageDraw.Visible = false;
+            ribbonPageEdit.Visible = false;
+            ribbonPageDimension.Visible = false;
+
         }
 
         private void HModel_BoundingBoxChanged(object sender)
@@ -1142,6 +1169,45 @@ namespace Br3D
                 //MessageBox.Show("undefined function");
 #endif
             }
+        }
+
+        private void barButtonItemShowGrid_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            foreach (Viewport v in model.Viewports)
+            {
+                foreach (var g in v.Grids)
+                {
+                    g.Visible = barButtonItemShowGrid.Down;
+                }
+            }
+            model.Invalidate();
+        }
+
+        private void barButtonItemShowToolbar_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            foreach (Viewport v in model.Viewports)
+            {
+                foreach (var t in v.ToolBars)
+                {
+                    t.Visible = barButtonItemShowToolbar.Down;
+                }
+            }
+            model.Invalidate();
+        }
+
+        private void barButtonItemShowSymbol_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            foreach (Viewport v in model.Viewports)
+            {
+                foreach (var o in v.OriginSymbols)
+                {
+                    o.Visible = barButtonItemShowSymbol.Down;
+                }
+
+                v.CoordinateSystemIcon.Visible = barButtonItemShowSymbol.Down;
+                v.ViewCubeIcon.Visible = barButtonItemShowSymbol.Down;
+            }
+            model.Invalidate();
         }
     }
 }

@@ -845,6 +845,10 @@ namespace hanee.ThreeD
             ActionBase.IsStopedCurrentStep = false;
 
             DynamicInputManager.ShowDynamicInput(environment);
+
+            // command bar의 메시지를 바꾼다.
+            if(DynamicInputManager.controlCommandBar != null)
+                DynamicInputManager.controlCommandBar.labelControlMessage.Text = message;
         }
 
         // input 끝
@@ -853,6 +857,10 @@ namespace hanee.ThreeD
             ActionBase.userInputting[(int)userInput] = false;
 
             DynamicInputManager.HideDynamicInput();
+
+            // command bar의 메시지를 초기화
+            if (DynamicInputManager.controlCommandBar != null)
+                DynamicInputManager.controlCommandBar.labelControlMessage.Text = "Command";
         }
 
 

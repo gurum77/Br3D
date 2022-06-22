@@ -11,6 +11,15 @@ namespace Br3D
             InitializeComponent();
 
             labelControlVersion.Text = $"Version {GetVersion()}";
+            if (VersionHelper.isLT)
+            {
+                labelControlLT.Visible = true;
+                this.Text = "About Br3D LT";
+            }
+            else
+            {
+                labelControlLT.Visible = false;
+            }
         }
 
         public string GetVersion()

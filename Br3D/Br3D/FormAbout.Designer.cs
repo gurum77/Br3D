@@ -36,6 +36,7 @@ namespace Br3D
             this.hyperlinkLabelControl1 = new DevExpress.XtraEditors.HyperlinkLabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControlVersion = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlLT = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,11 +103,26 @@ namespace Br3D
             this.labelControlVersion.TabIndex = 5;
             this.labelControlVersion.Text = "Version 1.0.0.0";
             // 
+            // labelControlLT
+            // 
+            this.labelControlLT.AllowHtmlString = true;
+            this.labelControlLT.Appearance.Font = new System.Drawing.Font("Segoe UI Semibold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControlLT.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.labelControlLT.Appearance.Options.UseFont = true;
+            this.labelControlLT.Appearance.Options.UseForeColor = true;
+            this.labelControlLT.ImageOptions.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelControlLT.Location = new System.Drawing.Point(251, 16);
+            this.labelControlLT.Name = "labelControlLT";
+            this.labelControlLT.Size = new System.Drawing.Size(49, 65);
+            this.labelControlLT.TabIndex = 6;
+            this.labelControlLT.Text = "LT";
+            // 
             // FormAbout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(374, 262);
+            this.Controls.Add(this.labelControlLT);
             this.Controls.Add(this.labelControlVersion);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.hyperlinkLabelControl1);
@@ -133,5 +149,6 @@ namespace Br3D
         private DevExpress.XtraEditors.HyperlinkLabelControl hyperlinkLabelControl1;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.LabelControl labelControlVersion;
+        private DevExpress.XtraEditors.LabelControl labelControlLT;
     }
 }

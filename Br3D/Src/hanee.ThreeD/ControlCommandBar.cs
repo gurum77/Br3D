@@ -9,6 +9,19 @@ namespace hanee.ThreeD
     public partial class ControlCommandBar : DevExpress.XtraEditors.XtraUserControl
     {
         Dictionary<string, Action> commands = new Dictionary<string, Action>();
+        public bool enabled
+        {
+            get
+            {
+                return this.Enabled;
+            }
+
+            set
+            {
+                comboBoxEdit1.Enabled = value;
+                this.Enabled = value;
+            }
+        }
         public ControlCommandBar()
         {
             InitializeComponent();
@@ -59,7 +72,8 @@ namespace hanee.ThreeD
         {
             if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter)
             {
-                if (comboBoxEdit1.SelectedItem == null || string.IsNullOrEmpty(comboBoxEdit1.SelectedItem.ToString()))
+                // 선택한 아이템이 없으면 검색중인 문자로 아이템을 강제 선택한다.
+                if (comboBoxEdit1.SelectedIndex == -1)
                 {
                     foreach (CommandItem item in comboBoxEdit1.Properties.Items)
                     {

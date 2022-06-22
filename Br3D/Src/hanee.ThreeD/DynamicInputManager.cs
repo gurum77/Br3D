@@ -15,9 +15,11 @@ namespace hanee.ThreeD
             distanceFactor
         }
 
+        static public bool enabled { get; set; } = true;
+        static public ControlCommandBar controlCommandBar { get; set; } // command bar
         static public Control.ControlCollection parentControls { get; set; }
         static public devDept.Eyeshot.Environment environment { get; set; }
-        //static FormDistanceFactorDynamicInput formDistanceFactorDynamicInput;
+
 
         static ControlXyzDynamicInput controlXyzDynamicInput;
         static ControlDistanceAngleDynamicInput controlDistanceAngleDynamicInput;
@@ -101,6 +103,9 @@ namespace hanee.ThreeD
 
         static public void ShowDynamicInput(devDept.Eyeshot.Environment environment)
         {
+            if (!enabled)
+                return;
+
             DynamicInputManager.environment = environment;
             var form = GetFormPoint3DDynamicInput();
             if (form == null)

@@ -15,6 +15,8 @@ namespace Br3D
         [STAThread]
         static void Main()
         {
+            VersionHelper.InitVersion();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());

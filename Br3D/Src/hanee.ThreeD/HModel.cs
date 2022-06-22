@@ -91,22 +91,33 @@ namespace hanee.ThreeD
         public void KeyEventListener(Keys keyData)
         {
             var e = new KeyEventArgs(keyData);
+
+            // 액션 사용자 입력중인 경우
             if (ActionBase.IsUserInputting())
             {
                 ActionBase.KeyUpHandler(e);
 
-                if (keyData == Keys.Oem3)
+                if (DynamicInputManager.enabled)
                 {
-                    DynamicInputManager.FlagPoint3DType();
-                }
-                else
-                {
-                    DynamicInputManager.OnKeyUp(e);
-
+                    if (keyData == Keys.Oem3)
+                    {
+                        DynamicInputManager.FlagPoint3DType();
+                    }
+                    else
+                    {
+                        DynamicInputManager.OnKeyUp(e);
+                    }
                 }
             }
             else
             {
+                if (DynamicInputManager.controlCommandBar != null && !DynamicInputManager.controlCommandBar.comboBoxEdit1.IsEditorActive)
+                {
+                    DynamicInputManager.controlCommandBar.comboBoxEdit1.Focus();
+                    
+                    return;
+                }
+
                 if (e.KeyCode == Keys.Escape)
                 {
                     // 입력중이 아니더라도 esc를 누르면 액션을 종료한다.
