@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -15,17 +16,34 @@ namespace hanee.ThreeD
             byTransparencyColor
         }
 
+        public void Default()
+        {
+            dimTextHeight = 2.0f;
+            annotationTextHeight = 30;
+            tempEntityColor = Color.White;
+            backgroundColorTop.colorValue = Color.FromArgb(255, 18, 32, 41);
+            backgroundColorBottom.colorValue = Color.FromArgb(255, 46, 82, 103);
+            backgroundColor2D.colorValue = Color.Black;
+        }
+
         public const string defaultLanguage = "en-US";
 
 
         public string appName { get; set; } = "hanee.ThreeD";
         public string language { get; set; } = defaultLanguage;
         public float dimTextHeight { get; set; } = 2.0f;
-        public float annotationTextHeight { get; set; } = 30;   
+        public float annotationTextHeight { get; set; } = 30;
         public int decimals { get; set; } = 5;  // 좌표, 길이값등의 허용 소수점 자릿수
         public TempEntityColorMethod tempEntityColorMethod { get; set; } = TempEntityColorMethod.byTransparencyColor;
         public Color tempEntityColor { get; set; } = Color.White;
-                
+        public XmlColor backgroundColorTop { get; set; } = new XmlColor(Color.FromArgb(255, 18, 32, 41));
+        public XmlColor backgroundColorBottom { get; set; } = new XmlColor(Color.FromArgb(255, 46, 82, 103));
+        public XmlColor backgroundColor2D { get; set; } = new XmlColor(Color.Black);
+        public bool saveImageWithUI { get; set; } = false;    // 이미지 저장할때 UI 포함(툴바등..)
+        public bool saveImageWithBackground { get; set; } = false;  // 이미지 저장할때 배경 포함
+        
+
+
         // 즐겨찾기 저장하는 파일 경로
         string GetOptionsFIlePath()
         {
@@ -82,9 +100,9 @@ namespace hanee.ThreeD
                     }
                 }
             }
-            catch/* (Exception ex)*/
+            catch(Exception ex)
             {
-                //MessageBox.Show("Save options faild.", ex.Message);
+                MessageBox.Show("Save options faild.", ex.Message);
             }
         }
     }

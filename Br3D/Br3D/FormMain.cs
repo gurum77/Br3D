@@ -61,7 +61,8 @@ namespace Br3D
             Options.Instance.tempEntityColorMethod = Options.TempEntityColorMethod.byTransparencyColor;
 
 
-            LanguageHelper.Load(Options.Instance.language);
+            ApplyOptions();
+
             InitGraphics();
             InitDisplayMode();
 
@@ -83,6 +84,32 @@ namespace Br3D
             ribbonControl1.SearchItemShortcut = new BarShortcut(Keys.Control | Keys.F);
 
             SetLTEnvironment();
+        }
+
+        // 옵션을 적용한다.
+        private void ApplyOptions()
+        {
+            // 배경색
+            foreach (Viewport vp in model.Viewports)
+            {
+                if (hModel.IsTopViewOnly())
+                {
+                    vp.Background.TopColor = Options.Instance.backgroundColor2D.colorValue;
+                    vp.Background.BottomColor = Options.Instance.backgroundColor2D.colorValue;
+                }
+                else
+                {
+                    vp.Background.TopColor = Options.Instance.backgroundColorTop.colorValue;
+                    vp.Background.BottomColor = Options.Instance.backgroundColorBottom.colorValue;
+
+                }
+            }
+
+            // 언어
+            LanguageHelper.Load(Options.Instance.language);
+
+
+            model.Invalidate();
         }
 
         // lt 버전인 경우 LT 버전에 맞게 환경을 설정한다.
@@ -248,6 +275,7 @@ namespace Br3D
             rowBackward.Properties.Caption = LanguageHelper.Tr("Backward");
             rowUpsideDown.Properties.Caption = LanguageHelper.Tr("Upside Down");
             rowAlignment.Properties.Caption = LanguageHelper.Tr("Alignment");
+            
 
         }
 
@@ -582,12 +610,12 @@ namespace Br3D
 
         void SetFunctionByElement(BarButtonItem barButtonItem, Action action, string caption, string command, string shortcut)
         {
+            barButtonItem.Caption = caption;
+
             if (functionByElement.ContainsKey(barButtonItem))
                 return;
 
             functionByElement.Add(barButtonItem, action);
-            barButtonItem.Caption = caption;
-
             if (!string.IsNullOrEmpty(command))
             {
                 controlCommandBar1.AddCommand(command, command, action);
@@ -597,7 +625,6 @@ namespace Br3D
             {
                 controlCommandBar1.AddCommand(shortcut, command, action);
             }
-
         }
 
         // ribbon button별 method 목록 초기화
@@ -670,11 +697,16 @@ namespace Br3D
             SetFunctionByElement(barButtonItemLineType, LineType, LanguageHelper.Tr("Line Type"), "LineType", "lt");
 
             // options
+            SetFunctionByElement(barButtonItemShowGrid, null, LanguageHelper.Tr("Grid"), null, null);
+            SetFunctionByElement(barButtonItemShowToolbar, null, LanguageHelper.Tr("Toolbar"), null, null);
+            SetFunctionByElement(barButtonItemShowSymbol, null, LanguageHelper.Tr("Symbol"), null, null);
+
             SetFunctionByElement(barButtonItemLanguage, null, LanguageHelper.Tr("Language"), null, null);
             SetFunctionByElement(barButtonItemLanguageKorean, Korean, LanguageHelper.Tr("Korean"), "Korean", null);
             SetFunctionByElement(barButtonItemLanguageEnglish, English, LanguageHelper.Tr("English"), "English", null);
             SetFunctionByElement(barButtonItemHomepage, Homepage, LanguageHelper.Tr("Homepage"), "Homepage", null);
             SetFunctionByElement(barButtonItemCheckForUpdate, CheckForUpdate, LanguageHelper.Tr("Check For Update"), "CheckForUpdate", null);
+            SetFunctionByElement(barButtonItemOptions, RunOptions, LanguageHelper.Tr("Options"), null, null);
             SetFunctionByElement(barButtonItemAbout, About, LanguageHelper.Tr("About"), "About", null);
         }
 
@@ -734,6 +766,14 @@ namespace Br3D
         void TextStyle() => new ActionTextStyle(model, this).Run();
         void Layer() => new ActionLayer(model, this).Run();
         void About() => new FormAbout().ShowDialog();
+        void RunOptions()
+        {
+            FormOptions form = new FormOptions();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ApplyOptions();
+            }
+        }
         void Homepage() => System.Diagnostics.Process.Start("http://hileejaeho.cafe24.com/kr-br3d/");
         void Language()
         {
@@ -940,7 +980,7 @@ namespace Br3D
 
         private void SaveImage()
         {
-            SaveFileDialog dlg = new SaveFileDialog();
+            var dlg = new XtraSaveFileDialog();
             dlg.Filter = "Bitmap (*.bmp)|*.bmp|" +
                 "Portable Network Graphics (*.png)|*.png|" +
                 "Windows metafile (*.wmf)|*.wmf|" +
@@ -952,22 +992,37 @@ namespace Br3D
             if (dlg.ShowDialog() == DialogResult.OK)
             {
 
+                if (!Options.Instance.saveImageWithUI)
+                {
+                    ShowGrid(false);
+                    ShowToolbar(false);
+                    ShowSymbol(false);
+                }
+
+                double lineWeightFactor = 1;
                 switch (dlg.FilterIndex)
                 {
 
                     case 1:
-                        model.WriteToFileRaster(2, dlg.FileName, System.Drawing.Imaging.ImageFormat.Bmp);
+                        model.WriteToFileRaster(2, lineWeightFactor, dlg.FileName, System.Drawing.Imaging.ImageFormat.Bmp, Options.Instance.saveImageWithBackground);
                         break;
                     case 2:
-                        model.WriteToFileRaster(2, dlg.FileName, System.Drawing.Imaging.ImageFormat.Png);
+                        model.WriteToFileRaster(2, lineWeightFactor, dlg.FileName, System.Drawing.Imaging.ImageFormat.Png, Options.Instance.saveImageWithBackground);
                         break;
                     case 3:
-                        model.WriteToFileRaster(2, dlg.FileName, System.Drawing.Imaging.ImageFormat.Wmf);
+                        model.WriteToFileRaster(2, lineWeightFactor, dlg.FileName, System.Drawing.Imaging.ImageFormat.Wmf, Options.Instance.saveImageWithBackground);
                         break;
                     case 4:
-                        model.WriteToFileRaster(2, dlg.FileName, System.Drawing.Imaging.ImageFormat.Emf);
+                        model.WriteToFileRaster(2, lineWeightFactor, dlg.FileName, System.Drawing.Imaging.ImageFormat.Emf, Options.Instance.saveImageWithBackground);
                         break;
 
+                }
+
+                if (!Options.Instance.saveImageWithUI)
+                {
+                    ShowGrid(barButtonItemShowGrid.Down);
+                    ShowToolbar(barButtonItemShowToolbar.Down);
+                    ShowSymbol(barButtonItemShowSymbol.Down);
                 }
 
             }
@@ -975,28 +1030,26 @@ namespace Br3D
 
         void Open()
         {
+
             // 파일 선택
-            OpenFileDialog openFile = new OpenFileDialog();
-
-
+            var dlg = new XtraOpenFileDialog();
             Dictionary<string, string> additionalSupportFormats = new Dictionary<string, string>();
-            //additionalSupportFormats.Add("Br3D(model, drawings)", "*.br3");
-            openFile.Filter = FileHelper.FilterForOpenDialog(additionalSupportFormats);
-            openFile.FilterIndex = 0;
-            openFile.AddExtension = true;
-            openFile.CheckFileExists = true;
-            openFile.CheckPathExists = true;
-            if (openFile.ShowDialog() != DialogResult.OK)
+            dlg.Filter = FileHelper.FilterForOpenDialog(additionalSupportFormats);
+            dlg.FilterIndex = 0;
+            dlg.AddExtension = true;
+            dlg.CheckFileExists = true;
+            dlg.CheckPathExists = true;
+            if (dlg.ShowDialog() != DialogResult.OK)
                 return;
 
             NewFile();
 
-            Import(openFile.FileName);
+            Import(dlg.FileName);
         }
 
         void SaveAs()
         {
-            SaveFileDialog dlg = new SaveFileDialog();
+            var dlg = new XtraSaveFileDialog();
             dlg.Filter = FileHelper.FilterForSaveDialog();
             dlg.DefaultExt = "dwg";
             if (dlg.ShowDialog() == DialogResult.OK)
@@ -1062,7 +1115,7 @@ namespace Br3D
             }
 #endif
         }
-        
+
         void CheckForUpdate()
         {
             this.Cursor = Cursors.WaitCursor;
@@ -1174,42 +1227,57 @@ namespace Br3D
             }
         }
 
-        private void barButtonItemShowGrid_ItemClick(object sender, ItemClickEventArgs e)
+        void ShowGrid(bool visible)
         {
             foreach (Viewport v in model.Viewports)
             {
                 foreach (var g in v.Grids)
                 {
-                    g.Visible = barButtonItemShowGrid.Down;
+                    g.Visible = visible;
                 }
             }
+        }
+
+
+
+        private void barButtonItemShowGrid_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ShowGrid(barButtonItemShowGrid.Down);
             model.Invalidate();
         }
 
-        private void barButtonItemShowToolbar_ItemClick(object sender, ItemClickEventArgs e)
+        void ShowToolbar(bool visible)
         {
             foreach (Viewport v in model.Viewports)
             {
                 foreach (var t in v.ToolBars)
                 {
-                    t.Visible = barButtonItemShowToolbar.Down;
+                    t.Visible = visible;
                 }
             }
+        }
+        private void barButtonItemShowToolbar_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ShowToolbar(barButtonItemShowToolbar.Down);
             model.Invalidate();
         }
 
-        private void barButtonItemShowSymbol_ItemClick(object sender, ItemClickEventArgs e)
+        void ShowSymbol(bool visible)
         {
             foreach (Viewport v in model.Viewports)
             {
                 foreach (var o in v.OriginSymbols)
                 {
-                    o.Visible = barButtonItemShowSymbol.Down;
+                    o.Visible = visible;
                 }
 
-                v.CoordinateSystemIcon.Visible = barButtonItemShowSymbol.Down;
-                v.ViewCubeIcon.Visible = barButtonItemShowSymbol.Down;
+                v.CoordinateSystemIcon.Visible = visible;
+                v.ViewCubeIcon.Visible = visible;
             }
+        }
+        private void barButtonItemShowSymbol_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ShowSymbol(barButtonItemShowSymbol.Down);
             model.Invalidate();
         }
     }

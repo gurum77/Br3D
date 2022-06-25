@@ -47,10 +47,6 @@ namespace hanee.ThreeD
         public PropertyGridHelper propertyGridHelper { get; set; }
 
 
-        // 배경색
-        Color backgroundTopColor { get; set; }
-        Color backgroundBottomColor { get; set; }
-
         // 투명도 옵션 설정
         public TranparencyMode Transparency
         { get; set; }
@@ -334,8 +330,8 @@ namespace hanee.ThreeD
 
         public void SaveBackgroundColor()
         {
-            backgroundTopColor = ActiveViewport.Background.TopColor;
-            backgroundBottomColor = ActiveViewport.Background.BottomColor;
+            Options.Instance.backgroundColorTop.colorValue = ActiveViewport.Background.TopColor;
+            Options.Instance.backgroundColorBottom.colorValue = ActiveViewport.Background.BottomColor;
         }
 
         // 2D view로 설정한다.
@@ -346,8 +342,8 @@ namespace hanee.ThreeD
             SetView(viewType.Top, true, true);
 
             // 배경을 검은색으로
-            ActiveViewport.Background.BottomColor = Color.Black;
-            ActiveViewport.Background.TopColor = Color.Black;
+            ActiveViewport.Background.BottomColor = Options.Instance.backgroundColor2D.colorValue;
+            ActiveViewport.Background.TopColor = Options.Instance.backgroundColor2D.colorValue;
             ActiveViewport.DisplayMode = displayType.Flat;
 
             // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
@@ -385,8 +381,8 @@ namespace hanee.ThreeD
             SetView(viewType.Isometric, true, true);
 
             // 배경을 검은색으로
-            ActiveViewport.Background.BottomColor = backgroundBottomColor;
-            ActiveViewport.Background.TopColor = backgroundTopColor;
+            ActiveViewport.Background.BottomColor = Options.Instance.backgroundColorBottom.colorValue;
+            ActiveViewport.Background.TopColor = Options.Instance.backgroundColorTop.colorValue;
             ActiveViewport.DisplayMode = displayType.Rendered;
 
             // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
