@@ -18,7 +18,7 @@ signtool.exe sign /a /v  /f HanGil_CodeSign.pfx /p aa123123 ..\..\bin\x64\Releas
 rem code sign start *.exe
 signtool.exe sign /a /v  /f HanGil_CodeSign.pfx /p aa123123 ..\..\bin\x64\Release\Br3D.exe
 
-signtool.exe sign /a /v  /f HanGil_CodeSign.pfx /p aa123123 ..\..\bin\x64\ReleaseLT\Br3D_LT.exe
+signtool.exe sign /a /v  /f HanGil_CodeSign.pfx /p aa123123 ..\..\bin\x64\ReleaseLT\Br3DLT.exe
 
 rem call Codesign_all.bat ..\..\bin\Release
 popd

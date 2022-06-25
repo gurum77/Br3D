@@ -54,7 +54,7 @@ namespace Br3D
             foreach (Viewport vp in model.Viewports)
                 viewports.Add(vp);
 
-            Options.Instance.appName = "Br3D";
+            Options.Instance.appName = VersionHelper.appName;
             Options.Instance.LoadOptions();
 
             // 테스트 용으로 옵션을 강제적용
@@ -91,7 +91,7 @@ namespace Br3D
             if (!VersionHelper.isLT)
                 return;
 
-            this.Text = "Br3D LT";
+            this.Text = VersionHelper.appName;
 
             // save 기능 숨김
             barButtonItemSaveAs.Visibility = BarItemVisibility.Never;
@@ -1062,7 +1062,7 @@ namespace Br3D
             }
 #endif
         }
-
+        
         void CheckForUpdate()
         {
             this.Cursor = Cursors.WaitCursor;
@@ -1074,7 +1074,7 @@ namespace Br3D
                 pi.WaitForExit(5000);
                 if (pi.ExitCode == 2)
                 {
-                    if (XtraMessageBox.Show(LanguageHelper.Tr("Install now?"), LanguageHelper.Tr("Br3D update available"), MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (XtraMessageBox.Show(LanguageHelper.Tr("Install now?"), VersionHelper.appName + LanguageHelper.Tr(" update available"), MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         System.Diagnostics.Process.Start(filePath);
                         Close();

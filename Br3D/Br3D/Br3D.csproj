@@ -196,6 +196,7 @@
     <None Include="Install\CodeSign_Program_All.bat" />
     <None Include="Install\CodeSign_Setup_All.bat" />
     <None Include="Patch\Br3D.wyp" />
+    <None Include="Patch\Br3DLT.wyp" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
