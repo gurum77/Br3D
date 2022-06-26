@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+
 using ToolBarButton = devDept.Eyeshot.ToolBarButton;
 
 namespace Br3D
@@ -77,12 +78,9 @@ namespace Br3D
 
             hModel.ActionMode = actionType.None;
             hModel.BoundingBoxChanged += HModel_BoundingBoxChanged;
-
-            DynamicInputManager.enabled = true;
-            DynamicInputManager.parentControls = dockPanelDynamicInput.Controls;
-            DynamicInputManager.controlCommandBar = controlCommandBar1;
             ribbonControl1.SearchItemShortcut = new BarShortcut(Keys.Control | Keys.F);
 
+            EnableDynamicInput(true, false);
             SetLTEnvironment();
         }
 
@@ -112,6 +110,64 @@ namespace Br3D
             model.Invalidate();
         }
 
+        // dynamic input을 활성화 한다.
+        void EnableDynamicInput(bool enableDynamicInput, bool enableCommandbar)
+        {
+            // 둘다 off 인 경우
+            if (!enableDynamicInput && !enableCommandbar)
+            {
+                controlCommandBar1.enabled = false;
+                DynamicInputManager.enabled = false;
+                DynamicInputManager.controlCommandBar = null;
+                dockPanelDynamicInput.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden;
+                return;
+            }
+
+            // 그 외의 경우는 panel을 활성화 한다.
+            dockPanelDynamicInput.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Visible;
+            dockPanelDynamicInput.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
+
+            // 둘다 on 인 경우
+            if (enableDynamicInput && enableCommandbar)
+            {
+                // command bar 활성화
+                controlCommandBar1.enabled = true;
+
+                // dynamic input manager에 command bar 연결
+                DynamicInputManager.controlCommandBar = controlCommandBar1;
+
+                // dynamic input manager 활성화
+                DynamicInputManager.enabled = true;
+            }
+            // 하나만 on인 경우
+            else if(enableCommandbar)
+            {
+                // command bar 활성화
+                controlCommandBar1.enabled = true;
+                controlCommandBar1.Visible = true;
+
+                // dynamic input manager에 command bar 연결
+                DynamicInputManager.controlCommandBar = controlCommandBar1;
+
+                // dynamic input manager 활성화
+                DynamicInputManager.enabled = true;
+                DynamicInputManager.parentControls = null;
+            }
+            else if (enableDynamicInput)
+            {
+                // command bar 비활성화
+                controlCommandBar1.enabled = false;
+                controlCommandBar1.Visible = false;
+
+                // dynamic input manager에 command bar 연결안함
+                DynamicInputManager.controlCommandBar = null;
+
+                // dynamic input manager 활성화
+                DynamicInputManager.enabled = true;
+                DynamicInputManager.parentControls = dockPanelDynamicInput.Controls;
+
+            }
+        }
         // lt 버전인 경우 LT 버전에 맞게 환경을 설정한다.
         private void SetLTEnvironment()
         {
@@ -123,10 +179,7 @@ namespace Br3D
             // save 기능 숨김
             barButtonItemSaveAs.Visibility = BarItemVisibility.Never;
 
-            // command bar 숨김
-            DynamicInputManager.enabled = false;
-            DynamicInputManager.controlCommandBar.enabled = false;
-            dockPanelDynamicInput.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden;
+            EnableDynamicInput(false, false);
 
             // 편집 리본탭 숨김
             ribbonPageDraw.Visible = false;
@@ -275,7 +328,7 @@ namespace Br3D
             rowBackward.Properties.Caption = LanguageHelper.Tr("Backward");
             rowUpsideDown.Properties.Caption = LanguageHelper.Tr("Upside Down");
             rowAlignment.Properties.Caption = LanguageHelper.Tr("Alignment");
-            
+
 
         }
 
@@ -1182,6 +1235,14 @@ namespace Br3D
 
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            // ctrl이 안 눌러져 있으면 취소
+            if(!System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl) && !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.RightCtrl))
+            {
+                e.Cancel = true;
+                return;
+            }
+
+
             HModel hModel = model as HModel;
             if (hModel == null)
                 return;
