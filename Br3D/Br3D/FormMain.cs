@@ -1235,8 +1235,11 @@ namespace Br3D
 
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // ctrl이 안 눌러져 있으면 취소
-            if(!System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl) && !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.RightCtrl))
+            // ctrl이나 shift가 안 눌러져 있으면 취소
+            if(!System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl) && 
+                !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.RightCtrl) &&
+                !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftShift) &&
+                !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.RightShift))
             {
                 e.Cancel = true;
                 return;

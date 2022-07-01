@@ -20,6 +20,7 @@ namespace hanee.Cad.Tool
 
         Point3D firstPoint;
         Point3D secondPoint;
+
         public DimDirection dimDirection { get; set; } = DimDirection.horizontal;
         public ActionDimLinear(devDept.Eyeshot.Environment environment) : base(environment)
         {
@@ -54,87 +55,107 @@ namespace hanee.Cad.Tool
             pt1 = null;
             pt2 = null;
 
-            if (dimDirection == DimDirection.horizontal)
-            {
-                axisX = Vector3D.AxisX;
-                extPt1 = new Point3D(firstPoint.X, current.Y);
-                extPt2 = new Point3D(secondPoint.X, current.Y);
+            var ws = GetWorkspace();
+            if (ws == null)
+                return;
 
-                if (current.Y > firstPoint.Y && current.Y > secondPoint.Y)
+            axisX = ws.plane.AxisX.Clone() as Vector3D;
+            var current2D = ws.plane.Project(current);
+            var firstPoint2D = ws.plane.Project(firstPoint);
+            var secondPoint2D = ws.plane.Project(secondPoint);
+
+
+            if (dimDirection == DimDirection.horizontal || dimDirection == DimDirection.aligned)
+            {
+            
+                var extPt12D = new Point2D(firstPoint2D.X, current2D.Y);
+                var extPt22D = new Point2D(secondPoint2D.X, current2D.Y);
+                if (current2D.Y > firstPoint2D.Y && current2D.Y > firstPoint2D.Y)
                 {
-                    extPt1.Y += Define.DefaultTextHeight / 2;
-                    extPt2.Y += Define.DefaultTextHeight / 2;
+                    extPt12D.Y += Define.DefaultTextHeight / 2;
+                    extPt22D.Y += Define.DefaultTextHeight / 2;
                 }
                 else
                 {
-                    extPt1.Y -= Define.DefaultTextHeight / 2;
-                    extPt2.Y -= Define.DefaultTextHeight / 2;
+                    extPt12D.Y -= Define.DefaultTextHeight / 2;
+                    extPt22D.Y -= Define.DefaultTextHeight / 2;
                 }
 
-                Segment3D extLine1 = new Segment3D(firstPoint, extPt1);
-                Segment3D extLine2 = new Segment3D(secondPoint, extPt2);
-                pt1 = current.ProjectTo(extLine1);
-                pt2 = current.ProjectTo(extLine2);
+                Segment2D extLine12D = new Segment2D(firstPoint2D, extPt12D);
+                Segment2D extLine22D = new Segment2D(secondPoint2D, extPt22D);
+                var pt12D = current2D.ProjectTo(extLine12D);
+                var pt22D = current2D.ProjectTo(extLine22D);
+
+                pt1 = ws.PointAt(pt12D);
+                pt2 = ws.PointAt(pt22D);
+                extPt1 = ws.PointAt(extPt12D);
+                extPt2 = ws.PointAt(extPt22D);
             }
             else if (dimDirection == DimDirection.vertical)
             {
-                axisX = Vector3D.AxisY;
 
-                extPt1 = new Point3D(current.X, firstPoint.Y);
-                extPt2 = new Point3D(current.X, secondPoint.Y);
+                var extPt12D = new Point2D(current2D.X, firstPoint2D.Y);
+                var extPt22D = new Point2D(current2D.X, secondPoint2D.Y);
 
-                if (current.X > firstPoint.X && current.X > secondPoint.X)
+                if (current2D.X > firstPoint2D.X && current2D.X > secondPoint2D.X)
                 {
-                    extPt1.X += Define.DefaultTextHeight / 2;
-                    extPt2.X += Define.DefaultTextHeight / 2;
+                    extPt12D.X += Define.DefaultTextHeight / 2;
+                    extPt22D.X += Define.DefaultTextHeight / 2;
                 }
                 else
                 {
-                    extPt1.X -= Define.DefaultTextHeight / 2;
-                    extPt2.X -= Define.DefaultTextHeight / 2;
+                    extPt12D.X -= Define.DefaultTextHeight / 2;
+                    extPt22D.X -= Define.DefaultTextHeight / 2;
                 }
 
-                Segment3D extLine1 = new Segment3D(firstPoint, extPt1);
-                Segment3D extLine2 = new Segment3D(secondPoint, extPt2);
-                pt1 = current.ProjectTo(extLine1);
-                pt2 = current.ProjectTo(extLine2);
+                Segment2D extLine12D = new Segment2D(firstPoint2D, extPt12D);
+                Segment2D extLine22D = new Segment2D(secondPoint2D, extPt22D);
+                var pt12D = current.ProjectTo(extLine12D);
+                var pt22D = current.ProjectTo(extLine22D);
+
+                pt1 = ws.PointAt(pt12D);
+                pt2 = ws.PointAt(pt22D);
+                extPt1 = ws.PointAt(extPt12D);
+                extPt2 = ws.PointAt(extPt22D);
             }
-            else if (dimDirection == DimDirection.aligned)
-            {
-                if (secondPoint.X < firstPoint.X || secondPoint.Y < firstPoint.Y)
-                {
-                    Point3D p0 = firstPoint;
-                    Point3D p1 = secondPoint;
+            //else if (dimDirection == DimDirection.aligned)
+            //{
+            //    if (secondPoint2D.X < firstPoint2D.X || secondPoint2D.Y < firstPoint2D.Y)
+            //    {
+            //        Point2D p0 = firstPoint2D;
+            //        Point2D p1 = secondPoint2D;
 
-                    Utility.Swap(ref p0, ref p1);
+            //        Utility.Swap(ref p0, ref p1);
 
-                    firstPoint = p0;
-                    secondPoint = p1;
-                }
+            //        firstPoint2D = p0;
+            //        secondPoint2D = p1;
+            //    }
 
-                axisX = new Vector3D(firstPoint, secondPoint);
-                Vector3D axisY = Vector3D.Cross(Vector3D.AxisZ, axisX);
+            //    axisX = new Vector3D(firstPoint, secondPoint);
+            //    Vector3D axisY = Vector3D.Cross(Vector3D.AxisZ, axisX);
 
-                var drawingPlane = new Plane(firstPoint, axisX, axisY);
+            //    var drawingPlane = new Plane(firstPoint, axisX, axisY);
 
-                Vector2D v1 = new Vector2D(firstPoint, secondPoint);
-                Vector2D v2 = new Vector2D(firstPoint, current);
+            //    Vector2D v1 = new Vector2D(firstPoint, secondPoint);
+            //    Vector2D v2 = new Vector2D(firstPoint, current);
 
-                double sign = System.Math.Sign(Vector2D.SignedAngleBetween(v1, v2));
+            //    double sign = System.Math.Sign(Vector2D.SignedAngleBetween(v1, v2));
 
-                //offset p0-p1 at current
-                Segment2D segment = new Segment2D(firstPoint, secondPoint);
-                double offsetDist = current.DistanceTo(segment);
-                extPt1 = firstPoint + sign * drawingPlane.AxisY * (offsetDist + Define.DefaultTextHeight / 2);
-                extPt2 = secondPoint + sign * drawingPlane.AxisY * (offsetDist + Define.DefaultTextHeight / 2);
-                pt1 = firstPoint + sign * drawingPlane.AxisY * offsetDist;
-                pt2 = secondPoint + sign * drawingPlane.AxisY * offsetDist;
-            }
+            //    //offset p0-p1 at current
+            //    Segment2D segment = new Segment2D(firstPoint, secondPoint);
+            //    double offsetDist = current.DistanceTo(segment);
+            //    extPt1 = firstPoint + sign * drawingPlane.AxisY * (offsetDist + Define.DefaultTextHeight / 2);
+            //    extPt2 = secondPoint + sign * drawingPlane.AxisY * (offsetDist + Define.DefaultTextHeight / 2);
+            //    pt1 = firstPoint + sign * drawingPlane.AxisY * offsetDist;
+            //    pt2 = secondPoint + sign * drawingPlane.AxisY * offsetDist;
+            //}
 
         }
 
         public async Task<bool> RunAsync()
         {
+            var ws = GetWorkspace();
+
             StartAction();
 
             while (true)
@@ -146,9 +167,25 @@ namespace hanee.Cad.Tool
                 if (IsCanceled())
                     break;
 
+                if (ws != null)
+                {
+                    ws.plane.Origin.Z = firstPoint.Z;
+                    ws.enabled = true;
+                }
+
+
                 secondPoint = await GetPoint3D(LanguageHelper.Tr("Second point"));
                 if (IsCanceled())
                     break;
+
+                if (dimDirection == DimDirection.aligned)
+                {
+                    var newAxisX = (secondPoint - firstPoint).AsVector;
+                    newAxisX.Normalize();
+
+                    var newAxisY = Vector3D.Cross(ws.plane.AxisZ, newAxisX);
+                    ws.plane = new Plane(new Point3D(0, 0, firstPoint.Z), newAxisX, newAxisY);
+                }
 
                 var textPoint = await GetPoint3D($"{firstPoint.DistanceTo(secondPoint):0.000}");
                 if (IsCanceled())
@@ -156,10 +193,9 @@ namespace hanee.Cad.Tool
 
 
                 GetDimInfo(textPoint, out Vector3D axisX, out Point3D extPt1, out Point3D extPt2, out Point3D pt1, out Point3D pt2);
-                var axisY = Vector3D.Cross(Vector3D.AxisZ, axisX);
-                var plane = new Plane(new Point3D(0, 0, 0), axisX, axisY);
+                var plane = ws.plane;
 
-                textPoint = ((firstPoint + secondPoint) / 2).IntersectionWith(axisY, textPoint, axisX);
+                textPoint = ((firstPoint + secondPoint) / 2).IntersectionWith(ws.plane.AxisY, textPoint, axisX);
                 var dim = new LinearDim(plane, firstPoint, secondPoint, textPoint, Define.DefaultTextHeight);
                 environment.Entities.Add(dim);
                 environment.Entities.Regen();
@@ -171,6 +207,9 @@ namespace hanee.Cad.Tool
 
 
             EndAction();
+
+            if (ws != null)
+                ws.enabled = false;
             return true;
         }
     }

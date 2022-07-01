@@ -7,6 +7,16 @@ namespace hanee.Geometry
     static public class Point3DHelper
     {
 
+        // Plane에 쏴서 교점을 찾는다.
+        // 3D 좌표로 직접 교점을 찾을때보다 안정적으로 찾아짐
+        public static Point3D IntersectionWith(this Point3D pt, Plane plane, Vector3D dir, Point3D otherPt, Vector3D otherDir)
+        {
+            var l1 = LineHelper.CreateInfinitLine(plane, pt, dir);
+            var l2 = LineHelper.CreateInfinitLine(plane, otherPt, otherDir);
+            var matchPoints = l1.IntersectWith(l2);
+            return matchPoints != null && matchPoints.Length > 0 ? matchPoints[0] : null;
+        }
+
         public static Point3D IntersectionWith(this Point3D pt, Vector3D dir, Point3D otherPt, Vector3D otherDir)
         {
             var l1 = LineHelper.CreateInfinitLine(pt, dir);
@@ -17,6 +27,9 @@ namespace hanee.Geometry
 
         public static void CopyFrom(this Point3D pt, Point3D fromPt)
         {
+            if (fromPt == null)
+                return;
+
             pt.X = fromPt.X;
             pt.Y = fromPt.Y;
             pt.Z = fromPt.Z;

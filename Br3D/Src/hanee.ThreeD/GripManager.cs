@@ -40,6 +40,7 @@ namespace hanee.ThreeD
         {
             model.TempEntities.Clear();
             model.Invalidate();
+            model.EndWorkspace();
         }
 
         // 이미 grip이 만들어진 객체인지?
@@ -195,6 +196,7 @@ namespace hanee.ThreeD
             model.Entities.Regen();
             model.TempEntities.Clear();
             model.Invalidate();
+            model.EndWorkspace();
         }
 
         public void OnMouseDown(MouseEventArgs e, List<Entity> selectedEntities = null, SelectionManager.Step step = default)

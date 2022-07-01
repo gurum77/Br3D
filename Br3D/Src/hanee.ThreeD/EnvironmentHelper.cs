@@ -10,6 +10,35 @@ namespace hanee.ThreeD
     // Model, Drawings 모두를 위한 헬퍼
     public static class EnvironmentHelper
     {
+        // workspace를 켠다
+        static public void StartWorkspace(this devDept.Eyeshot.Environment environment, Plane plane)
+        {
+            var ws = environment.GetWorkspace();
+            if (ws == null)
+                return;
+            ws.plane = plane;
+            ws.enabled = true;
+        }
+
+        // workspace를 끈다.
+        static public void EndWorkspace(this devDept.Eyeshot.Environment environment)
+        {
+            var ws = environment.GetWorkspace();
+            if (ws == null)
+                return;
+
+            ws.enabled = false;
+        }
+
+        static public Workspace GetWorkspace(this devDept.Eyeshot.Environment environment)
+        {
+            HModel hModel = environment as HModel;
+            if (hModel == null)
+                return null;
+
+            return hModel.workSpace;
+        }
+
         static public bool IsTopViewOnly(this devDept.Eyeshot.Environment environment)
         {
             HModel hDesign = environment as HModel;

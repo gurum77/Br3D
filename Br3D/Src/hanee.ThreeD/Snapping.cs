@@ -573,7 +573,7 @@ namespace hanee.ThreeD
                     environment.ResetOpenBlocks(false);
                     //environment.SetCurrent(null);
 
-                    var curSnapPoints = GetSnapPointsFromEntity(entity, mouseLocation, entity2);
+                    snapPoints = GetSnapPointsFromEntity(entity, mouseLocation, entity2);
 
 
                     // block이면 transform해야함

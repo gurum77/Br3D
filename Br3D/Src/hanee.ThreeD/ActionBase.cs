@@ -447,27 +447,29 @@ namespace hanee.ThreeD
                     environment.ScreenToPlane(location, model.ActiveViewport.Camera.NearPlane, out point3D);
                 }
             }
-            //if (point3D == null && WorkingPlane != null)
-            //{
-            //    if (viewportLayout.ScreenToPlane(location, WorkingPlane.Plane, out point3D) != true && point3D != null)
-            //    {
-            //        ActionBase.ModifyPointBySnap(ref point3D);
-            //        return point3D;
-            //    }
-
-            //}
 
             if (point3D != null)
             {
                 // 허용 소수점 자릿수로 조정(우선순위는 제일 낮다. snap, grid등에 의해서 조정되는 소수점은 허용한다)
                 ActionBase.ModifyPointByDecimals(ref point3D);
 
+                // 그리드 스냅 적용
+                ActionBase.ModifyPointByGridSnap(ref point3D);
+
+                // workplane
+                var hModel = environment as HModel;
+                if (hModel != null && hModel.workSpace != null && hModel.workSpace.enabled)
+                {
+                    var pt2 = hModel.workSpace.plane.Project(point3D);
+                    point3D = hModel.workSpace.plane.PointAt(pt2);
+                    //environment.ScreenToPlane(location, hModel.workSpace.plane, out point3D);
+                }
+
                 if (environment.IsTopViewOnly())
                     point3D.Z = 0;
 
-                //
-                ActionBase.ModifyPointByGridSnap(ref point3D);
             }
+
 
 
             return point3D;
@@ -682,6 +684,7 @@ namespace hanee.ThreeD
             ActionBase.cursorText = null;
 
 
+         
             return point3D;
         }
 
@@ -1061,6 +1064,13 @@ namespace hanee.ThreeD
         protected devDept.Eyeshot.Environment environment;
         protected devDept.Eyeshot.Model GetModel() { return environment as devDept.Eyeshot.Model; }
         protected HModel GetHModel() { return environment as HModel; }
+        protected Workspace GetWorkspace() 
+        {
+            if (GetHModel() != null)
+                return GetHModel().workSpace;
+
+            return null;
+        }
 
 
         // 액션이 취소 되었는지?

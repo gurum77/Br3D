@@ -29,6 +29,8 @@ namespace hanee.ThreeD
             if (ld == null)
                 return null;
 
+            model.StartWorkspace(ld.Plane);
+            
             var lp = ld.PreviewEntity();
 
             var gripPoints = new List<GripPoint>();

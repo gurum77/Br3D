@@ -42,6 +42,7 @@ namespace hanee.ThreeD
         public GripManager gripManager = null;
         public SelectionManager selectionManager = null;
         public EntityPropertiesManager entityPropertiesManager = null;
+        public Workspace workSpace = null;
 
         // property grid를 지정하면 객체 선택시 property grid에 속성이 표시됨
         public PropertyGridHelper propertyGridHelper { get; set; }
@@ -69,6 +70,7 @@ namespace hanee.ThreeD
             gripManager = new GripManager(this);
             selectionManager = new SelectionManager(this);
             entityPropertiesManager = new EntityPropertiesManager(this);
+            workSpace = new Workspace();
             CursorTypes[devDept.Eyeshot.cursorType.Default] = Cursors.Cross;
         }
 
@@ -454,13 +456,17 @@ namespace hanee.ThreeD
             if (vertices == null || vertices.Count == 0)
                 return null;
 
-            Point2D[] screenPts = new Point2D[vertices.Count];
+            List<Point2D> screenPts = new List<Point2D>();
+            
 
             for (int i = 0; i < vertices.Count; i++)
             {
-                screenPts[i] = WorldToScreen(vertices[i]);
+                if (vertices[i] == null)
+                    continue;
+
+                screenPts.Add(WorldToScreen(vertices[i]));
             }
-            return screenPts;
+            return screenPts.ToArray();
         }
 
         // 길이를 screen 2d 길이로 변환
@@ -525,7 +531,7 @@ namespace hanee.ThreeD
             Point2D[] screenPts = GetScreenVertices(vertices);
             if (screenPts == null)
                 return;
-            if (screenPts.Length == 0)
+            if (screenPts.Length == 0 || screenPts.Length != vertices.Length)
                 return;
 
             Point3D[] lines = new Point3D[(vertices.Length - 1) * 2];

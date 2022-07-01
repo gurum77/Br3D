@@ -181,6 +181,7 @@
     <Compile Include="Snapping.cs" />
     <Compile Include="SystemValue.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="Workspace.cs" />
     <Compile Include="XmlColor.cs" />
   </ItemGroup>
   <ItemGroup>
