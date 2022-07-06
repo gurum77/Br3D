@@ -135,6 +135,7 @@
     <Compile Include="ActionText.cs" />
     <Compile Include="ActionTextStyle.cs" />
     <Compile Include="ActionTrim.cs" />
+    <Compile Include="ActionWorkspace.cs" />
     <Compile Include="LineTypeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

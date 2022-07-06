@@ -36,7 +36,7 @@ namespace hanee.Cad.Tool
         Circle MakeCircle(bool tempEntity=false)
         {
             var radius = startPoint.DistanceTo(endPoint);
-            if (radius <= 0)
+            if (radius <= 0.001)
                 return null;
 
             Circle circle = new Circle(startPoint, radius);

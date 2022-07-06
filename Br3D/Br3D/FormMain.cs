@@ -270,6 +270,16 @@ namespace Br3D
         {
             InitRibbonButtonMethod();
 
+            // context menu
+            endPointToolStripMenuItem.Text = LanguageHelper.Tr("End point");
+            intersectionPointToolStripMenuItem.Text = LanguageHelper.Tr("Intersection point");
+            middlePointToolStripMenuItem.Text = LanguageHelper.Tr("Middle point");
+            centerPointToolStripMenuItem.Text = LanguageHelper.Tr("Center point");
+            selectallToolStripMenuItem.Text = LanguageHelper.Tr("Select all");
+            unselectAllToolStripMenuItem.Text = LanguageHelper.Tr("Unselect all");
+            invertSelectionToolStripMenuItem.Text = LanguageHelper.Tr("Invert selection");
+
+
             // page
             ribbonPageAnnotation.Text = LanguageHelper.Tr("Annotation");
             ribbonPageDimension.Text = LanguageHelper.Tr("Dimension");
@@ -687,6 +697,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemOpen, Open, LanguageHelper.Tr("Open"), "Open", "op");
             SetFunctionByElement(barButtonItemSaveAs, SaveAs, LanguageHelper.Tr("Save As"), "SaveAs", "sa");
             SetFunctionByElement(barButtonItemSaveImage, SaveImage, LanguageHelper.Tr("Save Image"), "SaveImage", "si");
+            SetFunctionByElement(barButtonItemWorkspace, Workspace, LanguageHelper.Tr("Workspace"), "Workspace", "ws");
             SetFunctionByElement(barButtonItemExit, Close, LanguageHelper.Tr("Exit"), "Exit", null);
 
             // draw
@@ -763,6 +774,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemAbout, About, LanguageHelper.Tr("About"), "About", null);
         }
 
+        async void Workspace() => await new ActionWorkspace(model).RunAsync();
         async void InsertImage() => await new ActionInsertImage(model).RunAsync();
         async void Insert() => await new ActionInsert(model).RunAsync();
         async void DimLeader() => await new ActionDimLeader(model).RunAsync();
@@ -1235,25 +1247,49 @@ namespace Br3D
 
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // ctrl이나 shift가 안 눌러져 있으면 취소
+            HModel hModel = model as HModel;
+            if (hModel == null)
+                return;
+
+            // ctrl이나 shift가 눌러져 있는지?
+            bool withCtrl = true;
             if(!System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl) && 
                 !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.RightCtrl) &&
                 !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftShift) &&
                 !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.RightShift))
             {
-                e.Cancel = true;
-                return;
+                withCtrl = false;
             }
 
+            if (withCtrl)
+            {
+                endPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.End);
+                intersectionPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Intersect);
+                middlePointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Mid);
+                centerPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Center);
 
-            HModel hModel = model as HModel;
-            if (hModel == null)
-                return;
+                VisibleContextMenuItems(endPointToolStripMenuItem, intersectionPointToolStripMenuItem, 
+                    middlePointToolStripMenuItem, centerPointToolStripMenuItem);
+            }
+            else
+            {
+                VisibleContextMenuItems(selectallToolStripMenuItem, unselectAllToolStripMenuItem, 
+                    invertSelectionToolStripMenuItem);
+            }
+        }
 
-            endPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.End);
-            intersectionPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Intersect);
-            middlePointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Mid);
-            centerPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Center);
+        // 해당 아이템을 표시한다.(나머지는 숨긴다)
+        private void VisibleContextMenuItems(params ToolStripMenuItem[] toolStripMenuItems)
+        {
+            foreach (ToolStripMenuItem item in contextMenuStrip1.Items)
+            {
+                item.Visible = false;
+            }
+
+            foreach (ToolStripMenuItem item in toolStripMenuItems)
+            {
+                item.Visible = true;
+            }
         }
 
         private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -1343,6 +1379,39 @@ namespace Br3D
         {
             ShowSymbol(barButtonItemShowSymbol.Down);
             model.Invalidate();
+        }
+
+        // select all
+        private void selectallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            model.Entities.SelectAll();
+            model.Invalidate();
+
+            RefreshPropertyGridControl(model.Entities[model.Entities.Count - 1]);
+        }
+
+        // unselect all
+        private void unselectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            model.Entities.ClearSelection();
+            model.Invalidate();
+
+            RefreshPropertyGridControl(null);
+        }
+
+        // invert selection
+        private void invertSelectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Entity lastSelectedEntity = null;
+            foreach (var ent in model.Entities)
+            {
+                ent.Selected = !ent.Selected;
+                if (ent.Selected)
+                    lastSelectedEntity = ent;
+            }
+            model.Invalidate();
+
+            RefreshPropertyGridControl(lastSelectedEntity);
         }
     }
 }

@@ -141,7 +141,8 @@ namespace hanee.ThreeD
             base.OnMouseDown(e);
 
             // eyeshot액션이 동작중이면 리턴
-            if (this.ActionMode != actionType.None)
+            if (this.ActionMode != actionType.None &&
+                this.ActionMode != actionType.SelectVisibleByPickDynamic)
                 return;
 
             if (e.Button == MouseButtons.Left)

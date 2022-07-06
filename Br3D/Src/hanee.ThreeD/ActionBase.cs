@@ -302,7 +302,9 @@ namespace hanee.ThreeD
             if (userInputting[(int)UserInput.SelectingSubEntity] ||
                 userInputting[(int)UserInput.SelectingEntity] ||
                 userInputting[(int)UserInput.SelectingLabel] ||
-                userInputting[(int)UserInput.SelectingEntities]
+                userInputting[(int)UserInput.SelectingEntities] ||
+                userInputting[(int)UserInput.SelectingFace] ||
+                userInputting[(int)UserInput.SelectingEdge]
                 )
                 return true;
 
@@ -382,13 +384,22 @@ namespace hanee.ThreeD
             // 현재 선택된 item이 마지막 선택과 다르면 갱신한다.
             if (LastSelectedItem != item)
             {
-                if (LastSelectedItem != null)
-                    LastSelectedItem.Select(environment, false);
+                bool selectable = true;
+                if (item is Environment.SelectedFace)
+                {
+                    selectable = item.Item is Brep;
+                }
 
-                LastSelectedItem = item;
+                if (selectable)
+                {
+                    if (LastSelectedItem != null)
+                        LastSelectedItem.Select(environment, false);
 
-                if (LastSelectedItem != null)
-                    LastSelectedItem.Select(environment, true);
+                    LastSelectedItem = item;
+
+                    if (LastSelectedItem != null)
+                        LastSelectedItem.Select(environment, true);
+                }
 
                 environment.Invalidate();
             }
@@ -539,7 +550,7 @@ namespace hanee.ThreeD
                 (Control.ModifierKeys & Keys.Alt) == Keys.Alt ||
                 (Control.ModifierKeys & Keys.Shift) == Keys.Shift)
                 return;
-            
+
             Entered = true;
         }
 
@@ -581,6 +592,33 @@ namespace hanee.ThreeD
                     {
                         selectedEntity = entityTmp;
                         ActionBase.EndInput(UserInput.SelectingEntity);
+                    }
+                }
+            }
+
+
+            if (userInputting[(int)UserInput.SelectingFace] == true)
+            {
+                devDept.Eyeshot.Model.SelectedItem item = environment.GetItemUnderMouseCursor(e.Location);
+                if (item != null)
+                {
+                    if (item is devDept.Eyeshot.Model.SelectedFace)
+                    {
+                        selectedFace = (devDept.Eyeshot.Model.SelectedFace)item;
+                        ActionBase.EndInput(UserInput.SelectingFace);
+                    }
+                }
+            }
+
+            if (userInputting[(int)UserInput.SelectingEdge] == true)
+            {
+                devDept.Eyeshot.Model.SelectedItem item = environment.GetItemUnderMouseCursor(e.Location);
+                if (item != null)
+                {
+                    if (item is devDept.Eyeshot.Model.SelectedEdge)
+                    {
+                        selectedEdge = (devDept.Eyeshot.Model.SelectedEdge)item;
+                        ActionBase.EndInput(UserInput.SelectingEdge);
                     }
                 }
             }
@@ -684,7 +722,7 @@ namespace hanee.ThreeD
             ActionBase.cursorText = null;
 
 
-         
+
             return point3D;
         }
 
@@ -794,10 +832,11 @@ namespace hanee.ThreeD
         }
 
         // face 1개를 선택받는다
-        public async Task<devDept.Eyeshot.Model.SelectedFace> GetFace(string message = null, int stepID = -1)
+        public async Task<devDept.Eyeshot.Model.SelectedFace> GetFace(string message = null, int stepID = -1, bool dynamicHighlight = false)
         {
             ActionBase.StartInput(environment, message, stepID, UserInput.SelectingFace);
-            actionType oldActionType = environment.ActionMode;
+            ActionBase.dynamicHighlight = dynamicHighlight;
+            //actionType oldActionType = environment.ActionMode;
             selectionFilterType oldSelectionFilterType = selectionFilterType.Entity;
 
             devDept.Eyeshot.Model model = environment as devDept.Eyeshot.Model;
@@ -807,7 +846,7 @@ namespace hanee.ThreeD
                 model.SelectionFilterMode = selectionFilterType.Face;
             }
 
-            environment.ActionMode = actionType.SelectVisibleByPickDynamic;
+            //environment.ActionMode = actionType.SelectVisibleByPickDynamic;
 
             while (ActionBase.userInputting[(int)UserInput.SelectingFace] == true)
             {
@@ -831,7 +870,7 @@ namespace hanee.ThreeD
 
             if (model != null)
             {
-                model.ActionMode = oldActionType;
+                //model.ActionMode = oldActionType;
                 model.SelectionFilterMode = oldSelectionFilterType;
             }
 
@@ -850,7 +889,7 @@ namespace hanee.ThreeD
             DynamicInputManager.ShowDynamicInput(environment);
 
             // command bar의 메시지를 바꾼다.
-            if(DynamicInputManager.controlCommandBar != null)
+            if (DynamicInputManager.controlCommandBar != null)
                 DynamicInputManager.controlCommandBar.labelControlMessage.Text = message;
         }
 
@@ -1064,7 +1103,7 @@ namespace hanee.ThreeD
         protected devDept.Eyeshot.Environment environment;
         protected devDept.Eyeshot.Model GetModel() { return environment as devDept.Eyeshot.Model; }
         protected HModel GetHModel() { return environment as HModel; }
-        protected Workspace GetWorkspace() 
+        protected Workspace GetWorkspace()
         {
             if (GetHModel() != null)
                 return GetHModel().workSpace;
