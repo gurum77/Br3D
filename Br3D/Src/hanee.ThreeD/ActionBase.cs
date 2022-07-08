@@ -384,19 +384,22 @@ namespace hanee.ThreeD
             // 현재 선택된 item이 마지막 선택과 다르면 갱신한다.
             if (LastSelectedItem != item)
             {
-                bool selectable = true;
+                bool highlightable = false;
                 if (item is Environment.SelectedFace)
                 {
-                    selectable = item.Item is Brep;
+                    highlightable = item.Item is Brep;
                 }
 
-                if (selectable)
+                if (highlightable)
                 {
                     if (LastSelectedItem != null)
                         LastSelectedItem.Select(environment, false);
+                }
 
                     LastSelectedItem = item;
 
+                if (highlightable)
+                {
                     if (LastSelectedItem != null)
                         LastSelectedItem.Select(environment, true);
                 }
@@ -435,6 +438,9 @@ namespace hanee.ThreeD
             DynamicInputManager.ModifyPoint3D(environment, ref pt);
 
 
+            // work space에 의한 좌표 조정
+            
+
             return pt;
         }
         // mouse event args로 Point3D 좌표를 설정한다.
@@ -448,15 +454,14 @@ namespace hanee.ThreeD
         // mouse 위치의 Point3D 좌표를 리턴
         static public Point3D GetPoint3DByMouseLocation(Environment environment, System.Drawing.Point location)
         {
-            Point3D point3D = environment.ScreenToWorld(location);
+            Point3D point3D = environment.ScreenToWorldWithWorkspace(location);
+
             // null 이면 camere 가 바라보는 평면을 기준으로 좌표를 계산한다
             if (point3D == null)
             {
                 Model model = environment as Model;
                 if (model != null)
-                {
                     environment.ScreenToPlane(location, model.ActiveViewport.Camera.NearPlane, out point3D);
-                }
             }
 
             if (point3D != null)
@@ -467,21 +472,12 @@ namespace hanee.ThreeD
                 // 그리드 스냅 적용
                 ActionBase.ModifyPointByGridSnap(ref point3D);
 
-                // workplane
-                var hModel = environment as HModel;
-                if (hModel != null && hModel.workSpace != null && hModel.workSpace.enabled)
-                {
-                    var pt2 = hModel.workSpace.plane.Project(point3D);
-                    point3D = hModel.workSpace.plane.PointAt(pt2);
-                    //environment.ScreenToPlane(location, hModel.workSpace.plane, out point3D);
-                }
+                // workspace에 투영
+                point3D = environment.ProjectOnWorkspace(point3D);
 
                 if (environment.IsTopViewOnly())
                     point3D.Z = 0;
-
             }
-
-
 
             return point3D;
         }

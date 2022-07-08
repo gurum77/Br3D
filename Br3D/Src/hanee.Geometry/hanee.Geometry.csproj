@@ -109,6 +109,7 @@
     <Compile Include="NamedIDManager.cs" />
     <Compile Include="ObjectHelper.cs" />
     <Compile Include="OrientedBoundingRectHelper.cs" />
+    <Compile Include="PlaneHelper.cs" />
     <Compile Include="Point2DListHelper.cs" />
     <Compile Include="Point3DHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

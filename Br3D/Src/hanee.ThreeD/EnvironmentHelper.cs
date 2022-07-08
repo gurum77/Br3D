@@ -10,6 +10,52 @@ namespace hanee.ThreeD
     // Model, Drawings 모두를 위한 헬퍼
     public static class EnvironmentHelper
     {
+        // world 좌표를 work space에 투영한다.
+        static public Point3D ProjectOnWorkspace(this devDept.Eyeshot.Environment environment, Point3D pt)
+        {
+            var ws = environment.GetWorkspace();
+            if (ws != null || !ws.enabled)
+                return pt;
+
+            var pt2D = ws.plane.Project(pt);
+            return ws.plane.PointAt(pt2D);
+        }
+
+        // 마우스 좌표를 world좌표로 변환(workspace 고려함)
+        static public Point3D ScreenToWorldWithWorkspace(this devDept.Eyeshot.Environment environment, System.Drawing.Point location)
+        {
+            Point3D point3D = environment.ScreenToWorld(location);
+
+            // workplane이 활성화 되어있으면 workplane에서 좌표를 찾는다.
+            var ws = environment.GetWorkspace();
+            if (ws != null && ws.enabled)
+                environment.ScreenToPlane(location, ws.plane, out point3D);
+
+            return point3D;
+        }
+
+        // workspace symbol을 리턴한다.
+        static public OriginSymbol GetWorkspaceSymbol(this devDept.Eyeshot.Environment environment)
+        {
+            var model = environment as Model;
+            if (model == null)
+                return null;
+
+            return model.ActiveViewport.OriginSymbols.Length > 1 ? model.ActiveViewport.OriginSymbols[1] : null;
+        }
+
+        // workspace를 시작한다.
+        static public void StartWorkspace(this devDept.Eyeshot.Environment environment, Point3D pt1, Point3D pt2, Point3D pt3)
+        {
+            var plane = new Plane();
+            plane.CreateFromPoints(pt1, pt2, pt3);
+            plane.Normalize();
+
+            environment.StartWorkspace(plane);
+        }
+
+
+
         // workspace를 켠다
         static public void StartWorkspace(this devDept.Eyeshot.Environment environment, Plane plane)
         {
@@ -18,6 +64,14 @@ namespace hanee.ThreeD
                 return;
             ws.plane = plane;
             ws.enabled = true;
+
+
+            var sym = environment.GetWorkspaceSymbol();
+            if (sym == null)
+                return;
+            sym.Transformation = new Transformation(ws.plane.Origin, ws.plane.AxisX, ws.plane.AxisY, ws.plane.AxisZ);
+            sym.Visible = true;
+            environment.Invalidate();
         }
 
         // workspace를 끈다.
@@ -28,6 +82,13 @@ namespace hanee.ThreeD
                 return;
 
             ws.enabled = false;
+
+            var sym = environment.GetWorkspaceSymbol();
+            if (sym == null)
+                return;
+            sym.Visible = false;
+            environment.Invalidate();
+
         }
 
         static public Workspace GetWorkspace(this devDept.Eyeshot.Environment environment)
