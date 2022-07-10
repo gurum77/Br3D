@@ -9,6 +9,8 @@ namespace hanee.Cad.Tool
 {
     public class ActionWorkspace : ActionBase
     {
+        Point3D point1, point2, point3;
+
         public ActionWorkspace(devDept.Eyeshot.Environment environment) : base(environment)
         {
         }
@@ -71,12 +73,46 @@ namespace hanee.Cad.Tool
         {
             StartAction();
 
-            var face = await GetFace(LanguageHelper.Tr("Select workspace face"), -1, true);
-            var points = GetSelectedFace(face);
+            point1 = null;
+            point2 = null;
+            point3 = null;
+
+            while (true)
+            {
+                var face = await GetFaceOrKey(LanguageHelper.Tr("Select workspace face(3 : 3 points)"), -1, true);
+                if (IsCanceled())
+                    break;
+
+                if (face.Key != null)
+                {
+                    var points = GetSelectedFace(face.Key);
+                    if (points != null && points.Length > 3)
+                    {
+                        point1 = points[0];
+                        point2 = points[1];
+                        point3 = points[2];
+                    }
+                }
+                else
+                {
+
+                    point1 = await GetPoint3D(LanguageHelper.Tr("Origin point"));
+                    if (IsCanceled())
+                        break;
+                    point2 = await GetPoint3D(LanguageHelper.Tr("X-axis point"));
+                    if (IsCanceled())
+                        break;
+                    point3 = await GetPoint3D(LanguageHelper.Tr("Y-axis point"));
+                    if (IsCanceled())
+                        break;
+                }
+
+                break;
+            }
 
             var model = GetHModel();
-            if (model != null && points != null && points.Length > 2)
-                model.StartWorkspace(points[0], points[1], points[2]);
+            if (model != null && point1 != null && point2 != null && point3 != null)
+                model.StartWorkspace(point1, point2, point3);
 
             EndAction();
             return true;

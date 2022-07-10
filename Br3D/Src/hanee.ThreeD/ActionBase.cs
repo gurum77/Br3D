@@ -396,7 +396,7 @@ namespace hanee.ThreeD
                         LastSelectedItem.Select(environment, false);
                 }
 
-                    LastSelectedItem = item;
+                LastSelectedItem = item;
 
                 if (highlightable)
                 {
@@ -439,7 +439,7 @@ namespace hanee.ThreeD
 
 
             // work space에 의한 좌표 조정
-            
+
 
             return pt;
         }
@@ -832,7 +832,6 @@ namespace hanee.ThreeD
         {
             ActionBase.StartInput(environment, message, stepID, UserInput.SelectingFace);
             ActionBase.dynamicHighlight = dynamicHighlight;
-            //actionType oldActionType = environment.ActionMode;
             selectionFilterType oldSelectionFilterType = selectionFilterType.Entity;
 
             devDept.Eyeshot.Model model = environment as devDept.Eyeshot.Model;
@@ -841,8 +840,6 @@ namespace hanee.ThreeD
                 oldSelectionFilterType = model.SelectionFilterMode;
                 model.SelectionFilterMode = selectionFilterType.Face;
             }
-
-            //environment.ActionMode = actionType.SelectVisibleByPickDynamic;
 
             while (ActionBase.userInputting[(int)UserInput.SelectingFace] == true)
             {
@@ -863,16 +860,66 @@ namespace hanee.ThreeD
                 environment.Invalidate();
             }
 
-
             if (model != null)
-            {
-                //model.ActionMode = oldActionType;
                 model.SelectionFilterMode = oldSelectionFilterType;
-            }
-
 
             return selectedFace;
         }
+
+        // face 1개를 선택받는다
+        public async Task<KeyValuePair<devDept.Eyeshot.Model.SelectedFace, KeyEventArgs>> GetFaceOrKey(string message = null, int stepID = -1, bool dynamicHighlight = false)
+        {
+            ActionBase.StartInput(environment, message, stepID, UserInput.SelectingFace);
+            ActionBase.StartInput(environment, message, stepID, UserInput.GettingKey);
+
+            ActionBase.dynamicHighlight = dynamicHighlight;
+            selectionFilterType oldSelectionFilterType = selectionFilterType.Entity;
+
+            devDept.Eyeshot.Model model = environment as devDept.Eyeshot.Model;
+            if (model != null)
+            {
+                oldSelectionFilterType = model.SelectionFilterMode;
+                model.SelectionFilterMode = selectionFilterType.Face;
+            }
+
+            while (ActionBase.userInputting[(int)UserInput.SelectingFace] == true &&
+                ActionBase.userInputting[(int)UserInput.GettingKey] == true)
+            {
+                // 스탭이 중지되었다면 그냥 보낸다.
+                if (ActionBase.IsStopedCurrentStep)
+                {
+                    ActionBase.EndInput(UserInput.SelectingFace);
+                    ActionBase.EndInput(UserInput.GettingKey);
+                    break;
+                }
+
+                await Task.Delay(100);
+            }
+
+            ActionBase.cursorText = null;
+            if (selectedFace != null)
+            {
+                selectedFace.Item.Selected = true;
+                environment.Invalidate();
+            }
+
+            if (model != null)
+                model.SelectionFilterMode = oldSelectionFilterType;
+
+            var resultFace = selectedFace;
+            var resultKey = key;
+            if (ActionBase.userInputting[(int)UserInput.SelectingFace])
+                resultFace = null;
+            if (ActionBase.userInputting[(int)UserInput.GettingKey])
+                resultKey = null;
+
+            // 2가지 모두 종료(GetFaceOrKey에서는 둘중 하나만 입력받기 때문에 나머지는 여전히  true이다)
+            ActionBase.EndInput(UserInput.SelectingFace);
+            ActionBase.EndInput(UserInput.GettingKey);
+
+            return new KeyValuePair<devDept.Eyeshot.Model.SelectedFace, KeyEventArgs>(resultFace, resultKey);
+        }
+
 
         // input 시작
         public static void StartInput(Environment environment, string message, int stepID, UserInput userInput)
@@ -1011,6 +1058,9 @@ namespace hanee.ThreeD
                 resultEntity = null;
             if (ActionBase.userInputting[(int)UserInput.GettingKey])
                 resultKey = null;
+
+            ActionBase.EndInput(UserInput.SelectingEntity);
+            ActionBase.EndInput(UserInput.GettingKey);
 
             return new KeyValuePair<Entity, KeyEventArgs>(resultEntity, resultKey);
         }
