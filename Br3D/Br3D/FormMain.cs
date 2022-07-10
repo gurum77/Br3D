@@ -772,6 +772,14 @@ namespace Br3D
             SetFunctionByElement(barButtonItemCheckForUpdate, CheckForUpdate, LanguageHelper.Tr("Check For Update"), "CheckForUpdate", null);
             SetFunctionByElement(barButtonItemOptions, RunOptions, LanguageHelper.Tr("Options"), null, null);
             SetFunctionByElement(barButtonItemAbout, About, LanguageHelper.Tr("About"), "About", null);
+
+            // status bar
+            SetFunctionByElement(barButtonItemEndPoint, End, "", "End", null);
+            SetFunctionByElement(barButtonItemIntPoint, Intersection, "", "Int", null);
+            SetFunctionByElement(barButtonItemMidPoint, Middle, "", "Mid", null);
+            SetFunctionByElement(barButtonItemCenterPoint, Center, "", "Cen", null);
+            SetFunctionByElement(barButtonItemNodePoint, Point, "", null, null);
+
         }
 
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
@@ -954,7 +962,7 @@ namespace Br3D
         }
 
         // 
-        void FlagOsnap(BarButtonItem barButtonItem, Snapping.objectSnapType snapType)
+        void FlagOsnap(BarButtonItem barButtonItem, Snapping.objectSnapType snapType, BarButtonItem barButtonItem2 = null)
         {
             HModel hModel = model as HModel;
             if (hModel == null)
@@ -962,6 +970,8 @@ namespace Br3D
 
             hModel.Snapping.FlagActiveObjectSnap(snapType);
             barButtonItem.Down = hModel.Snapping.IsActiveObjectSnap(snapType);
+            if(barButtonItem2 != null)
+                barButtonItem2.Down = barButtonItem.Down;
         }
 
         void ViewportSingle()
@@ -1013,11 +1023,11 @@ namespace Br3D
         }
 
         void OrthoMode() => FlagOrthoMode(barButtonItemOrthoMode);
-        void End() => FlagOsnap(barButtonItemOsnapend, Snapping.objectSnapType.End);
-        void Middle() => FlagOsnap(barButtonItemOsnapMiddle, Snapping.objectSnapType.Mid);
-        void Point() => FlagOsnap(barButtonItemOsnapPoint, Snapping.objectSnapType.Point);
-        void Intersection() => FlagOsnap(barButtonItemOsnapIntersection, Snapping.objectSnapType.Intersect);
-        void Center() => FlagOsnap(barButtonItemOsnapCenter, Snapping.objectSnapType.Center);
+        void End() => FlagOsnap(barButtonItemOsnapend, Snapping.objectSnapType.End, barButtonItemEndPoint);
+        void Middle() => FlagOsnap(barButtonItemOsnapMiddle, Snapping.objectSnapType.Mid, barButtonItemMidPoint);
+        void Point() => FlagOsnap(barButtonItemOsnapPoint, Snapping.objectSnapType.Point, null);
+        void Intersection() => FlagOsnap(barButtonItemOsnapIntersection, Snapping.objectSnapType.Intersect, barButtonItemIntPoint);
+        void Center() => FlagOsnap(barButtonItemOsnapCenter, Snapping.objectSnapType.Center, barButtonItemCenterPoint);
 
         async void Coorindates()
         {
