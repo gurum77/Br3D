@@ -138,6 +138,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryRowHelper.cs" />
+    <Compile Include="ControlAds.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlAds.Designer.cs">
+      <DependentUpon>ControlAds.cs</DependentUpon>
+    </Compile>
     <Compile Include="Define.cs" />
     <Compile Include="DisplayModeButton.cs" />
     <Compile Include="EntityProperties.cs" />
@@ -159,12 +165,16 @@
     <Compile Include="FormOptions.Designer.cs">
       <DependentUpon>FormOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="InternetExplorerBrowserEmulation.cs" />
     <Compile Include="ObjectTreeListHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyGridControlHelper.cs" />
     <Compile Include="TreeListNodeOption.cs" />
     <Compile Include="VersionHelper.cs" />
+    <EmbeddedResource Include="ControlAds.resx">
+      <DependentUpon>ControlAds.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </EmbeddedResource>

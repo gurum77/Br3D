@@ -82,6 +82,8 @@ namespace Br3D
 
             EnableDynamicInput(true, false);
             SetLTEnvironment();
+
+            
         }
 
         // 옵션을 적용한다.
@@ -172,7 +174,11 @@ namespace Br3D
         private void SetLTEnvironment()
         {
             if (!VersionHelper.isLT)
+            {
+                // 광고 표시
+                controlAds1.ShowAd();
                 return;
+            }
 
             this.Text = VersionHelper.appName;
 
@@ -185,6 +191,8 @@ namespace Br3D
             ribbonPageDraw.Visible = false;
             ribbonPageEdit.Visible = false;
             ribbonPageDimension.Visible = false;
+
+            
 
         }
 
