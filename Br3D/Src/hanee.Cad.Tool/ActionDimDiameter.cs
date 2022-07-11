@@ -62,7 +62,7 @@ namespace hanee.Cad.Tool
 
                 // arc 는 지름치수를 넣으면 글자가 뒤집힌다.
                 // circle을 만들어서 지정 entity를 넣어준다.
-                var tempCircle = new Circle(selectedCircle.Center, selectedCircle.Radius);
+                var tempCircle = new Circle(selectedCircle.Plane, selectedCircle.Center, selectedCircle.Radius);
                 
                 var dim = radius ? new RadialDim(tempCircle, pt, Define.DefaultTextHeight) : new DiametricDim(tempCircle, pt, Define.DefaultTextHeight);
                 GetHModel()?.entityPropertiesManager?.SetDefaultProperties(dim);

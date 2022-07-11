@@ -31,10 +31,11 @@ namespace hanee.Cad.Tool
                 return;
 
 
+            var plane = GetWorkplane();
             var pt1 = point3D.Clone() as Point3D;
-            var pt2 = new Point3D(pt1.X + image.Width * scale, pt1.Y);
-            var pt3 = new Point3D(pt1.X + image.Width * scale, pt1.Y + image.Height * scale);
-            var pt4 = new Point3D(pt1.X, pt1.Y + image.Height * scale);
+            var pt2 = pt1 + plane.AxisX * image.Width * scale;// new Point3D(pt1.X + image.Width * scale, pt1.Y);
+            var pt3 = pt2 + plane.AxisY * image.Height * scale;// new Point3D(pt1.X + image.Width * scale, pt1.Y + image.Height * scale);
+            var pt4 = pt1 + plane.AxisY * image.Height * scale;// new Point3D(pt1.X, pt1.Y + image.Height * scale);
             var pt5 = pt1.Clone() as Point3D;
             var lp = new LinearPath(pt1, pt2, pt3, pt4, pt5);
 
@@ -98,7 +99,7 @@ namespace hanee.Cad.Tool
 
                 if (insertionPoint == null)
                     break;
-                var plane = Plane.XY;
+                var plane = GetWorkplane();
                 plane.Origin = insertionPoint;
                 var pic = new Picture(plane, image.Width * scale, image.Height * scale, image);
                 environment.Entities.Add(pic);

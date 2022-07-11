@@ -65,13 +65,14 @@ namespace hanee.Cad.Tool
                 form.RichTextBox.SelectAll();
                 if (form.ShowDialog() == DialogResult.Cancel)
                     break;
-                
-                var leader = new Leader(Plane.XY, points);
+
+                var plane = GetWorkplane();
+                var leader = new Leader(plane, points);
                 leader.ArrowheadSize = Define.DefaultTextHeight;
                 environment.Entities.Add(leader);
 
                 var insPoint = points[points.Count - 1];
-                var text = ActionText.MakeText(insPoint, insPoint + Vector3D.AxisX, leader.ArrowheadSize, form.RichTextBox);
+                var text = ActionText.MakeText(insPoint,  insPoint + plane.AxisX, leader.ArrowheadSize, form.RichTextBox, plane);
                 environment.Entities.Add(text);
 
                 environment.TempEntities.Clear();

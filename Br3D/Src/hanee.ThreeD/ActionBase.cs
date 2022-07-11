@@ -580,15 +580,23 @@ namespace hanee.ThreeD
 
             if (userInputting[(int)UserInput.SelectingEntity] == true)
             {
-                devDept.Eyeshot.Model.SelectedItem item = environment.GetItemUnderMouseCursor(e.Location);
-                if (item != null)
+                var items = environment.GetAllItemsUnderMouseCursor(e.Location);
+                foreach (var item in items)
                 {
                     Entity entityTmp = item.Item as Entity;
-                    if (entityTmp != null)
+                    if (entityTmp == null)
+                        continue;
+
+                    if (selectableType == null || selectableType.Count == 0 || selectableType.ContainsKey(entityTmp.GetType()))
                     {
                         selectedEntity = entityTmp;
-                        ActionBase.EndInput(UserInput.SelectingEntity);
+                        break;
                     }
+                }
+
+                if (selectedEntity != null)
+                {
+                    ActionBase.EndInput(UserInput.SelectingEntity);
                 }
             }
 
@@ -1149,6 +1157,13 @@ namespace hanee.ThreeD
         protected devDept.Eyeshot.Environment environment;
         protected devDept.Eyeshot.Model GetModel() { return environment as devDept.Eyeshot.Model; }
         protected HModel GetHModel() { return environment as HModel; }
+        protected Plane GetWorkplane()
+        {
+            var ws = GetWorkspace();
+            if (ws == null)
+                return Plane.XY;
+            return ws.plane;
+        }
         protected Workspace GetWorkspace()
         {
             if (GetHModel() != null)

@@ -22,21 +22,58 @@ namespace hanee.Cad.Tool
         {
             base.OnMouseMove(environment, e);
 
-            var face = ActionBase.LastSelectedItem?.Item as SelectedFace;
-            if (face == null)
+            SetTempEtt(environment, null, true);
+
+            if (point3D != null)
             {
-                SetTempEtt(GetHModel(), null);
-                return;
+                // x축 지정중인 경우
+                if (point1 != null && point2 == null)
+                {
+                    var line = new Line(point1, point3D);
+                    line.Color = System.Drawing.Color.Red;
+                    line.ColorMethod = colorMethodType.byEntity;
+                    line.LineWeight = 3;
+                    line.LineWeightMethod = colorMethodType.byEntity;
+                    SetTempEtt(environment, line, false);
+                } 
+                // y축 지정중인 경우
+                else if (point1 != null && point2 != null)
+                {
+                    var line = new Line(point1, point2);
+                    line.Color = System.Drawing.Color.Red;
+                    line.ColorMethod = colorMethodType.byEntity;
+                    line.LineWeight = 3;
+                    line.LineWeightMethod = colorMethodType.byEntity;
+                    SetTempEtt(environment, line, false);
+
+                    line = new Line(point1, point3D);
+                    line.Color = System.Drawing.Color.Green;
+                    line.ColorMethod = colorMethodType.byEntity;
+                    line.LineWeight = 3;
+                    line.LineWeightMethod = colorMethodType.byEntity;
+                    SetTempEtt(environment, line, false);
+                }
             }
 
-            var points = GetSelectedFace(face);
-            if (points != null)
+            if (point1 == null && point2 == null && point3 == null)
             {
-                var lp = new LinearPath(points);
-                lp.LineWeight = 5;
-                lp.LineWeightMethod = colorMethodType.byEntity;
-                SetTempEtt(GetHModel(), lp, true);
+                var face = ActionBase.LastSelectedItem?.Item as SelectedFace;
+                if (face == null)
+                {
+                    SetTempEtt(GetHModel(), null);
+                    return;
+                }
+
+                var points = GetSelectedFace(face);
+                if (points != null)
+                {
+                    var lp = new LinearPath(points);
+                    lp.LineWeight = 5;
+                    lp.LineWeightMethod = colorMethodType.byEntity;
+                    SetTempEtt(GetHModel(), lp, false);
+                }
             }
+
         }
 
         Point3D[] GetSelectedFace(SelectedFace face)
@@ -71,7 +108,16 @@ namespace hanee.Cad.Tool
 
         public async Task<bool> RunAsync()
         {
+            
+
             StartAction();
+            var model = GetHModel();
+            if(model == null)
+            {
+                EndAction();
+                return true;
+            }
+
 
             point1 = null;
             point2 = null;
@@ -79,24 +125,29 @@ namespace hanee.Cad.Tool
 
             while (true)
             {
-                var face = await GetFaceOrKey(LanguageHelper.Tr("Select workspace face(3 : 3 points)"), -1, true);
+                var face = await GetFaceOrKey(LanguageHelper.Tr(" Select workspace face(3 : 3 points, W : World)"), -1, true);
                 if (IsCanceled())
                     break;
 
                 if (face.Key != null)
                 {
                     var points = GetSelectedFace(face.Key);
-                    if (points != null && points.Length > 3)
+                    if (points != null && points.Length > 2)
                     {
                         point1 = points[0];
                         point2 = points[1];
                         point3 = points[2];
                     }
                 }
+                // 표준 좌표계로 설정
+                else if(face.Value?.KeyCode == Keys.W)
+                {
+                    break;
+                }
                 else
                 {
 
-                    point1 = await GetPoint3D(LanguageHelper.Tr("Origin point"));
+                    point1 = await GetPoint3D(LanguageHelper.Tr("Origin point(f - Select face)"));
                     if (IsCanceled())
                         break;
                     point2 = await GetPoint3D(LanguageHelper.Tr("X-axis point"));
@@ -110,9 +161,11 @@ namespace hanee.Cad.Tool
                 break;
             }
 
-            var model = GetHModel();
-            if (model != null && point1 != null && point2 != null && point3 != null)
+
+            if (point1 != null && point2 != null && point3 != null)
                 model.StartWorkspace(point1, point2, point3);
+            else
+                model.EndWorkspace();
 
             EndAction();
             return true;

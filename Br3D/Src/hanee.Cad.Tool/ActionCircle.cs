@@ -39,7 +39,7 @@ namespace hanee.Cad.Tool
             if (radius <= 0.001)
                 return null;
 
-            Circle circle = new Circle(startPoint, radius);
+            Circle circle = new Circle(GetWorkplane(), startPoint, radius);
             GetHModel()?.entityPropertiesManager?.SetDefaultProperties(circle, tempEntity);
             
             return circle;

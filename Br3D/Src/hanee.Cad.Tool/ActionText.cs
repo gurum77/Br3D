@@ -34,7 +34,7 @@ namespace hanee.Cad.Tool
             var heightLine = new Line(insPoint, heightPoint == null ? point3D : heightPoint);
             heightLine.Color = System.Drawing.Color.Red;
             heightLine.ColorMethod = colorMethodType.byEntity;
-            
+
 
             // 방향선
             if (heightPoint != null)
@@ -72,7 +72,7 @@ namespace hanee.Cad.Tool
 
                 // 높이
                 DynamicInputManager.ActiveLengthFactor(insPoint, 1, LanguageHelper.Tr("Height"));
-                
+
                 heightPoint = await GetPoint3D(LanguageHelper.Tr("Height"));
                 SetOrthoModeStartPoint(insPoint);
                 if (IsCanceled())
@@ -98,7 +98,7 @@ namespace hanee.Cad.Tool
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     var height = insPoint.DistanceTo(heightPoint);
-                    var text = MakeText(insPoint, dirPoint, height, form.RichTextBox);
+                    var text = MakeText(insPoint, dirPoint, height, form.RichTextBox, GetWorkplane());
                     environment.Entities.Add(text);
                 }
                 else
@@ -112,13 +112,22 @@ namespace hanee.Cad.Tool
             return true;
         }
 
-        static public Text MakeText(Point3D insPoint, Point3D dirPoint, double height, RichTextBox richTextBox)
+        static public Text MakeText(Point3D insPoint, Point3D dirPoint, double height, RichTextBox richTextBox, Plane plane = null)
         {
             var textString = richTextBox.Text;
             textString = textString.Replace("\n", System.Environment.NewLine);
             var angle = (dirPoint - insPoint).To2D().ToDir().ToRadian();
-            var plane = new Plane(insPoint, Vector3D.AxisZ);
-            plane.Rotate(angle, Vector3D.AxisZ, insPoint);
+            if (plane == null)
+            {
+                plane = new Plane(insPoint, Vector3D.AxisZ);
+                plane.Rotate(angle, Vector3D.AxisZ, insPoint);
+            }
+            else
+            {
+                var dirPoint2D = plane.Project(dirPoint);
+                dirPoint = plane.PointAt(dirPoint2D);
+            }
+
 
             var text = new Text(plane, textString, height);
             if (richTextBox.Multiline)
