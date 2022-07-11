@@ -68,8 +68,9 @@ namespace hanee.Cad.Tool
 
         Mirror GetMirror(Point3D pt1, Point3D pt2)
         {
+            var plane = GetWorkplane();
             var axisX = new Vector3D(pt2, pt1);
-            var mirrorPlane = new Plane(pt1, axisX, Vector3D.AxisZ);
+            var mirrorPlane = new Plane(pt1, axisX, plane.AxisZ);
             var mirror = new Mirror(mirrorPlane);
             return mirror;
         }

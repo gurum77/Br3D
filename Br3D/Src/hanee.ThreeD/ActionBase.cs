@@ -587,7 +587,8 @@ namespace hanee.ThreeD
                     if (entityTmp == null)
                         continue;
 
-                    if (selectableType == null || selectableType.Count == 0 || selectableType.ContainsKey(entityTmp.GetType()))
+                    var entityType = entityTmp.GetType();
+                    if (selectableType == null || selectableType.Count == 0 || selectableType.ContainsKey(entityType))
                     {
                         selectedEntity = entityTmp;
                         break;

@@ -43,7 +43,11 @@ namespace hanee.Cad.Tool
                 var dist = endPoint.DistanceTo(startPoint);
 
                 var entityType = new Dictionary<Type, bool> ();
-                entityType.Add(typeof(ICurve), true);
+                entityType.Add(typeof(Circle), true);
+                entityType.Add(typeof(Arc), true);
+                entityType.Add(typeof(Line), true);
+                entityType.Add(typeof(LinearPath), true);
+                
                 while (true)
                 {
                     // 객체 선택
@@ -72,7 +76,7 @@ namespace hanee.Cad.Tool
                     var curvePoint2D = curve.PointAt(t).To2D();
 
                     var cw  = UtilityEx.IsOrientedClockwise<Point2D>(new List<Point2D>() { offsetPoint2D, curvePoint2D, curvePoint2D+ dir2D });
-                    var offsetCurve = curve.Offset(cw ? dist : -dist, Vector3D.AxisZ, 0.001, true);
+                    var offsetCurve = curve.Offset(cw ? dist : -dist, GetWorkplane().AxisZ, 0.001, true);
                     if (offsetCurve == null)
                         continue;
 
