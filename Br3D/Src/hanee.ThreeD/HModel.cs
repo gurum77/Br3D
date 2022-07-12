@@ -116,7 +116,8 @@ namespace hanee.ThreeD
                     return;
                 }
 
-                if (e.KeyCode == Keys.Escape)
+                // esc 누르거나 delete로 객체가 삭제된 경우 grip point를 제거한다.
+                if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Delete)
                 {
                     // 입력중이 아니더라도 esc를 누르면 액션을 종료한다.
                     // 액션도중 예외상황 때문에 종료가 안된경우에 대한 예외처리
@@ -124,9 +125,14 @@ namespace hanee.ThreeD
                     {
                         ActionBase.runningAction = null;
                     }
-                    Entities.ClearSelection();
                     gripManager.ClearGripPoints();
-                    selectionManager.ClearSelection();
+
+                    if (e.KeyCode == Keys.Escape)
+                    {
+                        Entities.ClearSelection();
+                        selectionManager.ClearSelection();
+                    }
+
                     UpdatePropertyGridControl(null);
                     Invalidate();
                 }

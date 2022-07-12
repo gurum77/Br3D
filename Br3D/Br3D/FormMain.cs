@@ -1260,6 +1260,7 @@ namespace Br3D
             {
                 OrthoMode();
             }
+
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
