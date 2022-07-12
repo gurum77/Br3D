@@ -1160,17 +1160,11 @@ namespace hanee.ThreeD
         protected HModel GetHModel() { return environment as HModel; }
         protected Plane GetWorkplane()
         {
-            var ws = GetWorkspace();
-            if (ws == null)
-                return Plane.XY;
-            return ws.plane;
+            return environment?.GetWorkplane();
         }
         protected Workspace GetWorkspace()
         {
-            if (GetHModel() != null)
-                return GetHModel().workSpace;
-
-            return null;
+            return environment?.GetWorkspace();
         }
 
 

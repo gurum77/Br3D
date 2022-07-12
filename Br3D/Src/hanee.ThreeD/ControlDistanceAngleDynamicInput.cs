@@ -124,17 +124,20 @@ namespace hanee.ThreeD
         {
             HModel hModel = environment as HModel;
             var mng = hModel?.orthoModeManager;
-            if (mng == null || mng.startPoint == null)
+            var plane = environment.GetWorkplane();
+            if (mng == null || mng.startPoint == null || plane == null)
                 return;
 
             if (fixedLength == null &&
                 fixedAngle == null)
                 return;
 
+            
             double len = fixedLength == null ? pt.DistanceTo(mng.startPoint) : fixedLength.Value;
-            double ang = fixedAngle == null ? (pt - mng.startPoint).AsVector.ToDegree() : fixedAngle.Value;
+            double ang = fixedAngle == null ? plane.ProjectDegree(mng.startPoint, pt) : fixedAngle.Value;
+            var vec = plane.VectorByDegree(ang);
 
-            var newPt = mng.startPoint + ang.ToRadians().ToVector() * len;
+            var newPt = mng.startPoint + vec * len;
             pt.X = newPt.X;
             pt.Y = newPt.Y;
         }

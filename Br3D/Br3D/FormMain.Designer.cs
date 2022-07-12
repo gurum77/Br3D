@@ -552,7 +552,8 @@ namespace Br3D
             this.controlAds1.Name = "controlAds1";
             this.controlAds1.Size = new System.Drawing.Size(253, 250);
             this.controlAds1.TabIndex = 10;
-            this.controlAds1.url = "https://hileejaeho.cafe24.com/brviewer-ad";
+            this.controlAds1.url = "http://hileejaeho.cafe24.com/br3d-ad/";
+            this.controlAds1.Visible = false;
             // 
             // panelContainer1
             // 

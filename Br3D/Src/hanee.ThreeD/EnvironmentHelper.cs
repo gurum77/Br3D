@@ -14,7 +14,7 @@ namespace hanee.ThreeD
         static public Point3D ProjectOnWorkspace(this devDept.Eyeshot.Environment environment, Point3D pt)
         {
             var ws = environment.GetWorkspace();
-            if (ws != null || !ws.enabled)
+            if (ws == null || !ws.enabled)
                 return pt;
 
             var pt2D = ws.plane.Project(pt);
@@ -89,6 +89,15 @@ namespace hanee.ThreeD
             sym.Visible = false;
             environment.Invalidate();
 
+        }
+
+        static public Plane GetWorkplane(this devDept.Eyeshot.Environment environment)
+        {
+            var ws = environment.GetWorkspace();
+            if (ws == null || !ws.enabled)
+                return Plane.XY;
+
+            return ws.plane;
         }
 
         static public Workspace GetWorkspace(this devDept.Eyeshot.Environment environment)

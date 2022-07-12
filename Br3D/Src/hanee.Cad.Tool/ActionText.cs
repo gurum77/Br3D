@@ -120,13 +120,20 @@ namespace hanee.Cad.Tool
             if (plane == null)
             {
                 plane = new Plane(insPoint, Vector3D.AxisZ);
-                plane.Rotate(angle, Vector3D.AxisZ, insPoint);
             }
             else
             {
+                plane = plane.Clone() as Plane;
+                plane.Origin = insPoint;
+
                 var dirPoint2D = plane.Project(dirPoint);
                 dirPoint = plane.PointAt(dirPoint2D);
+
+                // plane의 x축방향으로 써지므로 angle 계산
+                angle = dirPoint2D.AsVector.ToRadian();
+
             }
+            plane.Rotate(angle, plane.AxisZ, insPoint);
 
 
             var text = new Text(plane, textString, height);
@@ -134,6 +141,8 @@ namespace hanee.Cad.Tool
                 text = new MultilineText(plane, textString, 10, height, height * 1.2);
             text.Color = System.Drawing.Color.White;
             text.ColorMethod = colorMethodType.byEntity;
+
+
 
             return text;
         }

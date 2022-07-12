@@ -5,6 +5,23 @@ namespace hanee.Geometry
 {
     static public class PlaneHelper
     {
+        static public Vector3D VectorByDegree(this Plane plane, double ang)
+        {
+            var vec = ang.ToRadians().ToVector();
+            var pt = plane.PointAt(new Point2D(vec.X, vec.Y));
+            var vec3D = (pt - plane.Origin).AsVector;
+            vec3D.Normalize();
+            return vec3D;
+        }
+
+        // 3D좌표 2개의 각도를 계산(평면에 투영한 각도)
+        static public double ProjectDegree(this Plane plane, Point3D from, Point3D to)
+        {
+            var from2D = plane.Project(from);
+            var to2D = plane.Project(to);
+            return (to2D - from2D).AsVector.ToDegree();
+        }
+
         // plane을 수직수평이 되도록 만든다.
         static public void Normalize(this Plane plane)
         {
