@@ -83,7 +83,7 @@ namespace Br3D
             EnableDynamicInput(true, false);
             SetLTEnvironment();
 
-            
+
         }
 
         // 옵션을 적용한다.
@@ -142,7 +142,7 @@ namespace Br3D
                 DynamicInputManager.enabled = true;
             }
             // 하나만 on인 경우
-            else if(enableCommandbar)
+            else if (enableCommandbar)
             {
                 // command bar 활성화
                 controlCommandBar1.enabled = true;
@@ -192,7 +192,7 @@ namespace Br3D
             ribbonPageEdit.Visible = false;
             ribbonPageDimension.Visible = false;
 
-            
+
 
         }
 
@@ -247,7 +247,6 @@ namespace Br3D
 
         private void UpdateCoordinatesControl(MouseEventArgs e)
         {
-
             var point = ActionBase.GetPoint3DWithSnapAndOrthoMode(hModel, e);
             if (point == null)
                 return;
@@ -286,6 +285,7 @@ namespace Br3D
             selectallToolStripMenuItem.Text = LanguageHelper.Tr("Select all");
             unselectAllToolStripMenuItem.Text = LanguageHelper.Tr("Unselect all");
             invertSelectionToolStripMenuItem.Text = LanguageHelper.Tr("Invert selection");
+
 
 
             // page
@@ -978,7 +978,7 @@ namespace Br3D
 
             hModel.Snapping.FlagActiveObjectSnap(snapType);
             barButtonItem.Down = hModel.Snapping.IsActiveObjectSnap(snapType);
-            if(barButtonItem2 != null)
+            if (barButtonItem2 != null)
                 barButtonItem2.Down = barButtonItem.Down;
         }
 
@@ -1272,7 +1272,7 @@ namespace Br3D
 
             // ctrl이나 shift가 눌러져 있는지?
             bool withCtrl = true;
-            if(!System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl) && 
+            if (!System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl) &&
                 !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.RightCtrl) &&
                 !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftShift) &&
                 !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.RightShift))
@@ -1287,13 +1287,13 @@ namespace Br3D
                 middlePointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Mid);
                 centerPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Center);
 
-                VisibleContextMenuItems(endPointToolStripMenuItem, intersectionPointToolStripMenuItem, 
+                VisibleContextMenuItems(endPointToolStripMenuItem, intersectionPointToolStripMenuItem,
                     middlePointToolStripMenuItem, centerPointToolStripMenuItem);
             }
             else
             {
-                VisibleContextMenuItems(selectallToolStripMenuItem, unselectAllToolStripMenuItem, 
-                    invertSelectionToolStripMenuItem);
+                VisibleContextMenuItems(selectallToolStripMenuItem, unselectAllToolStripMenuItem,
+                    invertSelectionToolStripMenuItem, transparencyToolStripMenuItem);
             }
         }
 
@@ -1431,6 +1431,46 @@ namespace Br3D
             model.Invalidate();
 
             RefreshPropertyGridControl(lastSelectedEntity);
+        }
+
+        void SetTransparency(int alpha)
+        {
+            foreach (var ent in model.Entities)
+            {
+                if (!ent.Selected)
+                    continue;
+
+                if (ent is BlockReference br)
+                {
+                    foreach (var be in model.Blocks[br.BlockName].Entities)
+                    {
+                        be.Color = System.Drawing.Color.FromArgb(alpha, be.Color);
+                        be.ColorMethod = colorMethodType.byEntity;
+                    }
+                }
+                else
+                {
+                    ent.Color = System.Drawing.Color.FromArgb(alpha, ent.Color);
+                    ent.ColorMethod = colorMethodType.byEntity;
+
+                }
+            }
+            model.Invalidate();
+        }
+        // 투명도 - 0 (불투명)
+        private void toolStripMenuItemTransparency0_Click(object sender, EventArgs e)
+        {
+            SetTransparency(255);
+        }
+
+        private void toolStripMenuItemTransparency50_Click(object sender, EventArgs e)
+        {
+            SetTransparency(127);
+        }
+
+        private void toolStripMenuItemTransparency100_Click(object sender, EventArgs e)
+        {
+            SetTransparency(0);
         }
     }
 }

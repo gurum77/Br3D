@@ -13,7 +13,9 @@ namespace Br3D
 
         public ControlAds()
         {
+#if !DEBUG
             DevExpress.Utils.BrowserEmulationHelper.DisableBrowserEmulation(System.Reflection.Assembly.GetEntryAssembly().GetName().Name);
+#endif
             InitializeComponent();
 
             Visible = false;

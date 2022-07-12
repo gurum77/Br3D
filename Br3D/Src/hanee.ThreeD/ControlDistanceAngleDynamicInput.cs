@@ -140,6 +140,7 @@ namespace hanee.ThreeD
             var newPt = mng.startPoint + vec * len;
             pt.X = newPt.X;
             pt.Y = newPt.Y;
+            pt.Z = newPt.Z;
         }
 
         public void UpdateControls()
