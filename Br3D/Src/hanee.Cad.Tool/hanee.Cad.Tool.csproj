@@ -107,6 +107,7 @@
     <Compile Include="ActionAngle.cs" />
     <Compile Include="ActionArc.cs" />
     <Compile Include="ActionArea.cs" />
+    <Compile Include="ActionBox.cs" />
     <Compile Include="ActionCircle.cs" />
     <Compile Include="ActionCopy.cs" />
     <Compile Include="ActionCylinder.cs" />

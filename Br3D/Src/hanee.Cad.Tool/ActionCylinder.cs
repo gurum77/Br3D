@@ -13,7 +13,8 @@ namespace hanee.Cad.Tool
 {
     public class ActionCylinder : ActionBase
     {
-        Point3D centerPoint, radiusPoint, heightPoint;
+        protected Plane oldPlane;
+        protected Point3D centerPoint, radiusPoint, heightPoint;
         public ActionCylinder(devDept.Eyeshot.Environment environment) : base(environment)
         {
 
@@ -22,15 +23,47 @@ namespace hanee.Cad.Tool
         public override async void Run()
         { await RunAsync(); }
 
+
+        virtual protected Brep Make3D(bool tempEntity)
+        {
+            if (centerPoint == null || radiusPoint == null || heightPoint == null)
+                return null;
+
+            var radius = centerPoint.DistanceTo(radiusPoint);
+            var height = oldPlane.DistanceTo(heightPoint);
+            if (radius == 0 || height == 0)
+                return null;
+
+            var cylinder = Brep.CreateCylinder(radius, height);
+            cylinder.TransformBy(new Transformation(centerPoint, oldPlane.AxisX, oldPlane.AxisY, oldPlane.AxisZ));
+            GetHModel()?.entityPropertiesManager?.SetDefaultProperties(cylinder, tempEntity);
+            return cylinder;
+        }
+        virtual protected Entity MakeSection()
+        {
+            if (centerPoint == null || point3D == null)
+                return null;
+
+            return new Circle(GetWorkplane(), centerPoint, point3D.DistanceTo(centerPoint));
+        }
+
         protected override void OnMouseMove(devDept.Eyeshot.Environment environment, MouseEventArgs e)
         {
             base.OnMouseMove(environment, e);
-            if (centerPoint == null || radiusPoint == null)
+            if (centerPoint == null)
                 return;
+
+            if (radiusPoint == null)
+            {
+                var section = MakeSection();
+                SetTempEtt(environment, section);
+                return;
+            }
+
 
             heightPoint = point3D;
 
-            var cyl = MakeCylinder();
+            var cyl = Make3D(true);
             if (cyl == null)
                 return;
 
@@ -43,6 +76,7 @@ namespace hanee.Cad.Tool
         {
             StartAction();
 
+            var ws = GetWorkspace();
             while (true)
             {
                 centerPoint = await GetPoint3D(LanguageHelper.Tr("Center point"));
@@ -54,11 +88,15 @@ namespace hanee.Cad.Tool
                 if (IsCanceled())
                     break;
 
+                var oldEnable = ws.enabled;
+                oldPlane = ws.plane;
+                ws.enabled = false;
                 heightPoint = await GetPoint3D(LanguageHelper.Tr("Height point"));
                 if (IsCanceled())
                     break;
+                ws.enabled = true;
 
-                var cylinder = MakeCylinder();
+                var cylinder = Make3D(false);
                 GetModel().Entities.Add(cylinder);
 
                 centerPoint = null;
@@ -73,40 +111,6 @@ namespace hanee.Cad.Tool
             return true;
         }
 
-        private Brep MakeCylinder()
-        {
-            if (centerPoint == null || radiusPoint == null || heightPoint == null)
-                return null;
-
-            var centerPointPlane = Plane.XY;
-            centerPointPlane.Translate(centerPoint.X, centerPoint.Y, centerPoint.Z);
-
-            var matchPoint = centerPointPlane.Project(radiusPoint);
-            if (matchPoint != null)
-            {
-                radiusPoint = centerPointPlane.PointAt(matchPoint);
-            }
-
-            var heightPointPlane = Plane.XY;
-            heightPointPlane.Translate(heightPoint.X, heightPoint.Y, heightPoint.Z);
-            matchPoint = heightPointPlane.Project(centerPoint);
-            if (matchPoint != null)
-            {
-                heightPoint = heightPointPlane.PointAt(matchPoint);
-            }
-
-
-            var radius = centerPoint.DistanceTo(radiusPoint);
-            var height = centerPoint.DistanceTo(heightPoint);
-            if (radius == 0 || height == 0)
-                return null;
-
-            var cylinder = Brep.CreateCylinder(radius, height);
-            cylinder.Translate(centerPoint.X, centerPoint.Y, centerPoint.Z);
-
-            cylinder.Color = System.Drawing.Color.Yellow;
-            cylinder.ColorMethod = colorMethodType.byEntity;
-            return cylinder;
-        }
+      
     }
 }

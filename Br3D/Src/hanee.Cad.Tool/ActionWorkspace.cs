@@ -100,8 +100,15 @@ namespace hanee.Cad.Tool
                 }
 
                 return new Point3D[] { pt1, pt2, pt3 };
-
             }
+            else if(face.Item is Brep brep)
+            {
+                var subface = brep.Faces[face.Index];
+                if (subface.Surface is PlanarSurf ps)
+                {
+                    return new Point3D[]{ ps.Plane.Origin, ps.Plane.Origin+ps.Plane.AxisX, ps.Plane.Origin+ps.Plane.AxisY};
+                }
+            }    
 
             return null;
         }

@@ -708,6 +708,7 @@ namespace hanee.ThreeD
         }
 
         // 마우스로 point3D를 입력받는다.
+        // normalPoint workplane의 법선방향으로의 좌표를 입력받는다.
         public async Task<Point3D> GetPoint3D(string message = null, int stepID = -1)
         {
             ActionBase.StartInput(environment, message, stepID, UserInput.GettingPoint3D);
@@ -1162,6 +1163,13 @@ namespace hanee.ThreeD
         {
             return environment?.GetWorkplane();
         }
+        protected void SetWorkplane(Plane plane)
+        {
+            var ws = GetWorkspace();
+            if (ws == null)
+                return;
+            ws.plane = plane;
+        }
         protected Workspace GetWorkspace()
         {
             return environment?.GetWorkspace();
@@ -1193,6 +1201,7 @@ namespace hanee.ThreeD
         // 새로운 액션이 시작되어서 중지 되었는지?
         public bool StoppedActionByNewActionStart
         { get; set; }
+
         public ActionBase(devDept.Eyeshot.Environment environment)
         {
             this.environment = environment;
