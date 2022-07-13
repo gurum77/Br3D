@@ -125,7 +125,7 @@ namespace hanee.Cad.Tool
 
             while (true)
             {
-                var face = await GetFaceOrKey(LanguageHelper.Tr(" Select workspace face(3 : 3 points, W : World)"), -1, true);
+                var face = await GetFaceOrKey(LanguageHelper.Tr(" Select workspace face(3 : 3 points, W : World)"), -1, false);
                 if (IsCanceled())
                     break;
 

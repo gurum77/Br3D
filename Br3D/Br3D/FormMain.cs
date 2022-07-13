@@ -72,6 +72,7 @@ namespace Br3D
             InitTileElementStatus();
             InitObjectTreeList();
             InitPropertyGrid();
+            InitGrids();
 
             InitToolbar();
             Translate();
@@ -82,8 +83,41 @@ namespace Br3D
 
             EnableDynamicInput(true, false);
             SetLTEnvironment();
+        }
 
+        private void InitGrids()
+        {
+            if (model.Viewports.Count < 2)
+                return;
 
+            // 첫번째 viewport의 그리드를 나머지 viewport에 속성을 복사
+            var vp1 = model.Viewports[0];
+            if (vp1.Grids.Length < 2)
+                return;
+
+            var grid1 = vp1.Grids[1];
+            for (int i = 1; i < model.Viewports.Count; ++i)
+            {
+                var vpCur = model.Viewports[i];
+                if (vpCur.Grids.Length < 2)
+                    continue;
+
+                var gridCur = vpCur.Grids[1];
+                gridCur.AutoSize = grid1.AutoSize;
+                gridCur.AutoStep = grid1.AutoStep;
+                gridCur.BorderColor = grid1.BorderColor;
+                gridCur.ColorAxisX = grid1.ColorAxisX;
+                gridCur.ColorAxisY = grid1.ColorAxisY;
+                gridCur.FillColor = grid1.FillColor;
+                gridCur.AlwaysBehind = grid1.AlwaysBehind;
+                gridCur.Lighting = grid1.Lighting;
+                gridCur.LineColor = grid1.LineColor;
+                gridCur.MajorLineColor = grid1.MajorLineColor;
+                gridCur.MajorLinesEvery = grid1.MajorLinesEvery;
+                gridCur.MaxNumberOfLines = grid1.MaxNumberOfLines;
+                gridCur.MinNumberOfLines = grid1.MinNumberOfLines;
+                gridCur.Step = grid1.Step;
+            }
         }
 
         // 옵션을 적용한다.

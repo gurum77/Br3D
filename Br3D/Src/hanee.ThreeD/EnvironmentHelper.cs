@@ -35,13 +35,17 @@ namespace hanee.ThreeD
         }
 
         // workspace symbol을 리턴한다.
-        static public OriginSymbol GetWorkspaceSymbol(this devDept.Eyeshot.Environment environment)
+        static public Grid GetWorkspaceSymbol(this devDept.Eyeshot.Environment environment)
         {
             var model = environment as Model;
             if (model == null)
                 return null;
+            if (model.ActiveViewport.Grids.Length < 2)
+                return null;
 
-            return model.ActiveViewport.OriginSymbols.Length > 1 ? model.ActiveViewport.OriginSymbols[1] : null;
+            
+            return model.ActiveViewport.Grids[1];
+            //return model.ActiveViewport.OriginSymbols.Length > 1 ? model.ActiveViewport.OriginSymbols[1] : null;
         }
 
         // workspace를 시작한다.
@@ -69,8 +73,13 @@ namespace hanee.ThreeD
             var sym = environment.GetWorkspaceSymbol();
             if (sym == null)
                 return;
-            sym.Transformation = new Transformation(ws.plane.Origin, ws.plane.AxisX, ws.plane.AxisY, ws.plane.AxisZ);
+            sym.Plane = plane;
             sym.Visible = true;
+            
+            
+            //sym.Edit(Color.FromArgb(100, Color.Red));
+            //sym.Transformation = new Transformation(ws.plane.Origin, ws.plane.AxisX, ws.plane.AxisY, ws.plane.AxisZ);
+            //sym.Visible = true;
             environment.Invalidate();
         }
 
@@ -86,7 +95,9 @@ namespace hanee.ThreeD
             var sym = environment.GetWorkspaceSymbol();
             if (sym == null)
                 return;
+
             sym.Visible = false;
+            
             environment.Invalidate();
 
         }

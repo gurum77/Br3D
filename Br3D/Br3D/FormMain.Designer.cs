@@ -34,7 +34,7 @@ namespace Br3D
             devDept.Eyeshot.CancelToolBarButton cancelToolBarButton1 = new devDept.Eyeshot.CancelToolBarButton("Cancel", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
             devDept.Eyeshot.ProgressBar progressBar1 = new devDept.Eyeshot.ProgressBar(devDept.Eyeshot.ProgressBar.styleType.Circular, 0, "Idle", System.Drawing.Color.Black, System.Drawing.Color.Transparent, System.Drawing.Color.Green, 1D, true, cancelToolBarButton1, false, 0.1D, 0.333D, true);
             devDept.Graphics.BackgroundSettings backgroundSettings1 = new devDept.Graphics.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(82)))), ((int)(((byte)(103))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(41))))), 0.75D, null, devDept.Graphics.colorThemeType.Auto, 0.33D);
-            devDept.Eyeshot.Camera camera1 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(-1.2598973293902418D, 2.5657311010967412D, 42.261193606378384D), 307.26899936464309D, new devDept.Geometry.Quaternion(0.018434349666532512D, 0.039532590434972065D, 0.42221602280006187D, 0.90544518284475428D), devDept.Graphics.projectionType.Perspective, 40D, 1.8511617265459759D, false, 0.001D);
+            devDept.Eyeshot.Camera camera1 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(-1.2598973293902418D, 2.5657311010967412D, 42.261193606378384D), 307.26899936464309D, new devDept.Geometry.Quaternion(0.018434349666532512D, 0.039532590434972065D, 0.42221602280006187D, 0.90544518284475428D), devDept.Graphics.projectionType.Perspective, 40D, 1.801549330370017D, false, 0.001D);
             devDept.Eyeshot.HomeToolBarButton homeToolBarButton1 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
             devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton1 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
             devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton1 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
@@ -66,6 +66,7 @@ namespace Br3D
             ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton2)),
             ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton2))});
             devDept.Eyeshot.Grid grid1 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
+            devDept.Eyeshot.Grid grid2 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point3D(-100D, -100D, 0D), new devDept.Geometry.Point3D(100D, 100D, 0D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(1D, 0D, 0D)), System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, false, false, true, 10, 100, 0, System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255))))), true, System.Drawing.Color.Transparent);
             devDept.Eyeshot.OriginSymbol originSymbol1 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.Ball, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, null, false);
             devDept.Eyeshot.OriginSymbol originSymbol2 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.CoordinateSystem, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", false, null, true);
             devDept.Eyeshot.RotateSettings rotateSettings1 = new devDept.Eyeshot.RotateSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Ctrl), 10D, true, 1D, devDept.Eyeshot.rotationType.Turntable, devDept.Eyeshot.rotationCenterType.CursorLocation, new devDept.Geometry.Point3D(0D, 0D, 0D), false);
@@ -75,14 +76,15 @@ namespace Br3D
             devDept.Eyeshot.CoordinateSystemIcon coordinateSystemIcon1 = new devDept.Eyeshot.CoordinateSystemIcon(new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, devDept.Eyeshot.coordinateSystemPositionType.BottomLeft, 37, null, true);
             devDept.Eyeshot.ViewCubeIcon viewCubeIcon1 = new devDept.Eyeshot.ViewCubeIcon(devDept.Eyeshot.coordinateSystemPositionType.TopRight, true, System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(20)))), ((int)(((byte)(60))))), true, "FRONT", "BACK", "LEFT", "RIGHT", "TOP", "BOTTOM", System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), 'S', 'N', 'W', 'E', true, null, System.Drawing.Color.White, System.Drawing.Color.Black, 120, true, true, null, null, null, null, null, null, false, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D));
             devDept.Eyeshot.Viewport.SavedViewsManager savedViewsManager1 = new devDept.Eyeshot.Viewport.SavedViewsManager(8);
-            devDept.Eyeshot.Viewport viewport1 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(0, 0), new System.Drawing.Size(260, 296), backgroundSettings1, camera1, new devDept.Eyeshot.ToolBar[] {
+            devDept.Eyeshot.Viewport viewport1 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(0, 0), new System.Drawing.Size(594, 288), backgroundSettings1, camera1, new devDept.Eyeshot.ToolBar[] {
             toolBar1,
             toolBar2}, new devDept.Eyeshot.Legend[0], devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
-            grid1}, new devDept.Eyeshot.OriginSymbol[] {
+            grid1,
+            grid2}, new devDept.Eyeshot.OriginSymbol[] {
             originSymbol1,
             originSymbol2}, false, rotateSettings1, zoomSettings1, panSettings1, navigationSettings1, coordinateSystemIcon1, viewCubeIcon1, savedViewsManager1, devDept.Eyeshot.viewType.Trimetric);
             devDept.Graphics.BackgroundSettings backgroundSettings2 = new devDept.Graphics.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(82)))), ((int)(((byte)(103))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(41))))), 0.75D, null, devDept.Graphics.colorThemeType.Auto, 0.33D);
-            devDept.Eyeshot.Camera camera2 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(-2.0837870570316238E-14D, 5.903590011596604D, 47.596564948558807D), 293.85071937118977D, new devDept.Geometry.Quaternion(0.49999999999999989D, 0.49999999999999994D, 0.49999999999999994D, 0.5D), devDept.Graphics.projectionType.Perspective, 40D, 1.8511617265459759D, false, 0.001D);
+            devDept.Eyeshot.Camera camera2 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(-2.0837870570316238E-14D, 5.903590011596604D, 47.596564948558807D), 293.85071937118977D, new devDept.Geometry.Quaternion(0.49999999999999989D, 0.49999999999999994D, 0.49999999999999994D, 0.5D), devDept.Graphics.projectionType.Perspective, 40D, 1.801549330370017D, false, 0.001D);
             devDept.Eyeshot.HomeToolBarButton homeToolBarButton3 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
             devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton3 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
             devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton3 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
@@ -113,7 +115,8 @@ namespace Br3D
             ((devDept.Eyeshot.ToolBarButton)(panToolBarButton4)),
             ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton4)),
             ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton4))});
-            devDept.Eyeshot.Grid grid2 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
+            devDept.Eyeshot.Grid grid3 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
+            devDept.Eyeshot.Grid grid4 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point3D(-100D, -100D, 0D), new devDept.Geometry.Point3D(100D, 100D, 0D), 1D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, false, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
             devDept.Eyeshot.OriginSymbol originSymbol3 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.Ball, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, null, false);
             devDept.Eyeshot.RotateSettings rotateSettings2 = new devDept.Eyeshot.RotateSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Ctrl), 10D, true, 1D, devDept.Eyeshot.rotationType.Turntable, devDept.Eyeshot.rotationCenterType.CursorLocation, new devDept.Geometry.Point3D(0D, 0D, 0D), false);
             devDept.Eyeshot.ZoomSettings zoomSettings2 = new devDept.Eyeshot.ZoomSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Shift), 25, true, devDept.Eyeshot.zoomStyleType.AtCursorLocation, false, 1D, System.Drawing.Color.Empty, devDept.Eyeshot.Camera.perspectiveFitType.Accurate, false, 10, true);
@@ -122,13 +125,14 @@ namespace Br3D
             devDept.Eyeshot.CoordinateSystemIcon coordinateSystemIcon2 = new devDept.Eyeshot.CoordinateSystemIcon(new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.OrangeRed, "Origin", "X", "Y", "Z", true, devDept.Eyeshot.coordinateSystemPositionType.BottomLeft, 37, null, false);
             devDept.Eyeshot.ViewCubeIcon viewCubeIcon2 = new devDept.Eyeshot.ViewCubeIcon(devDept.Eyeshot.coordinateSystemPositionType.TopRight, true, System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(20)))), ((int)(((byte)(60))))), true, "FRONT", "BACK", "LEFT", "RIGHT", "TOP", "BOTTOM", System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), 'S', 'N', 'W', 'E', true, null, System.Drawing.Color.White, System.Drawing.Color.Black, 120, true, true, null, null, null, null, null, null, false, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D));
             devDept.Eyeshot.Viewport.SavedViewsManager savedViewsManager2 = new devDept.Eyeshot.Viewport.SavedViewsManager(8);
-            devDept.Eyeshot.Viewport viewport2 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(264, 0), new System.Drawing.Size(261, 296), backgroundSettings2, camera2, new devDept.Eyeshot.ToolBar[] {
+            devDept.Eyeshot.Viewport viewport2 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(598, 0), new System.Drawing.Size(595, 288), backgroundSettings2, camera2, new devDept.Eyeshot.ToolBar[] {
             toolBar3,
             toolBar4}, new devDept.Eyeshot.Legend[0], devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
-            grid2}, new devDept.Eyeshot.OriginSymbol[] {
+            grid3,
+            grid4}, new devDept.Eyeshot.OriginSymbol[] {
             originSymbol3}, false, rotateSettings2, zoomSettings2, panSettings2, navigationSettings2, coordinateSystemIcon2, viewCubeIcon2, savedViewsManager2, devDept.Eyeshot.viewType.Top);
             devDept.Graphics.BackgroundSettings backgroundSettings3 = new devDept.Graphics.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(82)))), ((int)(((byte)(103))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(41))))), 0.75D, null, devDept.Graphics.colorThemeType.Auto, 0.33D);
-            devDept.Eyeshot.Camera camera3 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(0D, 0D, 45D), 380D, new devDept.Geometry.Quaternion(0D, 0D, 0.70710678118654746D, 0.70710678118654757D), devDept.Graphics.projectionType.Perspective, 40D, 1.8511617265459759D, false, 0.001D);
+            devDept.Eyeshot.Camera camera3 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(0D, 0D, 45D), 380D, new devDept.Geometry.Quaternion(0D, 0D, 0.70710678118654746D, 0.70710678118654757D), devDept.Graphics.projectionType.Perspective, 40D, 1.801549330370017D, false, 0.001D);
             devDept.Eyeshot.HomeToolBarButton homeToolBarButton5 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
             devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton5 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
             devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton5 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
@@ -159,7 +163,8 @@ namespace Br3D
             ((devDept.Eyeshot.ToolBarButton)(panToolBarButton6)),
             ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton6)),
             ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton6))});
-            devDept.Eyeshot.Grid grid3 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
+            devDept.Eyeshot.Grid grid5 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
+            devDept.Eyeshot.Grid grid6 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point3D(-100D, -100D, 0D), new devDept.Geometry.Point3D(100D, 100D, 0D), 1D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, false, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
             devDept.Eyeshot.OriginSymbol originSymbol4 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.Ball, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, null, false);
             devDept.Eyeshot.RotateSettings rotateSettings3 = new devDept.Eyeshot.RotateSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Ctrl), 10D, true, 1D, devDept.Eyeshot.rotationType.Turntable, devDept.Eyeshot.rotationCenterType.CursorLocation, new devDept.Geometry.Point3D(0D, 0D, 0D), false);
             devDept.Eyeshot.ZoomSettings zoomSettings3 = new devDept.Eyeshot.ZoomSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Shift), 25, true, devDept.Eyeshot.zoomStyleType.AtCursorLocation, false, 1D, System.Drawing.Color.Empty, devDept.Eyeshot.Camera.perspectiveFitType.Accurate, false, 10, true);
@@ -168,13 +173,14 @@ namespace Br3D
             devDept.Eyeshot.CoordinateSystemIcon coordinateSystemIcon3 = new devDept.Eyeshot.CoordinateSystemIcon(new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.OrangeRed, "Origin", "X", "Y", "Z", true, devDept.Eyeshot.coordinateSystemPositionType.BottomLeft, 37, null, false);
             devDept.Eyeshot.ViewCubeIcon viewCubeIcon3 = new devDept.Eyeshot.ViewCubeIcon(devDept.Eyeshot.coordinateSystemPositionType.TopRight, true, System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(20)))), ((int)(((byte)(60))))), true, "FRONT", "BACK", "LEFT", "RIGHT", "TOP", "BOTTOM", System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), 'S', 'N', 'W', 'E', true, null, System.Drawing.Color.White, System.Drawing.Color.Black, 120, true, true, null, null, null, null, null, null, false, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D));
             devDept.Eyeshot.Viewport.SavedViewsManager savedViewsManager3 = new devDept.Eyeshot.Viewport.SavedViewsManager(8);
-            devDept.Eyeshot.Viewport viewport3 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(0, 300), new System.Drawing.Size(260, 297), backgroundSettings3, camera3, new devDept.Eyeshot.ToolBar[] {
+            devDept.Eyeshot.Viewport viewport3 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(0, 292), new System.Drawing.Size(594, 289), backgroundSettings3, camera3, new devDept.Eyeshot.ToolBar[] {
             toolBar5,
             toolBar6}, new devDept.Eyeshot.Legend[0], devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
-            grid3}, new devDept.Eyeshot.OriginSymbol[] {
+            grid5,
+            grid6}, new devDept.Eyeshot.OriginSymbol[] {
             originSymbol4}, false, rotateSettings3, zoomSettings3, panSettings3, navigationSettings3, coordinateSystemIcon3, viewCubeIcon3, savedViewsManager3, devDept.Eyeshot.viewType.Front);
             devDept.Graphics.BackgroundSettings backgroundSettings4 = new devDept.Graphics.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(82)))), ((int)(((byte)(103))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(41))))), 0.75D, null, devDept.Graphics.colorThemeType.Auto, 0.33D);
-            devDept.Eyeshot.Camera camera4 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(0D, 0D, 45D), 380D, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D), devDept.Graphics.projectionType.Perspective, 40D, 1.8511617265459759D, false, 0.001D);
+            devDept.Eyeshot.Camera camera4 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(0D, 0D, 45D), 380D, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D), devDept.Graphics.projectionType.Perspective, 40D, 1.801549330370017D, false, 0.001D);
             devDept.Eyeshot.HomeToolBarButton homeToolBarButton7 = new devDept.Eyeshot.HomeToolBarButton("Home", devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true);
             devDept.Eyeshot.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton7 = new devDept.Eyeshot.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
             devDept.Eyeshot.ZoomWindowToolBarButton zoomWindowToolBarButton7 = new devDept.Eyeshot.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.ToolBarButton.styleType.ToggleButton, true, true);
@@ -205,7 +211,8 @@ namespace Br3D
             ((devDept.Eyeshot.ToolBarButton)(panToolBarButton8)),
             ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton8)),
             ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton8))});
-            devDept.Eyeshot.Grid grid4 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
+            devDept.Eyeshot.Grid grid7 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
+            devDept.Eyeshot.Grid grid8 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point3D(-100D, -100D, 0D), new devDept.Geometry.Point3D(100D, 100D, 0D), 1D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, false, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
             devDept.Eyeshot.OriginSymbol originSymbol5 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.Ball, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, null, false);
             devDept.Eyeshot.RotateSettings rotateSettings4 = new devDept.Eyeshot.RotateSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Ctrl), 10D, true, 1D, devDept.Eyeshot.rotationType.Turntable, devDept.Eyeshot.rotationCenterType.CursorLocation, new devDept.Geometry.Point3D(0D, 0D, 0D), false);
             devDept.Eyeshot.ZoomSettings zoomSettings4 = new devDept.Eyeshot.ZoomSettings(new devDept.Eyeshot.MouseButton(devDept.Eyeshot.mouseButtonsZPR.Middle, devDept.Eyeshot.modifierKeys.Shift), 25, true, devDept.Eyeshot.zoomStyleType.AtCursorLocation, false, 1D, System.Drawing.Color.Empty, devDept.Eyeshot.Camera.perspectiveFitType.Accurate, false, 10, true);
@@ -214,10 +221,11 @@ namespace Br3D
             devDept.Eyeshot.CoordinateSystemIcon coordinateSystemIcon4 = new devDept.Eyeshot.CoordinateSystemIcon(new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.OrangeRed, "Origin", "X", "Y", "Z", true, devDept.Eyeshot.coordinateSystemPositionType.BottomLeft, 37, null, false);
             devDept.Eyeshot.ViewCubeIcon viewCubeIcon4 = new devDept.Eyeshot.ViewCubeIcon(devDept.Eyeshot.coordinateSystemPositionType.TopRight, true, System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(20)))), ((int)(((byte)(60))))), true, "FRONT", "BACK", "LEFT", "RIGHT", "TOP", "BOTTOM", System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), 'S', 'N', 'W', 'E', true, null, System.Drawing.Color.White, System.Drawing.Color.Black, 120, true, true, null, null, null, null, null, null, false, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D));
             devDept.Eyeshot.Viewport.SavedViewsManager savedViewsManager4 = new devDept.Eyeshot.Viewport.SavedViewsManager(8);
-            devDept.Eyeshot.Viewport viewport4 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(264, 300), new System.Drawing.Size(261, 297), backgroundSettings4, camera4, new devDept.Eyeshot.ToolBar[] {
+            devDept.Eyeshot.Viewport viewport4 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(598, 292), new System.Drawing.Size(595, 289), backgroundSettings4, camera4, new devDept.Eyeshot.ToolBar[] {
             toolBar7,
             toolBar8}, new devDept.Eyeshot.Legend[0], devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
-            grid4}, new devDept.Eyeshot.OriginSymbol[] {
+            grid7,
+            grid8}, new devDept.Eyeshot.OriginSymbol[] {
             originSymbol5}, false, rotateSettings4, zoomSettings4, panSettings4, navigationSettings4, coordinateSystemIcon4, viewCubeIcon4, savedViewsManager4, devDept.Eyeshot.viewType.Right);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tileNavSubItemInsertImage = new DevExpress.XtraBars.Navigation.TileNavSubItem();
@@ -235,10 +243,7 @@ namespace Br3D
             this.toolStripMenuItemTransparency50 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemTransparency100 = new System.Windows.Forms.ToolStripMenuItem();
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
-            this.dockPanelDynamicInput = new DevExpress.XtraBars.Docking.DockPanel();
-            this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
-            this.controlCommandBar1 = new hanee.ThreeD.ControlCommandBar();
-            this.controlAds1 = new Br3D.ControlAds();
+            this.hideContainerLeft = new DevExpress.XtraBars.Docking.AutoHideContainer();
             this.panelContainer1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanelProperties = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
@@ -278,6 +283,11 @@ namespace Br3D
             this.dockPanelObjectTree = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel3_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.treeListObject = new DevExpress.XtraTreeList.TreeList();
+            this.hideContainerRight = new DevExpress.XtraBars.Docking.AutoHideContainer();
+            this.dockPanelDynamicInput = new DevExpress.XtraBars.Docking.DockPanel();
+            this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.controlCommandBar1 = new hanee.ThreeD.ControlCommandBar();
+            this.controlAds1 = new Br3D.ControlAds();
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonItemDrawCircle = new DevExpress.XtraBars.BarButtonItem();
@@ -379,8 +389,7 @@ namespace Br3D
             ((System.ComponentModel.ISupportInitialize)(this.hModel)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
-            this.dockPanelDynamicInput.SuspendLayout();
-            this.controlContainer1.SuspendLayout();
+            this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
             this.dockPanelProperties.SuspendLayout();
             this.dockPanel1_Container.SuspendLayout();
@@ -392,6 +401,9 @@ namespace Br3D
             this.dockPanelObjectTree.SuspendLayout();
             this.dockPanel3_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeListObject)).BeginInit();
+            this.hideContainerRight.SuspendLayout();
+            this.dockPanelDynamicInput.SuspendLayout();
+            this.controlContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDrawArc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuLanguage)).BeginInit();
@@ -420,12 +432,12 @@ namespace Br3D
             this.hModel.DefaultColor = System.Drawing.Color.White;
             this.hModel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hModel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.hModel.Location = new System.Drawing.Point(259, 64);
+            this.hModel.Location = new System.Drawing.Point(23, 64);
             this.hModel.Name = "hModel";
             this.hModel.ProgressBar = progressBar1;
             this.hModel.propertyGridHelper = null;
             this.hModel.Renderer = devDept.Eyeshot.rendererType.Direct3D;
-            this.hModel.Size = new System.Drawing.Size(525, 597);
+            this.hModel.Size = new System.Drawing.Size(1193, 581);
             this.hModel.TabIndex = 3;
             this.hModel.Text = "hModel1";
             this.hModel.Transparency = hanee.ThreeD.HModel.TranparencyMode.untransparency;
@@ -513,30 +525,30 @@ namespace Br3D
             // toolStripMenuItemTransparency0
             // 
             this.toolStripMenuItemTransparency0.Name = "toolStripMenuItemTransparency0";
-            this.toolStripMenuItemTransparency0.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemTransparency0.Size = new System.Drawing.Size(105, 22);
             this.toolStripMenuItemTransparency0.Text = "0%";
             this.toolStripMenuItemTransparency0.Click += new System.EventHandler(this.toolStripMenuItemTransparency0_Click);
             // 
             // toolStripMenuItemTransparency50
             // 
             this.toolStripMenuItemTransparency50.Name = "toolStripMenuItemTransparency50";
-            this.toolStripMenuItemTransparency50.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemTransparency50.Size = new System.Drawing.Size(105, 22);
             this.toolStripMenuItemTransparency50.Text = "50%";
             this.toolStripMenuItemTransparency50.Click += new System.EventHandler(this.toolStripMenuItemTransparency50_Click);
             // 
             // toolStripMenuItemTransparency100
             // 
             this.toolStripMenuItemTransparency100.Name = "toolStripMenuItemTransparency100";
-            this.toolStripMenuItemTransparency100.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemTransparency100.Size = new System.Drawing.Size(105, 22);
             this.toolStripMenuItemTransparency100.Text = "100%";
             this.toolStripMenuItemTransparency100.Click += new System.EventHandler(this.toolStripMenuItemTransparency100_Click);
             // 
             // dockManager1
             // 
+            this.dockManager1.AutoHideContainers.AddRange(new DevExpress.XtraBars.Docking.AutoHideContainer[] {
+            this.hideContainerLeft,
+            this.hideContainerRight});
             this.dockManager1.Form = this;
-            this.dockManager1.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
-            this.dockPanelDynamicInput,
-            this.panelContainer1});
             this.dockManager1.TopZIndexControls.AddRange(new string[] {
             "DevExpress.XtraBars.BarDockControl",
             "DevExpress.XtraBars.StandaloneBarDockControl",
@@ -551,45 +563,14 @@ namespace Br3D
             "DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl",
             "DevExpress.XtraBars.ToolbarForm.ToolbarFormControl"});
             // 
-            // dockPanelDynamicInput
+            // hideContainerLeft
             // 
-            this.dockPanelDynamicInput.Controls.Add(this.controlContainer1);
-            this.dockPanelDynamicInput.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
-            this.dockPanelDynamicInput.FloatVertical = true;
-            this.dockPanelDynamicInput.ID = new System.Guid("754d9043-9e08-4dbc-87a8-0af55da86043");
-            this.dockPanelDynamicInput.Location = new System.Drawing.Point(784, 64);
-            this.dockPanelDynamicInput.Name = "dockPanelDynamicInput";
-            this.dockPanelDynamicInput.OriginalSize = new System.Drawing.Size(260, 200);
-            this.dockPanelDynamicInput.Size = new System.Drawing.Size(260, 597);
-            this.dockPanelDynamicInput.Text = "Dynamic input";
-            // 
-            // controlContainer1
-            // 
-            this.controlContainer1.Controls.Add(this.controlCommandBar1);
-            this.controlContainer1.Controls.Add(this.controlAds1);
-            this.controlContainer1.Location = new System.Drawing.Point(4, 26);
-            this.controlContainer1.Name = "controlContainer1";
-            this.controlContainer1.Size = new System.Drawing.Size(253, 568);
-            this.controlContainer1.TabIndex = 0;
-            // 
-            // controlCommandBar1
-            // 
-            this.controlCommandBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.controlCommandBar1.enabled = true;
-            this.controlCommandBar1.Location = new System.Drawing.Point(0, 296);
-            this.controlCommandBar1.Name = "controlCommandBar1";
-            this.controlCommandBar1.Size = new System.Drawing.Size(253, 22);
-            this.controlCommandBar1.TabIndex = 11;
-            // 
-            // controlAds1
-            // 
-            this.controlAds1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.controlAds1.Location = new System.Drawing.Point(0, 318);
-            this.controlAds1.Name = "controlAds1";
-            this.controlAds1.Size = new System.Drawing.Size(253, 250);
-            this.controlAds1.TabIndex = 10;
-            this.controlAds1.url = "http://hileejaeho.cafe24.com/br3d-ad/";
-            this.controlAds1.Visible = false;
+            this.hideContainerLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.hideContainerLeft.Controls.Add(this.panelContainer1);
+            this.hideContainerLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hideContainerLeft.Location = new System.Drawing.Point(0, 64);
+            this.hideContainerLeft.Name = "hideContainerLeft";
+            this.hideContainerLeft.Size = new System.Drawing.Size(23, 581);
             // 
             // panelContainer1
             // 
@@ -598,12 +579,15 @@ namespace Br3D
             this.panelContainer1.Controls.Add(this.dockPanelObjectTree);
             this.panelContainer1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.panelContainer1.ID = new System.Guid("2f55103e-9204-4e48-a94f-fab57b48506c");
-            this.panelContainer1.Location = new System.Drawing.Point(0, 64);
+            this.panelContainer1.Location = new System.Drawing.Point(0, 0);
             this.panelContainer1.Name = "panelContainer1";
             this.panelContainer1.OriginalSize = new System.Drawing.Size(259, 200);
-            this.panelContainer1.Size = new System.Drawing.Size(259, 597);
+            this.panelContainer1.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Left;
+            this.panelContainer1.SavedIndex = 1;
+            this.panelContainer1.Size = new System.Drawing.Size(259, 581);
             this.panelContainer1.Tabbed = true;
             this.panelContainer1.Text = "panelContainer1";
+            this.panelContainer1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
             // 
             // dockPanelProperties
             // 
@@ -612,8 +596,8 @@ namespace Br3D
             this.dockPanelProperties.ID = new System.Guid("c18255af-44ec-4932-9c11-d99e4ddfcd3e");
             this.dockPanelProperties.Location = new System.Drawing.Point(3, 26);
             this.dockPanelProperties.Name = "dockPanelProperties";
-            this.dockPanelProperties.OriginalSize = new System.Drawing.Size(252, 495);
-            this.dockPanelProperties.Size = new System.Drawing.Size(252, 540);
+            this.dockPanelProperties.OriginalSize = new System.Drawing.Size(252, 524);
+            this.dockPanelProperties.Size = new System.Drawing.Size(252, 552);
             this.dockPanelProperties.Text = "Properties";
             // 
             // dockPanel1_Container
@@ -621,7 +605,7 @@ namespace Br3D
             this.dockPanel1_Container.Controls.Add(this.propertyGridControl1);
             this.dockPanel1_Container.Location = new System.Drawing.Point(0, 0);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(252, 540);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(252, 552);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // propertyGridControl1
@@ -645,7 +629,7 @@ namespace Br3D
             this.categoryBlock,
             this.categoryLineType,
             this.categoryText});
-            this.propertyGridControl1.Size = new System.Drawing.Size(252, 540);
+            this.propertyGridControl1.Size = new System.Drawing.Size(252, 552);
             this.propertyGridControl1.TabIndex = 0;
             // 
             // repositoryItemComboBoxTextStyle
@@ -891,8 +875,8 @@ namespace Br3D
             this.dockPanelObjectTree.ID = new System.Guid("c306bba9-1d83-4cca-b897-1e005975cc6f");
             this.dockPanelObjectTree.Location = new System.Drawing.Point(3, 26);
             this.dockPanelObjectTree.Name = "dockPanelObjectTree";
-            this.dockPanelObjectTree.OriginalSize = new System.Drawing.Size(252, 495);
-            this.dockPanelObjectTree.Size = new System.Drawing.Size(252, 540);
+            this.dockPanelObjectTree.OriginalSize = new System.Drawing.Size(252, 524);
+            this.dockPanelObjectTree.Size = new System.Drawing.Size(252, 552);
             this.dockPanelObjectTree.Text = "Object Tree";
             // 
             // dockPanel3_Container
@@ -900,7 +884,7 @@ namespace Br3D
             this.dockPanel3_Container.Controls.Add(this.treeListObject);
             this.dockPanel3_Container.Location = new System.Drawing.Point(0, 0);
             this.dockPanel3_Container.Name = "dockPanel3_Container";
-            this.dockPanel3_Container.Size = new System.Drawing.Size(252, 540);
+            this.dockPanel3_Container.Size = new System.Drawing.Size(252, 552);
             this.dockPanel3_Container.TabIndex = 0;
             // 
             // treeListObject
@@ -908,8 +892,60 @@ namespace Br3D
             this.treeListObject.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeListObject.Location = new System.Drawing.Point(0, 0);
             this.treeListObject.Name = "treeListObject";
-            this.treeListObject.Size = new System.Drawing.Size(252, 540);
+            this.treeListObject.Size = new System.Drawing.Size(252, 552);
             this.treeListObject.TabIndex = 0;
+            // 
+            // hideContainerRight
+            // 
+            this.hideContainerRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.hideContainerRight.Controls.Add(this.dockPanelDynamicInput);
+            this.hideContainerRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hideContainerRight.Location = new System.Drawing.Point(1216, 64);
+            this.hideContainerRight.Name = "hideContainerRight";
+            this.hideContainerRight.Size = new System.Drawing.Size(23, 581);
+            // 
+            // dockPanelDynamicInput
+            // 
+            this.dockPanelDynamicInput.Controls.Add(this.controlContainer1);
+            this.dockPanelDynamicInput.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
+            this.dockPanelDynamicInput.FloatVertical = true;
+            this.dockPanelDynamicInput.ID = new System.Guid("754d9043-9e08-4dbc-87a8-0af55da86043");
+            this.dockPanelDynamicInput.Location = new System.Drawing.Point(0, 0);
+            this.dockPanelDynamicInput.Name = "dockPanelDynamicInput";
+            this.dockPanelDynamicInput.OriginalSize = new System.Drawing.Size(260, 200);
+            this.dockPanelDynamicInput.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Right;
+            this.dockPanelDynamicInput.SavedIndex = 0;
+            this.dockPanelDynamicInput.Size = new System.Drawing.Size(260, 581);
+            this.dockPanelDynamicInput.Text = "Dynamic input";
+            this.dockPanelDynamicInput.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
+            // 
+            // controlContainer1
+            // 
+            this.controlContainer1.Controls.Add(this.controlCommandBar1);
+            this.controlContainer1.Controls.Add(this.controlAds1);
+            this.controlContainer1.Location = new System.Drawing.Point(4, 26);
+            this.controlContainer1.Name = "controlContainer1";
+            this.controlContainer1.Size = new System.Drawing.Size(253, 552);
+            this.controlContainer1.TabIndex = 0;
+            // 
+            // controlCommandBar1
+            // 
+            this.controlCommandBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.controlCommandBar1.enabled = true;
+            this.controlCommandBar1.Location = new System.Drawing.Point(0, 280);
+            this.controlCommandBar1.Name = "controlCommandBar1";
+            this.controlCommandBar1.Size = new System.Drawing.Size(253, 22);
+            this.controlCommandBar1.TabIndex = 11;
+            // 
+            // controlAds1
+            // 
+            this.controlAds1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.controlAds1.Location = new System.Drawing.Point(0, 302);
+            this.controlAds1.Name = "controlAds1";
+            this.controlAds1.Size = new System.Drawing.Size(253, 250);
+            this.controlAds1.TabIndex = 10;
+            this.controlAds1.url = "http://hileejaeho.cafe24.com/br3d-ad/";
+            this.controlAds1.Visible = false;
             // 
             // ribbonControl1
             // 
@@ -1002,7 +1038,7 @@ namespace Br3D
             this.repositoryItemCheckEdit1});
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.OfficeUniversal;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
-            this.ribbonControl1.Size = new System.Drawing.Size(1044, 64);
+            this.ribbonControl1.Size = new System.Drawing.Size(1239, 64);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             this.ribbonControl1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ribbonControl1_ItemClick);
@@ -1751,10 +1787,10 @@ namespace Br3D
             this.ribbonStatusBar1.ItemLinks.Add(this.barButtonItemMidPoint);
             this.ribbonStatusBar1.ItemLinks.Add(this.barButtonItemCenterPoint);
             this.ribbonStatusBar1.ItemLinks.Add(this.barButtonItemNodePoint);
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 661);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 645);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1044, 27);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1239, 27);
             // 
             // barButtonItem1
             // 
@@ -1767,22 +1803,22 @@ namespace Br3D
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1044, 688);
+            this.ClientSize = new System.Drawing.Size(1239, 672);
             this.Controls.Add(this.hModel);
-            this.Controls.Add(this.panelContainer1);
-            this.Controls.Add(this.dockPanelDynamicInput);
+            this.Controls.Add(this.hideContainerLeft);
+            this.Controls.Add(this.hideContainerRight);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.IconOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("FormMain.IconOptions.SvgImage")));
             this.Name = "FormMain";
             this.Text = "Br3D";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.hModel)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
-            this.dockPanelDynamicInput.ResumeLayout(false);
-            this.controlContainer1.ResumeLayout(false);
+            this.hideContainerLeft.ResumeLayout(false);
             this.panelContainer1.ResumeLayout(false);
             this.dockPanelProperties.ResumeLayout(false);
             this.dockPanel1_Container.ResumeLayout(false);
@@ -1794,6 +1830,9 @@ namespace Br3D
             this.dockPanelObjectTree.ResumeLayout(false);
             this.dockPanel3_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeListObject)).EndInit();
+            this.hideContainerRight.ResumeLayout(false);
+            this.dockPanelDynamicInput.ResumeLayout(false);
+            this.controlContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDrawArc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuLanguage)).EndInit();
@@ -1962,5 +2001,7 @@ namespace Br3D
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTransparency0;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTransparency50;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTransparency100;
+        private DevExpress.XtraBars.Docking.AutoHideContainer hideContainerLeft;
+        private DevExpress.XtraBars.Docking.AutoHideContainer hideContainerRight;
     }
 }
