@@ -109,6 +109,7 @@
     <Compile Include="ActionArea.cs" />
     <Compile Include="ActionBox.cs" />
     <Compile Include="ActionCircle.cs" />
+    <Compile Include="ActionCone.cs" />
     <Compile Include="ActionCopy.cs" />
     <Compile Include="ActionCylinder.cs" />
     <Compile Include="ActionDimDiameter.cs" />

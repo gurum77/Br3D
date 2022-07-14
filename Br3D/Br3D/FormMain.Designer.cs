@@ -359,12 +359,15 @@ namespace Br3D
             this.barButtonItemMidPoint = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemCenterPoint = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemNodePoint = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDrawBox = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupSystem = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageDraw = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupDraw = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageDraw3D = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageDimension = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupDim = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageEdit = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -385,9 +388,7 @@ namespace Br3D
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.ribbonPageDraw3D = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.barButtonItemDrawBox = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDrawCone = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.hModel)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -1011,9 +1012,10 @@ namespace Br3D
             this.barButtonItemMidPoint,
             this.barButtonItemCenterPoint,
             this.barButtonItemNodePoint,
-            this.barButtonItemDrawBox});
+            this.barButtonItemDrawBox,
+            this.barButtonItemDrawCone});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 75;
+            this.ribbonControl1.MaxItemId = 76;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -1553,6 +1555,13 @@ namespace Br3D
             this.barButtonItemNodePoint.ImageOptions.Image = global::Br3D.Properties.Resources.snap_node_small;
             this.barButtonItemNodePoint.Name = "barButtonItemNodePoint";
             // 
+            // barButtonItemDrawBox
+            // 
+            this.barButtonItemDrawBox.Caption = "Box";
+            this.barButtonItemDrawBox.Id = 74;
+            this.barButtonItemDrawBox.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDrawBox.ImageOptions.SvgImage")));
+            this.barButtonItemDrawBox.Name = "barButtonItemDrawBox";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -1606,6 +1615,21 @@ namespace Br3D
             this.ribbonPageGroupDraw.ItemLinks.Add(this.barButtonItemInsertImage);
             this.ribbonPageGroupDraw.Name = "ribbonPageGroupDraw";
             this.ribbonPageGroupDraw.Text = "Draw";
+            // 
+            // ribbonPageDraw3D
+            // 
+            this.ribbonPageDraw3D.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup2});
+            this.ribbonPageDraw3D.Name = "ribbonPageDraw3D";
+            this.ribbonPageDraw3D.Text = "Draw3D";
+            // 
+            // ribbonPageGroup2
+            // 
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemDrawCylinder);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemDrawBox);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemDrawCone);
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            this.ribbonPageGroup2.Text = "ribbonPageGroup2";
             // 
             // ribbonPageDimension
             // 
@@ -1790,26 +1814,12 @@ namespace Br3D
             this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
             this.barButtonItem1.Name = "barButtonItem1";
             // 
-            // ribbonPageDraw3D
+            // barButtonItemDrawCone
             // 
-            this.ribbonPageDraw3D.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup2});
-            this.ribbonPageDraw3D.Name = "ribbonPageDraw3D";
-            this.ribbonPageDraw3D.Text = "Draw3D";
-            // 
-            // ribbonPageGroup2
-            // 
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemDrawCylinder);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemDrawBox);
-            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            this.ribbonPageGroup2.Text = "ribbonPageGroup2";
-            // 
-            // barButtonItemDrawBox
-            // 
-            this.barButtonItemDrawBox.Caption = "Box";
-            this.barButtonItemDrawBox.Id = 74;
-            this.barButtonItemDrawBox.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDrawBox.ImageOptions.SvgImage")));
-            this.barButtonItemDrawBox.Name = "barButtonItemDrawBox";
+            this.barButtonItemDrawCone.Caption = "Cone";
+            this.barButtonItemDrawCone.Id = 75;
+            this.barButtonItemDrawCone.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDrawCone.ImageOptions.SvgImage")));
+            this.barButtonItemDrawCone.Name = "barButtonItemDrawCone";
             // 
             // FormMain
             // 
@@ -2016,5 +2026,6 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemDrawBox;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageDraw3D;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawCone;
     }
 }

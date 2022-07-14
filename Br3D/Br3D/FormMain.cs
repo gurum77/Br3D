@@ -755,7 +755,8 @@ namespace Br3D
             SetFunctionByElement(barButtonItemInsert, Insert, LanguageHelper.Tr("Insert"), "Insert", "i");
             SetFunctionByElement(barButtonItemInsertImage, InsertImage, LanguageHelper.Tr("Insert Image"), "InsertImage", "ii");
             SetFunctionByElement(barButtonItemDrawCylinder, Cylinder, LanguageHelper.Tr("Cylinder"), "Cylinder", "cy");
-            SetFunctionByElement(barButtonItemDrawBox, Box, LanguageHelper.Tr("Box"), "Box", "bo");
+            SetFunctionByElement(barButtonItemDrawBox, Box, LanguageHelper.Tr("Box"), "Box", "bx");
+            SetFunctionByElement(barButtonItemDrawCone, Cone, LanguageHelper.Tr("Cone"), "Cone", "cn");
 
             // dimension
             SetFunctionByElement(barButtonItemDimHorizontal, DimHorizontal, LanguageHelper.Tr("Horizontal"), "Horizontal", "hor");
@@ -857,6 +858,7 @@ namespace Br3D
         async void Spline() => await new ActionPolyline(model) { spline = true }.RunAsync();
         async void Cylinder() => await new ActionCylinder(model).RunAsync();
         async void Box() => await new ActionBox(model).RunAsync();
+        async void Cone() => await new ActionCone(model).RunAsync();
         async void ArcCenterStartEnd() => await new ActionArc(model, ActionArc.Method.centerStartEnd).RunAsync();
         async void ArcFirstSecondThird() => await new ActionArc(model, ActionArc.Method.firstSecondThird).RunAsync();
         async void Arc() => await new ActionArc(model, ActionArc.Method.firstSecondThird).RunAsync();
