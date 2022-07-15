@@ -762,6 +762,8 @@ namespace Br3D
             SetFunctionByElement(barButtonItemDrawSphere, Sphere, LanguageHelper.Tr("Sphere"), "Sphere", "sp");
             SetFunctionByElement(barButtonItemDrawTorus, Torus, LanguageHelper.Tr("Torus"), "Torus", "to");
 
+            SetFunctionByElement(barButtonItemRevolve, Revolve, LanguageHelper.Tr("Revolve"), "Revolve", "rv");
+
             // dimension
             SetFunctionByElement(barButtonItemDimHorizontal, DimHorizontal, LanguageHelper.Tr("Horizontal"), "Horizontal", "hor");
             SetFunctionByElement(barButtonItemDimVertical, DimVertical, LanguageHelper.Tr("Vertical"), "Vertical", "vert");
@@ -866,6 +868,9 @@ namespace Br3D
         async void Box() => await new ActionBox(model).RunAsync();
         async void Cone() => await new ActionCone(model).RunAsync();
         async void Torus() => await new ActionTorus(model).RunAsync();
+
+        async void Revolve() => await new ActionRevolve(model).RunAsync();
+        
 
         async void ArcCenterStartEnd() => await new ActionArc(model, ActionArc.Method.centerStartEnd).RunAsync();
         async void ArcFirstSecondThird() => await new ActionArc(model, ActionArc.Method.firstSecondThird).RunAsync();

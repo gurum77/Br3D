@@ -66,7 +66,6 @@ namespace hanee.Cad.Tool
                     environment.Entities.Regen();
                     environment.TempEntities.Clear();
                     environment.Invalidate();
-
                 }
                 catch (Exception ex)
                 {
