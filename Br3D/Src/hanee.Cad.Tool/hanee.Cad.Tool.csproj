@@ -132,6 +132,7 @@
     <Compile Include="ActionMove.cs" />
     <Compile Include="ActionOffset.cs" />
     <Compile Include="ActionPolyline.cs" />
+    <Compile Include="ActionRegion.cs" />
     <Compile Include="ActionRotate.cs" />
     <Compile Include="ActionScale.cs" />
     <Compile Include="ActionSphere.cs" />

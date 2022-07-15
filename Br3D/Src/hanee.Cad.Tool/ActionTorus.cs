@@ -29,13 +29,15 @@ namespace hanee.Cad.Tool
             var reverseHeight = height < 0;
             height = Math.Abs(height);
 
-            Entity torus = null;
+            Entity torus;
             if (tempEntity)
                 torus = Mesh.CreateTorus(radius, height, 20, 20);
             else
                 torus = Brep.CreateTorus(radius, height, Math.Min(0.001, (radius/10)));
             torus.TransformBy(new Transformation(centerPoint, oldPlane.AxisX, oldPlane.AxisY, oldPlane.AxisZ));
             GetHModel()?.entityPropertiesManager?.SetDefaultProperties(torus, tempEntity);
+
+            
             return torus;
         }
     }

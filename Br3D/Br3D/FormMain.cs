@@ -754,6 +754,8 @@ namespace Br3D
             SetFunctionByElement(barButtonItemMultilineText, MText, LanguageHelper.Tr("Multiline Text"), "MText", "mt");
             SetFunctionByElement(barButtonItemInsert, Insert, LanguageHelper.Tr("Insert"), "Insert", "i");
             SetFunctionByElement(barButtonItemInsertImage, InsertImage, LanguageHelper.Tr("Insert Image"), "InsertImage", "ii");
+            SetFunctionByElement(barButtonItemDrawRegion, DrawRegion, LanguageHelper.Tr("Region"), "Region", "rg");
+
             SetFunctionByElement(barButtonItemDrawCylinder, Cylinder, LanguageHelper.Tr("Cylinder"), "Cylinder", "cy");
             SetFunctionByElement(barButtonItemDrawBox, Box, LanguageHelper.Tr("Box"), "Box", "bx");
             SetFunctionByElement(barButtonItemDrawCone, Cone, LanguageHelper.Tr("Cone"), "Cone", "cn");
@@ -829,6 +831,7 @@ namespace Br3D
         }
 
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
+        async void DrawRegion() => await new ActionRegion(model).RunAsync(); 
         async void InsertImage() => await new ActionInsertImage(model).RunAsync();
         async void Insert() => await new ActionInsert(model).RunAsync();
         async void DimLeader() => await new ActionDimLeader(model).RunAsync();

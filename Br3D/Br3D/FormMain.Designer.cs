@@ -362,6 +362,7 @@ namespace Br3D
             this.barButtonItemDrawBox = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemDrawCone = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemDrawSphere = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDrawTorus = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -390,7 +391,7 @@ namespace Br3D
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItemDrawTorus = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDrawRegion = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.hModel)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -601,7 +602,7 @@ namespace Br3D
             this.dockPanelProperties.ID = new System.Guid("c18255af-44ec-4932-9c11-d99e4ddfcd3e");
             this.dockPanelProperties.Location = new System.Drawing.Point(3, 26);
             this.dockPanelProperties.Name = "dockPanelProperties";
-            this.dockPanelProperties.OriginalSize = new System.Drawing.Size(252, 524);
+            this.dockPanelProperties.OriginalSize = new System.Drawing.Size(252, 552);
             this.dockPanelProperties.Size = new System.Drawing.Size(252, 552);
             this.dockPanelProperties.Text = "Properties";
             // 
@@ -880,7 +881,7 @@ namespace Br3D
             this.dockPanelObjectTree.ID = new System.Guid("c306bba9-1d83-4cca-b897-1e005975cc6f");
             this.dockPanelObjectTree.Location = new System.Drawing.Point(3, 26);
             this.dockPanelObjectTree.Name = "dockPanelObjectTree";
-            this.dockPanelObjectTree.OriginalSize = new System.Drawing.Size(252, 524);
+            this.dockPanelObjectTree.OriginalSize = new System.Drawing.Size(252, 552);
             this.dockPanelObjectTree.Size = new System.Drawing.Size(252, 552);
             this.dockPanelObjectTree.Text = "Object Tree";
             // 
@@ -1017,9 +1018,10 @@ namespace Br3D
             this.barButtonItemDrawBox,
             this.barButtonItemDrawCone,
             this.barButtonItemDrawSphere,
-            this.barButtonItemDrawTorus});
+            this.barButtonItemDrawTorus,
+            this.barButtonItemDrawRegion});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 78;
+            this.ribbonControl1.MaxItemId = 79;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -1580,6 +1582,13 @@ namespace Br3D
             this.barButtonItemDrawSphere.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDrawSphere.ImageOptions.SvgImage")));
             this.barButtonItemDrawSphere.Name = "barButtonItemDrawSphere";
             // 
+            // barButtonItemDrawTorus
+            // 
+            this.barButtonItemDrawTorus.Caption = "Torus";
+            this.barButtonItemDrawTorus.Id = 77;
+            this.barButtonItemDrawTorus.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDrawTorus.ImageOptions.SvgImage")));
+            this.barButtonItemDrawTorus.Name = "barButtonItemDrawTorus";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -1631,6 +1640,7 @@ namespace Br3D
             this.ribbonPageGroupDraw.ItemLinks.Add(this.barButtonItemMultilineText);
             this.ribbonPageGroupDraw.ItemLinks.Add(this.barButtonItemInsert);
             this.ribbonPageGroupDraw.ItemLinks.Add(this.barButtonItemInsertImage);
+            this.ribbonPageGroupDraw.ItemLinks.Add(this.barButtonItemDrawRegion);
             this.ribbonPageGroupDraw.Name = "ribbonPageGroupDraw";
             this.ribbonPageGroupDraw.Text = "Draw";
             // 
@@ -1834,12 +1844,12 @@ namespace Br3D
             this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
             this.barButtonItem1.Name = "barButtonItem1";
             // 
-            // barButtonItemDrawTorus
+            // barButtonItemDrawRegion
             // 
-            this.barButtonItemDrawTorus.Caption = "Torus";
-            this.barButtonItemDrawTorus.Id = 77;
-            this.barButtonItemDrawTorus.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDrawTorus.ImageOptions.SvgImage")));
-            this.barButtonItemDrawTorus.Name = "barButtonItemDrawTorus";
+            this.barButtonItemDrawRegion.Caption = "Region";
+            this.barButtonItemDrawRegion.Id = 78;
+            this.barButtonItemDrawRegion.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDrawRegion.ImageOptions.SvgImage")));
+            this.barButtonItemDrawRegion.Name = "barButtonItemDrawRegion";
             // 
             // FormMain
             // 
@@ -2049,5 +2059,6 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemDrawCone;
         private DevExpress.XtraBars.BarButtonItem barButtonItemDrawSphere;
         private DevExpress.XtraBars.BarButtonItem barButtonItemDrawTorus;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawRegion;
     }
 }
