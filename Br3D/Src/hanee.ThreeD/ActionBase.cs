@@ -193,9 +193,9 @@ namespace hanee.ThreeD
                         Mesh m = s.ConvertToMesh();
                         ActionBase.SetTempEtt(environment, m, false);
                     }
-                    catch
+                    catch(Exception ex)
                     {
-                        s.Regen(0.01);
+                        s.Regen(1);
                         Mesh m = s.ConvertToMesh();
                         ActionBase.SetTempEtt(environment, m, false);
                     }

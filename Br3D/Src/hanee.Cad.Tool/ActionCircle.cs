@@ -9,7 +9,7 @@ namespace hanee.Cad.Tool
 {
     public class ActionCircle : ActionBase
     {
-        Point3D startPoint, endPoint;
+        protected Point3D startPoint, endPoint;
         public ActionCircle(Environment environment) : base(environment)
         {
         }
@@ -27,13 +27,13 @@ namespace hanee.Cad.Tool
             endPoint = point3D;
             
 
-            var circle = MakeCircle(true);
+            var circle = MakeEntity(true);
             if (circle == null)
                 return;
             environment.TempEntities.ReplaceEntityAndRegen(circle);
         }
 
-        Circle MakeCircle(bool tempEntity=false)
+        virtual protected Entity MakeEntity(bool tempEntity=false)
         {
             var radius = startPoint.DistanceTo(endPoint);
             if (radius <= 0.001)
@@ -61,7 +61,7 @@ namespace hanee.Cad.Tool
                 if (IsCanceled() || IsEntered())
                     break;
                 SetOrthoModeStartPoint(null);
-                Circle circle = MakeCircle();
+                var circle = MakeEntity();
                 if (circle != null)
                 {
                     environment.Entities.Add(circle);

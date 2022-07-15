@@ -14,7 +14,7 @@ namespace hanee.Cad.Tool
         {
         }
 
-        protected override Brep Make3D(bool tempEntity)
+        protected override Entity Make3D(bool tempEntity)
         {
             if (centerPoint == null || radiusPoint == null || heightPoint == null)
                 return null;
@@ -26,7 +26,11 @@ namespace hanee.Cad.Tool
 
             var reverseHeight = height < 0;
             height = Math.Abs(height);
-            var cone = Brep.CreateCone(radius, height);
+            Entity cone = null;
+            if (tempEntity)
+                cone = Mesh.CreateCone(radius, 0, height, 10);
+            else
+                cone = Brep.CreateCone(radius, height);
             cone.TransformBy(new Transformation(centerPoint, oldPlane.AxisX, oldPlane.AxisY, reverseHeight ? oldPlane.AxisZ * -1: oldPlane.AxisZ));
             GetHModel()?.entityPropertiesManager?.SetDefaultProperties(cone, tempEntity);
             return cone;

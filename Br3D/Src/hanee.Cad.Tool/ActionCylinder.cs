@@ -24,7 +24,7 @@ namespace hanee.Cad.Tool
         { await RunAsync(); }
 
 
-        virtual protected Brep Make3D(bool tempEntity)
+        virtual protected Entity Make3D(bool tempEntity)
         {
             if (centerPoint == null || radiusPoint == null || heightPoint == null)
                 return null;
@@ -34,8 +34,15 @@ namespace hanee.Cad.Tool
             if (radius == 0 || height == 0)
                 return null;
 
-            var cylinder = Brep.CreateCylinder(radius, height);
-            cylinder.TransformBy(new Transformation(centerPoint, oldPlane.AxisX, oldPlane.AxisY, oldPlane.AxisZ));
+            var reverseHeight = height < 0;
+            height = Math.Abs(height);
+
+            Entity cylinder = null;
+            if (tempEntity)
+                cylinder = Mesh.CreateCylinder(radius, height, 10);
+            else
+                cylinder = Brep.CreateCylinder(radius, height);
+            cylinder.TransformBy(new Transformation(centerPoint, oldPlane.AxisX, oldPlane.AxisY, reverseHeight ? oldPlane.AxisZ * -1: oldPlane.AxisZ));
             GetHModel()?.entityPropertiesManager?.SetDefaultProperties(cylinder, tempEntity);
             return cylinder;
         }

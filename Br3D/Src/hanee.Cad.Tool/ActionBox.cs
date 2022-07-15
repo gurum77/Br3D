@@ -51,7 +51,7 @@ namespace hanee.Cad.Tool
             return rect;
         }
 
-        protected override Brep Make3D(bool tempEntity)
+        protected override Entity Make3D(bool tempEntity)
         {
             if (oldPlane == null)
                 return null;
@@ -59,12 +59,18 @@ namespace hanee.Cad.Tool
             var width = GetWidth(oldPlane, radiusPoint);
             var depth = GetDepth(oldPlane, radiusPoint);
             var height = oldPlane.DistanceTo(heightPoint);
-            if (height == 0)
+            if (width == 0 || depth == 0 || height == 0)
                 return null;
 
             var reverseHeight = height < 0;
             height = Math.Abs(height);
-            var box = Brep.CreateBox(width, depth, height);
+
+            Entity box = null;
+            if (tempEntity)
+                box = Mesh.CreateBox(width, depth, height);
+            else
+                box = Brep.CreateBox(width, depth, height);
+            
             box.TransformBy(new Transformation(base.centerPoint, oldPlane.AxisX, oldPlane.AxisY, reverseHeight ? oldPlane.AxisZ  * -1: oldPlane.AxisZ));
             GetHModel()?.entityPropertiesManager?.SetDefaultProperties(box, tempEntity);
 

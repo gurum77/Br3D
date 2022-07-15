@@ -45,8 +45,12 @@ namespace hanee.Geometry
                 t.Center.CopyFrom(s.Center);
                 t.Radius = s.Radius;
             }
+            
             else
             {
+                // brep는 복사불가하다. 
+                // brep는 이쪽으로 들어오지 않도록 코딩해야함
+                // 다른 객체는 복사 가능한 경우 추가로 코딩한다.
                 System.Diagnostics.Debug.Assert(false);
             }
 

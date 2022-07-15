@@ -134,6 +134,7 @@
     <Compile Include="ActionPolyline.cs" />
     <Compile Include="ActionRotate.cs" />
     <Compile Include="ActionScale.cs" />
+    <Compile Include="ActionSphere.cs" />
     <Compile Include="ActionText.cs" />
     <Compile Include="ActionTextStyle.cs" />
     <Compile Include="ActionTrim.cs" />
