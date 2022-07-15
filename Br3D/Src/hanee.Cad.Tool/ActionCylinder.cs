@@ -13,6 +13,8 @@ namespace hanee.Cad.Tool
 {
     public class ActionCylinder : ActionBase
     {
+        // 높이 입력 받을때 workplane을 비활성화 할지?
+        protected bool disableWorkplaneForHeight = true;
         protected Plane oldPlane;
         protected Point3D centerPoint, radiusPoint, heightPoint;
         public ActionCylinder(devDept.Eyeshot.Environment environment) : base(environment)
@@ -97,11 +99,13 @@ namespace hanee.Cad.Tool
 
                 var oldEnable = ws.enabled;
                 oldPlane = ws.plane;
-                ws.enabled = false;
+                if(disableWorkplaneForHeight)
+                    ws.enabled = false;
                 heightPoint = await GetPoint3D(LanguageHelper.Tr("Height point"));
                 if (IsCanceled())
                     break;
-                ws.enabled = true;
+                if(disableWorkplaneForHeight)
+                    ws.enabled = oldEnable;
 
                 var cylinder = Make3D(false);
                 GetModel().Entities.Add(cylinder);

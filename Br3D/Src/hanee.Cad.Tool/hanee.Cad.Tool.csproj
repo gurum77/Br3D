@@ -137,6 +137,7 @@
     <Compile Include="ActionSphere.cs" />
     <Compile Include="ActionText.cs" />
     <Compile Include="ActionTextStyle.cs" />
+    <Compile Include="ActionTorus.cs" />
     <Compile Include="ActionTrim.cs" />
     <Compile Include="ActionWorkspace.cs" />
     <Compile Include="LineTypeControl.cs">
