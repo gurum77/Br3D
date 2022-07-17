@@ -83,6 +83,7 @@ namespace Br3D
 
             EnableDynamicInput(true, false);
             SetLTEnvironment();
+            
         }
 
         private void InitGrids()
@@ -252,7 +253,7 @@ namespace Br3D
             Circle c = new Circle(Plane.XY, 200);
             hModel.Entities.Add(c);
 
-            hModel.Set2DView();
+            hModel.Set3DView();
 
             hModel.Entities.Remove(c);
         }

@@ -132,7 +132,7 @@ namespace hanee.Cad.Tool
 
             while (true)
             {
-                var face = await GetFaceOrKey(LanguageHelper.Tr(" Select workspace face(3 : 3 points, W : World)"), -1, false);
+                var face = await GetFaceOrKey(LanguageHelper.Tr(" Select workspace face(3 : 3 points, W : World, 1 : XY, 2 : XZ, 3 : YZ)"), -1, false);
                 if (IsCanceled())
                     break;
 
@@ -150,6 +150,27 @@ namespace hanee.Cad.Tool
                 else if(face.Value?.KeyCode == Keys.W)
                 {
                     break;
+                }
+                // xy평면
+                else if(face.Value?.KeyCode == Keys.D1)
+                {
+                    point1 = new Point3D(0, 0, 0);
+                    point2 = new Point3D(1, 0, 0);
+                    point3 = new Point3D(0, 1, 0);
+                }
+                // xz 평면
+                else if(face.Value?.KeyCode == Keys.D2)
+                {
+                    point1 = new Point3D(0, 0, 0);
+                    point2 = new Point3D(1, 0, 0);
+                    point3 = new Point3D(0, 0, 1);
+                }
+                // yz평면
+                else if(face.Value?.KeyCode == Keys.D3)
+                {
+                    point1 = new Point3D(0, 0, 0);
+                    point2 = new Point3D(0, 1, 0);
+                    point3 = new Point3D(0, 0, 1);
                 }
                 else
                 {

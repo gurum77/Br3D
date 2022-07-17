@@ -9,7 +9,7 @@ namespace hanee.Cad.Tool
     {
         public ActionBox(devDept.Eyeshot.Environment environment) : base(environment)
         {
-
+            activeDynamicInputManagerForRadius = false;
         }
 
         double GetWidth(Plane plane, Point3D secondPoint)

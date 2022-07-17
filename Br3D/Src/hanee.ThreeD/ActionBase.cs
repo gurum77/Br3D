@@ -218,14 +218,12 @@ namespace hanee.ThreeD
                 }
                 else if (ent is IFace/* || ent is ICurve*/)
                 {
-                    string type = ent.GetType().ToString();
                     Color col = Color.FromArgb(50, ent.Color.R, ent.Color.G, ent.Color.B);
                     ent.Color = col;
                     environment.TempEntities.Add(ent);
                 }
                 else if (ent is ICurve)
                 {
-                    string type = ent.GetType().ToString();
                     Color col = Color.FromArgb(50, ent.Color.R, ent.Color.G, ent.Color.B);
                     ent.Color = col;
                     ent.Regen(0.01);

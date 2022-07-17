@@ -15,6 +15,7 @@ namespace hanee.Cad.Tool
     {
         // 높이 입력 받을때 workplane을 비활성화 할지?
         protected bool disableWorkplaneForHeight = true;
+        protected bool activeDynamicInputManagerForRadius = true;
         protected Plane oldPlane;
         protected Point3D centerPoint, radiusPoint, heightPoint;
         public ActionCylinder(devDept.Eyeshot.Environment environment) : base(environment)
@@ -53,7 +54,11 @@ namespace hanee.Cad.Tool
             if (centerPoint == null || point3D == null)
                 return null;
 
-            return new Circle(GetWorkplane(), centerPoint, point3D.DistanceTo(centerPoint));
+            var radius = point3D.DistanceTo(centerPoint);
+            var circle =  new Circle(GetWorkplane(), centerPoint, radius);
+            GetHModel()?.entityPropertiesManager?.SetDefaultProperties(circle, true);
+
+            return circle;
         }
 
         protected override void OnMouseMove(devDept.Eyeshot.Environment environment, MouseEventArgs e)
@@ -93,9 +98,13 @@ namespace hanee.Cad.Tool
                     break;
 
 
+                if(activeDynamicInputManagerForRadius)
+                    DynamicInputManager.ActiveLengthFactor(centerPoint, 1, LanguageHelper.Tr("Radius"));
                 radiusPoint = await GetPoint3D(LanguageHelper.Tr("Radius point"));
                 if (IsCanceled())
                     break;
+                SetOrthoModeStartPoint(null);
+                DynamicInputManager.Init();
 
                 var oldEnable = ws.enabled;
                 oldPlane = ws.plane;
@@ -108,6 +117,9 @@ namespace hanee.Cad.Tool
                     ws.enabled = oldEnable;
 
                 var cylinder = Make3D(false);
+                if (cylinder == null)
+                    break;
+
                 GetModel().Entities.Add(cylinder);
 
                 centerPoint = null;
