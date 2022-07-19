@@ -62,6 +62,7 @@ namespace Br3D
             Options.Instance.tempEntityColorMethod = Options.TempEntityColorMethod.byTransparencyColor;
 
 
+            
             ApplyOptions();
 
             InitGraphics();
@@ -224,11 +225,9 @@ namespace Br3D
 
             // 편집 리본탭 숨김
             ribbonPageDraw.Visible = false;
+            ribbonPageDraw3D.Visible = false;
             ribbonPageEdit.Visible = false;
             ribbonPageDimension.Visible = false;
-
-
-
         }
 
         private void HModel_BoundingBoxChanged(object sender)
@@ -764,6 +763,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemDrawTorus, Torus, LanguageHelper.Tr("Torus"), "Torus", "to");
 
             SetFunctionByElement(barButtonItemRevolve, Revolve, LanguageHelper.Tr("Revolve"), "Revolve", "rv");
+            SetFunctionByElement(barButtonItemLoft, Loft, LanguageHelper.Tr("Loft"), "Loft", "lf");
 
             // dimension
             SetFunctionByElement(barButtonItemDimHorizontal, DimHorizontal, LanguageHelper.Tr("Horizontal"), "Horizontal", "hor");
@@ -785,6 +785,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemTrim, TrimEntity, LanguageHelper.Tr("Trim"), "Trim", "tr");
             SetFunctionByElement(barButtonItemFillet, FilletEntity, LanguageHelper.Tr("Fillet"), "Fillet", "f");
             SetFunctionByElement(barButtonItemChamfer, ChamferEntity, LanguageHelper.Tr("Chamfer"), "Chamfer", "ch");
+            SetFunctionByElement(barButtonItemBlock, MakeBlock, LanguageHelper.Tr("Block"), "Block", "bl");
 
             // annotation
             SetFunctionByElement(barButtonItemCoordinates, Coorindates, LanguageHelper.Tr("Coordinates"), "Coordinates", "coor");
@@ -843,6 +844,7 @@ namespace Br3D
         async void DimHorizontal() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.horizontal }.RunAsync();
         async void DimRadius() => await new ActionDimDiameter(model) { radius = true }.RunAsync();
         async void DimDiameter() => await new ActionDimDiameter(model).RunAsync();
+        async void MakeBlock() => await new ActionBlock(model).RunAsync();
         async void ChamferEntity() => await new ActionFillet(model) { chamfer = true }.RunAsync();
         async void FilletEntity() => await new ActionFillet(model).RunAsync();
         //async void ExtendEntity() => await new ActionExtend(model).RunAsync();
@@ -871,7 +873,8 @@ namespace Br3D
         async void Torus() => await new ActionTorus(model).RunAsync();
 
         async void Revolve() => await new ActionRevolve(model).RunAsync();
-        
+        async void Loft() => await new ActionLoft(model).RunAsync();
+
 
         async void ArcCenterStartEnd() => await new ActionArc(model, ActionArc.Method.centerStartEnd).RunAsync();
         async void ArcFirstSecondThird() => await new ActionArc(model, ActionArc.Method.firstSecondThird).RunAsync();

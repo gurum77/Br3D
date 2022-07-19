@@ -27,7 +27,7 @@ namespace hanee.ThreeD
         {
             get
             {
-                if (IsDarkBackground())
+                if (this.IsDarkBackground())
                     return Color.White;
                 return Color.Black;
             }
@@ -80,12 +80,7 @@ namespace hanee.ThreeD
         public event EventHandler<DrawSceneParams> AfterDrawOverlay;
         #endregion
 
-        // 배경색이 어두운지?
-        public bool IsDarkBackground()
-        {
-            return ActiveViewport.Background.IsDark;
-        }
-
+      
         public void KeyEventListener(Keys keyData)
         {
             var e = new KeyEventArgs(keyData);
@@ -347,55 +342,14 @@ namespace hanee.ThreeD
         public void Set2DView()
         {
             TopViewOnly = true;
-            ActiveViewport.Camera.ProjectionMode = projectionType.Orthographic;
-            SetView(viewType.Top, true, true);
-
-            // 배경을 검은색으로
-            ActiveViewport.Background.BottomColor = Options.Instance.backgroundColor2D.colorValue;
-            ActiveViewport.Background.TopColor = Options.Instance.backgroundColor2D.colorValue;
-            ActiveViewport.DisplayMode = displayType.Flat;
-
-            // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
-            SetLayerColorByBackgroundColor();
-        }
-
-        public void SetLayerColorByBackgroundColor()
-        {
-            // 배경색이 어두우면 layer의 검은색을 흰색으로 변경
-            if (IsDarkBackground())
-            {
-                foreach (var la in Layers)
-                {
-                    if (la.Color == Color.Black)
-                        la.Color = Color.White;
-                }
-            }
-            // 배경색이 밝으면 layer의 흰색을 검은색으로 변경
-            else
-            {
-                foreach (var la in Layers)
-                {
-                    if (la.Color == Color.White)
-                        la.Color = Color.Black;
-                }
-
-            }
+            this.Set2DViewStyle();
         }
 
         // 3D view로 설정한다.
         public void Set3DView()
         {
             TopViewOnly = false;
-            ActiveViewport.Camera.ProjectionMode = projectionType.Perspective;
-            SetView(viewType.Isometric, true, true);
-
-            // 배경을 검은색으로
-            ActiveViewport.Background.BottomColor = Options.Instance.backgroundColorBottom.colorValue;
-            ActiveViewport.Background.TopColor = Options.Instance.backgroundColorTop.colorValue;
-            ActiveViewport.DisplayMode = displayType.Rendered;
-
-            // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
-            SetLayerColorByBackgroundColor();
+            this.Set3DViewStyle();
         }
 
 

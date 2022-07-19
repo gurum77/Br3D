@@ -107,6 +107,7 @@
     <Compile Include="ActionAngle.cs" />
     <Compile Include="ActionArc.cs" />
     <Compile Include="ActionArea.cs" />
+    <Compile Include="ActionBlock.cs" />
     <Compile Include="ActionBox.cs" />
     <Compile Include="ActionCircle.cs" />
     <Compile Include="ActionCone.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="ActionRegion.cs" />
     <Compile Include="ActionRevolve.cs" />
     <Compile Include="ActionRotate.cs" />
+    <Compile Include="ActionLoft.cs" />
     <Compile Include="ActionScale.cs" />
     <Compile Include="ActionSphere.cs" />
     <Compile Include="ActionText.cs" />
@@ -142,6 +144,12 @@
     <Compile Include="ActionTorus.cs" />
     <Compile Include="ActionTrim.cs" />
     <Compile Include="ActionWorkspace.cs" />
+    <Compile Include="FormBlock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBlock.Designer.cs">
+      <DependentUpon>FormBlock.cs</DependentUpon>
+    </Compile>
     <Compile Include="LineTypeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -219,6 +227,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormBlock.resx">
+      <DependentUpon>FormBlock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LineTypeControl.resx">
       <DependentUpon>LineTypeControl.cs</DependentUpon>
     </EmbeddedResource>

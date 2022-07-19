@@ -1,6 +1,7 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using devDept.Graphics;
 using hanee.Geometry;
 using System.Collections.Generic;
 using System.Drawing;
@@ -43,7 +44,7 @@ namespace hanee.ThreeD
             if (model.ActiveViewport.Grids.Length < 2)
                 return null;
 
-            
+
             return model.ActiveViewport.Grids[1];
             //return model.ActiveViewport.OriginSymbols.Length > 1 ? model.ActiveViewport.OriginSymbols[1] : null;
         }
@@ -75,8 +76,8 @@ namespace hanee.ThreeD
                 return;
             sym.Plane = plane;
             sym.Visible = true;
-            
-            
+
+
             //sym.Edit(Color.FromArgb(100, Color.Red));
             //sym.Transformation = new Transformation(ws.plane.Origin, ws.plane.AxisX, ws.plane.AxisY, ws.plane.AxisZ);
             //sym.Visible = true;
@@ -97,7 +98,7 @@ namespace hanee.ThreeD
                 return;
 
             sym.Visible = false;
-            
+
             environment.Invalidate();
 
         }
@@ -448,6 +449,74 @@ namespace hanee.ThreeD
                 widths[i] = width;
 
             environment.renderContext.DrawLines(lines, colors, widths);
+        }
+
+        static public void SetLayerColorByBackgroundColor(this Environment env)
+        {
+            // 배경색이 어두우면 layer의 검은색을 흰색으로 변경
+            if (env.IsDarkBackground())
+            {
+                foreach (var la in env.Layers)
+                {
+                    if (la.Color == Color.Black)
+                        la.Color = Color.White;
+                }
+            }
+            // 배경색이 밝으면 layer의 흰색을 검은색으로 변경
+            else
+            {
+                foreach (var la in env.Layers)
+                {
+                    if (la.Color == Color.White)
+                        la.Color = Color.Black;
+                }
+
+            }
+        }
+
+
+        // 배경색이 어두운지?
+        static public bool IsDarkBackground(this Environment environment)
+        {
+            if (environment is Model model)
+                return model.ActiveViewport.Background.IsDark;
+            return false;
+        }
+
+        // 2D view로 설정한다.
+        static public void Set2DViewStyle(this Environment env)
+        {
+            if (env is Model model)
+            {
+                model.ActiveViewport.Camera.ProjectionMode = projectionType.Orthographic;
+                model.SetView(viewType.Top, true, true);
+
+                // 배경을 검은색으로
+                model.ActiveViewport.Background.BottomColor = Options.Instance.backgroundColor2D.colorValue;
+                model.ActiveViewport.Background.TopColor = Options.Instance.backgroundColor2D.colorValue;
+                model.ActiveViewport.DisplayMode = displayType.Flat;
+
+                // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
+                model.SetLayerColorByBackgroundColor();
+            }
+        }
+
+        // 3D view로 설정한다.
+        static public void Set3DViewStyle(this Environment env)
+        {
+            if (env is Model model)
+            {
+                model.ActiveViewport.Camera.ProjectionMode = projectionType.Perspective;
+                model.SetView(viewType.Isometric, true, true);
+
+                // 배경을 검은색으로
+                model.ActiveViewport.Background.BottomColor = Options.Instance.backgroundColorBottom.colorValue;
+                model.ActiveViewport.Background.TopColor = Options.Instance.backgroundColorTop.colorValue;
+                model.ActiveViewport.DisplayMode = displayType.Rendered;
+
+                // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
+                model.SetLayerColorByBackgroundColor();
+            }
         }
     }
 }
