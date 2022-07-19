@@ -16,15 +16,23 @@ namespace hanee.Cad.Tool
 {
     public partial class FormBlock : DevExpress.XtraEditors.XtraForm
     {
+        public enum Mode
+        {
+            newBlockName,
+            existBlockName
+        }
         Model mainModel { get; set; }
+        Mode mode { get; set; } = Mode.newBlockName;
         
-        public FormBlock(Model mainModel)
+        public FormBlock(Model mainModel, Mode mode)
         {
             InitializeComponent();
+
             model1.Unlock("US21-D8G5N-12J8F-5F65-RD3W");
             if (mainModel == null)
                 System.Diagnostics.Debug.Assert(false);
 
+            this.mode = mode;
             this.mainModel = mainModel;
             this.mainModel.CopyTo(model1, false);
         }
@@ -49,7 +57,7 @@ namespace hanee.Cad.Tool
             }
         }
 
-        string curBlockName => comboBoxEditBlock.SelectedItem as string;
+        public string curBlockName => comboBoxEditBlock.SelectedItem as string;
         private void simpleButtonDel_Click(object sender, EventArgs e)
         {
             if (mainModel == null)
@@ -79,8 +87,44 @@ namespace hanee.Cad.Tool
 
         private void simpleButtonOk_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            if(!IsValidBlockName())
+            {
+                XtraMessageBox.Show(LanguageHelper.Tr("Block name is incorrect"));
+                return;
+            }
+
+            // 새로운 block name 입력받는데 이미 있는걸 입력했다면 고칠지 물어본다.
+            if (mode == Mode.newBlockName)
+            {
+                if(mainModel.Blocks.Contains(curBlockName))
+                {
+                    var msg = LanguageHelper.Tr($"{curBlockName} is aleady exist. Replace?");
+                    if (XtraMessageBox.Show(msg, LanguageHelper.Tr("New block"), MessageBoxButtons.YesNo) == DialogResult.No)
+                        return;
+                }
+            }
+            else if (mode == Mode.existBlockName)
+            {
+                if (!mainModel.Blocks.Contains(curBlockName))
+                {
+                    var msg = LanguageHelper.Tr($"{curBlockName} is not found");
+                    XtraMessageBox.Show(msg);
+                    return;
+                }
+
+                DialogResult = DialogResult.OK;
+            }
             Close();
+        }
+
+        private bool IsValidBlockName()
+        {
+            if (string.IsNullOrEmpty(curBlockName))
+                return false;
+            if (curBlockName.Contains(" "))
+                return false;
+
+            return true;
         }
 
         private void simpleButtonCancel_Click(object sender, EventArgs e)
