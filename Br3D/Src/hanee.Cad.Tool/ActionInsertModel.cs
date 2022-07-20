@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace hanee.Cad.Tool
 {
-    public class ActionInsert : ActionBase
+    public class ActionInsertModel : ActionBase
     {
         enum BasePoint
         {
@@ -17,7 +17,7 @@ namespace hanee.Cad.Tool
             center
         }
         Vector3D lastVec;
-        public ActionInsert(devDept.Eyeshot.Environment environment) : base(environment)
+        public ActionInsertModel(devDept.Eyeshot.Environment environment) : base(environment)
         {
         }
 
@@ -46,6 +46,7 @@ namespace hanee.Cad.Tool
             {
                 lastVec = null;
 
+                // 파일 선택
                 OpenFileDialog dlg = new OpenFileDialog();
 
                 var additionalSupportFormats = new Dictionary<string, string>();
@@ -82,8 +83,6 @@ namespace hanee.Cad.Tool
                 center = environment.TempEntities.GetCenter();
                 if (center == null)
                     break;
-
-
 
                 // 좌측 하단이 0,0이 되도록 이동
                 var vec = leftBottom.AsVector * -1;

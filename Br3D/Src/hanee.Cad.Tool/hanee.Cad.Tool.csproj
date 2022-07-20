@@ -122,7 +122,8 @@
     <Compile Include="ActionFillet.cs" />
     <Compile Include="ActionFilter.cs" />
     <Compile Include="ActionID.cs" />
-    <Compile Include="ActionInsert.cs" />
+    <Compile Include="ActionInsertModel.cs" />
+    <Compile Include="ActionInsertBlock.cs" />
     <Compile Include="ActionInsertImage.cs" />
     <Compile Include="ActionLayer.cs" />
     <Compile Include="ActionLine.cs" />

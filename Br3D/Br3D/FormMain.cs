@@ -752,8 +752,10 @@ namespace Br3D
             SetFunctionByElement(barButtonItemDrawSpline, Spline, LanguageHelper.Tr("Spline"), "Spline", "sp");
             SetFunctionByElement(barButtonItemDrawText, DrawText, LanguageHelper.Tr("Text"), "Text", "t");
             SetFunctionByElement(barButtonItemMultilineText, MText, LanguageHelper.Tr("Multiline Text"), "MText", "mt");
-            SetFunctionByElement(barButtonItemInsert, Insert, LanguageHelper.Tr("Insert"), "Insert", "i");
+            SetFunctionByElement(barButtonItemInsertBlock, InsertBlock, LanguageHelper.Tr("Insert Block"), "InsertBlock", "i");
+            SetFunctionByElement(barButtonItemInsertModel, InsertModel, LanguageHelper.Tr("Insert Model"), "InsertModel", "im");
             SetFunctionByElement(barButtonItemInsertImage, InsertImage, LanguageHelper.Tr("Insert Image"), "InsertImage", "ii");
+            
             SetFunctionByElement(barButtonItemDrawRegion, DrawRegion, LanguageHelper.Tr("Region"), "Region", "rg");
 
             SetFunctionByElement(barButtonItemDrawCylinder, Cylinder, LanguageHelper.Tr("Cylinder"), "Cylinder", "cy");
@@ -837,7 +839,8 @@ namespace Br3D
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
         async void DrawRegion() => await new ActionRegion(model).RunAsync(); 
         async void InsertImage() => await new ActionInsertImage(model).RunAsync();
-        async void Insert() => await new ActionInsert(model).RunAsync();
+        async void InsertModel() => await new ActionInsertModel(model).RunAsync();
+        async void InsertBlock() => await new ActionInsertBlock(model).RunAsync();
         async void DimLeader() => await new ActionDimLeader(model).RunAsync();
         async void DimAlign() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.aligned }.RunAsync();
         async void DimVertical() => await new ActionDimLinear(model) { dimDirection = ActionDimLinear.DimDirection.vertical }.RunAsync();

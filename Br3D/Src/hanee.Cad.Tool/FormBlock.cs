@@ -53,8 +53,14 @@ namespace hanee.Cad.Tool
 
             foreach (var b in mainModel.Blocks)
             {
+                if (b.Name == "RootBlock")
+                    continue;
+
                 comboBoxEditBlock.Properties.Items.Add(b.Name);
             }
+
+            if (mode == Mode.existBlockName && comboBoxEditBlock.Properties.Items.Count > 0)
+                comboBoxEditBlock.SelectedIndex = 0;
         }
 
         public string curBlockName => comboBoxEditBlock.SelectedItem as string;
@@ -112,8 +118,10 @@ namespace hanee.Cad.Tool
                     return;
                 }
 
-                DialogResult = DialogResult.OK;
+                
             }
+
+            DialogResult = DialogResult.OK;
             Close();
         }
 

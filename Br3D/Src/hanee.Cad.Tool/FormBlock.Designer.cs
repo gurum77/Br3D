@@ -80,6 +80,7 @@ namespace hanee.Cad.Tool
             this.comboBoxEditBlock.Name = "comboBoxEditBlock";
             this.comboBoxEditBlock.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEditBlock.Properties.Sorted = true;
             this.comboBoxEditBlock.Size = new System.Drawing.Size(290, 22);
             this.comboBoxEditBlock.TabIndex = 0;
             this.comboBoxEditBlock.SelectedIndexChanged += new System.EventHandler(this.comboBoxEditBlock_SelectedIndexChanged);

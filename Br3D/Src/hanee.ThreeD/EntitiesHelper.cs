@@ -85,7 +85,7 @@ namespace hanee.ThreeD
             }
         }
 
-        private static void AddEntityToTempEntities(Entity ent, devDept.Eyeshot.Environment environment, bool clone)
+        public static void AddEntityToTempEntities(Entity ent, devDept.Eyeshot.Environment environment, bool clone)
         {
             // block이면 explode해서 넣는다.
             if (ent is BlockReference)
