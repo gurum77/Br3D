@@ -1,6 +1,8 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
+using devDept.Geometry;
 using DevExpress.XtraEditors;
+using hanee.Geometry;
 using hanee.ThreeD;
 using System;
 using System.Collections.Generic;
@@ -35,12 +37,13 @@ namespace hanee.Cad.Tool
             this.mode = mode;
             this.mainModel = mainModel;
             this.mainModel.CopyTo(model1, false);
+
+            panelControlExistBlockOptions.Visible = mode == Mode.existBlockName;
         }
 
 
         private void FormBlock_Load(object sender, EventArgs e)
         {
-            
             InitCombo();
             model1.Set2DViewStyle();
         }
@@ -64,6 +67,10 @@ namespace hanee.Cad.Tool
         }
 
         public string curBlockName => comboBoxEditBlock.SelectedItem as string;
+        public double xScale => textEditXScale.Text.ToDouble();
+        public double yScale => textEditYScale.Text.ToDouble();
+        public double zScale => textEditZScale.Text.ToDouble();
+
         private void simpleButtonDel_Click(object sender, EventArgs e)
         {
             if (mainModel == null)
@@ -75,7 +82,6 @@ namespace hanee.Cad.Tool
                 mainModel.Blocks.TryRemove(curBlockName);
                 InitCombo();
                 comboBoxEditBlock.SelectedText = "";
-
             }
             catch
             {

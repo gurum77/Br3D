@@ -45,6 +45,7 @@ namespace hanee.Cad.Tool
                     break;
 
                 var br = new BlockReference(form.curBlockName);
+                br.Scale(new Point3D(0, 0, 0), form.xScale, form.yScale, form.zScale);
                 EntitiesHelper.AddEntityToTempEntities(br, environment, true);
 
 
@@ -53,6 +54,7 @@ namespace hanee.Cad.Tool
                     break;
 
                 br.InsertionPoint = insertionPoint;
+                
                 environment.Entities.Add(br);
                 environment.Entities.Regen(new RegenOptions());
                 environment.Invalidate();
