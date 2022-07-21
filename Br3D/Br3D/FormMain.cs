@@ -789,6 +789,11 @@ namespace Br3D
             SetFunctionByElement(barButtonItemChamfer, ChamferEntity, LanguageHelper.Tr("Chamfer"), "Chamfer", "ch");
             SetFunctionByElement(barButtonItemBlock, MakeBlock, LanguageHelper.Tr("Block"), "Block", "bl");
 
+            // edit 3d
+            SetFunctionByElement(barButtonItemSubtract, Subtract, LanguageHelper.Tr("Subtract"), "Subtract", "sub");
+            SetFunctionByElement(barButtonItemUnion, Union, LanguageHelper.Tr("Union"), "Union", "uni");
+            SetFunctionByElement(barButtonItemIntersection, Intersection3D, LanguageHelper.Tr("Intersection"), "Intersection", "inte");
+
             // annotation
             SetFunctionByElement(barButtonItemCoordinates, Coorindates, LanguageHelper.Tr("Coordinates"), "Coordinates", "coor");
             SetFunctionByElement(barButtonItemDistance, Distance, LanguageHelper.Tr("Distance"), "Distance", "di");
@@ -835,6 +840,10 @@ namespace Br3D
             SetFunctionByElement(barButtonItemNodePoint, Point, "", null, null);
 
         }
+
+        async void Subtract() => await new ActionSubtract(model).RunAsync();
+        async void Union() => await new ActionUnion(model).RunAsync();
+        async void Intersection3D() => await new ActionIntersection(model).RunAsync();
 
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
         async void DrawRegion() => await new ActionRegion(model).RunAsync(); 
