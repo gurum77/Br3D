@@ -135,8 +135,29 @@ namespace hanee.ThreeD
             }
         }
 
+        bool IsMouseOnToolBar(MouseEventArgs e)
+        {
+            foreach (var toolbar in ActiveViewport.ToolBars)
+            {
+                // toolbar의 bounds
+                var rect = toolbar.GetBounds(ActiveViewport);
+
+                // mouse의 위치가 toolbar의 bounds안이면 그냥 리턴시킴
+                if (rect.Left < e.Location.X && rect.Right > e.Location.X && rect.Top < e.Location.Y && rect.Bottom > e.Location.Y)
+                    return true;
+            }
+
+            return false;
+        }
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
+            if (IsMouseOnToolBar(e))
+            {
+                base.OnMouseDown(e);
+                return;
+            }
+
             lastMouseDownPoint = e.Location;
 
             base.OnMouseDown(e);

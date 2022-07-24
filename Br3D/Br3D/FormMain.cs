@@ -326,7 +326,9 @@ namespace Br3D
             ribbonPageAnnotation.Text = LanguageHelper.Tr("Annotation");
             ribbonPageDimension.Text = LanguageHelper.Tr("Dimension");
             ribbonPageDraw.Text = LanguageHelper.Tr("Draw");
+            ribbonPageDraw3D.Text = LanguageHelper.Tr("Draw 3D");
             ribbonPageEdit.Text = LanguageHelper.Tr("Edit");
+            ribbonPageEdit3D.Text = LanguageHelper.Tr("Edit 3D");
             ribbonPageHome.Text = LanguageHelper.Tr("Home");
             ribbonPageOptions.Text = LanguageHelper.Tr("Options");
             ribbonPageTools.Text = LanguageHelper.Tr("Tools");

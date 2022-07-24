@@ -110,7 +110,7 @@ namespace hanee.Cad.Tool
             {
                 if(mainModel.Blocks.Contains(curBlockName))
                 {
-                    var msg = LanguageHelper.Tr($"{curBlockName} is aleady exist. Replace?");
+                    var msg = curBlockName + LanguageHelper.Tr(" is aleady exist. Replace?");
                     if (XtraMessageBox.Show(msg, LanguageHelper.Tr("New block"), MessageBoxButtons.YesNo) == DialogResult.No)
                         return;
                 }
@@ -119,7 +119,7 @@ namespace hanee.Cad.Tool
             {
                 if (!mainModel.Blocks.Contains(curBlockName))
                 {
-                    var msg = LanguageHelper.Tr($"{curBlockName} is not found");
+                    var msg = curBlockName + LanguageHelper.Tr(" is not found");
                     XtraMessageBox.Show(msg);
                     return;
                 }

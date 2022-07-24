@@ -34,7 +34,7 @@ namespace hanee.Cad.Tool
                 List<ICurve> curves = new List<ICurve>();
                 while (true)
                 {
-                    var curve = await GetEntity(LanguageHelper.Tr("Selct closed curve"), -1, true, selectableType) as ICurve;
+                    var curve = await GetEntity(LanguageHelper.Tr("Select closed curve"), -1, true, selectableType) as ICurve;
                     if (IsCanceled() || IsEntered())
                         break;
                     if (curve == null)
