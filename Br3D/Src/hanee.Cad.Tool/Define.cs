@@ -5,6 +5,7 @@ namespace hanee.Cad.Tool
     public class Define
     {
         #region 상수정의
+        static public Color translateColor = Color.White;
         static public Color AxisXColor = Color.Red;
         static public Color AxisYColor = Color.Green;
         static public Color AxisZColor = Color.Blue;

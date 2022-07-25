@@ -933,7 +933,7 @@ namespace hanee.ThreeD
         // input 시작
         public static void StartInput(Environment environment, string message, int stepID, UserInput userInput)
         {
-            ActionBase.StepID = StepID;
+            ActionBase.StepID = stepID;
             ActionBase.cursorText = message;
             ActionBase.userInputting[(int)userInput] = true;
             ActionBase.IsStopedCurrentStep = false;

@@ -59,12 +59,20 @@ namespace hanee.Cad.Tool
             if (firstDestPoint != null && thirdDestPoint != null)
                 entities.Add(MakeAxis(firstDestPoint, thirdDestPoint, Define.AxisYColor));
 
-            // 입력중인 축 그리기
+            // 이동 위치 그리기
+            if(firstSourcePoint != null && firstDestPoint != null)
+                entities.Add(MakeAxis(firstSourcePoint, firstDestPoint, Define.translateColor));
+
+
+            // 입력중인 선(축) 그리기
             var step = (Step)ActionBase.StepID;
             if(step == Step.secondSourcePoint || step == Step.thirdSourcePoint)
                 entities.Add(MakeAxis(firstSourcePoint, point3D, step == Step.secondSourcePoint ? Define.AxisXColor : Define.AxisYColor));
             else if (step == Step.secondDestPoint || step == Step.thirdDestPoint)
                 entities.Add(MakeAxis(firstDestPoint, point3D, step == Step.secondDestPoint ? Define.AxisXColor : Define.AxisYColor));
+            else if(step == Step.firstDestPoint)
+                entities.Add(MakeAxis(firstSourcePoint, point3D, Define.translateColor));
+
 
 
             environment.TempEntities.Clear();

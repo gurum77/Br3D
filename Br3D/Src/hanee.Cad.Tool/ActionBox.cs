@@ -18,7 +18,7 @@ namespace hanee.Cad.Tool
             if (base.centerPoint == null || secondPoint == null)
                 return 0;
 
-            var widthPoint = secondPoint.IntersectionWith(plane.AxisY, centerPoint, plane.AxisX);
+            var widthPoint = secondPoint.IntersectionWith(plane, plane.AxisY, centerPoint, plane.AxisX);
             if (widthPoint == null)
                 return 0;
 
@@ -30,7 +30,7 @@ namespace hanee.Cad.Tool
             if (base.centerPoint == null || point3D == null)
                 return 0;
 
-            var depthPoint = secondPoint.IntersectionWith(plane.AxisX, centerPoint, plane.AxisY);
+            var depthPoint = secondPoint.IntersectionWith(plane, plane.AxisX, centerPoint, plane.AxisY);
             if (depthPoint == null)
                 return 0;
 
@@ -71,7 +71,10 @@ namespace hanee.Cad.Tool
             else
                 box = Brep.CreateBox(width, depth, height);
             
-            box.TransformBy(new Transformation(base.centerPoint, oldPlane.AxisX, oldPlane.AxisY, reverseHeight ? oldPlane.AxisZ  * -1: oldPlane.AxisZ));
+            var leftBottom = base.centerPoint;
+            leftBottom = leftBottom + oldPlane.AxisX * -width / 2;
+            leftBottom = leftBottom + oldPlane.AxisY * -depth / 2;
+            box.TransformBy(new Transformation(leftBottom, oldPlane.AxisX, oldPlane.AxisY, reverseHeight ? oldPlane.AxisZ  * -1: oldPlane.AxisZ));
             GetHModel()?.entityPropertiesManager?.SetDefaultProperties(box, tempEntity);
 
             return box;
