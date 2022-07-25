@@ -227,6 +227,7 @@ namespace Br3D
             ribbonPageDraw.Visible = false;
             ribbonPageDraw3D.Visible = false;
             ribbonPageEdit.Visible = false;
+            ribbonPageEdit3D.Visible = false;
             ribbonPageDimension.Visible = false;
         }
 

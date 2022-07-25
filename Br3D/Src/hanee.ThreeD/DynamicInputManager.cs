@@ -144,7 +144,7 @@ namespace hanee.ThreeD
         }
 
         // length input을 활성화 한다.
-        public static void ActiveLengthFactor(Point3D startPoint, double baseLength, string title = null)
+        public static void ActiveLengthFactor(Point3D startPoint, double baseLength, string title = null, Vector3D lengthDir=null)
         {
             DynamicInputManager.point3DType = DynamicInputManager.Point3DType.distanceFactor;
             var formDi = DynamicInputManager.GetFormPoint3DDynamicInput() as ControlDistanceFactorDynamicInput;
@@ -155,6 +155,7 @@ namespace hanee.ThreeD
             
             formDi.fixedFactor = null;
             formDi.baseLength = baseLength;
+            formDi.lengthDir = lengthDir;
             if (title != null)
             {
                 formDi.controlDynamicInputEdit1.labelControl1.Text = title;

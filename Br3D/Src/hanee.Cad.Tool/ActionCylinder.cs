@@ -101,16 +101,21 @@ namespace hanee.Cad.Tool
                 if(activeDynamicInputManagerForRadius)
                     DynamicInputManager.ActiveLengthFactor(centerPoint, 1, LanguageHelper.Tr("Radius"));
                 radiusPoint = await GetPoint3D(LanguageHelper.Tr("Radius point"));
-                if (IsCanceled())
-                    break;
                 SetOrthoModeStartPoint(null);
                 DynamicInputManager.Init();
+                if (IsCanceled())
+                    break;
+                
 
                 var oldEnable = ws.enabled;
                 oldPlane = ws.plane;
                 if(disableWorkplaneForHeight)
                     ws.enabled = false;
+                if (activeDynamicInputManagerForRadius)
+                    DynamicInputManager.ActiveLengthFactor(centerPoint, 1, LanguageHelper.Tr("Height"), ws.plane.AxisZ);
                 heightPoint = await GetPoint3D(LanguageHelper.Tr("Height point"));
+                SetOrthoModeStartPoint(null);
+                DynamicInputManager.Init();
                 if (IsCanceled())
                     break;
                 if(disableWorkplaneForHeight)

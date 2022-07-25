@@ -22,6 +22,9 @@ namespace hanee.ThreeD
         TextEdit textEditFactor => controlDynamicInputEdit1.textEdit1;
         PictureEdit pictureEditFactor => controlDynamicInputEdit1.pictureEdit1;
 
+        // 길이 입력할때 좌표를 적용할 방향(null이면 x축으로, 정해져 있으면 정해진 방향으로 좌표를 적용한다)
+        public Vector3D lengthDir { get; internal set; } = null;
+
         public ControlDistanceFactorDynamicInput()
         {
             InitializeComponent();
@@ -101,9 +104,18 @@ namespace hanee.ThreeD
                 return;
 
             double len = fixedFactor.Value * baseLength;
-            var dir = (pt - mng.startPoint).ToDir();
-            if (dir.IsZero)
-                dir = new Vector3D(1, 0, 0);
+            Vector3D dir = null;
+            if (lengthDir == null)
+            {
+                dir = (pt - mng.startPoint).ToDir();
+                if (dir.IsZero)
+                    dir = new Vector3D(1, 0, 0);
+            }
+            else
+            {
+                dir = lengthDir;
+            }
+            
             var newPt = mng.startPoint + dir * len;
 
             pt.X = newPt.X;
