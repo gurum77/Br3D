@@ -19,6 +19,17 @@ namespace hanee.Cad.Tool
         Point3D secondDestPoint = null;
         Point3D thirdDestPoint = null;
 
+        enum Step
+        {
+            entitis,
+            firstSourcePoint,
+            secondSourcePoint,
+            thirdSourcePoint,
+            firstDestPoint,
+            secondDestPoint,
+            thirdDestPoint
+
+        }
         
         public ActionAlign(devDept.Eyeshot.Environment environment) : base(environment)
         {
@@ -29,57 +40,45 @@ namespace hanee.Cad.Tool
 
         protected override void OnMouseMove(Environment environment, MouseEventArgs e)
         {
-            var alpha = 100;
             EntityList entities = new EntityList();
-            if (firstSourcePoint != null)
-            {
-                // source x 축 그리기
-                var l = new Line(firstSourcePoint, secondSourcePoint == null ? point3D : secondSourcePoint);
-                l.LineWeight = 3;
-                l.Color = Color.FromArgb(alpha, Define.AxisXColor);
-                l.ColorMethod = colorMethodType.byEntity;
-                entities.Add(l);
-            }
 
-            // 목적지 점 입력 전인 경우
-            if (firstDestPoint == null)
-            {
-                // source y 축 그리기
-                if (secondSourcePoint != null)
-                {
-                    var l = new Line(firstSourcePoint, thirdSourcePoint == null ? point3D : thirdSourcePoint);
-                    l.LineWeight = 3;
-                    l.Color = Color.FromArgb(alpha, Define.AxisYColor);
-                    l.ColorMethod = colorMethodType.byEntity;
-                    entities.Add(l);
-                }
-            }
+            // 입력이 완료된 걸 그린다.
+            // source x 축 그리기
+            if (firstSourcePoint != null && secondSourcePoint != null)
+                entities.Add(MakeAxis(firstSourcePoint, secondSourcePoint, Define.AxisXColor));
 
-            // 목적지 점 입력중인경우
+            // source y 축 그리기
+            if(firstSourcePoint != null && thirdSourcePoint != null)
+                entities.Add(MakeAxis(firstSourcePoint, thirdSourcePoint, Define.AxisYColor));
+
             // dest x 축 그리기
-            if (firstDestPoint != null)
-            {
-                
-                var l = new Line(firstDestPoint, secondDestPoint == null ? point3D : secondDestPoint);
-                l.LineWeight = 3;
-                l.Color = Color.FromArgb(alpha, Define.AxisXColor);
-                l.ColorMethod = colorMethodType.byEntity;
-                entities.Add(l);
-            }
-
-            // dest y축 그리기
-            if (secondDestPoint != null)
-            {
-                var l = new Line(firstDestPoint, thirdDestPoint == null ? point3D : thirdDestPoint);
-                l.LineWeight = 3;
-                l.Color = Color.FromArgb(alpha, Define.AxisYColor);
-                l.ColorMethod = colorMethodType.byEntity;
-                entities.Add(l);
-            }
+            if(firstDestPoint != null && secondDestPoint != null)
+                entities.Add(MakeAxis(firstDestPoint, secondDestPoint, Define.AxisXColor));
             
+            // dest y 축 그리기
+            if (firstDestPoint != null && thirdDestPoint != null)
+                entities.Add(MakeAxis(firstDestPoint, thirdDestPoint, Define.AxisYColor));
+
+            // 입력중인 축 그리기
+            var step = (Step)ActionBase.StepID;
+            if(step == Step.secondSourcePoint || step == Step.thirdSourcePoint)
+                entities.Add(MakeAxis(firstSourcePoint, point3D, step == Step.secondSourcePoint ? Define.AxisXColor : Define.AxisYColor));
+            else if (step == Step.secondDestPoint || step == Step.thirdDestPoint)
+                entities.Add(MakeAxis(firstDestPoint, point3D, step == Step.secondDestPoint ? Define.AxisXColor : Define.AxisYColor));
+
 
             environment.TempEntities.Clear();
             environment.TempEntities.AddRange(entities);
+        }
+
+        private Entity MakeAxis(Point3D pt1, Point3D pt2, Color color)
+        {
+            var alpha = 100;
+            var l = new Line(pt1, pt2);
+            l.LineWeight = 3;
+            l.Color = Color.FromArgb(alpha, color);
+            l.ColorMethod = colorMethodType.byEntity;
+            return l;
         }
 
         void InitPoints()
@@ -103,23 +102,23 @@ namespace hanee.Cad.Tool
             // 객체 선택 / source point
             while (true)
             {
-                entities = await GetEntities(LanguageHelper.Tr("Select entities"));
+                entities = await GetEntities(LanguageHelper.Tr("Select entities"), (int)Step.entitis);
 
-                firstSourcePoint = await GetPoint3D(LanguageHelper.Tr("First source point"));
+                firstSourcePoint = await GetPoint3D(LanguageHelper.Tr("First source point"), (int)Step.firstSourcePoint);
                 if (IsCanceled() || IsEntered())
                 {
                     firstSourcePoint = null;
                     break;
                 }
 
-                secondSourcePoint = await GetPoint3D(LanguageHelper.Tr("Second source point"));
+                secondSourcePoint = await GetPoint3D(LanguageHelper.Tr("Second source point"), (int)Step.secondSourcePoint);
                 if (IsCanceled() || IsEntered())
                 {
                     secondSourcePoint = null;
                     break;
                 }
 
-                thirdSourcePoint = await GetPoint3D(LanguageHelper.Tr("Third source point"));
+                thirdSourcePoint = await GetPoint3D(LanguageHelper.Tr("Third source point"), (int)Step.thirdSourcePoint);
                 if (IsCanceled() || IsEntered())
                 {
                     thirdSourcePoint = null;
@@ -130,19 +129,19 @@ namespace hanee.Cad.Tool
 
             while (true)
             {
-                firstDestPoint = await GetPoint3D(LanguageHelper.Tr("First destination point"));
+                firstDestPoint = await GetPoint3D(LanguageHelper.Tr("First destination point"), (int)Step.firstDestPoint);
                 if (IsCanceled() || IsEntered())
                     break;
 
                 if (secondSourcePoint == null)
                     break;
-                secondDestPoint = await GetPoint3D(LanguageHelper.Tr("Second destination point"));
+                secondDestPoint = await GetPoint3D(LanguageHelper.Tr("Second destination point"), (int)Step.secondDestPoint);
                 if (IsCanceled() || IsEntered())
                     break;
 
                 if (thirdSourcePoint == null)
                     break;
-                thirdDestPoint = await GetPoint3D(LanguageHelper.Tr("Third destination point"));
+                thirdDestPoint = await GetPoint3D(LanguageHelper.Tr("Third destination point"), (int)Step.thirdDestPoint);
                 if (IsCanceled() || IsEntered())
                     break;
 
