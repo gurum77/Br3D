@@ -147,6 +147,7 @@ namespace hanee.ThreeD
         }
 
         // 임시 객체를 설정한다.
+        // 속도 느림
         static public void SetTempEtt(devDept.Eyeshot.Environment environment, Entity ent, bool initTempEntities = true)
         {
             if (initTempEntities)

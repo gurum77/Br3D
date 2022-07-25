@@ -312,13 +312,13 @@ namespace Br3D
             InitRibbonButtonMethod();
 
             // context menu
-            endPointToolStripMenuItem.Text = LanguageHelper.Tr("End point");
-            intersectionPointToolStripMenuItem.Text = LanguageHelper.Tr("Intersection point");
-            middlePointToolStripMenuItem.Text = LanguageHelper.Tr("Middle point");
-            centerPointToolStripMenuItem.Text = LanguageHelper.Tr("Center point");
-            selectallToolStripMenuItem.Text = LanguageHelper.Tr("Select all");
-            unselectAllToolStripMenuItem.Text = LanguageHelper.Tr("Unselect all");
-            invertSelectionToolStripMenuItem.Text = LanguageHelper.Tr("Invert selection");
+            endPointToolStripMenuItem.Text = LanguageHelper.Tr("End point(&E)");
+            intersectionPointToolStripMenuItem.Text = LanguageHelper.Tr("Intersection point(&I)");
+            middlePointToolStripMenuItem.Text = LanguageHelper.Tr("Middle point(&M)");
+            centerPointToolStripMenuItem.Text = LanguageHelper.Tr("Center point(&C)");
+            selectallToolStripMenuItem.Text = LanguageHelper.Tr("Select all(&A)");
+            unselectAllToolStripMenuItem.Text = LanguageHelper.Tr("Unselect all(&U)");
+            invertSelectionToolStripMenuItem.Text = LanguageHelper.Tr("Invert selection(&V)");
 
 
 
@@ -795,6 +795,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemSubtract, Subtract, LanguageHelper.Tr("Subtract"), "Subtract", "sub");
             SetFunctionByElement(barButtonItemUnion, Union, LanguageHelper.Tr("Union"), "Union", "uni");
             SetFunctionByElement(barButtonItemIntersection, Intersection3D, LanguageHelper.Tr("Intersection"), "Intersection", "inte");
+            SetFunctionByElement(barButtonItemAlign, Align, LanguageHelper.Tr("Align"), "Align", "align");
 
             // annotation
             SetFunctionByElement(barButtonItemCoordinates, Coorindates, LanguageHelper.Tr("Coordinates"), "Coordinates", "coor");
@@ -846,6 +847,7 @@ namespace Br3D
         async void Subtract() => await new ActionSubtract(model).RunAsync();
         async void Union() => await new ActionUnion(model).RunAsync();
         async void Intersection3D() => await new ActionIntersection(model).RunAsync();
+        async void Align() => await new ActionAlign(model).RunAsync();
 
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
         async void DrawRegion() => await new ActionRegion(model).RunAsync(); 

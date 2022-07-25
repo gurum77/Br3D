@@ -775,6 +775,7 @@ namespace hanee.ThreeD
             selectionManager.OnMouseMove(e);
 
             // If ObjectSnap is ON, we need to find closest vertex (if any)
+            // 스냅을 해야 하는 경우 마우스 이동할때 마다 스냅가능 포인트를 검색한다.
             if (ActionBase.IsNeedSnapping())
             {
                 Snapping.OnMouseMoveForSnap(e);
@@ -919,7 +920,8 @@ namespace hanee.ThreeD
             {
                 // 사용자 입력중일때만 draw overlay
                 //DrawOverlayForSnap();
-                Snapping.DrawOverlayForSnap();
+                if(ActionBase.IsNeedSnapping())
+                    Snapping.DrawOverlayForSnap();
                 if (orthoModeManager != null)
                     orthoModeManager.DrawOverlayForOrthoMode();
 

@@ -39,8 +39,20 @@ namespace hanee.Cad.Tool
             this.mainModel.CopyTo(model1, false);
 
             panelControlExistBlockOptions.Visible = mode == Mode.existBlockName;
+
+            Translate();
         }
 
+        private void Translate()
+        {
+            this.Text = LanguageHelper.Tr("Block");
+            labelControlName.Text = LanguageHelper.Tr("Block name");
+            labelControlScale.Text = LanguageHelper.Tr("Scale");
+            simpleButtonDel.Text = LanguageHelper.Tr("Delete");
+            checkButton3D.Text = LanguageHelper.Tr("3D View");
+            simpleButtonOk.Text = LanguageHelper.Tr("OK");
+            simpleButtonCancel.Text = LanguageHelper.Tr("Cancel");
+        }
 
         private void FormBlock_Load(object sender, EventArgs e)
         {

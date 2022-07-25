@@ -5,6 +5,9 @@ namespace hanee.Cad.Tool
     public class Define
     {
         #region 상수정의
+        static public Color AxisXColor = Color.Red;
+        static public Color AxisYColor = Color.Green;
+        static public Color AxisZColor = Color.Blue;
         static public string DefaultLayer = "0";
         static public string Only2DLayer = "Only2D";
         static public string Only3DLayer = "Only3D";
