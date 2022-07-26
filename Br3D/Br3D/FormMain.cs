@@ -797,6 +797,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemUnion, Union, LanguageHelper.Tr("Union"), "Union", "uni");
             SetFunctionByElement(barButtonItemIntersection, Intersection3D, LanguageHelper.Tr("Intersection"), "Intersection", "inte");
             SetFunctionByElement(barButtonItemAlign, Align, LanguageHelper.Tr("Align"), "Align", "align");
+            SetFunctionByElement(barButtonItemSmartExtrude, SmartExtrude, LanguageHelper.Tr("Smart extrude"), "SmartExtrude", "se");
 
             // annotation
             SetFunctionByElement(barButtonItemCoordinates, Coorindates, LanguageHelper.Tr("Coordinates"), "Coordinates", "coor");
@@ -849,6 +850,8 @@ namespace Br3D
         async void Union() => await new ActionUnion(model).RunAsync();
         async void Intersection3D() => await new ActionIntersection(model).RunAsync();
         async void Align() => await new ActionAlign(model).RunAsync();
+        async void SmartExtrude() => await new ActionSmartExtrude(model).RunAsync();
+        
 
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
         async void DrawRegion() => await new ActionRegion(model).RunAsync(); 

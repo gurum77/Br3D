@@ -62,6 +62,7 @@ namespace hanee.Cad.Tool
                 {
                     var region = new Region(contours);
                     GetHModel()?.entityPropertiesManager?.SetDefaultProperties(region, false);
+                    contours.ForEach(x => environment.Entities.Remove(x as Entity));
                     environment.Entities.Add(region);
                     environment.Entities.Regen();
                     environment.TempEntities.Clear();
@@ -71,7 +72,8 @@ namespace hanee.Cad.Tool
                 {
                     XtraMessageBox.Show(ex.Message);
                 }
-                
+
+                break;
             }
 
             EndAction();

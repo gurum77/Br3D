@@ -115,6 +115,7 @@
     <Compile Include="ActionCopy.cs" />
     <Compile Include="ActionCylinder.cs" />
     <Compile Include="ActionIntersection.cs" />
+    <Compile Include="ActionSmartExtrude.cs" />
     <Compile Include="ActionSubtract.cs" />
     <Compile Include="ActionDimDiameter.cs" />
     <Compile Include="ActionDimLeader.cs" />

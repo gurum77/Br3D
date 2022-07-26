@@ -72,9 +72,6 @@ namespace hanee.ThreeD
             {
                 DrawSelectionBox(initialLocation, currentLocation, Color.Green, true, false);
             }
-
-
-
         }
 
         public void DrawScreenCurve(ICurve curve, float linesize)
@@ -123,6 +120,29 @@ namespace hanee.ThreeD
 
         }
 
+        // 마우스 커서 아래 객체를 리턴
+        Entity GetEntityUnderMouseCursor(MouseEventArgs e)
+        {
+            if (ActionBase.selectableType == null || ActionBase.selectableType.Count == 0)
+            {
+                var ent = hModel.GetEntityUnderMouseCursor(e.Location);
+                if (ent < 0)
+                    return null;
+                return hModel.Entities[ent];
+            }
+
+            var indexes = hModel.GetAllEntitiesUnderMouseCursor(e.Location);
+            foreach (var idx in indexes)
+            {
+                var ent = hModel.Entities[idx];
+                if (ent == null)
+                    continue;
+                if (ActionBase.selectableType.ContainsKey(ent.GetType()))
+                    return ent;
+            }
+
+            return null;
+        }
         // return 이번에 선택된 객체
         public List<Entity> OnMouseDown(MouseEventArgs e)
         {
@@ -142,9 +162,9 @@ namespace hanee.ThreeD
                 if (grips != null && grips.Count > 0)
                     return null;
 
-                var ent = hModel.GetEntityUnderMouseCursor(e.Location);
+                var ent = GetEntityUnderMouseCursor(e);
                 // 선택된게 없으면 다음으로 넘어감
-                if (ent < 0)
+                if (ent == null)
                 {
                     initialLocation = e.Location;
                     currentLocation = initialLocation;
@@ -153,8 +173,8 @@ namespace hanee.ThreeD
                 // 선택되게 있으면 종료
                 else
                 {
-                    hModel.Entities[ent].Selected = true;
-                    entities.Add(hModel.Entities[ent]);
+                    ent.Selected = true;
+                    entities.Add(ent);
                 }
             }
             // 두번째 클릭시 객체를 enclosing / crossing으로 선택
@@ -178,20 +198,28 @@ namespace hanee.ThreeD
                 // crossing
                 if (isCrossing)
                 {
-                    var ents = hModel.GetAllCrossingEntities(rect);
-                    foreach (var ent in ents)
+                    var indexes = hModel.GetAllCrossingEntities(rect);
+                    foreach (var idx in indexes)
                     {
-                        hModel.Entities[ent].Selected = true;
-                        entities.Add(hModel.Entities[ent]);
+                        var ent = hModel.Entities[idx];
+                        if (!ActionBase.IsSelectableType(ent))
+                            continue;
+
+                        ent.Selected = true;
+                        entities.Add(ent);
                     }
                 }
                 else
                 {
-                    var ents = hModel.GetAllEnclosedEntities(rect);
-                    foreach (var ent in ents)
+                    var indexes = hModel.GetAllEnclosedEntities(rect);
+                    foreach (var idx in indexes)
                     {
-                        hModel.Entities[ent].Selected = true;
-                        entities.Add(hModel.Entities[ent]);
+                        var ent = hModel.Entities[idx];
+                        if (!ActionBase.IsSelectableType(ent))
+                            continue;
+
+                        ent.Selected = true;
+                        entities.Add(ent);
                     }
                 }
             }

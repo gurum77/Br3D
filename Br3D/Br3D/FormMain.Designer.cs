@@ -404,6 +404,7 @@ namespace Br3D
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemSmartExtrude = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.hModel)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -1038,9 +1039,10 @@ namespace Br3D
             this.barButtonItemSubtract,
             this.barButtonItemUnion,
             this.barButtonItemIntersection,
-            this.barButtonItemAlign});
+            this.barButtonItemAlign,
+            this.barButtonItemSmartExtrude});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 89;
+            this.ribbonControl1.MaxItemId = 90;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -1744,6 +1746,7 @@ namespace Br3D
             // 
             this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItemRevolve);
             this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItemLoft);
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItemSmartExtrude);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.Text = "ribbonPageGroup3";
             // 
@@ -1958,6 +1961,13 @@ namespace Br3D
             this.barButtonItem1.Id = 21;
             this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
             this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barButtonItemSmartExtrude
+            // 
+            this.barButtonItemSmartExtrude.Caption = "Smart extrude";
+            this.barButtonItemSmartExtrude.Id = 89;
+            this.barButtonItemSmartExtrude.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemSmartExtrude.ImageOptions.SvgImage")));
+            this.barButtonItemSmartExtrude.Name = "barButtonItemSmartExtrude";
             // 
             // FormMain
             // 
@@ -2180,5 +2190,6 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemUnion;
         private DevExpress.XtraBars.BarButtonItem barButtonItemIntersection;
         private DevExpress.XtraBars.BarButtonItem barButtonItemAlign;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemSmartExtrude;
     }
 }
