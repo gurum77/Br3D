@@ -292,7 +292,13 @@ namespace hanee.ThreeD
         // select시 dynamic highlight를 할지?
         static bool dynamicHighlight = true;
         static public devDept.Eyeshot.Model.SelectedItem LastSelectedItem = null;
-        static Dictionary<Type, bool> selectableType = new Dictionary<Type, bool>();
+        static public Dictionary<Type, bool> selectableType = new Dictionary<Type, bool>();
+        static public bool IsSelectableType(Entity ent)
+        {
+            if (selectableType == null || selectableType.Count == 0)
+                return true;
+            return selectableType.ContainsKey(ent.GetType());
+        }
 
 
         // 객체를 선택중인지?
@@ -579,6 +585,7 @@ namespace hanee.ThreeD
 
             if (userInputting[(int)UserInput.SelectingEntity] == true)
             {
+                selectedEntity = null;
                 var items = environment.GetAllItemsUnderMouseCursor(e.Location);
                 foreach (var item in items)
                 {
@@ -586,12 +593,11 @@ namespace hanee.ThreeD
                     if (entityTmp == null)
                         continue;
 
-                    var entityType = entityTmp.GetType();
-                    if (selectableType == null || selectableType.Count == 0 || selectableType.ContainsKey(entityType))
-                    {
-                        selectedEntity = entityTmp;
-                        break;
-                    }
+                    if (!ActionBase.IsSelectableType(entityTmp))
+                        continue;
+
+                    selectedEntity = entityTmp;
+                    break;
                 }
 
                 if (selectedEntity != null)
@@ -1038,6 +1044,7 @@ namespace hanee.ThreeD
 
             ActionBase.dynamicHighlight = dynamicHighlight;
             ActionBase.selectableType = selectableType;
+            ActionBase.selectedEntity = null;
 
             while (ActionBase.userInputting[(int)UserInput.SelectingEntity] == true &&
                 ActionBase.userInputting[(int)UserInput.GettingKey] == true
@@ -1080,6 +1087,7 @@ namespace hanee.ThreeD
             ActionBase.StartInput(environment, message, stepID, UserInput.SelectingEntity);
             ActionBase.dynamicHighlight = dynamicHighlight;
             ActionBase.selectableType = selectableType;
+            ActionBase.selectedEntity = null;
 
             while (ActionBase.userInputting[(int)UserInput.SelectingEntity] == true)
             {
@@ -1253,6 +1261,7 @@ namespace hanee.ThreeD
             ActionBase.PreviewFaceEntities = null;
             ActionBase.SetTempEtt(environment, null);
             ActionBase.IsModified = true;
+            ActionBase.selectableType.Clear();
 
             // dynamic input manager 초기화
             DynamicInputManager.Init();
