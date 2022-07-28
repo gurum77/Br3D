@@ -81,6 +81,7 @@
     <Compile Include="BindingStation.cs" />
     <Compile Include="Boundary.cs" />
     <Compile Include="ByteHelper.cs" />
+    <Compile Include="CollisionDetectionHelper.cs" />
     <Compile Include="Convert.cs" />
     <Compile Include="DepthTestAlwaysBlockReference.cs" />
     <Compile Include="DepthTestAlwaysLinearPath.cs" />

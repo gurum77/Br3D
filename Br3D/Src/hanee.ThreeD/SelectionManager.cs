@@ -123,7 +123,7 @@ namespace hanee.ThreeD
         // 마우스 커서 아래 객체를 리턴
         Entity GetEntityUnderMouseCursor(MouseEventArgs e)
         {
-            if (ActionBase.selectableType == null || ActionBase.selectableType.Count == 0)
+            if (ActionBase.selectableTypes == null || ActionBase.selectableTypes.Count == 0)
             {
                 var ent = hModel.GetEntityUnderMouseCursor(e.Location);
                 if (ent < 0)
@@ -137,7 +137,7 @@ namespace hanee.ThreeD
                 var ent = hModel.Entities[idx];
                 if (ent == null)
                     continue;
-                if (ActionBase.selectableType.ContainsKey(ent.GetType()))
+                if (ActionBase.selectableTypes.ContainsKey(ent.GetType()))
                     return ent;
             }
 

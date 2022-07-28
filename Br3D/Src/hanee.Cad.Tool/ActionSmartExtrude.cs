@@ -1,5 +1,7 @@
-﻿using devDept.Eyeshot.Entities;
+﻿using devDept.Eyeshot;
+using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using hanee.Geometry;
 using hanee.ThreeD;
 using System;
 using System.Collections.Generic;
@@ -52,8 +54,6 @@ namespace hanee.Cad.Tool
             if (amount.Length == 0)
                 return null;
 
-
-
             Entity ent = null;
             if(selectedEntity is Region region)
                 ent = tempEntity ? region.ExtrudeAsMesh(amount, 0.1, Mesh.natureType.Plain) as Entity : region.ExtrudeAsBrep(amount) as Entity;
@@ -74,6 +74,43 @@ namespace hanee.Cad.Tool
 
             environment.TempEntities.Add(ent);
         }
+
+        // section이 붙어 있는 brep를 찾는다.
+        Brep FindBrepAttachedSection(Entity section)
+        {
+            if (!(section is Region region))
+                return null;
+
+            var tol = 0.001;
+            var plane = region.Plane;
+            var mesh = region.ConvertToMesh();
+            mesh.Regen(tol);
+
+
+            foreach (var ent in environment.Entities)
+            {
+                if (!(ent is Brep brep))
+                    continue;
+
+                foreach (var face in brep.Faces)
+                {
+                    var planarSurf = face.Surface as PlanarSurf;
+                    if (planarSurf == null)
+                        continue;
+
+                    // 평면이 겹쳐져 있는지?
+                    if (!plane.IsOverlap(planarSurf.Plane, tol))
+                        continue;
+
+                    var intersectedMesh = face.Tessellation.FirstOrDefault(x => mesh.IsIntersection(x));
+                    if (intersectedMesh != null)
+                        return brep;
+                }
+            }
+
+            return null;
+        }
+
         public async Task<bool> RunAsync()
         {
             StartAction();
@@ -118,7 +155,36 @@ namespace hanee.Cad.Tool
                 if (ent == null)
                     break;
 
-                environment.Entities.Add(ent);
+                // 붙어 있는 객체를 찾는다.
+                var brep = FindBrepAttachedSection(selectedEntity);
+                if (brep != null && ent is Brep newBrep)
+                {
+                    if(newBrep.BoxMin == null || newBrep.BoxMax == null)
+                        newBrep.Regen(0.001);
+                    if(brep.BoxMin == null || brep.BoxMax == null)
+                        brep.Regen(0.001);
+
+                    // 기존 brep와 새로운 newBrep가 교차되면 diff 아니면 untion
+                    CollisionDetection cd = new CollisionDetection(new List<Entity>() { brep, newBrep }, environment.Blocks, true, CollisionDetection2D.collisionCheckType.Accurate);
+                    cd.DoWork();
+                    var result = cd.IsCollided() ?  Brep.Difference(brep, newBrep) : Brep.Union(brep, newBrep);
+                    if (result != null)
+                    {
+                        environment.Entities.Remove(selectedEntity);
+                        environment.Entities.Remove(brep);
+                        environment.Entities.AddRange(result);
+                    }
+                    else
+                    {
+                        environment.Entities.Add(ent);
+                    }
+                }
+                else
+                {
+                    environment.Entities.Add(ent);
+                }
+
+                
                 environment.Entities.Regen(new devDept.Eyeshot.RegenOptions());
                 environment.Invalidate();
                 break;

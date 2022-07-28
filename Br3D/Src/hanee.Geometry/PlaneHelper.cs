@@ -5,6 +5,26 @@ namespace hanee.Geometry
 {
     static public class PlaneHelper
     {
+        // plane이 한 평면에 있는지?
+        static public bool IsOverlap(this Plane plane, Plane otherPlane, double tol = 0.001)
+        {
+            var dist = plane.DistanceTo(otherPlane.Origin);
+            if (dist > tol)
+                return false;
+
+            var axisZ = plane.AxisZ.Clone() as Vector3D;
+            var otherAxisZ = otherPlane.AxisZ.Clone() as Vector3D;
+            if (!axisZ.X.Equals(otherAxisZ.X, tol) && !axisZ.X.Equals(otherAxisZ.X*-1, tol))
+                return false;
+            if (!axisZ.Y.Equals(otherAxisZ.Y, tol) && !axisZ.Y.Equals(otherAxisZ.Y*-1, tol))
+                return false;
+            if (!axisZ.Z.Equals(otherAxisZ.Z, tol) && !axisZ.Z.Equals(otherAxisZ.Z*-1, tol))
+                return false;
+
+            return true;
+
+        }
+
         static public Vector3D VectorByDegree(this Plane plane, double ang)
         {
             var vec = ang.ToRadians().ToVector();

@@ -7,6 +7,28 @@ namespace hanee.Geometry
 {
     static public class MeshHelper
     {
+        // mesh2개가 교차되는지?
+        public static bool IsIntersection(this Mesh mesh, Mesh otherMesh)
+        {
+            foreach (var tri in mesh.Triangles)
+            {
+                var points = tri.GetPoints(mesh);
+                if (points == null || points.Count != 3)
+                    continue;
+                foreach (var otherTri in otherMesh.Triangles)
+                {
+                    var otherPoints = otherTri.GetPoints(otherMesh);
+                    if (otherPoints == null || otherPoints.Count != 3)
+                        continue;
+
+                    if (UtilityEx.TriangleTriangleIntersection(points[0], points[1], points[2], otherPoints[0], otherPoints[1], otherPoints[2], out bool touch) && touch)
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
         // triangle의 index와 triangle의 코너 index에 해당하는 vertex 리턴
         public static Point3D GetVertexByTriangle(this Mesh mesh, int triangleIdx, int cornorIdx)
         {

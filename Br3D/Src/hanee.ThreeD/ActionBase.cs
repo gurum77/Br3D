@@ -194,7 +194,7 @@ namespace hanee.ThreeD
                         Mesh m = s.ConvertToMesh();
                         ActionBase.SetTempEtt(environment, m, false);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         s.Regen(1);
                         Mesh m = s.ConvertToMesh();
@@ -292,12 +292,18 @@ namespace hanee.ThreeD
         // select시 dynamic highlight를 할지?
         static bool dynamicHighlight = true;
         static public devDept.Eyeshot.Model.SelectedItem LastSelectedItem = null;
-        static public Dictionary<Type, bool> selectableType = new Dictionary<Type, bool>();
+        static public Dictionary<Type, bool> selectableTypes = new Dictionary<Type, bool>();
+        static public bool HasSelectableTypes()
+        {
+            if (selectableTypes == null || selectableTypes.Count == 0)
+                return false;
+            return true;
+        }
         static public bool IsSelectableType(Entity ent)
         {
-            if (selectableType == null || selectableType.Count == 0)
+            if (selectableTypes == null || selectableTypes.Count == 0)
                 return true;
-            return selectableType.ContainsKey(ent.GetType());
+            return selectableTypes.ContainsKey(ent.GetType());
         }
 
 
@@ -358,7 +364,7 @@ namespace hanee.ThreeD
             environment.SetCurrent(null);
 
             devDept.Eyeshot.Model.SelectedItem item = environment.GetItemUnderMouseCursor(e.Location);
-            if (item != null && item.Item != null && selectableType != null && selectableType.Count() > 0 && !selectableType.ContainsKey(item.Item.GetType()))
+            if (item != null && item.Item != null && selectableTypes != null && selectableTypes.Count() > 0 && !selectableTypes.ContainsKey(item.Item.GetType()))
             {
                 item = null;
             }
@@ -586,10 +592,25 @@ namespace hanee.ThreeD
             if (userInputting[(int)UserInput.SelectingEntity] == true)
             {
                 selectedEntity = null;
-                var items = environment.GetAllItemsUnderMouseCursor(e.Location);
-                foreach (var item in items)
+                int[] entityIndexes;
+                if (ActionBase.HasSelectableTypes())
                 {
-                    Entity entityTmp = item.Item as Entity;
+                    Rectangle selectionBox = new Rectangle();
+                    selectionBox.X = e.Location.X - environment.PickBoxSize / 2;
+                    selectionBox.Y = e.Location.Y - environment.PickBoxSize / 2;
+                    selectionBox.Width = environment.PickBoxSize;
+                    selectionBox.Height = environment.PickBoxSize;
+                    entityIndexes = environment.GetAllCrossingEntities(selectionBox);
+                }
+                else
+                {
+                    entityIndexes = environment.GetAllEntitiesUnderMouseCursor(e.Location);
+                }
+
+
+                foreach (var idx in entityIndexes)
+                {
+                    Entity entityTmp = environment.Entities[idx];
                     if (entityTmp == null)
                         continue;
 
@@ -989,7 +1010,7 @@ namespace hanee.ThreeD
         {
             ActionBase.StartInput(environment, message, stepID, UserInput.SelectingLabel);
             ActionBase.dynamicHighlight = dynamicHighlight;
-            ActionBase.selectableType = selectableType;
+            ActionBase.selectableTypes = selectableType;
 
             while (ActionBase.userInputting[(int)UserInput.SelectingLabel] == true)
             {
@@ -1018,7 +1039,7 @@ namespace hanee.ThreeD
         {
             ActionBase.StartInput(environment, message, stepID, UserInput.SelectingEntities);
             ActionBase.dynamicHighlight = dynamicHighlight;
-            ActionBase.selectableType = selectableType;
+            ActionBase.selectableTypes = selectableType;
 
             while (ActionBase.userInputting[(int)UserInput.SelectingEntities] == true)
             {
@@ -1043,7 +1064,7 @@ namespace hanee.ThreeD
             ActionBase.StartInput(environment, message, stepID, UserInput.GettingKey);
 
             ActionBase.dynamicHighlight = dynamicHighlight;
-            ActionBase.selectableType = selectableType;
+            ActionBase.selectableTypes = selectableType;
             ActionBase.selectedEntity = null;
 
             while (ActionBase.userInputting[(int)UserInput.SelectingEntity] == true &&
@@ -1086,7 +1107,7 @@ namespace hanee.ThreeD
         {
             ActionBase.StartInput(environment, message, stepID, UserInput.SelectingEntity);
             ActionBase.dynamicHighlight = dynamicHighlight;
-            ActionBase.selectableType = selectableType;
+            ActionBase.selectableTypes = selectableType;
             ActionBase.selectedEntity = null;
 
             while (ActionBase.userInputting[(int)UserInput.SelectingEntity] == true)
@@ -1261,7 +1282,7 @@ namespace hanee.ThreeD
             ActionBase.PreviewFaceEntities = null;
             ActionBase.SetTempEtt(environment, null);
             ActionBase.IsModified = true;
-            ActionBase.selectableType.Clear();
+            ActionBase.selectableTypes.Clear();
 
             // dynamic input manager 초기화
             DynamicInputManager.Init();
