@@ -16,6 +16,7 @@ namespace hanee.ThreeD
         {
             Dictionary<string, string> supportFormats = new Dictionary<string, string>();
             supportFormats.Add("All", "*.*");
+            supportFormats.Add("Br3D", "*.br3");
             supportFormats.Add("AutoCAD", "*.dwg; *.dxf");
             supportFormats.Add("IGES", "*.igs; *.iges");
             supportFormats.Add("STEP", "*.stp; *.step");
@@ -46,6 +47,7 @@ namespace hanee.ThreeD
         {
             Dictionary<string, string> supportFormats = new Dictionary<string, string>();
             supportFormats.Add("All", "*.*");
+            supportFormats.Add("Br3D", "*.br3");
             supportFormats.Add("AutoCAD", "*.dwg; *.dxf");
             supportFormats.Add("IFC", "*.ifc");
             supportFormats.Add("3DS", "*.3ds");
@@ -131,7 +133,11 @@ namespace hanee.ThreeD
             ext = ext.ToUpper();
 
             devDept.Eyeshot.Translators.ReadFileAsync rf;
-            if (ext == ".IGES" || ext == ".IGS")
+            if(ext == ".BR3")
+            {
+                rf = new devDept.Eyeshot.Translators.ReadFile(filename);
+            }
+            else if (ext == ".IGES" || ext == ".IGS")
             {
                 rf = new devDept.Eyeshot.Translators.ReadIGES(filename);
             }
@@ -259,7 +265,15 @@ namespace hanee.ThreeD
 
             WriteParamsWithDrawings writeParam = new WriteParamsWithDrawings(model, null);
             WriteFileAsync wf = null;
-            if (ext == ".IGES" || ext == ".IGS")
+            if (ext == ".BR3")
+            {
+                var writeFileParam = new WriteFileParams(model.Entities, model.Layers, 
+                    model.Blocks, model.Materials, model.TextStyles, model.LineTypes, 
+                    devDept.Serialization.contentType.Geometry, devDept.Serialization.serializationType.Compressed, 
+                    devDept.Geometry.linearUnitsType.Meters, false, null, model.HatchPatterns);
+                wf = new WriteFile(writeFileParam, filename);
+            }
+            else if (ext == ".IGES" || ext == ".IGS")
             {
                 wf = new WriteIGES(writeParam, filename);
             }
