@@ -1,8 +1,4 @@
-﻿using devDept.Eyeshot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace Br3D
@@ -16,7 +12,7 @@ namespace Br3D
         static void Main()
         {
             VersionHelper.InitVersion();
-            
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());

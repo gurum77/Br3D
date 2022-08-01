@@ -37,7 +37,6 @@ namespace Br3D
         bool isDwg => string.IsNullOrEmpty(opendFilePath) ? false : Path.GetExtension(opendFilePath).ToLower().EndsWith("dwg");
         GripManager gripManager => hModel?.gripManager;
         bool openMode = true; // 파일 열기인지?
-
         public FormMain()
         {
             // InitializeComponent 로딩시간 오래 걸림
@@ -51,6 +50,7 @@ namespace Br3D
             model.WorkFailed += Model_WorkFailed;
             model.MouseUp += Model_MouseUp;
             model.MouseMove += Model_MouseMove;
+           
             hModel.SaveBackgroundColor();
 
             foreach (Viewport vp in model.Viewports)
@@ -275,6 +275,15 @@ namespace Br3D
             hModel.Set3DView();
 
             hModel.Entities.Remove(c);
+
+
+            // startup file open
+            var args = System.Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+            {
+                var fileName = args[1];
+                Import(fileName, true);
+            }
         }
 
 
@@ -1038,8 +1047,12 @@ namespace Br3D
                 hModel.SetLayerColorByBackgroundColor();
 
                 opendFilePath = rfa.FileName;
+                this.Text = $"{VersionHelper.appName} - {opendFilePath}";
 
                 RegenAll();
+
+                // 수정플래그 초기화
+                modified = false;
             }
         }
 
