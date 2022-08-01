@@ -36,6 +36,7 @@ namespace Br3D
         string opendFilePath = "";
         bool isDwg => string.IsNullOrEmpty(opendFilePath) ? false : Path.GetExtension(opendFilePath).ToLower().EndsWith("dwg");
         GripManager gripManager => hModel?.gripManager;
+        bool openMode = true; // 파일 열기인지?
 
         public FormMain()
         {
@@ -84,7 +85,25 @@ namespace Br3D
 
             EnableDynamicInput(true, false);
             SetLTEnvironment();
+
+            AllowDrop = true;
+            DragDrop += FormMain_DragDrop;
+            DragEnter += FormMain_DragEnter;
+        }
+
+        private void FormMain_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        private void FormMain_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files == null || files.Length != 1)
+                return;
+
             
+            Import(files[0], true);
         }
 
         private void InitGrids()
@@ -1004,6 +1023,12 @@ namespace Br3D
         {
             if (e.WorkUnit is ReadFileAsync)
             {
+                // 파일 열기에 성공했으면 new 를 한다.
+                if (openMode)
+                {
+                    NewFile();
+                }
+
                 ReadFileAsync rfa = (ReadFileAsync)e.WorkUnit;
 
                 // viewport에 추가한다.
@@ -1200,8 +1225,6 @@ namespace Br3D
             if (dlg.ShowDialog() != DialogResult.OK)
                 return;
 
-            NewFile();
-
             Import(dlg.FileName);
         }
 
@@ -1218,13 +1241,20 @@ namespace Br3D
 
         // ribbon - import
         // iges, igs, stl, step, stp, obj, las, dwg, dxf, ifc, ifczip, 3ds, lus
-        void Import(string pathFileName)
+
+        // openMode : 파일읽기를 설공하면 현재 상태를 초기화 하고 연다.
+        void Import(string pathFileName, bool openMode=true)
         {
+            this.openMode = openMode;
+
             try
             {
                 devDept.Eyeshot.Translators.ReadFileAsync rf = FileHelper.GetReadFileAsync(pathFileName);
                 if (rf == null)
+                {
+                    XtraMessageBox.Show(LanguageHelper.Tr($"Unsupported file."));
                     return;
+                }
 
                 model.StartWork(rf);
             }
@@ -1253,6 +1283,7 @@ namespace Br3D
 
         }
 
+      
         void NewFile()
         {
             model.Clear();
