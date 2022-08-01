@@ -1050,9 +1050,6 @@ namespace Br3D
                 this.Text = $"{VersionHelper.appName} - {opendFilePath}";
 
                 RegenAll();
-
-                // 수정플래그 초기화
-                modified = false;
             }
         }
 
