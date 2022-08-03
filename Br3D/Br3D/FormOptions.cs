@@ -42,7 +42,6 @@ namespace Br3D
             checkEditSaveImageWithUI.Text = LanguageHelper.Tr("UI");
             checkEditSaveImageWithBackground.Text = LanguageHelper.Tr("Background");
 
-
             simpleButtonDefault.Text = LanguageHelper.Tr("Default");
             simpleButtonOk.Text = LanguageHelper.Tr("Ok");
             simpleButtonCancel.Text = LanguageHelper.Tr("Cancel");
@@ -57,6 +56,9 @@ namespace Br3D
 
             checkEditSaveImageWithUI.Checked = Options.Instance.saveImageWithUI;
             checkEditSaveImageWithBackground.Checked = Options.Instance.saveImageWithBackground;
+
+            controlFileAssociation1.Init(VersionHelper.appName + ".exe", "br3", "dwg", "dxf", 
+                "ifc", "3ds", "gcode", "jt", "stp", "step", "igs", "iges", "obj", "stl", "las", "asc", "emf");
         }
         void Save()
         {
@@ -67,6 +69,8 @@ namespace Br3D
 
             Options.Instance.saveImageWithUI = checkEditSaveImageWithUI.Checked;
             Options.Instance.saveImageWithBackground = checkEditSaveImageWithBackground.Checked;
+
+            controlFileAssociation1.Apply();
         }
 
         private void simpleButtonOk_Click(object sender, EventArgs e)

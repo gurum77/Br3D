@@ -144,9 +144,17 @@
     <Compile Include="ControlAds.Designer.cs">
       <DependentUpon>ControlAds.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlFileAssociation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlFileAssociation.Designer.cs">
+      <DependentUpon>ControlFileAssociation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Define.cs" />
     <Compile Include="DisplayModeButton.cs" />
     <Compile Include="EntityProperties.cs" />
+    <Compile Include="FileAssociationByExt.cs" />
+    <Compile Include="FileAssociationHelper.cs" />
     <Compile Include="FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +182,9 @@
     <Compile Include="VersionHelper.cs" />
     <EmbeddedResource Include="ControlAds.resx">
       <DependentUpon>ControlAds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlFileAssociation.resx">
+      <DependentUpon>ControlFileAssociation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
