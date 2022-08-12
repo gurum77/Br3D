@@ -56,6 +56,7 @@ namespace Br3D
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.OptionsView.ShowIndicator = false;
             // 
             // gridColumnAssociation
             // 
@@ -64,6 +65,7 @@ namespace Br3D
             this.gridColumnAssociation.Name = "gridColumnAssociation";
             this.gridColumnAssociation.Visible = true;
             this.gridColumnAssociation.VisibleIndex = 0;
+            this.gridColumnAssociation.Width = 70;
             // 
             // gridColumnExt
             // 
@@ -72,6 +74,7 @@ namespace Br3D
             this.gridColumnExt.Name = "gridColumnExt";
             this.gridColumnExt.Visible = true;
             this.gridColumnExt.VisibleIndex = 1;
+            this.gridColumnExt.Width = 178;
             // 
             // ControlFileAssociation
             // 

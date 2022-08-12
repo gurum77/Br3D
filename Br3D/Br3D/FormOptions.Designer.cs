@@ -46,8 +46,8 @@ namespace Br3D
             this.checkEditSaveImageWithBackground = new DevExpress.XtraEditors.CheckEdit();
             this.checkEditSaveImageWithUI = new DevExpress.XtraEditors.CheckEdit();
             this.xtraTabPageFileAssociation = new DevExpress.XtraTab.XtraTabPage();
-            this.simpleButtonDefault = new DevExpress.XtraEditors.SimpleButton();
             this.controlFileAssociation1 = new Br3D.ControlFileAssociation();
+            this.simpleButtonDefault = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPageColor.SuspendLayout();
@@ -69,7 +69,7 @@ namespace Br3D
             // simpleButtonCancel
             // 
             this.simpleButtonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButtonCancel.Location = new System.Drawing.Point(173, 297);
+            this.simpleButtonCancel.Location = new System.Drawing.Point(173, 368);
             this.simpleButtonCancel.Name = "simpleButtonCancel";
             this.simpleButtonCancel.Size = new System.Drawing.Size(75, 23);
             this.simpleButtonCancel.TabIndex = 0;
@@ -79,7 +79,7 @@ namespace Br3D
             // simpleButtonOk
             // 
             this.simpleButtonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButtonOk.Location = new System.Drawing.Point(92, 297);
+            this.simpleButtonOk.Location = new System.Drawing.Point(92, 368);
             this.simpleButtonOk.Name = "simpleButtonOk";
             this.simpleButtonOk.Size = new System.Drawing.Size(75, 23);
             this.simpleButtonOk.TabIndex = 1;
@@ -94,7 +94,7 @@ namespace Br3D
             this.xtraTabControl1.Location = new System.Drawing.Point(12, 12);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPageColor;
-            this.xtraTabControl1.Size = new System.Drawing.Size(236, 279);
+            this.xtraTabControl1.Size = new System.Drawing.Size(236, 350);
             this.xtraTabControl1.TabIndex = 2;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageColor,
@@ -225,32 +225,35 @@ namespace Br3D
             // 
             this.xtraTabPageFileAssociation.Controls.Add(this.controlFileAssociation1);
             this.xtraTabPageFileAssociation.Name = "xtraTabPageFileAssociation";
-            this.xtraTabPageFileAssociation.Size = new System.Drawing.Size(234, 252);
+            this.xtraTabPageFileAssociation.Size = new System.Drawing.Size(234, 323);
             this.xtraTabPageFileAssociation.Text = "File Association";
+            // 
+            // controlFileAssociation1
+            // 
+            this.controlFileAssociation1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.controlFileAssociation1.Location = new System.Drawing.Point(3, 4);
+            this.controlFileAssociation1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.controlFileAssociation1.Name = "controlFileAssociation1";
+            this.controlFileAssociation1.Size = new System.Drawing.Size(228, 315);
+            this.controlFileAssociation1.TabIndex = 0;
             // 
             // simpleButtonDefault
             // 
             this.simpleButtonDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.simpleButtonDefault.Location = new System.Drawing.Point(13, 297);
+            this.simpleButtonDefault.Location = new System.Drawing.Point(13, 368);
             this.simpleButtonDefault.Name = "simpleButtonDefault";
             this.simpleButtonDefault.Size = new System.Drawing.Size(75, 23);
             this.simpleButtonDefault.TabIndex = 3;
             this.simpleButtonDefault.Text = "Default";
             this.simpleButtonDefault.Click += new System.EventHandler(this.simpleButtonDefault_Click);
             // 
-            // controlFileAssociation1
-            // 
-            this.controlFileAssociation1.Location = new System.Drawing.Point(3, 4);
-            this.controlFileAssociation1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.controlFileAssociation1.Name = "controlFileAssociation1";
-            this.controlFileAssociation1.Size = new System.Drawing.Size(228, 244);
-            this.controlFileAssociation1.TabIndex = 0;
-            // 
             // FormOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(260, 332);
+            this.ClientSize = new System.Drawing.Size(260, 403);
             this.Controls.Add(this.simpleButtonDefault);
             this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.simpleButtonOk);
