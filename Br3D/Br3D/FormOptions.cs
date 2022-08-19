@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -57,7 +58,7 @@ namespace Br3D
             checkEditSaveImageWithUI.Checked = Options.Instance.saveImageWithUI;
             checkEditSaveImageWithBackground.Checked = Options.Instance.saveImageWithBackground;
 
-            controlFileAssociation1.Init(VersionHelper.appName + ".exe", "br3", "dwg", "dxf", 
+            controlFileAssociation1.Init(Process.GetCurrentProcess().MainModule.FileName, "br3", "dwg", "dxf", 
                 "ifc", "3ds", "gcode", "jt", "stp", "step", "igs", "iges", "obj", "stl", "las", "asc", "emf");
         }
         void Save()

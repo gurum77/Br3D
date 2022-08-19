@@ -1,17 +1,13 @@
 ﻿using Microsoft.Win32;
-using System.Collections.Generic;
+using System;
 
 namespace Br3D
 {
     // 파일 연결 관리
     public class FileAssociationHelper
     {
-
-        static void DeleteUserChoiceKey(string ext)
-        {
-            var path = $"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.{ext}\\UserChoice";
-            Registry.CurrentUser.DeleteSubKey(path);
-        }
+        [System.Runtime.InteropServices.DllImport("Shell32.dll")]
+        private static extern int SHChangeNotify(int eventId, int flags, IntPtr item1, IntPtr item2);
 
         // user choice key : 이 키는 수정 불가(삭제 / 읽기만 가능), 즉 수정이 필요하면 삭제하고 다시 써야함
         static RegistryKey GetUserChoiceKey(string ext)
@@ -26,6 +22,7 @@ namespace Br3D
             var path = $"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.{ext}\\OpenWithList";
             return Registry.CurrentUser.OpenSubKey(path, true);
         }
+
 
         // 확장자별 연결된 프로그램 이름 리턴
         // 컴퓨터\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ifc\OpenWithList
@@ -58,64 +55,53 @@ namespace Br3D
             return key.GetValue("a") as string;
         }
 
-        // 해당 확장자에 연결된 프로그램 이름 목록 리턴
-        static List<string> GetProgramNamesByExt(string ext)
+
+
+
+        public static void SetAssociation_User(string Extension, string OpenWith, string ExecutableName)
         {
-            var key = GetOpenWithListKey(ext);
-            if (key == null)
-                return null;
+            if (Extension.StartsWith("."))
+                Extension.Remove(0, 1);
 
-            List<string> programNames = new List<string>();
-            // OpenWithList에 이름이 있는지 검사하고, 없으면 마지막 빈칸에 이름을 쓴다.
-            for (int i = 'a'; i <= 'z'; ++i)
+            try
             {
-                var alphaStr = ((char)i).ToString();
-                var val = key.GetValue(alphaStr) as string;
-                // 값이 없으면 여기에 쓴다.
-                if (string.IsNullOrEmpty(val))
-                    break;
-                programNames.Add(val);
-            }
-
-            return programNames;
-        }
-
-
-
-        // 
-        internal static void SetProgramNameByExt(string ext, string programName)
-        {
-            var key = GetOpenWithListKey(ext);
-            if (key == null)
-                return;
-
-            // OpenWithList에 이름이 있는지 검사하고, 없으면 마지막 빈칸에 이름을 쓴다.
-            var programNames = GetProgramNamesByExt(ext);
-
-            if (!programNames.Contains(programName))
-            {
-                var alphaStr = ((char)(programNames.Count + 'a')).ToString();
-                key.SetValue(alphaStr, programName);
-                programNames.Add(programName);
-            }
-
-            // 2개 이상이면 UserChoice에 등록
-            if (programNames.Count > 1)
-            {
-                try
+                using (RegistryKey User_Classes = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Classes\\", true))
+                using (RegistryKey User_Ext = User_Classes.CreateSubKey("." + Extension))
+                using (RegistryKey User_AutoFile = User_Classes.CreateSubKey(Extension + "_auto_file"))
+                using (RegistryKey User_AutoFile_Command = User_AutoFile.CreateSubKey("shell").CreateSubKey("open").CreateSubKey("command"))
+                using (RegistryKey ApplicationAssociationToasts = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\ApplicationAssociationToasts\\", true))
+                using (RegistryKey User_Classes_Applications = User_Classes.CreateSubKey("Applications"))
+                using (RegistryKey User_Classes_Applications_Exe = User_Classes_Applications.CreateSubKey(ExecutableName))
+                using (RegistryKey User_Application_Command = User_Classes_Applications_Exe.CreateSubKey("shell").CreateSubKey("open").CreateSubKey("command"))
+                using (RegistryKey User_Explorer = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\." + Extension))
+                using (RegistryKey User_Choice = User_Explorer.OpenSubKey("UserChoice"))
                 {
-                    key = GetUserChoiceKey(ext);
-                    if (key == null)
-                        return;
+                    User_Ext.SetValue("", Extension + "_auto_file", RegistryValueKind.String);
+                    User_Classes.SetValue("", Extension + "_auto_file", RegistryValueKind.String);
+                    User_Classes.CreateSubKey(Extension + "_auto_file");
+                    User_AutoFile_Command.SetValue("", "\"" + OpenWith + "\"" + " \"%1\"");
+                    ApplicationAssociationToasts.SetValue(Extension + "_auto_file_." + Extension, 0);
+                    ApplicationAssociationToasts.SetValue(@"Applications\" + ExecutableName + "_." + Extension, 0);
+                    User_Application_Command.SetValue("", "\"" + OpenWith + "\"" + " \"%1\"");
+                    User_Explorer.CreateSubKey("OpenWithList").SetValue("a", ExecutableName);
+                    User_Explorer.CreateSubKey("OpenWithProgids").SetValue(Extension + "_auto_file", "0");
 
-                    key.SetValue("ProgId", $"Applications\\{programName}");
+                    var mruList = User_Explorer.CreateSubKey("OpenWithList").GetValue("MRUList").ToString();
+                    if (!mruList.StartsWith("a"))
+                    {
+                        mruList = "a" + mruList;
+                        User_Explorer.CreateSubKey("OpenWithList").SetValue("MRUList", mruList);
+                    }
+
+                    if (User_Choice != null) User_Explorer.DeleteSubKey("UserChoice");
+                    User_Explorer.CreateSubKey("UserChoice").SetValue("ProgId", @"Applications\" + ExecutableName);
                 }
-                catch
-                {
-                    // user choice에 접근 불가시 a에 등록함
-                    var alphaStr = ((char)('a')).ToString();
-                    key.SetValue(alphaStr, programName);
-                }
+                SHChangeNotify(0x08000000, 0x0000, IntPtr.Zero, IntPtr.Zero);
+            }
+            catch/* (Exception ext)*/
+            {
+                //Your code here
+                //MessageBox.Show(ext.Message);
             }
         }
     }

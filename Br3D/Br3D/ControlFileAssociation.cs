@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Br3D
@@ -9,7 +10,14 @@ namespace Br3D
     public partial class ControlFileAssociation : UserControl
     {
         List<FileAssociationByExt> faByExts = new List<FileAssociationByExt>();
-        string programName = "";
+        string programName
+        {
+            get
+            {
+                return Path.GetFileName(programPath);
+            }
+        }
+        string programPath = "";
         public ControlFileAssociation()
         {
             InitializeComponent();
@@ -48,7 +56,10 @@ namespace Br3D
                     if (!faByExt.associated)
                         continue;
 
-                    FileAssociationHelper.SetProgramNameByExt(faByExt.ext, programName);
+                    var ext = faByExt.ext;
+                    if (ext.StartsWith("."))
+                        ext = ext.Remove(0, 1);
+                    FileAssociationHelper.SetAssociation_User(faByExt.ext, programPath, "Br3D.exe");
                 }
 
             }
@@ -59,9 +70,9 @@ namespace Br3D
         }
 
         // 초기화
-        public void Init(string programName, params string[] exts)
+        public void Init(string programPath, params string[] exts)
         {
-            this.programName = programName;
+            this.programPath = programPath;
             faByExts.Clear();
             foreach (var ext in exts)
             {
@@ -78,7 +89,7 @@ namespace Br3D
                     }
                     faByExts.Add(faByExt);
                 }
-                catch(Exception ex)
+                catch
                 {
                 }
 
