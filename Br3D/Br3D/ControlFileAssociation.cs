@@ -1,4 +1,5 @@
 ﻿using DevExpress.Utils.Helpers;
+using hanee.ThreeD;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -22,6 +23,15 @@ namespace Br3D
         {
             InitializeComponent();
             gridView1.CustomDrawCell += GridView1_CustomDrawCell;
+            Translate();
+        }
+
+        private void Translate()
+        {
+            simpleButtonApply.Text = LanguageHelper.Tr("Apply");
+            simpleButtonSelectAll.Text = LanguageHelper.Tr("Select all");
+            gridView1.Columns[0].Caption = LanguageHelper.Tr("Association");
+            gridView1.Columns[1].Caption = LanguageHelper.Tr("Ext.");
         }
 
         private void GridView1_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
@@ -47,6 +57,7 @@ namespace Br3D
             e.Handled = true;
         }
 
+        // 파일 연결 적용
         public void Apply()
         {
             try
@@ -97,6 +108,23 @@ namespace Br3D
             
 
             gridControl1.DataSource = faByExts;
+        }
+
+        // 전체 선택
+        private void simpleButtonSelectAll_Click(object sender, EventArgs e)
+        {
+            foreach (var fe in faByExts)
+            {
+                fe.associated = true;
+            }
+
+            gridControl1.RefreshDataSource();
+
+        }
+
+        private void simpleButtonApply_Click(object sender, EventArgs e)
+        {
+            Apply();
         }
     }
 }

@@ -32,6 +32,7 @@ namespace Br3D
 
             xtraTabPageColor.Text = LanguageHelper.Tr("Color");
             xtraTabPageGeneral.Text = LanguageHelper.Tr("General");
+            xtraTabPageFileAssociation.Text = LanguageHelper.Tr("File association");
 
             groupControlBackground.Text = LanguageHelper.Tr("Background(3D)");
             labelControlBackgroundTop.Text = LanguageHelper.Tr("Top");
@@ -71,7 +72,7 @@ namespace Br3D
             Options.Instance.saveImageWithUI = checkEditSaveImageWithUI.Checked;
             Options.Instance.saveImageWithBackground = checkEditSaveImageWithBackground.Checked;
 
-            controlFileAssociation1.Apply();
+            
         }
 
         private void simpleButtonOk_Click(object sender, EventArgs e)

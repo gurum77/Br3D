@@ -69,7 +69,7 @@ namespace Br3D
             // simpleButtonCancel
             // 
             this.simpleButtonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButtonCancel.Location = new System.Drawing.Point(173, 368);
+            this.simpleButtonCancel.Location = new System.Drawing.Point(232, 368);
             this.simpleButtonCancel.Name = "simpleButtonCancel";
             this.simpleButtonCancel.Size = new System.Drawing.Size(75, 23);
             this.simpleButtonCancel.TabIndex = 0;
@@ -79,7 +79,7 @@ namespace Br3D
             // simpleButtonOk
             // 
             this.simpleButtonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButtonOk.Location = new System.Drawing.Point(92, 368);
+            this.simpleButtonOk.Location = new System.Drawing.Point(151, 368);
             this.simpleButtonOk.Name = "simpleButtonOk";
             this.simpleButtonOk.Size = new System.Drawing.Size(75, 23);
             this.simpleButtonOk.TabIndex = 1;
@@ -94,7 +94,7 @@ namespace Br3D
             this.xtraTabControl1.Location = new System.Drawing.Point(12, 12);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPageColor;
-            this.xtraTabControl1.Size = new System.Drawing.Size(236, 350);
+            this.xtraTabControl1.Size = new System.Drawing.Size(295, 350);
             this.xtraTabControl1.TabIndex = 2;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageColor,
@@ -106,7 +106,7 @@ namespace Br3D
             this.xtraTabPageColor.Controls.Add(this.groupControlBackground2D);
             this.xtraTabPageColor.Controls.Add(this.groupControlBackground);
             this.xtraTabPageColor.Name = "xtraTabPageColor";
-            this.xtraTabPageColor.Size = new System.Drawing.Size(234, 252);
+            this.xtraTabPageColor.Size = new System.Drawing.Size(293, 323);
             this.xtraTabPageColor.Text = "Color";
             // 
             // groupControlBackground2D
@@ -115,7 +115,7 @@ namespace Br3D
             this.groupControlBackground2D.Controls.Add(this.colorPickEditBackground2D);
             this.groupControlBackground2D.Location = new System.Drawing.Point(14, 116);
             this.groupControlBackground2D.Name = "groupControlBackground2D";
-            this.groupControlBackground2D.Size = new System.Drawing.Size(203, 67);
+            this.groupControlBackground2D.Size = new System.Drawing.Size(264, 67);
             this.groupControlBackground2D.TabIndex = 4;
             this.groupControlBackground2D.Text = "Background(2D)";
             // 
@@ -146,7 +146,7 @@ namespace Br3D
             this.groupControlBackground.Controls.Add(this.colorPickEditBackgroundTop);
             this.groupControlBackground.Location = new System.Drawing.Point(14, 12);
             this.groupControlBackground.Name = "groupControlBackground";
-            this.groupControlBackground.Size = new System.Drawing.Size(203, 98);
+            this.groupControlBackground.Size = new System.Drawing.Size(264, 98);
             this.groupControlBackground.TabIndex = 1;
             this.groupControlBackground.Text = "Background(3D)";
             // 
@@ -192,16 +192,16 @@ namespace Br3D
             // 
             this.xtraTabPageGeneral.Controls.Add(this.groupControlSaveImage);
             this.xtraTabPageGeneral.Name = "xtraTabPageGeneral";
-            this.xtraTabPageGeneral.Size = new System.Drawing.Size(234, 252);
+            this.xtraTabPageGeneral.Size = new System.Drawing.Size(293, 323);
             this.xtraTabPageGeneral.Text = "General";
             // 
             // groupControlSaveImage
             // 
             this.groupControlSaveImage.Controls.Add(this.checkEditSaveImageWithBackground);
             this.groupControlSaveImage.Controls.Add(this.checkEditSaveImageWithUI);
-            this.groupControlSaveImage.Location = new System.Drawing.Point(18, 13);
+            this.groupControlSaveImage.Location = new System.Drawing.Point(13, 14);
             this.groupControlSaveImage.Name = "groupControlSaveImage";
-            this.groupControlSaveImage.Size = new System.Drawing.Size(200, 100);
+            this.groupControlSaveImage.Size = new System.Drawing.Size(269, 100);
             this.groupControlSaveImage.TabIndex = 2;
             this.groupControlSaveImage.Text = "Save Image";
             // 
@@ -225,18 +225,18 @@ namespace Br3D
             // 
             this.xtraTabPageFileAssociation.Controls.Add(this.controlFileAssociation1);
             this.xtraTabPageFileAssociation.Name = "xtraTabPageFileAssociation";
-            this.xtraTabPageFileAssociation.Size = new System.Drawing.Size(234, 323);
+            this.xtraTabPageFileAssociation.Size = new System.Drawing.Size(293, 323);
             this.xtraTabPageFileAssociation.Text = "File Association";
             // 
             // controlFileAssociation1
             // 
-            this.controlFileAssociation1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.controlFileAssociation1.Location = new System.Drawing.Point(3, 4);
+            this.controlFileAssociation1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.controlFileAssociation1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.controlFileAssociation1.Location = new System.Drawing.Point(0, 0);
             this.controlFileAssociation1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.controlFileAssociation1.Name = "controlFileAssociation1";
-            this.controlFileAssociation1.Size = new System.Drawing.Size(228, 315);
+            this.controlFileAssociation1.Padding = new System.Windows.Forms.Padding(5);
+            this.controlFileAssociation1.Size = new System.Drawing.Size(293, 323);
             this.controlFileAssociation1.TabIndex = 0;
             // 
             // simpleButtonDefault
@@ -253,12 +253,13 @@ namespace Br3D
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(260, 403);
+            this.ClientSize = new System.Drawing.Size(319, 403);
             this.Controls.Add(this.simpleButtonDefault);
             this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.simpleButtonOk);
             this.Controls.Add(this.simpleButtonCancel);
             this.Name = "FormOptions";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Options";
             this.Load += new System.EventHandler(this.FormOptions_Load);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
@@ -298,11 +299,11 @@ namespace Br3D
         private DevExpress.XtraEditors.LabelControl labelControlAll;
         private DevExpress.XtraEditors.ColorPickEdit colorPickEditBackground2D;
         private DevExpress.XtraEditors.SimpleButton simpleButtonDefault;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageGeneral;
-        private DevExpress.XtraEditors.CheckEdit checkEditSaveImageWithUI;
-        private DevExpress.XtraEditors.GroupControl groupControlSaveImage;
-        private DevExpress.XtraEditors.CheckEdit checkEditSaveImageWithBackground;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageFileAssociation;
         private ControlFileAssociation controlFileAssociation1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageGeneral;
+        private DevExpress.XtraEditors.GroupControl groupControlSaveImage;
+        private DevExpress.XtraEditors.CheckEdit checkEditSaveImageWithBackground;
+        private DevExpress.XtraEditors.CheckEdit checkEditSaveImageWithUI;
     }
 }

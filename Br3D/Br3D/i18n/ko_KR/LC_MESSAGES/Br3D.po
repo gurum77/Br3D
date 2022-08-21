@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-08-02 08:23+0900\n"
-"PO-Revision-Date: 2022-08-02 08:24+0900\n"
+"POT-Creation-Date: 2022-08-22 08:45+0900\n"
+"PO-Revision-Date: 2022-08-22 08:45+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ko_KR\n"
@@ -16,6 +16,22 @@ msgstr ""
 "X-Poedit-SearchPath-0: Br3D/i18n/ko_KR\n"
 "X-Poedit-SearchPath-1: Br3D\n"
 "X-Poedit-SearchPath-2: Src\n"
+
+#: Br3D/ControlFileAssociation.cs:31
+msgid "Apply"
+msgstr "적용"
+
+#: Br3D/ControlFileAssociation.cs:32
+msgid "Select all"
+msgstr "전체 선택"
+
+#: Br3D/ControlFileAssociation.cs:33
+msgid "Association"
+msgstr "연결"
+
+#: Br3D/ControlFileAssociation.cs:34
+msgid "Ext."
+msgstr "확장자"
 
 #: Br3D/Define.cs:7 Src/hanee.Cad.Tool/LayerControl.cs:63
 msgid "Line Weight"
@@ -42,7 +58,7 @@ msgstr "선 타입 축적"
 msgid "Color Method"
 msgstr "색 지정방법"
 
-#: Br3D/Define.cs:13 Br3D/FormMain.cs:387 Br3D/FormOptions.cs:33
+#: Br3D/Define.cs:13 Br3D/FormMain.cs:387 Br3D/FormOptions.cs:34
 msgid "General"
 msgstr "일반"
 
@@ -118,7 +134,7 @@ msgid "Home"
 msgstr "홈"
 
 #: Br3D/FormMain.cs:362 Br3D/FormMain.cs:371 Br3D/FormMain.cs:865
-#: Br3D/FormOptions.cs:30
+#: Br3D/FormOptions.cs:31
 msgid "Options"
 msgstr "옵션"
 
@@ -186,7 +202,7 @@ msgstr "최소"
 msgid "Layer"
 msgstr "레이어"
 
-#: Br3D/FormMain.cs:397 Br3D/FormOptions.cs:32
+#: Br3D/FormMain.cs:397 Br3D/FormOptions.cs:33
 #: Src/hanee.Cad.Tool/LayerControl.cs:60
 msgid "Color"
 msgstr "색상"
@@ -549,42 +565,46 @@ msgid "Update check failed! - wyUpdate.exe not found!"
 msgstr "업데이트 체크 실패! - wyUpdate.exe가 없습니다!"
 
 #: Br3D/FormOptions.cs:35
+msgid "File association"
+msgstr "파일 연결"
+
+#: Br3D/FormOptions.cs:37
 msgid "Background(3D)"
 msgstr "배경(3D)"
 
-#: Br3D/FormOptions.cs:36
+#: Br3D/FormOptions.cs:38
 msgid "Top"
 msgstr "상"
 
-#: Br3D/FormOptions.cs:37
+#: Br3D/FormOptions.cs:39
 msgid "Bottom"
 msgstr "하"
 
-#: Br3D/FormOptions.cs:39
+#: Br3D/FormOptions.cs:41
 msgid "Background(2D)"
 msgstr "배경(2D)"
 
-#: Br3D/FormOptions.cs:40
+#: Br3D/FormOptions.cs:42
 msgid "All"
 msgstr "모두"
 
-#: Br3D/FormOptions.cs:42
+#: Br3D/FormOptions.cs:44
 msgid "UI"
 msgstr "UI"
 
-#: Br3D/FormOptions.cs:43
+#: Br3D/FormOptions.cs:45
 msgid "Background"
 msgstr "배경"
 
-#: Br3D/FormOptions.cs:46
+#: Br3D/FormOptions.cs:47
 msgid "Default"
 msgstr "기본값"
 
-#: Br3D/FormOptions.cs:47
+#: Br3D/FormOptions.cs:48
 msgid "Ok"
 msgstr "확인"
 
-#: Br3D/FormOptions.cs:48 Src/hanee.Cad.Tool/FormBlock.cs:54
+#: Br3D/FormOptions.cs:49 Src/hanee.Cad.Tool/FormBlock.cs:54
 msgid "Cancel"
 msgstr "취소"
 
@@ -937,6 +957,9 @@ msgstr "XYZ"
 #: Src/hanee.ThreeD/ControlXyzDynamicInput.cs:48
 msgid "By Length, Angle"
 msgstr "길이, 각도"
+
+#~ msgid "Extension"
+#~ msgstr "확장자"
 
 #~ msgid "New"
 #~ msgstr "새로 만들기"

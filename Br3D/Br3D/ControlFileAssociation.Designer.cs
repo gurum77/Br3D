@@ -33,17 +33,21 @@ namespace Br3D
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnAssociation = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnExt = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.simpleButtonSelectAll = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButtonApply = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl1
             // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(0, 0);
+            this.gridControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridControl1.Location = new System.Drawing.Point(5, 5);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(273, 344);
+            this.gridControl1.Size = new System.Drawing.Size(267, 301);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -76,13 +80,36 @@ namespace Br3D
             this.gridColumnExt.VisibleIndex = 1;
             this.gridColumnExt.Width = 178;
             // 
+            // simpleButtonSelectAll
+            // 
+            this.simpleButtonSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.simpleButtonSelectAll.Location = new System.Drawing.Point(8, 312);
+            this.simpleButtonSelectAll.Name = "simpleButtonSelectAll";
+            this.simpleButtonSelectAll.Size = new System.Drawing.Size(75, 23);
+            this.simpleButtonSelectAll.TabIndex = 1;
+            this.simpleButtonSelectAll.Text = "Select All";
+            this.simpleButtonSelectAll.Click += new System.EventHandler(this.simpleButtonSelectAll_Click);
+            // 
+            // simpleButtonApply
+            // 
+            this.simpleButtonApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.simpleButtonApply.Location = new System.Drawing.Point(194, 312);
+            this.simpleButtonApply.Name = "simpleButtonApply";
+            this.simpleButtonApply.Size = new System.Drawing.Size(75, 23);
+            this.simpleButtonApply.TabIndex = 2;
+            this.simpleButtonApply.Text = "Apply";
+            this.simpleButtonApply.Click += new System.EventHandler(this.simpleButtonApply_Click);
+            // 
             // ControlFileAssociation
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Controls.Add(this.simpleButtonApply);
+            this.Controls.Add(this.simpleButtonSelectAll);
             this.Controls.Add(this.gridControl1);
             this.Name = "ControlFileAssociation";
-            this.Size = new System.Drawing.Size(273, 344);
+            this.Padding = new System.Windows.Forms.Padding(5);
+            this.Size = new System.Drawing.Size(277, 343);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
@@ -95,5 +122,7 @@ namespace Br3D
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnAssociation;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnExt;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonSelectAll;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonApply;
     }
 }
