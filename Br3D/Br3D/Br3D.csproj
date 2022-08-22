@@ -165,12 +165,6 @@
     <Compile Include="ControlFileAssociation.Designer.cs">
       <DependentUpon>ControlFileAssociation.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlFileAssociationEx.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ControlFileAssociationEx.Designer.cs">
-      <DependentUpon>ControlFileAssociationEx.cs</DependentUpon>
-    </Compile>
     <Compile Include="Define.cs" />
     <Compile Include="DisplayModeButton.cs" />
     <Compile Include="EntityProperties.cs" />
@@ -206,9 +200,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ControlFileAssociation.resx">
       <DependentUpon>ControlFileAssociation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ControlFileAssociationEx.resx">
-      <DependentUpon>ControlFileAssociationEx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
