@@ -84,7 +84,6 @@ namespace Br3D
             ribbonControl1.SearchItemShortcut = new BarShortcut(Keys.Control | Keys.F);
 
             EnableDynamicInput(true, false);
-            SetLTEnvironment();
 
             AllowDrop = true;
             DragDrop += FormMain_DragDrop;
@@ -268,6 +267,7 @@ namespace Br3D
         private void FormMain_Load(object sender, EventArgs e)
         {
             ViewportSingle();
+            SetLTEnvironment();
 
             Circle c = new Circle(Plane.XY, 200);
             hModel.Entities.Add(c);

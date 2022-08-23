@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.Core;
+using Microsoft.Web.WebView2.WinForms;
+using System;
 using System.ComponentModel;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Br3D
@@ -13,25 +16,25 @@ namespace Br3D
 
         public ControlAds()
         {
-#if !DEBUG
-            DevExpress.Utils.BrowserEmulationHelper.DisableBrowserEmulation(System.Reflection.Assembly.GetEntryAssembly().GetName().Name);
-#endif
             InitializeComponent();
-
-            Visible = false;
         }
 
-        public void ShowAd()
+        public async void ShowAd()
         {
-            webBrowser1.ScrollBarsEnabled = false;
-            webBrowser1.ScriptErrorsSuppressed = true;
-            webBrowser1.Navigate(url);
-            webBrowser1.DocumentCompleted += WebBrowser1_DocumentCompleted;
+            var cacheFolderPath = Path.Combine(Path.GetTempPath(), "Br3D.exe", "WebView2");
+            var webview2Env = await CoreWebView2Environment.CreateAsync(null, cacheFolderPath);
+            await webView21.EnsureCoreWebView2Async(webview2Env);
+            webView21.Source = new Uri(url);
+            webView21.NavigationCompleted += WebView21_NavigationCompleted;
         }
 
-        private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void WebView21_NavigationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e)
         {
-            Visible = true;
+            if (e.IsSuccess)
+            {
+                ((WebView2)sender).ExecuteScriptAsync("document.querySelector('body').style.overflow='hidden'");
+                Visible = true;
+            }
         }
 
         private void ControlAds_Load(object sender, EventArgs e)
@@ -40,3 +43,4 @@ namespace Br3D
         }
     }
 }
+;

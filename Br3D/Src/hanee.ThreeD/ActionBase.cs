@@ -1282,7 +1282,7 @@ namespace hanee.ThreeD
             ActionBase.PreviewFaceEntities = null;
             ActionBase.SetTempEtt(environment, null);
             ActionBase.IsModified = true;
-            ActionBase.selectableTypes.Clear();
+            ActionBase.selectableTypes?.Clear();
 
             // dynamic input manager 초기화
             DynamicInputManager.Init();
