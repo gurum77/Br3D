@@ -1,4 +1,6 @@
-﻿namespace Br3D
+﻿using System.Reflection;
+
+namespace Br3D
 {
     static public class VersionHelper
     {
@@ -17,6 +19,12 @@
             var fileName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
             fileName = fileName.ToLower();
             isLT = fileName.EndsWith("lt.exe");
+        }
+
+        static public string GetVersionNumber()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            return assembly.GetName().Version.ToString();
         }
 
     }

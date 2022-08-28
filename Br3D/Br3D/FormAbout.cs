@@ -10,7 +10,7 @@ namespace Br3D
         {
             InitializeComponent();
 
-            labelControlVersion.Text = $"Version {GetVersion()}";
+            labelControlVersion.Text = $"Version {VersionHelper.GetVersionNumber()}";
             if (VersionHelper.isLT)
             {
                 labelControlLT.Visible = true;
@@ -20,13 +20,6 @@ namespace Br3D
             {
                 labelControlLT.Visible = false;
             }
-        }
-
-        public string GetVersion()
-        {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            return assembly.GetName().Version.ToString();
-
         }
 
         private void labelControlName_Click(object sender, EventArgs e)

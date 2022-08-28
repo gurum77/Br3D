@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.XtraSplashScreen;
+using System;
 using System.Windows.Forms;
 
 namespace Br3D
@@ -12,6 +13,8 @@ namespace Br3D
         static void Main()
         {
             VersionHelper.InitVersion();
+
+            SplashScreenManager.ShowForm(typeof(SplashScreen1), true, false);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

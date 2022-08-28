@@ -5,7 +5,9 @@ using devDept.Eyeshot.Translators;
 using devDept.Geometry;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
+using DevExpress.XtraSplashScreen;
 using hanee.Cad.Tool;
+using hanee.Geometry;
 using hanee.ThreeD;
 using System;
 using System.Collections.Generic;
@@ -266,6 +268,8 @@ namespace Br3D
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            SplashScreenManager.CloseForm();
+
             ViewportSingle();
             SetLTEnvironment();
 
@@ -348,6 +352,7 @@ namespace Br3D
             selectallToolStripMenuItem.Text = LanguageHelper.Tr("Select all(&A)");
             unselectAllToolStripMenuItem.Text = LanguageHelper.Tr("Unselect all(&U)");
             invertSelectionToolStripMenuItem.Text = LanguageHelper.Tr("Invert selection(&V)");
+            transparencyToolStripMenuItem.Text = LanguageHelper.Tr("Transparency(&T)");
 
 
 
@@ -1396,6 +1401,9 @@ namespace Br3D
                 withCtrl = false;
             }
 
+            // 액션실행중인지?
+            bool runningAction = ActionBase.runningAction != null;
+
             if (withCtrl)
             {
                 endPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.End);
@@ -1403,13 +1411,23 @@ namespace Br3D
                 middlePointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Mid);
                 centerPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Center);
 
+                // ctrl이 눌러져 있으면 snap 관련 menu item만 표시
                 VisibleContextMenuItems(endPointToolStripMenuItem, intersectionPointToolStripMenuItem,
                     middlePointToolStripMenuItem, centerPointToolStripMenuItem);
             }
             else
             {
-                VisibleContextMenuItems(selectallToolStripMenuItem, unselectAllToolStripMenuItem,
-                    invertSelectionToolStripMenuItem, transparencyToolStripMenuItem);
+                // 아무것도 안눌러져 있으면 선택관련 menu item만 표시
+                // 액션을 실행하고 있지 않아야 함
+                if (!runningAction)
+                {
+                    VisibleContextMenuItems(selectallToolStripMenuItem, unselectAllToolStripMenuItem,
+                        invertSelectionToolStripMenuItem, transparencyToolStripMenuItem);
+                }
+                else
+                {
+                    VisibleContextMenuItems();
+                }
             }
         }
 
@@ -1558,15 +1576,18 @@ namespace Br3D
 
                 if (ent is BlockReference br)
                 {
-                    foreach (var be in model.Blocks[br.BlockName].Entities)
+                    foreach (Entity be in model.Blocks[br.BlockName].Entities)
                     {
-                        be.Color = System.Drawing.Color.FromArgb(alpha, be.Color);
+                        var color = be.GetUsedColor(model);
+
+                        be.Color = System.Drawing.Color.FromArgb(alpha, color);
                         be.ColorMethod = colorMethodType.byEntity;
                     }
                 }
                 else
                 {
-                    ent.Color = System.Drawing.Color.FromArgb(alpha, ent.Color);
+                    var color = ent.GetUsedColor(model);
+                    ent.Color = System.Drawing.Color.FromArgb(alpha, color);
                     ent.ColorMethod = colorMethodType.byEntity;
 
                 }

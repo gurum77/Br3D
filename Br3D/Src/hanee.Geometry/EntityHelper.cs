@@ -1,11 +1,27 @@
-﻿using devDept.Eyeshot.Entities;
+﻿using devDept.Eyeshot;
+using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using System.Drawing;
+using Region = devDept.Eyeshot.Entities.Region;
 
 namespace hanee.Geometry
 {
     // entity helper
     static public class EntityHelper
     {
+        // 실제로 사용된 색 리턴
+        public static Color GetUsedColor(this Entity ent, Model model)
+        {
+            if (ent.ColorMethod == colorMethodType.byEntity)
+                return ent.Color;
+            else if (ent.ColorMethod == colorMethodType.byLayer)
+            {
+                var la = model.Layers[ent.LayerName];
+                return la.Color;
+            }
+
+            return ent.Color;
+        }
         // entity의 제원을 복사한다.
         // 느린 함수이다.
         public static void CopyFrom(this Entity ent, Entity source)
