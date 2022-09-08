@@ -52,7 +52,7 @@ namespace Br3D
             model.WorkFailed += Model_WorkFailed;
             model.MouseUp += Model_MouseUp;
             model.MouseMove += Model_MouseMove;
-           
+
             hModel.SaveBackgroundColor();
 
             foreach (Viewport vp in model.Viewports)
@@ -65,7 +65,7 @@ namespace Br3D
             Options.Instance.tempEntityColorMethod = Options.TempEntityColorMethod.byTransparencyColor;
 
 
-            
+
             ApplyOptions();
 
             InitGraphics();
@@ -90,6 +90,13 @@ namespace Br3D
             AllowDrop = true;
             DragDrop += FormMain_DragDrop;
             DragEnter += FormMain_DragEnter;
+
+            // script cad는 개발 완료시 true로 한다.
+#if DEBUG
+            controlScriptCad1.Visible = true;
+#else
+    controlScriptCad1.Visible = false;
+#endif
         }
 
         private void FormMain_DragEnter(object sender, DragEventArgs e)
@@ -103,7 +110,7 @@ namespace Br3D
             if (files == null || files.Length != 1)
                 return;
 
-            
+
             Import(files[0], true);
         }
 
@@ -791,7 +798,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemInsertBlock, InsertBlock, LanguageHelper.Tr("Insert Block"), "InsertBlock", "i");
             SetFunctionByElement(barButtonItemInsertModel, InsertModel, LanguageHelper.Tr("Insert Model"), "InsertModel", "im");
             SetFunctionByElement(barButtonItemInsertImage, InsertImage, LanguageHelper.Tr("Insert Image"), "InsertImage", "ii");
-            
+
             SetFunctionByElement(barButtonItemDrawRegion, DrawRegion, LanguageHelper.Tr("Region"), "Region", "rg");
 
             SetFunctionByElement(barButtonItemDrawCylinder, Cylinder, LanguageHelper.Tr("Cylinder"), "Cylinder", "cy");
@@ -884,10 +891,10 @@ namespace Br3D
         async void Intersection3D() => await new ActionIntersection(model).RunAsync();
         async void Align() => await new ActionAlign(model).RunAsync();
         async void SmartExtrude() => await new ActionSmartExtrude(model).RunAsync();
-        
+
 
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
-        async void DrawRegion() => await new ActionRegion(model).RunAsync(); 
+        async void DrawRegion() => await new ActionRegion(model).RunAsync();
         async void InsertImage() => await new ActionInsertImage(model).RunAsync();
         async void InsertModel() => await new ActionInsertModel(model).RunAsync();
         async void InsertBlock() => await new ActionInsertBlock(model).RunAsync();
@@ -1258,7 +1265,7 @@ namespace Br3D
         // iges, igs, stl, step, stp, obj, las, dwg, dxf, ifc, ifczip, 3ds, lus
 
         // openMode : 파일읽기를 설공하면 현재 상태를 초기화 하고 연다.
-        void Import(string pathFileName, bool openMode=true)
+        void Import(string pathFileName, bool openMode = true)
         {
             this.openMode = openMode;
 
@@ -1298,7 +1305,7 @@ namespace Br3D
 
         }
 
-      
+
         void NewFile()
         {
             model.Clear();

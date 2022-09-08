@@ -1,11 +1,103 @@
-﻿using System;
+﻿using devDept.Geometry;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace hanee.Geometry
 {
+    public class HeadValue
+    {
+        public HeadValue(char head, double value)
+        {
+            this.head = head;
+            this.value = value;
+        }
+        public char head;
+        public double value;
+    }
+
     public static class StringHelper
     {
+     
+        // string을 공백 또는 ,로 구분했을때 숫자만 추출
+        public static List<HeadValue> ToDoubles(this string str, params char[] heads)
+        {
+            char[] tokens = { ' ', ',' , '='};
+            var texts = str.Split(tokens, StringSplitOptions.RemoveEmptyEntries);
+
+            var values = new List<HeadValue>();
+            const char emptyHead = ' ';
+            char head = emptyHead;
+            foreach (var text in texts)
+            {
+                // 헤더인지?
+                if (text.Length == 1)
+                {
+                    bool isHead = false;
+                    var ch = text.ToLower()[0];
+                    foreach (var h in heads)
+                    {
+                        if (ch == h)
+                        {
+                            head = ch;
+                            isHead = true;
+                            break;
+                        }
+                    }
+                    if (isHead)
+                        continue;
+                }
+
+                // head가 없으면 숫자인지 보지도 말자.
+                if (head == emptyHead)
+                    continue;
+                
+                // head가 아니면 숫자인지?
+                if (double.TryParse(text, out double val))
+                {
+                    values.Add(new HeadValue(head, val));
+                    head = emptyHead;
+                }
+            }
+
+            return values;
+        }
+
+        // string을 point3D list로 변환
+        public static List<Point3D> ToPoint3Ds(this string str)
+        {
+            var values = str.ToDoubles('x', 'y', 'z');
+            if (values == null || values.Count== 0)
+                return null;
+
+            var points = new List<Point3D>();
+          
+            return points;
+        }
+
+
+        // string을 Point3D로 변환
+        public static Point3D ToPoint3D(this string str)
+        {
+            var values = str.ToDoubles('x', 'y', 'z');
+            if (values == null || values.Count == 0)
+                return null;
+
+            var point = new Point3D();
+            var x = values.Find(v => v.head == 'x');
+            var y = values.Find(v => v.head == 'y');
+            var z = values.Find(v => v.head == 'z');
+            if (x != null)
+                point.X = x.value;
+            if (y != null)
+                point.Y = y.value;
+            if (z != null)
+                point.Z = z.value;
+
+
+            return point;
+        }
+
         public static double ToDouble(this string str)
         {
             if (double.TryParse(str, out double val))

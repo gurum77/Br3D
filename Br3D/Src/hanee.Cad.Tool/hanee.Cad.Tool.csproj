@@ -92,9 +92,13 @@
     <Reference Include="DevExpress.XtraLayout.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPrinting.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraRichEdit.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraVerticalGrid.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -102,6 +106,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionAlign.cs" />
@@ -150,6 +156,12 @@
     <Compile Include="ActionTrim.cs" />
     <Compile Include="ActionUnion.cs" />
     <Compile Include="ActionWorkspace.cs" />
+    <Compile Include="ControlScriptCad.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlScriptCad.Designer.cs">
+      <DependentUpon>ControlScriptCad.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormBlock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +245,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ControlScriptCad.resx">
+      <DependentUpon>ControlScriptCad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormBlock.resx">
       <DependentUpon>FormBlock.cs</DependentUpon>
     </EmbeddedResource>
