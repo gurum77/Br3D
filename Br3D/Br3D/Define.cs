@@ -14,7 +14,5 @@ namespace Br3D
         public string defineText = LanguageHelper.Tr("Define");
         public string scaleText = LanguageHelper.Tr("Scale");
         public string methodText = LanguageHelper.Tr("Method");
-
-
     }
 }

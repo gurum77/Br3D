@@ -28,7 +28,7 @@ namespace Br3D
 
         private void Translate()
         {
-            simpleButtonApply.Text = LanguageHelper.Tr("Apply");
+            simpleButtonApply.Text = LanguageHelper.Tr("Apply file association");
             simpleButtonSelectAll.Text = LanguageHelper.Tr("Select all");
             gridView1.Columns[0].Caption = LanguageHelper.Tr("Association");
             gridView1.Columns[1].Caption = LanguageHelper.Tr("Ext.");

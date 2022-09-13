@@ -22,7 +22,7 @@ namespace hanee.Geometry
         // string을 공백 또는 ,로 구분했을때 숫자만 추출
         public static List<HeadValue> ToDoubles(this string str, params char[] heads)
         {
-            char[] tokens = { ' ', ',' , '='};
+            char[] tokens = { ' ', ',' , '=', '\n', '\t'};
             var texts = str.Split(tokens, StringSplitOptions.RemoveEmptyEntries);
 
             var values = new List<HeadValue>();
@@ -71,6 +71,35 @@ namespace hanee.Geometry
                 return null;
 
             var points = new List<Point3D>();
+            while(values.Count > 0)
+            {
+                var point = new Point3D();
+                var x = values.Find(val => val.head == 'x');
+                var y = values.Find(val => val.head == 'y');
+                var z = values.Find(val => val.head == 'z');
+                if (x != null)
+                {
+                    point.X = x.value;
+                    values.Remove(x);
+                }
+
+                if(y != null)
+                {
+                    point.Y = y.value;
+                    values.Remove(y);
+                }
+                
+                if (z != null)
+                {
+                    point.Z = z.value;
+                    values.Remove(z);
+                }
+
+                points.Add(point);
+                if (x == null && y == null && z == null)
+                    break;
+
+            }
           
             return points;
         }

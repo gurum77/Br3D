@@ -93,11 +93,11 @@ namespace Br3D
             // simpleButtonApply
             // 
             this.simpleButtonApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButtonApply.Location = new System.Drawing.Point(194, 312);
+            this.simpleButtonApply.Location = new System.Drawing.Point(132, 312);
             this.simpleButtonApply.Name = "simpleButtonApply";
-            this.simpleButtonApply.Size = new System.Drawing.Size(75, 23);
+            this.simpleButtonApply.Size = new System.Drawing.Size(137, 23);
             this.simpleButtonApply.TabIndex = 2;
-            this.simpleButtonApply.Text = "Apply";
+            this.simpleButtonApply.Text = "Apply file association";
             this.simpleButtonApply.Click += new System.EventHandler(this.simpleButtonApply_Click);
             // 
             // ControlFileAssociation

@@ -226,6 +226,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="ScriptCommand.cs" />
     <Compile Include="TextStyleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

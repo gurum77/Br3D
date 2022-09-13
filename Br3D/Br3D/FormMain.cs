@@ -94,6 +94,7 @@ namespace Br3D
             // script cad는 개발 완료시 true로 한다.
 #if DEBUG
             controlScriptCad1.Visible = true;
+            controlScriptCad1.model = model;
 #else
     controlScriptCad1.Visible = false;
 #endif
