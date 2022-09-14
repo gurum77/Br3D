@@ -1,4 +1,5 @@
 ﻿using devDept.Eyeshot;
+using DevExpress.XtraVerticalGrid;
 using hanee.Geometry;
 using hanee.ThreeD;
 using System;
@@ -12,15 +13,61 @@ namespace hanee.Cad.Tool
         public ControlScriptCad()
         {
             InitializeComponent();
+            
+            Translate();
+            Parse();
+        }
+
+        private void Translate()
+        {
             labelControlTitle.Text = LanguageHelper.Tr("Script");
             simpleButtonRun.Text = LanguageHelper.Tr("Run");
-            Parse();
+            rowRadius.Properties.Caption = LanguageHelper.Tr("Radius");
+            rowStartPoint.Properties.Caption = LanguageHelper.Tr("Start Point");
+            rowEndPoint.Properties.Caption = LanguageHelper.Tr("End Point");
+            rowPoints.Properties.Caption = LanguageHelper.Tr("Points");
+            rowCenterPoint.Properties.Caption = LanguageHelper.Tr("Center Point");
+
         }
 
         // 선택한 command 정보를 표시
         private void ComboBoxEdit1_SelectedIndexChanged(object sender, EventArgs e)
         {
             propertyGridControl1.SelectedObject = comboBoxEdit1.SelectedItem;
+            SetVisibleRows(propertyGridControl1);
+        }
+
+        // 선택 객체에 따라 visible row를 설정
+        private void SetVisibleRows(PropertyGridControl propertyGridControl1)
+        {
+            // 기본은 모두 숨김
+            rowStartPoint.Visible = false;
+            rowEndPoint.Visible = false;
+            rowRadius.Visible = false;
+            rowPoints.Visible = false;
+            rowCenterPoint.Visible = false;
+            
+
+            var cmd = propertyGridControl1.SelectedObject as ScriptCommand;
+            if (cmd == null)
+                return;
+            if (cmd.cmd == ScriptCommand.Command.createCircle)
+            {
+                rowCenterPoint.Visible = true;
+                rowRadius.Visible = true;
+            }
+            else if (cmd.cmd == ScriptCommand.Command.createLine)
+            {
+                rowStartPoint.Visible = true;
+                rowEndPoint.Visible = true;
+            }
+            else if (cmd.cmd == ScriptCommand.Command.createPline)
+            {
+                rowPoints.Visible = true;
+            }
+
+
+
         }
 
         // 실행
@@ -36,7 +83,7 @@ namespace hanee.Cad.Tool
 
             model.Entities.RegenAllCurved();
             model.Invalidate();
-            
+
         }
 
         // text 를 입력할때마다 parsing을 한다.
@@ -78,7 +125,7 @@ namespace hanee.Cad.Tool
                     cmd.points = new List<devDept.Geometry.Point3D>() { points[0], points[1] };
                     cmds.Add(cmd);
                 }
-                else if(points.Count > 2)
+                else if (points.Count > 2)
                 {
 
 
@@ -88,7 +135,7 @@ namespace hanee.Cad.Tool
                     cmds.Add(cmd);
                 }
                 cmd.points = points;
-                
+
 
             }
 

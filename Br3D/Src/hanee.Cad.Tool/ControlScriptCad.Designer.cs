@@ -31,6 +31,11 @@ namespace hanee.Cad.Tool
         {
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.propertyGridControl1 = new DevExpress.XtraVerticalGrid.PropertyGridControl();
+            this.rowRadius = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
+            this.rowStartPoint = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
+            this.rowEndPoint = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
+            this.rowPoints = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
+            this.rowCenterPoint = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
             this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.simpleButtonRun = new DevExpress.XtraEditors.SimpleButton();
             this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
@@ -55,14 +60,53 @@ namespace hanee.Cad.Tool
             // 
             // propertyGridControl1
             // 
+            this.propertyGridControl1.AutoGenerateRows = false;
             this.propertyGridControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.propertyGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propertyGridControl1.Location = new System.Drawing.Point(0, 20);
             this.propertyGridControl1.Name = "propertyGridControl1";
+            this.propertyGridControl1.OptionsBehavior.AllowSort = false;
+            this.propertyGridControl1.OptionsBehavior.PropertySort = DevExpress.XtraVerticalGrid.PropertySort.NoSort;
             this.propertyGridControl1.OptionsView.AllowReadOnlyRowAppearance = DevExpress.Utils.DefaultBoolean.True;
             this.propertyGridControl1.OptionsView.ShowRootCategories = false;
+            this.propertyGridControl1.Rows.AddRange(new DevExpress.XtraVerticalGrid.Rows.BaseRow[] {
+            this.rowRadius,
+            this.rowStartPoint,
+            this.rowEndPoint,
+            this.rowPoints,
+            this.rowCenterPoint});
             this.propertyGridControl1.Size = new System.Drawing.Size(247, 67);
             this.propertyGridControl1.TabIndex = 5;
+            // 
+            // rowRadius
+            // 
+            this.rowRadius.Name = "rowRadius";
+            this.rowRadius.Properties.Caption = "Radius";
+            this.rowRadius.Properties.FieldName = "radius";
+            // 
+            // rowStartPoint
+            // 
+            this.rowStartPoint.Name = "rowStartPoint";
+            this.rowStartPoint.Properties.Caption = "Start Point";
+            this.rowStartPoint.Properties.FieldName = "startPoint";
+            // 
+            // rowEndPoint
+            // 
+            this.rowEndPoint.Name = "rowEndPoint";
+            this.rowEndPoint.Properties.Caption = "End Point";
+            this.rowEndPoint.Properties.FieldName = "endPoint";
+            // 
+            // rowPoints
+            // 
+            this.rowPoints.Name = "rowPoints";
+            this.rowPoints.Properties.Caption = "Points";
+            this.rowPoints.Properties.FieldName = "points";
+            // 
+            // rowCenterPoint
+            // 
+            this.rowCenterPoint.Name = "rowCenterPoint";
+            this.rowCenterPoint.Properties.Caption = "Center Point";
+            this.rowCenterPoint.Properties.FieldName = "centerPoint";
             // 
             // comboBoxEdit1
             // 
@@ -134,5 +178,10 @@ namespace hanee.Cad.Tool
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
         private DevExpress.XtraEditors.LabelControl labelControlTitle;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowRadius;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowStartPoint;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowEndPoint;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowPoints;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowCenterPoint;
     }
 }

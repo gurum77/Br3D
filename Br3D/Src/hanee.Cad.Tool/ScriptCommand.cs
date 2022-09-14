@@ -130,6 +130,9 @@ namespace hanee.Cad.Tool
         [Browsable(false)]
         public Command cmd { get; set; }
         public double radius { get; set; }
+        public Point3D startPoint => points != null ? points.First() : null;
+        public Point3D endPoint => points != null ? points.Last() : null;
+            
         public List<Point3D> points { get; set; }
     }
 }

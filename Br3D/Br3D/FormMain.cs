@@ -41,6 +41,13 @@ namespace Br3D
         bool openMode = true; // 파일 열기인지?
         public FormMain()
         {
+            // option load를 제일 먼저 해야 함
+            // dll에 대한 translate를 하려면 InitializeComponent를 하기 전에 해야함
+            // 언어를 먼저 로드 한다.
+            Options.Instance.appName = VersionHelper.appName;
+            Options.Instance.LoadOptions();
+            LanguageHelper.Load(Options.Instance.language);
+
             // InitializeComponent 로딩시간 오래 걸림
             // HModel의 생성자에서 오래 걸림 
             // 개선해야함
@@ -58,8 +65,6 @@ namespace Br3D
             foreach (Viewport vp in model.Viewports)
                 viewports.Add(vp);
 
-            Options.Instance.appName = VersionHelper.appName;
-            Options.Instance.LoadOptions();
 
             // 테스트 용으로 옵션을 강제적용
             Options.Instance.tempEntityColorMethod = Options.TempEntityColorMethod.byTransparencyColor;
