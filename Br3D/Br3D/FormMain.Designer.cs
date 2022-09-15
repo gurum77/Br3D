@@ -406,6 +406,7 @@ namespace Br3D
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemArea = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.hModel)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -938,8 +939,10 @@ namespace Br3D
             // 
             // controlScriptCad1
             // 
+            this.controlScriptCad1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.controlScriptCad1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.controlScriptCad1.Location = new System.Drawing.Point(0, 38);
+            this.controlScriptCad1.model = null;
             this.controlScriptCad1.Name = "controlScriptCad1";
             this.controlScriptCad1.Size = new System.Drawing.Size(253, 215);
             this.controlScriptCad1.TabIndex = 12;
@@ -1050,9 +1053,10 @@ namespace Br3D
             this.barButtonItemUnion,
             this.barButtonItemIntersection,
             this.barButtonItemAlign,
-            this.barButtonItemSmartExtrude});
+            this.barButtonItemSmartExtrude,
+            this.barButtonItemArea});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 91;
+            this.ribbonControl1.MaxItemId = 92;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -1843,6 +1847,7 @@ namespace Br3D
             // 
             this.ribbonPageGroupDrawAnnotation.ItemLinks.Add(this.barButtonItemCoordinates);
             this.ribbonPageGroupDrawAnnotation.ItemLinks.Add(this.barButtonItemDistance);
+            this.ribbonPageGroupDrawAnnotation.ItemLinks.Add(this.barButtonItemArea);
             this.ribbonPageGroupDrawAnnotation.ItemLinks.Add(this.barButtonItemMemo);
             this.ribbonPageGroupDrawAnnotation.Name = "ribbonPageGroupDrawAnnotation";
             this.ribbonPageGroupDrawAnnotation.Text = "Draw";
@@ -1978,6 +1983,13 @@ namespace Br3D
             this.barButtonItem1.Id = 21;
             this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
             this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barButtonItemArea
+            // 
+            this.barButtonItemArea.Caption = "Area";
+            this.barButtonItemArea.Id = 91;
+            this.barButtonItemArea.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemArea.ImageOptions.SvgImage")));
+            this.barButtonItemArea.Name = "barButtonItemArea";
             // 
             // FormMain
             // 
@@ -2202,5 +2214,6 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemAlign;
         private DevExpress.XtraBars.BarButtonItem barButtonItemSmartExtrude;
         private hanee.Cad.Tool.ControlScriptCad controlScriptCad1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemArea;
     }
 }

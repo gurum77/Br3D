@@ -848,6 +848,7 @@ namespace Br3D
             // annotation
             SetFunctionByElement(barButtonItemCoordinates, Coorindates, LanguageHelper.Tr("Coordinates"), "Coordinates", "coor");
             SetFunctionByElement(barButtonItemDistance, Distance, LanguageHelper.Tr("Distance"), "Distance", "di");
+            SetFunctionByElement(barButtonItemArea, Area, LanguageHelper.Tr("Area"), "Area", "ar");
             SetFunctionByElement(barButtonItemMemo, Memo, LanguageHelper.Tr("Memo"), "Memo", "me");
             SetFunctionByElement(barButtonItemClearAnnotations, ClearAnnotations, LanguageHelper.Tr("Clear annotations"), "ClearAnnotations", "ca");
 
@@ -1174,6 +1175,12 @@ namespace Br3D
         async void Distance()
         {
             ActionDist ac = new ActionDist(model, ActionDist.ShowResult.label);
+            await ac.RunAsync();
+        }
+
+        async void Area()
+        {
+            ActionArea ac = new ActionArea(model, ActionArea.ShowResult.label);
             await ac.RunAsync();
         }
 

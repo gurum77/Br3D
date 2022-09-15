@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,10 +12,24 @@ namespace hanee.Cad.Tool
 {
     public class ActionArea : ActionBase
     {
-        List<Point3D> points;
-        public ActionArea(devDept.Eyeshot.Model vp) : base(vp)
+        public enum ShowResult
         {
-            points = null;
+            label,
+            form
+        }
+
+        public enum Method
+        {
+            entity,
+            points
+        }
+
+        List<Point3D> points = null;
+        Method method = Method.entity;
+        ShowResult showResult;
+        public ActionArea(devDept.Eyeshot.Model vp, ShowResult showResult = ShowResult.form) : base(vp)
+        {
+            this.showResult = showResult;
         }
 
         public override async void Run()
@@ -25,47 +38,138 @@ namespace hanee.Cad.Tool
         public async Task<bool> RunAsync()
         {
             StartAction();
-            points = new List<Point3D>();
-            while (true)
-            {
-                var pt = await GetPoint3D(points.Count == 0 ? LanguageHelper.Tr("Pick first point") : LanguageHelper.Tr("Next point or Enter"));
-                if (IsCanceled())
-                    break;
-                if (IsEntered())
-                    break;
 
-                points.Add(pt);
+            
+            Entity ent = null;
+            var entOrKey = await GetEntityOrKey(LanguageHelper.Tr("Select entity[p : pick points"));
+            if (IsCanceled() || IsEntered())
+            {
+                EndAction();
+                return true;
             }
 
-            if(IsCanceled())
+
+            // pick point 방식인지?
+            if (entOrKey.Value != null && entOrKey.Value.KeyCode == Keys.P)
+            {
+                method = Method.points;
+                points = new List<Point3D>();
+                while (true)
+                {
+
+                    var pt = await GetPoint3D(points.Count == 0 ? LanguageHelper.Tr("Pick first point") : LanguageHelper.Tr("Next point or Enter"));
+                    if (IsCanceled())
+                        break;
+                    if (IsEntered())
+                        break;
+
+                    points.Add(pt);
+                }
+            }
+            else
+            {
+                method = Method.entity;
+                ent = entOrKey.Key;
+            }
+
+
+            if (IsCanceled())
             {
                 EndAction();
                 return true;
             }
 
             // cancel이 아니면..
-            devDept.Eyeshot.Entities.Region region = new devDept.Eyeshot.Entities.Region(new LinearPath(points));
-            region.Regen(null);
-            var centroid = new Point3D();
-            double area = region.GetArea(out centroid);
-            double perimeter = region.GetPerimeter();
-            List<string> results = new List<string>();
-            results.Add($"Area = {Math.Abs(area):0.000}㎡");
-            results.Add($"Perimeter = {perimeter:0.000}m");
-            results.Add($"Centroid : X = {centroid.X:0.000}, Y = {centroid.Y:0.000}, Z = {centroid.Z:0.000}");
-            
-            FormResult formResult = new FormResult();
-            formResult.RichTextBox.Lines = results.ToArray();
-            formResult.ShowDialog();
+            if (method == Method.points)
+                ShowResultByPoints(points);
+            else if (method == Method.entity)
+                ShowResultByEntity(ent);
+
+
 
             EndAction();
             return true;
         }
 
+        void ShowResultByValues(double area, Point3D center)
+        {
+            List<string> results = new List<string>();
+            results.Add($"Area = {Math.Abs(area):0.000}㎡");
+            results.Add($"Centroid : X = {center.X:0.000}, Y = {center.Y:0.000}, Z = {center.Z:0.000}");
+
+            FormResult formResult = new FormResult();
+            formResult.RichTextBox.Lines = results.ToArray();
+            formResult.ShowDialog();
+        }
+
+        double GetArea(Entity ent, out Point3D center)
+        {
+            if (ent is Brep brep)
+            {
+                return brep.GetArea(out center);
+            }
+            else if (ent is Mesh mesh)
+            {
+                AreaProperties ap = new AreaProperties(mesh.Vertices, mesh.Triangles);
+                center = ap.Centroid;
+                return ap.Area;
+            }
+            else if (ent is Surface sur)
+            {
+                return sur.GetArea(out center);
+            }
+            else if (ent is devDept.Eyeshot.Entities.Region re)
+            {
+                return re.GetArea(out center);
+
+            }
+            else if (ent is BlockReference br)
+            {
+
+                var entities = br.GetEntities(environment.Blocks);
+                var totArea = 0.0;
+                var totCenter = new Point3D();
+                var availableCount = 0;
+                
+                foreach (var entity in entities)
+                {
+                    var curArea = GetArea(entity, out Point3D curCenter);
+                    if (curCenter == null)
+                        continue;
+
+                    totArea += curArea;
+                    totCenter += curCenter;
+                    availableCount++;
+                }
+
+                if (availableCount > 0)
+                    center = totCenter / availableCount;
+                else
+                    center = null;
+            }
+            center = null;
+            return 0;
+        }
+
+        // entity 의 면적을 표시
+        private void ShowResultByEntity(Entity ent)
+        {
+            var area = GetArea(ent, out Point3D center);
+            ShowResultByValues(area, center);
+        }
+
+
+
+        // 입력한 좌표로 면적 표시
+        private void ShowResultByPoints(List<Point3D> points)
+        {
+            AreaProperties ap = new AreaProperties(points);
+            ShowResultByValues(ap.Area, ap.Centroid);
+        }
 
         protected override void OnMouseMove(devDept.Eyeshot.Environment vp, MouseEventArgs e)
         {
-            if(points != null && points.Count > 0)
+            if (method == Method.points && points != null && points.Count > 0)
             {
                 List<Point3D> tmp = new List<Point3D>();
                 tmp.AddRange(points);
@@ -82,7 +186,7 @@ namespace hanee.Cad.Tool
             {
                 ActionBase.previewEntity = null;
             }
-            
+
         }
     }
 }
