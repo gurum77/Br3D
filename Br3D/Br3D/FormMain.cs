@@ -96,13 +96,9 @@ namespace Br3D
             DragDrop += FormMain_DragDrop;
             DragEnter += FormMain_DragEnter;
 
-            // script cad는 개발 완료시 true로 한다.
-#if DEBUG
+
             controlScriptCad1.Visible = true;
             controlScriptCad1.model = model;
-#else
-    controlScriptCad1.Visible = false;
-#endif
         }
 
         private void FormMain_DragEnter(object sender, DragEventArgs e)
@@ -1342,29 +1338,37 @@ namespace Br3D
 
         void CheckForUpdate()
         {
-            this.Cursor = Cursors.WaitCursor;
-
-            var filePath = Path.Combine(hanee.ThreeD.Util.GetExePath(), "wyUpdate.exe");
-            if (File.Exists(filePath))
+            try
             {
-                var pi = System.Diagnostics.Process.Start(filePath, "/quickcheck /justcheck /noerr");
-                pi.WaitForExit(5000);
-                if (pi.ExitCode == 2)
+                this.Cursor = Cursors.WaitCursor;
+
+                var filePath = Path.Combine(hanee.ThreeD.Util.GetExePath(), "wyUpdate.exe");
+                if (File.Exists(filePath))
                 {
-                    if (XtraMessageBox.Show(LanguageHelper.Tr("Install now?"), VersionHelper.appName + LanguageHelper.Tr(" update available"), MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    var pi = System.Diagnostics.Process.Start(filePath, "/quickcheck /justcheck /noerr");
+                    pi.WaitForExit(5000);
+                    if (pi.ExitCode == 2)
                     {
-                        System.Diagnostics.Process.Start(filePath);
-                        Close();
+                        if (XtraMessageBox.Show(LanguageHelper.Tr("Install now?"), VersionHelper.appName + LanguageHelper.Tr(" update available"), MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            System.Diagnostics.Process.Start(filePath);
+                            Close();
+                        }
                     }
                 }
+                else
+                {
+
+                    XtraMessageBox.Show(LanguageHelper.Tr("Update check failed! - wyUpdate.exe not found!"));
+                }
+
+                this.Cursor = Cursors.Default;
             }
-            else
+            catch
             {
 
-                XtraMessageBox.Show(LanguageHelper.Tr("Update check failed! - wyUpdate.exe not found!"));
             }
 
-            this.Cursor = Cursors.Default;
         }
 
         // 오늘 자동 업데이트 체크를 했는지?
