@@ -121,8 +121,12 @@ namespace hanee.ThreeD
             }
             set
             {
-                PreviewEntities = new Entity[1];
-                PreviewEntities[0] = value;
+                if (previewEntity == null)
+                    PreviewEntities = null;
+                else
+                {
+                    PreviewEntities = new Entity[] { value };
+                }
             }
         }
 
