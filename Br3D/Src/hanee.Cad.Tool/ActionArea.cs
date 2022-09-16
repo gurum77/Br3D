@@ -1,12 +1,13 @@
 ﻿using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using hanee.Geometry;
 using hanee.ThreeD;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static devDept.Eyeshot.Environment;
 
 namespace hanee.Cad.Tool
 {
@@ -21,10 +22,12 @@ namespace hanee.Cad.Tool
         public enum Method
         {
             entity,
+            face,
             points
         }
 
         List<Point3D> points = null;
+        List<SelectedFace> faces = null;
         Method method = Method.entity;
         ShowResult showResult;
         public ActionArea(devDept.Eyeshot.Model vp, ShowResult showResult = ShowResult.form) : base(vp)
@@ -39,9 +42,10 @@ namespace hanee.Cad.Tool
         {
             StartAction();
 
-            
             Entity ent = null;
-            var entOrKey = await GetEntityOrKey(LanguageHelper.Tr("Select entity[p : pick points"));
+            
+
+            var entOrKey = await GetEntityOrKey(LanguageHelper.Tr("Select entity(F : Select face, P : Pick points)"));
             if (IsCanceled() || IsEntered())
             {
                 EndAction();
@@ -49,8 +53,34 @@ namespace hanee.Cad.Tool
             }
 
 
+            // select face  방식인지?
+            if (entOrKey.Value != null && entOrKey.Value.KeyCode == Keys.F)
+            {
+                environment.TempEntities.Clear();
+                faces = new List<SelectedFace>();
+                method = Method.face;
+                while (true)
+                {
+                    var face = await GetFace(LanguageHelper.Tr("Select face"));
+                    if (face == null || IsCanceled() || IsEntered())
+                        break;
+
+                    faces.Add(face);
+
+                    var tmpEnt = face.ToTempEntity(environment);
+                    if(tmpEnt != null)
+                    {
+                        tmpEnt.LineWeight = 2;
+                        tmpEnt.LineWeightMethod = colorMethodType.byEntity;
+                        tmpEnt.Color = System.Drawing.Color.Red;
+                        tmpEnt.ColorMethod = colorMethodType.byEntity; 
+                        environment.TempEntities.Add(tmpEnt);
+                        environment.TempEntities.RegenAfterModify();
+                    }
+                }
+            }
             // pick point 방식인지?
-            if (entOrKey.Value != null && entOrKey.Value.KeyCode == Keys.P)
+            else if (entOrKey.Value != null && entOrKey.Value.KeyCode == Keys.P)
             {
                 method = Method.points;
                 points = new List<Point3D>();
@@ -84,6 +114,8 @@ namespace hanee.Cad.Tool
                 ShowResultByPoints(points);
             else if (method == Method.entity)
                 ShowResultByEntity(ent);
+            else if(method == Method.face)
+                ShowResultByFaces(faces);
 
 
 
@@ -94,8 +126,16 @@ namespace hanee.Cad.Tool
         void ShowResultByValues(double area, Point3D center)
         {
             List<string> results = new List<string>();
-            results.Add($"Area = {Math.Abs(area):0.000}㎡");
-            results.Add($"Centroid : X = {center.X:0.000}, Y = {center.Y:0.000}, Z = {center.Z:0.000}");
+            if (center != null)
+            {
+                results.Add($"Area = {Math.Abs(area):0.000}㎡");
+                results.Add($"Centroid : X = {center.X:0.000}, Y = {center.Y:0.000}, Z = {center.Z:0.000}");
+            }
+            else
+            {
+                results.Add(LanguageHelper.Tr("Area cannot be measured!"));
+            }
+
 
             FormResult formResult = new FormResult();
             formResult.RichTextBox.Lines = results.ToArray();
@@ -123,6 +163,12 @@ namespace hanee.Cad.Tool
                 return re.GetArea(out center);
 
             }
+            else if(ent is LinearPath lp)
+            {
+                AreaProperties ap = new AreaProperties(lp.Vertices);
+                center = ap.Centroid;
+                return ap.Area;
+            }
             else if (ent is BlockReference br)
             {
 
@@ -130,7 +176,7 @@ namespace hanee.Cad.Tool
                 var totArea = 0.0;
                 var totCenter = new Point3D();
                 var availableCount = 0;
-                
+
                 foreach (var entity in entities)
                 {
                     var curArea = GetArea(entity, out Point3D curCenter);
@@ -146,10 +192,35 @@ namespace hanee.Cad.Tool
                     center = totCenter / availableCount;
                 else
                     center = null;
+                return totArea;
             }
+
             center = null;
             return 0;
         }
+
+        // faces의 면적을 표시
+        void ShowResultByFaces(List<SelectedFace> faces)
+        {
+            int count = 0;
+            double totArea = 0;
+            Point3D totCenter = new Point3D();
+            foreach (var face in faces)
+            {
+                var ent = face.ToTempEntity(environment);
+                var area = GetArea(ent, out Point3D center);
+                if (center == null)
+                    continue;
+                count++;
+                totArea += area;
+                totCenter += center;
+            }
+            if (count == 0)
+                return;
+           
+            ShowResultByValues(totArea, totCenter / count);
+        }
+
 
         // entity 의 면적을 표시
         private void ShowResultByEntity(Entity ent)
@@ -169,7 +240,7 @@ namespace hanee.Cad.Tool
 
         protected override void OnMouseMove(devDept.Eyeshot.Environment vp, MouseEventArgs e)
         {
-            if (method == Method.points && points != null && points.Count > 0)
+           if (method == Method.points && points != null && points.Count > 0)
             {
                 List<Point3D> tmp = new List<Point3D>();
                 tmp.AddRange(points);
@@ -184,8 +255,9 @@ namespace hanee.Cad.Tool
             }
             else
             {
-                ActionBase.previewEntity = null;
+                //ActionBase.previewEntity = null;
             }
+           
 
         }
     }

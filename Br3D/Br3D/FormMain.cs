@@ -338,6 +338,7 @@ namespace Br3D
         // 마우스 커서 아래에 있는 memo를 리턴한다.
         private Memo GetMemoUnderMouseCursor(System.Drawing.Point location)
         {
+            return null;
             int index = model.GetLabelUnderMouseCursor(location);
             if (index != -1)
             {
