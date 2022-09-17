@@ -238,11 +238,17 @@ namespace hanee.Cad.Tool
             }
             else if (ent is BlockReference br)
             {
-
                 var entities = br.GetEntities(environment.Blocks);
+                var trans = br.GetFullTransformation(environment.Blocks);
+                foreach (var entity in entities)
+                {
+                    entity.TransformBy(trans);
+                }
+
                 var totArea = 0.0;
                 var totCenter = new Point3D();
                 var availableCount = 0;
+                
 
                 foreach (var entity in entities)
                 {

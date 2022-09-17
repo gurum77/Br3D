@@ -155,6 +155,7 @@
     <Compile Include="ActionTorus.cs" />
     <Compile Include="ActionTrim.cs" />
     <Compile Include="ActionUnion.cs" />
+    <Compile Include="ActionVolume.cs" />
     <Compile Include="ActionWorkspace.cs" />
     <Compile Include="ControlScriptCad.cs">
       <SubType>UserControl</SubType>

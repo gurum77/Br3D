@@ -850,6 +850,8 @@ namespace Br3D
 
             // measure
             SetFunctionByElement(barButtonItemArea, Area, LanguageHelper.Tr("Area"), "Area", "ar");
+            SetFunctionByElement(barButtonItemVolume, Volume, LanguageHelper.Tr("Volume"), "Volume", "v");
+            
 
 
             // osnap
@@ -1177,9 +1179,15 @@ namespace Br3D
             await ac.RunAsync();
         }
 
+        async void Volume()
+        {
+            ActionVolume ac = new ActionVolume(model, ActionVolume.ShowResult.form);
+            await ac.RunAsync();
+        }
+
         async void Area()
         {
-            ActionArea ac = new ActionArea(model, ActionArea.ShowResult.label);
+            ActionArea ac = new ActionArea(model, ActionArea.ShowResult.form);
             await ac.RunAsync();
         }
 
