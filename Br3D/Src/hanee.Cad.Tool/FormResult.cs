@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using hanee.ThreeD;
+using System;
 using System.Drawing;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
 
 namespace hanee.Cad.Tool
 {
@@ -16,6 +10,13 @@ namespace hanee.Cad.Tool
         public FormResult()
         {
             InitializeComponent();
+            Translate();
+        }
+
+        private void Translate()
+        {
+            this.Text = LanguageHelper.Tr("Result");
+            simpleButtonOK.Text = LanguageHelper.Tr("Close");
         }
 
         private void FormResult_Load(object sender, EventArgs e)
@@ -29,7 +30,7 @@ namespace hanee.Cad.Tool
             // 글자라인수만큼 키운다.
             // 원래 크기보다 커질 수는 없다.
             height += (richTextBox1.Lines.Length - 1) * richTextBox1.Font.Height;
-            if(this.Size.Height > height)
+            if (this.Size.Height > height)
                 this.Size = new Size(this.Size.Width, height);
         }
 
@@ -43,6 +44,6 @@ namespace hanee.Cad.Tool
             this.Close();
         }
 
-        
+
     }
 }

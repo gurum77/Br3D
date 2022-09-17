@@ -37,27 +37,28 @@
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 12);
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Location = new System.Drawing.Point(12, 13);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(386, 356);
+            this.richTextBox1.Size = new System.Drawing.Size(386, 381);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
             // simpleButtonOK
             // 
             this.simpleButtonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButtonOK.Location = new System.Drawing.Point(323, 374);
+            this.simpleButtonOK.Location = new System.Drawing.Point(323, 401);
             this.simpleButtonOK.Name = "simpleButtonOK";
-            this.simpleButtonOK.Size = new System.Drawing.Size(75, 23);
+            this.simpleButtonOK.Size = new System.Drawing.Size(75, 25);
             this.simpleButtonOK.TabIndex = 2;
             this.simpleButtonOK.Text = "OK";
             this.simpleButtonOK.Click += new System.EventHandler(this.simpleButtonOK_Click);
             // 
             // FormResult
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(410, 409);
+            this.ClientSize = new System.Drawing.Size(410, 438);
             this.Controls.Add(this.simpleButtonOK);
             this.Controls.Add(this.richTextBox1);
             this.Name = "FormResult";

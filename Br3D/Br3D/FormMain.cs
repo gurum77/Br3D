@@ -277,7 +277,7 @@ namespace Br3D
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            SplashScreenManager.CloseForm();
+            SplashScreenManagerHelper.SafeCloseForm();
 
             ViewportSingle();
             SetLTEnvironment();
@@ -338,7 +338,6 @@ namespace Br3D
         // 마우스 커서 아래에 있는 memo를 리턴한다.
         private Memo GetMemoUnderMouseCursor(System.Drawing.Point location)
         {
-            return null;
             int index = model.GetLabelUnderMouseCursor(location);
             if (index != -1)
             {
@@ -353,6 +352,7 @@ namespace Br3D
         private void Translate()
         {
             InitRibbonButtonMethod();
+            controlScriptCad1.Translate();
 
             // context menu
             endPointToolStripMenuItem.Text = LanguageHelper.Tr("End point(&E)");
@@ -367,7 +367,7 @@ namespace Br3D
 
 
             // page
-            ribbonPageAnnotation.Text = LanguageHelper.Tr("Annotation");
+            ribbonPageAnnotation.Text = LanguageHelper.Tr("Annotation/Measure");
             ribbonPageDimension.Text = LanguageHelper.Tr("Dimension");
             ribbonPageDraw.Text = LanguageHelper.Tr("Draw");
             ribbonPageDraw3D.Text = LanguageHelper.Tr("Draw 3D");
@@ -845,9 +845,11 @@ namespace Br3D
             // annotation
             SetFunctionByElement(barButtonItemCoordinates, Coorindates, LanguageHelper.Tr("Coordinates"), "Coordinates", "coor");
             SetFunctionByElement(barButtonItemDistance, Distance, LanguageHelper.Tr("Distance"), "Distance", "di");
-            SetFunctionByElement(barButtonItemArea, Area, LanguageHelper.Tr("Area"), "Area", "ar");
             SetFunctionByElement(barButtonItemMemo, Memo, LanguageHelper.Tr("Memo"), "Memo", "me");
             SetFunctionByElement(barButtonItemClearAnnotations, ClearAnnotations, LanguageHelper.Tr("Clear annotations"), "ClearAnnotations", "ca");
+
+            // measure
+            SetFunctionByElement(barButtonItemArea, Area, LanguageHelper.Tr("Area"), "Area", "ar");
 
 
             // osnap

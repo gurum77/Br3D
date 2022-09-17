@@ -43,7 +43,7 @@ namespace hanee.Cad.Tool
             StartAction();
 
             Entity ent = null;
-            
+
 
             var entOrKey = await GetEntityOrKey(LanguageHelper.Tr("Select entity(F : Select face, P : Pick points)"));
             if (IsCanceled() || IsEntered())
@@ -61,20 +61,24 @@ namespace hanee.Cad.Tool
                 method = Method.face;
                 while (true)
                 {
-                    var face = await GetFace(LanguageHelper.Tr("Select face"));
+                    var face = await GetFace(LanguageHelper.Tr("Select face(Enter : Finish)"));
                     if (face == null || IsCanceled() || IsEntered())
                         break;
 
                     faces.Add(face);
 
-                    var tmpEnt = face.ToTempEntity(environment);
-                    if(tmpEnt != null)
+                    var tmpEntities = face.ToTempEntity(environment);
+                    if (tmpEntities != null)
                     {
-                        tmpEnt.LineWeight = 2;
-                        tmpEnt.LineWeightMethod = colorMethodType.byEntity;
-                        tmpEnt.Color = System.Drawing.Color.Red;
-                        tmpEnt.ColorMethod = colorMethodType.byEntity; 
-                        environment.TempEntities.Add(tmpEnt);
+                        tmpEntities.ForEach(x =>
+                        {
+                            x.LineWeight = 2;
+                            x.LineWeightMethod = colorMethodType.byEntity;
+                            x.Color = System.Drawing.Color.Red;
+                            x.ColorMethod = colorMethodType.byEntity;
+                        });
+
+                        environment.TempEntities.AddRange(tmpEntities);
                         environment.TempEntities.RegenAfterModify();
                     }
                 }
@@ -87,7 +91,7 @@ namespace hanee.Cad.Tool
                 while (true)
                 {
 
-                    var pt = await GetPoint3D(points.Count == 0 ? LanguageHelper.Tr("Pick first point") : LanguageHelper.Tr("Next point or Enter"));
+                    var pt = await GetPoint3D(points.Count == 0 ? LanguageHelper.Tr("Pick first point") : LanguageHelper.Tr("Next point or Enter(Enter : Finish)"));
                     if (IsCanceled())
                         break;
                     if (IsEntered())
@@ -114,7 +118,7 @@ namespace hanee.Cad.Tool
                 ShowResultByPoints(points);
             else if (method == Method.entity)
                 ShowResultByEntity(ent);
-            else if(method == Method.face)
+            else if (method == Method.face)
                 ShowResultByFaces(faces);
 
 
@@ -128,7 +132,7 @@ namespace hanee.Cad.Tool
             List<string> results = new List<string>();
             if (center != null)
             {
-                results.Add($"Area = {Math.Abs(area):0.000}㎡");
+                results.Add($"Area = {Math.Abs(area):0.000}");
                 results.Add($"Centroid : X = {center.X:0.000}, Y = {center.Y:0.000}, Z = {center.Z:0.000}");
             }
             else
@@ -140,6 +144,69 @@ namespace hanee.Cad.Tool
             FormResult formResult = new FormResult();
             formResult.RichTextBox.Lines = results.ToArray();
             formResult.ShowDialog();
+        }
+
+        // selected face의 면적 리턴
+        double GetArea(SelectedFace face, out Point3D center)
+        {
+            if (face.Item is Brep brep)
+            {
+                // surface의 면적은 curve 1개로 이루어진 경우 curve 의 면적을 계산하는게 가장 정확하다.
+                var entities = face.ToTempEntity(environment);
+                if (entities != null && entities.Count == 1)
+                {
+                    return GetArea(entities[0], out center);
+                }
+                else
+                {
+                    center = new Point3D();
+
+                    var bf = brep.Faces[face.Index];
+
+                    // surface로 분해
+                    brep.Rebuild();
+                    var surfaces = bf.ConvertToSurface(brep);
+
+                    var count = 0;
+                    double totArea = 0;
+                    foreach (var surface in surfaces)
+                    {
+                        surface.Regen(new devDept.Eyeshot.RegenParams(0.001));
+                        var curArea = surface.GetArea(out Point3D curCenter);
+                        if (curCenter == null)
+                            continue;
+                        count++;
+                        totArea += curArea;
+                        center = center + curCenter;
+                    }
+                    center = center / count;
+                    return totArea;
+                }
+
+
+            }
+            else
+            {
+                var tmpEntities = face.ToTempEntity(environment);
+
+                var count = 0;
+                double totArea = 0;
+                center = new Point3D();
+
+                foreach (var tmpEnt in tmpEntities)
+                {
+                    var curArea = GetArea(tmpEnt, out Point3D curCenter);
+                    if (curCenter == null)
+                        continue;
+                    totArea += curArea;
+                    center += curCenter;
+                    count++;
+                }
+                if (count > 0)
+                    center = center / count;
+
+                return totArea;
+            }
         }
 
         double GetArea(Entity ent, out Point3D center)
@@ -163,7 +230,7 @@ namespace hanee.Cad.Tool
                 return re.GetArea(out center);
 
             }
-            else if(ent is LinearPath lp)
+            else if (ent is LinearPath lp)
             {
                 AreaProperties ap = new AreaProperties(lp.Vertices);
                 center = ap.Centroid;
@@ -194,6 +261,11 @@ namespace hanee.Cad.Tool
                     center = null;
                 return totArea;
             }
+            else if(ent is Circle c)
+            {
+                center = c.Center;
+                return Math.PI * c.Radius * c.Radius;
+            }
 
             center = null;
             return 0;
@@ -207,8 +279,7 @@ namespace hanee.Cad.Tool
             Point3D totCenter = new Point3D();
             foreach (var face in faces)
             {
-                var ent = face.ToTempEntity(environment);
-                var area = GetArea(ent, out Point3D center);
+                var area = GetArea(face, out Point3D center);
                 if (center == null)
                     continue;
                 count++;
@@ -217,7 +288,7 @@ namespace hanee.Cad.Tool
             }
             if (count == 0)
                 return;
-           
+
             ShowResultByValues(totArea, totCenter / count);
         }
 
@@ -240,7 +311,7 @@ namespace hanee.Cad.Tool
 
         protected override void OnMouseMove(devDept.Eyeshot.Environment vp, MouseEventArgs e)
         {
-           if (method == Method.points && points != null && points.Count > 0)
+            if (method == Method.points && points != null && points.Count > 0)
             {
                 List<Point3D> tmp = new List<Point3D>();
                 tmp.AddRange(points);
@@ -257,7 +328,7 @@ namespace hanee.Cad.Tool
             {
                 //ActionBase.previewEntity = null;
             }
-           
+
 
         }
     }

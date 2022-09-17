@@ -1,5 +1,6 @@
 ﻿using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using System.Collections.Generic;
 using static devDept.Eyeshot.Environment;
 
 namespace hanee.Geometry
@@ -7,7 +8,7 @@ namespace hanee.Geometry
     public static class SelectedFaceHelper
     {
         // 선택한 face를 temp entity로  변환
-        public static Entity ToTempEntity(this SelectedFace face, devDept.Eyeshot.Environment env)
+        public static List<Entity> ToTempEntity(this SelectedFace face, devDept.Eyeshot.Environment env)
         {
             if (face.Item is Mesh mesh && face.Index > -1)
             {
@@ -28,7 +29,28 @@ namespace hanee.Geometry
                     }
                 }
 
-                return lp;
+                return new List<Entity>() { lp };
+            }
+            else if (face.Item is Brep brep && face.Index > -1)
+            {
+                var bf = brep.Faces[face.Index];
+
+                var entities = new List<Entity>();
+                foreach (var lp in bf.Loops)
+                {
+                    foreach (var seg in lp.Segments)
+                    {
+                        var ent = seg.GetOrientedCurve(brep.Edges) as Entity;
+                        if (ent == null)
+                            continue;
+
+                        entities.Add(ent);
+                    }
+                }
+
+
+
+                return entities;
             }
 
             return null;

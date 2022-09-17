@@ -18,7 +18,7 @@ namespace hanee.Cad.Tool
             Parse();
         }
 
-        private void Translate()
+        public void Translate()
         {
             labelControlTitle.Text = LanguageHelper.Tr("Script");
             simpleButtonRun.Text = LanguageHelper.Tr("Run");
