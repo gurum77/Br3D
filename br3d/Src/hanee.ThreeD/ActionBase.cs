@@ -121,7 +121,7 @@ namespace hanee.ThreeD
             }
             set
             {
-                if (previewEntity == null)
+                if (value == null)
                     PreviewEntities = null;
                 else
                 {
@@ -253,6 +253,7 @@ namespace hanee.ThreeD
                 Entered = false;
             }
         }
+
         // 명령이 취소된 경우 
         static public bool Canceled = false;
 
@@ -297,6 +298,36 @@ namespace hanee.ThreeD
         static bool dynamicHighlight = true;
         static public devDept.Eyeshot.Model.SelectedItem LastSelectedItem = null;
         static public Dictionary<Type, bool> selectableTypes = new Dictionary<Type, bool>();
+        static public List<KeyEventArgs> availableKeys = new List<KeyEventArgs>();
+        static public bool HasAvailableKeys()
+        {
+            if (availableKeys == null || availableKeys.Count == 0)
+                return false;
+            return true;
+        }
+        static public bool IsAvailableKey(KeyEventArgs key)
+        {
+            if (availableKeys == null || availableKeys.Count == 0)
+                return true;
+
+            foreach (var ak in availableKeys)
+            {
+                if (ak.KeyCode != key.KeyCode)
+                    continue;
+                if (ak.KeyData != key.KeyData)
+                    continue;
+                if (ak.Modifiers != key.Modifiers)
+                    continue;
+                if (ak.Alt != key.Alt)
+                    continue;
+                if (ak.Control != key.Control)
+                    continue;
+
+                return true;
+            }
+
+            return false;
+        }
         static public bool HasSelectableTypes()
         {
             if (selectableTypes == null || selectableTypes.Count == 0)
@@ -714,6 +745,10 @@ namespace hanee.ThreeD
 
             if (userInputting[(int)UserInput.GettingKey] == true)
             {
+                if (HasAvailableKeys() && !IsAvailableKey(e))
+                {
+                    return;
+                }
                 key = e;
 
                 ActionBase.EndInput(UserInput.GettingKey);
@@ -1062,13 +1097,20 @@ namespace hanee.ThreeD
         }
 
         // 객체 1개를 선택받는다.
-        public async Task<KeyValuePair<Entity, KeyEventArgs>> GetEntityOrKey(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null)
+        public async Task<KeyValuePair<Entity, KeyEventArgs>> GetEntityOrKey(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null, params KeyEventArgs[] availableKeys)
         {
             ActionBase.StartInput(environment, message, stepID, UserInput.SelectingEntity);
             ActionBase.StartInput(environment, message, stepID, UserInput.GettingKey);
 
             ActionBase.dynamicHighlight = dynamicHighlight;
             ActionBase.selectableTypes = selectableType;
+            ActionBase.availableKeys.Clear();
+            if (availableKeys != null)
+            {
+                foreach (var ak in availableKeys)
+                    ActionBase.availableKeys.Add(ak);
+            }
+
             ActionBase.selectedEntity = null;
 
             while (ActionBase.userInputting[(int)UserInput.SelectingEntity] == true &&
@@ -1287,6 +1329,7 @@ namespace hanee.ThreeD
             ActionBase.SetTempEtt(environment, null);
             ActionBase.IsModified = true;
             ActionBase.selectableTypes?.Clear();
+            ActionBase.availableKeys?.Clear();
 
             // dynamic input manager 초기화
             DynamicInputManager.Init();
