@@ -43,9 +43,7 @@ namespace hanee.Cad.Tool
             StartAction();
 
             Entity ent = null;
-
-
-            var entOrKey = await GetEntityOrKey(LanguageHelper.Tr("Select entity(F : Select face, P : Pick points)"));
+            var entOrKey = await GetEntityOrKey(LanguageHelper.Tr("Select entity(F : Select face, P : Pick points)"), -1, false, null, new KeyEventArgs(Keys.F), new KeyEventArgs(Keys.P));
             if (IsCanceled() || IsEntered())
             {
                 EndAction();
@@ -90,7 +88,6 @@ namespace hanee.Cad.Tool
                 points = new List<Point3D>();
                 while (true)
                 {
-
                     var pt = await GetPoint3D(points.Count == 0 ? LanguageHelper.Tr("Pick first point") : LanguageHelper.Tr("Next point or Enter(Enter : Finish)"));
                     if (IsCanceled())
                         break;
@@ -113,6 +110,9 @@ namespace hanee.Cad.Tool
                 return true;
             }
 
+            DrawPreview();
+            environment.Invalidate();
+
             // cancel이 아니면..
             if (method == Method.points)
                 ShowResultByPoints(points);
@@ -120,8 +120,6 @@ namespace hanee.Cad.Tool
                 ShowResultByEntity(ent);
             else if (method == Method.face)
                 ShowResultByFaces(faces);
-
-
 
             EndAction();
             return true;
@@ -306,8 +304,6 @@ namespace hanee.Cad.Tool
             ShowResultByValues(area, center);
         }
 
-
-
         // 입력한 좌표로 면적 표시
         private void ShowResultByPoints(List<Point3D> points)
         {
@@ -315,27 +311,35 @@ namespace hanee.Cad.Tool
             ShowResultByValues(ap.Area, ap.Centroid);
         }
 
-        protected override void OnMouseMove(devDept.Eyeshot.Environment vp, MouseEventArgs e)
+        void DrawPreview()
         {
             if (method == Method.points && points != null && points.Count > 0)
             {
+                
                 List<Point3D> tmp = new List<Point3D>();
                 tmp.AddRange(points);
-                tmp.Add(point3D);
+                // 입력중일때는 현재 마우스 위치를 추가
+                if (ActionBase.IsUserInputting())
+                    tmp.Add(point3D);
                 tmp.Add(points[0]);
 
-                ActionBase.previewEntity = new LinearPath(tmp)
+                var lp = new LinearPath(tmp)
                 {
                     Color = Color.White,
                     ColorMethod = colorMethodType.byEntity
                 };
+                environment.TempEntities.Clear();
+                environment.TempEntities.Add(lp);
             }
             else
             {
                 //ActionBase.previewEntity = null;
             }
+        }
 
-
+        protected override void OnMouseMove(devDept.Eyeshot.Environment vp, MouseEventArgs e)
+        {
+            DrawPreview();
         }
     }
 }
