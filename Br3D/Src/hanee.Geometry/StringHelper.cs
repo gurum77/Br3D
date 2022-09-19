@@ -133,6 +133,13 @@ namespace hanee.Geometry
                 return val;
             return 0;
         }
+
+        public static float ToFloat(this string str)
+        {
+            if (float.TryParse(str, out float val))
+                return val;
+            return 0;
+        }
         public static bool ToBool(this string str)
         {
             if (bool.TryParse(str, out bool val))

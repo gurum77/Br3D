@@ -1,16 +1,19 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using hanee.Geometry;
 using hanee.ThreeD;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Environment = devDept.Eyeshot.Environment;
 
 namespace hanee.Cad.Tool
 {
     public class ActionPolyline : ActionBase
     {
         List<Point3D> points = new List<Point3D>();
+        float width = 0.5f;
         public bool spline { get; set; } = false;
         public ActionPolyline(Environment environment) : base(environment)
         {
@@ -44,8 +47,44 @@ namespace hanee.Cad.Tool
 
             while (true)
             {
-                var pt = await GetPoint3D(LanguageHelper.Tr("Point"));
-                SetOrthoModeStartPoint(pt);
+                KeyValuePair<Point3D, KeyEventArgs> pk;
+                Point3D point = null;
+                if (points.Count == 0)
+                    pk = await GetPoint3DOrKey(LanguageHelper.Tr("Point(W : Width)"), -1, new KeyEventArgs(Keys.W));
+                else if (points.Count < 3)
+                    pk = await GetPoint3DOrKey(LanguageHelper.Tr("Next point(W : Width)"), -1, new KeyEventArgs(Keys.W));
+                else
+                    pk = await GetPoint3DOrKey(LanguageHelper.Tr("Next point(W : Width, C : Close)"), -1, new KeyEventArgs(Keys.W), new KeyEventArgs(Keys.C));
+
+                if (pk.Value != null && pk.Value.KeyCode == Keys.C)
+                {
+                    // C를 누르며 입력 완료
+                    point = points[0].Clone() as Point3D;
+                    points.Add(point);
+                    Entered = true;
+                }
+                else if (pk.Value != null && pk.Value.KeyCode == Keys.W)
+                {
+                    FormInputMessage form = new FormInputMessage();
+                    form.Text = LanguageHelper.Tr("Width(> 0)");
+                    form.RichTextBox.Text = width.ToString();
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        width = form.RichTextBox.Text.ToFloat();
+                        if (width <= 0)
+                            width = 0.5f;
+                    }
+                    continue;
+                }
+                else if (pk.Key != null)
+                {
+                    point = pk.Key;
+                }
+
+                if (point == null)
+                    break;
+                
+                SetOrthoModeStartPoint(point);
 
                 // pline은 취소를 눌러도 입력 완료로 한다.
                 if (IsEntered() || IsCanceled())
@@ -62,7 +101,7 @@ namespace hanee.Cad.Tool
                 }
                 else
                 {
-                    points.Add(pt);
+                    points.Add(point);
                 }
             }
 
@@ -90,12 +129,16 @@ namespace hanee.Cad.Tool
                         pts[i] = sp.PointAt(sp.Domain.ParameterAt((double)i / subd));
                     }
                     var lp = new LinearPath(pts);
+                    lp.LineWeight = width;
+                    lp.LineWeightMethod = colorMethodType.byEntity;
                     GetHModel()?.entityPropertiesManager?.SetDefaultProperties(lp, tempEntity);
                     return lp;
                 }
                 else
                 {
                     var lp = new LinearPath(curPoints);
+                    lp.LineWeight = width;
+                    lp.LineWeightMethod = colorMethodType.byEntity;
                     GetHModel()?.entityPropertiesManager?.SetDefaultProperties(sp, tempEntity);
                     return sp;
 
@@ -105,6 +148,8 @@ namespace hanee.Cad.Tool
             {
 
                 var lp = new LinearPath(curPoints);
+                lp.LineWeight = width;
+                lp.LineWeightMethod = colorMethodType.byEntity;
                 GetHModel()?.entityPropertiesManager?.SetDefaultProperties(lp, tempEntity);
                 return lp;
             }

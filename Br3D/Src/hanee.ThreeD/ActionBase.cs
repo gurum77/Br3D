@@ -298,16 +298,16 @@ namespace hanee.ThreeD
         static bool dynamicHighlight = true;
         static public devDept.Eyeshot.Model.SelectedItem LastSelectedItem = null;
         static public Dictionary<Type, bool> selectableTypes = new Dictionary<Type, bool>();
-        static public List<KeyEventArgs> availableKeys = new List<KeyEventArgs>();
+        static public KeyEventArgs[] availableKeys;
         static public bool HasAvailableKeys()
         {
-            if (availableKeys == null || availableKeys.Count == 0)
+            if (availableKeys == null || availableKeys.Length == 0)
                 return false;
             return true;
         }
         static public bool IsAvailableKey(KeyEventArgs key)
         {
-            if (availableKeys == null || availableKeys.Count == 0)
+            if (availableKeys == null || availableKeys.Length == 0)
                 return true;
 
             foreach (var ak in availableKeys)
@@ -798,10 +798,11 @@ namespace hanee.ThreeD
         }
 
         // 마우스로 point3D를 입력받거나 key를 입력받는다.
-        public async Task<KeyValuePair<Point3D, KeyEventArgs>> GetPoint3DOrKey(string message = null, int stepID = -1)
+        public async Task<KeyValuePair<Point3D, KeyEventArgs>> GetPoint3DOrKey(string message = null, int stepID = -1, params KeyEventArgs[] availableKeys)
         {
             ActionBase.StartInput(environment, message, stepID, UserInput.GettingPoint3D);
             ActionBase.StartInput(environment, message, stepID, UserInput.GettingKey);
+            ActionBase.availableKeys = availableKeys;
 
             while (ActionBase.userInputting[(int)UserInput.GettingPoint3D] == true &&
                 ActionBase.userInputting[(int)UserInput.GettingKey] == true
@@ -1104,12 +1105,8 @@ namespace hanee.ThreeD
 
             ActionBase.dynamicHighlight = dynamicHighlight;
             ActionBase.selectableTypes = selectableType;
-            ActionBase.availableKeys.Clear();
-            if (availableKeys != null)
-            {
-                foreach (var ak in availableKeys)
-                    ActionBase.availableKeys.Add(ak);
-            }
+            ActionBase.availableKeys = availableKeys;
+            
 
             ActionBase.selectedEntity = null;
 
@@ -1329,7 +1326,7 @@ namespace hanee.ThreeD
             ActionBase.SetTempEtt(environment, null);
             ActionBase.IsModified = true;
             ActionBase.selectableTypes?.Clear();
-            ActionBase.availableKeys?.Clear();
+            ActionBase.availableKeys = null;
 
             // dynamic input manager 초기화
             DynamicInputManager.Init();
