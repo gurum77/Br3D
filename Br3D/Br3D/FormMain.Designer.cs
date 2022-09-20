@@ -374,6 +374,8 @@ namespace Br3D
             this.barButtonItemAlign = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemSmartExtrude = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemArea = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemVolume = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemList = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -408,7 +410,6 @@ namespace Br3D
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItemVolume = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.hModel)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -602,7 +603,7 @@ namespace Br3D
             this.panelContainer1.Controls.Add(this.dockPanelObjectTree);
             this.panelContainer1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.panelContainer1.ID = new System.Guid("2f55103e-9204-4e48-a94f-fab57b48506c");
-            this.panelContainer1.Location = new System.Drawing.Point(-259, 0);
+            this.panelContainer1.Location = new System.Drawing.Point(0, 0);
             this.panelContainer1.Name = "panelContainer1";
             this.panelContainer1.OriginalSize = new System.Drawing.Size(259, 200);
             this.panelContainer1.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Left;
@@ -1057,9 +1058,10 @@ namespace Br3D
             this.barButtonItemAlign,
             this.barButtonItemSmartExtrude,
             this.barButtonItemArea,
-            this.barButtonItemVolume});
+            this.barButtonItemVolume,
+            this.barButtonItemList});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 93;
+            this.ribbonControl1.MaxItemId = 94;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -1699,6 +1701,20 @@ namespace Br3D
             this.barButtonItemArea.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemArea.ImageOptions.SvgImage")));
             this.barButtonItemArea.Name = "barButtonItemArea";
             // 
+            // barButtonItemVolume
+            // 
+            this.barButtonItemVolume.Caption = "Volume";
+            this.barButtonItemVolume.Id = 92;
+            this.barButtonItemVolume.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemVolume.ImageOptions.SvgImage")));
+            this.barButtonItemVolume.Name = "barButtonItemVolume";
+            // 
+            // barButtonItemList
+            // 
+            this.barButtonItemList.Caption = "Property List";
+            this.barButtonItemList.Id = 93;
+            this.barButtonItemList.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemList.ImageOptions.SvgImage")));
+            this.barButtonItemList.Name = "barButtonItemList";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -1891,6 +1907,7 @@ namespace Br3D
             this.ribbonPageGroupTools.ItemLinks.Add(this.barButtonItemLayer);
             this.ribbonPageGroupTools.ItemLinks.Add(this.barButtonItemTextStyle);
             this.ribbonPageGroupTools.ItemLinks.Add(this.barButtonItemLineType);
+            this.ribbonPageGroupTools.ItemLinks.Add(this.barButtonItemList);
             this.ribbonPageGroupTools.Name = "ribbonPageGroupTools";
             this.ribbonPageGroupTools.Text = "Settings";
             // 
@@ -2000,13 +2017,6 @@ namespace Br3D
             this.barButtonItem1.Id = 21;
             this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
             this.barButtonItem1.Name = "barButtonItem1";
-            // 
-            // barButtonItemVolume
-            // 
-            this.barButtonItemVolume.Caption = "Volume";
-            this.barButtonItemVolume.Id = 92;
-            this.barButtonItemVolume.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemVolume.ImageOptions.SvgImage")));
-            this.barButtonItemVolume.Name = "barButtonItemVolume";
             // 
             // FormMain
             // 
@@ -2234,5 +2244,6 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemArea;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
         private DevExpress.XtraBars.BarButtonItem barButtonItemVolume;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemList;
     }
 }

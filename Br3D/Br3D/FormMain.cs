@@ -871,6 +871,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemLayer, Layer, LanguageHelper.Tr("Layer"), "Layer", "la");
             SetFunctionByElement(barButtonItemTextStyle, TextStyle, LanguageHelper.Tr("Text Style"), "TextStyle", "ts");
             SetFunctionByElement(barButtonItemLineType, LineType, LanguageHelper.Tr("Line Type"), "LineType", "lt");
+            SetFunctionByElement(barButtonItemList, List, LanguageHelper.Tr("List"), "List", "list");
 
             // options
             SetFunctionByElement(barButtonItemShowGrid, null, LanguageHelper.Tr("Grid"), null, null);
@@ -966,6 +967,7 @@ namespace Br3D
 
             RefreshDataSource();
         }
+        void List() => new ActionList(model).Run();
         void LineType() => new ActionLineType(model, this).Run();
         void TextStyle() => new ActionTextStyle(model, this).Run();
         void Layer() => new ActionLayer(model, this).Run();
