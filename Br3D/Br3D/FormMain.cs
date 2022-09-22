@@ -20,19 +20,10 @@ namespace Br3D
 {
     public partial class FormMain : DevExpress.XtraEditors.XtraForm
     {
-        devDept.Eyeshot.ToolBarButton toolBarButtonWireframe = new devDept.Eyeshot.ToolBarButton(global::Br3D.Properties.Resources.wireframe_32x, "Wireframe", null, devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true, null, null);
-        devDept.Eyeshot.ToolBarButton toolBarButtonHiddenLine = new devDept.Eyeshot.ToolBarButton(global::Br3D.Properties.Resources.hiddenline_32x, "HiddenLine", null, devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true, null, null);
-        devDept.Eyeshot.ToolBarButton toolBarButtonShaded = new devDept.Eyeshot.ToolBarButton(global::Br3D.Properties.Resources.shaded_32x, "Shade", null, devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true, null, null);
-        devDept.Eyeshot.ToolBarButton toolBarButtonRendered = new devDept.Eyeshot.ToolBarButton(global::Br3D.Properties.Resources.rendered_32x, "Render", null, devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true, null, null);
-        devDept.Eyeshot.ToolBarSeparator toolBarSeparator = new ToolBarSeparator();
-        devDept.Eyeshot.ToolBarButton toolBarButtonPerspectiveMode = new devDept.Eyeshot.ToolBarButton(global::Br3D.Properties.Resources.perspective, "Perspective", null, devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true, null, null);
-        devDept.Eyeshot.ToolBarButton toolBarButtonOrthographicMode = new devDept.Eyeshot.ToolBarButton(global::Br3D.Properties.Resources.orthographic, "Orthographic", null, devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true, null, null);
-        devDept.Eyeshot.ToolBarButton toolBarButton2DMode = new devDept.Eyeshot.ToolBarButton(global::Br3D.Properties.Resources._2d_32px, "2D", null, devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true, null, null);
-        devDept.Eyeshot.ToolBarButton toolBarButton3DMode = new devDept.Eyeshot.ToolBarButton(global::Br3D.Properties.Resources._3d_32px, "3D", null, devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true, null, null);
-
-        List<Viewport> viewports = new List<Viewport>();
-
         private Memo lastMemo = null;
+
+        ControlModel controlModel = null;
+        HModel hModel => controlModel?.hModel;
         Model model => hModel;
         Dictionary<object, Action> functionByElement = new Dictionary<object, Action>();
         string opendFilePath = "";
@@ -52,7 +43,22 @@ namespace Br3D
             // HModel의 생성자에서 오래 걸림 
             // 개선해야함
             InitializeComponent();
-            model.Unlock("US21-D8G5N-12J8F-5F65-RD3W");
+
+            ribbonControl1.SearchItemShortcut = new BarShortcut(Keys.Control | Keys.F);
+            
+            AllowDrop = true;
+            DragDrop += FormMain_DragDrop;
+            DragEnter += FormMain_DragEnter;
+        }
+
+        private void FormMain_Shown(object sender, EventArgs e)
+        {
+            // model init은 제일 나중에 한다.
+            controlModel = new ControlModel();
+            controlModel.Dock = DockStyle.Fill;
+            pictureEdit1.Controls.Add(controlModel);
+            //this.Controls.Add(controlModel);  // form에 직접 add 하면 controlModel의 크기가 잘못 계산됨
+            
 
             model.MouseDoubleClick += Model_MouseDoubleClick;
             model.WorkCompleted += Model_WorkCompleted;
@@ -60,45 +66,36 @@ namespace Br3D
             model.MouseUp += Model_MouseUp;
             model.MouseMove += Model_MouseMove;
 
-            hModel.SaveBackgroundColor();
-
-            foreach (Viewport vp in model.Viewports)
-                viewports.Add(vp);
-
-
-            // 테스트 용으로 옵션을 강제적용
-            Options.Instance.tempEntityColorMethod = Options.TempEntityColorMethod.byTransparencyColor;
-
-
-
             ApplyOptions();
 
-            InitGraphics();
-            InitDisplayMode();
+            SplashScreenManagerHelper.SafeCloseForm();
 
-            InitSnapping();
+            // startup file open
+            var args = System.Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+            {
+                var fileName = args[1];
+                Import(fileName, true);
+            }
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            controlScriptCad1.Visible = true;
+            controlScriptCad1.model = model;
+
+            EnableDynamicInput(true, false);
+            SetLTEnvironment();
+
             InitRibbonButtonMethod();
             InitTileElementStatus();
             InitObjectTreeList();
             InitPropertyGrid();
-            InitGrids();
-
-            InitToolbar();
+            
             Translate();
-
-            hModel.ActionMode = actionType.None;
-            hModel.BoundingBoxChanged += HModel_BoundingBoxChanged;
-            ribbonControl1.SearchItemShortcut = new BarShortcut(Keys.Control | Keys.F);
-
-            EnableDynamicInput(true, false);
-
-            AllowDrop = true;
-            DragDrop += FormMain_DragDrop;
-            DragEnter += FormMain_DragEnter;
-
-
-            controlScriptCad1.Visible = true;
-            controlScriptCad1.model = model;
+            
+            // 테스트 용으로 옵션을 강제적용
+            Options.Instance.tempEntityColorMethod = Options.TempEntityColorMethod.byTransparencyColor;
         }
 
         private void FormMain_DragEnter(object sender, DragEventArgs e)
@@ -116,40 +113,7 @@ namespace Br3D
             Import(files[0], true);
         }
 
-        private void InitGrids()
-        {
-            if (model.Viewports.Count < 2)
-                return;
-
-            // 첫번째 viewport의 그리드를 나머지 viewport에 속성을 복사
-            var vp1 = model.Viewports[0];
-            if (vp1.Grids.Length < 2)
-                return;
-
-            var grid1 = vp1.Grids[1];
-            for (int i = 1; i < model.Viewports.Count; ++i)
-            {
-                var vpCur = model.Viewports[i];
-                if (vpCur.Grids.Length < 2)
-                    continue;
-
-                var gridCur = vpCur.Grids[1];
-                gridCur.AutoSize = grid1.AutoSize;
-                gridCur.AutoStep = grid1.AutoStep;
-                gridCur.BorderColor = grid1.BorderColor;
-                gridCur.ColorAxisX = grid1.ColorAxisX;
-                gridCur.ColorAxisY = grid1.ColorAxisY;
-                gridCur.FillColor = grid1.FillColor;
-                gridCur.AlwaysBehind = grid1.AlwaysBehind;
-                gridCur.Lighting = grid1.Lighting;
-                gridCur.LineColor = grid1.LineColor;
-                gridCur.MajorLineColor = grid1.MajorLineColor;
-                gridCur.MajorLinesEvery = grid1.MajorLinesEvery;
-                gridCur.MaxNumberOfLines = grid1.MaxNumberOfLines;
-                gridCur.MinNumberOfLines = grid1.MinNumberOfLines;
-                gridCur.Step = grid1.Step;
-            }
-        }
+   
 
         // 옵션을 적용한다.
         private void ApplyOptions()
@@ -260,44 +224,9 @@ namespace Br3D
             ribbonPageDimension.Visible = false;
         }
 
-        private void HModel_BoundingBoxChanged(object sender)
-        {
-            var boxSize = hModel.Entities.BoxSize;
-            if (boxSize == null || boxSize.X < 100 || boxSize.Y < 100)
-            {
-                hModel.ActiveViewport.Grid.AutoSize = false;
-                hModel.ActiveViewport.Grid.Min = new devDept.Geometry.Point2D(-100, -100);
-                hModel.ActiveViewport.Grid.Max = new devDept.Geometry.Point2D(100, 100);
-            }
-            else
-            {
-                hModel.ActiveViewport.Grid.AutoSize = true;
-            }
-        }
+        
 
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-            SplashScreenManagerHelper.SafeCloseForm();
-
-            ViewportSingle();
-            SetLTEnvironment();
-
-            Circle c = new Circle(Plane.XY, 200);
-            hModel.Entities.Add(c);
-
-            hModel.Set3DView();
-
-            hModel.Entities.Remove(c);
-
-
-            // startup file open
-            var args = System.Environment.GetCommandLineArgs();
-            if (args.Length > 1)
-            {
-                var fileName = args[1];
-                Import(fileName, true);
-            }
-        }
+   
 
 
         private void Model_MouseMove(object sender, MouseEventArgs e)
@@ -431,103 +360,12 @@ namespace Br3D
         }
 
 
-        private void InitToolbar()
-        {
-            foreach (Viewport vp in model.Viewports)
-            {
-                if (vp.ToolBars.Length > 1)
-                {
-                    var displayModelToolbar = vp.ToolBars[1];
-                    displayModelToolbar.Position = devDept.Eyeshot.ToolBar.positionType.VerticalTopLeft;
-                    displayModelToolbar.Buttons.Clear();
-                    displayModelToolbar.Buttons.Add(toolBarButtonWireframe);
-                    displayModelToolbar.Buttons.Add(toolBarButtonHiddenLine);
-                    displayModelToolbar.Buttons.Add(toolBarButtonShaded);
-                    displayModelToolbar.Buttons.Add(toolBarButtonRendered);
-                    displayModelToolbar.Buttons.Add(toolBarSeparator);
-                    displayModelToolbar.Buttons.Add(toolBarButtonPerspectiveMode);
-                    displayModelToolbar.Buttons.Add(toolBarButtonOrthographicMode);
-                    displayModelToolbar.Buttons.Add(toolBarSeparator);
-                    displayModelToolbar.Buttons.Add(toolBarButton2DMode);
-                    displayModelToolbar.Buttons.Add(toolBarButton3DMode);
-                }
+        
 
-                vp.Rotate.MouseButton = new MouseButton(MouseButtons.Middle, modifierKeys.Ctrl);
-                vp.Rotate.RotationMode = rotationType.Turntable;
 
-                vp.Pan.MouseButton = new MouseButton(MouseButtons.Middle, modifierKeys.None);
-            }
 
-            toolBarButtonWireframe.Click += ToolBarButtonDisplayMode_Click;
-            toolBarButtonHiddenLine.Click += ToolBarButtonDisplayMode_Click;
-            toolBarButtonShaded.Click += ToolBarButtonDisplayMode_Click;
-            toolBarButtonRendered.Click += ToolBarButtonDisplayMode_Click;
+        
 
-            toolBarButtonPerspectiveMode.Click += ToolBarButtonPerspectiveMode_Click;
-            toolBarButtonOrthographicMode.Click += ToolBarButtonOrthographicMode_Click;
-
-            toolBarButton2DMode.Click += ToolBarButton2DMode_Click;
-            toolBarButton3DMode.Click += ToolBarButton3DMode_Click;
-
-        }
-
-        // 3d 모드로 변경
-        private void ToolBarButton3DMode_Click(object sender, EventArgs e)
-        {
-            hModel.Set3DView();
-        }
-
-        private void ToolBarButton2DMode_Click(object sender, EventArgs e)
-        {
-            hModel.Set2DView();
-        }
-
-        private void ToolBarButtonOrthographicMode_Click(object sender, EventArgs e)
-        {
-            model.ActiveViewport.Camera.ProjectionMode = devDept.Graphics.projectionType.Orthographic;
-            model.ActiveViewport.ZoomFit();
-            model.ActiveViewport.Invalidate();
-        }
-
-        private void ToolBarButtonPerspectiveMode_Click(object sender, EventArgs e)
-        {
-            model.ActiveViewport.Camera.ProjectionMode = devDept.Graphics.projectionType.Perspective;
-            model.ActiveViewport.ZoomFit();
-            model.ActiveViewport.Invalidate();
-        }
-
-        private void ToolBarButtonDisplayMode_Click(object sender, EventArgs e)
-        {
-
-            var toolBar = sender as ToolBarButton;
-            if (toolBar == toolBarButtonWireframe)
-                model.ActiveViewport.DisplayMode = displayType.Wireframe;
-            else if (toolBar == toolBarButtonHiddenLine)
-                model.ActiveViewport.DisplayMode = displayType.HiddenLines;
-            else if (toolBar == toolBarButtonShaded)
-                model.ActiveViewport.DisplayMode = displayType.Shaded;
-            else if (toolBar == toolBarButtonRendered)
-                model.ActiveViewport.DisplayMode = displayType.Rendered;
-
-            model.Invalidate();
-        }
-
-        private void InitGraphics()
-        {
-            model.AntiAliasing = true;
-            model.AntiAliasingSamples = devDept.Graphics.antialiasingSamplesNumberType.x4;
-            model.AskForAntiAliasing = true;
-        }
-
-        private void InitDisplayMode()
-        {
-            model.Shaded.ShowInternalWires = false;
-            model.Shaded.EdgeColorMethod = edgeColorMethodType.SingleColor;
-            model.Shaded.EdgeThickness = 1;
-
-            model.Rendered.SilhouettesDrawingMode = silhouettesDrawingType.Never;
-            model.Rendered.ShadowMode = devDept.Graphics.shadowType.None;
-        }
 
         void RefreshPropertyGridControl(object selectedObj)
         {
@@ -1000,16 +838,7 @@ namespace Br3D
             LanguageHelper.Load(Options.Instance.language);
             Translate();
         }
-        private void InitSnapping()
-        {
-            if (model is HModel)
-            {
-                HModel vp = (HModel)model;
-                vp.Snapping.SetActiveObjectSnap(Snapping.objectSnapType.None, true);
-                vp.Snapping.objectSnapEnabled = true;
-            }
-        }
-
+     
         private void Model_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Middle)
@@ -1114,53 +943,7 @@ namespace Br3D
                 barButtonItem2.Down = barButtonItem.Down;
         }
 
-        void ViewportSingle()
-        {
-            if (model.Viewports.Contains(viewports[1]))
-                model.Viewports.Remove(viewports[1]);
-            if (model.Viewports.Contains(viewports[2]))
-                model.Viewports.Remove(viewports[2]);
-            if (model.Viewports.Contains(viewports[3]))
-                model.Viewports.Remove(viewports[3]);
-            model.Invalidate();
-        }
-
-        void Viewport1x1()
-        {
-            if (!model.Viewports.Contains(viewports[1]))
-                model.Viewports.Add(viewports[1]);
-            if (model.Viewports.Contains(viewports[2]))
-                model.Viewports.Remove(viewports[2]);
-            if (model.Viewports.Contains(viewports[3]))
-                model.Viewports.Remove(viewports[3]);
-            foreach (Viewport vp in model.Viewports)
-                vp.ZoomFit();
-            model.Invalidate();
-        }
-        void Viewport1x2()
-        {
-            if (!model.Viewports.Contains(viewports[1]))
-                model.Viewports.Add(viewports[1]);
-            if (!model.Viewports.Contains(viewports[2]))
-                model.Viewports.Add(viewports[2]);
-            if (model.Viewports.Contains(viewports[3]))
-                model.Viewports.Remove(viewports[3]);
-            foreach (Viewport vp in model.Viewports)
-                vp.ZoomFit();
-            model.Invalidate();
-        }
-        void Viewport2x2()
-        {
-            if (!model.Viewports.Contains(viewports[1]))
-                model.Viewports.Add(viewports[1]);
-            if (!model.Viewports.Contains(viewports[2]))
-                model.Viewports.Add(viewports[2]);
-            if (!model.Viewports.Contains(viewports[3]))
-                model.Viewports.Add(viewports[3]);
-            foreach (Viewport vp in model.Viewports)
-                vp.ZoomFit();
-            model.Invalidate();
-        }
+    
 
         void OrthoMode() => FlagOrthoMode(barButtonItemOrthoMode);
         void End() => FlagOsnap(barButtonItemOsnapend, Snapping.objectSnapType.End, barButtonItemEndPoint);
@@ -1168,6 +951,11 @@ namespace Br3D
         void Point() => FlagOsnap(barButtonItemOsnapPoint, Snapping.objectSnapType.Point, null);
         void Intersection() => FlagOsnap(barButtonItemOsnapIntersection, Snapping.objectSnapType.Intersect, barButtonItemIntPoint);
         void Center() => FlagOsnap(barButtonItemOsnapCenter, Snapping.objectSnapType.Center, barButtonItemCenterPoint);
+        void ViewportSingle() => controlModel.ViewportSingle();
+        void Viewport1x1() => controlModel.Viewport1x1();
+        void Viewport1x2() => controlModel.Viewport1x2();
+        void Viewport2x2() => controlModel.Viewport2x2();
+
 
         async void Coorindates()
         {
@@ -1646,5 +1434,7 @@ namespace Br3D
         {
             SetTransparency(0);
         }
+
+      
     }
 }

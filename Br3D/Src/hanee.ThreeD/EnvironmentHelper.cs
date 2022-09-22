@@ -506,6 +506,8 @@ namespace hanee.ThreeD
         {
             if (env is Model model)
             {
+                model.Visible = true;
+
                 model.ActiveViewport.Camera.ProjectionMode = projectionType.Perspective;
                 model.SetView(viewType.Isometric, true, true);
 

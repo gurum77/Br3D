@@ -144,6 +144,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Web.Services" />
@@ -172,6 +173,12 @@
     </Compile>
     <Compile Include="ControlFileAssociation.Designer.cs">
       <DependentUpon>ControlFileAssociation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlModel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlModel.Designer.cs">
+      <DependentUpon>ControlModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Define.cs" />
     <Compile Include="DisplayModeButton.cs" />
@@ -214,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ControlFileAssociation.resx">
       <DependentUpon>ControlFileAssociation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlModel.resx">
+      <DependentUpon>ControlModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>

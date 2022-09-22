@@ -85,6 +85,18 @@ namespace hanee.Cad.Tool
                     results.Add("  " + LanguageHelper.Tr("Scale Y") + $" : {br.GetScaleFactorY().ToString("0.000")}");
                     results.Add("  " + LanguageHelper.Tr("Scale Z") + $" : {br.GetScaleFactorZ().ToString("0.000")}");
                 }
+                else if(ent is Text text)
+                {
+                    results.Add("  " + LanguageHelper.Tr("Insertion Point") + $" : {text.InsertionPoint}");
+                    results.Add("  " + LanguageHelper.Tr("Text Style") + $" : {text.StyleName}");
+                    results.Add("  " + LanguageHelper.Tr("Contents") + $" : {text.TextString}");
+                    results.Add("  " + LanguageHelper.Tr("Height") + $" : {text.Height:0.0}");
+                    results.Add("  " + LanguageHelper.Tr("Width Factor") + $" : {text.WidthFactor:0.0}");
+                    results.Add("  " + LanguageHelper.Tr("Alignment") + $" : {text.Alignment}");
+                    results.Add("  " + LanguageHelper.Tr("Backward") + $" : {text.Backward}");
+                    results.Add("  " + LanguageHelper.Tr("Upside Down") + $" : {text.UpsideDown}");
+                    results.Add("  " + LanguageHelper.Tr("Simplify") + $" : {text.Simplify}");
+                }
                 else
                 {
                     System.Diagnostics.Debug.Assert(false);

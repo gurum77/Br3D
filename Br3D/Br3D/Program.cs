@@ -15,7 +15,7 @@ namespace Br3D
         {
             VersionHelper.InitVersion();
 
-            SplashScreenManager.ShowForm(typeof(SplashScreen1), true, false);
+            SplashScreenManager.ShowForm(typeof(SplashScreen1), false, false);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

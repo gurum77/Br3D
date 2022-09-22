@@ -215,6 +215,26 @@
         MSwxLjA4LDBsMS40Ni0xLjQ2ICBMMTcuMzgsMTguODV6IiBjbGFzcz0iQmxhY2siIC8+DQo8L3N2Zz4L
 </value>
   </data>
+  <data name="pictureEdit1.EditValue" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v21.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjIxLjIsIFZlcnNpb249MjEuMi4z
+        LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
+        dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAAPICAAAC77u/
+        PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgi
+        IHZpZXdCb3g9IjAgMCAzMiAzMiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+        MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3Bh
+        Y2U9InByZXNlcnZlIiBpZD0iTGF5ZXJfMSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAg
+        MzIgMzIiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLkdyZWVue2ZpbGw6IzAzOUMyMzt9Cgku
+        QmxhY2t7ZmlsbDojNzI3MjcyO30KPC9zdHlsZT4NCiAgPGcgaWQ9Ik5vdFN0YXJ0ZWQiPg0KICAgIDxw
+        YXRoIGQ9Ik0xNiwxNC4yVjhoLTJ2Ni4yYy0xLjIsMC40LTIsMS41LTIsMi44YzAsMS43LDEuMywzLDMs
+        M3MzLTEuMywzLTNDMTgsMTUuNywxNy4yLDE0LjYsMTYsMTQuMnoiIGNsYXNzPSJCbGFjayIgLz4NCiAg
+        ICA8cGF0aCBkPSJNMTcuNyw0LjNDMTcuOSwzLjksMTgsMy41LDE4LDNjMC0xLjctMS4zLTMtMy0zcy0z
+        LDEuMy0zLDNjMCwwLjUsMC4xLDAuOSwwLjMsMS4zQzYuNCw1LjUsMiwxMC43LDIsMTcgICBjMCw3LjIs
+        NS44LDEzLDEzLDEzczEzLTUuOCwxMy0xM0MyOCwxMC43LDIzLjYsNS41LDE3LjcsNC4zeiBNMTUsMjhD
+        OC45LDI4LDQsMjMuMSw0LDE3UzguOSw2LDE1LDZzMTEsNC45LDExLDExUzIxLjEsMjgsMTUsMjh6IiBj
+        bGFzcz0iR3JlZW4iIC8+DQogIDwvZz4NCjwvc3ZnPgs=
+</value>
+  </data>
   <metadata name="popupMenuDrawArc.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>587, 22</value>
   </metadata>
