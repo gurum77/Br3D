@@ -27,6 +27,7 @@ namespace Br3D
         Model model => hModel;
         Dictionary<object, Action> functionByElement = new Dictionary<object, Action>();
         string opendFilePath = "";
+        bool modifiedFile = false;
         bool isDwg => string.IsNullOrEmpty(opendFilePath) ? false : Path.GetExtension(opendFilePath).ToLower().EndsWith("dwg");
         GripManager gripManager => hModel?.gripManager;
         bool openMode = true; // 파일 열기인지?
@@ -58,6 +59,7 @@ namespace Br3D
             controlModel.Dock = DockStyle.Fill;
             pictureEdit1.Controls.Add(controlModel);
             //this.Controls.Add(controlModel);  // form에 직접 add 하면 controlModel의 크기가 잘못 계산됨
+
             
 
             model.MouseDoubleClick += Model_MouseDoubleClick;
@@ -65,6 +67,8 @@ namespace Br3D
             model.WorkFailed += Model_WorkFailed;
             model.MouseUp += Model_MouseUp;
             model.MouseMove += Model_MouseMove;
+            model.BoundingBoxChanged += Model_BoundingBoxChanged;
+
 
             ApplyOptions();
 
@@ -77,6 +81,11 @@ namespace Br3D
                 var fileName = args[1];
                 Import(fileName, true);
             }
+        }
+
+        private void Model_BoundingBoxChanged(object sender)
+        {
+            modifiedFile = true;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -212,6 +221,8 @@ namespace Br3D
             this.Text = VersionHelper.appName;
 
             // save 기능 숨김
+            barButtonItemNew.Visibility = BarItemVisibility.Never;
+            barButtonItemSave.Visibility = BarItemVisibility.Never;
             barButtonItemSaveAs.Visibility = BarItemVisibility.Never;
 
             EnableDynamicInput(false, false);
@@ -620,8 +631,10 @@ namespace Br3D
         void InitRibbonButtonMethod()
         {
             // home
+            SetFunctionByElement(barButtonItemNew, New, LanguageHelper.Tr("New"), "New", "n");
             SetFunctionByElement(barButtonItemOpen, Open, LanguageHelper.Tr("Open"), "Open", "op");
-            SetFunctionByElement(barButtonItemSaveAs, SaveAs, LanguageHelper.Tr("Save As"), "SaveAs", "sa");
+            SetFunctionByElement(barButtonItemSave, Save, LanguageHelper.Tr("Save"), "Save", "sa");
+            SetFunctionByElement(barButtonItemSaveAs, SaveAs, LanguageHelper.Tr("Save As"), "SaveAs", "saveas");
             SetFunctionByElement(barButtonItemSaveImage, SaveImage, LanguageHelper.Tr("Save Image"), "SaveImage", "si");
             SetFunctionByElement(barButtonItemWorkspace, Workspace, LanguageHelper.Tr("Workspace"), "Workspace", "ws");
             SetFunctionByElement(barButtonItemExit, Close, LanguageHelper.Tr("Exit"), "Exit", null);
@@ -881,15 +894,13 @@ namespace Br3D
 
         private void Model_WorkCompleted(object sender, WorkCompletedEventArgs e)
         {
-            if (e.WorkUnit is ReadFileAsync)
+            if (e.WorkUnit is ReadFileAsync rfa)
             {
                 // 파일 열기에 성공했으면 new 를 한다.
                 if (openMode)
                 {
                     NewFile();
                 }
-
-                ReadFileAsync rfa = (ReadFileAsync)e.WorkUnit;
 
                 // viewport에 추가한다.
                 rfa.AddToScene(model);
@@ -901,6 +912,12 @@ namespace Br3D
                 this.Text = $"{VersionHelper.appName} - {opendFilePath}";
 
                 RegenAll();
+            }
+            else if (e.WorkUnit is WriteFileAsync wfa)
+            {
+                modifiedFile = false;
+                opendFilePath = wfa.FileName;
+                this.Text = $"{VersionHelper.appName} - {opendFilePath}";
             }
         }
 
@@ -1043,8 +1060,37 @@ namespace Br3D
             }
         }
 
+        // 편집된 내용 저장 체크
+        bool CheckSaveForModifiedFile()
+        {
+            // 이미 편집중인 내용이 있으면 저장할지 묻는다.
+            if (modifiedFile)
+            {
+                var re = XtraMessageBox.Show(LanguageHelper.Tr("Do you want to save the file you are editing?"), LanguageHelper.Tr("Save"), MessageBoxButtons.YesNoCancel);
+                if (re == DialogResult.Cancel)
+                    return false;
+                if (re == DialogResult.Yes)
+                {
+                    Save();
+                }
+            }
+
+            return true;
+        }
+
+        
+        void New()
+        {
+            if (!CheckSaveForModifiedFile())
+                return;
+
+            NewFile();
+        }
+
         void Open()
         {
+            if (!CheckSaveForModifiedFile())
+                return;
 
             // 파일 선택
             var dlg = new XtraOpenFileDialog();
@@ -1058,6 +1104,19 @@ namespace Br3D
                 return;
 
             Import(dlg.FileName);
+        }
+
+        // 파일이 열려 있으면 바로 저장
+        void Save()
+        {
+            if (string.IsNullOrEmpty(opendFilePath))
+            {
+                SaveAs();
+            }
+            else
+            {
+                Export(opendFilePath);
+            }
         }
 
         void SaveAs()

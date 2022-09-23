@@ -179,6 +179,7 @@ namespace Br3D
             this.barButtonItemArea = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemVolume = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemList = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemNew = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -214,6 +215,7 @@ namespace Br3D
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
+            this.barButtonItemSave = new DevExpress.XtraBars.BarButtonItem();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
@@ -840,9 +842,11 @@ namespace Br3D
             this.barButtonItemSmartExtrude,
             this.barButtonItemArea,
             this.barButtonItemVolume,
-            this.barButtonItemList});
+            this.barButtonItemList,
+            this.barButtonItemNew,
+            this.barButtonItemSave});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 94;
+            this.ribbonControl1.MaxItemId = 97;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -1496,6 +1500,13 @@ namespace Br3D
             this.barButtonItemList.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemList.ImageOptions.SvgImage")));
             this.barButtonItemList.Name = "barButtonItemList";
             // 
+            // barButtonItemNew
+            // 
+            this.barButtonItemNew.Caption = "New";
+            this.barButtonItemNew.Id = 95;
+            this.barButtonItemNew.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemNew.ImageOptions.SvgImage")));
+            this.barButtonItemNew.Name = "barButtonItemNew";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -1509,7 +1520,9 @@ namespace Br3D
             // 
             // ribbonPageGroupFile
             // 
+            this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemNew);
             this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemOpen);
+            this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemSave);
             this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemSaveAs);
             this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemSaveImage);
             this.ribbonPageGroupFile.Name = "ribbonPageGroupFile";
@@ -1813,6 +1826,13 @@ namespace Br3D
             this.pictureEdit1.Size = new System.Drawing.Size(956, 581);
             this.pictureEdit1.TabIndex = 10;
             // 
+            // barButtonItemSave
+            // 
+            this.barButtonItemSave.Caption = "Save";
+            this.barButtonItemSave.Id = 96;
+            this.barButtonItemSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemSave.ImageOptions.SvgImage")));
+            this.barButtonItemSave.Name = "barButtonItemSave";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2041,5 +2061,7 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemVolume;
         private DevExpress.XtraBars.BarButtonItem barButtonItemList;
         private DevExpress.XtraEditors.PictureEdit pictureEdit1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemNew;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemSave;
     }
 }
