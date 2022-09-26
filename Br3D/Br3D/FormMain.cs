@@ -1163,7 +1163,10 @@ namespace Br3D
             {
                 devDept.Eyeshot.Translators.WriteFileAsync wf = FileHelper.GetWriteFileAsync(model, pathFileName);
                 if (wf == null)
+                {
+                    SaveAs();
                     return;
+                }
 
                 model.StartWork(wf);
             }

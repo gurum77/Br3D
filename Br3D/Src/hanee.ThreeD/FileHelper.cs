@@ -313,7 +313,9 @@ namespace hanee.ThreeD
             }
             else
             {
-                System.Diagnostics.Debug.Assert(false);
+                // 저장불가 파일확장자는 save as로 해야함
+                return null;
+                //System.Diagnostics.Debug.Assert(false);
             }
 
 
