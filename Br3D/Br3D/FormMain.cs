@@ -46,10 +46,25 @@ namespace Br3D
             InitializeComponent();
 
             ribbonControl1.SearchItemShortcut = new BarShortcut(Keys.Control | Keys.F);
-            
+
             AllowDrop = true;
             DragDrop += FormMain_DragDrop;
             DragEnter += FormMain_DragEnter;
+            
+            barButtonItemWorkspace.Alignment = BarItemLinkAlignment.Right;
+            barButtonItemOsnapend.Alignment = BarItemLinkAlignment.Right;
+            barButtonItemOsnapIntersection.Alignment = BarItemLinkAlignment.Right;
+            barButtonItemOsnapMiddle.Alignment = BarItemLinkAlignment.Right;
+            barButtonItemOsnapCenter.Alignment = BarItemLinkAlignment.Right;
+            barButtonItemOsnapPoint.Alignment = BarItemLinkAlignment.Right;
+
+            ribbonStatusBar1.ItemLinks.Add(barButtonItemWorkspace);
+            ribbonStatusBar1.ItemLinks.Add(barButtonItemOsnapend);
+            ribbonStatusBar1.ItemLinks.Add(barButtonItemOsnapIntersection);
+            ribbonStatusBar1.ItemLinks.Add(barButtonItemOsnapMiddle);
+            ribbonStatusBar1.ItemLinks.Add(barButtonItemOsnapCenter);
+            ribbonStatusBar1.ItemLinks.Add(barButtonItemOsnapPoint);
+
         }
 
         private void FormMain_Shown(object sender, EventArgs e)
@@ -58,6 +73,7 @@ namespace Br3D
             controlModel = new ControlModel();
             controlModel.Dock = DockStyle.Fill;
             pictureEdit1.Controls.Add(controlModel);
+            simpleButtonInit.Visible = false;
             //this.Controls.Add(controlModel);  // form에 직접 add 하면 controlModel의 크기가 잘못 계산됨
 
             
@@ -736,14 +752,6 @@ namespace Br3D
             SetFunctionByElement(barButtonItemCheckForUpdate, CheckForUpdate, LanguageHelper.Tr("Check For Update"), "CheckForUpdate", null);
             SetFunctionByElement(barButtonItemOptions, RunOptions, LanguageHelper.Tr("Options"), null, null);
             SetFunctionByElement(barButtonItemAbout, About, LanguageHelper.Tr("About"), "About", null);
-
-            // status bar
-            SetFunctionByElement(barButtonItemEndPoint, End, "", "End", null);
-            SetFunctionByElement(barButtonItemIntPoint, Intersection, "", "Int", null);
-            SetFunctionByElement(barButtonItemMidPoint, Middle, "", "Mid", null);
-            SetFunctionByElement(barButtonItemCenterPoint, Center, "", "Cen", null);
-            SetFunctionByElement(barButtonItemNodePoint, Point, "", null, null);
-
         }
 
         async void Subtract() => await new ActionSubtract(model).RunAsync();
@@ -963,11 +971,11 @@ namespace Br3D
     
 
         void OrthoMode() => FlagOrthoMode(barButtonItemOrthoMode);
-        void End() => FlagOsnap(barButtonItemOsnapend, Snapping.objectSnapType.End, barButtonItemEndPoint);
-        void Middle() => FlagOsnap(barButtonItemOsnapMiddle, Snapping.objectSnapType.Mid, barButtonItemMidPoint);
+        void End() => FlagOsnap(barButtonItemOsnapend, Snapping.objectSnapType.End);
+        void Middle() => FlagOsnap(barButtonItemOsnapMiddle, Snapping.objectSnapType.Mid);
         void Point() => FlagOsnap(barButtonItemOsnapPoint, Snapping.objectSnapType.Point, null);
-        void Intersection() => FlagOsnap(barButtonItemOsnapIntersection, Snapping.objectSnapType.Intersect, barButtonItemIntPoint);
-        void Center() => FlagOsnap(barButtonItemOsnapCenter, Snapping.objectSnapType.Center, barButtonItemCenterPoint);
+        void Intersection() => FlagOsnap(barButtonItemOsnapIntersection, Snapping.objectSnapType.Intersect);
+        void Center() => FlagOsnap(barButtonItemOsnapCenter, Snapping.objectSnapType.Center);
         void ViewportSingle() => controlModel.ViewportSingle();
         void Viewport1x1() => controlModel.Viewport1x1();
         void Viewport1x2() => controlModel.Viewport1x2();

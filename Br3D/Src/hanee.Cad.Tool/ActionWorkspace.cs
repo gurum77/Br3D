@@ -115,9 +115,8 @@ namespace hanee.Cad.Tool
 
         public async Task<bool> RunAsync()
         {
-            
-
             StartAction();
+
             var model = GetHModel();
             if(model == null)
             {
@@ -125,6 +124,8 @@ namespace hanee.Cad.Tool
                 return true;
             }
 
+            // 일단 초기화
+            model.EndWorkspace();
 
             point1 = null;
             point2 = null;
@@ -192,8 +193,7 @@ namespace hanee.Cad.Tool
 
             if (point1 != null && point2 != null && point3 != null)
                 model.StartWorkspace(point1, point2, point3);
-            else
-                model.EndWorkspace();
+               
 
             EndAction();
             return true;

@@ -157,11 +157,6 @@ namespace Br3D
             this.barButtonItemShowSymbol = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemOptions = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemWorkspace = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItemEndPoint = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItemIntPoint = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItemMidPoint = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItemCenterPoint = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItemNodePoint = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemDrawBox = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemDrawCone = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemDrawSphere = new DevExpress.XtraBars.BarButtonItem();
@@ -180,6 +175,7 @@ namespace Br3D
             this.barButtonItemVolume = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemList = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemNew = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemSave = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -215,7 +211,8 @@ namespace Br3D
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
-            this.barButtonItemSave = new DevExpress.XtraBars.BarButtonItem();
+            this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
+            this.barButtonItemWorkplane = new DevExpress.XtraBars.BarButtonItem();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
@@ -821,11 +818,6 @@ namespace Br3D
             this.barButtonItemShowSymbol,
             this.barButtonItemOptions,
             this.barButtonItemWorkspace,
-            this.barButtonItemEndPoint,
-            this.barButtonItemIntPoint,
-            this.barButtonItemMidPoint,
-            this.barButtonItemCenterPoint,
-            this.barButtonItemNodePoint,
             this.barButtonItemDrawBox,
             this.barButtonItemDrawCone,
             this.barButtonItemDrawSphere,
@@ -844,9 +836,10 @@ namespace Br3D
             this.barButtonItemVolume,
             this.barButtonItemList,
             this.barButtonItemNew,
-            this.barButtonItemSave});
+            this.barButtonItemSave,
+            this.barButtonItemWorkplane});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 97;
+            this.ribbonControl1.MaxItemId = 101;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -922,7 +915,7 @@ namespace Br3D
             // 
             // barStaticItemCoordinates
             // 
-            this.barStaticItemCoordinates.Caption = "barStaticItem2";
+            this.barStaticItemCoordinates.Caption = "x, y";
             this.barStaticItemCoordinates.Id = 7;
             this.barStaticItemCoordinates.Name = "barStaticItemCoordinates";
             // 
@@ -1342,45 +1335,6 @@ namespace Br3D
             this.barButtonItemWorkspace.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemWorkspace.ImageOptions.SvgImage")));
             this.barButtonItemWorkspace.Name = "barButtonItemWorkspace";
             // 
-            // barButtonItemEndPoint
-            // 
-            this.barButtonItemEndPoint.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
-            this.barButtonItemEndPoint.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.Check;
-            this.barButtonItemEndPoint.Id = 69;
-            this.barButtonItemEndPoint.ImageOptions.Image = global::Br3D.Properties.Resources.snap_endpoint_small;
-            this.barButtonItemEndPoint.Name = "barButtonItemEndPoint";
-            // 
-            // barButtonItemIntPoint
-            // 
-            this.barButtonItemIntPoint.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
-            this.barButtonItemIntPoint.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.Check;
-            this.barButtonItemIntPoint.Id = 70;
-            this.barButtonItemIntPoint.ImageOptions.Image = global::Br3D.Properties.Resources.snap_intersection_small;
-            this.barButtonItemIntPoint.Name = "barButtonItemIntPoint";
-            // 
-            // barButtonItemMidPoint
-            // 
-            this.barButtonItemMidPoint.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
-            this.barButtonItemMidPoint.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.Check;
-            this.barButtonItemMidPoint.Id = 71;
-            this.barButtonItemMidPoint.ImageOptions.Image = global::Br3D.Properties.Resources.snap_middle_small;
-            this.barButtonItemMidPoint.Name = "barButtonItemMidPoint";
-            // 
-            // barButtonItemCenterPoint
-            // 
-            this.barButtonItemCenterPoint.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
-            this.barButtonItemCenterPoint.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.Check;
-            this.barButtonItemCenterPoint.Id = 72;
-            this.barButtonItemCenterPoint.ImageOptions.Image = global::Br3D.Properties.Resources.snap_center_small;
-            this.barButtonItemCenterPoint.Name = "barButtonItemCenterPoint";
-            // 
-            // barButtonItemNodePoint
-            // 
-            this.barButtonItemNodePoint.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
-            this.barButtonItemNodePoint.Id = 73;
-            this.barButtonItemNodePoint.ImageOptions.Image = global::Br3D.Properties.Resources.snap_node_small;
-            this.barButtonItemNodePoint.Name = "barButtonItemNodePoint";
-            // 
             // barButtonItemDrawBox
             // 
             this.barButtonItemDrawBox.Caption = "Box";
@@ -1506,6 +1460,13 @@ namespace Br3D
             this.barButtonItemNew.Id = 95;
             this.barButtonItemNew.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemNew.ImageOptions.SvgImage")));
             this.barButtonItemNew.Name = "barButtonItemNew";
+            // 
+            // barButtonItemSave
+            // 
+            this.barButtonItemSave.Caption = "Save";
+            this.barButtonItemSave.Id = 96;
+            this.barButtonItemSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemSave.ImageOptions.SvgImage")));
+            this.barButtonItemSave.Name = "barButtonItemSave";
             // 
             // ribbonPageHome
             // 
@@ -1783,11 +1744,7 @@ namespace Br3D
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.ribbonControl1.SearchEditItem);
             this.ribbonStatusBar1.ItemLinks.Add(this.barStaticItemCoordinates);
-            this.ribbonStatusBar1.ItemLinks.Add(this.barButtonItemEndPoint);
-            this.ribbonStatusBar1.ItemLinks.Add(this.barButtonItemIntPoint);
-            this.ribbonStatusBar1.ItemLinks.Add(this.barButtonItemMidPoint);
-            this.ribbonStatusBar1.ItemLinks.Add(this.barButtonItemCenterPoint);
-            this.ribbonStatusBar1.ItemLinks.Add(this.barButtonItemNodePoint);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barButtonItemWorkplane);
             this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 645);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
@@ -1826,18 +1783,34 @@ namespace Br3D
             this.pictureEdit1.Size = new System.Drawing.Size(956, 581);
             this.pictureEdit1.TabIndex = 10;
             // 
-            // barButtonItemSave
+            // simpleButtonInit
             // 
-            this.barButtonItemSave.Caption = "Save";
-            this.barButtonItemSave.Id = 96;
-            this.barButtonItemSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemSave.ImageOptions.SvgImage")));
-            this.barButtonItemSave.Name = "barButtonItemSave";
+            this.simpleButtonInit.Appearance.BackColor = System.Drawing.Color.Black;
+            this.simpleButtonInit.Appearance.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
+            this.simpleButtonInit.Appearance.Options.UseBackColor = true;
+            this.simpleButtonInit.Appearance.Options.UseFont = true;
+            this.simpleButtonInit.Appearance.Options.UseTextOptions = true;
+            this.simpleButtonInit.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+            this.simpleButtonInit.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.simpleButtonInit.Enabled = false;
+            this.simpleButtonInit.Location = new System.Drawing.Point(23, 462);
+            this.simpleButtonInit.Name = "simpleButtonInit";
+            this.simpleButtonInit.Size = new System.Drawing.Size(956, 183);
+            this.simpleButtonInit.TabIndex = 15;
+            this.simpleButtonInit.Text = "Initializing...";
+            // 
+            // barButtonItemWorkplane
+            // 
+            this.barButtonItemWorkplane.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.barButtonItemWorkplane.Id = 100;
+            this.barButtonItemWorkplane.Name = "barButtonItemWorkplane";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1239, 672);
+            this.Controls.Add(this.simpleButtonInit);
             this.Controls.Add(this.pictureEdit1);
             this.Controls.Add(this.dockPanelDynamicInput);
             this.Controls.Add(this.hideContainerLeft);
@@ -2021,13 +1994,8 @@ namespace Br3D
         private System.Windows.Forms.ToolStripMenuItem invertSelectionToolStripMenuItem;
         private DevExpress.XtraBars.BarButtonItem barButtonItemWorkspace;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupWorkspace;
-        private DevExpress.XtraBars.BarButtonItem barButtonItemEndPoint;
-        private DevExpress.XtraBars.BarButtonItem barButtonItemIntPoint;
-        private DevExpress.XtraBars.BarButtonItem barButtonItemMidPoint;
-        private DevExpress.XtraBars.BarButtonItem barButtonItemCenterPoint;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItemNodePoint;
         private hanee.ThreeD.ControlCommandBar controlCommandBar1;
         private ControlAds controlAds1;
         private System.Windows.Forms.ToolStripMenuItem transparencyToolStripMenuItem;
@@ -2063,5 +2031,7 @@ namespace Br3D
         private DevExpress.XtraEditors.PictureEdit pictureEdit1;
         private DevExpress.XtraBars.BarButtonItem barButtonItemNew;
         private DevExpress.XtraBars.BarButtonItem barButtonItemSave;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonInit;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemWorkplane;
     }
 }

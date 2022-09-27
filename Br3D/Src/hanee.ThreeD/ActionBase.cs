@@ -1214,6 +1214,7 @@ namespace hanee.ThreeD
 
 
         protected OrthoModeManager orthoModeManager => (GetModel() as HModel)?.orthoModeManager;
+
         protected void SetOrthoModeStartPoint(Point3D startPoint)
         {
             if (orthoModeManager == null)

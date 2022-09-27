@@ -54,6 +54,7 @@ namespace hanee.Cad.Tool
                 startPoint = await GetPoint3D(LanguageHelper.Tr("Center point"));
                 if (IsCanceled() || IsEntered())
                     break;
+
                 SetOrthoModeStartPoint(startPoint);
 
                 DynamicInputManager.ActiveLengthFactor(startPoint, 1, LanguageHelper.Tr("Radius"));
