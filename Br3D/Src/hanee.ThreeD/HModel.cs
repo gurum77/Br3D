@@ -35,8 +35,8 @@ namespace hanee.ThreeD
         public static Font drawingFont = new Font("Tahoma", 10.0f, FontStyle.Bold);
         public System.Drawing.Point cursorPoint;
         System.Drawing.Point lastMouseDownPoint { get; set; }
+        public Dictionary<Viewport, bool> topViewOnlys = new Dictionary<Viewport, bool>();
         public bool displayHelp = true;
-        public bool TopViewOnly = false;
         public Snapping Snapping = null;
         public OrthoModeManager orthoModeManager = null;
         public GripManager gripManager = null;
@@ -362,14 +362,21 @@ namespace hanee.ThreeD
         // 2D view로 설정한다.
         public void Set2DView()
         {
-            TopViewOnly = true;
+            if (topViewOnlys.ContainsKey(ActiveViewport))
+                topViewOnlys[ActiveViewport] = true;
+            else
+                topViewOnlys.Add(ActiveViewport, true);
+                
             this.Set2DViewStyle();
         }
 
         // 3D view로 설정한다.
         public void Set3DView()
         {
-            TopViewOnly = false;
+            if (topViewOnlys.ContainsKey(ActiveViewport))
+                topViewOnlys[ActiveViewport] = false;
+            else
+                topViewOnlys.Add(ActiveViewport, false);
             this.Set3DViewStyle();
         }
 
@@ -788,7 +795,7 @@ namespace hanee.ThreeD
             SwapBuffers();
 
             // 2D view일 때는 좌우로만 회전하도록 한다.
-            if (TopViewOnly && e.Button == MouseButtons.Middle && Control.ModifierKeys == Keys.Control)
+            if (IsTopViewOnly(ActiveViewport) && e.Button == MouseButtons.Middle && Control.ModifierKeys == Keys.Control)
             {
                 System.Windows.Forms.MouseEventArgs eNew = new MouseEventArgs(e.Button, e.Clicks, e.X, lastMouseDownPoint.Y, e.Delta);
                 base.OnMouseMove(eNew);
@@ -797,6 +804,14 @@ namespace hanee.ThreeD
             {
                 base.OnMouseMove(e);
             }
+        }
+
+        public bool IsTopViewOnly(Viewport viewport)
+        {
+            if (topViewOnlys.TryGetValue(viewport, out bool topViewOnly))
+                return topViewOnly;
+
+            return false;
         }
 
         // navigation 도움말 출력

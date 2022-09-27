@@ -121,14 +121,7 @@ namespace hanee.ThreeD
             return hModel.workSpace;
         }
 
-        static public bool IsTopViewOnly(this devDept.Eyeshot.Environment environment)
-        {
-            HModel hDesign = environment as HModel;
-            if (hDesign == null)
-                return false;
-
-            return hDesign.TopViewOnly;
-        }
+      
 
         // text를 모두 regen한다.
         static public void RegenAllTexts(this Environment environment, double deviation = 0.001)

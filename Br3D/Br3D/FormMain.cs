@@ -2,10 +2,8 @@
 using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Eyeshot.Translators;
-using devDept.Geometry;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
-using DevExpress.XtraSplashScreen;
 using hanee.Cad.Tool;
 using hanee.Geometry;
 using hanee.ThreeD;
@@ -13,8 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-
-using ToolBarButton = devDept.Eyeshot.ToolBarButton;
 
 namespace Br3D
 {
@@ -50,7 +46,7 @@ namespace Br3D
             AllowDrop = true;
             DragDrop += FormMain_DragDrop;
             DragEnter += FormMain_DragEnter;
-            
+
             barButtonItemWorkspace.Alignment = BarItemLinkAlignment.Right;
             barButtonItemOsnapend.Alignment = BarItemLinkAlignment.Right;
             barButtonItemOsnapIntersection.Alignment = BarItemLinkAlignment.Right;
@@ -76,14 +72,16 @@ namespace Br3D
             simpleButtonInit.Visible = false;
             //this.Controls.Add(controlModel);  // form에 직접 add 하면 controlModel의 크기가 잘못 계산됨
 
-            
+
 
             model.MouseDoubleClick += Model_MouseDoubleClick;
             model.WorkCompleted += Model_WorkCompleted;
             model.WorkFailed += Model_WorkFailed;
+            model.MouseDown += Model_MouseDown;
             model.MouseUp += Model_MouseUp;
             model.MouseMove += Model_MouseMove;
             model.BoundingBoxChanged += Model_BoundingBoxChanged;
+           
 
 
             ApplyOptions();
@@ -97,7 +95,12 @@ namespace Br3D
                 var fileName = args[1];
                 Import(fileName, true);
             }
+            
+            Update2D3DButton();
+            UpdateDisplayModeButton();
         }
+
+        
 
         private void Model_BoundingBoxChanged(object sender)
         {
@@ -116,9 +119,9 @@ namespace Br3D
             InitTileElementStatus();
             InitObjectTreeList();
             InitPropertyGrid();
-            
+
             Translate();
-            
+
             // 테스트 용으로 옵션을 강제적용
             Options.Instance.tempEntityColorMethod = Options.TempEntityColorMethod.byTransparencyColor;
         }
@@ -138,7 +141,7 @@ namespace Br3D
             Import(files[0], true);
         }
 
-   
+
 
         // 옵션을 적용한다.
         private void ApplyOptions()
@@ -146,7 +149,7 @@ namespace Br3D
             // 배경색
             foreach (Viewport vp in model.Viewports)
             {
-                if (hModel.IsTopViewOnly())
+                if (hModel.IsTopViewOnly(vp))
                 {
                     vp.Background.TopColor = Options.Instance.backgroundColor2D.colorValue;
                     vp.Background.BottomColor = Options.Instance.backgroundColor2D.colorValue;
@@ -251,9 +254,9 @@ namespace Br3D
             ribbonPageDimension.Visible = false;
         }
 
-        
 
-   
+
+
 
 
         private void Model_MouseMove(object sender, MouseEventArgs e)
@@ -284,7 +287,7 @@ namespace Br3D
                 return;
 
             var text = "";
-            if (hModel.TopViewOnly)
+            if (hModel.IsTopViewOnly(hModel.ActiveViewport))
                 text = Units.GetPointString(point.X, point.Y);
             else
                 text = Units.GetPointString(point.X, point.Y, point.Z);
@@ -309,6 +312,10 @@ namespace Br3D
         {
             InitRibbonButtonMethod();
             controlScriptCad1.Translate();
+
+            // subitem
+            barSubItem2D3D.Caption = LanguageHelper.Tr("2D/3D");
+            barSubItemDisplayMode.Caption = LanguageHelper.Tr("Display mode");
 
             // context menu
             endPointToolStripMenuItem.Text = LanguageHelper.Tr("End point(&E)");
@@ -387,11 +394,11 @@ namespace Br3D
         }
 
 
-        
 
 
 
-        
+
+
 
 
         void RefreshPropertyGridControl(object selectedObj)
@@ -411,8 +418,16 @@ namespace Br3D
             propertyGridControl1.BestFit();
         }
 
+        private void Model_MouseDown(object sender, MouseEventArgs e)
+        {
+         
+        }
+
         private void Model_MouseUp(object sender, MouseEventArgs e)
         {
+            Update2D3DButton();
+            UpdateDisplayModeButton();
+
             if (model.ActionMode != actionType.None)
                 return;
 
@@ -718,8 +733,6 @@ namespace Br3D
             // measure
             SetFunctionByElement(barButtonItemArea, Area, LanguageHelper.Tr("Area"), "Area", "ar");
             SetFunctionByElement(barButtonItemVolume, Volume, LanguageHelper.Tr("Volume"), "Volume", "v");
-            
-
 
             // osnap
             SetFunctionByElement(barButtonItemOrthoMode, OrthoMode, LanguageHelper.Tr("Ortho mode"), "OrthoMode", "or");
@@ -741,6 +754,13 @@ namespace Br3D
             SetFunctionByElement(barButtonItemList, List, LanguageHelper.Tr("List"), "List", "list");
 
             // options
+            SetFunctionByElement(barButtonItem2D, Set2DView, LanguageHelper.Tr("2D View"), null, null);
+            SetFunctionByElement(barButtonItem3D, Set3DView, LanguageHelper.Tr("3D View"), null, null);
+            SetFunctionByElement(barButtonItemRendered, Rendered, LanguageHelper.Tr("Rendered"), null, null);
+            SetFunctionByElement(barButtonItemShaded, Shaded, LanguageHelper.Tr("Shaded"), null, null);
+            SetFunctionByElement(barButtonItemHiddenLines, HiddenLines, LanguageHelper.Tr("Hidden lines"), null, null);
+            SetFunctionByElement(barButtonItemWireframe, Wireframe, LanguageHelper.Tr("Wireframe"), null, null);
+
             SetFunctionByElement(barButtonItemShowGrid, null, LanguageHelper.Tr("Grid"), null, null);
             SetFunctionByElement(barButtonItemShowToolbar, null, LanguageHelper.Tr("Toolbar"), null, null);
             SetFunctionByElement(barButtonItemShowSymbol, null, LanguageHelper.Tr("Symbol"), null, null);
@@ -812,9 +832,9 @@ namespace Br3D
         void RegenAll()
         {
             if (isDwg)
-                hModel.Set2DView();
+                Flag2D3D(true);
             else
-                hModel.Set3DView();
+                Flag2D3D(false);
 
             // zoom fit
             foreach (Viewport v in model.Viewports)
@@ -840,8 +860,25 @@ namespace Br3D
             }
         }
         void Homepage() => System.Diagnostics.Process.Start("http://hileejaeho.cafe24.com/kr-br3d/");
-        void Language()
+        void Language() { }
+
+        void Set2DView() => Flag2D3D(true);
+        void Set3DView() => Flag2D3D(false);
+        void Rendered()
         {
+            FlagDisplayMode(displayType.Rendered);
+        }
+        void Shaded()
+        {
+            FlagDisplayMode(displayType.Shaded);
+        }
+        void HiddenLines()
+        {
+            FlagDisplayMode(displayType.HiddenLines);
+        }
+        void Wireframe()
+        {
+            FlagDisplayMode(displayType.Wireframe);
         }
 
         void Korean()
@@ -859,7 +896,7 @@ namespace Br3D
             LanguageHelper.Load(Options.Instance.language);
             Translate();
         }
-     
+
         private void Model_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Middle)
@@ -955,6 +992,66 @@ namespace Br3D
             barButtonItem.Down = hModel.orthoModeManager.enabled;
         }
 
+        // display mode 설정 / 버튼 체크
+        void FlagDisplayMode(displayType displayMode)
+        {
+            if (hModel == null)
+                return;
+            if (displayMode == displayType.Rendered)
+                hModel.ActiveViewport.DisplayMode = displayType.Rendered;
+            else if (displayMode == displayType.Shaded)
+                hModel.ActiveViewport.DisplayMode = displayType.Shaded;
+            else if (displayMode == displayType.HiddenLines)
+                hModel.ActiveViewport.DisplayMode = displayType.HiddenLines;
+            else if (displayMode == displayType.Wireframe)
+                hModel.ActiveViewport.DisplayMode = displayType.Wireframe;
+            hModel.Invalidate();
+            UpdateDisplayModeButton();
+        }
+
+        void UpdateDisplayModeButton()
+        {
+            if (hModel == null)
+                return;
+
+            var buttonItem = barButtonItemRendered;
+            if (hModel.ActiveViewport.DisplayMode == displayType.Rendered)
+                buttonItem = barButtonItemRendered;
+            else if (hModel.ActiveViewport.DisplayMode == displayType.Shaded)
+                buttonItem = barButtonItemShaded;
+            else if (hModel.ActiveViewport.DisplayMode == displayType.HiddenLines)
+                buttonItem = barButtonItemHiddenLines;
+            else if (hModel.ActiveViewport.DisplayMode == displayType.Wireframe)
+                buttonItem = barButtonItemWireframe;
+
+            barSubItemDisplayMode.ImageOptions.Image = buttonItem.ImageOptions.Image;
+        }
+
+        // 2D/3D View 설정 / 버튼 체크
+        void Flag2D3D(bool set2DView)
+        {
+            if (hModel == null)
+                return;
+
+            if (set2DView)
+                hModel.Set2DView();
+            else
+                hModel.Set3DView();
+            Update2D3DButton();
+        }
+
+        void Update2D3DButton()
+        {
+            if (hModel == null)
+                return;
+
+            var buttonItem = barButtonItem2D;
+            if (!hModel.IsTopViewOnly(hModel.ActiveViewport))
+                buttonItem = barButtonItem3D;
+
+            barSubItem2D3D.ImageOptions.Image = buttonItem.ImageOptions.Image;
+        }
+
         // 
         void FlagOsnap(BarButtonItem barButtonItem, Snapping.objectSnapType snapType, BarButtonItem barButtonItem2 = null)
         {
@@ -968,7 +1065,7 @@ namespace Br3D
                 barButtonItem2.Down = barButtonItem.Down;
         }
 
-    
+
 
         void OrthoMode() => FlagOrthoMode(barButtonItemOrthoMode);
         void End() => FlagOsnap(barButtonItemOsnapend, Snapping.objectSnapType.End);
@@ -1086,7 +1183,7 @@ namespace Br3D
             return true;
         }
 
-        
+
         void New()
         {
             if (!CheckSaveForModifiedFile())
@@ -1505,6 +1602,6 @@ namespace Br3D
             SetTransparency(0);
         }
 
-      
+
     }
 }
