@@ -521,8 +521,11 @@ namespace hanee.ThreeD
                 // workspace에 투영
                 point3D = environment.ProjectOnWorkspace(point3D);
 
-                if (environment.IsTopViewOnly())
-                    point3D.Z = 0;
+                if (environment is HModel hModel)
+                {
+                    if (hModel.IsTopViewOnly(hModel.ActiveViewport))
+                        point3D.Z = 0;
+                }
             }
 
             return point3D;
@@ -1106,7 +1109,7 @@ namespace hanee.ThreeD
             ActionBase.dynamicHighlight = dynamicHighlight;
             ActionBase.selectableTypes = selectableType;
             ActionBase.availableKeys = availableKeys;
-            
+
 
             ActionBase.selectedEntity = null;
 
@@ -1214,6 +1217,7 @@ namespace hanee.ThreeD
 
 
         protected OrthoModeManager orthoModeManager => (GetModel() as HModel)?.orthoModeManager;
+
         protected void SetOrthoModeStartPoint(Point3D startPoint)
         {
             if (orthoModeManager == null)
