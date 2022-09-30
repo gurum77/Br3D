@@ -4,11 +4,13 @@ using devDept.Eyeshot.Entities;
 using devDept.Eyeshot.Translators;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using hanee.Cad.Tool;
 using hanee.Geometry;
 using hanee.ThreeD;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -71,8 +73,12 @@ namespace Br3D
             pictureEdit1.Controls.Add(controlModel);
             simpleButtonInit.Visible = false;
             //this.Controls.Add(controlModel);  // form에 직접 add 하면 controlModel의 크기가 잘못 계산됨
-
-
+            
+            InitCurCombos();
+            repositoryItemImageComboBoxCurLayer.CustomDisplayText += RepositoryItemImageComboBoxCurLayer_CustomDisplayText;
+            repositoryItemImageComboBoxCurLayer.CustomItemDisplayText += RepositoryItemImageComboBoxCurLayer_CustomItemDisplayText;
+            repositoryItemImageComboBoxCurLayer.TextEditStyle = TextEditStyles.Standard;
+            repositoryItemImageComboBoxCurLayer.SelectedIndexChanged += RepositoryItemImageComboBoxCurLayer_SelectedIndexChanged;
 
             model.MouseDoubleClick += Model_MouseDoubleClick;
             model.WorkCompleted += Model_WorkCompleted;
@@ -81,7 +87,7 @@ namespace Br3D
             model.MouseUp += Model_MouseUp;
             model.MouseMove += Model_MouseMove;
             model.BoundingBoxChanged += Model_BoundingBoxChanged;
-           
+            
 
 
             ApplyOptions();
@@ -98,9 +104,36 @@ namespace Br3D
             
             Update2D3DButton();
             UpdateDisplayModeButton();
+
+            
         }
 
-        
+        private void RepositoryItemImageComboBoxCurLayer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (barEditItemCurLayer.EditValue is Layer la)
+            {
+                hModel.entityPropertiesManager.currentLayerName = la.Name;
+            }
+        }
+
+        private void RepositoryItemImageComboBoxCurLayer_CustomDisplayText(object sender, CustomDisplayTextEventArgs e)
+        {
+            var item = e.Value as ImageComboBoxItem;
+            if (item == null)
+                return;
+
+            var la = item.Value as Layer;
+            if (la == null)
+                return;
+
+
+            e.DisplayText = la.Name;
+        }
+
+        private void RepositoryItemImageComboBoxCurLayer_CustomItemDisplayText(object sender, CustomItemDisplayTextEventArgs e)
+        {
+           
+        }
 
         private void Model_BoundingBoxChanged(object sender)
         {
@@ -119,11 +152,43 @@ namespace Br3D
             InitTileElementStatus();
             InitObjectTreeList();
             InitPropertyGrid();
+            
 
             Translate();
 
             // 테스트 용으로 옵션을 강제적용
             Options.Instance.tempEntityColorMethod = Options.TempEntityColorMethod.byTransparencyColor;
+        }
+
+        private void InitCurCombos()
+        {
+            // 이미지만들기
+            var imagesColors = new ImageList();
+            int iWidth = 16;
+            int iHeight = 16;
+            foreach (var la in model.Layers)
+            {
+                var bmp = new Bitmap(iWidth, iHeight);
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.DrawRectangle(new Pen(Color.Black, 2), 0, 0, iWidth, iHeight);
+                    g.FillRectangle(new SolidBrush(la.Color), 1, 1, iWidth - 2, iHeight - 2);
+
+                }
+                imagesColors.Images.Add(bmp);
+            }
+
+            repositoryItemImageComboBoxCurLayer.SmallImages = imagesColors;
+
+
+            for (int i = 0; i < model.Layers.Count; i++)
+            {
+                Layer la = model.Layers[i];
+                repositoryItemImageComboBoxCurLayer.Items.Add(la.ToString(), la, i);
+            }
+
+            if(model.Layers.Count > 0)
+                barEditItemCurLayer.EditValue = model.Layers[0];
         }
 
         private void FormMain_DragEnter(object sender, DragEventArgs e)
@@ -950,6 +1015,8 @@ namespace Br3D
                 // viewport에 추가한다.
                 rfa.AddToScene(model);
 
+                InitCurCombos();
+
                 // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
                 hModel.SetLayerColorByBackgroundColor();
 
@@ -1287,6 +1354,8 @@ namespace Br3D
         {
             model.Clear();
             model.Invalidate();
+            
+            InitCurCombos();
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)

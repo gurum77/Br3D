@@ -5,7 +5,7 @@ namespace hanee.ThreeD
     public class EntityPropertiesManager
     {
         HModel model;
-        string currentLayerName = "Default";
+        public string currentLayerName { get; set; } = "Default";
         public EntityPropertiesManager(HModel model)
         {
             this.model = model;

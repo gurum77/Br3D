@@ -185,6 +185,8 @@ namespace Br3D
             this.barSubItem2D3D = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem2D = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem3D = new DevExpress.XtraBars.BarButtonItem();
+            this.barEditItemCurLayer = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemImageComboBoxCurLayer = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -217,6 +219,7 @@ namespace Br3D
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.svgImageCollection1 = new DevExpress.Utils.SvgImageCollection(this.components);
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
@@ -241,9 +244,11 @@ namespace Br3D
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDrawArc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuLanguage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRibbonSearchEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.svgImageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -854,9 +859,10 @@ namespace Br3D
             this.barButtonItemWireframe,
             this.barSubItem2D3D,
             this.barButtonItem2D,
-            this.barButtonItem3D});
+            this.barButtonItem3D,
+            this.barEditItemCurLayer});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 112;
+            this.ribbonControl1.MaxItemId = 116;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -871,7 +877,8 @@ namespace Br3D
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemRibbonSearchEdit1,
             this.repositoryItemButtonEdit1,
-            this.repositoryItemCheckEdit1});
+            this.repositoryItemCheckEdit1,
+            this.repositoryItemImageComboBoxCurLayer});
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.OfficeUniversal;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.Size = new System.Drawing.Size(1239, 64);
@@ -1555,6 +1562,21 @@ namespace Br3D
             this.barButtonItem3D.ImageOptions.Image = global::Br3D.Properties.Resources._3d_32px;
             this.barButtonItem3D.Name = "barButtonItem3D";
             // 
+            // barEditItemCurLayer
+            // 
+            this.barEditItemCurLayer.Edit = this.repositoryItemImageComboBoxCurLayer;
+            this.barEditItemCurLayer.EditWidth = 120;
+            this.barEditItemCurLayer.Id = 115;
+            this.barEditItemCurLayer.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barEditItemCurLayer.ImageOptions.SvgImage")));
+            this.barEditItemCurLayer.Name = "barEditItemCurLayer";
+            // 
+            // repositoryItemImageComboBoxCurLayer
+            // 
+            this.repositoryItemImageComboBoxCurLayer.AutoHeight = false;
+            this.repositoryItemImageComboBoxCurLayer.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemImageComboBoxCurLayer.Name = "repositoryItemImageComboBoxCurLayer";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -1579,6 +1601,7 @@ namespace Br3D
             // ribbonPageGroupWorkspace
             // 
             this.ribbonPageGroupWorkspace.ItemLinks.Add(this.barButtonItemWorkspace);
+            this.ribbonPageGroupWorkspace.ItemLinks.Add(this.barEditItemCurLayer);
             this.ribbonPageGroupWorkspace.Name = "ribbonPageGroupWorkspace";
             this.ribbonPageGroupWorkspace.Text = "Workspace";
             // 
@@ -1845,6 +1868,10 @@ namespace Br3D
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
             this.ribbonStatusBar1.Size = new System.Drawing.Size(1239, 27);
             // 
+            // svgImageCollection1
+            // 
+            this.svgImageCollection1.Add("appointmentnightclock", "image://svgimages/scheduling/appointmentnightclock.svg");
+            // 
             // barStaticItem1
             // 
             this.barStaticItem1.Caption = "barStaticItem1";
@@ -1931,9 +1958,11 @@ namespace Br3D
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDrawArc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuLanguage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRibbonSearchEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.svgImageCollection1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -2131,5 +2160,8 @@ namespace Br3D
         private DevExpress.XtraBars.BarSubItem barSubItem2D3D;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2D;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3D;
+        private DevExpress.Utils.SvgImageCollection svgImageCollection1;
+        private DevExpress.XtraBars.BarEditItem barEditItemCurLayer;
+        private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBoxCurLayer;
     }
 }
