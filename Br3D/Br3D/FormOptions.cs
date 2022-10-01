@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using hanee.Geometry;
 using hanee.ThreeD;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Br3D
         public FormOptions()
         {
             InitializeComponent();
+            optionsBindingSource.DataSource = Options.Instance;
         }
 
         private void FormOptions_Load(object sender, EventArgs e)
@@ -30,6 +32,7 @@ namespace Br3D
         {
             this.Text = LanguageHelper.Tr("Options");
 
+            xtraTabPageDrawing.Text = LanguageHelper.Tr("Drawing");
             xtraTabPageColor.Text = LanguageHelper.Tr("Color");
             xtraTabPageGeneral.Text = LanguageHelper.Tr("General");
             xtraTabPageFileAssociation.Text = LanguageHelper.Tr("File association");
@@ -51,6 +54,9 @@ namespace Br3D
 
         void InitControl()
         {
+            // drawing
+
+            // color
             colorPickEditBackgroundTop.Color = Options.Instance.backgroundColorTop.colorValue;
             colorPickEditBackgroundBottom.Color = Options.Instance.backgroundColorBottom.colorValue;
 
@@ -64,6 +70,10 @@ namespace Br3D
         }
         void Save()
         {
+            // drawing
+            Options.Instance.curLinetypeScale = textEditLineTypeScale.EditValue.ToString().ToFloat();
+
+            // color
             Options.Instance.backgroundColorTop.colorValue = colorPickEditBackgroundTop.Color;
             Options.Instance.backgroundColorBottom.colorValue = colorPickEditBackgroundBottom.Color;
 
@@ -71,8 +81,6 @@ namespace Br3D
 
             Options.Instance.saveImageWithUI = checkEditSaveImageWithUI.Checked;
             Options.Instance.saveImageWithBackground = checkEditSaveImageWithBackground.Checked;
-
-            
         }
 
         private void simpleButtonOk_Click(object sender, EventArgs e)

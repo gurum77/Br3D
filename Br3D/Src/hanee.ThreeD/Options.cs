@@ -1,4 +1,5 @@
-﻿using hanee.Geometry;
+﻿using devDept.Eyeshot.Entities;
+using hanee.Geometry;
 using System;
 using System.Drawing;
 using System.IO;
@@ -31,9 +32,25 @@ namespace hanee.ThreeD
 
         public string appName { get; set; } = "hanee.ThreeD";
         public string language { get; set; } = defaultLanguage;
+
+        // drawing
+
         public float dimTextHeight { get; set; } = 2.0f;
         public float annotationTextHeight { get; set; } = 30;
         public int decimals { get; set; } = 5;  // 좌표, 길이값등의 허용 소수점 자릿수
+
+        public string currentLayerName { get; set; } = "Default";
+
+        public colorMethodType currentColorMethodType { get; set; } = colorMethodType.byLayer;
+        public System.Drawing.Color currentColor { get; set; } = System.Drawing.Color.White;
+
+        public colorMethodType currentLinetypeMethodType { get; set; } = colorMethodType.byLayer;
+        public string currentLinetype { get; set; } = "Default";
+
+        public float curLinetypeScale { get; set; } = 1.0f;
+        // color
+
+
         public TempEntityColorMethod tempEntityColorMethod { get; set; } = TempEntityColorMethod.byTransparencyColor;
         public Color tempEntityColor { get; set; } = Color.White;
         public XmlColor backgroundColorTop { get; set; } = new XmlColor(Color.FromArgb(255, 18, 32, 41));

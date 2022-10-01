@@ -262,6 +262,7 @@
     <None Include="packages.config" />
     <None Include="Patch\Br3D.wyp" />
     <None Include="Patch\Br3DLT.wyp" />
+    <None Include="Properties\DataSources\hanee.ThreeD.Options.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

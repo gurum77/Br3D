@@ -52,18 +52,18 @@ namespace Br3D
             get
             {
                 var curLayer = model.Layers[0];
-                if (model.Layers.Contains(hModel.entityPropertiesManager.currentLayerName))
+                if (model.Layers.Contains(Options.Instance.currentLayerName))
                 {
-                    curLayer = model.Layers[hModel.entityPropertiesManager.currentLayerName];
+                    curLayer = model.Layers[Options.Instance.currentLayerName];
                 }
 
                 var colors = new List<Color>() { curLayer.Color, Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta, Color.White };
 
                 // custom이 없으면 추가한다.
-                var idx = colors.FindLastIndex(x => x == hModel.entityPropertiesManager.currentColor);
+                var idx = colors.FindLastIndex(x => x == Options.Instance.currentColor);
                 if(idx < 1)
                 {
-                    colors.Add(hModel.entityPropertiesManager.currentColor);
+                    colors.Add(Options.Instance.currentColor);
                 }
 
                 // 마지막은 more colors
@@ -171,18 +171,18 @@ namespace Br3D
                 var idx = (int)(barEditItemCurLinetype.EditValue);
                 if (idx == 0)
                 {
-                    hModel.entityPropertiesManager.currentLinetypeMethodType = colorMethodType.byLayer;
+                    Options.Instance.currentLinetypeMethodType = colorMethodType.byLayer;
                 }
                 else
                 {
-                    hModel.entityPropertiesManager.currentLinetypeMethodType = colorMethodType.byEntity;
+                    Options.Instance.currentLinetypeMethodType = colorMethodType.byEntity;
                     if (idx == 1)
                     {
-                        hModel.entityPropertiesManager.currentLinetype = null;
+                        Options.Instance.currentLinetype = null;
                     }
                     else
                     {
-                        hModel.entityPropertiesManager.currentLinetype = hModel.LineTypes[idx-2].Name;
+                        Options.Instance.currentLinetype = hModel.LineTypes[idx-2].Name;
                     }
                 }
 
@@ -231,22 +231,22 @@ namespace Br3D
                 var idx = (int)(barEditItemCurColor.EditValue);
                 if (idx == 0)
                 {
-                    hModel.entityPropertiesManager.currentColorMethodType = colorMethodType.byLayer;
+                    Options.Instance.currentColorMethodType = colorMethodType.byLayer;
                 }
                 else
                 {
-                    hModel.entityPropertiesManager.currentColorMethodType = colorMethodType.byEntity;
+                    Options.Instance.currentColorMethodType = colorMethodType.byEntity;
                     if (idx < colors.Count - 1)
                     {
-                        hModel.entityPropertiesManager.currentColor = colors[idx];
+                        Options.Instance.currentColor = colors[idx];
                     }
                     // 마지막은 custom color
                     else
                     {
-                        colorDialog1.Color = hModel.entityPropertiesManager.currentColor;
+                        colorDialog1.Color = Options.Instance.currentColor;
                         if (colorDialog1.ShowDialog() == DialogResult.OK)
                         {
-                            hModel.entityPropertiesManager.currentColor = colorDialog1.Color;
+                            Options.Instance.currentColor = colorDialog1.Color;
                             InitCurCombos_CurColor();
                         }
                     }
@@ -260,7 +260,7 @@ namespace Br3D
         {
             if (barEditItemCurLayer.EditValue is Layer la)
             {
-                hModel.entityPropertiesManager.currentLayerName = la.Name;
+                Options.Instance.currentLayerName = la.Name;
             }
         }
 
@@ -324,13 +324,13 @@ namespace Br3D
                 repositoryItemImageComboBoxCurLinetype.Items.Add(lt, i, i);
             }
             
-            if (hModel.entityPropertiesManager.currentLinetypeMethodType== colorMethodType.byLayer)
+            if (Options.Instance.currentLinetypeMethodType== colorMethodType.byLayer)
             {
                 barEditItemCurLinetype.EditValue = 0;
             }
             else
             {
-                var idx = linetypeTable.FindIndex(x => x == hModel.entityPropertiesManager.currentLinetype);
+                var idx = linetypeTable.FindIndex(x => x == Options.Instance.currentLinetype);
                 if (idx > 0)
                     barEditItemCurLinetype.EditValue = idx;
             }
@@ -369,13 +369,13 @@ namespace Br3D
             }
 
             repositoryItemImageComboBoxCurColor.SmallImages = imagesColors;
-            if (hModel.entityPropertiesManager.currentColorMethodType == colorMethodType.byLayer)
+            if (Options.Instance.currentColorMethodType == colorMethodType.byLayer)
             {
                 barEditItemCurColor.EditValue = 0;
             }
             else
             {
-                var idx = colorTable.FindIndex(x => x == hModel.entityPropertiesManager.currentColor);
+                var idx = colorTable.FindIndex(x => x == Options.Instance.currentColor);
                 if (idx > 0)
                     barEditItemCurColor.EditValue = idx;
             }

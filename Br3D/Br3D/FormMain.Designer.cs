@@ -189,6 +189,8 @@ namespace Br3D
             this.repositoryItemImageComboBoxCurLayer = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.barEditItemCurColor = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemImageComboBoxCurColor = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
+            this.barEditItemCurLinetype = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemImageComboBoxCurLinetype = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -228,8 +230,6 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.barEditItemCurLinetype = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemImageComboBoxCurLinetype = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
@@ -251,12 +251,12 @@ namespace Br3D
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuLanguage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLinetype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRibbonSearchEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.svgImageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLinetype)).BeginInit();
             this.SuspendLayout();
             // 
             // tileNavSubItemInsertImage
@@ -1603,6 +1603,21 @@ namespace Br3D
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemImageComboBoxCurColor.Name = "repositoryItemImageComboBoxCurColor";
             // 
+            // barEditItemCurLinetype
+            // 
+            this.barEditItemCurLinetype.Edit = this.repositoryItemImageComboBoxCurLinetype;
+            this.barEditItemCurLinetype.EditWidth = 150;
+            this.barEditItemCurLinetype.Id = 118;
+            this.barEditItemCurLinetype.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barEditItemCurLinetype.ImageOptions.SvgImage")));
+            this.barEditItemCurLinetype.Name = "barEditItemCurLinetype";
+            // 
+            // repositoryItemImageComboBoxCurLinetype
+            // 
+            this.repositoryItemImageComboBoxCurLinetype.AutoHeight = false;
+            this.repositoryItemImageComboBoxCurLinetype.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemImageComboBoxCurLinetype.Name = "repositoryItemImageComboBoxCurLinetype";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -1953,21 +1968,6 @@ namespace Br3D
             // 
             this.colorDialog1.FullOpen = true;
             // 
-            // barEditItemCurLinetype
-            // 
-            this.barEditItemCurLinetype.Edit = this.repositoryItemImageComboBoxCurLinetype;
-            this.barEditItemCurLinetype.EditWidth = 150;
-            this.barEditItemCurLinetype.Id = 118;
-            this.barEditItemCurLinetype.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barEditItemCurLinetype.ImageOptions.SvgImage")));
-            this.barEditItemCurLinetype.Name = "barEditItemCurLinetype";
-            // 
-            // repositoryItemImageComboBoxCurLinetype
-            // 
-            this.repositoryItemImageComboBoxCurLinetype.AutoHeight = false;
-            this.repositoryItemImageComboBoxCurLinetype.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemImageComboBoxCurLinetype.Name = "repositoryItemImageComboBoxCurLinetype";
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2007,12 +2007,12 @@ namespace Br3D
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuLanguage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLinetype)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRibbonSearchEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.svgImageCollection1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLinetype)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

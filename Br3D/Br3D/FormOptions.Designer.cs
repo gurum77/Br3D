@@ -29,6 +29,7 @@ namespace Br3D
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonOk = new DevExpress.XtraEditors.SimpleButton();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
@@ -48,6 +49,11 @@ namespace Br3D
             this.xtraTabPageFileAssociation = new DevExpress.XtraTab.XtraTabPage();
             this.controlFileAssociation1 = new Br3D.ControlFileAssociation();
             this.simpleButtonDefault = new DevExpress.XtraEditors.SimpleButton();
+            this.xtraTabPageDrawing = new DevExpress.XtraTab.XtraTabPage();
+            this.groupControlDrawingScale = new DevExpress.XtraEditors.GroupControl();
+            this.labelControlLineTypeScale = new DevExpress.XtraEditors.LabelControl();
+            this.textEditLineTypeScale = new DevExpress.XtraEditors.TextEdit();
+            this.optionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPageColor.SuspendLayout();
@@ -64,6 +70,11 @@ namespace Br3D
             ((System.ComponentModel.ISupportInitialize)(this.checkEditSaveImageWithBackground.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEditSaveImageWithUI.Properties)).BeginInit();
             this.xtraTabPageFileAssociation.SuspendLayout();
+            this.xtraTabPageDrawing.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControlDrawingScale)).BeginInit();
+            this.groupControlDrawingScale.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditLineTypeScale.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.optionsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // simpleButtonCancel
@@ -93,10 +104,11 @@ namespace Br3D
             | System.Windows.Forms.AnchorStyles.Right)));
             this.xtraTabControl1.Location = new System.Drawing.Point(12, 12);
             this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPageColor;
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPageDrawing;
             this.xtraTabControl1.Size = new System.Drawing.Size(295, 350);
-            this.xtraTabControl1.TabIndex = 2;
+            this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPageDrawing,
             this.xtraTabPageColor,
             this.xtraTabPageGeneral,
             this.xtraTabPageFileAssociation});
@@ -249,6 +261,46 @@ namespace Br3D
             this.simpleButtonDefault.Text = "Default";
             this.simpleButtonDefault.Click += new System.EventHandler(this.simpleButtonDefault_Click);
             // 
+            // xtraTabPageDrawing
+            // 
+            this.xtraTabPageDrawing.Controls.Add(this.groupControlDrawingScale);
+            this.xtraTabPageDrawing.Name = "xtraTabPageDrawing";
+            this.xtraTabPageDrawing.Size = new System.Drawing.Size(293, 323);
+            this.xtraTabPageDrawing.Text = "Drawing";
+            // 
+            // groupControlDrawingScale
+            // 
+            this.groupControlDrawingScale.Controls.Add(this.textEditLineTypeScale);
+            this.groupControlDrawingScale.Controls.Add(this.labelControlLineTypeScale);
+            this.groupControlDrawingScale.Location = new System.Drawing.Point(13, 15);
+            this.groupControlDrawingScale.Name = "groupControlDrawingScale";
+            this.groupControlDrawingScale.Size = new System.Drawing.Size(266, 71);
+            this.groupControlDrawingScale.TabIndex = 0;
+            this.groupControlDrawingScale.Text = "Scale";
+            // 
+            // labelControlLineTypeScale
+            // 
+            this.labelControlLineTypeScale.Location = new System.Drawing.Point(18, 35);
+            this.labelControlLineTypeScale.Name = "labelControlLineTypeScale";
+            this.labelControlLineTypeScale.Size = new System.Drawing.Size(74, 15);
+            this.labelControlLineTypeScale.TabIndex = 0;
+            this.labelControlLineTypeScale.Text = "Linetype scale";
+            // 
+            // textEditLineTypeScale
+            // 
+            this.textEditLineTypeScale.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.optionsBindingSource, "curLinetypeScale", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, null, "N2"));
+            this.textEditLineTypeScale.EditValue = "1";
+            this.textEditLineTypeScale.Location = new System.Drawing.Point(152, 32);
+            this.textEditLineTypeScale.Name = "textEditLineTypeScale";
+            this.textEditLineTypeScale.Properties.DisplayFormat.FormatString = "0.00";
+            this.textEditLineTypeScale.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.textEditLineTypeScale.Size = new System.Drawing.Size(100, 22);
+            this.textEditLineTypeScale.TabIndex = 1;
+            // 
+            // optionsBindingSource
+            // 
+            this.optionsBindingSource.DataSource = typeof(hanee.ThreeD.Options);
+            // 
             // FormOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -280,6 +332,12 @@ namespace Br3D
             ((System.ComponentModel.ISupportInitialize)(this.checkEditSaveImageWithBackground.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEditSaveImageWithUI.Properties)).EndInit();
             this.xtraTabPageFileAssociation.ResumeLayout(false);
+            this.xtraTabPageDrawing.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControlDrawingScale)).EndInit();
+            this.groupControlDrawingScale.ResumeLayout(false);
+            this.groupControlDrawingScale.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditLineTypeScale.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.optionsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -305,5 +363,10 @@ namespace Br3D
         private DevExpress.XtraEditors.GroupControl groupControlSaveImage;
         private DevExpress.XtraEditors.CheckEdit checkEditSaveImageWithBackground;
         private DevExpress.XtraEditors.CheckEdit checkEditSaveImageWithUI;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageDrawing;
+        private DevExpress.XtraEditors.GroupControl groupControlDrawingScale;
+        private DevExpress.XtraEditors.TextEdit textEditLineTypeScale;
+        private DevExpress.XtraEditors.LabelControl labelControlLineTypeScale;
+        private System.Windows.Forms.BindingSource optionsBindingSource;
     }
 }
