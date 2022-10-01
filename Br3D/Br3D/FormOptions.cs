@@ -32,11 +32,16 @@ namespace Br3D
         {
             this.Text = LanguageHelper.Tr("Options");
 
+            // page
             xtraTabPageDrawing.Text = LanguageHelper.Tr("Drawing");
             xtraTabPageColor.Text = LanguageHelper.Tr("Color");
             xtraTabPageGeneral.Text = LanguageHelper.Tr("General");
             xtraTabPageFileAssociation.Text = LanguageHelper.Tr("File association");
 
+            // drawing
+            labelControlLineTypeScale.Text = LanguageHelper.Tr("Linetype scale");
+            
+            // color
             groupControlBackground.Text = LanguageHelper.Tr("Background(3D)");
             labelControlBackgroundTop.Text = LanguageHelper.Tr("Top");
             labelControlBackgroundBottom.Text = LanguageHelper.Tr("Bottom");
