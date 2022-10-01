@@ -187,6 +187,8 @@ namespace Br3D
             this.barButtonItem3D = new DevExpress.XtraBars.BarButtonItem();
             this.barEditItemCurLayer = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemImageComboBoxCurLayer = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
+            this.barEditItemCurColor = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemImageComboBoxCurColor = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -225,6 +227,9 @@ namespace Br3D
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.barEditItemCurLinetype = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemImageComboBoxCurLinetype = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
@@ -245,11 +250,13 @@ namespace Br3D
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDrawArc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuLanguage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLayer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRibbonSearchEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.svgImageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLinetype)).BeginInit();
             this.SuspendLayout();
             // 
             // tileNavSubItemInsertImage
@@ -860,9 +867,11 @@ namespace Br3D
             this.barSubItem2D3D,
             this.barButtonItem2D,
             this.barButtonItem3D,
-            this.barEditItemCurLayer});
+            this.barEditItemCurLayer,
+            this.barEditItemCurColor,
+            this.barEditItemCurLinetype});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 116;
+            this.ribbonControl1.MaxItemId = 119;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -878,7 +887,9 @@ namespace Br3D
             this.repositoryItemRibbonSearchEdit1,
             this.repositoryItemButtonEdit1,
             this.repositoryItemCheckEdit1,
-            this.repositoryItemImageComboBoxCurLayer});
+            this.repositoryItemImageComboBoxCurLayer,
+            this.repositoryItemImageComboBoxCurColor,
+            this.repositoryItemImageComboBoxCurLinetype});
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.OfficeUniversal;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.Size = new System.Drawing.Size(1239, 64);
@@ -1565,7 +1576,7 @@ namespace Br3D
             // barEditItemCurLayer
             // 
             this.barEditItemCurLayer.Edit = this.repositoryItemImageComboBoxCurLayer;
-            this.barEditItemCurLayer.EditWidth = 120;
+            this.barEditItemCurLayer.EditWidth = 200;
             this.barEditItemCurLayer.Id = 115;
             this.barEditItemCurLayer.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barEditItemCurLayer.ImageOptions.SvgImage")));
             this.barEditItemCurLayer.Name = "barEditItemCurLayer";
@@ -1576,6 +1587,21 @@ namespace Br3D
             this.repositoryItemImageComboBoxCurLayer.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemImageComboBoxCurLayer.Name = "repositoryItemImageComboBoxCurLayer";
+            // 
+            // barEditItemCurColor
+            // 
+            this.barEditItemCurColor.Edit = this.repositoryItemImageComboBoxCurColor;
+            this.barEditItemCurColor.EditWidth = 100;
+            this.barEditItemCurColor.Id = 116;
+            this.barEditItemCurColor.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barEditItemCurColor.ImageOptions.SvgImage")));
+            this.barEditItemCurColor.Name = "barEditItemCurColor";
+            // 
+            // repositoryItemImageComboBoxCurColor
+            // 
+            this.repositoryItemImageComboBoxCurColor.AutoHeight = false;
+            this.repositoryItemImageComboBoxCurColor.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemImageComboBoxCurColor.Name = "repositoryItemImageComboBoxCurColor";
             // 
             // ribbonPageHome
             // 
@@ -1602,6 +1628,8 @@ namespace Br3D
             // 
             this.ribbonPageGroupWorkspace.ItemLinks.Add(this.barButtonItemWorkspace);
             this.ribbonPageGroupWorkspace.ItemLinks.Add(this.barEditItemCurLayer);
+            this.ribbonPageGroupWorkspace.ItemLinks.Add(this.barEditItemCurColor);
+            this.ribbonPageGroupWorkspace.ItemLinks.Add(this.barEditItemCurLinetype);
             this.ribbonPageGroupWorkspace.Name = "ribbonPageGroupWorkspace";
             this.ribbonPageGroupWorkspace.Text = "Workspace";
             // 
@@ -1921,6 +1949,25 @@ namespace Br3D
             this.simpleButtonInit.TabIndex = 15;
             this.simpleButtonInit.Text = "Initializing...";
             // 
+            // colorDialog1
+            // 
+            this.colorDialog1.FullOpen = true;
+            // 
+            // barEditItemCurLinetype
+            // 
+            this.barEditItemCurLinetype.Edit = this.repositoryItemImageComboBoxCurLinetype;
+            this.barEditItemCurLinetype.EditWidth = 150;
+            this.barEditItemCurLinetype.Id = 118;
+            this.barEditItemCurLinetype.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barEditItemCurLinetype.ImageOptions.SvgImage")));
+            this.barEditItemCurLinetype.Name = "barEditItemCurLinetype";
+            // 
+            // repositoryItemImageComboBoxCurLinetype
+            // 
+            this.repositoryItemImageComboBoxCurLinetype.AutoHeight = false;
+            this.repositoryItemImageComboBoxCurLinetype.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemImageComboBoxCurLinetype.Name = "repositoryItemImageComboBoxCurLinetype";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1959,11 +2006,13 @@ namespace Br3D
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDrawArc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuLanguage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLayer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRibbonSearchEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.svgImageCollection1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLinetype)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2163,5 +2212,10 @@ namespace Br3D
         private DevExpress.Utils.SvgImageCollection svgImageCollection1;
         private DevExpress.XtraBars.BarEditItem barEditItemCurLayer;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBoxCurLayer;
+        private DevExpress.XtraBars.BarEditItem barEditItemCurColor;
+        private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBoxCurColor;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private DevExpress.XtraBars.BarEditItem barEditItemCurLinetype;
+        private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBoxCurLinetype;
     }
 }
