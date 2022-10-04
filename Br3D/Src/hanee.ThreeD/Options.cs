@@ -45,7 +45,7 @@ namespace hanee.ThreeD
         public System.Drawing.Color currentColor { get; set; } = System.Drawing.Color.White;
 
         public colorMethodType currentLinetypeMethodType { get; set; } = colorMethodType.byLayer;
-        public string currentLinetype { get; set; } = "Default";
+        public string currentLinetype { get; set; } = null;
 
         public float curLinetypeScale { get; set; } = 1.0f;
         // color

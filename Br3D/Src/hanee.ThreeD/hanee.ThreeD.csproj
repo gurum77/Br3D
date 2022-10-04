@@ -132,6 +132,15 @@
     <Compile Include="ControlXyzDynamicInput.Designer.cs">
       <DependentUpon>ControlXyzDynamicInput.cs</DependentUpon>
     </Compile>
+    <Compile Include="CurColorBarEditItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CurLayerBarEditItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CurLinetypeBarEditItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CurveGripManager.cs" />
     <Compile Include="EntitiesHelper.cs" />
     <Compile Include="EntityPropertiesManager.cs" />

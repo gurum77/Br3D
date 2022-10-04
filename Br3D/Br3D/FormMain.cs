@@ -30,51 +30,6 @@ namespace Br3D
         GripManager gripManager => hModel?.gripManager;
         bool openMode = true; // 파일 열기인지?
 
-        // 처음은 bylayer
-        List<string> linetypeTable
-        {
-            get
-            {
-                var linetypes = new List<string>();
-                linetypes.Add("ByLayer");
-                linetypes.Add("Continuous");    // 기본 linetype(null) 신)
-                foreach(var lt in hModel.LineTypes)
-                    linetypes.Add(lt.Name);
-
-
-                return linetypes;
-            }
-        }
-
-        // 처음은 bylayer, 마지막 앞은 사용자 color, 마지막은 more colors
-        List<Color> colorTable
-        {
-            get
-            {
-                var curLayer = model.Layers[0];
-                if (model.Layers.Contains(Options.Instance.currentLayerName))
-                {
-                    curLayer = model.Layers[Options.Instance.currentLayerName];
-                }
-
-                var colors = new List<Color>() { curLayer.Color, Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta, Color.White };
-
-                // custom이 없으면 추가한다.
-                var idx = colors.FindLastIndex(x => x == Options.Instance.currentColor);
-                if(idx < 1)
-                {
-                    colors.Add(Options.Instance.currentColor);
-                }
-
-                // 마지막은 more colors
-                colors.Add(Color.Transparent);
-
-                return colors;
-
-
-            }
-        }
-
         public FormMain()
         {
             // option load를 제일 먼저 해야 함
@@ -120,18 +75,9 @@ namespace Br3D
             simpleButtonInit.Visible = false;
             //this.Controls.Add(controlModel);  // form에 직접 add 하면 controlModel의 크기가 잘못 계산됨
 
+            
             InitCurCombos();
-            repositoryItemImageComboBoxCurLayer.CustomItemDisplayText += RepositoryItemImageComboBoxCurLayer_CustomItemDisplayText;
-            repositoryItemImageComboBoxCurLayer.SelectedIndexChanged += RepositoryItemImageComboBoxCurLayer_SelectedIndexChanged;
-
-            repositoryItemImageComboBoxCurColor.CustomItemDisplayText += RepositoryItemImageComboBoxCurColor_CustomItemDisplayText;
-            repositoryItemImageComboBoxCurColor.SelectedIndexChanged += RepositoryItemImageComboBoxCurColor_SelectedIndexChanged;
-
-            repositoryItemImageComboBoxCurLinetype.CustomItemDisplayText += RepositoryItemImageComboBoxCurLinetype_CustomItemDisplayText;
-            repositoryItemImageComboBoxCurLinetype.SelectedIndexChanged += RepositoryItemImageComboBoxCurLinetype_SelectedIndexChanged;
-
-
-
+            UpdateCurCombos();
 
 
             model.MouseDoubleClick += Model_MouseDoubleClick;
@@ -141,8 +87,6 @@ namespace Br3D
             model.MouseUp += Model_MouseUp;
             model.MouseMove += Model_MouseMove;
             model.BoundingBoxChanged += Model_BoundingBoxChanged;
-
-
 
             ApplyOptions();
 
@@ -162,120 +106,6 @@ namespace Br3D
 
         }
 
-        // cur linetype combo changed
-        private void RepositoryItemImageComboBoxCurLinetype_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (barEditItemCurLinetype.EditValue != null)
-            {
-                var linetypes = linetypeTable;
-                var idx = (int)(barEditItemCurLinetype.EditValue);
-                if (idx == 0)
-                {
-                    Options.Instance.currentLinetypeMethodType = colorMethodType.byLayer;
-                }
-                else
-                {
-                    Options.Instance.currentLinetypeMethodType = colorMethodType.byEntity;
-                    if (idx == 1)
-                    {
-                        Options.Instance.currentLinetype = null;
-                    }
-                    else
-                    {
-                        Options.Instance.currentLinetype = hModel.LineTypes[idx-2].Name;
-                    }
-                }
-
-            }
-        }
-
-        // cur linetype custom display text
-        private void RepositoryItemImageComboBoxCurLinetype_CustomItemDisplayText(object sender, CustomItemDisplayTextEventArgs e)
-        {
-            var item = e.Value as ImageComboBoxItem;
-            if (item == null)
-                return;
-
-            var idx = (int)item.Value;
-            if (idx == 0)
-                e.DisplayText = "ByLayer";
-            else if (idx == 1)
-                e.DisplayText = "Continuous";
-            else
-            {
-                var lt = hModel.LineTypes[idx-2];
-                e.DisplayText = $"{lt.Name} {lt.Description}";
-            }
-        }
-
-        // cur color custom display text
-        private void RepositoryItemImageComboBoxCurColor_CustomItemDisplayText(object sender, CustomItemDisplayTextEventArgs e)
-        {
-            var item = e.Value as ImageComboBoxItem;
-            if (item == null)
-                return;
-
-            var idx = (int)item.Value;
-            if (idx == 0)
-                e.DisplayText = "ByLayer";
-            else if (idx == colorTable.Count - 1)
-                e.DisplayText = LanguageHelper.Tr("More colors");
-        }
-
-        // cur color 콤보 변경시
-        private void RepositoryItemImageComboBoxCurColor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (barEditItemCurColor.EditValue != null)
-            {
-                var colors = colorTable;
-                var idx = (int)(barEditItemCurColor.EditValue);
-                if (idx == 0)
-                {
-                    Options.Instance.currentColorMethodType = colorMethodType.byLayer;
-                }
-                else
-                {
-                    Options.Instance.currentColorMethodType = colorMethodType.byEntity;
-                    if (idx < colors.Count - 1)
-                    {
-                        Options.Instance.currentColor = colors[idx];
-                    }
-                    // 마지막은 custom color
-                    else
-                    {
-                        colorDialog1.Color = Options.Instance.currentColor;
-                        if (colorDialog1.ShowDialog() == DialogResult.OK)
-                        {
-                            Options.Instance.currentColor = colorDialog1.Color;
-                            InitCurCombos_CurColor();
-                        }
-                    }
-                }
-
-            }
-        }
-
-        // cur layer 콤보 변경시
-        private void RepositoryItemImageComboBoxCurLayer_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (barEditItemCurLayer.EditValue is Layer la)
-            {
-                Options.Instance.currentLayerName = la.Name;
-            }
-        }
-
-        private void RepositoryItemImageComboBoxCurLayer_CustomItemDisplayText(object sender, CustomItemDisplayTextEventArgs e)
-        {
-            var item = e.Value as ImageComboBoxItem;
-            if (item == null)
-                return;
-
-            var la = item.Value as Layer;
-            if (la == null)
-                return;
-
-            e.DisplayText = la.Name;
-        }
 
         private void Model_BoundingBoxChanged(object sender)
         {
@@ -304,115 +134,23 @@ namespace Br3D
 
         private void InitCurCombos()
         {
+            barEditItemCurLayer.Init(model);
+            barEditItemCurColor.Init(model);
+            barEditItemCurLinetype.Init(model);
+        }
+
+        private void UpdateCurCombos()
+        {
             // cur layer
-            InitCurCombos_CurLayer();
+            barEditItemCurLayer.UpdateCombo();
 
             // cur color
-            InitCurCombos_CurColor();
+            barEditItemCurColor.UpdateCombo();
 
             // cur linetype
-            InitCurCombos_CurLinetype();
-
+            barEditItemCurLinetype.UpdateCombo();
         }
 
-        private void InitCurCombos_CurLinetype()
-        {
-            repositoryItemImageComboBoxCurLinetype.Items.Clear();
-            for (int i = 0; i < linetypeTable.Count; i++)
-            {
-                var lt = linetypeTable[i];
-                repositoryItemImageComboBoxCurLinetype.Items.Add(lt, i, i);
-            }
-            
-            if (Options.Instance.currentLinetypeMethodType== colorMethodType.byLayer)
-            {
-                barEditItemCurLinetype.EditValue = 0;
-            }
-            else
-            {
-                var idx = linetypeTable.FindIndex(x => x == Options.Instance.currentLinetype);
-                if (idx > 0)
-                    barEditItemCurLinetype.EditValue = idx;
-            }
-        }
-
-        private void InitCurCombos_CurColor()
-        {
-            // 이미지만들기
-            var imagesColors = new ImageList();
-            int iWidth = 16;
-            int iHeight = 16;
-            var colors = colorTable;
-            for (int i = 0; i < colors.Count; i++)
-            {
-                Color color = colors[i];
-                var bmp = new Bitmap(iWidth, iHeight);
-                using (Graphics g = Graphics.FromImage(bmp))
-                {
-                    g.FillRectangle(new SolidBrush(color), 1, 1, iWidth - 2, iHeight - 2);
-                    g.DrawRectangle(new Pen(Color.Black, 2), 0, 0, iWidth, iHeight);
-                    if (i == colors.Count - 1)
-                    {
-                        var gap = 2;
-                        g.DrawRectangle(new Pen(Color.Red, gap), gap, gap, iWidth - gap*2, iHeight - gap*2);
-                        g.DrawRectangle(new Pen(Color.Yellow, gap*2), gap*2, gap*2, iWidth - gap * 4, iHeight - gap * 4);
-                    }
-                }
-                imagesColors.Images.Add(bmp);
-            }
-
-            repositoryItemImageComboBoxCurColor.Items.Clear();
-            for (int i = 0; i < colorTable.Count; i++)
-            {
-                var color = colorTable[i];
-                repositoryItemImageComboBoxCurColor.Items.Add(color.Name, i, i);
-            }
-
-            repositoryItemImageComboBoxCurColor.SmallImages = imagesColors;
-            if (Options.Instance.currentColorMethodType == colorMethodType.byLayer)
-            {
-                barEditItemCurColor.EditValue = 0;
-            }
-            else
-            {
-                var idx = colorTable.FindIndex(x => x == Options.Instance.currentColor);
-                if (idx > 0)
-                    barEditItemCurColor.EditValue = idx;
-            }
-        }
-
-        // cur layer 콤보 박스 초기화
-        private void InitCurCombos_CurLayer()
-        {
-            // 이미지만들기
-            var imagesColors = new ImageList();
-            int iWidth = 16;
-            int iHeight = 16;
-            foreach (var la in model.Layers)
-            {
-                var bmp = new Bitmap(iWidth, iHeight);
-                using (Graphics g = Graphics.FromImage(bmp))
-                {
-                    g.DrawRectangle(new Pen(Color.Black, 2), 0, 0, iWidth, iHeight);
-                    g.FillRectangle(new SolidBrush(la.Color), 1, 1, iWidth - 2, iHeight - 2);
-
-                }
-                imagesColors.Images.Add(bmp);
-            }
-
-            repositoryItemImageComboBoxCurLayer.SmallImages = imagesColors;
-
-
-            repositoryItemImageComboBoxCurLayer.Items.Clear();
-            for (int i = 0; i < model.Layers.Count; i++)
-            {
-                Layer la = model.Layers[i];
-                repositoryItemImageComboBoxCurLayer.Items.Add(la.ToString(), la, i);
-            }
-
-            if (model.Layers.Count > 0)
-                barEditItemCurLayer.EditValue = model.Layers[0];
-        }
 
         private void FormMain_DragEnter(object sender, DragEventArgs e)
         {
@@ -952,6 +690,7 @@ namespace Br3D
             // home
             SetFunctionByElement(barButtonItemNew, New, LanguageHelper.Tr("New"), "New", "n");
             SetFunctionByElement(barButtonItemOpen, Open, LanguageHelper.Tr("Open"), "Open", "op");
+            SetFunctionByElement(barButtonItemReload, Reload, LanguageHelper.Tr("Reload"), "Reload", "reload");
             SetFunctionByElement(barButtonItemSave, Save, LanguageHelper.Tr("Save"), "Save", "sa");
             SetFunctionByElement(barButtonItemSaveAs, SaveAs, LanguageHelper.Tr("Save As"), "SaveAs", "saveas");
             SetFunctionByElement(barButtonItemSaveImage, SaveImage, LanguageHelper.Tr("Save Image"), "SaveImage", "si");
@@ -1238,7 +977,7 @@ namespace Br3D
                 // viewport에 추가한다.
                 rfa.AddToScene(model);
 
-                InitCurCombos();
+                UpdateCurCombos();
 
                 // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
                 hModel.SetLayerColorByBackgroundColor();
@@ -1482,6 +1221,16 @@ namespace Br3D
             NewFile();
         }
 
+        // 현재 파일 다시 로딩하기
+        void Reload()
+        {
+            var re = XtraMessageBox.Show(LanguageHelper.Tr("Do you want to reload the current file?"), LanguageHelper.Tr("Reload"), MessageBoxButtons.YesNo);
+            if (re == DialogResult.No)
+                return;
+
+            Import(opendFilePath, true);
+        }
+
         void Open()
         {
             if (!CheckSaveForModifiedFile())
@@ -1496,6 +1245,10 @@ namespace Br3D
             dlg.CheckFileExists = true;
             dlg.CheckPathExists = true;
             if (dlg.ShowDialog() != DialogResult.OK)
+                return;
+
+            // 이미 열려 있는 파일이면 리턴
+            if (opendFilePath.Equals(dlg.FileName))
                 return;
 
             Import(dlg.FileName);
@@ -1578,7 +1331,7 @@ namespace Br3D
             model.Clear();
             model.Invalidate();
 
-            InitCurCombos();
+            UpdateCurCombos();
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)

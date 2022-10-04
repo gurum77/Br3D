@@ -1,4 +1,6 @@
 ﻿
+using hanee.ThreeD;
+
 namespace Br3D
 {
     partial class FormMain
@@ -185,11 +187,11 @@ namespace Br3D
             this.barSubItem2D3D = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem2D = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem3D = new DevExpress.XtraBars.BarButtonItem();
-            this.barEditItemCurLayer = new DevExpress.XtraBars.BarEditItem();
+            this.barEditItemCurLayer = new CurLayerBarEditItem();
             this.repositoryItemImageComboBoxCurLayer = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
-            this.barEditItemCurColor = new DevExpress.XtraBars.BarEditItem();
+            this.barEditItemCurColor = new CurColorBarEditItem();
             this.repositoryItemImageComboBoxCurColor = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
-            this.barEditItemCurLinetype = new DevExpress.XtraBars.BarEditItem();
+            this.barEditItemCurLinetype = new CurLinetypeBarEditItem();
             this.repositoryItemImageComboBoxCurLinetype = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -230,6 +232,7 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.barButtonItemReload = new DevExpress.XtraBars.BarButtonItem();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
@@ -869,9 +872,10 @@ namespace Br3D
             this.barButtonItem3D,
             this.barEditItemCurLayer,
             this.barEditItemCurColor,
-            this.barEditItemCurLinetype});
+            this.barEditItemCurLinetype,
+            this.barButtonItemReload});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 119;
+            this.ribbonControl1.MaxItemId = 120;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -1633,6 +1637,7 @@ namespace Br3D
             // 
             this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemNew);
             this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemOpen);
+            this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemReload);
             this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemSave);
             this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemSaveAs);
             this.ribbonPageGroupFile.ItemLinks.Add(this.barButtonItemSaveImage);
@@ -1968,6 +1973,13 @@ namespace Br3D
             // 
             this.colorDialog1.FullOpen = true;
             // 
+            // barButtonItemReload
+            // 
+            this.barButtonItemReload.Caption = "Reload";
+            this.barButtonItemReload.Id = 119;
+            this.barButtonItemReload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemReload.ImageOptions.SvgImage")));
+            this.barButtonItemReload.Name = "barButtonItemReload";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2210,12 +2222,13 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItem2D;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3D;
         private DevExpress.Utils.SvgImageCollection svgImageCollection1;
-        private DevExpress.XtraBars.BarEditItem barEditItemCurLayer;
+        private CurLayerBarEditItem barEditItemCurLayer;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBoxCurLayer;
-        private DevExpress.XtraBars.BarEditItem barEditItemCurColor;
+        private CurColorBarEditItem barEditItemCurColor;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBoxCurColor;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private DevExpress.XtraBars.BarEditItem barEditItemCurLinetype;
+        private CurLinetypeBarEditItem barEditItemCurLinetype;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBoxCurLinetype;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemReload;
     }
 }

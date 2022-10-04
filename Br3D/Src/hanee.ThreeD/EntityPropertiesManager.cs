@@ -16,9 +16,9 @@ namespace hanee.ThreeD
             var options = Options.Instance;
 
             if (!model.Layers.Contains(options.currentLayerName))
-            {
                 options.currentLayerName = model.Layers[0].Name;
-            }
+            if (options.currentLinetype != null && !model.LineTypes.Contains(options.currentLinetype))
+                options.currentLinetype = null;
 
             ent.LayerName = options.currentLayerName;
             ent.Color = options.currentColor;
@@ -32,7 +32,7 @@ namespace hanee.ThreeD
             {
                 ent.Color = options.currentColorMethodType == colorMethodType.byLayer ? model.Layers[options.currentLayerName].Color : options.currentColor;
                 ent.ColorMethod = colorMethodType.byEntity;
-                ent.LineTypeName = options.currentLinetypeMethodType == colorMethodType.byLayer ? model.LineTypes[options.currentLayerName].Name : options.currentLinetype;
+                ent.LineTypeName = options.currentLinetypeMethodType == colorMethodType.byLayer ? model.Layers[options.currentLayerName].LineTypeName : options.currentLinetype;
                 ent.LineTypeMethod = colorMethodType.byEntity;
                 ent.LineTypeScale = options.curLinetypeScale;
             }
