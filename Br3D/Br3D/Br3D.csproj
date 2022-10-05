@@ -181,7 +181,6 @@
       <DependentUpon>ControlModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Define.cs" />
-    <Compile Include="DisplayModeButton.cs" />
     <Compile Include="EntityProperties.cs" />
     <Compile Include="FileAssociationByExt.cs" />
     <Compile Include="FileAssociationHelper.cs" />
@@ -203,7 +202,6 @@
     <Compile Include="FormOptions.Designer.cs">
       <DependentUpon>FormOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="InternetExplorerBrowserEmulation.cs" />
     <Compile Include="ObjectTreeListHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -19,7 +19,7 @@ namespace hanee.ThreeD
             repositoryItemImageComboBoxCurLayer.SelectedIndexChanged += RepositoryItemImageComboBoxCurLayer_SelectedIndexChanged;
         }
 
-        DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBoxCurLayer
+        public DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBoxCurLayer
         {
             get
             {
@@ -50,7 +50,7 @@ namespace hanee.ThreeD
             e.DisplayText = la.Name;
         }
 
-        public void UpdateCombo()
+        public void UpdateCombo(devDept.Eyeshot.Entities.Entity entity)
         {
             // 이미지만들기
             var imagesColors = new ImageList();
@@ -78,8 +78,14 @@ namespace hanee.ThreeD
                 repositoryItemImageComboBoxCurLayer.Items.Add(la.Name, la, i);
             }
 
-            if (model.Layers.Count > 0)
-                this.EditValue = model.Layers[0];
+            if (entity != null)
+                this.EditValue = model.Layers[entity.LayerName];
+            else if (model.Layers.Count > 0)
+            {
+                var layer = model.Layers[Options.Instance.currentLayerName];
+                this.EditValue = layer;
+
+            }
         }
     }
 }

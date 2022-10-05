@@ -89,7 +89,7 @@ namespace hanee.ThreeD
             }
         }
 
-        public void UpdateCombo()
+        public void UpdateCombo(Entity entity)
         {
             repositoryItemImageComboBoxCurLinetype.Items.Clear();
             for (int i = 0; i < linetypeTable.Count; i++)
@@ -98,16 +98,34 @@ namespace hanee.ThreeD
                 repositoryItemImageComboBoxCurLinetype.Items.Add(lt, i, i);
             }
 
-            if (Options.Instance.currentLinetypeMethodType == colorMethodType.byLayer)
+            if(entity != null)
             {
-                this.EditValue = 0;
+                if (entity.LineTypeMethod == colorMethodType.byLayer)
+                    this.EditValue = 0;
+                else
+                {
+                    if(!string.IsNullOrEmpty(entity.LineTypeName))
+                    {
+                        var idx = linetypeTable.FindIndex(x => x == entity.LineTypeName);
+                        if (idx > 0)
+                            this.EditValue = idx;
+                    }
+                }
             }
             else
             {
-                var idx = linetypeTable.FindIndex(x => x == Options.Instance.currentLinetype);
-                if (idx > 0)
-                    this.EditValue = idx;
+                if (Options.Instance.currentLinetypeMethodType == colorMethodType.byLayer)
+                {
+                    this.EditValue = 0;
+                }
+                else
+                {
+                    var idx = linetypeTable.FindIndex(x => x == Options.Instance.currentLinetype);
+                    if (idx > 0)
+                        this.EditValue = idx;
+                }
             }
+            
         }
     }
 }

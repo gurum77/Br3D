@@ -77,13 +77,12 @@ namespace Br3D
 
             
             InitCurCombos();
-            UpdateCurCombos();
+            UpdateCurCombos(null);
 
 
             model.MouseDoubleClick += Model_MouseDoubleClick;
             model.WorkCompleted += Model_WorkCompleted;
             model.WorkFailed += Model_WorkFailed;
-            model.MouseDown += Model_MouseDown;
             model.MouseUp += Model_MouseUp;
             model.MouseMove += Model_MouseMove;
             model.BoundingBoxChanged += Model_BoundingBoxChanged;
@@ -137,18 +136,27 @@ namespace Br3D
             barEditItemCurLayer.Init(model);
             barEditItemCurColor.Init(model);
             barEditItemCurLinetype.Init(model);
+
+            barEditItemCurLayer.repositoryItemImageComboBoxCurLayer.SelectedIndexChanged += RepositoryItemImageComboBoxCurLayer_SelectedIndexChanged;
         }
 
-        private void UpdateCurCombos()
+        // layer combo를 바꾸면 cur color / cur linetype 콤보를 갱신한다.
+        private void RepositoryItemImageComboBoxCurLayer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // 선택한 객체가 없는 경우에
+            UpdateCurCombos(null);
+        }
+
+        private void UpdateCurCombos(Entity entity)
         {
             // cur layer
-            barEditItemCurLayer.UpdateCombo();
+            barEditItemCurLayer.UpdateCombo(entity);
 
             // cur color
-            barEditItemCurColor.UpdateCombo();
+            barEditItemCurColor.UpdateCombo(entity);
 
             // cur linetype
-            barEditItemCurLinetype.UpdateCombo();
+            barEditItemCurLinetype.UpdateCombo(entity);
         }
 
 
@@ -444,11 +452,6 @@ namespace Br3D
             propertyGridControl1.BestFit();
         }
 
-        private void Model_MouseDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
         private void Model_MouseUp(object sender, MouseEventArgs e)
         {
             Update2D3DButton();
@@ -467,6 +470,9 @@ namespace Br3D
                     // 속성창 갱신
                     if (propertyGridControl1.Visible)
                         RefreshPropertyGridControl(item?.Item);
+
+                    // combo 선택
+                    UpdateCurCombos(item?.Item as Entity);
 
                     // tree에서 선택
                     if (treeListObject.Visible && item != null)
@@ -977,7 +983,7 @@ namespace Br3D
                 // viewport에 추가한다.
                 rfa.AddToScene(model);
 
-                UpdateCurCombos();
+                UpdateCurCombos(null);
 
                 // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
                 hModel.SetLayerColorByBackgroundColor();
@@ -1331,7 +1337,7 @@ namespace Br3D
             model.Clear();
             model.Invalidate();
 
-            UpdateCurCombos();
+            UpdateCurCombos(null);
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)

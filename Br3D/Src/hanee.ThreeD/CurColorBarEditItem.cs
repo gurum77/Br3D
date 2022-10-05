@@ -30,32 +30,15 @@ namespace hanee.ThreeD
             }
         }
 
+        List<Color> comboColors = new List<Color>();
         // 처음은 bylayer, 마지막 앞은 사용자 color, 마지막은 more colors
-        public List<Color> colorTable
+        public List<Color> defaultColorTable
         {
             get
             {
-                var curLayer = model.Layers[0];
-                if (model.Layers.Contains(Options.Instance.currentLayerName))
-                {
-                    curLayer = model.Layers[Options.Instance.currentLayerName];
-                }
-
-                var colors = new List<Color>() { curLayer.Color, Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta, Color.White };
-
-                // custom이 없으면 추가한다.
-                var idx = colors.FindLastIndex(x => x == Options.Instance.currentColor);
-                if (idx < 1)
-                {
-                    colors.Add(Options.Instance.currentColor);
-                }
-
-                // 마지막은 more colors
-                colors.Add(Color.Transparent);
+                var colors = new List<Color>() { Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta, Color.White };
 
                 return colors;
-
-
             }
         }
 
@@ -69,7 +52,8 @@ namespace hanee.ThreeD
             var idx = (int)item.Value;
             if (idx == 0)
                 e.DisplayText = "ByLayer";
-            else if (idx == colorTable.Count - 1)
+            // 마지막은  more colors
+            else if (idx == repositoryItemImageComboBoxCurColor.Items.Count-1)
                 e.DisplayText = LanguageHelper.Tr("More colors");
         }
 
@@ -78,7 +62,6 @@ namespace hanee.ThreeD
         {
             if (this.EditValue != null)
             {
-                var colors = colorTable;
                 var idx = (int)(this.EditValue);
                 if (idx == 0)
                 {
@@ -87,9 +70,20 @@ namespace hanee.ThreeD
                 else
                 {
                     Options.Instance.currentColorMethodType = colorMethodType.byEntity;
-                    if (idx < colors.Count - 1)
+                    if (idx < repositoryItemImageComboBoxCurColor.Items.Count - 1)
                     {
-                        Options.Instance.currentColor = colors[idx];
+                        // 현재 item의 color
+                        var imageList = repositoryItemImageComboBoxCurColor.SmallImages as ImageList;
+                        if (imageList == null || imageList.Images.Count <= idx)
+                            return;
+                        
+                        var image = imageList.Images[idx] as Bitmap;
+                        if (image == null)
+                            return;
+                        var pixel = image.GetPixel(image.Width / 2, image.Height / 2);
+                        if (pixel == null)
+                            return;
+                        Options.Instance.currentColor = Color.FromArgb(pixel.ToArgb());
                     }
                     // 마지막은 custom color
                     else
@@ -99,56 +93,101 @@ namespace hanee.ThreeD
                         if (colorDialog1.ShowDialog() == DialogResult.OK)
                         {
                             Options.Instance.currentColor = colorDialog1.Color;
-                            UpdateCombo();
+                            UpdateCombo(null);
                         }
                     }
                 }
             }
         }
 
-        public void UpdateCombo()
+        public void UpdateCombo(Entity entity)
         {
-            // 이미지만들기
+            repositoryItemImageComboBoxCurColor.Items.Clear();
             var imagesColors = new ImageList();
-            int iWidth = 16;
-            int iHeight = 16;
-            var colors = colorTable;
-            for (int i = 0; i < colors.Count; i++)
+            repositoryItemImageComboBoxCurColor.SmallImages = imagesColors;
+
+            // by layer
+            var layer = model.Layers[Options.Instance.currentLayerName];
+            AddColorComboItem(imagesColors, layer.Color);
+
+            // 기본 color table 콤보 아이템 추가
+            foreach (Color color in defaultColorTable)
+                AddColorComboItem(imagesColors, color);
+
+
+            var curIdx = -1;
+            if (entity != null)
             {
-                Color color = colors[i];
-                var bmp = new Bitmap(iWidth, iHeight);
-                using (Graphics g = Graphics.FromImage(bmp))
+                if (entity.ColorMethod == colorMethodType.byLayer)
+                    curIdx = 0;
+                else
                 {
-                    g.FillRectangle(new SolidBrush(color), 1, 1, iWidth - 2, iHeight - 2);
-                    g.DrawRectangle(new Pen(Color.Black, 2), 0, 0, iWidth, iHeight);
-                    if (i == colors.Count - 1)
+                    curIdx = defaultColorTable.FindLastIndex(x => x == entity.Color);
+
+                    // 객체의 색상이 없으면 마지막에 추가한다.
+                    if (curIdx < 0)
                     {
-                        var gap = 2;
-                        g.DrawRectangle(new Pen(Color.Red, gap), gap, gap, iWidth - gap * 2, iHeight - gap * 2);
-                        g.DrawRectangle(new Pen(Color.Yellow, gap * 2), gap * 2, gap * 2, iWidth - gap * 4, iHeight - gap * 4);
+                        AddColorComboItem(imagesColors, entity.Color);
+                        curIdx = repositoryItemImageComboBoxCurColor.Items.Count - 1;
                     }
                 }
-                imagesColors.Images.Add(bmp);
-            }
-
-            repositoryItemImageComboBoxCurColor.Items.Clear();
-            for (int i = 0; i < colorTable.Count; i++)
-            {
-                var color = colorTable[i];
-                repositoryItemImageComboBoxCurColor.Items.Add(color.Name, i, i);
-            }
-
-            repositoryItemImageComboBoxCurColor.SmallImages = imagesColors;
-            if (Options.Instance.currentColorMethodType == colorMethodType.byLayer)
-            {
-                this.EditValue = 0;
             }
             else
             {
-                var idx = colorTable.FindIndex(x => x == Options.Instance.currentColor);
-                if (idx > 0)
-                    this.EditValue = idx;
+                if (Options.Instance.currentColorMethodType == colorMethodType.byLayer)
+                    curIdx = 0;
+                else
+                {
+                    curIdx = defaultColorTable.FindLastIndex(x => x == Options.Instance.currentColor);
+
+                    // 현재 색상이 없으면 마지막에 추가한다.
+                    if (curIdx < 0)
+                    {
+                        AddColorComboItem(imagesColors, Options.Instance.currentColor);
+                        curIdx = repositoryItemImageComboBoxCurColor.Items.Count - 1;
+                    }
+                }
             }
+
+            // more color combo 추가
+            AddColorComboItem(imagesColors, Color.Transparent, true);
+
+            if (curIdx > -1)
+                this.EditValue = curIdx;
+        }
+
+        // color combo  item 추가
+        private void AddColorComboItem(ImageList images, Color color, bool moreColor=false)
+        {
+            var count = repositoryItemImageComboBoxCurColor.Items.Count;
+            if(count == 0)
+                repositoryItemImageComboBoxCurColor.Items.Add("ByLayer", count, count);
+            else
+                repositoryItemImageComboBoxCurColor.Items.Add(color.Name, count, count);
+
+            AddColorImage(images, color, moreColor);
+        }
+
+        // image list에 color를 추가한다.
+        private void AddColorImage(ImageList images, Color color, bool moreColor)
+        {
+            int iWidth = 16;
+            int iHeight = 16;
+
+            var bmp = new Bitmap(iWidth, iHeight);
+
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.FillRectangle(new SolidBrush(color), 1, 1, iWidth - 2, iHeight - 2);
+                g.DrawRectangle(new Pen(Color.Black, 2), 0, 0, iWidth, iHeight);
+                if (moreColor)
+                {
+                    var gap = 2;
+                    g.DrawRectangle(new Pen(Color.Red, gap), gap, gap, iWidth - gap * 2, iHeight - gap * 2);
+                    g.DrawRectangle(new Pen(Color.Yellow, gap * 2), gap * 2, gap * 2, iWidth - gap * 4, iHeight - gap * 4);
+                }
+            }
+            images.Images.Add(bmp);
         }
     }
 }
