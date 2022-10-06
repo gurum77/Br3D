@@ -2,6 +2,7 @@
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
 using hanee.ThreeD;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -46,15 +47,33 @@ namespace hanee.Cad.Tool
 
             DisableHideDynamicInput();
 
+            Point3D firstPoint = null;
+
             startPoint = await GetPoint3D(LanguageHelper.Tr("First point"));
+            firstPoint = startPoint;
             SetOrthoModeStartPoint(startPoint);
 
-
+            int lineCount = 0;  // 지금까지 그린 선의 갯수
             while (!IsCanceled() && !IsEntered())
             {
-                endPoint = await GetPoint3D(LanguageHelper.Tr("Next point"));
+                KeyValuePair<Point3D, KeyEventArgs> pk;
+                if (lineCount < 2)
+                    pk = await GetPoint3DOrKey(LanguageHelper.Tr("Next point"));
+                else
+                    pk = await GetPoint3DOrKey(LanguageHelper.Tr("Next point(C : Close)"), -1, new KeyEventArgs(Keys.C));
                 if (IsCanceled() || IsEntered())
                     break;
+
+                if (pk.Value != null && pk.Value.KeyCode == Keys.C)
+                {
+                    // C를 누르면 firstPoint와 연결한 선을 만들고 입력 종료
+                    endPoint = firstPoint;
+                    Entered = true;
+                }
+                else if(pk.Value != null)
+                {
+                    endPoint = pk.Key;
+                }
 
                 SetOrthoModeStartPoint(endPoint);
                 Line line = MakeLine();
@@ -62,7 +81,12 @@ namespace hanee.Cad.Tool
                 environment.Entities.RegenAllCurved();
                 environment.Invalidate();
 
+                lineCount++;
+
                 startPoint = endPoint;
+
+                if (IsEntered())
+                    break;
             }
 
             
