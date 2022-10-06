@@ -16,10 +16,13 @@ namespace Br3D
 {
     public partial class FormOptions : DevExpress.XtraEditors.XtraForm
     {
+        public Options lastOptions;
         public FormOptions()
         {
             InitializeComponent();
             optionsBindingSource.DataSource = Options.Instance;
+
+            lastOptions = Options.Instance.Clone() as Options;
         }
 
         private void FormOptions_Load(object sender, EventArgs e)

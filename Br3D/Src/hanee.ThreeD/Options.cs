@@ -1,4 +1,5 @@
-﻿using devDept.Eyeshot.Entities;
+﻿using devDept.Eyeshot;
+using devDept.Eyeshot.Entities;
 using hanee.Geometry;
 using System;
 using System.Drawing;
@@ -9,7 +10,7 @@ using System.Xml.Serialization;
 
 namespace hanee.ThreeD
 {
-    public class Options : Singleton<Options>
+    public class Options : Singleton<Options>, ICloneable
     {
         public enum TempEntityColorMethod
         {
@@ -48,6 +49,18 @@ namespace hanee.ThreeD
         public string currentLinetype { get; set; } = null;
 
         public float curLinetypeScale { get; set; } = 1.0f;
+
+        // 현재 상태를 허용 가능한 값으로 동기화 한다.
+        public void SyncCurStatus(Model model)
+        {
+            if (model == null)
+                return;
+            if (!model.Layers.Contains(currentLayerName))
+                currentLayerName = model.Layers[0].Name;
+
+            if (currentColor.A == 0)
+                currentColor = System.Drawing.Color.White;
+        }
         // color
 
 
@@ -58,9 +71,37 @@ namespace hanee.ThreeD
         public XmlColor backgroundColor2D { get; set; } = new XmlColor(Color.Black);
         public bool saveImageWithUI { get; set; } = false;    // 이미지 저장할때 UI 포함(툴바등..)
         public bool saveImageWithBackground { get; set; } = false;  // 이미지 저장할때 배경 포함
-        
 
+        public object Clone()
+        {
+            var obj = new Options();
+            obj.language = this.language;
 
+            // drawing
+            obj.dimTextHeight = this.dimTextHeight;
+            obj.annotationTextHeight = this.annotationTextHeight;
+            obj.decimals = this.decimals;
+
+            obj.currentLayerName = this.currentLayerName;
+
+            obj.currentColorMethodType = this.currentColorMethodType;
+            obj.currentColor = this.currentColor;
+
+            obj.currentLinetypeMethodType = this.currentLinetypeMethodType;
+            obj.currentLinetype = this.currentLinetype;
+
+            obj.curLinetypeScale = this.curLinetypeScale;
+
+            obj.tempEntityColorMethod = this.tempEntityColorMethod;
+            obj.tempEntityColor = this.tempEntityColor;
+            obj.backgroundColorTop.colorValue = this.backgroundColorTop.colorValue;
+            obj.backgroundColorBottom.colorValue = this.backgroundColorBottom.colorValue;
+            obj.backgroundColor2D.colorValue = this.backgroundColor2D.colorValue;
+            obj.saveImageWithUI = this.saveImageWithUI;
+            obj.saveImageWithBackground = this.saveImageWithBackground;
+
+            return obj;
+        }
         // 즐겨찾기 저장하는 파일 경로
         string GetOptionsFIlePath()
         {
@@ -121,6 +162,15 @@ namespace hanee.ThreeD
             {
                 MessageBox.Show("Save options faild.", ex.Message);
             }
+        }
+
+        // regen이 필요한지?
+        public bool IsNeedRegen(Options lastOptions)
+        {
+            if (lastOptions.curLinetypeScale != Options.Instance.curLinetypeScale)
+                return true;
+
+            return false;
         }
     }
 }

@@ -63,13 +63,17 @@ namespace hanee.ThreeD
             if (this.EditValue != null)
             {
                 var idx = (int)(this.EditValue);
+                
+                var newColor = Options.Instance.currentColor;
+                var newColorMethodType = Options.Instance.currentColorMethodType;
+
                 if (idx == 0)
                 {
-                    Options.Instance.currentColorMethodType = colorMethodType.byLayer;
+                    newColorMethodType = colorMethodType.byLayer;
                 }
                 else
                 {
-                    Options.Instance.currentColorMethodType = colorMethodType.byEntity;
+                    newColorMethodType = colorMethodType.byEntity;
                     if (idx < repositoryItemImageComboBoxCurColor.Items.Count - 1)
                     {
                         // 현재 item의 color
@@ -83,7 +87,8 @@ namespace hanee.ThreeD
                         var pixel = image.GetPixel(image.Width / 2, image.Height / 2);
                         if (pixel == null)
                             return;
-                        Options.Instance.currentColor = Color.FromArgb(pixel.ToArgb());
+
+                        newColor = Color.FromArgb(pixel.ToArgb());
                     }
                     // 마지막은 custom color
                     else
@@ -91,20 +96,36 @@ namespace hanee.ThreeD
                         var colorDialog1 = new ColorDialog();
                         colorDialog1.Color = Options.Instance.currentColor;
                         if (colorDialog1.ShowDialog() == DialogResult.OK)
-                        {
-                            Options.Instance.currentColor = colorDialog1.Color;
-                            UpdateCombo(null);
-                        }
+                            newColor = colorDialog1.Color;
                     }
                 }
+
+                var selectedEntities = model.GetAllSelectedEntities();
+                if (selectedEntities != null && selectedEntities.Count > 0)
+                {
+                    foreach (var ent in selectedEntities)
+                    {
+                        if (newColorMethodType == colorMethodType.byEntity)
+                            ent.Color = newColor;
+                        ent.ColorMethod = newColorMethodType;
+                    }
+                }
+                else
+                {
+                    Options.Instance.currentColor = newColor;
+                    Options.Instance.currentColorMethodType = newColorMethodType;
+                }
+
+                UpdateCombo(null);
             }
         }
 
-        public void UpdateCombo(Entity entity)
+        public void UpdateCombo(List<Entity> entities)
         {
             repositoryItemImageComboBoxCurColor.Items.Clear();
             var imagesColors = new ImageList();
             repositoryItemImageComboBoxCurColor.SmallImages = imagesColors;
+
 
             // by layer
             var layer = model.Layers[Options.Instance.currentLayerName];
@@ -116,21 +137,34 @@ namespace hanee.ThreeD
 
 
             var curIdx = -1;
-            if (entity != null)
+            if (entities != null && entities.Count > 0)
             {
-                if (entity.ColorMethod == colorMethodType.byLayer)
-                    curIdx = 0;
-                else
+                if(entities.Count == 1)
                 {
-                    curIdx = defaultColorTable.FindLastIndex(x => x == entity.Color);
-
-                    // 객체의 색상이 없으면 마지막에 추가한다.
-                    if (curIdx < 0)
+                    if (entities[0].ColorMethod == colorMethodType.byLayer)
+                        curIdx = 0;
+                    else
                     {
-                        AddColorComboItem(imagesColors, entity.Color);
-                        curIdx = repositoryItemImageComboBoxCurColor.Items.Count - 1;
+                        curIdx = defaultColorTable.FindLastIndex(x => x == entities[0].Color);
+
+                        // 객체의 색상이 없으면 마지막에 추가한다.
+                        if (curIdx < 0)
+                        {
+                            AddColorComboItem(imagesColors, entities[0].Color);
+                            curIdx = repositoryItemImageComboBoxCurColor.Items.Count - 1;
+                        }
+                        else
+                        {
+                            // 첫번째는 bylayer이므로 +1을 해야함
+                            curIdx++;
+                        }
                     }
                 }
+                else
+                {
+                    curIdx = -1;
+                }
+              
             }
             else
             {
@@ -146,6 +180,11 @@ namespace hanee.ThreeD
                         AddColorComboItem(imagesColors, Options.Instance.currentColor);
                         curIdx = repositoryItemImageComboBoxCurColor.Items.Count - 1;
                     }
+                    else
+                    {
+                        // 첫번째는 bylayer이므로 +1을 해야함
+                        curIdx++;
+                    }
                 }
             }
 
@@ -154,6 +193,8 @@ namespace hanee.ThreeD
 
             if (curIdx > -1)
                 this.EditValue = curIdx;
+            else
+                this.EditValue = null;
         }
 
         // color combo  item 추가

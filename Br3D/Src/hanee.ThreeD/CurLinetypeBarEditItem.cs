@@ -50,23 +50,44 @@ namespace hanee.ThreeD
             if (this.EditValue != null)
             {
                 var idx = (int)(this.EditValue);
+                var newLinetypeMethodType = Options.Instance.currentLinetypeMethodType;
+                var newLinetype = Options.Instance.currentLinetype;
                 if (idx == 0)
                 {
-                    Options.Instance.currentLinetypeMethodType = colorMethodType.byLayer;
+                    newLinetypeMethodType = colorMethodType.byLayer;
                 }
                 else
                 {
-                    Options.Instance.currentLinetypeMethodType = colorMethodType.byEntity;
+                    newLinetypeMethodType = colorMethodType.byEntity;
                     if (idx == 1)
                     {
-                        Options.Instance.currentLinetype = null;
+                        newLinetype = null;
                     }
                     else
                     {
-                        Options.Instance.currentLinetype = model.LineTypes[idx - 2].Name;
+                        newLinetype = model.LineTypes[idx - 2].Name;
                     }
                 }
 
+                var selectedEntities = model.GetAllSelectedEntities();
+                if(selectedEntities != null && selectedEntities.Count > 0)
+                {
+                    foreach (var ent in selectedEntities)
+                    {
+                        if (!(ent is ICurve))
+                            continue;
+
+                        if (newLinetypeMethodType == colorMethodType.byEntity)
+                            ent.LineTypeName = newLinetype;
+                        ent.LineTypeMethod = newLinetypeMethodType;
+                    }
+                    model.Entities.RegenAllCurved(null);
+                }
+                else
+                {
+                    Options.Instance.currentLinetype = newLinetype;
+                    Options.Instance.currentLinetypeMethodType = newLinetypeMethodType;
+                }
             }
         }
 
@@ -89,7 +110,7 @@ namespace hanee.ThreeD
             }
         }
 
-        public void UpdateCombo(Entity entity)
+        public void UpdateCombo(List<Entity> entities)
         {
             repositoryItemImageComboBoxCurLinetype.Items.Clear();
             for (int i = 0; i < linetypeTable.Count; i++)
@@ -98,18 +119,25 @@ namespace hanee.ThreeD
                 repositoryItemImageComboBoxCurLinetype.Items.Add(lt, i, i);
             }
 
-            if(entity != null)
+            if (entities != null && entities.Count > 0)
             {
-                if (entity.LineTypeMethod == colorMethodType.byLayer)
-                    this.EditValue = 0;
+                if (entities.Count == 1)
+                {
+                    if (entities[0].LineTypeMethod == colorMethodType.byLayer)
+                        this.EditValue = 0;
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(entities[0].LineTypeName))
+                        {
+                            var idx = linetypeTable.FindIndex(x => x == entities[0].LineTypeName);
+                            if (idx > 0)
+                                this.EditValue = idx;
+                        }
+                    }
+                }
                 else
                 {
-                    if(!string.IsNullOrEmpty(entity.LineTypeName))
-                    {
-                        var idx = linetypeTable.FindIndex(x => x == entity.LineTypeName);
-                        if (idx > 0)
-                            this.EditValue = idx;
-                    }
+                    this.EditValue = null;
                 }
             }
             else
@@ -125,7 +153,7 @@ namespace hanee.ThreeD
                         this.EditValue = idx;
                 }
             }
-            
+
         }
     }
 }

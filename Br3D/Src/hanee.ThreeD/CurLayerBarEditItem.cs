@@ -1,8 +1,10 @@
 ﻿using devDept.Eyeshot;
+using devDept.Eyeshot.Entities;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -33,7 +35,18 @@ namespace hanee.ThreeD
         {
             if (this.EditValue is Layer la)
             {
+                // 선택한 객체가 있는경우 객체의 속성을 변경한다
+                var selectedEntities = model.GetAllSelectedEntities();
+                if(selectedEntities != null && selectedEntities.Count > 0)
+                {
+                    foreach (var ent in selectedEntities)
+                        ent.LayerName = la.Name;
+                    return;
+                }
+                
+                
                 Options.Instance.currentLayerName = la.Name;
+                
             }
         }
 
@@ -50,7 +63,7 @@ namespace hanee.ThreeD
             e.DisplayText = la.Name;
         }
 
-        public void UpdateCombo(devDept.Eyeshot.Entities.Entity entity)
+        public void UpdateCombo(List<Entity> entities)
         {
             // 이미지만들기
             var imagesColors = new ImageList();
@@ -78,13 +91,17 @@ namespace hanee.ThreeD
                 repositoryItemImageComboBoxCurLayer.Items.Add(la.Name, la, i);
             }
 
-            if (entity != null)
-                this.EditValue = model.Layers[entity.LayerName];
+            if (entities != null && entities.Count > 0)
+            {
+                if (entities.Count == 1)
+                    this.EditValue = model.Layers[entities[0].LayerName];
+                else
+                    this.EditValue = null;
+            }
             else if (model.Layers.Count > 0)
             {
-                var layer = model.Layers[Options.Instance.currentLayerName];
-                this.EditValue = layer;
-
+                if (model.Layers.TryGetValue(Options.Instance.currentLayerName, out Layer layer))
+                    this.EditValue = layer;
             }
         }
     }

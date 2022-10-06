@@ -77,7 +77,7 @@ namespace Br3D
 
             
             InitCurCombos();
-            UpdateCurCombos(null);
+            UpdateCurCombos();
 
 
             model.MouseDoubleClick += Model_MouseDoubleClick;
@@ -144,19 +144,23 @@ namespace Br3D
         private void RepositoryItemImageComboBoxCurLayer_SelectedIndexChanged(object sender, EventArgs e)
         {
             // 선택한 객체가 없는 경우에
-            UpdateCurCombos(null);
+            UpdateCurCombos();
         }
 
-        private void UpdateCurCombos(Entity entity)
+        private void UpdateCurCombos()
         {
+            Options.Instance.SyncCurStatus(model);
+
+            var entities = model.GetAllSelectedEntities();
+
             // cur layer
-            barEditItemCurLayer.UpdateCombo(entity);
+            barEditItemCurLayer.UpdateCombo(entities);
 
             // cur color
-            barEditItemCurColor.UpdateCombo(entity);
+            barEditItemCurColor.UpdateCombo(entities);
 
             // cur linetype
-            barEditItemCurLinetype.UpdateCombo(entity);
+            barEditItemCurLinetype.UpdateCombo(entities);
         }
 
 
@@ -178,7 +182,7 @@ namespace Br3D
 
 
         // 옵션을 적용한다.
-        private void ApplyOptions()
+        private void ApplyOptions(bool regen=false)
         {
             // 배경색
             foreach (Viewport vp in model.Viewports)
@@ -199,7 +203,13 @@ namespace Br3D
             // 언어
             LanguageHelper.Load(Options.Instance.language);
 
-
+            // ltscale이 변경되었으면 객체에 반영해야 함
+            foreach(var ent in model.Entities)
+            {
+                ent.LineTypeScale = Options.Instance.curLinetypeScale;
+            }
+            if(regen)
+                model.Entities.RegenAllCurved(null);
             model.Invalidate();
         }
 
@@ -472,7 +482,7 @@ namespace Br3D
                         RefreshPropertyGridControl(item?.Item);
 
                     // combo 선택
-                    UpdateCurCombos(item?.Item as Entity);
+                    UpdateCurCombos();
 
                     // tree에서 선택
                     if (treeListObject.Visible && item != null)
@@ -889,7 +899,20 @@ namespace Br3D
             FormOptions form = new FormOptions();
             if (form.ShowDialog() == DialogResult.OK)
             {
-                ApplyOptions();
+                bool regen = Options.Instance.IsNeedRegen(form.lastOptions);
+                if (regen)
+                {
+                    if (form.lastOptions.curLinetypeScale != Options.Instance.curLinetypeScale)
+                    {
+                        // ltscale이 변경되었으면 객체에 반영해야 함
+                        foreach (var ent in model.Entities)
+                        {
+                            ent.LineTypeScale = Options.Instance.curLinetypeScale;
+                        }
+                    }
+                    
+                }
+                ApplyOptions(regen);
             }
         }
         void Homepage() => System.Diagnostics.Process.Start("http://hileejaeho.cafe24.com/kr-br3d/");
@@ -983,7 +1006,7 @@ namespace Br3D
                 // viewport에 추가한다.
                 rfa.AddToScene(model);
 
-                UpdateCurCombos(null);
+                UpdateCurCombos();
 
                 // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
                 hModel.SetLayerColorByBackgroundColor();
@@ -1337,7 +1360,7 @@ namespace Br3D
             model.Clear();
             model.Invalidate();
 
-            UpdateCurCombos(null);
+            UpdateCurCombos();
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -1418,6 +1441,11 @@ namespace Br3D
             if (hModel != null)
             {
                 hModel.KeyEventListener(keyData);
+                if(keyData == Keys.Escape)
+                {
+                    RefreshPropertyGridControl(null);
+                    UpdateCurCombos();
+                }
             }
 
             if (keyData == Keys.F8)
@@ -1584,6 +1612,7 @@ namespace Br3D
             model.Invalidate();
 
             RefreshPropertyGridControl(model.Entities[model.Entities.Count - 1]);
+            UpdateCurCombos();
         }
 
         // unselect all
@@ -1593,6 +1622,7 @@ namespace Br3D
             model.Invalidate();
 
             RefreshPropertyGridControl(null);
+            UpdateCurCombos();
         }
 
         // invert selection
@@ -1608,6 +1638,7 @@ namespace Br3D
             model.Invalidate();
 
             RefreshPropertyGridControl(lastSelectedEntity);
+            UpdateCurCombos();
         }
 
         void SetTransparency(int alpha)
