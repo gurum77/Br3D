@@ -96,6 +96,10 @@ namespace Br3D
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonItemDrawCircle = new DevExpress.XtraBars.BarButtonItem();
+            this.popupMenuDrawCircle = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.barButtonItemDrawCircleByCenterRadius = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDrawCircleByFirstSecondThird = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDrawCircleByFirstSecond = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemDrawArc = new DevExpress.XtraBars.BarButtonItem();
             this.popupMenuDrawArc = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barButtonItemDrawArc_FirstSecondThird = new DevExpress.XtraBars.BarButtonItem();
@@ -187,12 +191,13 @@ namespace Br3D
             this.barSubItem2D3D = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem2D = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem3D = new DevExpress.XtraBars.BarButtonItem();
-            this.barEditItemCurLayer = new CurLayerBarEditItem();
+            this.barEditItemCurLayer = new hanee.ThreeD.CurLayerBarEditItem();
             this.repositoryItemImageComboBoxCurLayer = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
-            this.barEditItemCurColor = new CurColorBarEditItem();
+            this.barEditItemCurColor = new hanee.ThreeD.CurColorBarEditItem();
             this.repositoryItemImageComboBoxCurColor = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
-            this.barEditItemCurLinetype = new CurLinetypeBarEditItem();
+            this.barEditItemCurLinetype = new hanee.ThreeD.CurLinetypeBarEditItem();
             this.repositoryItemImageComboBoxCurLinetype = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
+            this.barButtonItemReload = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -232,7 +237,6 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.barButtonItemReload = new DevExpress.XtraBars.BarButtonItem();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
@@ -250,6 +254,7 @@ namespace Br3D
             this.dockPanelDynamicInput.SuspendLayout();
             this.controlContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuDrawCircle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDrawArc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuLanguage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLayer)).BeginInit();
@@ -873,9 +878,12 @@ namespace Br3D
             this.barEditItemCurLayer,
             this.barEditItemCurColor,
             this.barEditItemCurLinetype,
-            this.barButtonItemReload});
+            this.barButtonItemReload,
+            this.barButtonItemDrawCircleByCenterRadius,
+            this.barButtonItemDrawCircleByFirstSecondThird,
+            this.barButtonItemDrawCircleByFirstSecond});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 120;
+            this.ribbonControl1.MaxItemId = 124;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -903,11 +911,40 @@ namespace Br3D
             // 
             // barButtonItemDrawCircle
             // 
+            this.barButtonItemDrawCircle.ActAsDropDown = true;
+            this.barButtonItemDrawCircle.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
             this.barButtonItemDrawCircle.Caption = "Circle";
+            this.barButtonItemDrawCircle.DropDownControl = this.popupMenuDrawCircle;
             this.barButtonItemDrawCircle.Id = 2;
             this.barButtonItemDrawCircle.ImageOptions.Image = global::Br3D.Properties.Resources.circle_32px;
             this.barButtonItemDrawCircle.ImageOptions.LargeImage = global::Br3D.Properties.Resources.circle_32px;
             this.barButtonItemDrawCircle.Name = "barButtonItemDrawCircle";
+            // 
+            // popupMenuDrawCircle
+            // 
+            this.popupMenuDrawCircle.ItemLinks.Add(this.barButtonItemDrawCircleByCenterRadius);
+            this.popupMenuDrawCircle.ItemLinks.Add(this.barButtonItemDrawCircleByFirstSecondThird);
+            this.popupMenuDrawCircle.ItemLinks.Add(this.barButtonItemDrawCircleByFirstSecond);
+            this.popupMenuDrawCircle.Name = "popupMenuDrawCircle";
+            this.popupMenuDrawCircle.Ribbon = this.ribbonControl1;
+            // 
+            // barButtonItemDrawCircleByCenterRadius
+            // 
+            this.barButtonItemDrawCircleByCenterRadius.Caption = "Center Point, Radius";
+            this.barButtonItemDrawCircleByCenterRadius.Id = 120;
+            this.barButtonItemDrawCircleByCenterRadius.Name = "barButtonItemDrawCircleByCenterRadius";
+            // 
+            // barButtonItemDrawCircleByFirstSecondThird
+            // 
+            this.barButtonItemDrawCircleByFirstSecondThird.Caption = "First, Second, Third Point";
+            this.barButtonItemDrawCircleByFirstSecondThird.Id = 121;
+            this.barButtonItemDrawCircleByFirstSecondThird.Name = "barButtonItemDrawCircleByFirstSecondThird";
+            // 
+            // barButtonItemDrawCircleByFirstSecond
+            // 
+            this.barButtonItemDrawCircleByFirstSecond.Caption = "First, Second Point";
+            this.barButtonItemDrawCircleByFirstSecond.Id = 122;
+            this.barButtonItemDrawCircleByFirstSecond.Name = "barButtonItemDrawCircleByFirstSecond";
             // 
             // barButtonItemDrawArc
             // 
@@ -1622,6 +1659,13 @@ namespace Br3D
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemImageComboBoxCurLinetype.Name = "repositoryItemImageComboBoxCurLinetype";
             // 
+            // barButtonItemReload
+            // 
+            this.barButtonItemReload.Caption = "Reload";
+            this.barButtonItemReload.Id = 119;
+            this.barButtonItemReload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemReload.ImageOptions.SvgImage")));
+            this.barButtonItemReload.Name = "barButtonItemReload";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -1973,13 +2017,6 @@ namespace Br3D
             // 
             this.colorDialog1.FullOpen = true;
             // 
-            // barButtonItemReload
-            // 
-            this.barButtonItemReload.Caption = "Reload";
-            this.barButtonItemReload.Id = 119;
-            this.barButtonItemReload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemReload.ImageOptions.SvgImage")));
-            this.barButtonItemReload.Name = "barButtonItemReload";
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2015,6 +2052,7 @@ namespace Br3D
             this.dockPanelDynamicInput.ResumeLayout(false);
             this.controlContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuDrawCircle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDrawArc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuLanguage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBoxCurLayer)).EndInit();
@@ -2230,5 +2268,9 @@ namespace Br3D
         private CurLinetypeBarEditItem barEditItemCurLinetype;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBoxCurLinetype;
         private DevExpress.XtraBars.BarButtonItem barButtonItemReload;
+        private DevExpress.XtraBars.PopupMenu popupMenuDrawCircle;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawCircleByCenterRadius;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawCircleByFirstSecondThird;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDrawCircleByFirstSecond;
     }
 }

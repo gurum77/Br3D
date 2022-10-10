@@ -716,6 +716,10 @@ namespace Br3D
             // draw
             SetFunctionByElement(barButtonItemDrawLine, Line, LanguageHelper.Tr("Line"), "Line", "l");
             SetFunctionByElement(barButtonItemDrawCircle, Circle, LanguageHelper.Tr("Circle"), "Circle", "c");
+            SetFunctionByElement(barButtonItemDrawCircleByCenterRadius, CircleByCenterRadius, LanguageHelper.Tr("Center point, Radius"), "CircleByCenterRadius", "ccr");
+            SetFunctionByElement(barButtonItemDrawCircleByFirstSecondThird, CircleByFirstSecondThird, LanguageHelper.Tr("First, second, third point"), "CircleByFirstSecondThird", "c3p");
+            SetFunctionByElement(barButtonItemDrawCircleByFirstSecond, CircleByFirstSecond, LanguageHelper.Tr("First, second point"), "CircleByFirstSecond", "c2p");
+            
             SetFunctionByElement(barButtonItemDrawArc, Arc, LanguageHelper.Tr("Arc"), "Arc", "a");
             SetFunctionByElement(barButtonItemDrawArc_FirstSecondThird, ArcFirstSecondThird, LanguageHelper.Tr("First, second, third point"), null, null);
             SetFunctionByElement(barButtonItemDrawArc_CenterStartEnd, ArcCenterStartEnd, LanguageHelper.Tr("Center, start, end point"), null, null);
@@ -870,6 +874,9 @@ namespace Br3D
         async void ArcCenterStartEnd() => await new ActionArc(model, ActionArc.Method.centerStartEnd).RunAsync();
         async void ArcFirstSecondThird() => await new ActionArc(model, ActionArc.Method.firstSecondThird).RunAsync();
         async void Arc() => await new ActionArc(model, ActionArc.Method.firstSecondThird).RunAsync();
+        async void CircleByCenterRadius() => await new ActionCircle(model, ActionCircle.Method.centerRadius).RunAsync();
+        async void CircleByFirstSecondThird() => await new ActionCircle(model, ActionCircle.Method.threePoints).RunAsync();
+        async void CircleByFirstSecond() => await new ActionCircle(model, ActionCircle.Method.twoPoints).RunAsync();
         async void Circle() => await new ActionCircle(model).RunAsync();
         async void Line() => await new ActionLine(model).RunAsync();
         void RegenAll()
@@ -1684,6 +1691,13 @@ namespace Br3D
             SetTransparency(0);
         }
 
+        private void barButtonItemDrawCircle_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            
+        }
 
+        private void popupMenuDrawCircle_BeforePopup(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+        }
     }
 }

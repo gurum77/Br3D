@@ -36,6 +36,8 @@ namespace hanee.Cad.Tool
         static public int Stacks = 20;
         static public int Rings = 20;
 
+        static public double MinimumRadius = 0.00001;
+
         // section 만들때의 오차
         static public double SectionTol = 0.01;
 

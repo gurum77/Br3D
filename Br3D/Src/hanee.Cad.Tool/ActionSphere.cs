@@ -11,10 +11,10 @@ namespace hanee.Cad.Tool
 
         protected override void OnMouseMove(devDept.Eyeshot.Environment environment, MouseEventArgs e)
         {
-            if (startPoint == null)
+            if (centerPoint == null)
                 return;
 
-            endPoint = point3D;
+            radiusPoint = point3D;
 
 
             var circle = MakeEntity(true);
@@ -26,7 +26,7 @@ namespace hanee.Cad.Tool
 
         protected override Entity MakeEntity(bool tempEntity = false)
         {
-            var radius = startPoint.DistanceTo(endPoint);
+            var radius = centerPoint.DistanceTo(radiusPoint);
             if (radius <= 0.001)
                 return null;
 
@@ -40,7 +40,7 @@ namespace hanee.Cad.Tool
                 ent = Brep.CreateSphere(radius, radius / 10);
             }
 
-            ent.Translate(startPoint.X, startPoint.Y, startPoint.Z);
+            ent.Translate(centerPoint.X, centerPoint.Y, centerPoint.Z);
             GetHModel()?.entityPropertiesManager?.SetDefaultProperties(ent, tempEntity);
 
             return ent;

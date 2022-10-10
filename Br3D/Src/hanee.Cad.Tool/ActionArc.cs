@@ -31,7 +31,6 @@ namespace hanee.Cad.Tool
 
             if (method == Method.firstSecondThird)
             {
-
                 while (true)
                 {
                     pt1 = await GetPoint3D(LanguageHelper.Tr("First point"));
