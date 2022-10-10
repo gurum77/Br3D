@@ -335,6 +335,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="br3d_icon.ico" />
+    <None Include="Resources\Create_ArcCenterRadius_Small.png" />
+    <None Include="Resources\Create_Circle_Small.png" />
+    <None Include="Resources\Create_Circle2P_Small.png" />
+    <None Include="Resources\Create_Circle_3P_Small.png" />
     <None Include="Resources\Edit_Chamfer_Small.png" />
     <None Include="Resources\Edit_Fillet_Small.png" />
     <None Include="Resources\Annotation_Leader_Small.png" />

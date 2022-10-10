@@ -916,7 +916,7 @@ namespace Br3D
             this.barButtonItemDrawCircle.Caption = "Circle";
             this.barButtonItemDrawCircle.DropDownControl = this.popupMenuDrawCircle;
             this.barButtonItemDrawCircle.Id = 2;
-            this.barButtonItemDrawCircle.ImageOptions.Image = global::Br3D.Properties.Resources.circle_32px;
+            this.barButtonItemDrawCircle.ImageOptions.Image = global::Br3D.Properties.Resources.Create_Circle_Small;
             this.barButtonItemDrawCircle.ImageOptions.LargeImage = global::Br3D.Properties.Resources.circle_32px;
             this.barButtonItemDrawCircle.Name = "barButtonItemDrawCircle";
             // 
@@ -932,18 +932,21 @@ namespace Br3D
             // 
             this.barButtonItemDrawCircleByCenterRadius.Caption = "Center Point, Radius";
             this.barButtonItemDrawCircleByCenterRadius.Id = 120;
+            this.barButtonItemDrawCircleByCenterRadius.ImageOptions.Image = global::Br3D.Properties.Resources.Create_Circle_Small;
             this.barButtonItemDrawCircleByCenterRadius.Name = "barButtonItemDrawCircleByCenterRadius";
             // 
             // barButtonItemDrawCircleByFirstSecondThird
             // 
             this.barButtonItemDrawCircleByFirstSecondThird.Caption = "First, Second, Third Point";
             this.barButtonItemDrawCircleByFirstSecondThird.Id = 121;
+            this.barButtonItemDrawCircleByFirstSecondThird.ImageOptions.Image = global::Br3D.Properties.Resources.Create_Circle_3P_Small;
             this.barButtonItemDrawCircleByFirstSecondThird.Name = "barButtonItemDrawCircleByFirstSecondThird";
             // 
             // barButtonItemDrawCircleByFirstSecond
             // 
             this.barButtonItemDrawCircleByFirstSecond.Caption = "First, Second Point";
             this.barButtonItemDrawCircleByFirstSecond.Id = 122;
+            this.barButtonItemDrawCircleByFirstSecond.ImageOptions.Image = global::Br3D.Properties.Resources.Create_Circle2P_Small;
             this.barButtonItemDrawCircleByFirstSecond.Name = "barButtonItemDrawCircleByFirstSecond";
             // 
             // barButtonItemDrawArc
@@ -953,6 +956,7 @@ namespace Br3D
             this.barButtonItemDrawArc.Caption = "Arc";
             this.barButtonItemDrawArc.DropDownControl = this.popupMenuDrawArc;
             this.barButtonItemDrawArc.Id = 3;
+            this.barButtonItemDrawArc.ImageOptions.Image = global::Br3D.Properties.Resources.Create_Arc_Small;
             this.barButtonItemDrawArc.ImageOptions.LargeImage = global::Br3D.Properties.Resources.Create_Arc_Small1;
             this.barButtonItemDrawArc.Name = "barButtonItemDrawArc";
             // 
@@ -967,12 +971,14 @@ namespace Br3D
             // 
             this.barButtonItemDrawArc_FirstSecondThird.Caption = "First, Second, Third";
             this.barButtonItemDrawArc_FirstSecondThird.Id = 14;
+            this.barButtonItemDrawArc_FirstSecondThird.ImageOptions.Image = global::Br3D.Properties.Resources.Create_Arc_Small;
             this.barButtonItemDrawArc_FirstSecondThird.Name = "barButtonItemDrawArc_FirstSecondThird";
             // 
             // barButtonItemDrawArc_CenterStartEnd
             // 
             this.barButtonItemDrawArc_CenterStartEnd.Caption = "Center, Start, End";
             this.barButtonItemDrawArc_CenterStartEnd.Id = 15;
+            this.barButtonItemDrawArc_CenterStartEnd.ImageOptions.Image = global::Br3D.Properties.Resources.Create_ArcCenterRadius_Small;
             this.barButtonItemDrawArc_CenterStartEnd.Name = "barButtonItemDrawArc_CenterStartEnd";
             // 
             // barButtonItemDrawPolyline

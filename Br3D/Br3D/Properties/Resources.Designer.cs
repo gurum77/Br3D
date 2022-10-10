@@ -173,6 +173,46 @@ namespace Br3D.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap Create_ArcCenterRadius_Small {
+            get {
+                object obj = ResourceManager.GetObject("Create_ArcCenterRadius_Small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Create_Circle_3P_Small {
+            get {
+                object obj = ResourceManager.GetObject("Create_Circle_3P_Small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Create_Circle_Small {
+            get {
+                object obj = ResourceManager.GetObject("Create_Circle_Small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Create_Circle2P_Small {
+            get {
+                object obj = ResourceManager.GetObject("Create_Circle2P_Small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Edit_Chamfer_Small {
             get {
                 object obj = ResourceManager.GetObject("Edit_Chamfer_Small", resourceCulture);
