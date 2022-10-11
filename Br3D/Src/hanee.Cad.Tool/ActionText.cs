@@ -66,17 +66,18 @@ namespace hanee.Cad.Tool
             {
                 // 삽입점
                 insPoint = await GetPoint3D(LanguageHelper.Tr("Insertion point"));
-                SetOrthoModeStartPoint(insPoint);
                 if (IsCanceled())
                     break;
+                SetAutoWorkspace();
+                SetOrthoModeStartPoint(insPoint);
 
                 // 높이
                 DynamicInputManager.ActiveLengthFactor(insPoint, 1, LanguageHelper.Tr("Height"));
 
                 heightPoint = await GetPoint3D(LanguageHelper.Tr("Height"));
-                SetOrthoModeStartPoint(insPoint);
                 if (IsCanceled())
                     break;
+                SetOrthoModeStartPoint(insPoint);
 
                 // 방향
                 DynamicInputManager.point3DType = DynamicInputManager.Point3DType.distanceAngle;

@@ -1,4 +1,5 @@
-﻿using devDept.Eyeshot.Entities;
+﻿using devDept.Eyeshot;
+using devDept.Eyeshot.Entities;
 using devDept.Geometry;
 using hanee.ThreeD;
 using System.Threading.Tasks;
@@ -64,7 +65,7 @@ namespace hanee.Cad.Tool
                     return;
                 }
 
-                var points = GetSelectedFace(face);
+                var points = environment.GetSelectedFace(face);
                 if (points != null)
                 {
                     var lp = new LinearPath(points);
@@ -76,42 +77,7 @@ namespace hanee.Cad.Tool
 
         }
 
-        Point3D[] GetSelectedFace(SelectedFace face)
-        {
-            if (face == null)
-                return null;
-
-
-            if (face.Item is Mesh mesh)
-            {
-                var hModel = GetHModel();
-                var parent = face.Parents.Count > 0 ? face.Parents.Pop() : null;
-                var fTrans = parent?.GetFullTransformation(hModel.Blocks);
-
-                var tri = mesh.Triangles[face.Index];
-                var pt1 = mesh.Vertices[tri.V1].Clone() as Point3D;
-                var pt2 = mesh.Vertices[tri.V2].Clone() as Point3D;
-                var pt3 = mesh.Vertices[tri.V3].Clone() as Point3D;
-                if (fTrans != null)
-                {
-                    pt1.TransformBy(fTrans);
-                    pt2.TransformBy(fTrans);
-                    pt3.TransformBy(fTrans);
-                }
-
-                return new Point3D[] { pt1, pt2, pt3 };
-            }
-            else if(face.Item is Brep brep)
-            {
-                var subface = brep.Faces[face.Index];
-                if (subface.Surface is PlanarSurf ps)
-                {
-                    return new Point3D[]{ ps.Plane.Origin, ps.Plane.Origin+ps.Plane.AxisX, ps.Plane.Origin+ps.Plane.AxisY};
-                }
-            }    
-
-            return null;
-        }
+     
 
         public async Task<bool> RunAsync()
         {
@@ -139,7 +105,7 @@ namespace hanee.Cad.Tool
 
                 if (face.Key != null)
                 {
-                    var points = GetSelectedFace(face.Key);
+                    var points = environment.GetSelectedFace(face.Key);
                     if (points != null && points.Length > 2)
                     {
                         point1 = points[0];

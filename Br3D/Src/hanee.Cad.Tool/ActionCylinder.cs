@@ -97,6 +97,7 @@ namespace hanee.Cad.Tool
                 if (IsCanceled())
                     break;
 
+                SetAutoWorkspace(centerPoint);
 
                 if(activeDynamicInputManagerForRadius)
                     DynamicInputManager.ActiveLengthFactor(centerPoint, 1, LanguageHelper.Tr("Radius"));

@@ -94,6 +94,9 @@ namespace hanee.Cad.Tool
                     if (IsEntered())
                         break;
 
+                    if(points.Count == 0)
+                        SetAutoWorkspace();
+
                     points.Add(pt);
                 }
             }

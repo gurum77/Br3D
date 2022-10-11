@@ -144,10 +144,12 @@ namespace hanee.Cad.Tool
                 if(defaultMethod == Method.none)
                 {
                     pk = await GetPoint3DOrKey(LanguageHelper.Tr("Center point(3:3 Points, 2:2 Points)"), -1, new KeyEventArgs(Keys.D3), new KeyEventArgs(Keys.D2));
+                    SetAutoWorkspace();
                 }
                 else if(defaultMethod == Method.centerRadius)
                 {
                     pk = await GetPoint3DOrKey(LanguageHelper.Tr("Center point"));
+                    SetAutoWorkspace();
                 }
                
                 if (IsCanceled() || IsEntered())
@@ -160,6 +162,7 @@ namespace hanee.Cad.Tool
                     firstPoint = await GetPoint3D(LanguageHelper.Tr("First point"));
                     if (IsCanceled() || IsEntered())
                         break;
+                    SetAutoWorkspace();
                     SetOrthoModeStartPoint(firstPoint);
 
                     secondPoint = await GetPoint3D(LanguageHelper.Tr("Second point"));
@@ -176,6 +179,7 @@ namespace hanee.Cad.Tool
                     method = Method.twoPoints;
 
                     firstPoint = await GetPoint3D(LanguageHelper.Tr("First point"));
+                    SetAutoWorkspace();
                     if (IsCanceled() || IsEntered())
                         break;
                     SetOrthoModeStartPoint(firstPoint);

@@ -36,6 +36,7 @@ namespace hanee.Cad.Tool
                     pt1 = await GetPoint3D(LanguageHelper.Tr("First point"));
                     if (IsCanceled())
                         break;
+                    SetAutoWorkspace();
                     SetOrthoModeStartPoint(pt1);
                     pt2 = await GetPoint3D(LanguageHelper.Tr("Second point"));
                     if (IsCanceled())
@@ -62,6 +63,7 @@ namespace hanee.Cad.Tool
                     pt1 = await GetPoint3D(LanguageHelper.Tr("Center point"));
                     if (IsCanceled())
                         break;
+                    SetAutoWorkspace();
                     SetOrthoModeStartPoint(pt1);
                     pt2 = await GetPoint3D(LanguageHelper.Tr("Start point"));
                     if (IsCanceled())

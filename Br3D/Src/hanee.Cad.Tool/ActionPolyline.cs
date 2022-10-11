@@ -56,6 +56,8 @@ namespace hanee.Cad.Tool
                 else
                     pk = await GetPoint3DOrKey(LanguageHelper.Tr("Next point(W : Width, C : Close)"), -1, new KeyEventArgs(Keys.W), new KeyEventArgs(Keys.C));
 
+                
+
                 if (pk.Value != null && pk.Value.KeyCode == Keys.C)
                 {
                     // C를 누르며 입력 완료
@@ -83,7 +85,9 @@ namespace hanee.Cad.Tool
 
                 if (point == null)
                     break;
-                
+
+                if(points.Count == 0)
+                    SetAutoWorkspace();
                 SetOrthoModeStartPoint(point);
 
                 // pline은 취소를 눌러도 입력 완료로 한다.

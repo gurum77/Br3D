@@ -49,6 +49,54 @@ namespace hanee.ThreeD
             //return model.ActiveViewport.OriginSymbols.Length > 1 ? model.ActiveViewport.OriginSymbols[1] : null;
         }
 
+        // face의 세 점 리턴
+        static public Point3D[] GetSelectedFace(this devDept.Eyeshot.Environment environment, Environment.SelectedFace face)
+        {
+            if (face == null)
+                return null;
+
+
+            if (face.Item is Mesh mesh)
+            {
+                var parent = face.Parents.Count > 0 ? face.Parents.Pop() : null;
+                var fTrans = parent?.GetFullTransformation(environment.Blocks);
+
+                var tri = mesh.Triangles[face.Index];
+                var pt1 = mesh.Vertices[tri.V1].Clone() as Point3D;
+                var pt2 = mesh.Vertices[tri.V2].Clone() as Point3D;
+                var pt3 = mesh.Vertices[tri.V3].Clone() as Point3D;
+                if (fTrans != null)
+                {
+                    pt1.TransformBy(fTrans);
+                    pt2.TransformBy(fTrans);
+                    pt3.TransformBy(fTrans);
+                }
+
+                return new Point3D[] { pt1, pt2, pt3 };
+            }
+            else if (face.Item is Brep brep)
+            {
+                var subface = brep.Faces[face.Index];
+                if (subface.Surface is PlanarSurf ps)
+                {
+                    return new Point3D[] { ps.Plane.Origin, ps.Plane.Origin + ps.Plane.AxisX, ps.Plane.Origin + ps.Plane.AxisY };
+                }
+            }
+
+            return null;
+        }
+
+        // workspace를 시작한다.
+        static public void StartWorkspace(this devDept.Eyeshot.Environment environment, Environment.SelectedFace sf)
+        {
+            var points = environment.GetSelectedFace(sf);
+            if (points == null)
+                return;
+
+            environment.StartWorkspace(points[0], points[1], points[2]);
+        }
+
+
         // workspace를 시작한다.
         static public void StartWorkspace(this devDept.Eyeshot.Environment environment, Point3D pt1, Point3D pt2, Point3D pt3)
         {

@@ -63,7 +63,7 @@ namespace hanee.Cad.Tool
                     pk = await GetPoint3DOrKey(LanguageHelper.Tr("Next point(C : Close)"), -1, new KeyEventArgs(Keys.C));
                 if (IsCanceled() || IsEntered())
                     break;
-
+                
                 if (pk.Value != null && pk.Value.KeyCode == Keys.C)
                 {
                     // C를 누르면 firstPoint와 연결한 선을 만들고 입력 종료
@@ -75,6 +75,7 @@ namespace hanee.Cad.Tool
                     endPoint = pk.Key;
                 }
 
+                SetAutoWorkspace();
                 SetOrthoModeStartPoint(endPoint);
                 Line line = MakeLine();
                 environment.Entities.Add(line);
