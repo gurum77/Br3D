@@ -1242,8 +1242,20 @@ namespace hanee.ThreeD
         // workspace가 비활성인 경우 자동 설정한다.
         protected void SetAutoWorkspace(Point3D modifyPoint=null)
         {
-            if (environment is Model model)
+            if (environment is HModel model)
             {
+                // 2D View인 경우에는 자동설정 하지 않는다.
+                if (model.IsTopViewOnly(model.ActiveViewport))
+                    return;
+                
+                var ws = model.GetWorkspace();
+                if (ws == null)
+                    return;
+
+                // 이미 활성화 되어 있는 경우에는 자동설정을 하지 않는다.
+                if (ws.enabled)
+                    return;
+
                 var oldSelectionFilterMode = model.SelectionFilterMode;
                 model.SelectionFilterMode = selectionFilterType.Face;
 
@@ -1251,7 +1263,7 @@ namespace hanee.ThreeD
                 if (item is Environment.SelectedFace sf)
                 {
                     // 기존 workspace를 복사
-                    ActionBase.tempWorkspace = GetWorkspace()?.Clone() as Workspace;
+                    ActionBase.tempWorkspace = ws.Clone() as Workspace;
 
                     // 새로운 workspace 시작
                     environment.StartWorkspace(sf);
