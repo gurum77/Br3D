@@ -66,16 +66,37 @@ namespace Br3D
 
         }
 
+        // control model을 초기화한다.
+        void InitControlModel()
+        {
+            controlModel = new ControlModel();
+            controlModel.Dock = DockStyle.Fill;
+            controlModel.barButtonItemOsnapCenter = barButtonItemOsnapCenter;
+            controlModel.barButtonItemOsnapend = barButtonItemOsnapend;
+            controlModel.barButtonItemOsnapIntersection = barButtonItemOsnapIntersection;
+            controlModel.barButtonItemOsnapMiddle = barButtonItemOsnapMiddle;
+            controlModel.barButtonItemOsnapPoint = barButtonItemOsnapPoint;
+
+            controlModel.barEditItemCurLayer = barEditItemCurLayer;
+            controlModel.barEditItemCurColor = barEditItemCurColor;
+            controlModel.barEditItemCurLinetype = barEditItemCurLinetype;
+
+            controlModel.propertyGridControl1 = propertyGridControl1;
+
+            pictureEdit1.Controls.Add(controlModel);
+        }
+
         private void FormMain_Shown(object sender, EventArgs e)
         {
             // model init은 제일 나중에 한다.
-            controlModel = new ControlModel();
-            controlModel.Dock = DockStyle.Fill;
-            pictureEdit1.Controls.Add(controlModel);
+            InitControlModel();
+            
             simpleButtonInit.Visible = false;
             //this.Controls.Add(controlModel);  // form에 직접 add 하면 controlModel의 크기가 잘못 계산됨
 
-            
+            // control이 만들어 지고 나서 translate를 한다
+            Translate();
+
             InitCurCombos();
             UpdateCurCombos();
 
@@ -124,8 +145,7 @@ namespace Br3D
             InitObjectTreeList();
             InitPropertyGrid();
 
-
-            Translate();
+                      
 
             // 테스트 용으로 옵션을 강제적용
             Options.Instance.tempEntityColorMethod = Options.TempEntityColorMethod.byTransparencyColor;
@@ -147,20 +167,20 @@ namespace Br3D
             UpdateCurCombos();
         }
 
-        private void UpdateCurCombos()
+        void UpdateCurCombos()
         {
-            Options.Instance.SyncCurStatus(model);
+            if (controlModel == null)
+                return;
 
-            var entities = model.GetAllSelectedEntities();
+            controlModel.UpdateCurCombos();
+        }
 
-            // cur layer
-            barEditItemCurLayer.UpdateCombo(entities);
+        void RefreshPropertyGridControl(object selectedObj)
+        {
+            if (controlModel == null)
+                return;
 
-            // cur color
-            barEditItemCurColor.UpdateCombo(entities);
-
-            // cur linetype
-            barEditItemCurLinetype.UpdateCombo(entities);
+            controlModel.RefreshPropertyGridControl(selectedObj);
         }
 
 
@@ -356,21 +376,12 @@ namespace Br3D
         {
             InitRibbonButtonMethod();
             controlScriptCad1.Translate();
+            if (controlModel != null)
+                controlModel.Translate();
 
             // subitem
             barSubItem2D3D.Caption = LanguageHelper.Tr("2D/3D");
             barSubItemDisplayMode.Caption = LanguageHelper.Tr("Display mode");
-
-            // context menu
-            endPointToolStripMenuItem.Text = LanguageHelper.Tr("End point(&E)");
-            intersectionPointToolStripMenuItem.Text = LanguageHelper.Tr("Intersection point(&I)");
-            middlePointToolStripMenuItem.Text = LanguageHelper.Tr("Middle point(&M)");
-            centerPointToolStripMenuItem.Text = LanguageHelper.Tr("Center point(&C)");
-            selectallToolStripMenuItem.Text = LanguageHelper.Tr("Select all(&A)");
-            unselectAllToolStripMenuItem.Text = LanguageHelper.Tr("Unselect all(&U)");
-            invertSelectionToolStripMenuItem.Text = LanguageHelper.Tr("Invert selection(&V)");
-            transparencyToolStripMenuItem.Text = LanguageHelper.Tr("Transparency(&T)");
-
 
 
             // page
@@ -445,22 +456,7 @@ namespace Br3D
 
 
 
-        void RefreshPropertyGridControl(object selectedObj)
-        {
-            if (selectedObj is Entity)
-            {
-                EntityProperties entityProperties = new EntityProperties(selectedObj as Entity);
-                propertyGridControl1.SelectedObject = entityProperties;
-            }
-            else
-            {
-                propertyGridControl1.SelectedObject = selectedObj;
-
-            }
-            propertyGridControl1.SetVisibleExistPropertiyOnly();
-
-            propertyGridControl1.BestFit();
-        }
+    
 
         private void Model_MouseUp(object sender, MouseEventArgs e)
         {
@@ -1118,26 +1114,12 @@ namespace Br3D
         }
 
         // 
-        void FlagOsnap(BarButtonItem barButtonItem, Snapping.objectSnapType snapType, BarButtonItem barButtonItem2 = null)
-        {
-            HModel hModel = model as HModel;
-            if (hModel == null)
-                return;
-
-            hModel.Snapping.FlagActiveObjectSnap(snapType);
-            barButtonItem.Down = hModel.Snapping.IsActiveObjectSnap(snapType);
-            if (barButtonItem2 != null)
-                barButtonItem2.Down = barButtonItem.Down;
-        }
-
-
-
         void OrthoMode() => FlagOrthoMode(barButtonItemOrthoMode);
-        void End() => FlagOsnap(barButtonItemOsnapend, Snapping.objectSnapType.End);
-        void Middle() => FlagOsnap(barButtonItemOsnapMiddle, Snapping.objectSnapType.Mid);
-        void Point() => FlagOsnap(barButtonItemOsnapPoint, Snapping.objectSnapType.Point, null);
-        void Intersection() => FlagOsnap(barButtonItemOsnapIntersection, Snapping.objectSnapType.Intersect);
-        void Center() => FlagOsnap(barButtonItemOsnapCenter, Snapping.objectSnapType.Center);
+        void End() => controlModel.End();
+        void Middle() => controlModel.Middle();
+        void Point() => controlModel.Point();
+        void Intersection() => controlModel.Intersection();
+        void Center() => controlModel.Center();
         void ViewportSingle() => controlModel.ViewportSingle();
         void Viewport1x1() => controlModel.Viewport1x1();
         void Viewport1x2() => controlModel.Viewport1x2();
@@ -1463,85 +1445,10 @@ namespace Br3D
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            HModel hModel = model as HModel;
-            if (hModel == null)
-                return;
+     
+    
 
-            // ctrl이나 shift가 눌러져 있는지?
-            bool withCtrl = true;
-            if (!System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl) &&
-                !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.RightCtrl) &&
-                !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftShift) &&
-                !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.RightShift))
-            {
-                withCtrl = false;
-            }
-
-            // 액션실행중인지?
-            bool runningAction = ActionBase.runningAction != null;
-
-            if (withCtrl)
-            {
-                endPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.End);
-                intersectionPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Intersect);
-                middlePointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Mid);
-                centerPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Center);
-
-                // ctrl이 눌러져 있으면 snap 관련 menu item만 표시
-                VisibleContextMenuItems(endPointToolStripMenuItem, intersectionPointToolStripMenuItem,
-                    middlePointToolStripMenuItem, centerPointToolStripMenuItem);
-            }
-            else
-            {
-                // 아무것도 안눌러져 있으면 선택관련 menu item만 표시
-                // 액션을 실행하고 있지 않아야 함
-                if (!runningAction)
-                {
-                    VisibleContextMenuItems(selectallToolStripMenuItem, unselectAllToolStripMenuItem,
-                        invertSelectionToolStripMenuItem, transparencyToolStripMenuItem);
-                }
-                else
-                {
-                    VisibleContextMenuItems();
-                }
-            }
-        }
-
-        // 해당 아이템을 표시한다.(나머지는 숨긴다)
-        private void VisibleContextMenuItems(params ToolStripMenuItem[] toolStripMenuItems)
-        {
-            foreach (ToolStripMenuItem item in contextMenuStrip1.Items)
-            {
-                item.Visible = false;
-            }
-
-            foreach (ToolStripMenuItem item in toolStripMenuItems)
-            {
-                item.Visible = true;
-            }
-        }
-
-        private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            if (e.ClickedItem == endPointToolStripMenuItem)
-            {
-                End();
-            }
-            else if (e.ClickedItem == intersectionPointToolStripMenuItem)
-            {
-                Intersection();
-            }
-            else if (e.ClickedItem == middlePointToolStripMenuItem)
-            {
-                Middle();
-            }
-            else if (e.ClickedItem == centerPointToolStripMenuItem)
-            {
-                Center();
-            }
-        }
+     
 
         private void ribbonControl1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -1612,84 +1519,10 @@ namespace Br3D
             model.Invalidate();
         }
 
-        // select all
-        private void selectallToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            model.Entities.SelectAll();
-            model.Invalidate();
+       
 
-            RefreshPropertyGridControl(model.Entities[model.Entities.Count - 1]);
-            UpdateCurCombos();
-        }
-
-        // unselect all
-        private void unselectAllToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            model.Entities.ClearSelection();
-            model.Invalidate();
-
-            RefreshPropertyGridControl(null);
-            UpdateCurCombos();
-        }
-
-        // invert selection
-        private void invertSelectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Entity lastSelectedEntity = null;
-            foreach (var ent in model.Entities)
-            {
-                ent.Selected = !ent.Selected;
-                if (ent.Selected)
-                    lastSelectedEntity = ent;
-            }
-            model.Invalidate();
-
-            RefreshPropertyGridControl(lastSelectedEntity);
-            UpdateCurCombos();
-        }
-
-        void SetTransparency(int alpha)
-        {
-            foreach (var ent in model.Entities)
-            {
-                if (!ent.Selected)
-                    continue;
-
-                if (ent is BlockReference br)
-                {
-                    foreach (Entity be in model.Blocks[br.BlockName].Entities)
-                    {
-                        var color = be.GetUsedColor(model);
-
-                        be.Color = System.Drawing.Color.FromArgb(alpha, color);
-                        be.ColorMethod = colorMethodType.byEntity;
-                    }
-                }
-                else
-                {
-                    var color = ent.GetUsedColor(model);
-                    ent.Color = System.Drawing.Color.FromArgb(alpha, color);
-                    ent.ColorMethod = colorMethodType.byEntity;
-
-                }
-            }
-            model.Invalidate();
-        }
-        // 투명도 - 0 (불투명)
-        private void toolStripMenuItemTransparency0_Click(object sender, EventArgs e)
-        {
-            SetTransparency(255);
-        }
-
-        private void toolStripMenuItemTransparency50_Click(object sender, EventArgs e)
-        {
-            SetTransparency(127);
-        }
-
-        private void toolStripMenuItemTransparency100_Click(object sender, EventArgs e)
-        {
-            SetTransparency(0);
-        }
+    
+      
 
         private void barButtonItemDrawCircle_ItemClick(object sender, ItemClickEventArgs e)
         {

@@ -65,6 +65,7 @@ namespace hanee.ThreeD
         { get; set; }
 
         static public bool[] userInputting = new bool[(int)UserInput.Count];
+        static public Workspace tempWorkspace = new Workspace();
 
         static protected Point3D point3D = new Point3D();
         static public Point3D Point3D
@@ -796,7 +797,6 @@ namespace hanee.ThreeD
             ActionBase.cursorText = null;
 
 
-
             return point3D;
         }
 
@@ -1238,6 +1238,42 @@ namespace hanee.ThreeD
         {
             return environment?.GetWorkplane();
         }
+
+        // workspace가 비활성인 경우 자동 설정한다.
+        protected void SetAutoWorkspace(Point3D modifyPoint=null)
+        {
+            if (environment is Model model)
+            {
+                var oldSelectionFilterMode = model.SelectionFilterMode;
+                model.SelectionFilterMode = selectionFilterType.Face;
+
+                var item = environment.GetItemUnderMouseCursor(ActionBase.CurrentMousePoint);
+                if (item is Environment.SelectedFace sf)
+                {
+                    // 기존 workspace를 복사
+                    ActionBase.tempWorkspace = GetWorkspace()?.Clone() as Workspace;
+
+                    // 새로운 workspace 시작
+                    environment.StartWorkspace(sf);
+
+                    // 새로운 workspace에 맞게 좌표 조정
+                    if(modifyPoint != null)
+                    {
+                        var newPt = environment.ProjectOnWorkspace(modifyPoint);
+                        if(newPt != null)
+                        {
+                            modifyPoint.X = newPt.X;
+                            modifyPoint.Y = newPt.Y;
+                            modifyPoint.Z = newPt.Z;
+                        }
+                    }
+                }
+
+
+                model.SelectionFilterMode = oldSelectionFilterMode;
+            }
+        }
+
         protected void SetWorkplane(Plane plane)
         {
             var ws = GetWorkspace();
@@ -1314,11 +1350,12 @@ namespace hanee.ThreeD
             ActionBase.Canceled = false;
             for (int i = 0; i < (int)UserInput.Count; ++i)
             {
-                userInputting[i] = false;
+                userInputting[i] = false;   
             }
 
             ActionBase.PreviewEntities = null;
             ActionBase.PreviewFaceEntities = null;
+            ActionBase.tempWorkspace = null;// GetWorkspace()?.Clone() as Workspace;
             ActionBase.SetTempEtt(environment, null);
         }
 
@@ -1327,6 +1364,15 @@ namespace hanee.ThreeD
         {
             ActionBase.PreviewEntities = null;
             ActionBase.PreviewFaceEntities = null;
+            var ws = GetWorkspace();
+            if(ActionBase.tempWorkspace != null && ws != null)
+            {
+                if (!ActionBase.tempWorkspace.enabled)
+                    environment.EndWorkspace();
+                else
+                    ws.CopyFrom(ActionBase.tempWorkspace);
+                ActionBase.tempWorkspace = null;
+            }
             ActionBase.SetTempEtt(environment, null);
             ActionBase.IsModified = true;
             ActionBase.selectableTypes?.Clear();

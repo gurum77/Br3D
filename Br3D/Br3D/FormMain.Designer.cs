@@ -35,18 +35,6 @@ namespace Br3D
             DevExpress.XtraEditors.TileItemElement tileItemElement1 = new DevExpress.XtraEditors.TileItemElement();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tileNavSubItemInsertImage = new DevExpress.XtraBars.Navigation.TileNavSubItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.endPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.intersectionPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.middlePointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.centerPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unselectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.invertSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.transparencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemTransparency0 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemTransparency50 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemTransparency100 = new System.Windows.Forms.ToolStripMenuItem();
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.hideContainerLeft = new DevExpress.XtraBars.Docking.AutoHideContainer();
             this.panelContainer1 = new DevExpress.XtraBars.Docking.DockPanel();
@@ -237,7 +225,6 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
@@ -278,102 +265,6 @@ namespace Br3D
             tileItemElement1.Text = "Image";
             this.tileNavSubItemInsertImage.Tile.Elements.Add(tileItemElement1);
             this.tileNavSubItemInsertImage.Tile.Name = "tileBarItem1";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.endPointToolStripMenuItem,
-            this.intersectionPointToolStripMenuItem,
-            this.middlePointToolStripMenuItem,
-            this.centerPointToolStripMenuItem,
-            this.selectallToolStripMenuItem,
-            this.unselectAllToolStripMenuItem,
-            this.invertSelectionToolStripMenuItem,
-            this.transparencyToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(169, 180);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
-            // 
-            // endPointToolStripMenuItem
-            // 
-            this.endPointToolStripMenuItem.Image = global::Br3D.Properties.Resources.snap_endpoint_small;
-            this.endPointToolStripMenuItem.Name = "endPointToolStripMenuItem";
-            this.endPointToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.endPointToolStripMenuItem.Text = "&End point";
-            // 
-            // intersectionPointToolStripMenuItem
-            // 
-            this.intersectionPointToolStripMenuItem.Image = global::Br3D.Properties.Resources.snap_intersection_small;
-            this.intersectionPointToolStripMenuItem.Name = "intersectionPointToolStripMenuItem";
-            this.intersectionPointToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.intersectionPointToolStripMenuItem.Text = "&Intersection point";
-            // 
-            // middlePointToolStripMenuItem
-            // 
-            this.middlePointToolStripMenuItem.Image = global::Br3D.Properties.Resources.snap_middle_small;
-            this.middlePointToolStripMenuItem.Name = "middlePointToolStripMenuItem";
-            this.middlePointToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.middlePointToolStripMenuItem.Text = "&Middle point";
-            // 
-            // centerPointToolStripMenuItem
-            // 
-            this.centerPointToolStripMenuItem.Image = global::Br3D.Properties.Resources.snap_center_small;
-            this.centerPointToolStripMenuItem.Name = "centerPointToolStripMenuItem";
-            this.centerPointToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.centerPointToolStripMenuItem.Text = "&Center point";
-            // 
-            // selectallToolStripMenuItem
-            // 
-            this.selectallToolStripMenuItem.Name = "selectallToolStripMenuItem";
-            this.selectallToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.selectallToolStripMenuItem.Text = "Select &all";
-            this.selectallToolStripMenuItem.Click += new System.EventHandler(this.selectallToolStripMenuItem_Click);
-            // 
-            // unselectAllToolStripMenuItem
-            // 
-            this.unselectAllToolStripMenuItem.Name = "unselectAllToolStripMenuItem";
-            this.unselectAllToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.unselectAllToolStripMenuItem.Text = "&Unselect all";
-            this.unselectAllToolStripMenuItem.Click += new System.EventHandler(this.unselectAllToolStripMenuItem_Click);
-            // 
-            // invertSelectionToolStripMenuItem
-            // 
-            this.invertSelectionToolStripMenuItem.Name = "invertSelectionToolStripMenuItem";
-            this.invertSelectionToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.invertSelectionToolStripMenuItem.Text = "&Invert selection";
-            this.invertSelectionToolStripMenuItem.Click += new System.EventHandler(this.invertSelectionToolStripMenuItem_Click);
-            // 
-            // transparencyToolStripMenuItem
-            // 
-            this.transparencyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemTransparency0,
-            this.toolStripMenuItemTransparency50,
-            this.toolStripMenuItemTransparency100});
-            this.transparencyToolStripMenuItem.Name = "transparencyToolStripMenuItem";
-            this.transparencyToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.transparencyToolStripMenuItem.Text = "Transparency";
-            // 
-            // toolStripMenuItemTransparency0
-            // 
-            this.toolStripMenuItemTransparency0.Name = "toolStripMenuItemTransparency0";
-            this.toolStripMenuItemTransparency0.Size = new System.Drawing.Size(105, 22);
-            this.toolStripMenuItemTransparency0.Text = "0%";
-            this.toolStripMenuItemTransparency0.Click += new System.EventHandler(this.toolStripMenuItemTransparency0_Click);
-            // 
-            // toolStripMenuItemTransparency50
-            // 
-            this.toolStripMenuItemTransparency50.Name = "toolStripMenuItemTransparency50";
-            this.toolStripMenuItemTransparency50.Size = new System.Drawing.Size(105, 22);
-            this.toolStripMenuItemTransparency50.Text = "50%";
-            this.toolStripMenuItemTransparency50.Click += new System.EventHandler(this.toolStripMenuItemTransparency50_Click);
-            // 
-            // toolStripMenuItemTransparency100
-            // 
-            this.toolStripMenuItemTransparency100.Name = "toolStripMenuItemTransparency100";
-            this.toolStripMenuItemTransparency100.Size = new System.Drawing.Size(105, 22);
-            this.toolStripMenuItemTransparency100.Text = "100%";
-            this.toolStripMenuItemTransparency100.Click += new System.EventHandler(this.toolStripMenuItemTransparency100_Click);
             // 
             // dockManager1
             // 
@@ -2041,7 +1932,6 @@ namespace Br3D
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.Shown += new System.EventHandler(this.FormMain_Shown);
-            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
             this.hideContainerLeft.ResumeLayout(false);
             this.panelContainer1.ResumeLayout(false);
@@ -2116,11 +2006,6 @@ namespace Br3D
         private DevExpress.XtraVerticalGrid.Rows.EditorRow rowEntityType;
         private DevExpress.XtraVerticalGrid.Rows.CategoryRow categoryCircle;
         private DevExpress.XtraVerticalGrid.Rows.EditorRow rowRadius;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem endPointToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem intersectionPointToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem middlePointToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem centerPointToolStripMenuItem;
         private DevExpress.XtraBars.Navigation.TileNavSubItem tileNavSubItemInsertImage;
         private DevExpress.XtraBars.Docking.DockPanel dockPanelDynamicInput;
         private DevExpress.XtraBars.Docking.ControlContainer controlContainer1;
@@ -2212,19 +2097,12 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemShowSymbol;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.BarButtonItem barButtonItemOptions;
-        private System.Windows.Forms.ToolStripMenuItem selectallToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem unselectAllToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem invertSelectionToolStripMenuItem;
         private DevExpress.XtraBars.BarButtonItem barButtonItemWorkspace;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupWorkspace;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
         private hanee.ThreeD.ControlCommandBar controlCommandBar1;
         private ControlAds controlAds1;
-        private System.Windows.Forms.ToolStripMenuItem transparencyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTransparency0;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTransparency50;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTransparency100;
         private DevExpress.XtraBars.Docking.AutoHideContainer hideContainerLeft;
         private DevExpress.XtraBars.BarButtonItem barButtonItemDrawBox;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageDraw3D;

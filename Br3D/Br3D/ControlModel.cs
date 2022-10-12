@@ -1,7 +1,9 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
+using hanee.Geometry;
 using hanee.ThreeD;
 using System;
 using System.Collections.Generic;
@@ -28,6 +30,15 @@ namespace Br3D
         devDept.Eyeshot.ToolBarButton toolBarButton2DMode = new devDept.Eyeshot.ToolBarButton(global::Br3D.Properties.Resources._2d_32px, "2D", null, devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true, null, null);
         devDept.Eyeshot.ToolBarButton toolBarButton3DMode = new devDept.Eyeshot.ToolBarButton(global::Br3D.Properties.Resources._3d_32px, "3D", null, devDept.Eyeshot.ToolBarButton.styleType.PushButton, true, true, null, null);
 
+        public BarButtonItem barButtonItemOsnapend { get; set; }
+        public BarButtonItem barButtonItemOsnapIntersection { get; set; }
+        public BarButtonItem barButtonItemOsnapMiddle { get; set; }
+        public BarButtonItem barButtonItemOsnapCenter { get; set; }
+        public BarButtonItem barButtonItemOsnapPoint { get; set; }
+        public CurLayerBarEditItem barEditItemCurLayer { get; set; }
+        public CurColorBarEditItem barEditItemCurColor { get; set; }
+        public CurLinetypeBarEditItem barEditItemCurLinetype { get; set; }
+        public DevExpress.XtraVerticalGrid.PropertyGridControl propertyGridControl1 { get; set; }
         public ControlModel()
         {
             InitializeComponent();
@@ -129,6 +140,19 @@ namespace Br3D
             }
         }
 
+        // 번역
+        public void Translate()
+        {
+            // context menu
+            endPointToolStripMenuItem.Text = LanguageHelper.Tr("End point(&E)");
+            intersectionPointToolStripMenuItem.Text = LanguageHelper.Tr("Intersection point(&I)");
+            middlePointToolStripMenuItem.Text = LanguageHelper.Tr("Middle point(&M)");
+            centerPointToolStripMenuItem.Text = LanguageHelper.Tr("Center point(&C)");
+            selectallToolStripMenuItem.Text = LanguageHelper.Tr("Select all(&A)");
+            unselectAllToolStripMenuItem.Text = LanguageHelper.Tr("Unselect all(&U)");
+            invertSelectionToolStripMenuItem.Text = LanguageHelper.Tr("Invert selection(&V)");
+            transparencyToolStripMenuItem.Text = LanguageHelper.Tr("Transparency(&T)");
+        }
         public void ViewportSingle()
         {
             if (hModel.Viewports.Contains(viewports[1]))
@@ -256,6 +280,237 @@ namespace Br3D
             hModel.Set2DView();
         }
 
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if (hModel == null)
+                return;
+            
+            // ctrl이나 shift가 눌러져 있는지?
+            bool withCtrl = true;
+            if (!System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl) &&
+                !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.RightCtrl) &&
+                !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftShift) &&
+                !System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.RightShift))
+            {
+                withCtrl = false;
+            }
 
+            // 액션실행중인지?
+            bool runningAction = ActionBase.runningAction != null;
+
+            if (withCtrl)
+            {
+                endPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.End);
+                intersectionPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Intersect);
+                middlePointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Mid);
+                centerPointToolStripMenuItem.Checked = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Center);
+
+                // ctrl이 눌러져 있으면 snap 관련 menu item만 표시
+                VisibleContextMenuItems(endPointToolStripMenuItem, intersectionPointToolStripMenuItem,
+                    middlePointToolStripMenuItem, centerPointToolStripMenuItem);
+            }
+            else
+            {
+                // 아무것도 안눌러져 있으면 선택관련 menu item만 표시
+                // 액션을 실행하고 있지 않아야 함
+                if (!runningAction)
+                {
+                    VisibleContextMenuItems(selectallToolStripMenuItem, unselectAllToolStripMenuItem,
+                        invertSelectionToolStripMenuItem, transparencyToolStripMenuItem);
+                }
+                else
+                {
+                    VisibleContextMenuItems();
+                }
+            }
+        }
+
+        // 해당 아이템을 표시한다.(나머지는 숨긴다)
+        private void VisibleContextMenuItems(params ToolStripMenuItem[] toolStripMenuItems)
+        {
+            foreach (ToolStripMenuItem item in contextMenuStrip1.Items)
+            {
+                item.Visible = false;
+            }
+
+            foreach (ToolStripMenuItem item in toolStripMenuItems)
+            {
+                item.Visible = true;
+            }
+        }
+
+        private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem == endPointToolStripMenuItem)
+            {
+                End();
+            }
+            else if (e.ClickedItem == intersectionPointToolStripMenuItem)
+            {
+                Intersection();
+            }
+            else if (e.ClickedItem == middlePointToolStripMenuItem)
+            {
+                Middle();
+            }
+            else if (e.ClickedItem == centerPointToolStripMenuItem)
+            {
+                Center();
+            }
+        }
+
+        public void End() => FlagOsnap(barButtonItemOsnapend, Snapping.objectSnapType.End);
+        public void Middle() => FlagOsnap(barButtonItemOsnapMiddle, Snapping.objectSnapType.Mid);
+        public void Point() => FlagOsnap(barButtonItemOsnapPoint, Snapping.objectSnapType.Point, null);
+        public void Intersection() => FlagOsnap(barButtonItemOsnapIntersection, Snapping.objectSnapType.Intersect);
+        public void Center() => FlagOsnap(barButtonItemOsnapCenter, Snapping.objectSnapType.Center);
+
+        void FlagOsnap(BarButtonItem barButtonItem, Snapping.objectSnapType snapType, BarButtonItem barButtonItem2 = null)
+        {
+            if (hModel == null)
+                return;
+
+            hModel.Snapping.FlagActiveObjectSnap(snapType);
+            barButtonItem.Down = hModel.Snapping.IsActiveObjectSnap(snapType);
+            if (barButtonItem2 != null)
+                barButtonItem2.Down = barButtonItem.Down;
+        }
+
+        // select all
+        private void selectallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            hModel.Entities.SelectAll();
+            hModel.Invalidate();
+            if(hModel.Entities.Count > 0)
+                RefreshPropertyGridControl(hModel.Entities[hModel.Entities.Count - 1]);
+            UpdateCurCombos();
+        }
+
+        // unselect all
+        private void unselectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            hModel.Entities.ClearSelection();
+            hModel.Invalidate();
+
+            RefreshPropertyGridControl(null);
+            UpdateCurCombos();
+        }
+
+        // invert selection
+        private void invertSelectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Entity lastSelectedEntity = null;
+            foreach (var ent in hModel.Entities)
+            {
+                ent.Selected = !ent.Selected;
+                if (ent.Selected)
+                    lastSelectedEntity = ent;
+            }
+            hModel.Invalidate();
+
+            RefreshPropertyGridControl(lastSelectedEntity);
+            UpdateCurCombos();
+        }
+
+        public void RefreshPropertyGridControl(object selectedObj)
+        {
+            if (selectedObj is Entity)
+            {
+                EntityProperties entityProperties = new EntityProperties(selectedObj as Entity);
+                propertyGridControl1.SelectedObject = entityProperties;
+            }
+            else
+            {
+                propertyGridControl1.SelectedObject = selectedObj;
+
+            }
+            propertyGridControl1.SetVisibleExistPropertiyOnly();
+
+            propertyGridControl1.BestFit();
+        }
+
+        public void UpdateCurCombos()
+        {
+            Options.Instance.SyncCurStatus(hModel);
+
+            var entities = hModel.GetAllSelectedEntities();
+
+            // cur layer
+            barEditItemCurLayer.UpdateCombo(entities);
+
+            // cur color
+            barEditItemCurColor.UpdateCombo(entities);
+
+            // cur linetype
+            barEditItemCurLinetype.UpdateCombo(entities);
+        }
+
+
+        // 투명도 - 0 (불투명)
+        private void toolStripMenuItemTransparency0_Click(object sender, EventArgs e)
+        {
+            SetTransparency(255);
+        }
+
+        private void toolStripMenuItemTransparency50_Click(object sender, EventArgs e)
+        {
+            SetTransparency(127);
+        }
+
+        private void toolStripMenuItemTransparency100_Click(object sender, EventArgs e)
+        {
+            SetTransparency(0);
+        }
+
+        void SetTransparency(int alpha)
+        {
+            if (hModel == null)
+                return;
+
+            foreach (var ent in hModel.Entities)
+            {
+                if (!ent.Selected)
+                    continue;
+
+                if (ent is BlockReference br)
+                {
+                    foreach (Entity be in hModel.Blocks[br.BlockName].Entities)
+                    {
+                        var color = be.GetUsedColor(hModel);
+
+                        be.Color = System.Drawing.Color.FromArgb(alpha, color);
+                        be.ColorMethod = colorMethodType.byEntity;
+                    }
+                }
+                else
+                {
+                    var color = ent.GetUsedColor(hModel);
+                    ent.Color = System.Drawing.Color.FromArgb(alpha, color);
+                    ent.ColorMethod = colorMethodType.byEntity;
+
+                }
+            }
+            hModel.Invalidate();
+        }
+
+        private void endPointToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            End();
+        }
+
+        private void intersectionPointToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Intersection();
+        }
+
+        private void middlePointToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Middle();
+        }
+
+        private void centerPointToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Center();
+        }
     }
 }
