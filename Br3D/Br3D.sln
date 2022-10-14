@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hanee.ThreeD", "Src\hanee.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hanee.Geometry", "Src\hanee.Geometry\hanee.Geometry.csproj", "{8A7185A8-B093-4391-984F-0E73F4E08541}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hanee.Terrain.Tool", "Src\hanee.Terrain.Tool\hanee.Terrain.Tool.csproj", "{D6B7CB9B-83D6-4CE3-8B7B-4B66DBBD2C49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{8A7185A8-B093-4391-984F-0E73F4E08541}.Release|x64.Build.0 = Release|x64
 		{8A7185A8-B093-4391-984F-0E73F4E08541}.Release|x86.ActiveCfg = Release|x86
 		{8A7185A8-B093-4391-984F-0E73F4E08541}.Release|x86.Build.0 = Release|x86
+		{D6B7CB9B-83D6-4CE3-8B7B-4B66DBBD2C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B7CB9B-83D6-4CE3-8B7B-4B66DBBD2C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B7CB9B-83D6-4CE3-8B7B-4B66DBBD2C49}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D6B7CB9B-83D6-4CE3-8B7B-4B66DBBD2C49}.Debug|x64.Build.0 = Debug|Any CPU
+		{D6B7CB9B-83D6-4CE3-8B7B-4B66DBBD2C49}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D6B7CB9B-83D6-4CE3-8B7B-4B66DBBD2C49}.Debug|x86.Build.0 = Debug|Any CPU
+		{D6B7CB9B-83D6-4CE3-8B7B-4B66DBBD2C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6B7CB9B-83D6-4CE3-8B7B-4B66DBBD2C49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6B7CB9B-83D6-4CE3-8B7B-4B66DBBD2C49}.Release|x64.ActiveCfg = Release|Any CPU
+		{D6B7CB9B-83D6-4CE3-8B7B-4B66DBBD2C49}.Release|x64.Build.0 = Release|Any CPU
+		{D6B7CB9B-83D6-4CE3-8B7B-4B66DBBD2C49}.Release|x86.ActiveCfg = Release|Any CPU
+		{D6B7CB9B-83D6-4CE3-8B7B-4B66DBBD2C49}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

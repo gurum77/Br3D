@@ -13,6 +13,9 @@ namespace hanee.ThreeD
 
         public void SetDefaultProperties(Entity ent, bool tempEntity=false)
         {
+            if (ent == null)
+                return;
+
             var options = Options.Instance;
 
             if (!model.Layers.Contains(options.currentLayerName))

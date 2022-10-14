@@ -1234,6 +1234,7 @@ namespace hanee.ThreeD
         protected devDept.Eyeshot.Environment environment;
         protected devDept.Eyeshot.Model GetModel() { return environment as devDept.Eyeshot.Model; }
         protected HModel GetHModel() { return environment as HModel; }
+        protected EntityPropertiesManager entityPropertiesManager => GetHModel()?.entityPropertiesManager;
         protected Plane GetWorkplane()
         {
             return environment?.GetWorkplane();

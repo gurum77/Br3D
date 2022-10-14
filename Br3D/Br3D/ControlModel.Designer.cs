@@ -64,6 +64,16 @@ namespace Br3D
             ((devDept.Eyeshot.ToolBarButton)(panToolBarButton2)),
             ((devDept.Eyeshot.ToolBarButton)(rotateToolBarButton2)),
             ((devDept.Eyeshot.ToolBarButton)(zoomFitToolBarButton2))});
+            devDept.Eyeshot.Legend legend1 = new devDept.Eyeshot.Legend(0D, 100D, "Title", "EL.", new System.Drawing.Point(24, 24), new System.Drawing.Size(10, 30), true, false, false, "{0:+0.###;-0.###;0}", System.Drawing.Color.Transparent, System.Drawing.Color.Black, System.Drawing.Color.Black, null, null, new System.Drawing.Color[] {
+            System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))),
+            System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(127)))), ((int)(((byte)(255))))),
+            System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))),
+            System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(127))))),
+            System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(0))))),
+            System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0))))),
+            System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(0))))),
+            System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(127)))), ((int)(((byte)(0))))),
+            System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))))}, true, false);
             devDept.Eyeshot.Grid grid1 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point2D(-100D, -100D), new devDept.Geometry.Point2D(100D, 100D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(0D, 0D, 1D)), System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, true, true, true, 10, 100, 10, System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90))))), System.Drawing.Color.Transparent, false, System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255))))));
             devDept.Eyeshot.Grid grid2 = new devDept.Eyeshot.Grid(new devDept.Geometry.Point3D(-100D, -100D, 0D), new devDept.Geometry.Point3D(100D, 100D, 0D), 10D, new devDept.Geometry.Plane(new devDept.Geometry.Point3D(0D, 0D, 0D), new devDept.Geometry.Vector3D(1D, 0D, 0D)), System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192))))), System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))), System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0))))), true, false, false, true, 10, 100, 0, System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128))))), System.Drawing.Color.Transparent, true, System.Drawing.Color.Transparent);
             devDept.Eyeshot.OriginSymbol originSymbol1 = new devDept.Eyeshot.OriginSymbol(10, devDept.Eyeshot.originSymbolStyleType.Ball, new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue, "Origin", "X", "Y", "Z", true, null, false);
@@ -77,7 +87,8 @@ namespace Br3D
             devDept.Eyeshot.Viewport.SavedViewsManager savedViewsManager1 = new devDept.Eyeshot.Viewport.SavedViewsManager(8);
             devDept.Eyeshot.Viewport viewport1 = new devDept.Eyeshot.Viewport(new System.Drawing.Point(0, 0), new System.Drawing.Size(463, 310), backgroundSettings1, camera1, new devDept.Eyeshot.ToolBar[] {
             toolBar1,
-            toolBar2}, new devDept.Eyeshot.Legend[0], devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
+            toolBar2}, new devDept.Eyeshot.Legend[] {
+            legend1}, devDept.Eyeshot.displayType.Rendered, true, false, false, false, new devDept.Eyeshot.Grid[] {
             grid1,
             grid2}, new devDept.Eyeshot.OriginSymbol[] {
             originSymbol1,
@@ -226,7 +237,6 @@ namespace Br3D
             grid7,
             grid8}, new devDept.Eyeshot.OriginSymbol[] {
             originSymbol5}, false, rotateSettings4, zoomSettings4, panSettings4, navigationSettings4, coordinateSystemIcon4, viewCubeIcon4, savedViewsManager4, devDept.Eyeshot.viewType.Right);
-            this.hModel = new hanee.ThreeD.HModel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.endPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.intersectionPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -239,9 +249,109 @@ namespace Br3D
             this.toolStripMenuItemTransparency0 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemTransparency50 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemTransparency100 = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.hModel)).BeginInit();
+            this.hModel = new hanee.ThreeD.HModel();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hModel)).BeginInit();
             this.SuspendLayout();
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.endPointToolStripMenuItem,
+            this.intersectionPointToolStripMenuItem,
+            this.middlePointToolStripMenuItem,
+            this.centerPointToolStripMenuItem,
+            this.selectallToolStripMenuItem,
+            this.unselectAllToolStripMenuItem,
+            this.invertSelectionToolStripMenuItem,
+            this.transparencyToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(169, 180);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // endPointToolStripMenuItem
+            // 
+            this.endPointToolStripMenuItem.Image = global::Br3D.Properties.Resources.snap_endpoint_small;
+            this.endPointToolStripMenuItem.Name = "endPointToolStripMenuItem";
+            this.endPointToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.endPointToolStripMenuItem.Text = "&End point";
+            this.endPointToolStripMenuItem.Click += new System.EventHandler(this.endPointToolStripMenuItem_Click);
+            // 
+            // intersectionPointToolStripMenuItem
+            // 
+            this.intersectionPointToolStripMenuItem.Image = global::Br3D.Properties.Resources.snap_intersection_small;
+            this.intersectionPointToolStripMenuItem.Name = "intersectionPointToolStripMenuItem";
+            this.intersectionPointToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.intersectionPointToolStripMenuItem.Text = "&Intersection point";
+            this.intersectionPointToolStripMenuItem.Click += new System.EventHandler(this.intersectionPointToolStripMenuItem_Click);
+            // 
+            // middlePointToolStripMenuItem
+            // 
+            this.middlePointToolStripMenuItem.Image = global::Br3D.Properties.Resources.snap_middle_small;
+            this.middlePointToolStripMenuItem.Name = "middlePointToolStripMenuItem";
+            this.middlePointToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.middlePointToolStripMenuItem.Text = "&Middle point";
+            this.middlePointToolStripMenuItem.Click += new System.EventHandler(this.middlePointToolStripMenuItem_Click);
+            // 
+            // centerPointToolStripMenuItem
+            // 
+            this.centerPointToolStripMenuItem.Image = global::Br3D.Properties.Resources.snap_center_small;
+            this.centerPointToolStripMenuItem.Name = "centerPointToolStripMenuItem";
+            this.centerPointToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.centerPointToolStripMenuItem.Text = "&Center point";
+            this.centerPointToolStripMenuItem.Click += new System.EventHandler(this.centerPointToolStripMenuItem_Click);
+            // 
+            // selectallToolStripMenuItem
+            // 
+            this.selectallToolStripMenuItem.Name = "selectallToolStripMenuItem";
+            this.selectallToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.selectallToolStripMenuItem.Text = "Select &all";
+            this.selectallToolStripMenuItem.Click += new System.EventHandler(this.selectallToolStripMenuItem_Click);
+            // 
+            // unselectAllToolStripMenuItem
+            // 
+            this.unselectAllToolStripMenuItem.Name = "unselectAllToolStripMenuItem";
+            this.unselectAllToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.unselectAllToolStripMenuItem.Text = "&Unselect all";
+            this.unselectAllToolStripMenuItem.Click += new System.EventHandler(this.unselectAllToolStripMenuItem_Click);
+            // 
+            // invertSelectionToolStripMenuItem
+            // 
+            this.invertSelectionToolStripMenuItem.Name = "invertSelectionToolStripMenuItem";
+            this.invertSelectionToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.invertSelectionToolStripMenuItem.Text = "&Invert selection";
+            this.invertSelectionToolStripMenuItem.Click += new System.EventHandler(this.invertSelectionToolStripMenuItem_Click);
+            // 
+            // transparencyToolStripMenuItem
+            // 
+            this.transparencyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemTransparency0,
+            this.toolStripMenuItemTransparency50,
+            this.toolStripMenuItemTransparency100});
+            this.transparencyToolStripMenuItem.Name = "transparencyToolStripMenuItem";
+            this.transparencyToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.transparencyToolStripMenuItem.Text = "Transparency";
+            // 
+            // toolStripMenuItemTransparency0
+            // 
+            this.toolStripMenuItemTransparency0.Name = "toolStripMenuItemTransparency0";
+            this.toolStripMenuItemTransparency0.Size = new System.Drawing.Size(105, 22);
+            this.toolStripMenuItemTransparency0.Text = "0%";
+            this.toolStripMenuItemTransparency0.Click += new System.EventHandler(this.toolStripMenuItemTransparency0_Click);
+            // 
+            // toolStripMenuItemTransparency50
+            // 
+            this.toolStripMenuItemTransparency50.Name = "toolStripMenuItemTransparency50";
+            this.toolStripMenuItemTransparency50.Size = new System.Drawing.Size(105, 22);
+            this.toolStripMenuItemTransparency50.Text = "50%";
+            this.toolStripMenuItemTransparency50.Click += new System.EventHandler(this.toolStripMenuItemTransparency50_Click);
+            // 
+            // toolStripMenuItemTransparency100
+            // 
+            this.toolStripMenuItemTransparency100.Name = "toolStripMenuItemTransparency100";
+            this.toolStripMenuItemTransparency100.Size = new System.Drawing.Size(105, 22);
+            this.toolStripMenuItemTransparency100.Text = "100%";
+            this.toolStripMenuItemTransparency100.Click += new System.EventHandler(this.toolStripMenuItemTransparency100_Click);
             // 
             // hModel
             // 
@@ -267,105 +377,6 @@ namespace Br3D
             this.hModel.Viewports.Add(viewport4);
             this.hModel.Visible = false;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.endPointToolStripMenuItem,
-            this.intersectionPointToolStripMenuItem,
-            this.middlePointToolStripMenuItem,
-            this.centerPointToolStripMenuItem,
-            this.selectallToolStripMenuItem,
-            this.unselectAllToolStripMenuItem,
-            this.invertSelectionToolStripMenuItem,
-            this.transparencyToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 202);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            // 
-            // endPointToolStripMenuItem
-            // 
-            this.endPointToolStripMenuItem.Image = global::Br3D.Properties.Resources.snap_endpoint_small;
-            this.endPointToolStripMenuItem.Name = "endPointToolStripMenuItem";
-            this.endPointToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.endPointToolStripMenuItem.Text = "&End point";
-            this.endPointToolStripMenuItem.Click += new System.EventHandler(this.endPointToolStripMenuItem_Click);
-            // 
-            // intersectionPointToolStripMenuItem
-            // 
-            this.intersectionPointToolStripMenuItem.Image = global::Br3D.Properties.Resources.snap_intersection_small;
-            this.intersectionPointToolStripMenuItem.Name = "intersectionPointToolStripMenuItem";
-            this.intersectionPointToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.intersectionPointToolStripMenuItem.Text = "&Intersection point";
-            this.intersectionPointToolStripMenuItem.Click += new System.EventHandler(this.intersectionPointToolStripMenuItem_Click);
-            // 
-            // middlePointToolStripMenuItem
-            // 
-            this.middlePointToolStripMenuItem.Image = global::Br3D.Properties.Resources.snap_middle_small;
-            this.middlePointToolStripMenuItem.Name = "middlePointToolStripMenuItem";
-            this.middlePointToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.middlePointToolStripMenuItem.Text = "&Middle point";
-            this.middlePointToolStripMenuItem.Click += new System.EventHandler(this.middlePointToolStripMenuItem_Click);
-            // 
-            // centerPointToolStripMenuItem
-            // 
-            this.centerPointToolStripMenuItem.Image = global::Br3D.Properties.Resources.snap_center_small;
-            this.centerPointToolStripMenuItem.Name = "centerPointToolStripMenuItem";
-            this.centerPointToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.centerPointToolStripMenuItem.Text = "&Center point";
-            this.centerPointToolStripMenuItem.Click += new System.EventHandler(this.centerPointToolStripMenuItem_Click);
-            // 
-            // selectallToolStripMenuItem
-            // 
-            this.selectallToolStripMenuItem.Name = "selectallToolStripMenuItem";
-            this.selectallToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.selectallToolStripMenuItem.Text = "Select &all";
-            this.selectallToolStripMenuItem.Click += new System.EventHandler(this.selectallToolStripMenuItem_Click);
-            // 
-            // unselectAllToolStripMenuItem
-            // 
-            this.unselectAllToolStripMenuItem.Name = "unselectAllToolStripMenuItem";
-            this.unselectAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.unselectAllToolStripMenuItem.Text = "&Unselect all";
-            this.unselectAllToolStripMenuItem.Click += new System.EventHandler(this.unselectAllToolStripMenuItem_Click);
-            // 
-            // invertSelectionToolStripMenuItem
-            // 
-            this.invertSelectionToolStripMenuItem.Name = "invertSelectionToolStripMenuItem";
-            this.invertSelectionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.invertSelectionToolStripMenuItem.Text = "&Invert selection";
-            this.invertSelectionToolStripMenuItem.Click += new System.EventHandler(this.invertSelectionToolStripMenuItem_Click);
-            // 
-            // transparencyToolStripMenuItem
-            // 
-            this.transparencyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemTransparency0,
-            this.toolStripMenuItemTransparency50,
-            this.toolStripMenuItemTransparency100});
-            this.transparencyToolStripMenuItem.Name = "transparencyToolStripMenuItem";
-            this.transparencyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.transparencyToolStripMenuItem.Text = "Transparency";
-            // 
-            // toolStripMenuItemTransparency0
-            // 
-            this.toolStripMenuItemTransparency0.Name = "toolStripMenuItemTransparency0";
-            this.toolStripMenuItemTransparency0.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItemTransparency0.Text = "0%";
-            this.toolStripMenuItemTransparency0.Click += new System.EventHandler(this.toolStripMenuItemTransparency0_Click);
-            // 
-            // toolStripMenuItemTransparency50
-            // 
-            this.toolStripMenuItemTransparency50.Name = "toolStripMenuItemTransparency50";
-            this.toolStripMenuItemTransparency50.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItemTransparency50.Text = "50%";
-            this.toolStripMenuItemTransparency50.Click += new System.EventHandler(this.toolStripMenuItemTransparency50_Click);
-            // 
-            // toolStripMenuItemTransparency100
-            // 
-            this.toolStripMenuItemTransparency100.Name = "toolStripMenuItemTransparency100";
-            this.toolStripMenuItemTransparency100.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItemTransparency100.Text = "100%";
-            this.toolStripMenuItemTransparency100.Click += new System.EventHandler(this.toolStripMenuItemTransparency100_Click);
-            // 
             // ControlModel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -373,8 +384,8 @@ namespace Br3D
             this.Controls.Add(this.hModel);
             this.Name = "ControlModel";
             this.Size = new System.Drawing.Size(930, 624);
-            ((System.ComponentModel.ISupportInitialize)(this.hModel)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.hModel)).EndInit();
             this.ResumeLayout(false);
 
         }

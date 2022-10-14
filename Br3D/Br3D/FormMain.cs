@@ -7,6 +7,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using hanee.Cad.Tool;
 using hanee.Geometry;
+using hanee.Terrain.Tool;
 using hanee.ThreeD;
 using System;
 using System.Collections.Generic;
@@ -315,6 +316,7 @@ namespace Br3D
             ribbonPageDraw3D.Visible = false;
             ribbonPageEdit.Visible = false;
             ribbonPageEdit3D.Visible = false;
+            ribbonPageTerrain.Visible = false;
             ribbonPageDimension.Visible = false;
         }
 
@@ -767,6 +769,11 @@ namespace Br3D
             SetFunctionByElement(barButtonItemAlign, Align, LanguageHelper.Tr("Align"), "Align", "align");
             SetFunctionByElement(barButtonItemSmartExtrude, SmartExtrude, LanguageHelper.Tr("Smart extrude"), "SmartExtrude", "se");
 
+            // terrain
+            SetFunctionByElement(barButtonItemCreateTerrain, CreateTerrain, LanguageHelper.Tr("Create terrain"), "CreateTerrain", "ct");
+            SetFunctionByElement(barButtonItemColoringTerrain, ColoringTerrain, LanguageHelper.Tr("Coloring terrain"), "ColoringTerrain", "crt");
+            
+
             // annotation
             SetFunctionByElement(barButtonItemCoordinates, Coorindates, LanguageHelper.Tr("Coordinates"), "Coordinates", "coor");
             SetFunctionByElement(barButtonItemDistance, Distance, LanguageHelper.Tr("Distance"), "Distance", "di");
@@ -823,7 +830,9 @@ namespace Br3D
         async void Align() => await new ActionAlign(model).RunAsync();
         async void SmartExtrude() => await new ActionSmartExtrude(model).RunAsync();
 
-
+        async void CreateTerrain() => await new ActionCreateTerrain(model).RunAsync();
+        async void ColoringTerrain() => await new ActionColoringTerrain(model).RunAsync();
+        
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
         async void DrawRegion() => await new ActionRegion(model).RunAsync();
         async void InsertImage() => await new ActionInsertImage(model).RunAsync();

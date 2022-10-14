@@ -328,6 +328,10 @@
       <Project>{8a7185a8-b093-4391-984f-0e73f4e08541}</Project>
       <Name>hanee.Geometry</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Src\hanee.Terrain.Tool\hanee.Terrain.Tool.csproj">
+      <Project>{d6b7cb9b-83d6-4ce3-8b7b-4b66dbbd2c49}</Project>
+      <Name>hanee.Terrain.Tool</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Src\hanee.ThreeD\hanee.ThreeD.csproj">
       <Project>{fc3755df-44f3-4bda-badc-4333146dbc84}</Project>
       <Name>hanee.ThreeD</Name>

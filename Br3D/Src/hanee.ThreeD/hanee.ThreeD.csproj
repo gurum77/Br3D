@@ -164,6 +164,7 @@
     <Compile Include="LanguageHelper.cs" />
     <Compile Include="LanguageOptionsHelper.cs" />
     <Compile Include="LeaderGripManager.cs" />
+    <Compile Include="LegendColorHelper.cs" />
     <Compile Include="LinearDimGripManager.cs" />
     <Compile Include="LinearPathGripManager.cs" />
     <Compile Include="LineGripManager.cs" />

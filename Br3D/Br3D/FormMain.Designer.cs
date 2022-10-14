@@ -186,6 +186,7 @@ namespace Br3D
             this.barEditItemCurLinetype = new hanee.ThreeD.CurLinetypeBarEditItem();
             this.repositoryItemImageComboBoxCurLinetype = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.barButtonItemReload = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemCreateTerrain = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -195,6 +196,8 @@ namespace Br3D
             this.ribbonPageDraw3D = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageTerrain = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageDimension = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupDim = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageEdit = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -225,6 +228,7 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.barButtonItemColoringTerrain = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
@@ -772,14 +776,17 @@ namespace Br3D
             this.barButtonItemReload,
             this.barButtonItemDrawCircleByCenterRadius,
             this.barButtonItemDrawCircleByFirstSecondThird,
-            this.barButtonItemDrawCircleByFirstSecond});
+            this.barButtonItemDrawCircleByFirstSecond,
+            this.barButtonItemCreateTerrain,
+            this.barButtonItemColoringTerrain});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 124;
+            this.ribbonControl1.MaxItemId = 126;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
             this.ribbonPageDraw,
             this.ribbonPageDraw3D,
+            this.ribbonPageTerrain,
             this.ribbonPageDimension,
             this.ribbonPageEdit,
             this.ribbonPageEdit3D,
@@ -1563,6 +1570,13 @@ namespace Br3D
             this.barButtonItemReload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemReload.ImageOptions.SvgImage")));
             this.barButtonItemReload.Name = "barButtonItemReload";
             // 
+            // barButtonItemCreateTerrain
+            // 
+            this.barButtonItemCreateTerrain.Caption = "Create Terrain";
+            this.barButtonItemCreateTerrain.Id = 124;
+            this.barButtonItemCreateTerrain.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemCreateTerrain.ImageOptions.SvgImage")));
+            this.barButtonItemCreateTerrain.Name = "barButtonItemCreateTerrain";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -1650,6 +1664,20 @@ namespace Br3D
             this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItemSmartExtrude);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.Text = "ribbonPageGroup3";
+            // 
+            // ribbonPageTerrain
+            // 
+            this.ribbonPageTerrain.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup7});
+            this.ribbonPageTerrain.Name = "ribbonPageTerrain";
+            this.ribbonPageTerrain.Text = "Terrain";
+            // 
+            // ribbonPageGroup7
+            // 
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemCreateTerrain);
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemColoringTerrain);
+            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
+            this.ribbonPageGroup7.Text = "ribbonPageGroup7";
             // 
             // ribbonPageDimension
             // 
@@ -1914,6 +1942,13 @@ namespace Br3D
             // 
             this.colorDialog1.FullOpen = true;
             // 
+            // barButtonItemColoringTerrain
+            // 
+            this.barButtonItemColoringTerrain.Caption = "Coloring Terrain";
+            this.barButtonItemColoringTerrain.Id = 125;
+            this.barButtonItemColoringTerrain.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemColoringTerrain.ImageOptions.SvgImage")));
+            this.barButtonItemColoringTerrain.Name = "barButtonItemColoringTerrain";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2156,5 +2191,9 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemDrawCircleByCenterRadius;
         private DevExpress.XtraBars.BarButtonItem barButtonItemDrawCircleByFirstSecondThird;
         private DevExpress.XtraBars.BarButtonItem barButtonItemDrawCircleByFirstSecond;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemCreateTerrain;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageTerrain;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemColoringTerrain;
     }
 }
