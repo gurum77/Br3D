@@ -1,6 +1,9 @@
-﻿using devDept.Eyeshot.Entities;
+﻿using devDept.Eyeshot;
+using devDept.Eyeshot.Entities;
 using devDept.Eyeshot.Translators;
+using devDept.Geometry;
 using devDept.Graphics;
+using devDept.Serialization;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -257,20 +260,19 @@ namespace hanee.ThreeD
             return false;
         }
 
-        // 파일이름을 받아서 WriteFileAsync를 리턴한다.
-        static public WriteFileAsync GetWriteFileAsync(devDept.Eyeshot.Model model, string filename, bool ascii = false)
+        static public WriteFileAsync GetWriteFileAsync(string filename, bool ascii = false, IList < Entity> entities = null, LayerKeyedCollection layers = null, BlockKeyedCollection blocks = null, MaterialKeyedCollection materials = null, TextStyleKeyedCollection textStyles = null, LineTypeKeyedCollection lineTypes = null, contentType contentType = contentType.GeometryAndTessellation, serializationType serializationType = serializationType.Uncompressed, linearUnitsType units = linearUnitsType.Meters, bool selectedOnly = false, Drawings drawings = null, HatchPatternKeyedCollection hatchPatterns = null)
         {
             string ext = System.IO.Path.GetExtension(filename);
             ext = ext.ToUpper();
 
-            WriteParamsWithDrawings writeParam = new WriteParamsWithDrawings(model, null);
+            WriteParamsWithDrawings writeParam = new WriteParamsWithDrawings(entities, layers, blocks, materials, textStyles, lineTypes, units, selectedOnly, null, hatchPatterns);
             WriteFileAsync wf = null;
             if (ext == ".BR3")
             {
-                var writeFileParam = new WriteFileParams(model.Entities, model.Layers, 
-                    model.Blocks, model.Materials, model.TextStyles, model.LineTypes, 
-                    devDept.Serialization.contentType.Geometry, devDept.Serialization.serializationType.Compressed, 
-                    devDept.Geometry.linearUnitsType.Meters, false, null, model.HatchPatterns);
+                var writeFileParam = new WriteFileParams(entities, layers,
+                    blocks, materials, textStyles, lineTypes,
+                    contentType, devDept.Serialization.serializationType.Compressed,
+                    units, false, null, hatchPatterns);
                 wf = new WriteFile(writeFileParam, filename);
             }
             else if (ext == ".IGES" || ext == ".IGS")
@@ -291,16 +293,12 @@ namespace hanee.ThreeD
             }
             else if (ext == ".DWG")
             {
-                WriteAutodeskParams aWriteParam = new WriteAutodeskParams(model, null);
+                WriteAutodeskParams aWriteParam = new WriteAutodeskParams(entities, layers, blocks, materials, textStyles, lineTypes, units, selectedOnly, null, false, 1, hatchPatterns);
                 wf = new WriteAutodesk(aWriteParam, filename);
             }
             else if (ext == ".HTML")
             {
-                WriteParamsWithMaterials writeParamTmp = new WriteParamsWithMaterials(model);
-                writeParamTmp.Materials = model.Materials;
-
-                wf = new WriteWebGL(writeParamTmp, Material.Aluminium, filename);
-
+                wf = new WriteWebGL(writeParam, Material.Aluminium, filename);
             }
             else if (ext == ".XML")
             {
@@ -308,7 +306,7 @@ namespace hanee.ThreeD
             }
             else if (ext == ".PRC")
             {
-                WritePrcParams prcParam = new WritePrcParams(model);
+                WritePrcParams prcParam = new WritePrcParams(entities, layers, blocks, materials, textStyles, lineTypes, units, selectedOnly, hatchPatterns);
                 wf = new WritePRC(prcParam, filename);
             }
             else
@@ -320,6 +318,14 @@ namespace hanee.ThreeD
 
 
             return wf;
+        }
+
+        // 파일이름을 받아서 WriteFileAsync를 리턴한다.
+        static public WriteFileAsync GetWriteFileAsync(devDept.Eyeshot.Model model, string filename, bool ascii = false)
+        {
+            return GetWriteFileAsync(filename, ascii, model.Entities, model.Layers, model.Blocks, model.Materials, model.TextStyles,
+                model.LineTypes, devDept.Serialization.contentType.Geometry, devDept.Serialization.serializationType.Compressed, linearUnitsType.Meters,
+                false, null, model.HatchPatterns);
         }
     }
 }

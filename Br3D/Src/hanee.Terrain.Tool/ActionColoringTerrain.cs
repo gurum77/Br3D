@@ -34,6 +34,7 @@ namespace hanee.Terrain.Tool
             var mesh = await GetEntity(LanguageHelper.Tr("Select mesh"), -1, false, selectableType) as Mesh;
             if(mesh != null)
             {
+                
                 if (mesh.MeshNature != Mesh.natureType.MulticolorPlain)
                 {
                     environment.Entities.Remove(mesh);
@@ -41,14 +42,36 @@ namespace hanee.Terrain.Tool
                     environment.Entities.Add(mesh);
                 }
 
-                
-                if (environment.Entities.BoxMin == null || environment.Entities.BoxMin == null)
+                // 전체  mesh의 높이를 기준으로 lengend를 구성한다.
+                double min = 0;
+                double max = 0;
+                foreach(var ent in environment.Entities)
                 {
-                    environment.Entities.Regen(null);
+                    if(ent is Mesh m)
+                    {
+                        if(m.BoxMin == null || m.BoxMax == null)
+                        {
+                            m.Regen(0.001);
+                        }
+                        if (m.BoxMin == null || m.BoxMax == null)
+                            continue;
+
+                        if(min == max)
+                        {
+                            min = m.BoxMin.Z;
+                            max = m.BoxMax.Z;
+                        }
+                        else
+                        {
+                            min = Math.Min(min, m.BoxMin.Z);
+                            max = Math.Max(max, m.BoxMax.Z);
+                        }
+                    }
                 }
+                
                 legend.Position = new System.Drawing.Point(100, 5);
-                legend.Max = environment.Entities.BoxMax.Z;
-                legend.Min = environment.Entities.BoxMin.Z;
+                legend.Min = min;
+                legend.Max = max;
                 legend.Visible = true;
                 legend.Title = "EL.";
                 legend.Subtitle = null;

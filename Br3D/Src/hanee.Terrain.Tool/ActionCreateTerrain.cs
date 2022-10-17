@@ -48,6 +48,7 @@ namespace hanee.Terrain.Tool
 
                         layerNames.Add(la.Name, true);
                     }
+                    break;
                 }
                 else if (ek.Value != null && ek.Value.KeyCode == Keys.E)
                 {

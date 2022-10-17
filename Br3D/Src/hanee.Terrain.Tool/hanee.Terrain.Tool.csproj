@@ -33,6 +33,11 @@
   <ItemGroup>
     <Reference Include="devDept.Eyeshot.Control.Win.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=5385d83d2fb4d7d9" />
     <Reference Include="devDept.Geometry.v2021, Version=2021.2.416.0, Culture=neutral, PublicKeyToken=9440825e8b4733bc, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v21.2.Core, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -46,7 +51,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionColoringTerrain.cs" />
+    <Compile Include="ActionCreateContour.cs" />
     <Compile Include="ActionCreateTerrain.cs" />
+    <Compile Include="FormCreateContour.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCreateContour.Designer.cs">
+      <DependentUpon>FormCreateContour.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +70,12 @@
       <Project>{FC3755DF-44F3-4BDA-BADC-4333146DBC84}</Project>
       <Name>hanee.ThreeD</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormCreateContour.resx">
+      <DependentUpon>FormCreateContour.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
