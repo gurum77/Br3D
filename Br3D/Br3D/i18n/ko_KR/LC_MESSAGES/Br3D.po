@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-10-11 08:39+0900\n"
-"PO-Revision-Date: 2022-10-11 08:39+0900\n"
+"POT-Creation-Date: 2022-10-17 20:01+0900\n"
+"PO-Revision-Date: 2022-10-17 20:01+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ko_KR\n"
@@ -33,6 +33,38 @@ msgstr "연결"
 msgid "Ext."
 msgstr "확장자"
 
+#: Br3D/ControlModel.cs:147
+msgid "End point(&E)"
+msgstr "끝점(&E)"
+
+#: Br3D/ControlModel.cs:148
+msgid "Intersection point(&I)"
+msgstr "교차점(&I)"
+
+#: Br3D/ControlModel.cs:149
+msgid "Middle point(&M)"
+msgstr "중간점(&M)"
+
+#: Br3D/ControlModel.cs:150
+msgid "Center point(&C)"
+msgstr "중심점(&C)"
+
+#: Br3D/ControlModel.cs:151
+msgid "Select all(&A)"
+msgstr "전체 선택(&A)"
+
+#: Br3D/ControlModel.cs:152
+msgid "Unselect all(&U)"
+msgstr "전체 선택 해제(&U)"
+
+#: Br3D/ControlModel.cs:153
+msgid "Invert selection(&V)"
+msgstr "선택 반전(&V)"
+
+#: Br3D/ControlModel.cs:154
+msgid "Transparency(&T)"
+msgstr "투명도(&T)"
+
 #: Br3D/Define.cs:7 Src/hanee.Cad.Tool/LayerControl.cs:63
 msgid "Line Weight"
 msgstr "선 두께"
@@ -41,7 +73,7 @@ msgstr "선 두께"
 msgid "Line Weight Method"
 msgstr "선 두께 지정방법"
 
-#: Br3D/Define.cs:9 Br3D/FormMain.cs:411 Br3D/FormMain.cs:800
+#: Br3D/Define.cs:9 Br3D/FormMain.cs:425 Br3D/FormMain.cs:806
 #: Src/hanee.Cad.Tool/FormLineType.cs:28
 msgid "Line Type"
 msgstr "선 타입"
@@ -58,7 +90,7 @@ msgstr "선 타입 축적"
 msgid "Color Method"
 msgstr "색 지정방법"
 
-#: Br3D/Define.cs:13 Br3D/FormMain.cs:409 Br3D/FormOptions.cs:41
+#: Br3D/Define.cs:13 Br3D/FormMain.cs:423 Br3D/FormOptions.cs:41
 #: Src/hanee.Cad.Tool/ActionList.cs:42
 msgid "General"
 msgstr "일반"
@@ -67,7 +99,7 @@ msgstr "일반"
 msgid "Define"
 msgstr "정의"
 
-#: Br3D/Define.cs:15 Br3D/FormMain.cs:423 Br3D/FormMain.cs:757
+#: Br3D/Define.cs:15 Br3D/FormMain.cs:437 Br3D/FormMain.cs:756
 #: Src/hanee.Cad.Tool/ActionInsertImage.cs:87
 #: Src/hanee.Cad.Tool/ActionScale.cs:88 Src/hanee.Cad.Tool/FormBlock.cs:50
 #: Src/hanee.ThreeD/ControlDistanceFactorDynamicInput.cs:39
@@ -78,576 +110,560 @@ msgstr "스케일"
 msgid "Method"
 msgstr "지정방법"
 
-#: Br3D/FormMain.cs:361
+#: Br3D/FormMain.cs:385
 msgid "2D/3D"
 msgstr "2D/3D"
 
-#: Br3D/FormMain.cs:362
+#: Br3D/FormMain.cs:386
 msgid "Display mode"
 msgstr "Display mode"
 
-#: Br3D/FormMain.cs:365
-msgid "End point(&E)"
-msgstr "끝점(&E)"
-
-#: Br3D/FormMain.cs:366
-msgid "Intersection point(&I)"
-msgstr "교차점(&I)"
-
-#: Br3D/FormMain.cs:367
-msgid "Middle point(&M)"
-msgstr "중간점(&M)"
-
-#: Br3D/FormMain.cs:368
-msgid "Center point(&C)"
-msgstr "중심점(&C)"
-
-#: Br3D/FormMain.cs:369
-msgid "Select all(&A)"
-msgstr "전체 선택(&A)"
-
-#: Br3D/FormMain.cs:370
-msgid "Unselect all(&U)"
-msgstr "전체 선택 해제(&U)"
-
-#: Br3D/FormMain.cs:371
-msgid "Invert selection(&V)"
-msgstr "선택 반전(&V)"
-
-#: Br3D/FormMain.cs:372
-msgid "Transparency(&T)"
-msgstr "투명도(&T)"
-
-#: Br3D/FormMain.cs:377
+#: Br3D/FormMain.cs:390
 msgid "Annotation/Measure"
 msgstr "주석/측정"
 
-#: Br3D/FormMain.cs:378 Br3D/FormMain.cs:388
+#: Br3D/FormMain.cs:391 Br3D/FormMain.cs:402
 msgid "Dimension"
 msgstr "치수"
 
-#: Br3D/FormMain.cs:379 Br3D/FormMain.cs:389
+#: Br3D/FormMain.cs:392 Br3D/FormMain.cs:403
 msgid "Draw"
 msgstr "그리기"
 
-#: Br3D/FormMain.cs:380
+#: Br3D/FormMain.cs:393
 msgid "Draw 3D"
 msgstr "3D 그리기"
 
-#: Br3D/FormMain.cs:381 Br3D/FormMain.cs:391
+#: Br3D/FormMain.cs:394
+msgid "Terrain"
+msgstr "지형"
+
+#: Br3D/FormMain.cs:395 Br3D/FormMain.cs:405
 msgid "Edit"
 msgstr "편집"
 
-#: Br3D/FormMain.cs:382
+#: Br3D/FormMain.cs:396
 msgid "Edit 3D"
 msgstr "3D 편집"
 
-#: Br3D/FormMain.cs:383
+#: Br3D/FormMain.cs:397
 msgid "Home"
 msgstr "홈"
 
-#: Br3D/FormMain.cs:384 Br3D/FormMain.cs:393 Br3D/FormMain.cs:820
+#: Br3D/FormMain.cs:398 Br3D/FormMain.cs:407 Br3D/FormMain.cs:826
 #: Br3D/FormOptions.cs:36
 msgid "Options"
 msgstr "옵션"
 
-#: Br3D/FormMain.cs:385 Br3D/FormMain.cs:397
+#: Br3D/FormMain.cs:399 Br3D/FormMain.cs:411
 msgid "Tools"
 msgstr "도구"
 
-#: Br3D/FormMain.cs:390
+#: Br3D/FormMain.cs:404
 msgid "Annotation"
 msgstr "주석"
 
-#: Br3D/FormMain.cs:392
+#: Br3D/FormMain.cs:406
 msgid "File"
 msgstr "파일"
 
-#: Br3D/FormMain.cs:394
+#: Br3D/FormMain.cs:408
 msgid "Ortho Mode"
 msgstr "직교 모드"
 
-#: Br3D/FormMain.cs:395
+#: Br3D/FormMain.cs:409
 msgid "Osnap"
 msgstr "객체 스냅"
 
-#: Br3D/FormMain.cs:396
+#: Br3D/FormMain.cs:410
 msgid "System"
 msgstr "시스템"
 
-#: Br3D/FormMain.cs:398
+#: Br3D/FormMain.cs:412
 msgid "Clear"
 msgstr "지우기"
 
-#: Br3D/FormMain.cs:399
+#: Br3D/FormMain.cs:413
 msgid "Viewports"
 msgstr "뷰 포트"
 
-#: Br3D/FormMain.cs:405
+#: Br3D/FormMain.cs:419
 msgid "Object Tree"
 msgstr "객체 트리"
 
-#: Br3D/FormMain.cs:406
+#: Br3D/FormMain.cs:420
 msgid "Properties"
 msgstr "속성"
 
-#: Br3D/FormMain.cs:410 Br3D/FormMain.cs:765 Src/hanee.Cad.Tool/FormBlock.cs:48
+#: Br3D/FormMain.cs:424 Br3D/FormMain.cs:764 Src/hanee.Cad.Tool/FormBlock.cs:48
 msgid "Block"
 msgstr "블럭"
 
-#: Br3D/FormMain.cs:412 Br3D/FormMain.cs:728
+#: Br3D/FormMain.cs:426 Br3D/FormMain.cs:727
 msgid "Text"
 msgstr "문자"
 
-#: Br3D/FormMain.cs:414
+#: Br3D/FormMain.cs:428
 msgid "Entity Type"
 msgstr "객체 타입"
 
-#: Br3D/FormMain.cs:415 Src/hanee.Cad.Tool/LayerControl.cs:58
+#: Br3D/FormMain.cs:429 Src/hanee.Cad.Tool/LayerControl.cs:58
 msgid "Visible"
 msgstr "보기"
 
-#: Br3D/FormMain.cs:416
+#: Br3D/FormMain.cs:430
 msgid "Max"
 msgstr "최대"
 
-#: Br3D/FormMain.cs:417
+#: Br3D/FormMain.cs:431
 msgid "Min"
 msgstr "최소"
 
-#: Br3D/FormMain.cs:418 Br3D/FormMain.cs:798
+#: Br3D/FormMain.cs:432 Br3D/FormMain.cs:804
 #: Src/hanee.Cad.Tool/ActionList.cs:44
 msgid "Layer"
 msgstr "레이어"
 
-#: Br3D/FormMain.cs:419 Br3D/FormOptions.cs:40
+#: Br3D/FormMain.cs:433 Br3D/FormOptions.cs:40
 #: Src/hanee.Cad.Tool/ActionList.cs:47 Src/hanee.Cad.Tool/LayerControl.cs:60
 msgid "Color"
 msgstr "색상"
 
-#: Br3D/FormMain.cs:420
+#: Br3D/FormMain.cs:434
 msgid "Color Type"
 msgstr "색상 종류"
 
-#: Br3D/FormMain.cs:421
+#: Br3D/FormMain.cs:435
 msgid "Group Index"
 msgstr "그룹"
 
-#: Br3D/FormMain.cs:422 Src/hanee.Cad.Tool/LayerControl.cs:62
+#: Br3D/FormMain.cs:436 Src/hanee.Cad.Tool/LayerControl.cs:62
 msgid "Line Type Name"
 msgstr "선 타입명"
 
-#: Br3D/FormMain.cs:424
+#: Br3D/FormMain.cs:438
 msgid "Weight"
 msgstr "두께"
 
-#: Br3D/FormMain.cs:425
+#: Br3D/FormMain.cs:439
 msgid "Weight Type"
 msgstr "두께 종류"
 
-#: Br3D/FormMain.cs:426 Src/hanee.Cad.Tool/ActionList.cs:82
+#: Br3D/FormMain.cs:440 Src/hanee.Cad.Tool/ActionList.cs:82
 msgid "Block Name"
 msgstr "블럭명"
 
-#: Br3D/FormMain.cs:427 Src/hanee.Cad.Tool/ActionList.cs:92
-#: Src/hanee.Cad.Tool/ActionText.cs:96
+#: Br3D/FormMain.cs:441 Src/hanee.Cad.Tool/ActionList.cs:92
+#: Src/hanee.Cad.Tool/ActionText.cs:97
 msgid "Contents"
 msgstr "내용"
 
-#: Br3D/FormMain.cs:428 Src/hanee.Cad.Tool/TextStyleControl.cs:61
+#: Br3D/FormMain.cs:442 Src/hanee.Cad.Tool/TextStyleControl.cs:61
 msgid "Style"
 msgstr "스타일"
 
-#: Br3D/FormMain.cs:429 Src/hanee.Cad.Tool/ActionCylinder.cs:115
+#: Br3D/FormMain.cs:443 Src/hanee.Cad.Tool/ActionCylinder.cs:116
 #: Src/hanee.Cad.Tool/ActionList.cs:93
 #: Src/hanee.Cad.Tool/ActionSmartExtrude.cs:143
 #: Src/hanee.Cad.Tool/ActionSmartExtrude.cs:144
-#: Src/hanee.Cad.Tool/ActionText.cs:74 Src/hanee.Cad.Tool/ActionText.cs:76
+#: Src/hanee.Cad.Tool/ActionText.cs:75 Src/hanee.Cad.Tool/ActionText.cs:77
 msgid "Height"
 msgstr "높이"
 
-#: Br3D/FormMain.cs:430
+#: Br3D/FormMain.cs:444
 msgid "Billboard"
 msgstr "정면유지"
 
-#: Br3D/FormMain.cs:431 Src/hanee.Cad.Tool/ActionList.cs:94
+#: Br3D/FormMain.cs:445 Src/hanee.Cad.Tool/ActionList.cs:94
 msgid "Width Factor"
 msgstr "폭 비율"
 
-#: Br3D/FormMain.cs:432 Src/hanee.Cad.Tool/ActionList.cs:83
+#: Br3D/FormMain.cs:446 Src/hanee.Cad.Tool/ActionList.cs:83
 #: Src/hanee.Cad.Tool/ActionList.cs:90
 msgid "Insertion Point"
 msgstr "삽입점"
 
-#: Br3D/FormMain.cs:433 Src/hanee.Cad.Tool/ActionList.cs:96
+#: Br3D/FormMain.cs:447 Src/hanee.Cad.Tool/ActionList.cs:96
 msgid "Backward"
 msgstr "뒤로 쓰기"
 
-#: Br3D/FormMain.cs:434 Src/hanee.Cad.Tool/ActionList.cs:97
+#: Br3D/FormMain.cs:448 Src/hanee.Cad.Tool/ActionList.cs:97
 msgid "Upside Down"
 msgstr "위 아래 반전"
 
-#: Br3D/FormMain.cs:435 Src/hanee.Cad.Tool/ActionList.cs:95
+#: Br3D/FormMain.cs:449 Src/hanee.Cad.Tool/ActionList.cs:95
 msgid "Alignment"
 msgstr "정렬"
 
-#: Br3D/FormMain.cs:707
+#: Br3D/FormMain.cs:706
 msgid "New"
 msgstr "새로 만들기"
 
-#: Br3D/FormMain.cs:708
+#: Br3D/FormMain.cs:707
 msgid "Open"
 msgstr "열기"
 
-#: Br3D/FormMain.cs:709 Br3D/FormMain.cs:1263
+#: Br3D/FormMain.cs:708 Br3D/FormMain.cs:1259
 msgid "Reload"
 msgstr "다시 열기"
 
-#: Br3D/FormMain.cs:710 Br3D/FormMain.cs:1239
+#: Br3D/FormMain.cs:709 Br3D/FormMain.cs:1235
 msgid "Save"
 msgstr "저장"
 
-#: Br3D/FormMain.cs:711
+#: Br3D/FormMain.cs:710
 msgid "Save As"
 msgstr "다른이름으로 저장"
 
-#: Br3D/FormMain.cs:712
+#: Br3D/FormMain.cs:711
 msgid "Save Image"
 msgstr "이미지 저장"
 
-#: Br3D/FormMain.cs:713
+#: Br3D/FormMain.cs:712
 msgid "Workspace"
 msgstr "작업공간"
 
-#: Br3D/FormMain.cs:714
+#: Br3D/FormMain.cs:713
 msgid "Exit"
 msgstr "종료"
 
-#: Br3D/FormMain.cs:717
+#: Br3D/FormMain.cs:716
 msgid "Line"
 msgstr "선"
 
-#: Br3D/FormMain.cs:718
+#: Br3D/FormMain.cs:717
 msgid "Circle"
 msgstr "원"
 
-#: Br3D/FormMain.cs:719
+#: Br3D/FormMain.cs:718
 msgid "Center point, Radius"
 msgstr "중심 점, 반지름"
 
-#: Br3D/FormMain.cs:720 Br3D/FormMain.cs:724
+#: Br3D/FormMain.cs:719 Br3D/FormMain.cs:723
 msgid "First, second, third point"
 msgstr "첫번째, 두번째, 세번째 점"
 
-#: Br3D/FormMain.cs:721
+#: Br3D/FormMain.cs:720
 msgid "First, second point"
 msgstr "첫번째, 두번째 점"
 
-#: Br3D/FormMain.cs:723
+#: Br3D/FormMain.cs:722
 msgid "Arc"
 msgstr "아크"
 
-#: Br3D/FormMain.cs:725
+#: Br3D/FormMain.cs:724
 msgid "Center, start, end point"
 msgstr "중심, 시작, 끝점"
 
-#: Br3D/FormMain.cs:726
+#: Br3D/FormMain.cs:725
 msgid "Polyline"
 msgstr "폴리선"
 
-#: Br3D/FormMain.cs:727
+#: Br3D/FormMain.cs:726
 msgid "Spline"
 msgstr "스플라인"
 
-#: Br3D/FormMain.cs:729
+#: Br3D/FormMain.cs:728
 msgid "Multiline Text"
 msgstr "여러줄 문자"
 
-#: Br3D/FormMain.cs:730
+#: Br3D/FormMain.cs:729
 msgid "Insert Block"
 msgstr "블럭 삽입"
 
-#: Br3D/FormMain.cs:731
+#: Br3D/FormMain.cs:730
 msgid "Insert Model"
 msgstr "모델 삽입"
 
-#: Br3D/FormMain.cs:732
+#: Br3D/FormMain.cs:731
 msgid "Insert Image"
 msgstr "이미지 삽입"
 
-#: Br3D/FormMain.cs:734
+#: Br3D/FormMain.cs:733
 msgid "Region"
 msgstr "영역"
 
-#: Br3D/FormMain.cs:736
+#: Br3D/FormMain.cs:735
 msgid "Cylinder"
 msgstr "실린더"
 
-#: Br3D/FormMain.cs:737
+#: Br3D/FormMain.cs:736
 msgid "Box"
 msgstr "박스"
 
-#: Br3D/FormMain.cs:738
+#: Br3D/FormMain.cs:737
 msgid "Cone"
 msgstr "콘"
 
-#: Br3D/FormMain.cs:739
+#: Br3D/FormMain.cs:738
 msgid "Sphere"
 msgstr "구"
 
-#: Br3D/FormMain.cs:740
+#: Br3D/FormMain.cs:739
 msgid "Torus"
 msgstr "토러스"
 
-#: Br3D/FormMain.cs:742
+#: Br3D/FormMain.cs:741
 msgid "Revolve"
 msgstr "회전"
 
-#: Br3D/FormMain.cs:743
+#: Br3D/FormMain.cs:742
 msgid "Loft"
 msgstr "Loft"
 
-#: Br3D/FormMain.cs:746
+#: Br3D/FormMain.cs:745
 msgid "Horizontal"
 msgstr "수평"
 
-#: Br3D/FormMain.cs:747
+#: Br3D/FormMain.cs:746
 msgid "Vertical"
 msgstr "수직"
 
-#: Br3D/FormMain.cs:748
+#: Br3D/FormMain.cs:747
 msgid "Aligned"
 msgstr "정렬"
 
-#: Br3D/FormMain.cs:749
+#: Br3D/FormMain.cs:748
 msgid "Diameter"
 msgstr "직경"
 
-#: Br3D/FormMain.cs:750 Src/hanee.Cad.Tool/ActionCircle.cs:192
-#: Src/hanee.Cad.Tool/ActionCylinder.cs:102
+#: Br3D/FormMain.cs:749 Src/hanee.Cad.Tool/ActionCircle.cs:196
+#: Src/hanee.Cad.Tool/ActionCylinder.cs:103
 #: Src/hanee.Cad.Tool/ActionFillet.cs:100
 #: Src/hanee.Cad.Tool/ControlScriptCad.cs:25
 msgid "Radius"
 msgstr "반지름"
 
-#: Br3D/FormMain.cs:751
+#: Br3D/FormMain.cs:750
 msgid "Leader"
 msgstr "지시선"
 
-#: Br3D/FormMain.cs:754
+#: Br3D/FormMain.cs:753
 msgid "Erase"
 msgstr "삭제"
 
-#: Br3D/FormMain.cs:755
+#: Br3D/FormMain.cs:754
 msgid "Move"
 msgstr "이동"
 
-#: Br3D/FormMain.cs:756
+#: Br3D/FormMain.cs:755
 msgid "Copy"
 msgstr "복사"
 
-#: Br3D/FormMain.cs:758
+#: Br3D/FormMain.cs:757
 msgid "Rotate"
 msgstr "회전"
 
-#: Br3D/FormMain.cs:759
+#: Br3D/FormMain.cs:758
 msgid "Offset"
 msgstr "간격띄우기"
 
-#: Br3D/FormMain.cs:760
+#: Br3D/FormMain.cs:759
 msgid "Mirror"
 msgstr "대칭"
 
-#: Br3D/FormMain.cs:761
+#: Br3D/FormMain.cs:760
 msgid "Explode"
 msgstr "분해"
 
-#: Br3D/FormMain.cs:762
+#: Br3D/FormMain.cs:761
 msgid "Trim"
 msgstr "잘라내기"
 
-#: Br3D/FormMain.cs:763
+#: Br3D/FormMain.cs:762
 msgid "Fillet"
 msgstr "필렛"
 
-#: Br3D/FormMain.cs:764
+#: Br3D/FormMain.cs:763
 msgid "Chamfer"
 msgstr "모따기"
 
-#: Br3D/FormMain.cs:768
+#: Br3D/FormMain.cs:767
 msgid "Subtract"
 msgstr "Subtract"
 
-#: Br3D/FormMain.cs:769
+#: Br3D/FormMain.cs:768
 msgid "Union"
 msgstr "Union"
 
-#: Br3D/FormMain.cs:770
+#: Br3D/FormMain.cs:769
 msgid "Intersection"
 msgstr "Intersection"
 
-#: Br3D/FormMain.cs:771
+#: Br3D/FormMain.cs:770
 msgid "Align"
 msgstr "정렬"
 
-#: Br3D/FormMain.cs:772
+#: Br3D/FormMain.cs:771
 msgid "Smart extrude"
 msgstr "스마트 돌출"
 
+#: Br3D/FormMain.cs:774
+msgid "Create terrain"
+msgstr "지형 생성"
+
 #: Br3D/FormMain.cs:775
+msgid "Coloring terrain"
+msgstr "지형 색 적용"
+
+#: Br3D/FormMain.cs:776
+msgid "Create contour"
+msgstr "등고선 생성"
+
+#: Br3D/FormMain.cs:781
 msgid "Coordinates"
 msgstr "좌표"
 
-#: Br3D/FormMain.cs:776 Src/hanee.Cad.Tool/ActionOffset.cs:37
+#: Br3D/FormMain.cs:782 Src/hanee.Cad.Tool/ActionOffset.cs:37
 msgid "Distance"
 msgstr "거리"
 
-#: Br3D/FormMain.cs:777
+#: Br3D/FormMain.cs:783
 msgid "Memo"
 msgstr "메모"
 
-#: Br3D/FormMain.cs:778
+#: Br3D/FormMain.cs:784
 msgid "Clear annotations"
 msgstr "주석 제거"
 
-#: Br3D/FormMain.cs:781 Src/hanee.Cad.Tool/ActionList.cs:57
+#: Br3D/FormMain.cs:787 Src/hanee.Cad.Tool/ActionList.cs:57
 #: Src/hanee.Cad.Tool/ActionList.cs:73
 msgid "Area"
 msgstr "면적"
 
-#: Br3D/FormMain.cs:782 Src/hanee.Cad.Tool/ActionList.cs:58
+#: Br3D/FormMain.cs:788 Src/hanee.Cad.Tool/ActionList.cs:58
 msgid "Volume"
 msgstr "체적"
 
-#: Br3D/FormMain.cs:785
+#: Br3D/FormMain.cs:791
 msgid "Ortho mode"
 msgstr "직교 모드"
 
-#: Br3D/FormMain.cs:786 Src/hanee.Cad.Tool/ControlScriptCad.cs:27
+#: Br3D/FormMain.cs:792 Src/hanee.Cad.Tool/ControlScriptCad.cs:27
 msgid "End Point"
 msgstr "끝점"
 
-#: Br3D/FormMain.cs:787
+#: Br3D/FormMain.cs:793
 msgid "Intersection Point"
 msgstr "교차점"
 
-#: Br3D/FormMain.cs:788
+#: Br3D/FormMain.cs:794
 msgid "Midle Point"
 msgstr "중간점"
 
-#: Br3D/FormMain.cs:789 Src/hanee.Cad.Tool/ControlScriptCad.cs:29
+#: Br3D/FormMain.cs:795 Src/hanee.Cad.Tool/ControlScriptCad.cs:29
 msgid "Center Point"
 msgstr "중심점"
 
-#: Br3D/FormMain.cs:790 Src/hanee.Cad.Tool/ActionList.cs:78
+#: Br3D/FormMain.cs:796 Src/hanee.Cad.Tool/ActionList.cs:78
 msgid "Point"
 msgstr "점"
 
-#: Br3D/FormMain.cs:793
+#: Br3D/FormMain.cs:799
 msgid "Single"
 msgstr "단일"
 
-#: Br3D/FormMain.cs:794
+#: Br3D/FormMain.cs:800
 msgid "1x1"
 msgstr "1x1"
 
-#: Br3D/FormMain.cs:795
+#: Br3D/FormMain.cs:801
 msgid "1x2"
 msgstr "1x2"
 
-#: Br3D/FormMain.cs:796
+#: Br3D/FormMain.cs:802
 msgid "2x2"
 msgstr "2x2"
 
-#: Br3D/FormMain.cs:799 Src/hanee.Cad.Tool/ActionList.cs:91
+#: Br3D/FormMain.cs:805 Src/hanee.Cad.Tool/ActionList.cs:91
 msgid "Text Style"
 msgstr "텍스트 스타일"
 
-#: Br3D/FormMain.cs:801
+#: Br3D/FormMain.cs:807
 msgid "List"
 msgstr "리스트"
 
-#: Br3D/FormMain.cs:804
+#: Br3D/FormMain.cs:810
 msgid "2D View"
 msgstr "2D 뷰"
 
-#: Br3D/FormMain.cs:805 Src/hanee.Cad.Tool/FormBlock.cs:52
+#: Br3D/FormMain.cs:811 Src/hanee.Cad.Tool/FormBlock.cs:52
 msgid "3D View"
 msgstr "3D 뷰"
 
-#: Br3D/FormMain.cs:806
+#: Br3D/FormMain.cs:812
 msgid "Rendered"
 msgstr "랜더링"
 
-#: Br3D/FormMain.cs:807
+#: Br3D/FormMain.cs:813
 msgid "Shaded"
 msgstr "음영처리"
 
-#: Br3D/FormMain.cs:808
+#: Br3D/FormMain.cs:814
 msgid "Hidden lines"
 msgstr "은선"
 
-#: Br3D/FormMain.cs:809
+#: Br3D/FormMain.cs:815
 msgid "Wireframe"
 msgstr "와이어프레이"
 
-#: Br3D/FormMain.cs:811
+#: Br3D/FormMain.cs:817
 msgid "Grid"
 msgstr "그리드"
 
-#: Br3D/FormMain.cs:812
+#: Br3D/FormMain.cs:818
 msgid "Toolbar"
 msgstr "툴바"
 
-#: Br3D/FormMain.cs:813
+#: Br3D/FormMain.cs:819
 msgid "Symbol"
 msgstr "심볼"
 
-#: Br3D/FormMain.cs:815
+#: Br3D/FormMain.cs:821
 msgid "Language"
 msgstr "언어"
 
-#: Br3D/FormMain.cs:816
+#: Br3D/FormMain.cs:822
 msgid "Korean"
 msgstr "한국어"
 
-#: Br3D/FormMain.cs:817
+#: Br3D/FormMain.cs:823
 msgid "English"
 msgstr "English"
 
-#: Br3D/FormMain.cs:818
+#: Br3D/FormMain.cs:824
 msgid "Homepage"
 msgstr "홈페이지"
 
-#: Br3D/FormMain.cs:819
+#: Br3D/FormMain.cs:825
 msgid "Check For Update"
 msgstr "업데이트 체크"
 
-#: Br3D/FormMain.cs:821
+#: Br3D/FormMain.cs:827
 msgid "About"
 msgstr "About"
 
-#: Br3D/FormMain.cs:1239
+#: Br3D/FormMain.cs:1235
 msgid "Do you want to save the file you are editing?"
 msgstr "편집중인 파일을 저장하시겠습니까?"
 
-#: Br3D/FormMain.cs:1263
+#: Br3D/FormMain.cs:1259
 msgid "Do you want to reload the current file?"
 msgstr "현재 파일을 다시 여시겠습니까?"
 
-#: Br3D/FormMain.cs:1330
+#: Br3D/FormMain.cs:1326
 msgid "Unsupported file."
 msgstr "지원하지 않는 파일입니다."
 
-#: Br3D/FormMain.cs:1401
+#: Br3D/FormMain.cs:1397
 msgid "Install now?"
 msgstr "지금 설치하시겠습니까?"
 
-#: Br3D/FormMain.cs:1401
+#: Br3D/FormMain.cs:1397
 msgid " update available"
 msgstr " 업데이트 가능"
 
-#: Br3D/FormMain.cs:1411
+#: Br3D/FormMain.cs:1407
 msgid "Update check failed! - wyUpdate.exe not found!"
 msgstr "업데이트 체크 실패! - wyUpdate.exe가 없습니다!"
 
@@ -707,6 +723,7 @@ msgstr "취소"
 #: Src/hanee.Cad.Tool/ActionMirror.cs:34 Src/hanee.Cad.Tool/ActionMove.cs:52
 #: Src/hanee.Cad.Tool/ActionRotate.cs:71 Src/hanee.Cad.Tool/ActionScale.cs:47
 #: Src/hanee.Cad.Tool/ActionTrim.cs:30
+#: Src/hanee.Terrain.Tool/ActionCreateTerrain.cs:56
 msgid "Select entities"
 msgstr "객체 선택"
 
@@ -734,38 +751,38 @@ msgstr "두번째 목적지 점"
 msgid "Third destination point"
 msgstr "세번째 목적지 점"
 
-#: Src/hanee.Cad.Tool/ActionAngle.cs:36 Src/hanee.Cad.Tool/ActionArc.cs:62
-#: Src/hanee.Cad.Tool/ActionCircle.cs:150
+#: Src/hanee.Cad.Tool/ActionAngle.cs:36 Src/hanee.Cad.Tool/ActionArc.cs:63
+#: Src/hanee.Cad.Tool/ActionCircle.cs:151
 #: Src/hanee.Cad.Tool/ActionCylinder.cs:96 Src/hanee.Cad.Tool/ActionList.cs:59
 #: Src/hanee.Cad.Tool/ActionList.cs:74
 msgid "Center point"
 msgstr "중심점"
 
 #: Src/hanee.Cad.Tool/ActionAngle.cs:40 Src/hanee.Cad.Tool/ActionArc.cs:36
-#: Src/hanee.Cad.Tool/ActionCircle.cs:160
-#: Src/hanee.Cad.Tool/ActionCircle.cs:178
+#: Src/hanee.Cad.Tool/ActionCircle.cs:162
+#: Src/hanee.Cad.Tool/ActionCircle.cs:181
 #: Src/hanee.Cad.Tool/ActionDimLinear.cs:166
 #: Src/hanee.Cad.Tool/ActionLine.cs:52 Src/hanee.Cad.Tool/ActionMirror.cs:41
 msgid "First point"
 msgstr "첫번째 점"
 
-#: Src/hanee.Cad.Tool/ActionAngle.cs:44 Src/hanee.Cad.Tool/ActionArc.cs:40
-#: Src/hanee.Cad.Tool/ActionCircle.cs:165
-#: Src/hanee.Cad.Tool/ActionCircle.cs:183
+#: Src/hanee.Cad.Tool/ActionAngle.cs:44 Src/hanee.Cad.Tool/ActionArc.cs:41
+#: Src/hanee.Cad.Tool/ActionCircle.cs:168
+#: Src/hanee.Cad.Tool/ActionCircle.cs:187
 #: Src/hanee.Cad.Tool/ActionDimLinear.cs:177
 #: Src/hanee.Cad.Tool/ActionMirror.cs:48
 msgid "Second point"
 msgstr "두번째 점"
 
-#: Src/hanee.Cad.Tool/ActionArc.cs:44 Src/hanee.Cad.Tool/ActionCircle.cs:170
+#: Src/hanee.Cad.Tool/ActionArc.cs:45 Src/hanee.Cad.Tool/ActionCircle.cs:173
 msgid "Third point"
 msgstr "세번째 점"
 
-#: Src/hanee.Cad.Tool/ActionArc.cs:66 Src/hanee.Cad.Tool/ActionList.cs:65
+#: Src/hanee.Cad.Tool/ActionArc.cs:68 Src/hanee.Cad.Tool/ActionList.cs:65
 msgid "Start point"
 msgstr "시작점"
 
-#: Src/hanee.Cad.Tool/ActionArc.cs:70 Src/hanee.Cad.Tool/ActionList.cs:66
+#: Src/hanee.Cad.Tool/ActionArc.cs:72 Src/hanee.Cad.Tool/ActionList.cs:66
 msgid "End point"
 msgstr "끝점"
 
@@ -785,7 +802,7 @@ msgstr "첫번째 점"
 msgid "Next point or Enter(Enter : Finish)"
 msgstr "다음 점 또는 엔터(엔터 : 종료)"
 
-#: Src/hanee.Cad.Tool/ActionArea.cs:138
+#: Src/hanee.Cad.Tool/ActionArea.cs:141
 msgid "Area cannot be measured!"
 msgstr "면적을 측정할 수 없습니다!"
 
@@ -797,12 +814,12 @@ msgstr "기준 점"
 msgid "Center point(3:3 Points, 2:2 Points)"
 msgstr "중심 점(3:3점, 2:2점)"
 
-#: Src/hanee.Cad.Tool/ActionCircle.cs:193
-#: Src/hanee.Cad.Tool/ActionCylinder.cs:103
+#: Src/hanee.Cad.Tool/ActionCircle.cs:197
+#: Src/hanee.Cad.Tool/ActionCylinder.cs:104
 msgid "Radius point"
 msgstr "반지름 점"
 
-#: Src/hanee.Cad.Tool/ActionCylinder.cs:116
+#: Src/hanee.Cad.Tool/ActionCylinder.cs:117
 msgid "Height point"
 msgstr "높이점"
 
@@ -987,7 +1004,7 @@ msgstr "다음 점(W : 선 두께)"
 msgid "Next point(W : Width, C : Close)"
 msgstr "다음 점(W : 선 두께, C : 닫기)"
 
-#: Src/hanee.Cad.Tool/ActionPolyline.cs:69
+#: Src/hanee.Cad.Tool/ActionPolyline.cs:71
 msgid "Width(> 0)"
 msgstr "선 두께(> 0)"
 
@@ -1037,7 +1054,7 @@ msgstr "첫번째 객체 선택"
 msgid "Select second entity"
 msgstr "두번째 객체 선택"
 
-#: Src/hanee.Cad.Tool/ActionText.cs:90
+#: Src/hanee.Cad.Tool/ActionText.cs:91
 msgid "Direction"
 msgstr "방향"
 
@@ -1053,19 +1070,19 @@ msgstr "객체 선택"
 msgid "Volume cannot be measured!"
 msgstr "체적을 측정할 수 없습니다!"
 
-#: Src/hanee.Cad.Tool/ActionWorkspace.cs:136
+#: Src/hanee.Cad.Tool/ActionWorkspace.cs:102
 msgid " Select workspace face(3 : 3 points, W : World, 1 : XY, 2 : XZ, 3 : YZ)"
 msgstr " 작업공간 면 선택(3 : 세점, W : 월드좌표계, 1 : XY, 2 : XZ, 3 : YZ)"
 
-#: Src/hanee.Cad.Tool/ActionWorkspace.cs:179
+#: Src/hanee.Cad.Tool/ActionWorkspace.cs:145
 msgid "Origin point(f - Select face)"
 msgstr "기준점(f - 면 선택)"
 
-#: Src/hanee.Cad.Tool/ActionWorkspace.cs:182
+#: Src/hanee.Cad.Tool/ActionWorkspace.cs:148
 msgid "X-axis point"
 msgstr "X축 끝점"
 
-#: Src/hanee.Cad.Tool/ActionWorkspace.cs:185
+#: Src/hanee.Cad.Tool/ActionWorkspace.cs:151
 msgid "Y-axis point"
 msgstr "Y축 끝점"
 
@@ -1153,6 +1170,22 @@ msgstr "SHX 파일명"
 #: Src/hanee.Cad.Tool/TextStyleControl.cs:62
 msgid "WidthFactor"
 msgstr "폭 비율"
+
+#: Src/hanee.Terrain.Tool/ActionColoringTerrain.cs:34
+msgid "Select mesh"
+msgstr "매쉬 선택"
+
+#: Src/hanee.Terrain.Tool/ActionCreateContour.cs:29
+msgid "Select a terrain"
+msgstr "지형 선택"
+
+#: Src/hanee.Terrain.Tool/ActionCreateContour.cs:85
+msgid "Completed"
+msgstr "완료"
+
+#: Src/hanee.Terrain.Tool/ActionCreateTerrain.cs:37
+msgid "Select layer(A:All layers, E:By entities)"
+msgstr "레이어 선택(A:모든 레이어, E:객체 선택)"
 
 #: Src/hanee.ThreeD/ControlDistanceAngleDynamicInput.cs:61
 msgid "By XYZ"
@@ -1392,9 +1425,6 @@ msgstr "더 많은 색"
 #~ msgid "Changed item"
 #~ msgstr "변경된 항목"
 
-#~ msgid "Created item"
-#~ msgstr "생성된 항목"
-
 #~ msgid "Deleted item"
 #~ msgstr "삭제된 항목"
 
@@ -1532,9 +1562,6 @@ msgstr "더 많은 색"
 
 #~ msgid "File Copy"
 #~ msgstr "파일 복사"
-
-#~ msgid "Completed"
-#~ msgstr "완료"
 
 #~ msgid "Extract completed"
 #~ msgstr "압축풀기 완료"

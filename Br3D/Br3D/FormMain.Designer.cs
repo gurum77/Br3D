@@ -187,6 +187,7 @@ namespace Br3D
             this.repositoryItemImageComboBoxCurLinetype = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.barButtonItemReload = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemCreateTerrain = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemColoringTerrain = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -228,7 +229,7 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.barButtonItemColoringTerrain = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemCreateContour = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
@@ -778,9 +779,10 @@ namespace Br3D
             this.barButtonItemDrawCircleByFirstSecondThird,
             this.barButtonItemDrawCircleByFirstSecond,
             this.barButtonItemCreateTerrain,
-            this.barButtonItemColoringTerrain});
+            this.barButtonItemColoringTerrain,
+            this.barButtonItemCreateContour});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 126;
+            this.ribbonControl1.MaxItemId = 127;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -1577,6 +1579,13 @@ namespace Br3D
             this.barButtonItemCreateTerrain.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemCreateTerrain.ImageOptions.SvgImage")));
             this.barButtonItemCreateTerrain.Name = "barButtonItemCreateTerrain";
             // 
+            // barButtonItemColoringTerrain
+            // 
+            this.barButtonItemColoringTerrain.Caption = "Coloring Terrain";
+            this.barButtonItemColoringTerrain.Id = 125;
+            this.barButtonItemColoringTerrain.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemColoringTerrain.ImageOptions.SvgImage")));
+            this.barButtonItemColoringTerrain.Name = "barButtonItemColoringTerrain";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -1676,6 +1685,7 @@ namespace Br3D
             // 
             this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemCreateTerrain);
             this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemColoringTerrain);
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemCreateContour);
             this.ribbonPageGroup7.Name = "ribbonPageGroup7";
             this.ribbonPageGroup7.Text = "ribbonPageGroup7";
             // 
@@ -1942,12 +1952,12 @@ namespace Br3D
             // 
             this.colorDialog1.FullOpen = true;
             // 
-            // barButtonItemColoringTerrain
+            // barButtonItemCreateContour
             // 
-            this.barButtonItemColoringTerrain.Caption = "Coloring Terrain";
-            this.barButtonItemColoringTerrain.Id = 125;
-            this.barButtonItemColoringTerrain.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemColoringTerrain.ImageOptions.SvgImage")));
-            this.barButtonItemColoringTerrain.Name = "barButtonItemColoringTerrain";
+            this.barButtonItemCreateContour.Caption = "Create contour";
+            this.barButtonItemCreateContour.Id = 126;
+            this.barButtonItemCreateContour.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemCreateContour.ImageOptions.SvgImage")));
+            this.barButtonItemCreateContour.Name = "barButtonItemCreateContour";
             // 
             // FormMain
             // 
@@ -2195,5 +2205,6 @@ namespace Br3D
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageTerrain;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
         private DevExpress.XtraBars.BarButtonItem barButtonItemColoringTerrain;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemCreateContour;
     }
 }

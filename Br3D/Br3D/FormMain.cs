@@ -391,6 +391,7 @@ namespace Br3D
             ribbonPageDimension.Text = LanguageHelper.Tr("Dimension");
             ribbonPageDraw.Text = LanguageHelper.Tr("Draw");
             ribbonPageDraw3D.Text = LanguageHelper.Tr("Draw 3D");
+            ribbonPageTerrain.Text = LanguageHelper.Tr("Terrain");
             ribbonPageEdit.Text = LanguageHelper.Tr("Edit");
             ribbonPageEdit3D.Text = LanguageHelper.Tr("Edit 3D");
             ribbonPageHome.Text = LanguageHelper.Tr("Home");
@@ -772,7 +773,9 @@ namespace Br3D
             // terrain
             SetFunctionByElement(barButtonItemCreateTerrain, CreateTerrain, LanguageHelper.Tr("Create terrain"), "CreateTerrain", "ct");
             SetFunctionByElement(barButtonItemColoringTerrain, ColoringTerrain, LanguageHelper.Tr("Coloring terrain"), "ColoringTerrain", "crt");
+            SetFunctionByElement(barButtonItemCreateContour, CreateContour, LanguageHelper.Tr("Create contour"), "CreateContour", "crc");
             
+
 
             // annotation
             SetFunctionByElement(barButtonItemCoordinates, Coorindates, LanguageHelper.Tr("Coordinates"), "Coordinates", "coor");
@@ -832,7 +835,9 @@ namespace Br3D
 
         async void CreateTerrain() => await new ActionCreateTerrain(model).RunAsync();
         async void ColoringTerrain() => await new ActionColoringTerrain(model).RunAsync();
+        async void CreateContour() => await new ActionCreateContour(model).RunAsync();
         
+
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
         async void DrawRegion() => await new ActionRegion(model).RunAsync();
         async void InsertImage() => await new ActionInsertImage(model).RunAsync();

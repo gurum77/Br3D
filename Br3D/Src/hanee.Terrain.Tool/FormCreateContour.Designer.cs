@@ -200,8 +200,6 @@ namespace hanee.Terrain.Tool
 
         private DevExpress.XtraEditors.SimpleButton simpleButtonCancel;
         private DevExpress.XtraEditors.SimpleButton simpleButtonOk;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditMinorLayer;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditMajorLayer;
         private DevExpress.XtraEditors.LabelControl labelControlMinorContour;
         private DevExpress.XtraEditors.LabelControl labelControlMajorContour;
         private DevExpress.XtraEditors.LabelControl labelControl3;
@@ -211,5 +209,7 @@ namespace hanee.Terrain.Tool
         public DevExpress.XtraEditors.TextEdit textEditMinorHeight;
         public DevExpress.XtraEditors.TextEdit textEditMajorHeight;
         private DevExpress.XtraEditors.GroupControl groupControl1;
+        public DevExpress.XtraEditors.ComboBoxEdit comboBoxEditMinorLayer;
+        public DevExpress.XtraEditors.ComboBoxEdit comboBoxEditMajorLayer;
     }
 }

@@ -24,10 +24,11 @@ namespace hanee.Terrain.Tool
 
             var selectableType = new Dictionary<Type, bool>();
             selectableType.Add(typeof(Mesh), true);
-            while(true)
+            selectableType.Add(typeof(Brep), true);
+            while (true)
             {
-                var mesh = await GetEntity(LanguageHelper.Tr("Select a terrain"), -1, false, selectableType) as Mesh;
-                if (mesh == null)
+                var ent = await GetEntity(LanguageHelper.Tr("Select a terrain"), -1, false, selectableType);
+                if (ent == null)
                     break;
                 if (IsCanceled() || IsEntered())
                     break;
@@ -36,30 +37,46 @@ namespace hanee.Terrain.Tool
                 if (form.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                     break;
 
-                if (mesh.BoxMin == null || mesh.BoxMax == null)
-                    mesh.Regen(0.001);
-                if (mesh.BoxMin == null || mesh.BoxMax == null)
+                if (ent.BoxMin == null || ent.BoxMax == null)
+                    ent.Regen(0.001);
+                if (ent.BoxMin == null || ent.BoxMax == null)
                     break;
-                   
-                var min = mesh.BoxMin.Z;
-                var max = mesh.BoxMax.Z;
-                var elevations = hanee.Geometry.Util.GetAllChainaInRange(min, max, form.textEditMinorHeight.ToDouble(), true);
+
+                var minorHeight = form.textEditMinorHeight.Text.ToDouble();
+                var majorHeight = form.textEditMajorHeight.Text.ToDouble();
+                var minorLayerName = form.comboBoxEditMinorLayer.SelectedItem.ToString();
+                var majorLayerName = form.comboBoxEditMajorLayer.SelectedItem.ToString();
+                var min = ent.BoxMin.Z;
+                var max = ent.BoxMax.Z;
+                var elevations = hanee.Geometry.Util.GetAllChainaInRange(min, max, minorHeight, true);
 
                 var entities = new List<Entity>();
                 foreach(var el in elevations)
                 {
-                    var plane = Plane.XY;
-                    plane.Origin.Z = el;
-                    var curves = mesh.Section(plane, 0.001);
+                    var plane = new Plane(new Point3D(0, 0, el), Vector3D.AxisZ);
+                    ICurve[] curves = null;
+                    if(ent is Mesh mesh)
+                    {
+                        curves = mesh.Section(plane, 0.001);
+                    }
+                    else if(ent is Brep brep)
+                    {
+                        curves = brep.Section(plane, 0.001);
+                    }
                     if (curves == null)
                         continue;
 
                     foreach(var curve in curves)
                     {
-                        var ent = curve as Entity;
-                        if (ent == null)
+                        var tmpEnt = curve as Entity;
+                        if (tmpEnt == null)
                             continue;
-                        entities.Add(ent);
+                        if (hanee.Geometry.Util.IsTick(el, majorHeight))
+                            tmpEnt.LayerName = majorLayerName;
+                        else
+                            tmpEnt.LayerName = minorLayerName;
+                        tmpEnt.ColorMethod = colorMethodType.byLayer;
+                        entities.Add(tmpEnt);
                     }
                 }
 

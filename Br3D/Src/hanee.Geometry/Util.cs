@@ -15,11 +15,13 @@ namespace hanee.Geometry
             return (offset * count).Equals(sta, 0.001);
         }
 
-
         // 범위내 모든 측점간격을 가져온다.
         // 시점 / 종점을 포함한 측점간격을 리턴
         static public List<double> GetAllChainaInRange(double startSta, double startEnd, double offset, bool includeStartEnd = true)
         {
+            if (offset <= 0.1)
+                return null;
+
             List<double> chainages = new List<double>();
             // 시점 
             if (includeStartEnd)
