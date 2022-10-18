@@ -51,22 +51,22 @@ namespace hanee.Terrain.Tool
                 var elevations = hanee.Geometry.Util.GetAllChainaInRange(min, max, minorHeight, true);
 
                 var entities = new List<Entity>();
-                foreach(var el in elevations)
+                foreach (var el in elevations)
                 {
                     var plane = new Plane(new Point3D(0, 0, el), Vector3D.AxisZ);
                     ICurve[] curves = null;
-                    if(ent is Mesh mesh)
+                    if (ent is Mesh mesh)
                     {
                         curves = mesh.Section(plane, 0.001);
                     }
-                    else if(ent is Brep brep)
+                    else if (ent is Brep brep)
                     {
                         curves = brep.Section(plane, 0.001);
                     }
                     if (curves == null)
                         continue;
 
-                    foreach(var curve in curves)
+                    foreach (var curve in curves)
                     {
                         var tmpEnt = curve as Entity;
                         if (tmpEnt == null)
@@ -76,29 +76,39 @@ namespace hanee.Terrain.Tool
                         else
                             tmpEnt.LayerName = minorLayerName;
                         tmpEnt.ColorMethod = colorMethodType.byLayer;
+                        tmpEnt.LineWeightMethod = colorMethodType.byLayer;
                         entities.Add(tmpEnt);
                     }
                 }
 
                 // dwg로 내보내기를 한다.
-                SaveFileDialog dlg = new SaveFileDialog();
-                dlg.Filter = HModel.FilterForSaveDialog();
-                dlg.DefaultExt = "dwg";
-                if(dlg.ShowDialog() == DialogResult.OK && environment is Model model)
+                if (form.checkEditSaveAsFile.Checked)
                 {
-                    var wf = FileHelper.GetWriteFileAsync(dlg.FileName, false, entities, model.Layers, model.Blocks, model.Materials, model.TextStyles, model.LineTypes, devDept.Serialization.contentType.Geometry,
-                        devDept.Serialization.serializationType.Compressed, linearUnitsType.Meters, false, null, model.HatchPatterns);
-                    if(wf != null)
+                    SaveFileDialog dlg = new SaveFileDialog();
+                    dlg.Filter = HModel.FilterForSaveDialog();
+                    dlg.DefaultExt = "dwg";
+                    if (dlg.ShowDialog() == DialogResult.OK && environment is Model model)
                     {
-                        wf.DoWork();
-                        MessageBox.Show(LanguageHelper.Tr("Completed"));
+                        var wf = FileHelper.GetWriteFileAsync(dlg.FileName, false, entities, model.Layers, model.Blocks, model.Materials, model.TextStyles, model.LineTypes, devDept.Serialization.contentType.Geometry,
+                            devDept.Serialization.serializationType.Compressed, linearUnitsType.Meters, false, null, model.HatchPatterns);
+                        if (wf != null)
+                        {
+                            wf.DoWork();
+                            MessageBox.Show(LanguageHelper.Tr("Completed"));
+                        }
                     }
                 }
-
+                // 아니면 직접 그린다.
+                else
+                {
+                    environment.Entities.AddRange(entities);
+                    environment.Entities.Regen();
+                    environment.Invalidate();
+                }
 
                 break;
             }
-                
+
 
             EndAction();
             return true;

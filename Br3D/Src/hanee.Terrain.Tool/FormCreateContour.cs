@@ -1,4 +1,5 @@
 ﻿using devDept.Eyeshot;
+using hanee.ThreeD;
 using System;
 
 namespace hanee.Terrain.Tool
@@ -10,6 +11,22 @@ namespace hanee.Terrain.Tool
         {
             InitializeComponent();
             this.model = model;
+            Translate();
+        }
+
+        private void Translate()
+        {
+            this.Text = LanguageHelper.Tr("Create contour");
+
+            groupControl1.Text = LanguageHelper.Tr("Options");
+            labelControlHeight.Text = LanguageHelper.Tr("Height");
+            labelControlLayer.Text = LanguageHelper.Tr("Layer");
+
+            labelControlMajorContour.Text = LanguageHelper.Tr("Major contour");
+            labelControlMinorContour.Text = LanguageHelper.Tr("Minor contour");
+
+            simpleButtonOk.Text = LanguageHelper.Tr("Ok");
+            simpleButtonCancel.Text = LanguageHelper.Tr("Cancel");
         }
 
         private void FormCreateContour_Load(object sender, EventArgs e)

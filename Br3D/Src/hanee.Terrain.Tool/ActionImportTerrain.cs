@@ -1,4 +1,6 @@
-﻿using hanee.ThreeD;
+﻿using devDept.Eyeshot.Entities;
+using hanee.ThreeD;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -33,9 +35,13 @@ namespace hanee.Terrain.Tool
                         var mesh = TerrainExchanger.FromLandXML(dlg.FileName);
                         if (mesh != null)
                         {
+
                             environment.Entities.Add(mesh);
                             environment.Entities.Regen(null);
                             environment.Invalidate();
+
+                            var entities = new List<Entity>() { mesh };
+                            environment.ZoomFit(entities, false);
                         }
                     }
 
