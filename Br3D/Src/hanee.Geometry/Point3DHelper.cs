@@ -79,6 +79,11 @@ namespace hanee.Geometry
             return new Point2D(pt.Y, pt.X);
         }
 
+        public static string ToStringWithSpace(this Point3D pt)
+        {
+            return $"{pt.X} {pt.Y} {pt.Z}";
+        }
+
         public static Vector2D ToDir(this Point2D pt)
         {
             var dir = pt.AsVector;

@@ -189,6 +189,7 @@ namespace Br3D
             this.barButtonItemCreateTerrain = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemColoringTerrain = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemCreateContour = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemImportTerrain = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -200,6 +201,7 @@ namespace Br3D
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageTerrain = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroupTerrainExchange = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageDimension = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupDim = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageEdit = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -230,8 +232,7 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.ribbonPageGroupTerrainExchange = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.barButtonItemImportTerrain = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemExportTerrain = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
@@ -783,9 +784,10 @@ namespace Br3D
             this.barButtonItemCreateTerrain,
             this.barButtonItemColoringTerrain,
             this.barButtonItemCreateContour,
-            this.barButtonItemImportTerrain});
+            this.barButtonItemImportTerrain,
+            this.barButtonItemExportTerrain});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 128;
+            this.ribbonControl1.MaxItemId = 129;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -1596,6 +1598,13 @@ namespace Br3D
             this.barButtonItemCreateContour.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemCreateContour.ImageOptions.SvgImage")));
             this.barButtonItemCreateContour.Name = "barButtonItemCreateContour";
             // 
+            // barButtonItemImportTerrain
+            // 
+            this.barButtonItemImportTerrain.Caption = "Import terrain";
+            this.barButtonItemImportTerrain.Id = 127;
+            this.barButtonItemImportTerrain.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemImportTerrain.ImageOptions.SvgImage")));
+            this.barButtonItemImportTerrain.Name = "barButtonItemImportTerrain";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -1699,6 +1708,13 @@ namespace Br3D
             this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemCreateContour);
             this.ribbonPageGroup7.Name = "ribbonPageGroup7";
             this.ribbonPageGroup7.Text = "ribbonPageGroup7";
+            // 
+            // ribbonPageGroupTerrainExchange
+            // 
+            this.ribbonPageGroupTerrainExchange.ItemLinks.Add(this.barButtonItemImportTerrain);
+            this.ribbonPageGroupTerrainExchange.ItemLinks.Add(this.barButtonItemExportTerrain);
+            this.ribbonPageGroupTerrainExchange.Name = "ribbonPageGroupTerrainExchange";
+            this.ribbonPageGroupTerrainExchange.Text = "Terrain exchange";
             // 
             // ribbonPageDimension
             // 
@@ -1963,18 +1979,12 @@ namespace Br3D
             // 
             this.colorDialog1.FullOpen = true;
             // 
-            // ribbonPageGroupTerrainExchange
+            // barButtonItemExportTerrain
             // 
-            this.ribbonPageGroupTerrainExchange.ItemLinks.Add(this.barButtonItemImportTerrain);
-            this.ribbonPageGroupTerrainExchange.Name = "ribbonPageGroupTerrainExchange";
-            this.ribbonPageGroupTerrainExchange.Text = "Terrain exchange";
-            // 
-            // barButtonItemImportTerrain
-            // 
-            this.barButtonItemImportTerrain.Caption = "Import terrain";
-            this.barButtonItemImportTerrain.Id = 127;
-            this.barButtonItemImportTerrain.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemImportTerrain.ImageOptions.SvgImage")));
-            this.barButtonItemImportTerrain.Name = "barButtonItemImportTerrain";
+            this.barButtonItemExportTerrain.Caption = "Export terrain";
+            this.barButtonItemExportTerrain.Id = 128;
+            this.barButtonItemExportTerrain.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemExportTerrain.ImageOptions.SvgImage")));
+            this.barButtonItemExportTerrain.Name = "barButtonItemExportTerrain";
             // 
             // FormMain
             // 
@@ -2225,5 +2235,6 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemCreateContour;
         private DevExpress.XtraBars.BarButtonItem barButtonItemImportTerrain;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupTerrainExchange;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemExportTerrain;
     }
 }

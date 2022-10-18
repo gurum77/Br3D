@@ -53,6 +53,7 @@
     <Compile Include="ActionColoringTerrain.cs" />
     <Compile Include="ActionCreateContour.cs" />
     <Compile Include="ActionCreateTerrain.cs" />
+    <Compile Include="ActionExportTerrain.cs" />
     <Compile Include="ActionImportTerrain.cs" />
     <Compile Include="FormCreateContour.cs">
       <SubType>Form</SubType>
@@ -63,6 +64,7 @@
     <Compile Include="LandXML12.cs" />
     <Compile Include="NamespaceIgnorantXmlTextReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TerrainExchanger.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\hanee.Geometry\hanee.Geometry.csproj">

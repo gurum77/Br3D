@@ -1,12 +1,13 @@
-﻿using hanee.ThreeD;
+﻿using devDept.Eyeshot.Entities;
+using hanee.ThreeD;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace hanee.Terrain.Tool
 {
-    public class ActionImportTerrain : ActionBase
+    public class ActionExportTerrain : ActionBase
     {
-        public ActionImportTerrain(devDept.Eyeshot.Environment environment) : base(environment)
+        public ActionExportTerrain(devDept.Eyeshot.Environment environment) : base(environment)
         {
         }
 
@@ -16,34 +17,30 @@ namespace hanee.Terrain.Tool
         public async Task<bool> RunAsync()
         {
             StartAction();
-
-            while (true)
+            while(true)
             {
+                var mesh = await GetEntity(LanguageHelper.Tr("Select mesh"));
+                if (IsEntered() || IsCanceled())
+                    break;
+                
                 var k = await GetKey(LanguageHelper.Tr("X:LandXML 1.2"));
                 if (IsEntered() || IsCanceled())
                     break;
 
                 if (k.KeyCode == Keys.X)
                 {
-                    OpenFileDialog dlg = new OpenFileDialog();
+                    var dlg = new SaveFileDialog();
                     dlg.Filter = "LandXML 1.2|*.xml";
                     dlg.DefaultExt = "xml";
                     if (dlg.ShowDialog() == DialogResult.OK)
                     {
-                        var mesh = TerrainExchanger.FromLandXML(dlg.FileName);
-                        if (mesh != null)
-                        {
-                            environment.Entities.Add(mesh);
-                            environment.Entities.Regen(null);
-                            environment.Invalidate();
-                        }
+                        if (TerrainExchanger.ToLandXML(mesh as Mesh, dlg.FileName))
+                            MessageBox.Show("Export completed!");
                     }
-
                 }
 
                 break;
             }
-
 
             EndAction();
             return true;

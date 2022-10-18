@@ -776,7 +776,8 @@ namespace Br3D
             SetFunctionByElement(barButtonItemColoringTerrain, ColoringTerrain, LanguageHelper.Tr("Coloring terrain"), "ColoringTerrain", "crt");
             SetFunctionByElement(barButtonItemCreateContour, CreateContour, LanguageHelper.Tr("Create contour"), "CreateContour", "crc");
             SetFunctionByElement(barButtonItemImportTerrain, ImportTerrain, LanguageHelper.Tr("Import terrain"), "ImportTerrain", "it");
-
+            SetFunctionByElement(barButtonItemExportTerrain, ExportTerrain, LanguageHelper.Tr("Export terrain"), "ExportTerrain", "et");
+            
 
 
             // annotation
@@ -839,8 +840,8 @@ namespace Br3D
         async void ColoringTerrain() => await new ActionColoringTerrain(model).RunAsync();
         async void CreateContour() => await new ActionCreateContour(model).RunAsync();
         async void ImportTerrain() => await new ActionImportTerrain(model).RunAsync();
+        async void ExportTerrain() => await new ActionExportTerrain(model).RunAsync();
         
-
 
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
         async void DrawRegion() => await new ActionRegion(model).RunAsync();
