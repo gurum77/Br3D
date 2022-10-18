@@ -53,12 +53,15 @@
     <Compile Include="ActionColoringTerrain.cs" />
     <Compile Include="ActionCreateContour.cs" />
     <Compile Include="ActionCreateTerrain.cs" />
+    <Compile Include="ActionImportTerrain.cs" />
     <Compile Include="FormCreateContour.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormCreateContour.Designer.cs">
       <DependentUpon>FormCreateContour.cs</DependentUpon>
     </Compile>
+    <Compile Include="LandXML12.cs" />
+    <Compile Include="NamespaceIgnorantXmlTextReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

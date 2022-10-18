@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace Br3D
 {
@@ -774,7 +775,8 @@ namespace Br3D
             SetFunctionByElement(barButtonItemCreateTerrain, CreateTerrain, LanguageHelper.Tr("Create terrain"), "CreateTerrain", "ct");
             SetFunctionByElement(barButtonItemColoringTerrain, ColoringTerrain, LanguageHelper.Tr("Coloring terrain"), "ColoringTerrain", "crt");
             SetFunctionByElement(barButtonItemCreateContour, CreateContour, LanguageHelper.Tr("Create contour"), "CreateContour", "crc");
-            
+            SetFunctionByElement(barButtonItemImportTerrain, ImportTerrain, LanguageHelper.Tr("Import terrain"), "ImportTerrain", "it");
+
 
 
             // annotation
@@ -836,7 +838,9 @@ namespace Br3D
         async void CreateTerrain() => await new ActionCreateTerrain(model).RunAsync();
         async void ColoringTerrain() => await new ActionColoringTerrain(model).RunAsync();
         async void CreateContour() => await new ActionCreateContour(model).RunAsync();
+        async void ImportTerrain() => await new ActionImportTerrain(model).RunAsync();
         
+
 
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
         async void DrawRegion() => await new ActionRegion(model).RunAsync();

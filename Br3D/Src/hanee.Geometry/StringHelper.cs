@@ -105,6 +105,16 @@ namespace hanee.Geometry
         }
 
 
+        // 공백으로 분리된 문자를 Point3D로 변환
+        public static Point3D ToPoint3DBySpace(this string str)
+        {
+            var values = str.Split(' ');
+            if (values == null || values.Length != 3)
+                return null;
+
+            return new Point3D(values[0].ToDouble(), values[1].ToDouble(), values[2].ToDouble());
+        }
+
         // string을 Point3D로 변환
         public static Point3D ToPoint3D(this string str)
         {
