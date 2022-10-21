@@ -1,4 +1,5 @@
-﻿using devDept.Eyeshot.Entities;
+﻿using devDept.Eyeshot;
+using devDept.Eyeshot.Entities;
 using devDept.Geometry;
 using hanee.ThreeD;
 using System;
@@ -18,6 +19,73 @@ namespace hanee.Terrain.Tool
         public override async void Run()
         { await RunAsync(); }
 
+        static public bool SetColor(Model model, Mesh mesh)
+        {
+            if (model == null || mesh == null)
+                return false;
+
+            var legend = model.ActiveViewport.Legends.FirstOrDefault();
+            if (legend == null)
+                return false;
+
+            if (mesh.MeshNature != Mesh.natureType.MulticolorPlain)
+            {
+                model.Entities.Remove(mesh);
+                mesh = mesh.ConvertToMesh(0.001, 0.001, Mesh.natureType.MulticolorPlain, false);
+                model.Entities.Add(mesh);
+            }
+
+            // 전체  mesh의 높이를 기준으로 lengend를 구성한다.
+            double min = 0;
+            double max = 0;
+            foreach (var ent in model.Entities)
+            {
+                if (ent is Mesh m)
+                {
+                    if (m.BoxMin == null || m.BoxMax == null)
+                    {
+                        m.Regen(0.001);
+                    }
+                    if (m.BoxMin == null || m.BoxMax == null)
+                        continue;
+
+                    if (min == max)
+                    {
+                        min = m.BoxMin.Z;
+                        max = m.BoxMax.Z;
+                    }
+                    else
+                    {
+                        min = Math.Min(min, m.BoxMin.Z);
+                        max = Math.Max(max, m.BoxMax.Z);
+                    }
+                }
+            }
+
+            legend.Position = new System.Drawing.Point(100, 5);
+            legend.Min = min;
+            legend.Max = max;
+            legend.Visible = true;
+            legend.Title = "EL.";
+            legend.Subtitle = null;
+            legend.TextColor = System.Drawing.Color.White;
+            legend.TitleColor = legend.TextColor;
+
+            foreach (var v in mesh.Vertices)
+            {
+                var rgbPoint = v as PointRGB;
+                if (rgbPoint == null)
+                    continue;
+                var color = legend.GetColorByValue(v.Z, true);
+                rgbPoint.R = color.R;
+                rgbPoint.G = color.G;
+                rgbPoint.B = color.B;
+            }
+            mesh.ColorMethod = colorMethodType.byEntity;
+            mesh.Regen(0.001);
+            return true;
+        }
+
         public async Task<bool> RunAsync()
         {
             StartAction();
@@ -28,68 +96,12 @@ namespace hanee.Terrain.Tool
                 return true;
             }
 
-
             var selectableType = new Dictionary<Type, bool>();
             selectableType.Add(typeof(Mesh), true);
             var mesh = await GetEntity(LanguageHelper.Tr("Select mesh"), -1, false, selectableType) as Mesh;
             if(mesh != null)
             {
-                
-                if (mesh.MeshNature != Mesh.natureType.MulticolorPlain)
-                {
-                    environment.Entities.Remove(mesh);
-                    mesh = mesh.ConvertToMesh(0.001, 0.001, Mesh.natureType.MulticolorPlain, false);
-                    environment.Entities.Add(mesh);
-                }
-
-                // 전체  mesh의 높이를 기준으로 lengend를 구성한다.
-                double min = 0;
-                double max = 0;
-                foreach(var ent in environment.Entities)
-                {
-                    if(ent is Mesh m)
-                    {
-                        if(m.BoxMin == null || m.BoxMax == null)
-                        {
-                            m.Regen(0.001);
-                        }
-                        if (m.BoxMin == null || m.BoxMax == null)
-                            continue;
-
-                        if(min == max)
-                        {
-                            min = m.BoxMin.Z;
-                            max = m.BoxMax.Z;
-                        }
-                        else
-                        {
-                            min = Math.Min(min, m.BoxMin.Z);
-                            max = Math.Max(max, m.BoxMax.Z);
-                        }
-                    }
-                }
-                
-                legend.Position = new System.Drawing.Point(100, 5);
-                legend.Min = min;
-                legend.Max = max;
-                legend.Visible = true;
-                legend.Title = "EL.";
-                legend.Subtitle = null;
-                legend.TextColor = System.Drawing.Color.White;
-                legend.TitleColor = legend.TextColor;
-
-                foreach (var v in mesh.Vertices)
-                {
-                    var rgbPoint = v as PointRGB;
-                    if (rgbPoint == null)
-                        continue;
-                    var color = legend.GetColorByValue(v.Z, true);
-                    rgbPoint.R = color.R;
-                    rgbPoint.G = color.G;
-                    rgbPoint.B = color.B;
-                }
-                mesh.ColorMethod = colorMethodType.byEntity;
-                mesh.Regen(0.001);
+                ActionColoringTerrain.SetColor(environment as Model, mesh);
                 environment.Entities.Regen(null);
                 environment.Invalidate();
             }

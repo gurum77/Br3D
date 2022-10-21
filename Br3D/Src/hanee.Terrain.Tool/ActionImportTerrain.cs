@@ -35,7 +35,6 @@ namespace hanee.Terrain.Tool
                         var mesh = TerrainExchanger.FromLandXML(dlg.FileName);
                         if (mesh != null)
                         {
-
                             environment.Entities.Add(mesh);
                             environment.Entities.Regen(null);
                             environment.Invalidate();
