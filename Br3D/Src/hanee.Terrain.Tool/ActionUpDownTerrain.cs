@@ -74,6 +74,8 @@ namespace hanee.Terrain.Tool
             circle.Color = System.Drawing.Color.Red;
             circle.ColorMethod = colorMethodType.byEntity;
             environment.TempEntities.ReplaceEntityAndRegen(circle);
+
+            
         }
 
         public override void EndAction()
@@ -119,10 +121,10 @@ namespace hanee.Terrain.Tool
                         v.Z += isUp ? curHeight : -curHeight;
                     }
 
-                    if(isUpdateColor)
+                    
+                    mesh.Regen(0.001);
+                    if (isUpdateColor)
                         ActionColoringTerrain.SetColor(environment as Model, mesh);
-                    else
-                        mesh.Regen(0.001);
                     environment.Entities.Regen(null);
                     environment.Invalidate();
                 }

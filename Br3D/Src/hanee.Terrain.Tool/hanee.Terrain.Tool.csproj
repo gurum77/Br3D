@@ -62,6 +62,12 @@
     <Compile Include="FormCreateContour.Designer.cs">
       <DependentUpon>FormCreateContour.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCreateGrid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCreateGrid.Designer.cs">
+      <DependentUpon>FormCreateGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormUpDownTerrainOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FormCreateContour.resx">
       <DependentUpon>FormCreateContour.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCreateGrid.resx">
+      <DependentUpon>FormCreateGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormUpDownTerrainOptions.resx">
       <DependentUpon>FormUpDownTerrainOptions.cs</DependentUpon>

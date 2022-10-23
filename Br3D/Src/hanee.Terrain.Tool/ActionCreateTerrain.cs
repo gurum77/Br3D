@@ -1,6 +1,7 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using hanee.Geometry;
 using hanee.ThreeD;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,12 +14,13 @@ namespace hanee.Terrain.Tool
         enum Method
         {
             byLayer,
-            byEntity
+            byEntity,
+            byGrid
         }
 
         Method method = Method.byLayer;
-
-        public ActionCreateTerrain(Environment environment) : base(environment)
+        FormCreateGrid form;
+        public ActionCreateTerrain(devDept.Eyeshot.Environment environment) : base(environment)
         {
         }
 
@@ -34,7 +36,8 @@ namespace hanee.Terrain.Tool
             var entities = new Dictionary<Entity, bool>();
             while (true)
             {
-                var ek = await GetEntityOrKey(LanguageHelper.Tr("Select layer(A:All layers, E:By entities)"), -1, false, null, new KeyEventArgs(Keys.E), new KeyEventArgs(Keys.A));
+                var ek = await GetEntityOrKey(LanguageHelper.Tr("Select layer(A:All layers, E:By entities, G:By grid)"), -1, false, null,
+                    new KeyEventArgs(Keys.E), new KeyEventArgs(Keys.A), new KeyEventArgs(Keys.G));
                 if (IsCanceled() || IsEntered())
                     break;
 
@@ -72,6 +75,18 @@ namespace hanee.Terrain.Tool
                     if (IsCanceled() || IsEntered())
                         break;
                 }
+                else if (ek.Value != null && ek.Value.KeyCode == Keys.G)
+                {
+                    method = Method.byGrid;
+                    form = new FormCreateGrid();
+                    if (form.ShowDialog() == DialogResult.Cancel)
+                    {
+                        form = null;
+                        Canceled = true;
+                    }
+                    break;
+
+                }
                 else
                 {
                     if (!layerNames.ContainsKey(ek.Key.LayerName))
@@ -101,7 +116,8 @@ namespace hanee.Terrain.Tool
                     }
                 }
 
-                var mesh = MakeMesh(selectedEntities) as Mesh;
+
+                var mesh = method == Method.byGrid ? MakeGrid(form) : MakeMesh(selectedEntities);
                 if (mesh != null)
                 {
                     entityPropertiesManager?.SetDefaultProperties(mesh, false);
@@ -115,6 +131,57 @@ namespace hanee.Terrain.Tool
 
             EndAction();
             return true;
+        }
+
+        private Mesh MakeGrid(FormCreateGrid form)
+        {
+            if (form == null)
+                return null;
+
+            return MakeGrid(form.textEditX.Text.ToDouble(), form.textEditY.Text.ToDouble(), form.textEditResolution.Text.ToDouble(), form.textEditXSize.Text.ToInt(), form.textEditYSize.Text.ToInt());
+        }
+
+        // 그리드 생성
+        private Mesh MakeGrid(double x, double y, double resolution, int xSize, int ySize)
+        {
+            if (resolution <= 0.001)
+                return null;
+            if (xSize < 1 || ySize < 1)
+                return null;
+
+            var vertices = new Point3D[xSize * ySize];
+            var idx = 0;
+            for (int row = 0; row < ySize; ++row)
+            {
+                for (int col = 0; col < xSize; ++col)
+                {
+                    double curX = x + col * resolution;
+                    double curY = y + row * resolution;
+                    double curZ = 0;
+                    vertices[idx++] = new Point3D(curX, curY, curZ);
+                }
+            }
+
+            var triangles = new SmoothTriangle[(ySize - 1) * (xSize - 1) * 2];
+            idx = 0;
+            for (int row = 0; row < ySize - 1; ++row)
+            {
+                for (int col = 0; col < xSize - 1; ++col)
+                {
+                    var v1 = col + row * xSize;
+                    var v2 = col + row * xSize + 1;
+                    var v3 = col + (row + 1) * xSize + 1;
+                    triangles[idx++]    = new SmoothTriangle(v1, v2, v3);
+
+                    v1 = col + row * xSize;
+                    v2 = col + (row + 1) * xSize + 1;
+                    v3 = col + (row + 1) * xSize;
+                    triangles[idx++] = new SmoothTriangle(v1, v2, v3);
+                }
+            }
+
+            var mesh = new Mesh(vertices, triangles);
+            return mesh;
         }
 
         // ent에서 triangle의 source 데이타를 리턴한다.
@@ -192,7 +259,7 @@ namespace hanee.Terrain.Tool
             var color = Options.Instance.currentColor;
             var allPoints = new List<Point3D>();
             foreach (var p in points)
-                allPoints.Add( new PointRGB(p.X, p.Y, p.Z, color));
+                allPoints.Add(new PointRGB(p.X, p.Y, p.Z, color));
             foreach (var seg in segments)
             {
                 allPoints.Add(new PointRGB(seg.P0.X, seg.P0.Y, seg.P0.Z, color));

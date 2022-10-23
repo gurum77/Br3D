@@ -30,9 +30,9 @@ namespace hanee.Terrain.Tool
         private void InitializeComponent()
         {
             this.spinEditHeight = new DevExpress.XtraEditors.SpinEdit();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlHeight = new DevExpress.XtraEditors.LabelControl();
             this.checkEditUpDown = new DevExpress.XtraEditors.CheckEdit();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlRadius = new DevExpress.XtraEditors.LabelControl();
             this.spinEditRadius = new DevExpress.XtraEditors.SpinEdit();
             this.checkEditAutoUpdateColor = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEditHeight.Properties)).BeginInit();
@@ -48,7 +48,7 @@ namespace hanee.Terrain.Tool
             0,
             0,
             0});
-            this.spinEditHeight.Location = new System.Drawing.Point(74, 12);
+            this.spinEditHeight.Location = new System.Drawing.Point(74, 11);
             this.spinEditHeight.Name = "spinEditHeight";
             this.spinEditHeight.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -62,33 +62,33 @@ namespace hanee.Terrain.Tool
             0,
             0,
             65536});
-            this.spinEditHeight.Size = new System.Drawing.Size(75, 22);
+            this.spinEditHeight.Size = new System.Drawing.Size(75, 20);
             this.spinEditHeight.TabIndex = 0;
             // 
-            // labelControl1
+            // labelControlHeight
             // 
-            this.labelControl1.Location = new System.Drawing.Point(12, 15);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(36, 15);
-            this.labelControl1.TabIndex = 1;
-            this.labelControl1.Text = "Height";
+            this.labelControlHeight.Location = new System.Drawing.Point(12, 14);
+            this.labelControlHeight.Name = "labelControlHeight";
+            this.labelControlHeight.Size = new System.Drawing.Size(36, 14);
+            this.labelControlHeight.TabIndex = 1;
+            this.labelControlHeight.Text = "Height";
             // 
             // checkEditUpDown
             // 
             this.checkEditUpDown.EditValue = true;
-            this.checkEditUpDown.Location = new System.Drawing.Point(12, 68);
+            this.checkEditUpDown.Location = new System.Drawing.Point(12, 63);
             this.checkEditUpDown.Name = "checkEditUpDown";
             this.checkEditUpDown.Properties.Caption = "Up";
             this.checkEditUpDown.Size = new System.Drawing.Size(75, 20);
             this.checkEditUpDown.TabIndex = 2;
             // 
-            // labelControl2
+            // labelControlRadius
             // 
-            this.labelControl2.Location = new System.Drawing.Point(12, 43);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(35, 15);
-            this.labelControl2.TabIndex = 4;
-            this.labelControl2.Text = "Radius";
+            this.labelControlRadius.Location = new System.Drawing.Point(12, 40);
+            this.labelControlRadius.Name = "labelControlRadius";
+            this.labelControlRadius.Size = new System.Drawing.Size(34, 14);
+            this.labelControlRadius.TabIndex = 4;
+            this.labelControlRadius.Text = "Radius";
             // 
             // spinEditRadius
             // 
@@ -97,7 +97,7 @@ namespace hanee.Terrain.Tool
             0,
             0,
             0});
-            this.spinEditRadius.Location = new System.Drawing.Point(74, 40);
+            this.spinEditRadius.Location = new System.Drawing.Point(74, 37);
             this.spinEditRadius.Name = "spinEditRadius";
             this.spinEditRadius.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -111,13 +111,13 @@ namespace hanee.Terrain.Tool
             0,
             0,
             65536});
-            this.spinEditRadius.Size = new System.Drawing.Size(75, 22);
+            this.spinEditRadius.Size = new System.Drawing.Size(75, 20);
             this.spinEditRadius.TabIndex = 3;
             // 
             // checkEditAutoUpdateColor
             // 
             this.checkEditAutoUpdateColor.EditValue = true;
-            this.checkEditAutoUpdateColor.Location = new System.Drawing.Point(12, 94);
+            this.checkEditAutoUpdateColor.Location = new System.Drawing.Point(12, 88);
             this.checkEditAutoUpdateColor.Name = "checkEditAutoUpdateColor";
             this.checkEditAutoUpdateColor.Properties.Caption = "Update color";
             this.checkEditAutoUpdateColor.Size = new System.Drawing.Size(105, 20);
@@ -125,15 +125,15 @@ namespace hanee.Terrain.Tool
             // 
             // FormUpDownTerrainOptions
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(168, 132);
+            this.ClientSize = new System.Drawing.Size(168, 123);
             this.ControlBox = false;
             this.Controls.Add(this.checkEditAutoUpdateColor);
-            this.Controls.Add(this.labelControl2);
+            this.Controls.Add(this.labelControlRadius);
             this.Controls.Add(this.spinEditRadius);
             this.Controls.Add(this.checkEditUpDown);
-            this.Controls.Add(this.labelControl1);
+            this.Controls.Add(this.labelControlHeight);
             this.Controls.Add(this.spinEditHeight);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -149,8 +149,8 @@ namespace hanee.Terrain.Tool
         }
 
         #endregion
-        private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.LabelControl labelControlHeight;
+        private DevExpress.XtraEditors.LabelControl labelControlRadius;
         public DevExpress.XtraEditors.SpinEdit spinEditHeight;
         public DevExpress.XtraEditors.CheckEdit checkEditUpDown;
         public DevExpress.XtraEditors.SpinEdit spinEditRadius;

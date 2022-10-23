@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-10-19 08:42+0900\n"
-"PO-Revision-Date: 2022-10-19 08:43+0900\n"
+"POT-Creation-Date: 2022-10-24 07:52+0900\n"
+"PO-Revision-Date: 2022-10-24 07:56+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ko_KR\n"
@@ -73,7 +73,7 @@ msgstr "선 두께"
 msgid "Line Weight Method"
 msgstr "선 두께 지정방법"
 
-#: Br3D/Define.cs:9 Br3D/FormMain.cs:426 Br3D/FormMain.cs:809
+#: Br3D/Define.cs:9 Br3D/FormMain.cs:426 Br3D/FormMain.cs:811
 #: Src/hanee.Cad.Tool/FormLineType.cs:28
 msgid "Line Type"
 msgstr "선 타입"
@@ -150,8 +150,8 @@ msgstr "3D 편집"
 msgid "Home"
 msgstr "홈"
 
-#: Br3D/FormMain.cs:399 Br3D/FormMain.cs:408 Br3D/FormMain.cs:829
-#: Br3D/FormOptions.cs:36
+#: Br3D/FormMain.cs:399 Br3D/FormMain.cs:408 Br3D/FormMain.cs:831
+#: Br3D/FormOptions.cs:36 Src/hanee.Terrain.Tool/FormCreateContour.cs:21
 msgid "Options"
 msgstr "옵션"
 
@@ -219,8 +219,9 @@ msgstr "최대"
 msgid "Min"
 msgstr "최소"
 
-#: Br3D/FormMain.cs:433 Br3D/FormMain.cs:807
+#: Br3D/FormMain.cs:433 Br3D/FormMain.cs:809
 #: Src/hanee.Cad.Tool/ActionList.cs:44
+#: Src/hanee.Terrain.Tool/FormCreateContour.cs:23
 msgid "Layer"
 msgstr "레이어"
 
@@ -267,6 +268,8 @@ msgstr "스타일"
 #: Src/hanee.Cad.Tool/ActionSmartExtrude.cs:143
 #: Src/hanee.Cad.Tool/ActionSmartExtrude.cs:144
 #: Src/hanee.Cad.Tool/ActionText.cs:75 Src/hanee.Cad.Tool/ActionText.cs:77
+#: Src/hanee.Terrain.Tool/FormCreateContour.cs:22
+#: Src/hanee.Terrain.Tool/FormUpDownTerrainOptions.cs:27
 msgid "Height"
 msgstr "높이"
 
@@ -303,11 +306,11 @@ msgstr "새로 만들기"
 msgid "Open"
 msgstr "열기"
 
-#: Br3D/FormMain.cs:709 Br3D/FormMain.cs:1264
+#: Br3D/FormMain.cs:709 Br3D/FormMain.cs:1267
 msgid "Reload"
 msgstr "다시 열기"
 
-#: Br3D/FormMain.cs:710 Br3D/FormMain.cs:1240
+#: Br3D/FormMain.cs:710 Br3D/FormMain.cs:1243
 msgid "Save"
 msgstr "저장"
 
@@ -431,6 +434,7 @@ msgstr "직경"
 #: Src/hanee.Cad.Tool/ActionCylinder.cs:103
 #: Src/hanee.Cad.Tool/ActionFillet.cs:100
 #: Src/hanee.Cad.Tool/ControlScriptCad.cs:25
+#: Src/hanee.Terrain.Tool/FormUpDownTerrainOptions.cs:28
 msgid "Radius"
 msgstr "반지름"
 
@@ -506,7 +510,7 @@ msgstr "지형 생성"
 msgid "Coloring terrain"
 msgstr "지형 색 적용"
 
-#: Br3D/FormMain.cs:777
+#: Br3D/FormMain.cs:777 Src/hanee.Terrain.Tool/FormCreateContour.cs:19
 msgid "Create contour"
 msgstr "등고선 생성"
 
@@ -518,160 +522,164 @@ msgstr "지형 불러오기"
 msgid "Export terrain"
 msgstr "지형 내보내기"
 
-#: Br3D/FormMain.cs:784
+#: Br3D/FormMain.cs:780
+msgid "Up/down terrain"
+msgstr "지형 올리기/내리기"
+
+#: Br3D/FormMain.cs:786
 msgid "Coordinates"
 msgstr "좌표"
 
-#: Br3D/FormMain.cs:785 Src/hanee.Cad.Tool/ActionOffset.cs:37
+#: Br3D/FormMain.cs:787 Src/hanee.Cad.Tool/ActionOffset.cs:37
 msgid "Distance"
 msgstr "거리"
 
-#: Br3D/FormMain.cs:786
+#: Br3D/FormMain.cs:788
 msgid "Memo"
 msgstr "메모"
 
-#: Br3D/FormMain.cs:787
+#: Br3D/FormMain.cs:789
 msgid "Clear annotations"
 msgstr "주석 제거"
 
-#: Br3D/FormMain.cs:790 Src/hanee.Cad.Tool/ActionList.cs:57
+#: Br3D/FormMain.cs:792 Src/hanee.Cad.Tool/ActionList.cs:57
 #: Src/hanee.Cad.Tool/ActionList.cs:73
 msgid "Area"
 msgstr "면적"
 
-#: Br3D/FormMain.cs:791 Src/hanee.Cad.Tool/ActionList.cs:58
+#: Br3D/FormMain.cs:793 Src/hanee.Cad.Tool/ActionList.cs:58
 msgid "Volume"
 msgstr "체적"
 
-#: Br3D/FormMain.cs:794
+#: Br3D/FormMain.cs:796
 msgid "Ortho mode"
 msgstr "직교 모드"
 
-#: Br3D/FormMain.cs:795 Src/hanee.Cad.Tool/ControlScriptCad.cs:27
+#: Br3D/FormMain.cs:797 Src/hanee.Cad.Tool/ControlScriptCad.cs:27
 msgid "End Point"
 msgstr "끝점"
 
-#: Br3D/FormMain.cs:796
+#: Br3D/FormMain.cs:798
 msgid "Intersection Point"
 msgstr "교차점"
 
-#: Br3D/FormMain.cs:797
+#: Br3D/FormMain.cs:799
 msgid "Midle Point"
 msgstr "중간점"
 
-#: Br3D/FormMain.cs:798 Src/hanee.Cad.Tool/ControlScriptCad.cs:29
+#: Br3D/FormMain.cs:800 Src/hanee.Cad.Tool/ControlScriptCad.cs:29
 msgid "Center Point"
 msgstr "중심점"
 
-#: Br3D/FormMain.cs:799 Src/hanee.Cad.Tool/ActionList.cs:78
+#: Br3D/FormMain.cs:801 Src/hanee.Cad.Tool/ActionList.cs:78
 msgid "Point"
 msgstr "점"
 
-#: Br3D/FormMain.cs:802
+#: Br3D/FormMain.cs:804
 msgid "Single"
 msgstr "단일"
 
-#: Br3D/FormMain.cs:803
+#: Br3D/FormMain.cs:805
 msgid "1x1"
 msgstr "1x1"
 
-#: Br3D/FormMain.cs:804
+#: Br3D/FormMain.cs:806
 msgid "1x2"
 msgstr "1x2"
 
-#: Br3D/FormMain.cs:805
+#: Br3D/FormMain.cs:807
 msgid "2x2"
 msgstr "2x2"
 
-#: Br3D/FormMain.cs:808 Src/hanee.Cad.Tool/ActionList.cs:91
+#: Br3D/FormMain.cs:810 Src/hanee.Cad.Tool/ActionList.cs:91
 msgid "Text Style"
 msgstr "텍스트 스타일"
 
-#: Br3D/FormMain.cs:810
+#: Br3D/FormMain.cs:812
 msgid "List"
 msgstr "리스트"
 
-#: Br3D/FormMain.cs:813
+#: Br3D/FormMain.cs:815
 msgid "2D View"
 msgstr "2D 뷰"
 
-#: Br3D/FormMain.cs:814 Src/hanee.Cad.Tool/FormBlock.cs:52
+#: Br3D/FormMain.cs:816 Src/hanee.Cad.Tool/FormBlock.cs:52
 msgid "3D View"
 msgstr "3D 뷰"
 
-#: Br3D/FormMain.cs:815
+#: Br3D/FormMain.cs:817
 msgid "Rendered"
 msgstr "랜더링"
 
-#: Br3D/FormMain.cs:816
+#: Br3D/FormMain.cs:818
 msgid "Shaded"
 msgstr "음영처리"
 
-#: Br3D/FormMain.cs:817
+#: Br3D/FormMain.cs:819
 msgid "Hidden lines"
 msgstr "은선"
 
-#: Br3D/FormMain.cs:818
+#: Br3D/FormMain.cs:820
 msgid "Wireframe"
 msgstr "와이어프레이"
 
-#: Br3D/FormMain.cs:820
+#: Br3D/FormMain.cs:822
 msgid "Grid"
 msgstr "그리드"
 
-#: Br3D/FormMain.cs:821
+#: Br3D/FormMain.cs:823
 msgid "Toolbar"
 msgstr "툴바"
 
-#: Br3D/FormMain.cs:822
+#: Br3D/FormMain.cs:824
 msgid "Symbol"
 msgstr "심볼"
 
-#: Br3D/FormMain.cs:824
+#: Br3D/FormMain.cs:826
 msgid "Language"
 msgstr "언어"
 
-#: Br3D/FormMain.cs:825
+#: Br3D/FormMain.cs:827
 msgid "Korean"
 msgstr "한국어"
 
-#: Br3D/FormMain.cs:826
+#: Br3D/FormMain.cs:828
 msgid "English"
 msgstr "English"
 
-#: Br3D/FormMain.cs:827
+#: Br3D/FormMain.cs:829
 msgid "Homepage"
 msgstr "홈페이지"
 
-#: Br3D/FormMain.cs:828
+#: Br3D/FormMain.cs:830
 msgid "Check For Update"
 msgstr "업데이트 체크"
 
-#: Br3D/FormMain.cs:830
+#: Br3D/FormMain.cs:832
 msgid "About"
 msgstr "About"
 
-#: Br3D/FormMain.cs:1240
+#: Br3D/FormMain.cs:1243
 msgid "Do you want to save the file you are editing?"
 msgstr "편집중인 파일을 저장하시겠습니까?"
 
-#: Br3D/FormMain.cs:1264
+#: Br3D/FormMain.cs:1267
 msgid "Do you want to reload the current file?"
 msgstr "현재 파일을 다시 여시겠습니까?"
 
-#: Br3D/FormMain.cs:1331
+#: Br3D/FormMain.cs:1334
 msgid "Unsupported file."
 msgstr "지원하지 않는 파일입니다."
 
-#: Br3D/FormMain.cs:1402
+#: Br3D/FormMain.cs:1405
 msgid "Install now?"
 msgstr "지금 설치하시겠습니까?"
 
-#: Br3D/FormMain.cs:1402
+#: Br3D/FormMain.cs:1405
 msgid " update available"
 msgstr " 업데이트 가능"
 
-#: Br3D/FormMain.cs:1412
+#: Br3D/FormMain.cs:1415
 msgid "Update check failed! - wyUpdate.exe not found!"
 msgstr "업데이트 체크 실패! - wyUpdate.exe가 없습니다!"
 
@@ -719,11 +727,12 @@ msgstr "배경"
 msgid "Default"
 msgstr "기본값"
 
-#: Br3D/FormOptions.cs:59
+#: Br3D/FormOptions.cs:59 Src/hanee.Terrain.Tool/FormCreateContour.cs:28
 msgid "Ok"
 msgstr "확인"
 
 #: Br3D/FormOptions.cs:60 Src/hanee.Cad.Tool/FormBlock.cs:54
+#: Src/hanee.Terrain.Tool/FormCreateContour.cs:29
 msgid "Cancel"
 msgstr "취소"
 
@@ -1179,7 +1188,7 @@ msgstr "SHX 파일명"
 msgid "WidthFactor"
 msgstr "폭 비율"
 
-#: Src/hanee.Terrain.Tool/ActionColoringTerrain.cs:34
+#: Src/hanee.Terrain.Tool/ActionColoringTerrain.cs:101
 #: Src/hanee.Terrain.Tool/ActionExportTerrain.cs:22
 msgid "Select mesh"
 msgstr "매쉬 선택"
@@ -1188,7 +1197,7 @@ msgstr "매쉬 선택"
 msgid "Select a terrain"
 msgstr "지형 선택"
 
-#: Src/hanee.Terrain.Tool/ActionCreateContour.cs:94
+#: Src/hanee.Terrain.Tool/ActionCreateContour.cs:97
 msgid "Completed"
 msgstr "완료"
 
@@ -1197,9 +1206,37 @@ msgid "Select layer(A:All layers, E:By entities)"
 msgstr "레이어 선택(A:모든 레이어, E:객체 선택)"
 
 #: Src/hanee.Terrain.Tool/ActionExportTerrain.cs:26
-#: Src/hanee.Terrain.Tool/ActionImportTerrain.cs:22
+#: Src/hanee.Terrain.Tool/ActionImportTerrain.cs:24
 msgid "X:LandXML 1.2"
 msgstr "X:LandXML 1.2"
+
+#: Src/hanee.Terrain.Tool/ActionUpDownTerrain.cs:93
+msgid "Select a mesh"
+msgstr "매쉬 선택"
+
+#: Src/hanee.Terrain.Tool/ActionUpDownTerrain.cs:106
+msgid "Click to up/down"
+msgstr "올리기/내리기할 위치 클릭"
+
+#: Src/hanee.Terrain.Tool/FormCreateContour.cs:25
+msgid "Major contour"
+msgstr "주 등고선"
+
+#: Src/hanee.Terrain.Tool/FormCreateContour.cs:26
+msgid "Minor contour"
+msgstr "부 등고선"
+
+#: Src/hanee.Terrain.Tool/FormUpDownTerrainOptions.cs:26
+msgid "Up/Down terrain options"
+msgstr "지형 올리기/내리기 옵션"
+
+#: Src/hanee.Terrain.Tool/FormUpDownTerrainOptions.cs:29
+msgid "Up"
+msgstr "올리기"
+
+#: Src/hanee.Terrain.Tool/FormUpDownTerrainOptions.cs:30
+msgid "Update color"
+msgstr "색 업데이트"
 
 #: Src/hanee.ThreeD/ControlDistanceAngleDynamicInput.cs:61
 msgid "By XYZ"
@@ -1417,9 +1454,6 @@ msgstr "더 많은 색"
 
 #~ msgid "Default color?"
 #~ msgstr "색을 초기화 합니까?"
-
-#~ msgid "Default color"
-#~ msgstr "기본색"
 
 #~ msgid "Default hotkey?"
 #~ msgstr "단축키를 초기화 합니까?"
