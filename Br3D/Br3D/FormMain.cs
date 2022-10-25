@@ -92,7 +92,10 @@ namespace Br3D
         {
             // model init은 제일 나중에 한다.
             InitControlModel();
-            
+
+            controlScriptCad1.Visible = true;
+            controlScriptCad1.model = model;
+
             simpleButtonInit.Visible = false;
             //this.Controls.Add(controlModel);  // form에 직접 add 하면 controlModel의 크기가 잘못 계산됨
 
@@ -136,8 +139,7 @@ namespace Br3D
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            controlScriptCad1.Visible = true;
-            controlScriptCad1.model = model;
+            
 
             EnableDynamicInput(true, false);
             SetLTEnvironment();

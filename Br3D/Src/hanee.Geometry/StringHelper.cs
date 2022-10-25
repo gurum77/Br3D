@@ -7,22 +7,32 @@ namespace hanee.Geometry
 {
     public class HeadValue
     {
-        public HeadValue(char head, double value)
+        public HeadValue(char head, object value)
         {
             this.head = head;
             this.value = value;
         }
+        
+        public double GetDouble()
+        {
+            return (double)value;
+        }
+
+        public string GetString()
+        {
+            return value.ToString();
+        }
+
         public char head;
-        public double value;
+        public object value;
     }
 
     public static class StringHelper
     {
      
-        // string을 공백 또는 ,로 구분했을때 숫자만 추출
-        public static List<HeadValue> ToDoubles(this string str, params char[] heads)
+        public static List<HeadValue> ToStrings(this string str, params char[] heads)
         {
-            char[] tokens = { ' ', ',' , '=', '\n', '\t'};
+            char[] tokens = { ' ', ',', '=', '\n', '\t' };
             var texts = str.Split(tokens, StringSplitOptions.RemoveEmptyEntries);
 
             var values = new List<HeadValue>();
@@ -51,18 +61,33 @@ namespace hanee.Geometry
                 // head가 없으면 숫자인지 보지도 말자.
                 if (head == emptyHead)
                     continue;
-                
-                // head가 아니면 숫자인지?
-                if (double.TryParse(text, out double val))
-                {
-                    values.Add(new HeadValue(head, val));
-                    head = emptyHead;
-                }
+
+                values.Add(new HeadValue(head, text));
+                head = emptyHead;
             }
 
             return values;
         }
 
+        // string을 공백 또는 ,로 구분했을때 숫자만 추출
+        public static List<HeadValue> ToDoubles(this string str, params char[] heads)
+        {
+            var strings = str.ToStrings(heads);
+            var doubles = new List<HeadValue>();
+            foreach(var curStr in strings)
+            {
+                if(double.TryParse(curStr.value.ToString(), out double result))
+                {
+                    curStr.value = result;
+                    doubles.Add(curStr);
+                }
+            }
+
+            return doubles;
+        }
+
+
+        
         // string을 point3D list로 변환
         public static List<Point3D> ToPoint3Ds(this string str)
         {
@@ -79,19 +104,19 @@ namespace hanee.Geometry
                 var z = values.Find(val => val.head == 'z');
                 if (x != null)
                 {
-                    point.X = x.value;
+                    point.X = x.GetDouble();
                     values.Remove(x);
                 }
 
                 if(y != null)
                 {
-                    point.Y = y.value;
+                    point.Y = y.GetDouble();
                     values.Remove(y);
                 }
                 
                 if (z != null)
                 {
-                    point.Z = z.value;
+                    point.Z = z.GetDouble();
                     values.Remove(z);
                 }
 
@@ -127,11 +152,11 @@ namespace hanee.Geometry
             var y = values.Find(v => v.head == 'y');
             var z = values.Find(v => v.head == 'z');
             if (x != null)
-                point.X = x.value;
+                point.X = x.GetDouble();
             if (y != null)
-                point.Y = y.value;
+                point.Y = y.GetDouble();
             if (z != null)
-                point.Z = z.value;
+                point.Z = z.GetDouble();
 
 
             return point;

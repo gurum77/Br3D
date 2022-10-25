@@ -27,6 +27,8 @@ namespace hanee.Cad.Tool
             rowEndPoint.Properties.Caption = LanguageHelper.Tr("End Point");
             rowPoints.Properties.Caption = LanguageHelper.Tr("Points");
             rowCenterPoint.Properties.Caption = LanguageHelper.Tr("Center Point");
+            rowWidth.Properties.Caption = LanguageHelper.Tr("Width");
+            rowColor.Properties.Caption = LanguageHelper.Tr("Color");
 
         }
 
@@ -46,7 +48,7 @@ namespace hanee.Cad.Tool
             rowRadius.Visible = false;
             rowPoints.Visible = false;
             rowCenterPoint.Visible = false;
-            
+            rowColor.Visible = false;
 
             var cmd = propertyGridControl1.SelectedObject as ScriptCommand;
             if (cmd == null)
@@ -66,6 +68,11 @@ namespace hanee.Cad.Tool
                 rowPoints.Visible = true;
             }
 
+            if(cmd.color != null && cmd.color != System.Drawing.Color.Empty)
+            {
+                rowColor.Visible = true;
+            }
+
 
 
         }
@@ -81,7 +88,7 @@ namespace hanee.Cad.Tool
             if (!cmd.Run(model))
                 return;
 
-            model.Entities.RegenAllCurved();
+            model.Entities.Regen();
             model.Invalidate();
 
         }
@@ -112,6 +119,9 @@ namespace hanee.Cad.Tool
             {
                 // 좌표를 가져온다.
                 var points = script.ToPoint3Ds();
+                if (points == null)
+                    return;
+
                 // 점이 1개이면 원
                 if (points.Count == 1)
                 {
@@ -135,9 +145,38 @@ namespace hanee.Cad.Tool
                     cmds.Add(cmd);
                 }
                 cmd.points = points;
-
-
             }
+
+            // cmd에 객체 속성 parsing
+            foreach(var curCmd in cmds)
+            {
+                var w = script.ToDoubles('w');
+                if(w != null && w.Count > 0)
+                {
+                    cmd.width = (float)w[0].GetDouble();
+                }
+
+                var c = script.ToStrings('c');
+                if(c != null && c.Count > 0)
+                {
+                    try
+                    {
+                        var htmlColor = c[0].GetString();
+                    
+                        var color = System.Drawing.ColorTranslator.FromHtml(htmlColor);
+                        if (color != System.Drawing.Color.Empty)
+                            cmd.color = color;
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                
+            }
+
+
+
 
             // combo를 갱신
             comboBoxEdit1.Properties.Items.Clear();
@@ -145,6 +184,12 @@ namespace hanee.Cad.Tool
             if (comboBoxEdit1.Properties.Items.Count > 0)
                 comboBoxEdit1.SelectedIndex = 0;
 
+        }
+
+        // help
+        private void simpleButtonHelp_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://hileejaeho.cafe24.com/docs/br3d/%ec%8a%a4%ed%81%ac%eb%9e%a9%ed%8a%b8-%ec%ba%90%eb%93%9c/");
         }
     }
 }

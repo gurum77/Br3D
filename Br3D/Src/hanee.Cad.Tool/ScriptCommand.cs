@@ -53,12 +53,12 @@ namespace hanee.Cad.Tool
                 points = script.ToPoint3Ds();
                 var values = script.ToDoubles('r');
                 if (values != null && values.Count > 0)
-                    radius = values[0].value;
+                    radius = values[0].GetDouble();
                 else
                 {
                     values = script.ToDoubles('d');
                     if (values != null && values.Count > 0)
-                        radius = values[0].value/2;
+                        radius = values[0].GetDouble()/2;
                 }
             }
             else
@@ -72,14 +72,16 @@ namespace hanee.Cad.Tool
         {
             if (cmd == Command.unknown)
                 return false;
+
+
+            Entity newEntity = null;
             if (cmd == Command.createCircle)
             {
                 var center = points.Count > 0 ? points[0].Clone() as Point3D : null;
                 if (center == null)
                     return false;
 
-                var c = new Circle(center, radius);
-                model.Entities.Add(c);
+                newEntity = new Circle(center, radius);
             }
             else if (cmd == Command.createLine)
             {
@@ -88,8 +90,7 @@ namespace hanee.Cad.Tool
                 if(pt1 == null || pt2 == null)
                     return false;
 
-                var l = new Line(pt1, pt2);
-                model.Entities.Add(l);
+                newEntity = new Line(pt1, pt2);
             }
             else if (cmd == Command.createPline)
             {
@@ -99,12 +100,30 @@ namespace hanee.Cad.Tool
                 var lpPoints = new List<Point3D>();
                 foreach (var p in points)
                     lpPoints.Add(p.Clone() as Point3D);
-                var lp = new LinearPath(lpPoints.ToArray());
-                model.Entities.Add(lp);
+                newEntity = new LinearPath(lpPoints.ToArray());
             }
             else
             {
                 new NotImplementedException();
+            }
+
+            if (model is HModel hModel)
+                hModel.entityPropertiesManager.SetDefaultProperties(newEntity);
+
+            newEntity.LineWeight = width;
+            newEntity.LineWeightMethod = colorMethodType.byEntity;
+
+            if(color != null && color.Value != System.Drawing.Color.Empty)
+            {
+                newEntity.Color = color.Value;
+                newEntity.ColorMethod = colorMethodType.byEntity;
+            }
+
+            if(newEntity != null)
+            {
+                model.Entities.ClearSelection();
+                model.Entities.Add(newEntity);
+                newEntity.Selected = true;
             }
 
             return true;
@@ -130,6 +149,8 @@ namespace hanee.Cad.Tool
         [Browsable(false)]
         public Command cmd { get; set; }
         public double radius { get; set; }
+        public float width { get; set; } = 0.5f;
+        public System.Drawing.Color ?color { get; set; }
         public Point3D startPoint => points != null ? points.First() : null;
         public Point3D endPoint => points != null ? points.Last() : null;
             
