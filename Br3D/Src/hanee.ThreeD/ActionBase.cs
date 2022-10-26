@@ -757,6 +757,9 @@ namespace hanee.ThreeD
             {
                 Entered = true;
             }
+            // shfit, control, alt키를 누르는건 무시한다.
+            else if (e.KeyCode == Keys.Shift || e.KeyCode == Keys.ShiftKey || e.KeyCode == Keys.ControlKey || e.KeyCode == Keys.Alt || e.KeyCode == Keys.Control)
+                return;
 
             if (userInputting[(int)UserInput.GettingKey] == true)
             {

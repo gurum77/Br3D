@@ -37,6 +37,9 @@ namespace hanee.Cad.Tool
 
         Line MakeLine(bool tempEntity=false)
         {
+            if (startPoint == null || endPoint == null)
+                return null;
+
             Line line = new Line(startPoint.Clone() as Point3D, endPoint.Clone() as Point3D);
             GetHModel()?.entityPropertiesManager?.SetDefaultProperties(line, tempEntity);
             return line;
@@ -78,13 +81,16 @@ namespace hanee.Cad.Tool
                 SetAutoWorkspace();
                 SetOrthoModeStartPoint(endPoint);
                 Line line = MakeLine();
-                environment.Entities.Add(line);
-                environment.Entities.RegenAllCurved();
-                environment.Invalidate();
+                if(line != null)
+                {
+                    environment.Entities.Add(line);
+                    environment.Entities.RegenAllCurved();
+                    environment.Invalidate();
 
-                lineCount++;
+                    lineCount++;
 
-                startPoint = endPoint;
+                    startPoint = endPoint;
+                }
 
                 if (IsEntered())
                     break;
