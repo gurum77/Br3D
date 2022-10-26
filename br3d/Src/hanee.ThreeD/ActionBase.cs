@@ -289,7 +289,18 @@ namespace hanee.ThreeD
         }
 
         // 커서 메세지
+        static public void InitCursorText()
+        {
+            cursorText = null;
+        }
+
+        static public void InitSubCursorText()
+        {
+            subCursorText.Clear();
+        }
+
         static public string cursorText;
+        static public List<string> subCursorText = new List<string>();
 
         // 액션에서 현재 스탭 ID
         static public int StepID
@@ -746,6 +757,9 @@ namespace hanee.ThreeD
             {
                 Entered = true;
             }
+            // shfit, control, alt키를 누르는건 무시한다.
+            else if (e.KeyCode == Keys.Shift || e.KeyCode == Keys.ShiftKey || e.KeyCode == Keys.ControlKey || e.KeyCode == Keys.Alt || e.KeyCode == Keys.Control)
+                return;
 
             if (userInputting[(int)UserInput.GettingKey] == true)
             {
@@ -794,7 +808,7 @@ namespace hanee.ThreeD
                 await Task.Delay(100);
             }
 
-            ActionBase.cursorText = null;
+            ActionBase.InitCursorText();
 
 
             return point3D;
@@ -822,7 +836,7 @@ namespace hanee.ThreeD
                 await Task.Delay(100);
             }
 
-            ActionBase.cursorText = null;
+            ActionBase.InitCursorText();
 
             // 정상 입력이 아닌 경우라면 null을 준다.
             // 그래야 사용하는 곳에서 어떤 값이 입력 되었는지 알수 있다.
@@ -857,7 +871,8 @@ namespace hanee.ThreeD
                 await Task.Delay(100);
             }
 
-            ActionBase.cursorText = null;
+            ActionBase.InitCursorText();
+
             return point;
         }
 
@@ -889,7 +904,8 @@ namespace hanee.ThreeD
                 await Task.Delay(100);
             }
 
-            ActionBase.cursorText = null;
+            ActionBase.InitCursorText();
+
             if (selectedEdge != null)
             {
                 selectedEdge.Select(environment, true);
@@ -932,7 +948,8 @@ namespace hanee.ThreeD
                 await Task.Delay(100);
             }
 
-            ActionBase.cursorText = null;
+            ActionBase.InitCursorText();
+
             if (selectedFace != null)
             {
                 selectedFace.Item.Selected = true;
@@ -975,7 +992,8 @@ namespace hanee.ThreeD
                 await Task.Delay(100);
             }
 
-            ActionBase.cursorText = null;
+            ActionBase.InitCursorText();
+
             if (selectedFace != null)
             {
                 selectedFace.Item.Selected = true;
@@ -1044,7 +1062,8 @@ namespace hanee.ThreeD
                 await Task.Delay(100);
             }
 
-            ActionBase.cursorText = null;
+            ActionBase.InitCursorText();
+
             return key;
         }
 
@@ -1067,7 +1086,8 @@ namespace hanee.ThreeD
                 await Task.Delay(100);
             }
 
-            ActionBase.cursorText = null;
+            ActionBase.InitCursorText();
+
             if (selectedLabel != null)
             {
                 selectedLabel.Selected = true;
@@ -1096,7 +1116,8 @@ namespace hanee.ThreeD
                 await Task.Delay(100);
             }
 
-            ActionBase.cursorText = null;
+            ActionBase.InitCursorText();
+
             return selectedEntities;
         }
 
@@ -1128,7 +1149,8 @@ namespace hanee.ThreeD
                 await Task.Delay(100);
             }
 
-            ActionBase.cursorText = null;
+            ActionBase.InitCursorText();
+
             if (selectedEntity != null)
             {
                 selectedEntity.Selected = true;
@@ -1168,7 +1190,8 @@ namespace hanee.ThreeD
                 await Task.Delay(100);
             }
 
-            ActionBase.cursorText = null;
+            ActionBase.InitCursorText();
+
             if (selectedEntity != null)
             {
                 selectedEntity.Selected = true;
@@ -1200,7 +1223,8 @@ namespace hanee.ThreeD
             }
 
             ActionBase.LastSelectedItem = null;
-            ActionBase.cursorText = null;
+            ActionBase.InitCursorText();
+
             if (selectedEntity != null)
             {
                 selectedEntity.Selected = true;
@@ -1359,6 +1383,8 @@ namespace hanee.ThreeD
                 }
             }
 
+            ActionBase.InitCursorText();
+            ActionBase.InitSubCursorText();
             ActionBase.runningAction = this;
             ActionBase.Canceled = false;
             for (int i = 0; i < (int)UserInput.Count; ++i)
@@ -1390,6 +1416,8 @@ namespace hanee.ThreeD
             ActionBase.IsModified = true;
             ActionBase.selectableTypes?.Clear();
             ActionBase.availableKeys = null;
+            ActionBase.InitCursorText();
+            ActionBase.InitSubCursorText();
 
             // dynamic input manager 초기화
             DynamicInputManager.Init();
