@@ -15,7 +15,7 @@ copy ..\Patch\wyUpdate\client.wyc ..\bin\x64\Release /y
 copy ..\Patch\wyUpdateLT\client.wyc ..\bin\x64\ReleaseLT  /y
 
 pushd ..\Install
-call CodeSign_Program_All.bat
+rem call CodeSign_Program_All.bat
 popd
 
 pushd ..\Patch
@@ -26,7 +26,7 @@ popd
 pushd ..\Install
 "c:\Program Files (x86)\Inno Setup 6\Compil32.exe" /cc Setup_Br3D.iss
 "c:\Program Files (x86)\Inno Setup 6\Compil32.exe" /cc Setup_Br3DLT.iss
-call CodeSign_Setup_All.bat
+rem call CodeSign_Setup_All.bat
 popd
 
 rem ftp -s:upload.txt

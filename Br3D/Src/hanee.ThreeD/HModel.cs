@@ -32,6 +32,17 @@ namespace hanee.ThreeD
                 return Color.Black;
             }
         }
+
+        public Color drawingSubColor
+        {
+            get
+            {
+                if (this.IsDarkBackground())
+                    return Color.Yellow;
+                return Color.Red;
+            }
+        }
+
         public static Font drawingFont = new Font("Tahoma", 10.0f, FontStyle.Bold);
         public System.Drawing.Point cursorPoint;
         System.Drawing.Point lastMouseDownPoint { get; set; }
@@ -426,12 +437,12 @@ namespace hanee.ThreeD
 
         #region 액션중 미리 보기
         // 마우스 옆에 따라 다니는 text를 그린다.
-        public void DrawMouseText(string text, System.Drawing.Point location)
+        public void DrawMouseText(string text, System.Drawing.Point location, bool subText=false)
         {
             renderContext.EnableXOR(false);
 
-            DrawText(location.X, (int)Size.Height - location.Y + 10,
-                 text, drawingFont, drawingColor, ContentAlignment.BottomLeft);
+            DrawText(subText ? location.X + 10: location.X, (int)Size.Height - location.Y + 10,
+                 text, drawingFont, subText ? drawingSubColor : drawingColor, ContentAlignment.BottomLeft);
 
 
 
@@ -946,6 +957,16 @@ namespace hanee.ThreeD
 
                 if (ActionBase.cursorText != null)
                     DrawMouseText(ActionBase.cursorText, cursorPoint);
+                if(ActionBase.subCursorText != null && ActionBase.subCursorText.Count > 0)
+                {
+                    var point = cursorPoint;
+                    foreach (var t in ActionBase.subCursorText)
+                    {
+                        point.Y += (drawingFont.Height+3);
+                        DrawMouseText(t, point, true);
+                    }
+
+                }
 
 
 

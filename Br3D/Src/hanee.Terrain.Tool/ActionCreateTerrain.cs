@@ -90,7 +90,12 @@ namespace hanee.Terrain.Tool
                 else
                 {
                     if (!layerNames.ContainsKey(ek.Key.LayerName))
-                        layerNames.Add(ek.Key.LayerName, true);
+                    {
+                        var layerName = ek.Key.LayerName;
+                        layerNames.Add(layerName, true);
+
+                        ActionBase.subCursorText.Add(layerName);
+                    }
                 }
             }
 

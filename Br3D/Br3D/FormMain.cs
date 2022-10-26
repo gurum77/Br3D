@@ -4,17 +4,13 @@ using devDept.Eyeshot.Entities;
 using devDept.Eyeshot.Translators;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Controls;
 using hanee.Cad.Tool;
-using hanee.Geometry;
 using hanee.Terrain.Tool;
 using hanee.ThreeD;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 
 namespace Br3D
 {
@@ -139,7 +135,7 @@ namespace Br3D
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            
+
 
             EnableDynamicInput(true, false);
             SetLTEnvironment();
@@ -149,7 +145,7 @@ namespace Br3D
             InitObjectTreeList();
             InitPropertyGrid();
 
-                      
+
 
             // 테스트 용으로 옵션을 강제적용
             Options.Instance.tempEntityColorMethod = Options.TempEntityColorMethod.byTransparencyColor;
@@ -206,7 +202,7 @@ namespace Br3D
 
 
         // 옵션을 적용한다.
-        private void ApplyOptions(bool regen=false)
+        private void ApplyOptions(bool regen = false)
         {
             // 배경색
             foreach (Viewport vp in model.Viewports)
@@ -228,11 +224,11 @@ namespace Br3D
             LanguageHelper.Load(Options.Instance.language);
 
             // ltscale이 변경되었으면 객체에 반영해야 함
-            foreach(var ent in model.Entities)
+            foreach (var ent in model.Entities)
             {
                 ent.LineTypeScale = Options.Instance.curLinetypeScale;
             }
-            if(regen)
+            if (regen)
                 model.Entities.RegenAllCurved(null);
             model.Invalidate();
         }
@@ -462,7 +458,7 @@ namespace Br3D
 
 
 
-    
+
 
         private void Model_MouseUp(object sender, MouseEventArgs e)
         {
@@ -721,7 +717,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemDrawCircleByCenterRadius, CircleByCenterRadius, LanguageHelper.Tr("Center point, Radius"), "CircleByCenterRadius", "ccr");
             SetFunctionByElement(barButtonItemDrawCircleByFirstSecondThird, CircleByFirstSecondThird, LanguageHelper.Tr("First, second, third point"), "CircleByFirstSecondThird", "c3p");
             SetFunctionByElement(barButtonItemDrawCircleByFirstSecond, CircleByFirstSecond, LanguageHelper.Tr("First, second point"), "CircleByFirstSecond", "c2p");
-            
+
             SetFunctionByElement(barButtonItemDrawArc, Arc, LanguageHelper.Tr("Arc"), "Arc", "a");
             SetFunctionByElement(barButtonItemDrawArc_FirstSecondThird, ArcFirstSecondThird, LanguageHelper.Tr("First, second, third point"), null, null);
             SetFunctionByElement(barButtonItemDrawArc_CenterStartEnd, ArcCenterStartEnd, LanguageHelper.Tr("Center, start, end point"), null, null);
@@ -780,7 +776,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemImportTerrain, ImportTerrain, LanguageHelper.Tr("Import terrain"), "ImportTerrain", "it");
             SetFunctionByElement(barButtonItemExportTerrain, ExportTerrain, LanguageHelper.Tr("Export terrain"), "ExportTerrain", "et");
             SetFunctionByElement(barButtonItemUpDownTerrain, UpDownTerrain, LanguageHelper.Tr("Up/down terrain"), "UpDownTerrain", "udt");
-            
+
 
 
 
@@ -846,7 +842,7 @@ namespace Br3D
         async void ImportTerrain() => await new ActionImportTerrain(model).RunAsync();
         async void ExportTerrain() => await new ActionExportTerrain(model).RunAsync();
         async void UpDownTerrain() => await new ActionUpDownTerrain(model).RunAsync();
-        
+
 
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
         async void DrawRegion() => await new ActionRegion(model).RunAsync();
@@ -937,8 +933,8 @@ namespace Br3D
                             ent.LineTypeScale = Options.Instance.curLinetypeScale;
                         }
                     }
-                    
                 }
+
                 ApplyOptions(regen);
             }
         }
@@ -1454,7 +1450,7 @@ namespace Br3D
             if (hModel != null)
             {
                 hModel.KeyEventListener(keyData);
-                if(keyData == Keys.Escape)
+                if (keyData == Keys.Escape)
                 {
                     RefreshPropertyGridControl(null);
                     UpdateCurCombos();
@@ -1469,10 +1465,10 @@ namespace Br3D
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-     
-    
 
-     
+
+
+
 
         private void ribbonControl1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -1543,14 +1539,14 @@ namespace Br3D
             model.Invalidate();
         }
 
-       
 
-    
-      
+
+
+
 
         private void barButtonItemDrawCircle_ItemClick(object sender, ItemClickEventArgs e)
         {
-            
+
         }
 
         private void popupMenuDrawCircle_BeforePopup(object sender, System.ComponentModel.CancelEventArgs e)
