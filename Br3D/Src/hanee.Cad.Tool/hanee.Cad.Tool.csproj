@@ -120,6 +120,7 @@
     <Compile Include="ActionCone.cs" />
     <Compile Include="ActionCopy.cs" />
     <Compile Include="ActionCylinder.cs" />
+    <Compile Include="ActionExtractFace.cs" />
     <Compile Include="ActionIntersection.cs" />
     <Compile Include="ActionSmartExtrude.cs" />
     <Compile Include="ActionSubtract.cs" />

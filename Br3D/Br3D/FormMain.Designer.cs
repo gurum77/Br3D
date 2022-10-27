@@ -235,6 +235,8 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.ribbonPageGroup9 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.barButtonItemExtractFace = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
@@ -304,7 +306,7 @@ namespace Br3D
             this.hideContainerLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.hideContainerLeft.Location = new System.Drawing.Point(0, 64);
             this.hideContainerLeft.Name = "hideContainerLeft";
-            this.hideContainerLeft.Size = new System.Drawing.Size(22, 536);
+            this.hideContainerLeft.Size = new System.Drawing.Size(23, 581);
             // 
             // panelContainer1
             // 
@@ -318,7 +320,7 @@ namespace Br3D
             this.panelContainer1.OriginalSize = new System.Drawing.Size(259, 200);
             this.panelContainer1.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.panelContainer1.SavedIndex = 1;
-            this.panelContainer1.Size = new System.Drawing.Size(259, 542);
+            this.panelContainer1.Size = new System.Drawing.Size(259, 581);
             this.panelContainer1.Tabbed = true;
             this.panelContainer1.Text = "panelContainer1";
             this.panelContainer1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
@@ -328,10 +330,10 @@ namespace Br3D
             this.dockPanelProperties.Controls.Add(this.dockPanel1_Container);
             this.dockPanelProperties.Dock = DevExpress.XtraBars.Docking.DockingStyle.Fill;
             this.dockPanelProperties.ID = new System.Guid("c18255af-44ec-4932-9c11-d99e4ddfcd3e");
-            this.dockPanelProperties.Location = new System.Drawing.Point(3, 24);
+            this.dockPanelProperties.Location = new System.Drawing.Point(3, 26);
             this.dockPanelProperties.Name = "dockPanelProperties";
             this.dockPanelProperties.OriginalSize = new System.Drawing.Size(252, 552);
-            this.dockPanelProperties.Size = new System.Drawing.Size(252, 515);
+            this.dockPanelProperties.Size = new System.Drawing.Size(252, 552);
             this.dockPanelProperties.Text = "Properties";
             // 
             // dockPanel1_Container
@@ -339,7 +341,7 @@ namespace Br3D
             this.dockPanel1_Container.Controls.Add(this.propertyGridControl1);
             this.dockPanel1_Container.Location = new System.Drawing.Point(0, 0);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(252, 515);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(252, 552);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // propertyGridControl1
@@ -351,6 +353,7 @@ namespace Br3D
             this.propertyGridControl1.OptionsBehavior.AllowSort = false;
             this.propertyGridControl1.OptionsBehavior.PropertySort = DevExpress.XtraVerticalGrid.PropertySort.NoSort;
             this.propertyGridControl1.OptionsView.AllowReadOnlyRowAppearance = DevExpress.Utils.DefaultBoolean.True;
+            this.propertyGridControl1.OptionsView.MinRowAutoHeight = 11;
             this.propertyGridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBoxTextStyle,
             this.repositoryItemComboBoxLayerName,
@@ -362,7 +365,7 @@ namespace Br3D
             this.categoryBlock,
             this.categoryLineType,
             this.categoryText});
-            this.propertyGridControl1.Size = new System.Drawing.Size(252, 515);
+            this.propertyGridControl1.Size = new System.Drawing.Size(252, 552);
             this.propertyGridControl1.TabIndex = 0;
             // 
             // repositoryItemComboBoxTextStyle
@@ -464,7 +467,7 @@ namespace Br3D
             // 
             this.categoryCircle.ChildRows.AddRange(new DevExpress.XtraVerticalGrid.Rows.BaseRow[] {
             this.rowRadius});
-            this.categoryCircle.Height = 19;
+            this.categoryCircle.Height = 20;
             this.categoryCircle.Name = "categoryCircle";
             this.categoryCircle.Properties.Caption = "Circle";
             // 
@@ -485,7 +488,7 @@ namespace Br3D
             // 
             // rowBlockName
             // 
-            this.rowBlockName.Height = 17;
+            this.rowBlockName.Height = 18;
             this.rowBlockName.Name = "rowBlockName";
             this.rowBlockName.Properties.Caption = "Name";
             this.rowBlockName.Properties.FieldName = "BlockName";
@@ -540,7 +543,7 @@ namespace Br3D
             this.rowBackward,
             this.rowUpsideDown,
             this.rowAlignment});
-            this.categoryText.Height = 19;
+            this.categoryText.Height = 20;
             this.categoryText.Name = "categoryText";
             this.categoryText.Properties.Caption = "Text";
             this.categoryText.Properties.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("categoryText.Properties.ImageOptions.SvgImage")));
@@ -606,10 +609,10 @@ namespace Br3D
             this.dockPanelObjectTree.Controls.Add(this.dockPanel3_Container);
             this.dockPanelObjectTree.Dock = DevExpress.XtraBars.Docking.DockingStyle.Fill;
             this.dockPanelObjectTree.ID = new System.Guid("c306bba9-1d83-4cca-b897-1e005975cc6f");
-            this.dockPanelObjectTree.Location = new System.Drawing.Point(3, 24);
+            this.dockPanelObjectTree.Location = new System.Drawing.Point(3, 26);
             this.dockPanelObjectTree.Name = "dockPanelObjectTree";
             this.dockPanelObjectTree.OriginalSize = new System.Drawing.Size(252, 552);
-            this.dockPanelObjectTree.Size = new System.Drawing.Size(252, 515);
+            this.dockPanelObjectTree.Size = new System.Drawing.Size(252, 552);
             this.dockPanelObjectTree.Text = "Object Tree";
             // 
             // dockPanel3_Container
@@ -617,7 +620,7 @@ namespace Br3D
             this.dockPanel3_Container.Controls.Add(this.treeListObject);
             this.dockPanel3_Container.Location = new System.Drawing.Point(0, 0);
             this.dockPanel3_Container.Name = "dockPanel3_Container";
-            this.dockPanel3_Container.Size = new System.Drawing.Size(252, 515);
+            this.dockPanel3_Container.Size = new System.Drawing.Size(252, 552);
             this.dockPanel3_Container.TabIndex = 0;
             // 
             // treeListObject
@@ -625,7 +628,7 @@ namespace Br3D
             this.treeListObject.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeListObject.Location = new System.Drawing.Point(0, 0);
             this.treeListObject.Name = "treeListObject";
-            this.treeListObject.Size = new System.Drawing.Size(252, 515);
+            this.treeListObject.Size = new System.Drawing.Size(252, 552);
             this.treeListObject.TabIndex = 0;
             // 
             // dockPanelDynamicInput
@@ -637,7 +640,7 @@ namespace Br3D
             this.dockPanelDynamicInput.Location = new System.Drawing.Point(979, 64);
             this.dockPanelDynamicInput.Name = "dockPanelDynamicInput";
             this.dockPanelDynamicInput.OriginalSize = new System.Drawing.Size(260, 200);
-            this.dockPanelDynamicInput.Size = new System.Drawing.Size(260, 536);
+            this.dockPanelDynamicInput.Size = new System.Drawing.Size(260, 581);
             this.dockPanelDynamicInput.Text = "Dynamic input";
             // 
             // controlContainer1
@@ -647,41 +650,40 @@ namespace Br3D
             this.controlContainer1.Controls.Add(this.controlAds1);
             this.controlContainer1.Location = new System.Drawing.Point(4, 26);
             this.controlContainer1.Name = "controlContainer1";
-            this.controlContainer1.Size = new System.Drawing.Size(253, 507);
+            this.controlContainer1.Size = new System.Drawing.Size(253, 552);
             this.controlContainer1.TabIndex = 0;
             // 
             // controlScriptCad1
             // 
             this.controlScriptCad1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.controlScriptCad1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.controlScriptCad1.Location = new System.Drawing.Point(0, 38);
+            this.controlScriptCad1.Location = new System.Drawing.Point(0, 50);
             this.controlScriptCad1.model = null;
             this.controlScriptCad1.Name = "controlScriptCad1";
-            this.controlScriptCad1.Size = new System.Drawing.Size(253, 215);
+            this.controlScriptCad1.Size = new System.Drawing.Size(253, 230);
             this.controlScriptCad1.TabIndex = 12;
             // 
             // controlCommandBar1
             // 
             this.controlCommandBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.controlCommandBar1.enabled = true;
-            this.controlCommandBar1.Location = new System.Drawing.Point(0, 253);
+            this.controlCommandBar1.Location = new System.Drawing.Point(0, 280);
             this.controlCommandBar1.Name = "controlCommandBar1";
-            this.controlCommandBar1.Size = new System.Drawing.Size(253, 21);
+            this.controlCommandBar1.Size = new System.Drawing.Size(253, 22);
             this.controlCommandBar1.TabIndex = 11;
             // 
             // controlAds1
             // 
             this.controlAds1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.controlAds1.Location = new System.Drawing.Point(0, 274);
+            this.controlAds1.Location = new System.Drawing.Point(0, 302);
             this.controlAds1.Name = "controlAds1";
-            this.controlAds1.Size = new System.Drawing.Size(253, 233);
+            this.controlAds1.Size = new System.Drawing.Size(253, 250);
             this.controlAds1.TabIndex = 10;
             this.controlAds1.url = "http://hileejaeho.cafe24.com/br3d-ad/";
             this.controlAds1.Visible = false;
             // 
             // ribbonControl1
             // 
-            this.ribbonControl1.EmptyAreaImageOptions.ImagePadding = new System.Windows.Forms.Padding(30, 28, 30, 28);
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbonControl1.ExpandCollapseItem,
@@ -788,9 +790,10 @@ namespace Br3D
             this.barButtonItemCreateContour,
             this.barButtonItemImportTerrain,
             this.barButtonItemExportTerrain,
-            this.barButtonItemUpDownTerrain});
+            this.barButtonItemUpDownTerrain,
+            this.barButtonItemExtractFace});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 130;
+            this.ribbonControl1.MaxItemId = 131;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -1688,7 +1691,8 @@ namespace Br3D
             // 
             this.ribbonPageDraw3D.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup2,
-            this.ribbonPageGroup3});
+            this.ribbonPageGroup3,
+            this.ribbonPageGroup9});
             this.ribbonPageDraw3D.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("ribbonPageDraw3D.ImageOptions.SvgImage")));
             this.ribbonPageDraw3D.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
             this.ribbonPageDraw3D.Name = "ribbonPageDraw3D";
@@ -1945,7 +1949,7 @@ namespace Br3D
             this.ribbonStatusBar1.ItemLinks.Add(this.ribbonControl1.SearchEditItem);
             this.ribbonStatusBar1.ItemLinks.Add(this.barStaticItemCoordinates);
             this.ribbonStatusBar1.ItemLinks.Add(this.barButtonItemWorkplane);
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 600);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 645);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
             this.ribbonStatusBar1.Size = new System.Drawing.Size(1239, 27);
@@ -1977,14 +1981,14 @@ namespace Br3D
             // 
             this.pictureEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureEdit1.EditValue = ((object)(resources.GetObject("pictureEdit1.EditValue")));
-            this.pictureEdit1.Location = new System.Drawing.Point(22, 64);
+            this.pictureEdit1.Location = new System.Drawing.Point(23, 64);
             this.pictureEdit1.MenuManager = this.ribbonControl1;
             this.pictureEdit1.Name = "pictureEdit1";
             this.pictureEdit1.Properties.Appearance.BackColor = System.Drawing.Color.Black;
             this.pictureEdit1.Properties.Appearance.Options.UseBackColor = true;
             this.pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             this.pictureEdit1.Properties.SvgImageSize = new System.Drawing.Size(200, 200);
-            this.pictureEdit1.Size = new System.Drawing.Size(957, 536);
+            this.pictureEdit1.Size = new System.Drawing.Size(956, 581);
             this.pictureEdit1.TabIndex = 10;
             // 
             // simpleButtonInit
@@ -1997,9 +2001,9 @@ namespace Br3D
             this.simpleButtonInit.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
             this.simpleButtonInit.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.simpleButtonInit.Enabled = false;
-            this.simpleButtonInit.Location = new System.Drawing.Point(22, 429);
+            this.simpleButtonInit.Location = new System.Drawing.Point(23, 462);
             this.simpleButtonInit.Name = "simpleButtonInit";
-            this.simpleButtonInit.Size = new System.Drawing.Size(957, 171);
+            this.simpleButtonInit.Size = new System.Drawing.Size(956, 183);
             this.simpleButtonInit.TabIndex = 15;
             this.simpleButtonInit.Text = "Initializing...";
             // 
@@ -2007,11 +2011,24 @@ namespace Br3D
             // 
             this.colorDialog1.FullOpen = true;
             // 
+            // ribbonPageGroup9
+            // 
+            this.ribbonPageGroup9.ItemLinks.Add(this.barButtonItemExtractFace);
+            this.ribbonPageGroup9.Name = "ribbonPageGroup9";
+            this.ribbonPageGroup9.Text = "ribbonPageGroup9";
+            // 
+            // barButtonItemExtractFace
+            // 
+            this.barButtonItemExtractFace.Caption = "Extract face";
+            this.barButtonItemExtractFace.Id = 130;
+            this.barButtonItemExtractFace.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemExtractFace.ImageOptions.SvgImage")));
+            this.barButtonItemExtractFace.Name = "barButtonItemExtractFace";
+            // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1239, 627);
+            this.ClientSize = new System.Drawing.Size(1239, 672);
             this.Controls.Add(this.simpleButtonInit);
             this.Controls.Add(this.pictureEdit1);
             this.Controls.Add(this.dockPanelDynamicInput);
@@ -2259,5 +2276,7 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemExportTerrain;
         private DevExpress.XtraBars.BarButtonItem barButtonItemUpDownTerrain;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemExtractFace;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup9;
     }
 }

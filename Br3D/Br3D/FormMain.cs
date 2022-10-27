@@ -769,6 +769,9 @@ namespace Br3D
             SetFunctionByElement(barButtonItemAlign, Align, LanguageHelper.Tr("Align"), "Align", "align");
             SetFunctionByElement(barButtonItemSmartExtrude, SmartExtrude, LanguageHelper.Tr("Smart extrude"), "SmartExtrude", "se");
 
+            SetFunctionByElement(barButtonItemExtractFace, ExtractFace, LanguageHelper.Tr("Extract face"), "ExtractFace", "ef");
+            
+
             // terrain
             SetFunctionByElement(barButtonItemCreateTerrain, CreateTerrain, LanguageHelper.Tr("Create terrain"), "CreateTerrain", "ct");
             SetFunctionByElement(barButtonItemColoringTerrain, ColoringTerrain, LanguageHelper.Tr("Coloring terrain"), "ColoringTerrain", "crt");
@@ -835,6 +838,8 @@ namespace Br3D
         async void Intersection3D() => await new ActionIntersection(model).RunAsync();
         async void Align() => await new ActionAlign(model).RunAsync();
         async void SmartExtrude() => await new ActionSmartExtrude(model).RunAsync();
+
+        async void ExtractFace() => await new ActionExtractFace(model).RunAsync();
 
         async void CreateTerrain() => await new ActionCreateTerrain(model).RunAsync();
         async void ColoringTerrain() => await new ActionColoringTerrain(model).RunAsync();

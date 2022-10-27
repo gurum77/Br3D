@@ -443,15 +443,16 @@ namespace hanee.ThreeD
             if (LastSelectedItem != item)
             {
                 bool highlightable = false;
-                if (item is Environment.SelectedFace)
+                var sf = item as Environment.SelectedFace;
+                if (sf != null)
                 {
                     highlightable = item.Item is Brep;
                 }
 
-                if (highlightable)
+                // 기존 highlight를 제거
+                if (LastSelectedItem != null && LastSelectedItem.Item is Brep lastBrep)
                 {
-                    if (LastSelectedItem != null)
-                        LastSelectedItem.Select(environment, false);
+                    lastBrep.ClearFacesSelection();
                 }
 
                 LastSelectedItem = item;
@@ -459,7 +460,12 @@ namespace hanee.ThreeD
                 if (highlightable)
                 {
                     if (LastSelectedItem != null)
-                        LastSelectedItem.Select(environment, true);
+                    {
+                        if(sf != null &&  item.Item is Brep brep)
+                        {
+                            brep.SetFaceSelection(sf.Index, true);
+                        }
+                    }
                 }
 
                 environment.Invalidate();
