@@ -31,10 +31,11 @@ namespace hanee.Cad.Tool
             }
 
             // 높이선
-            var heightLine = new Line(insPoint, heightPoint == null ? point3D : heightPoint);
+            var curHeightPoint = heightPoint == null ? point3D : heightPoint;
+            var heightLine = new Line(insPoint, curHeightPoint);
             heightLine.Color = System.Drawing.Color.Red;
             heightLine.ColorMethod = colorMethodType.byEntity;
-
+            PreviewLabel.PreviewDistanceLabel(model, insPoint, curHeightPoint, 0, true, "H=");
 
             // 방향선
             if (heightPoint != null)
