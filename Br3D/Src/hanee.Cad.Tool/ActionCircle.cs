@@ -50,12 +50,15 @@ namespace hanee.Cad.Tool
                     return;
 
                 radiusPoint = point3D;
+                PreviewLabel.PreviewDistanceLabel(model, centerPoint, radiusPoint, 0, true);
             }
             else if(method == Method.threePoints)
             {
                 // 첫번째 점일때는 선으로 그린다.
                 if(firstPoint != null && secondPoint == null)
                 {
+                    PreviewLabel.PreviewDistanceLabel(model, firstPoint, point3D, 0, true);
+
                     var line = new Line(firstPoint, point3D);
                     GetHModel()?.entityPropertiesManager?.SetDefaultProperties(line, true);
                     environment.TempEntities.ReplaceEntityAndRegen(line);
@@ -64,14 +67,17 @@ namespace hanee.Cad.Tool
                 else if(firstPoint != null && secondPoint != null)
                 {
                     thirdPoint = point3D;
+
+                    var tmpCircle = MakeEntity(true) as Circle;
+                    if(tmpCircle != null)
+                    {
+                        PreviewLabel.PreviewDistanceLabel(model, thirdPoint, tmpCircle.Center, 1, true, "R=");
+                    }
                 }
                 else
                 {
                     return;
                 }
-                
-
-                
             }
             else if(method == Method.twoPoints)
             {
@@ -79,11 +85,13 @@ namespace hanee.Cad.Tool
                     return;
 
                 secondPoint = point3D;
+                PreviewLabel.PreviewDistanceLabel(model, firstPoint, secondPoint, 0, true);
             }
 
             circle = MakeEntity(true);
             if (circle == null)
                 return;
+            
             environment.TempEntities.ReplaceEntityAndRegen(circle);
         }
 

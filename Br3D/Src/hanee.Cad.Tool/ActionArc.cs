@@ -53,6 +53,8 @@ namespace hanee.Cad.Tool
                     pt1 = null;
                     pt2 = null;
                     pt3 = null;
+
+                    break;
                 }
             }
             else if (method == Method.centerStartEnd)
@@ -81,6 +83,8 @@ namespace hanee.Cad.Tool
                     pt1 = null;
                     pt2 = null;
                     pt3 = null;
+
+                    break;
                 }
             }
             EndAction();
@@ -142,6 +146,8 @@ namespace hanee.Cad.Tool
                 var arc = MakeArc(true);
                 if (arc == null)
                     return;
+
+                PreviewLabel.PreviewDistanceLabel(model, arc.Center, arc.MidPoint, 0, true, "R=");
 
                 arc.Regen(0.001);
                 environment.TempEntities.Add(arc);

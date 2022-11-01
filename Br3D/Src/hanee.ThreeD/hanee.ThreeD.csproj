@@ -142,6 +142,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CurveGripManager.cs" />
+    <Compile Include="Define.cs" />
+    <Compile Include="DistanceText.cs" />
     <Compile Include="EntitiesHelper.cs" />
     <Compile Include="EntityPropertiesManager.cs" />
     <Compile Include="DimensionOptionsHelper.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="KeysHelper.cs" />
     <Compile Include="LanguageHelper.cs" />
     <Compile Include="LanguageOptionsHelper.cs" />
+    <Compile Include="LeaderAndTextAndBox.cs" />
     <Compile Include="LeaderGripManager.cs" />
     <Compile Include="LegendColorHelper.cs" />
     <Compile Include="LinearDimGripManager.cs" />
@@ -175,6 +178,7 @@
     <Compile Include="Options.cs" />
     <Compile Include="OptionsHelper.cs" />
     <Compile Include="OrthoModeManager.cs" />
+    <Compile Include="PreviewLabel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

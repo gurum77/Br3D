@@ -271,6 +271,7 @@ namespace hanee.Terrain.Tool
                 allPoints.Add(new PointRGB(seg.P1.X, seg.P1.Y, seg.P1.Z, color));
             }
 
+            
             return UtilityEx.Triangulate(allPoints);
             //return UtilityEx.Triangulate(allPoints, Mesh.natureType.MulticolorSmooth);
         }

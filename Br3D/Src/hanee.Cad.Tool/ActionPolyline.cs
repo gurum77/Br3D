@@ -30,11 +30,16 @@ namespace hanee.Cad.Tool
             if (points == null || points.Count < 1)
                 return;
 
-            var cutPoints = new List<Point3D>();
-            cutPoints.AddRange(points);
-            cutPoints.Add(point3D.Clone() as Point3D);
+            var curPoints = new List<Point3D>();
+            curPoints.AddRange(points);
+            curPoints.Add(point3D.Clone() as Point3D);
 
-            var lp = MakePolyline(cutPoints, true);
+            if(curPoints.Count > 1)
+            {
+                PreviewLabel.PreviewDistanceLabel(model, curPoints[curPoints.Count - 2], curPoints[curPoints.Count - 1], 0);
+            }
+
+            var lp = MakePolyline(curPoints, true);
 
             //lp.Regen(0.001);
             GetModel().TempEntities.Clear();

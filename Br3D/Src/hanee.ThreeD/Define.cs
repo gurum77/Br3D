@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace hanee.Cad.Tool
+namespace hanee.ThreeD
 {
     public class Define
     {

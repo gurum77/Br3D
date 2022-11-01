@@ -176,8 +176,6 @@
     <Compile Include="LineTypeControl.Designer.cs">
       <DependentUpon>LineTypeControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Define.cs" />
-    <Compile Include="DistanceText.cs" />
     <Compile Include="FormFilter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,7 +218,6 @@
     <Compile Include="LayerControl.Designer.cs">
       <DependentUpon>LayerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="LeaderAndTextAndBox.cs" />
     <Compile Include="Memo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

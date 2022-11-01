@@ -60,11 +60,11 @@ namespace hanee.Cad.Tool
                 ActionBase.previewEntity = CreateLine();
         }
 
-        DistanceText CreateDistanceText()
+        static public DistanceText CreateDistanceText(Environment env, Point3D pt1, Point3D pt2)
         {
-            if (environment is HModel)
+            if (env is HModel)
             {
-                DistanceText dt = new DistanceText((Model)environment, pt1, pt2, pt1.DistanceTo(pt2).ToString("0.000"), Define.DefaultFont, Define.DefaultTextColor, new Vector2D(0, 0))
+                DistanceText dt = new DistanceText((Model)env, pt1, pt2, pt1.DistanceTo(pt2).ToString("0.000"), Define.DefaultFont, Define.DefaultTextColor, new Vector2D(0, 0))
                 {
                     Alignment = System.Drawing.ContentAlignment.MiddleCenter,
                     FillColor = System.Drawing.Color.Yellow
@@ -76,6 +76,11 @@ namespace hanee.Cad.Tool
             {
                 return null;
             }
+        }
+
+        DistanceText CreateDistanceText()
+        {
+            return CreateDistanceText(environment, pt1, pt2);
         }
 
         LinearPath CreateLinearPath()

@@ -1,18 +1,12 @@
 ﻿using devDept.Eyeshot.Labels;
 using devDept.Geometry;
 using devDept.Graphics;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace hanee.Cad.Tool
+namespace hanee.ThreeD
 {
     public class LeaderAndTextAndBox : LeaderAndText
     {
-
         public LeaderAndTextAndBox(Point3D p, string text, Font textFont, Color textColor, Vector2D offset) : base(p, text, textFont, textColor, offset)
         {
 

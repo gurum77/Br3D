@@ -101,6 +101,7 @@
     <Compile Include="IBX.cs" />
     <Compile Include="ICurveHelper.cs" />
     <Compile Include="IndexTriangleHelper.cs" />
+    <Compile Include="LabelData.cs" />
     <Compile Include="LegendHelper.cs" />
     <Compile Include="LinearDimHelper.cs" />
     <Compile Include="LinearPathHelper.cs" />

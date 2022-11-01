@@ -31,6 +31,7 @@ namespace hanee.Cad.Tool
             if (line == null)
                 return;
 
+            PreviewLabel.PreviewDistanceLabel(model, startPoint, endPoint, 0);
             environment.TempEntities.ReplaceEntityAndRegen(line);
             environment.Invalidate();
         }
