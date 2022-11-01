@@ -1,5 +1,6 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
+using devDept.Eyeshot.Labels;
 using devDept.Geometry;
 using System;
 using System.Collections.Generic;
@@ -130,6 +131,8 @@ namespace hanee.ThreeD
                 }
             }
         }
+
+     
 
         // 임시 객체를 이동한다.
         static public void MoveTempEtt(devDept.Eyeshot.Model model, Vector3D vMove)
@@ -1261,8 +1264,9 @@ namespace hanee.ThreeD
             return orthoModeManager.GetOrthoPoint3D(e, curPoint);
         }
         #region 생성자
-        protected devDept.Eyeshot.Environment environment;
-        protected devDept.Eyeshot.Model GetModel() { return environment as devDept.Eyeshot.Model; }
+        protected Environment environment;
+        protected Model model => environment as Model;
+        protected Model GetModel() { return environment as devDept.Eyeshot.Model; }
         protected HModel GetHModel() { return environment as HModel; }
         protected EntityPropertiesManager entityPropertiesManager => GetHModel()?.entityPropertiesManager;
         protected Plane GetWorkplane()
@@ -1407,6 +1411,7 @@ namespace hanee.ThreeD
         // 액션 종료할때 반드시 호출해야 한다.
         virtual public void EndAction()
         {
+            PreviewLabel.Clear(model);
             ActionBase.PreviewEntities = null;
             ActionBase.PreviewFaceEntities = null;
             var ws = GetWorkspace();
