@@ -1,7 +1,9 @@
 ﻿using devDept.Eyeshot.Entities;
 using devDept.Geometry;
 using hanee.Geometry;
+using hanee.ThreeD;
 using System;
+using System.Windows.Forms;
 
 namespace hanee.Cad.Tool
 {
@@ -36,19 +38,48 @@ namespace hanee.Cad.Tool
 
             return depthPoint.DistanceTo(centerPoint) * 2;
         }
+
+        protected override void OnMouseMove(devDept.Eyeshot.Environment environment, MouseEventArgs e)
+        {
+            // 
+            base.OnMouseMove(environment, e);
+
+
+            var sec = MakeSection() as Region;
+            if (sec == null || sec.ContourList.Count == 0)
+                return;
+            
+            var lp = sec.ContourList[0] as CompositeCurve;
+            if (lp == null || lp.CurveList.Count < 4)
+                return;
+
+            var l1 = lp.CurveList[0] as Line;
+            var l2 = lp.CurveList[1] as Line;
+            if (l1 == null || l2 == null)
+                return;
+            PreviewLabel.PreviewDistanceLabel(model, l1.StartPoint, l1.EndPoint, 1, false, "W=");
+            PreviewLabel.PreviewDistanceLabel(model, l2.StartPoint, l2.EndPoint, 2, false, "H=");
+
+        }
+
+     
         protected override Entity MakeSection()
         {
+            // radiusPoint가 입력이 되어 있다면 plane이 바뀌기 때문에 section을 만들 수 없다.
+            if (radiusPoint != null)
+                return null;
+                
             var plane = GetWorkplane();
             var width = GetWidth(plane, point3D);
             var depth = GetDepth(plane, point3D);
             if (width == 0 || depth == 0)
                 return null;
 
-            
-            var rect = LinearPathHelper.CreateRectangle(0, 0, 0, width, depth, true);
-            var trans = new Transformation(centerPoint, plane.AxisX, plane.AxisY, plane.AxisZ);
-            rect.TransformBy(trans);
-            return rect;
+            var secPlane = plane.Clone() as Plane;
+            secPlane.Origin = centerPoint;
+            var region = Region.CreateRectangle(secPlane, width, depth, true);
+            GetHModel().entityPropertiesManager.SetDefaultProperties(region, true);
+            return region;
         }
 
         protected override Entity Make3D(bool tempEntity)

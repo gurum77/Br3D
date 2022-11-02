@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace hanee.Cad.Tool
 {
@@ -14,8 +15,17 @@ namespace hanee.Cad.Tool
         public ActionTorus(devDept.Eyeshot.Environment environment) : base(environment)
         {
             disableWorkplaneForHeight = false;
+            outlineSection = true;
         }
 
+        protected override void OnMouseMove(devDept.Eyeshot.Environment environment, MouseEventArgs e)
+        {
+            base.OnMouseMove(environment, e);
+
+            if (radiusPoint == null || heightPoint == null)
+                return;
+            PreviewLabel.PreviewDistanceLabel(model, radiusPoint, heightPoint, 1, true, "R2=");
+        }
         protected override Entity Make3D(bool tempEntity)
         {
             if (centerPoint == null || radiusPoint == null || heightPoint == null)

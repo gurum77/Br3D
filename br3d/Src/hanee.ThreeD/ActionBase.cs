@@ -1,6 +1,5 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
-using devDept.Eyeshot.Labels;
 using devDept.Geometry;
 using System;
 using System.Collections.Generic;
@@ -132,7 +131,7 @@ namespace hanee.ThreeD
             }
         }
 
-     
+
 
         // 임시 객체를 이동한다.
         static public void MoveTempEtt(devDept.Eyeshot.Model model, Vector3D vMove)
@@ -464,7 +463,7 @@ namespace hanee.ThreeD
                 {
                     if (LastSelectedItem != null)
                     {
-                        if(sf != null &&  item.Item is Brep brep)
+                        if (sf != null && item.Item is Brep brep)
                         {
                             brep.SetFaceSelection(sf.Index, true);
                         }
@@ -1275,14 +1274,14 @@ namespace hanee.ThreeD
         }
 
         // workspace가 비활성인 경우 자동 설정한다.
-        protected void SetAutoWorkspace(Point3D modifyPoint=null)
+        protected void SetAutoWorkspace(Point3D modifyPoint = null)
         {
             if (environment is HModel model)
             {
                 // 2D View인 경우에는 자동설정 하지 않는다.
                 if (model.IsTopViewOnly(model.ActiveViewport))
                     return;
-                
+
                 var ws = model.GetWorkspace();
                 if (ws == null)
                     return;
@@ -1304,15 +1303,29 @@ namespace hanee.ThreeD
                     environment.StartWorkspace(sf);
 
                     // 새로운 workspace에 맞게 좌표 조정
-                    if(modifyPoint != null)
+                    if (modifyPoint != null)
                     {
                         var newPt = environment.ProjectOnWorkspace(modifyPoint);
-                        if(newPt != null)
+                        if (newPt != null)
                         {
                             modifyPoint.X = newPt.X;
                             modifyPoint.Y = newPt.Y;
                             modifyPoint.Z = newPt.Z;
                         }
+                    }
+                }
+                else
+                {
+                    if (modifyPoint != null)
+                    {
+                        // 기존 workspace를 복사
+                        ActionBase.tempWorkspace = ws.Clone() as Workspace;
+
+                        // 새로운 workspace 시작
+                        var plane = ws.plane.Clone() as Plane;
+                        plane.Origin = modifyPoint;
+                        environment.StartWorkspace(plane);
+
                     }
                 }
 
@@ -1399,7 +1412,7 @@ namespace hanee.ThreeD
             ActionBase.Canceled = false;
             for (int i = 0; i < (int)UserInput.Count; ++i)
             {
-                userInputting[i] = false;   
+                userInputting[i] = false;
             }
 
             ActionBase.PreviewEntities = null;
@@ -1415,7 +1428,7 @@ namespace hanee.ThreeD
             ActionBase.PreviewEntities = null;
             ActionBase.PreviewFaceEntities = null;
             var ws = GetWorkspace();
-            if(ActionBase.tempWorkspace != null && ws != null)
+            if (ActionBase.tempWorkspace != null && ws != null)
             {
                 if (!ActionBase.tempWorkspace.enabled)
                     environment.EndWorkspace();

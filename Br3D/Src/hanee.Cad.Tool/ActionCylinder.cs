@@ -13,6 +13,7 @@ namespace hanee.Cad.Tool
 {
     public class ActionCylinder : ActionBase
     {
+        protected bool outlineSection = false;  // section을 그릴때 외곽선으로만 그릴지?
         // 높이 입력 받을때 workplane을 비활성화 할지?
         protected bool disableWorkplaneForHeight = true;
         protected bool activeDynamicInputManagerForRadius = true;
@@ -54,11 +55,30 @@ namespace hanee.Cad.Tool
             if (centerPoint == null || point3D == null)
                 return null;
 
+           
             var wp = GetWorkplane();
             var radius = wp.DistanceTo(centerPoint, point3D);
             if (radius <= 0)
                 return null;
-            var circle =  new Circle(wp, centerPoint, radius);
+
+            var circlePlane = wp.Clone() as Plane;
+            if (circlePlane == null)
+                return null;
+            circlePlane.Origin = centerPoint;
+
+            Entity circle = null;
+            if (outlineSection)
+            {
+                circle = new Circle(circlePlane, radius);
+            }
+            else
+            {
+                circle = Region.CreateCircle(circlePlane, radius);
+            }
+            
+            if (circle == null)
+                return null;
+
             GetHModel()?.entityPropertiesManager?.SetDefaultProperties(circle, true);
 
             return circle;

@@ -1,4 +1,5 @@
 ﻿using devDept.Eyeshot.Entities;
+using hanee.ThreeD;
 using System.Windows.Forms;
 
 namespace hanee.Cad.Tool
@@ -22,6 +23,8 @@ namespace hanee.Cad.Tool
                 return;
 
             SetTempEtt(environment, circle);
+
+            PreviewLabel.PreviewDistanceLabel(model, centerPoint, radiusPoint, 0, true, "R=");
         }
 
         protected override Entity MakeEntity(bool tempEntity = false)

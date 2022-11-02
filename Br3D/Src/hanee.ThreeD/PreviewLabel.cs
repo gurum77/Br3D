@@ -23,6 +23,9 @@ namespace hanee.ThreeD
         // distance label 미리보기를 한다.
         static public void PreviewDistanceLabel(Model model, Point3D from, Point3D to, int idx, bool drawLine=false, string header=null, Plane plane=null)
         {
+            if (model == null || from == null || to == null)
+                return;
+
             var toTmp = plane==null ? to :  plane.Project3D(to);
             var labels = model.ActiveViewport.Labels.FindAll(x => x is DistanceText);
             DistanceText label = null;
