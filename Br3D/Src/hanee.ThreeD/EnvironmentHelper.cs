@@ -17,9 +17,7 @@ namespace hanee.ThreeD
             var ws = environment.GetWorkspace();
             if (ws == null || !ws.enabled)
                 return pt;
-
-            var pt2D = ws.plane.Project(pt);
-            return ws.plane.PointAt(pt2D);
+            return ws.plane.Project3D(pt);
         }
 
         // 마우스 좌표를 world좌표로 변환(workspace 고려함)

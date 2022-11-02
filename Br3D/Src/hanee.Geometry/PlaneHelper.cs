@@ -34,6 +34,21 @@ namespace hanee.Geometry
             return vec3D;
         }
 
+        // 3D 좌표를 plane에 투영해서 거리를 계산해서 리턴
+        static public double DistanceTo(this Plane plane, Point3D pt1, Point3D pt2)
+        {
+            var pt1Tmp = plane.Project3D(pt1);
+            var pt2Tmp = plane.Project3D(pt2);
+            return pt1Tmp.DistanceTo(pt2Tmp);
+        }
+
+        // 3D 좌표를 plane에 투영한 3D 좌표로 변환해서 리턴
+        static public Point3D Project3D(this Plane plane, Point3D from)
+        {
+            var pt2D = plane.Project(from);
+            return plane.PointAt(pt2D);
+        }
+
         // 3D좌표 2개의 각도를 계산(평면에 투영한 각도)
         static public double ProjectDegree(this Plane plane, Point3D from, Point3D to)
         {

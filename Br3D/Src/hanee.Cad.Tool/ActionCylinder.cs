@@ -54,8 +54,11 @@ namespace hanee.Cad.Tool
             if (centerPoint == null || point3D == null)
                 return null;
 
-            var radius = point3D.DistanceTo(centerPoint);
-            var circle =  new Circle(GetWorkplane(), centerPoint, radius);
+            var wp = GetWorkplane();
+            var radius = wp.DistanceTo(centerPoint, point3D);
+            if (radius <= 0)
+                return null;
+            var circle =  new Circle(wp, centerPoint, radius);
             GetHModel()?.entityPropertiesManager?.SetDefaultProperties(circle, true);
 
             return circle;
@@ -71,11 +74,14 @@ namespace hanee.Cad.Tool
             {
                 var section = MakeSection();
                 SetTempEtt(environment, section);
+                PreviewLabel.PreviewDistanceLabel(model, centerPoint, point3D, 0, true, "R=", GetWorkplane());
+
                 return;
             }
 
-
             heightPoint = point3D;
+            var height = oldPlane.DistanceTo(heightPoint);
+            PreviewLabel.PreviewHeightLabel(model, centerPoint, height, 1, oldPlane, true, "H=");
 
             var cyl = Make3D(true);
             if (cyl == null)
@@ -94,7 +100,7 @@ namespace hanee.Cad.Tool
             while (true)
             {
                 centerPoint = await GetPoint3D(LanguageHelper.Tr("Center point"));
-                if (IsCanceled())
+                if (IsCanceled() || IsEntered())
                     break;
 
                 SetAutoWorkspace(centerPoint);
@@ -104,7 +110,7 @@ namespace hanee.Cad.Tool
                 radiusPoint = await GetPoint3D(LanguageHelper.Tr("Radius point"));
                 SetOrthoModeStartPoint(null);
                 DynamicInputManager.Init();
-                if (IsCanceled())
+                if (IsCanceled() || IsEntered())
                     break;
                 
 
@@ -117,7 +123,7 @@ namespace hanee.Cad.Tool
                 heightPoint = await GetPoint3D(LanguageHelper.Tr("Height point"));
                 SetOrthoModeStartPoint(null);
                 DynamicInputManager.Init();
-                if (IsCanceled())
+                if (IsCanceled() || IsEntered())
                     break;
                 if(disableWorkplaneForHeight)
                     ws.enabled = oldEnable;
@@ -134,6 +140,7 @@ namespace hanee.Cad.Tool
                 GetModel().TempEntities.Clear();
                 GetModel().Entities.Regen();
                 GetModel().Invalidate();
+                break;
             }
 
             EndAction();
