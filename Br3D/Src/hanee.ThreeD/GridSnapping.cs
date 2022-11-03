@@ -4,8 +4,18 @@ namespace hanee.ThreeD
 {
     public class GridSnapping
     {
-        public bool enabled { get; set; } = true;
-        public int gridSnapDecimals { get; set; } = 1;  // grid snap 단위( 0 : 정수, 1 : 0.1, 2 : 0.01, 3 : 0.001 ...)
+        public bool enabled
+        {
+            get => Options.Instance.enableGridSnap;
+            set => Options.Instance.enableGridSnap = value;
+        }
+
+        // grid snap 단위( 0 : 정수, 1 : 0.1, 2 : 0.01, 3 : 0.001 ...)
+        public int gridSnapDecimals 
+        {
+            get => Options.Instance.gridSnapDecimals;
+            set => Options.Instance.gridSnapDecimals = value;
+        }
 
         /// <summary>
         /// Tries to snap grid vertex for the current mouse point

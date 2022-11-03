@@ -43,6 +43,10 @@ namespace Br3D
 
             // drawing
             labelControlLineTypeScale.Text = LanguageHelper.Tr("Linetype scale");
+
+            // general
+            checkEditGridSnap.Text = LanguageHelper.Tr("Grid snap");
+            checkEditOrthoMode.Text = LanguageHelper.Tr("Ortho mode");
             
             // color
             groupControlBackground.Text = LanguageHelper.Tr("Background(3D)");
@@ -63,6 +67,8 @@ namespace Br3D
         void InitControl()
         {
             // drawing
+
+            // general
 
             // color
             colorPickEditBackgroundTop.Color = Options.Instance.backgroundColorTop.colorValue;
@@ -109,6 +115,11 @@ namespace Br3D
         {
             Options.Instance.Default();
             InitControl();
+        }
+
+        private void checkEditGridSnap_CheckedChanged(object sender, EventArgs e)
+        {
+            comboBoxEditGridSnapDecimals.Enabled = checkEditGridSnap.Checked;
         }
     }
 }

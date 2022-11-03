@@ -21,7 +21,11 @@ namespace hanee.ThreeD
             z
         }
         public Point3D startPoint { get; set; } = null;
-        public bool enabled { get; set; } = false;
+        public bool enabled
+        {
+            get => Options.Instance.enableOrthoMode;
+            set => Options.Instance.enableOrthoMode = value;
+        }
         HModel model { get; set; }
         public Axis axis { get; private set; }
         public Point3D lastOrthoPoint { get; set; } = null;
@@ -31,7 +35,6 @@ namespace hanee.ThreeD
         {
             this.model = model;
         }
-
 
         public Point3D GetOrthoPoint3D(MouseEventArgs e, Point3D curPoint)
         {

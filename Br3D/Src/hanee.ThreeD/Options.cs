@@ -39,6 +39,12 @@ namespace hanee.ThreeD
         public float dimTextHeight { get; set; } = 2.0f;
         public float annotationTextHeight { get; set; } = 30;
         public int decimals { get; set; } = 5;  // 좌표, 길이값등의 허용 소수점 자릿수
+
+        // general
+        public int gridSnapDecimals { get; set; } = 2;  // 그리드 스냅 자릿수
+        public bool enableGridSnap { get; set; } = true;
+
+        public bool enableOrthoMode { get; set; } = false;
         
         public string currentLayerName { get; set; } = "Default";
 

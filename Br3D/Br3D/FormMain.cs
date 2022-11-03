@@ -127,8 +127,6 @@ namespace Br3D
             Update2D3DButton();
             UpdateDisplayModeButton();
             UpdateSnapButton();
-
-
         }
 
 
