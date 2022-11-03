@@ -483,6 +483,8 @@ namespace hanee.ThreeD
         // snap / ortho mode를 고려한 3D 좌표 리턴
         static public Point3D GetPoint3DWithSnapAndOrthoMode(Environment environment, MouseEventArgs e)
         {
+    
+
             // snapPoint 우선
             var model = environment as HModel;
             if (model != null)
@@ -497,15 +499,15 @@ namespace hanee.ThreeD
             var pt = GetPoint3DByMouseLocation(environment, e.Location);
             if (model != null)
             {
+                // grid snap
+                pt = model.gridSnapping.GetGridSnapPoint3D(pt);
+
+                // ortho mode
                 pt = model.orthoModeManager.GetOrthoPoint3D(e, pt);
             }
 
             // dynamic input에 의한 좌표 조정
             DynamicInputManager.ModifyPoint3D(environment, ref pt);
-
-
-            // work space에 의한 좌표 조정
-
 
             return pt;
         }

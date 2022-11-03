@@ -49,6 +49,7 @@ namespace hanee.ThreeD
         public Dictionary<Viewport, bool> topViewOnlys = new Dictionary<Viewport, bool>();
         public bool displayHelp = true;
         public Snapping Snapping = null;
+        public GridSnapping gridSnapping = null;
         public OrthoModeManager orthoModeManager = null;
         public GripManager gripManager = null;
         public SelectionManager selectionManager = null;
@@ -77,6 +78,7 @@ namespace hanee.ThreeD
                 la.Color = DefaultColor;
             }
             Snapping = new Snapping(this);
+            gridSnapping = new GridSnapping();
             orthoModeManager = new OrthoModeManager(this);
             gripManager = new GripManager(this);
             selectionManager = new SelectionManager(this);

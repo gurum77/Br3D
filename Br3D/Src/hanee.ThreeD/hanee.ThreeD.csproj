@@ -152,6 +152,7 @@
     <Compile Include="EntityColor.cs" />
     <Compile Include="EventParams.cs" />
     <Compile Include="FileHelper.cs" />
+    <Compile Include="GridSnapping.cs" />
     <Compile Include="GripManager.cs" />
     <Compile Include="GripPoint.cs" />
     <Compile Include="HModelProperties.cs" />

@@ -192,6 +192,8 @@ namespace Br3D
             this.barButtonItemImportTerrain = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemExportTerrain = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemUpDownTerrain = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemExtractFace = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemGridSnap = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -201,6 +203,7 @@ namespace Br3D
             this.ribbonPageDraw3D = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup9 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageTerrain = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupTerrainExchange = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -235,8 +238,6 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.ribbonPageGroup9 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.barButtonItemExtractFace = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
@@ -791,9 +792,10 @@ namespace Br3D
             this.barButtonItemImportTerrain,
             this.barButtonItemExportTerrain,
             this.barButtonItemUpDownTerrain,
-            this.barButtonItemExtractFace});
+            this.barButtonItemExtractFace,
+            this.barButtonItemGridSnap});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 131;
+            this.ribbonControl1.MaxItemId = 132;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -1226,6 +1228,7 @@ namespace Br3D
             // 
             // barButtonItemOrthoMode
             // 
+            this.barButtonItemOrthoMode.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.Check;
             this.barButtonItemOrthoMode.Caption = "Ortho Mode";
             this.barButtonItemOrthoMode.Id = 52;
             this.barButtonItemOrthoMode.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemOrthoMode.ImageOptions.SvgImage")));
@@ -1625,6 +1628,21 @@ namespace Br3D
             this.barButtonItemUpDownTerrain.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemUpDownTerrain.ImageOptions.SvgImage")));
             this.barButtonItemUpDownTerrain.Name = "barButtonItemUpDownTerrain";
             // 
+            // barButtonItemExtractFace
+            // 
+            this.barButtonItemExtractFace.Caption = "Extract face";
+            this.barButtonItemExtractFace.Id = 130;
+            this.barButtonItemExtractFace.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemExtractFace.ImageOptions.SvgImage")));
+            this.barButtonItemExtractFace.Name = "barButtonItemExtractFace";
+            // 
+            // barButtonItemGridSnap
+            // 
+            this.barButtonItemGridSnap.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.Check;
+            this.barButtonItemGridSnap.Caption = "Grid snap";
+            this.barButtonItemGridSnap.Id = 131;
+            this.barButtonItemGridSnap.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemGridSnap.ImageOptions.SvgImage")));
+            this.barButtonItemGridSnap.Name = "barButtonItemGridSnap";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -1715,6 +1733,12 @@ namespace Br3D
             this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItemSmartExtrude);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.Text = "ribbonPageGroup3";
+            // 
+            // ribbonPageGroup9
+            // 
+            this.ribbonPageGroup9.ItemLinks.Add(this.barButtonItemExtractFace);
+            this.ribbonPageGroup9.Name = "ribbonPageGroup9";
+            this.ribbonPageGroup9.Text = "ribbonPageGroup9";
             // 
             // ribbonPageTerrain
             // 
@@ -1865,6 +1889,7 @@ namespace Br3D
             // ribbonPageGroupOrthoMode
             // 
             this.ribbonPageGroupOrthoMode.ItemLinks.Add(this.barButtonItemOrthoMode);
+            this.ribbonPageGroupOrthoMode.ItemLinks.Add(this.barButtonItemGridSnap);
             this.ribbonPageGroupOrthoMode.Name = "ribbonPageGroupOrthoMode";
             this.ribbonPageGroupOrthoMode.Text = "Mode";
             // 
@@ -2010,19 +2035,6 @@ namespace Br3D
             // colorDialog1
             // 
             this.colorDialog1.FullOpen = true;
-            // 
-            // ribbonPageGroup9
-            // 
-            this.ribbonPageGroup9.ItemLinks.Add(this.barButtonItemExtractFace);
-            this.ribbonPageGroup9.Name = "ribbonPageGroup9";
-            this.ribbonPageGroup9.Text = "ribbonPageGroup9";
-            // 
-            // barButtonItemExtractFace
-            // 
-            this.barButtonItemExtractFace.Caption = "Extract face";
-            this.barButtonItemExtractFace.Id = 130;
-            this.barButtonItemExtractFace.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemExtractFace.ImageOptions.SvgImage")));
-            this.barButtonItemExtractFace.Name = "barButtonItemExtractFace";
             // 
             // FormMain
             // 
@@ -2278,5 +2290,6 @@ namespace Br3D
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
         private DevExpress.XtraBars.BarButtonItem barButtonItemExtractFace;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup9;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemGridSnap;
     }
 }

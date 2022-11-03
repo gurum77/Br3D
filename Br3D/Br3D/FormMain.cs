@@ -49,6 +49,7 @@ namespace Br3D
             DragEnter += FormMain_DragEnter;
 
             barButtonItemWorkspace.Alignment = BarItemLinkAlignment.Right;
+            barButtonItemGridSnap.Alignment = BarItemLinkAlignment.Right;
             barButtonItemOsnapend.Alignment = BarItemLinkAlignment.Right;
             barButtonItemOsnapIntersection.Alignment = BarItemLinkAlignment.Right;
             barButtonItemOsnapMiddle.Alignment = BarItemLinkAlignment.Right;
@@ -56,11 +57,13 @@ namespace Br3D
             barButtonItemOsnapPoint.Alignment = BarItemLinkAlignment.Right;
 
             ribbonStatusBar1.ItemLinks.Add(barButtonItemWorkspace);
+            ribbonStatusBar1.ItemLinks.Add(barButtonItemGridSnap);
             ribbonStatusBar1.ItemLinks.Add(barButtonItemOsnapend);
             ribbonStatusBar1.ItemLinks.Add(barButtonItemOsnapIntersection);
             ribbonStatusBar1.ItemLinks.Add(barButtonItemOsnapMiddle);
             ribbonStatusBar1.ItemLinks.Add(barButtonItemOsnapCenter);
             ribbonStatusBar1.ItemLinks.Add(barButtonItemOsnapPoint);
+
 
         }
 
@@ -123,6 +126,7 @@ namespace Br3D
 
             Update2D3DButton();
             UpdateDisplayModeButton();
+            UpdateSnapButton();
 
 
         }
@@ -795,6 +799,7 @@ namespace Br3D
 
             // osnap
             SetFunctionByElement(barButtonItemOrthoMode, OrthoMode, LanguageHelper.Tr("Ortho mode"), "OrthoMode", "or");
+            SetFunctionByElement(barButtonItemGridSnap, GridSnap, LanguageHelper.Tr("Grid snap"), "GridSnap", "gs");
             SetFunctionByElement(barButtonItemOsnapend, End, LanguageHelper.Tr("End Point"), "End", "end");
             SetFunctionByElement(barButtonItemOsnapIntersection, Intersection, LanguageHelper.Tr("Intersection Point"), "Int", null);
             SetFunctionByElement(barButtonItemOsnapMiddle, Middle, LanguageHelper.Tr("Midle Point"), "Mid", null);
@@ -1078,6 +1083,17 @@ namespace Br3D
             barButtonItem.Down = hModel.orthoModeManager.enabled;
         }
 
+        // 그리드 스냅
+        void FlagGridSnap(BarButtonItem barButtonItem)
+        {
+            HModel hModel = model as HModel;
+            if (hModel == null)
+                return;
+
+            hModel.gridSnapping.enabled = !hModel.gridSnapping.enabled;
+            barButtonItem.Down = hModel.gridSnapping.enabled;
+        }
+
         // display mode 설정 / 버튼 체크
         void FlagDisplayMode(displayType displayMode)
         {
@@ -1093,6 +1109,18 @@ namespace Br3D
                 hModel.ActiveViewport.DisplayMode = displayType.Wireframe;
             hModel.Invalidate();
             UpdateDisplayModeButton();
+        }
+
+        // grid snap, osnap, ortho mode 버튼을 현재 상태로 변경
+        void UpdateSnapButton()
+        {
+            barButtonItemOrthoMode.Down = hModel.orthoModeManager.enabled;
+            barButtonItemGridSnap.Down = hModel.gridSnapping.enabled;
+            barButtonItemOsnapend.Down = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.End);
+            barButtonItemOsnapIntersection.Down = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Intersect);
+            barButtonItemOsnapMiddle.Down = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Mid);
+            barButtonItemOsnapCenter.Down = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Center);
+            barButtonItemOsnapPoint.Down = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Point);
         }
 
         void UpdateDisplayModeButton()
@@ -1140,6 +1168,7 @@ namespace Br3D
 
         // 
         void OrthoMode() => FlagOrthoMode(barButtonItemOrthoMode);
+        void GridSnap() => FlagGridSnap(barButtonItemGridSnap);
         void End() => controlModel.End();
         void Middle() => controlModel.Middle();
         void Point() => controlModel.Point();

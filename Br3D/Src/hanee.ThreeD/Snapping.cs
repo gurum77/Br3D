@@ -256,26 +256,7 @@ namespace hanee.ThreeD
             environment.Invalidate();
         }
 
-        /// <summary>
-        /// Tries to snap grid vertex for the current mouse point
-        /// </summary>
-        private bool SnapToGrid(ref Point3D ptToSnap)
-        {
-            if (ptToSnap == null)
-                return false;
-            double offset = ActionBase.systemValue.GridSnapOffset;
-            Point2D gridPoint = new Point2D(Math.Round(ptToSnap.X / offset) * offset, Math.Round(ptToSnap.Y / offset) * offset);
-
-            if (Point2D.Distance(gridPoint, ptToSnap) < ActionBase.systemValue.MagnetRange)
-            {
-                ptToSnap.X = gridPoint.X;
-                ptToSnap.Y = gridPoint.Y;
-
-                return true;
-            }
-
-            return false;
-        }
+     
 
 
         #region snap 찾기
@@ -597,19 +578,19 @@ namespace hanee.ThreeD
             }
 
 
-            // 그리드 스냅 on이고, 다른 스냅을 찾지 못 한 경우
-            if (snapPoints != null && snapPoints.Count() == 0 && activeObjectSnap.HasFlag(objectSnapType.Grid))
-            {
+            //// 그리드 스냅 on이고, 다른 스냅을 찾지 못 한 경우
+            //if (snapPoints != null && snapPoints.Count() == 0 && activeObjectSnap.HasFlag(objectSnapType.Grid))
+            //{
 
-                Point3D pt3D = ActionBase.GetPoint3DByMouseLocation(environment, mouseLocation);
-                if (SnapToGrid(ref pt3D))
-                {
-                    List<SnapPoint> gridSnapPoints = new List<SnapPoint>();
-                    gridSnapPoints.Add(new SnapPoint(pt3D, objectSnapType.Grid, null));
-                    snapPoints = gridSnapPoints.ToArray();
-                }
+            //    Point3D pt3D = ActionBase.GetPoint3DByMouseLocation(environment, mouseLocation);
+            //    if (SnapToGrid(ref pt3D))
+            //    {
+            //        List<SnapPoint> gridSnapPoints = new List<SnapPoint>();
+            //        gridSnapPoints.Add(new SnapPoint(pt3D, objectSnapType.Grid, null));
+            //        snapPoints = gridSnapPoints.ToArray();
+            //    }
 
-            }
+            //}
 
             environment.PickBoxSize = oldSize;
             return snapPoints;

@@ -39,7 +39,7 @@ namespace hanee.ThreeD
         public float dimTextHeight { get; set; } = 2.0f;
         public float annotationTextHeight { get; set; } = 30;
         public int decimals { get; set; } = 5;  // 좌표, 길이값등의 허용 소수점 자릿수
-
+        
         public string currentLayerName { get; set; } = "Default";
 
         public colorMethodType currentColorMethodType { get; set; } = colorMethodType.byLayer;
