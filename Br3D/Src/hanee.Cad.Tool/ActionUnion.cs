@@ -16,6 +16,9 @@ namespace hanee.Cad.Tool
 
         protected override Entity[] Calc()
         {
+            if (ent1 == ent2)
+                return null;
+
             if (ent1 is Brep brep1 && ent2 is Brep brep2)
             {
                 return Brep.Union(brep1, brep2);

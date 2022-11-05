@@ -826,6 +826,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemShowGrid, null, LanguageHelper.Tr("Grid"), null, null);
             SetFunctionByElement(barButtonItemShowToolbar, null, LanguageHelper.Tr("Toolbar"), null, null);
             SetFunctionByElement(barButtonItemShowSymbol, null, LanguageHelper.Tr("Symbol"), null, null);
+            SetFunctionByElement(barButtonItemShowBoundary, ShowBoundary, LanguageHelper.Tr("Boundary"), null, null);
 
             SetFunctionByElement(barButtonItemLanguage, null, LanguageHelper.Tr("Language"), null, null);
             SetFunctionByElement(barButtonItemLanguageKorean, Korean, LanguageHelper.Tr("Korean"), "Korean", null);
@@ -966,6 +967,11 @@ namespace Br3D
         void Wireframe()
         {
             FlagDisplayMode(displayType.Wireframe);
+        }
+
+        void ShowBoundary()
+        {
+            ShowBoundary(!model.BoundingBox.Visible);
         }
 
         void Korean()
@@ -1233,6 +1239,7 @@ namespace Br3D
                     ShowGrid(false);
                     ShowToolbar(false);
                     ShowSymbol(false);
+                    ShowBoundary(false);
                 }
 
                 double lineWeightFactor = 1;
@@ -1259,6 +1266,7 @@ namespace Br3D
                     ShowGrid(barButtonItemShowGrid.Down);
                     ShowToolbar(barButtonItemShowToolbar.Down);
                     ShowSymbol(barButtonItemShowSymbol.Down);
+                    ShowBoundary(barButtonItemShowBoundary.Down);
                 }
 
             }
@@ -1549,6 +1557,12 @@ namespace Br3D
         private void barButtonItemShowToolbar_ItemClick(object sender, ItemClickEventArgs e)
         {
             ShowToolbar(barButtonItemShowToolbar.Down);
+            model.Invalidate();
+        }
+
+        void ShowBoundary(bool visible)
+        {
+            model.BoundingBox.Visible = visible;
             model.Invalidate();
         }
 

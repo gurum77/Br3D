@@ -238,6 +238,7 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.barButtonItemShowBoundary = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
@@ -793,9 +794,10 @@ namespace Br3D
             this.barButtonItemExportTerrain,
             this.barButtonItemUpDownTerrain,
             this.barButtonItemExtractFace,
-            this.barButtonItemGridSnap});
+            this.barButtonItemGridSnap,
+            this.barButtonItemShowBoundary});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 132;
+            this.ribbonControl1.MaxItemId = 133;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
@@ -1314,6 +1316,7 @@ namespace Br3D
             this.barButtonItemShowSymbol.Caption = "Symbol";
             this.barButtonItemShowSymbol.Down = true;
             this.barButtonItemShowSymbol.Id = 64;
+            this.barButtonItemShowSymbol.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemShowSymbol.ImageOptions.SvgImage")));
             this.barButtonItemShowSymbol.Name = "barButtonItemShowSymbol";
             this.barButtonItemShowSymbol.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemShowSymbol_ItemClick);
             // 
@@ -1937,6 +1940,7 @@ namespace Br3D
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemShowGrid);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemShowToolbar);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemShowSymbol);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemShowBoundary);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "ribbonPageGroup1";
             // 
@@ -2035,6 +2039,15 @@ namespace Br3D
             // colorDialog1
             // 
             this.colorDialog1.FullOpen = true;
+            // 
+            // barButtonItemShowBoundary
+            // 
+            this.barButtonItemShowBoundary.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.Check;
+            this.barButtonItemShowBoundary.Caption = "Boundary";
+            this.barButtonItemShowBoundary.Down = true;
+            this.barButtonItemShowBoundary.Id = 132;
+            this.barButtonItemShowBoundary.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemShowBoundingBox.ImageOptions.SvgImage")));
+            this.barButtonItemShowBoundary.Name = "barButtonItemShowBoundary";
             // 
             // FormMain
             // 
@@ -2291,5 +2304,6 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemExtractFace;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup9;
         private DevExpress.XtraBars.BarButtonItem barButtonItemGridSnap;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemShowBoundary;
     }
 }

@@ -64,6 +64,8 @@ namespace Br3D
             hModel.Entities.Add(c);
             hModel.Set3DView();
             hModel.Entities.Remove(c);
+
+            hModel.BoundingBox.Visible = true;
         }
 
         private void InitGraphics()
