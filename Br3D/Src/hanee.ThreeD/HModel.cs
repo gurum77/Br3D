@@ -806,7 +806,7 @@ namespace hanee.ThreeD
 
             // back buffer를 화면에 표시
             SwapBuffers();
-
+            
             // 2D view일 때는 좌우로만 회전하도록 한다.
             if (IsTopViewOnly(ActiveViewport) && e.Button == MouseButtons.Middle && Control.ModifierKeys == Keys.Control)
             {
