@@ -775,6 +775,7 @@ namespace hanee.ThreeD
             {
                 if (HasAvailableKeys() && !IsAvailableKey(e))
                 {
+                    key = null;
                     return;
                 }
                 key = e;
