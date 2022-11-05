@@ -166,6 +166,8 @@ namespace hanee.Cad.Tool
             }
 
             lastPoint = point3D.Clone() as Point3D;
+
+            PreviewLabel.PreviewDistanceLabel(model, fromPoint, lastPoint, 0, true, "D=");
         }
 
         protected void Finish(List<devDept.Eyeshot.Entities.Entity> entities)

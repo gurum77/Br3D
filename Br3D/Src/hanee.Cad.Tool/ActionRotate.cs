@@ -13,8 +13,9 @@ namespace hanee.Cad.Tool
         protected Point3D fromPoint = null;
         protected Point3D toPoint = null;
         protected Point3D lastPoint = null;
-        double baseAngle = 1;
+        double ?baseAngle = null;
         double lastRotationAngle = 0;
+        
 
         public ActionRotate(devDept.Eyeshot.Environment environment) : base(environment)
         {
@@ -40,18 +41,32 @@ namespace hanee.Cad.Tool
                     ent.Regen(regenParams);
                 }
 
-                ActionBase.cursorText = $"∠ :  {rotationAngle.ToDegree()}°";
+                ActionBase.cursorText = $"∠ = {rotationAngle.ToDegree()}°";
                 lastRotationAngle = rotationAngle;
             }
 
             lastPoint = point3D.Clone() as Point3D;
+
+            // 미리보기
+            var wp = GetWorkplane();
+            var len = fromPoint.DistanceTo(lastPoint);
+            var startPoint = fromPoint + wp.AxisX * len;
+            if (baseAngle != null)
+            {
+                var vec = baseAngle.Value.ToVector();
+                startPoint = fromPoint +  new Vector3D(vec.X, vec.Y, 0) * len;
+            }
+            PreviewLabel.PreviewAngleLabel(model, fromPoint, startPoint, lastPoint, 0);
         }
 
         private double GetRotationAngle()
         {
             var curAngle = (point3D - fromPoint).AsVector;
             curAngle.Normalize();
-            return curAngle.ToRadian() - baseAngle;
+            var rotationAngle = curAngle.ToRadian();
+            if (baseAngle != null)
+                rotationAngle -= baseAngle.Value;
+            return rotationAngle;
         }
 
         public override async void Run()

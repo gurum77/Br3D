@@ -28,6 +28,8 @@ namespace hanee.Cad.Tool
             if (fromPoint == null)
                 return;
 
+            PreviewLabel.PreviewDistanceLabel(model, fromPoint, point3D, 0, true);
+
             var vec = point3D - lastPoint;
             foreach (var ent in environment.TempEntities)
             {

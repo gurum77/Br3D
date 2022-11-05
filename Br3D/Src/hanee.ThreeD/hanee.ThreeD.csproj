@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionBase.cs" />
+    <Compile Include="AngleText.cs" />
     <Compile Include="ArcGripManager.cs" />
     <Compile Include="BlockReferenceGripManager.cs" />
     <Compile Include="CategoryEx.cs" />
