@@ -136,7 +136,7 @@ namespace hanee.ThreeD
                 if (dist < gripSize)
                 {
                     // 두번째 부터는 첫번째와 좌표가 같아야 함
-                    if (points.Count > 0 && !points[0].Equals(gp.StartPoint))
+                    if (points.Count > 0 && !points[0].StartPoint.Equals(gp.StartPoint))
                         continue;
 
                     points.Add(gp);
