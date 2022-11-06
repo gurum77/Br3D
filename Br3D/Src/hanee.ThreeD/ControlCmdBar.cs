@@ -18,10 +18,13 @@ namespace hanee.ThreeD
         {
             InitializeComponent();
             textEdit1.KeyDown += TextEdit1_KeyDown;
+            textEdit1.TextChanged += TextEdit1_TextChanged;
         }
 
-
-
+        private void TextEdit1_TextChanged(object sender, EventArgs e)
+        {
+            UpdateCmdList();
+        }
 
         // 현재 cmd line의 내용을 history에 등록한다.
         public void AddHistory()
@@ -70,8 +73,42 @@ namespace hanee.ThreeD
             FocusTextEdit();
         }
 
+        // cmd list를 표시하거나 숨김
+        private void VisibleCmdList(bool visible)
+        {
+            if (status != Status.command)
+                return;
+
+            listBoxControl1.Visible = visible;
+        }
+
+        // cmd list를 갱신한다.
+        private void UpdateCmdList()
+        {
+            var str = textEdit1.Text.ToLower();
+            if(string.IsNullOrEmpty(str))
+            {
+                VisibleCmdList(false);
+                return;
+            }
+
+            if (!listBoxControl1.Visible)
+                VisibleCmdList(true);
+
+            var cmdList = new List<string>();
+            foreach (var cmd in cmds)
+            {
+                if(cmd.Key.StartsWith(str))
+                    cmdList.Add(cmd.Key);
+            }
+
+            cmdList.Sort();
+
+            listBoxControl1.DataSource = cmdList;
+        }
+
         // command를 추가한다.
-        public void AddCommand(string command, Action action)
+        public void AddCommand(string command, string displayText, Action action)
         {
             var commandKey = command.ToLower();
             if (cmds.ContainsKey(commandKey))
@@ -80,6 +117,7 @@ namespace hanee.ThreeD
             cmds.Add(commandKey, action);
         }
 
+      
         // command를 찾는다.
         public string FindCommand(Action act)
         {
@@ -106,7 +144,7 @@ namespace hanee.ThreeD
             {
                 if (status == Status.command)
                 {
-                    var commandKey = textEdit1.Text.ToLower().Trim();
+                    var commandKey = listBoxControl1.SelectedItem.ToString().ToLower();
                     if (cmds.TryGetValue(commandKey, out Action act) && act != null)
                     {
                         var command = FindCommand(act);
@@ -122,6 +160,5 @@ namespace hanee.ThreeD
                     textEdit1.Text = "";
             }
         }
-
     }
 }

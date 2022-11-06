@@ -640,12 +640,12 @@ namespace Br3D
             functionByElement.Add(barButtonItem, action);
             if (!string.IsNullOrEmpty(command))
             {
-                controlCmdBar1.AddCommand(command, action);
+                controlCmdBar1.AddCommand(command, command, action);
             }
 
             if (!string.IsNullOrEmpty(shortcut))
             {
-                controlCmdBar1.AddCommand(shortcut, action);
+                controlCmdBar1.AddCommand(shortcut, command, action);
             }
         }
 
