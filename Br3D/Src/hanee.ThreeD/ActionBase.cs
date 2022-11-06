@@ -483,8 +483,6 @@ namespace hanee.ThreeD
         // snap / ortho mode를 고려한 3D 좌표 리턴
         static public Point3D GetPoint3DWithSnapAndOrthoMode(Environment environment, MouseEventArgs e)
         {
-    
-
             // snapPoint 우선
             var model = environment as HModel;
             if (model != null)
@@ -828,8 +826,7 @@ namespace hanee.ThreeD
         // 마우스로 point3D를 입력받거나 key를 입력받는다.
         public async Task<KeyValuePair<Point3D, KeyEventArgs>> GetPoint3DOrKey(string message = null, int stepID = -1, params KeyEventArgs[] availableKeys)
         {
-            ActionBase.StartInput(environment, message, stepID, UserInput.GettingPoint3D);
-            ActionBase.StartInput(environment, message, stepID, UserInput.GettingKey);
+            ActionBase.StartInput(environment, message, stepID, UserInput.GettingPoint3D, UserInput.GettingKey);
             ActionBase.availableKeys = availableKeys;
 
             while (ActionBase.userInputting[(int)UserInput.GettingPoint3D] == true &&
@@ -976,9 +973,7 @@ namespace hanee.ThreeD
         // face 1개를 선택받는다
         public async Task<KeyValuePair<devDept.Eyeshot.Model.SelectedFace, KeyEventArgs>> GetFaceOrKey(string message = null, int stepID = -1, bool dynamicHighlight = false)
         {
-            ActionBase.StartInput(environment, message, stepID, UserInput.SelectingFace);
-            ActionBase.StartInput(environment, message, stepID, UserInput.GettingKey);
-
+            ActionBase.StartInput(environment, message, stepID, UserInput.SelectingFace, UserInput.GettingKey);
             ActionBase.dynamicHighlight = dynamicHighlight;
             selectionFilterType oldSelectionFilterType = selectionFilterType.Entity;
 
@@ -1030,30 +1025,41 @@ namespace hanee.ThreeD
 
 
         // input 시작
-        public static void StartInput(Environment environment, string message, int stepID, UserInput userInput)
+        public static void StartInput(Environment environment, string message, int stepID, params UserInput[] userInputs)
         {
             ActionBase.StepID = stepID;
             ActionBase.cursorText = message;
-            ActionBase.userInputting[(int)userInput] = true;
+            foreach (var ui in userInputs)
+                ActionBase.userInputting[(int)ui] = true;
+
             ActionBase.IsStopedCurrentStep = false;
 
-            DynamicInputManager.ShowDynamicInput(environment);
+            // cmdbar 메세지 변경
+            CmdBarManager.AddHistory();
+            CmdBarManager.SetCmdMessage(message, ControlCmdBar.Status.input);
 
-            // command bar의 메시지를 바꾼다.
-            if (DynamicInputManager.controlCommandBar != null)
-                DynamicInputManager.controlCommandBar.labelControlMessage.Text = message;
+
+
+            //DynamicInputManager.ShowDynamicInput(environment);
+
+            //// command bar의 메시지를 바꾼다.
+            //if (DynamicInputManager.controlCommandBar != null)
+            //    DynamicInputManager.controlCommandBar.labelControlMessage.Text = message;
         }
 
         // input 끝
-        public static void EndInput(UserInput userInput)
+        public static void EndInput(params UserInput[] userInputs)
         {
-            ActionBase.userInputting[(int)userInput] = false;
+            foreach (var ui in userInputs)
+                ActionBase.userInputting[(int)ui] = false;
 
-            DynamicInputManager.HideDynamicInput();
 
-            // command bar의 메시지를 초기화
-            if (DynamicInputManager.controlCommandBar != null)
-                DynamicInputManager.controlCommandBar.labelControlMessage.Text = "Command";
+
+            //DynamicInputManager.HideDynamicInput();
+
+            //// command bar의 메시지를 초기화
+            //if (DynamicInputManager.controlCommandBar != null)
+            //    DynamicInputManager.controlCommandBar.labelControlMessage.Text = "Command";
         }
 
 
@@ -1135,8 +1141,7 @@ namespace hanee.ThreeD
         // 객체 1개를 선택받는다.
         public async Task<KeyValuePair<Entity, KeyEventArgs>> GetEntityOrKey(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null, params KeyEventArgs[] availableKeys)
         {
-            ActionBase.StartInput(environment, message, stepID, UserInput.SelectingEntity);
-            ActionBase.StartInput(environment, message, stepID, UserInput.GettingKey);
+            ActionBase.StartInput(environment, message, stepID, UserInput.SelectingEntity, UserInput.GettingKey);
 
             ActionBase.dynamicHighlight = dynamicHighlight;
             ActionBase.selectableTypes = selectableType;
@@ -1152,8 +1157,7 @@ namespace hanee.ThreeD
                 // 스탭이 중지되었다면 그냥 보낸다.
                 if (ActionBase.IsStopedCurrentStep)
                 {
-                    ActionBase.EndInput(UserInput.SelectingEntity);
-                    ActionBase.EndInput(UserInput.GettingKey);
+                    ActionBase.EndInput(UserInput.SelectingEntity, UserInput.GettingKey);
                     break;
                 }
 
@@ -1175,8 +1179,7 @@ namespace hanee.ThreeD
             if (ActionBase.userInputting[(int)UserInput.GettingKey])
                 resultKey = null;
 
-            ActionBase.EndInput(UserInput.SelectingEntity);
-            ActionBase.EndInput(UserInput.GettingKey);
+            ActionBase.EndInput(UserInput.SelectingEntity, UserInput.GettingKey);
 
             return new KeyValuePair<Entity, KeyEventArgs>(resultEntity, resultKey);
         }
@@ -1394,11 +1397,11 @@ namespace hanee.ThreeD
 
         #endregion
 
-        // 액션 시작할때 반드시 호출해야 한다.
-        virtual protected void StartAction()
+        // 액션을 중지 시킨다.
+        static public void StopAction()
         {
             // 시작할때 이미 실행중인 액션이 있다면 종료 시킨다.
-            if (ActionBase.runningAction != null && ActionBase.runningAction != this)
+            if (ActionBase.runningAction != null)
             {
                 ActionBase.Canceled = true;
                 while (ActionBase.runningAction != null)
@@ -1408,7 +1411,11 @@ namespace hanee.ThreeD
                     System.Threading.Thread.Sleep(100);
                 }
             }
-
+        }
+        // 액션 시작할때 반드시 호출해야 한다.
+        virtual protected void StartAction()
+        {
+            ActionBase.StopAction();
             ActionBase.InitCursorText();
             ActionBase.InitSubCursorText();
             ActionBase.runningAction = this;
@@ -1441,13 +1448,18 @@ namespace hanee.ThreeD
             }
             ActionBase.SetTempEtt(environment, null);
             ActionBase.IsModified = true;
+            ActionBase.Canceled = true;
             ActionBase.selectableTypes?.Clear();
             ActionBase.availableKeys = null;
             ActionBase.InitCursorText();
             ActionBase.InitSubCursorText();
 
+            // cmdbar 메세지를 초기화
+            CmdBarManager.AddHistory();
+            CmdBarManager.SetCmdMessage("Command : ", ControlCmdBar.Status.command);
+
             // dynamic input manager 초기화
-            DynamicInputManager.Init();
+            //DynamicInputManager.Init();
 
             environment.ActionMode = actionType.None;
             devDept.Eyeshot.Model design = environment as devDept.Eyeshot.Model;

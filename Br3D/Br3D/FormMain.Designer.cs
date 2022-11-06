@@ -79,7 +79,6 @@ namespace Br3D
             this.dockPanelDynamicInput = new DevExpress.XtraBars.Docking.DockPanel();
             this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
             this.controlScriptCad1 = new hanee.Cad.Tool.ControlScriptCad();
-            this.controlCommandBar1 = new hanee.ThreeD.ControlCommandBar();
             this.controlAds1 = new Br3D.ControlAds();
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
@@ -194,6 +193,7 @@ namespace Br3D
             this.barButtonItemUpDownTerrain = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemExtractFace = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemGridSnap = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemShowBoundary = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -238,7 +238,9 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.barButtonItemShowBoundary = new DevExpress.XtraBars.BarButtonItem();
+            this.dockPanelCmd = new DevExpress.XtraBars.Docking.DockPanel();
+            this.controlContainer2 = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.controlCmdBar1 = new ControlCmdBar();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
@@ -266,6 +268,8 @@ namespace Br3D
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.svgImageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
+            this.dockPanelCmd.SuspendLayout();
+            this.controlContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tileNavSubItemInsertImage
@@ -286,7 +290,8 @@ namespace Br3D
             this.hideContainerLeft});
             this.dockManager1.Form = this;
             this.dockManager1.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
-            this.dockPanelDynamicInput});
+            this.dockPanelDynamicInput,
+            this.dockPanelCmd});
             this.dockManager1.TopZIndexControls.AddRange(new string[] {
             "DevExpress.XtraBars.BarDockControl",
             "DevExpress.XtraBars.StandaloneBarDockControl",
@@ -648,7 +653,6 @@ namespace Br3D
             // controlContainer1
             // 
             this.controlContainer1.Controls.Add(this.controlScriptCad1);
-            this.controlContainer1.Controls.Add(this.controlCommandBar1);
             this.controlContainer1.Controls.Add(this.controlAds1);
             this.controlContainer1.Location = new System.Drawing.Point(4, 26);
             this.controlContainer1.Name = "controlContainer1";
@@ -659,20 +663,11 @@ namespace Br3D
             // 
             this.controlScriptCad1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.controlScriptCad1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.controlScriptCad1.Location = new System.Drawing.Point(0, 50);
+            this.controlScriptCad1.Location = new System.Drawing.Point(0, 72);
             this.controlScriptCad1.model = null;
             this.controlScriptCad1.Name = "controlScriptCad1";
             this.controlScriptCad1.Size = new System.Drawing.Size(253, 230);
             this.controlScriptCad1.TabIndex = 12;
-            // 
-            // controlCommandBar1
-            // 
-            this.controlCommandBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.controlCommandBar1.enabled = true;
-            this.controlCommandBar1.Location = new System.Drawing.Point(0, 280);
-            this.controlCommandBar1.Name = "controlCommandBar1";
-            this.controlCommandBar1.Size = new System.Drawing.Size(253, 22);
-            this.controlCommandBar1.TabIndex = 11;
             // 
             // controlAds1
             // 
@@ -1646,6 +1641,15 @@ namespace Br3D
             this.barButtonItemGridSnap.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemGridSnap.ImageOptions.SvgImage")));
             this.barButtonItemGridSnap.Name = "barButtonItemGridSnap";
             // 
+            // barButtonItemShowBoundary
+            // 
+            this.barButtonItemShowBoundary.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.Check;
+            this.barButtonItemShowBoundary.Caption = "Boundary";
+            this.barButtonItemShowBoundary.Down = true;
+            this.barButtonItemShowBoundary.Id = 132;
+            this.barButtonItemShowBoundary.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemShowBoundary.ImageOptions.SvgImage")));
+            this.barButtonItemShowBoundary.Name = "barButtonItemShowBoundary";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -2017,7 +2021,7 @@ namespace Br3D
             this.pictureEdit1.Properties.Appearance.Options.UseBackColor = true;
             this.pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             this.pictureEdit1.Properties.SvgImageSize = new System.Drawing.Size(200, 200);
-            this.pictureEdit1.Size = new System.Drawing.Size(956, 581);
+            this.pictureEdit1.Size = new System.Drawing.Size(956, 428);
             this.pictureEdit1.TabIndex = 10;
             // 
             // simpleButtonInit
@@ -2030,7 +2034,7 @@ namespace Br3D
             this.simpleButtonInit.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
             this.simpleButtonInit.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.simpleButtonInit.Enabled = false;
-            this.simpleButtonInit.Location = new System.Drawing.Point(23, 462);
+            this.simpleButtonInit.Location = new System.Drawing.Point(23, 309);
             this.simpleButtonInit.Name = "simpleButtonInit";
             this.simpleButtonInit.Size = new System.Drawing.Size(956, 183);
             this.simpleButtonInit.TabIndex = 15;
@@ -2040,14 +2044,32 @@ namespace Br3D
             // 
             this.colorDialog1.FullOpen = true;
             // 
-            // barButtonItemShowBoundary
+            // dockPanelCmd
             // 
-            this.barButtonItemShowBoundary.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.Check;
-            this.barButtonItemShowBoundary.Caption = "Boundary";
-            this.barButtonItemShowBoundary.Down = true;
-            this.barButtonItemShowBoundary.Id = 132;
-            this.barButtonItemShowBoundary.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemShowBoundingBox.ImageOptions.SvgImage")));
-            this.barButtonItemShowBoundary.Name = "barButtonItemShowBoundary";
+            this.dockPanelCmd.Controls.Add(this.controlContainer2);
+            this.dockPanelCmd.Dock = DevExpress.XtraBars.Docking.DockingStyle.Bottom;
+            this.dockPanelCmd.ID = new System.Guid("5e321395-d44f-41d2-a3f2-446088350ac7");
+            this.dockPanelCmd.Location = new System.Drawing.Point(23, 492);
+            this.dockPanelCmd.Name = "dockPanelCmd";
+            this.dockPanelCmd.OriginalSize = new System.Drawing.Size(200, 153);
+            this.dockPanelCmd.Size = new System.Drawing.Size(956, 153);
+            this.dockPanelCmd.Text = "Command";
+            // 
+            // controlContainer2
+            // 
+            this.controlContainer2.Controls.Add(this.controlCmdBar1);
+            this.controlContainer2.Location = new System.Drawing.Point(3, 27);
+            this.controlContainer2.Name = "controlContainer2";
+            this.controlContainer2.Size = new System.Drawing.Size(950, 123);
+            this.controlContainer2.TabIndex = 0;
+            // 
+            // controlCmdBar1
+            // 
+            this.controlCmdBar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.controlCmdBar1.Location = new System.Drawing.Point(0, 0);
+            this.controlCmdBar1.Name = "controlCmdBar1";
+            this.controlCmdBar1.Size = new System.Drawing.Size(950, 123);
+            this.controlCmdBar1.TabIndex = 0;
             // 
             // FormMain
             // 
@@ -2056,6 +2078,7 @@ namespace Br3D
             this.ClientSize = new System.Drawing.Size(1239, 672);
             this.Controls.Add(this.simpleButtonInit);
             this.Controls.Add(this.pictureEdit1);
+            this.Controls.Add(this.dockPanelCmd);
             this.Controls.Add(this.dockPanelDynamicInput);
             this.Controls.Add(this.hideContainerLeft);
             this.Controls.Add(this.ribbonStatusBar1);
@@ -2094,6 +2117,8 @@ namespace Br3D
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.svgImageCollection1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
+            this.dockPanelCmd.ResumeLayout(false);
+            this.controlContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2236,7 +2261,6 @@ namespace Br3D
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupWorkspace;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
-        private hanee.ThreeD.ControlCommandBar controlCommandBar1;
         private ControlAds controlAds1;
         private DevExpress.XtraBars.Docking.AutoHideContainer hideContainerLeft;
         private DevExpress.XtraBars.BarButtonItem barButtonItemDrawBox;
@@ -2305,5 +2329,8 @@ namespace Br3D
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup9;
         private DevExpress.XtraBars.BarButtonItem barButtonItemGridSnap;
         private DevExpress.XtraBars.BarButtonItem barButtonItemShowBoundary;
+        private DevExpress.XtraBars.Docking.DockPanel dockPanelCmd;
+        private DevExpress.XtraBars.Docking.ControlContainer controlContainer2;
+        private ControlCmdBar controlCmdBar1;
     }
 }

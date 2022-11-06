@@ -95,6 +95,8 @@ namespace Br3D
             controlScriptCad1.Visible = true;
             controlScriptCad1.model = model;
 
+            CmdBarManager.Init(controlCmdBar1);
+
             simpleButtonInit.Visible = false;
             //this.Controls.Add(controlModel);  // form에 직접 add 하면 controlModel의 크기가 잘못 계산됨
 
@@ -139,7 +141,7 @@ namespace Br3D
         {
 
 
-            EnableDynamicInput(true, false);
+            EnableCmdBar(true);
             SetLTEnvironment();
 
             InitRibbonButtonMethod();
@@ -235,64 +237,7 @@ namespace Br3D
             model.Invalidate();
         }
 
-        // dynamic input을 활성화 한다.
-        void EnableDynamicInput(bool enableDynamicInput, bool enableCommandbar)
-        {
-            // 둘다 off 인 경우
-            if (!enableDynamicInput && !enableCommandbar)
-            {
-                controlCommandBar1.enabled = false;
-                DynamicInputManager.enabled = false;
-                DynamicInputManager.controlCommandBar = null;
-                dockPanelDynamicInput.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden;
-                return;
-            }
-
-            // 그 외의 경우는 panel을 활성화 한다.
-            dockPanelDynamicInput.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Visible;
-            dockPanelDynamicInput.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
-
-            // 둘다 on 인 경우
-            if (enableDynamicInput && enableCommandbar)
-            {
-                // command bar 활성화
-                controlCommandBar1.enabled = true;
-
-                // dynamic input manager에 command bar 연결
-                DynamicInputManager.controlCommandBar = controlCommandBar1;
-
-                // dynamic input manager 활성화
-                DynamicInputManager.enabled = true;
-            }
-            // 하나만 on인 경우
-            else if (enableCommandbar)
-            {
-                // command bar 활성화
-                controlCommandBar1.enabled = true;
-                controlCommandBar1.Visible = true;
-
-                // dynamic input manager에 command bar 연결
-                DynamicInputManager.controlCommandBar = controlCommandBar1;
-
-                // dynamic input manager 활성화
-                DynamicInputManager.enabled = true;
-                DynamicInputManager.parentControls = null;
-            }
-            else if (enableDynamicInput)
-            {
-                // command bar 비활성화
-                controlCommandBar1.enabled = false;
-                controlCommandBar1.Visible = false;
-
-                // dynamic input manager에 command bar 연결안함
-                DynamicInputManager.controlCommandBar = null;
-
-                // dynamic input manager 활성화
-                DynamicInputManager.enabled = true;
-                DynamicInputManager.parentControls = dockPanelDynamicInput.Controls;
-
-            }
-        }
+      
         // lt 버전인 경우 LT 버전에 맞게 환경을 설정한다.
         private void SetLTEnvironment()
         {
@@ -310,8 +255,8 @@ namespace Br3D
             barButtonItemSave.Visibility = BarItemVisibility.Never;
             barButtonItemSaveAs.Visibility = BarItemVisibility.Never;
 
-            EnableDynamicInput(false, false);
-
+            EnableCmdBar(false);
+            
             // 편집 리본탭 숨김
             ribbonPageDraw.Visible = false;
             ribbonPageDraw3D.Visible = false;
@@ -321,10 +266,12 @@ namespace Br3D
             ribbonPageDimension.Visible = false;
         }
 
-
-
-
-
+        // cmdbar 활성화
+        private void EnableCmdBar(bool enable)
+        {
+            controlCmdBar1.Enabled = enable;
+            controlCmdBar1.Visible = enable;
+        }
 
         private void Model_MouseMove(object sender, MouseEventArgs e)
         {
@@ -472,6 +419,8 @@ namespace Br3D
 
             if (e.Button == MouseButtons.Left)
             {
+                
+
                 bool gripEditing = gripManager != null && gripManager.EditingGripPoints();
                 if (!gripEditing && ActionBase.runningAction == null)
                 {
@@ -691,12 +640,12 @@ namespace Br3D
             functionByElement.Add(barButtonItem, action);
             if (!string.IsNullOrEmpty(command))
             {
-                controlCommandBar1.AddCommand(command, command, action);
+                controlCmdBar1.AddCommand(command, action);
             }
 
             if (!string.IsNullOrEmpty(shortcut))
             {
-                controlCommandBar1.AddCommand(shortcut, command, action);
+                controlCmdBar1.AddCommand(shortcut, action);
             }
         }
 
@@ -1484,8 +1433,15 @@ namespace Br3D
             Settings.Default.Save();
         }
 
+        protected override bool ProcessKeyPreview(ref Message m)
+        {
+            return base.ProcessKeyPreview(ref m);
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            CmdBarManager.FocusTextEdit(new KeyEventArgs(keyData));
+
             HModel hModel = model as HModel;
             if (hModel != null)
             {
@@ -1505,17 +1461,21 @@ namespace Br3D
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-
-
-
-
-
         private void ribbonControl1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (functionByElement.TryGetValue(e.Item, out Action act))
             {
                 if (act != null)
+                {
+                    ActionBase.StopAction();
+
+                    var command = CmdBarManager.FindCommand(act);
+                    if(!string.IsNullOrEmpty(command))
+                        CmdBarManager.SetTextEdit(command);
+
                     act();
+                }
+
             }
             else
             {

@@ -48,7 +48,8 @@ namespace hanee.Cad.Tool
                     SetOrthoModeStartPoint(null);
 
                     var arc = MakeArc();
-                    GetModel().Entities.Add(arc);
+                    if(arc != null)
+                        GetModel().Entities.Add(arc);
 
                     pt1 = null;
                     pt2 = null;

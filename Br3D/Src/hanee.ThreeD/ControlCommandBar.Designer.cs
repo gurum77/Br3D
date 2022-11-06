@@ -44,7 +44,7 @@ namespace hanee.ThreeD
             this.labelControlMessage.Location = new System.Drawing.Point(0, 0);
             this.labelControlMessage.Name = "labelControlMessage";
             this.labelControlMessage.Padding = new System.Windows.Forms.Padding(5, 3, 5, 0);
-            this.labelControlMessage.Size = new System.Drawing.Size(76, 17);
+            this.labelControlMessage.Size = new System.Drawing.Size(76, 18);
             this.labelControlMessage.TabIndex = 3;
             this.labelControlMessage.Text = "Command : ";
             // 
@@ -56,7 +56,7 @@ namespace hanee.ThreeD
             this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.comboBoxEdit1.Properties.DropDownRows = 5;
-            this.comboBoxEdit1.Size = new System.Drawing.Size(425, 20);
+            this.comboBoxEdit1.Size = new System.Drawing.Size(425, 22);
             this.comboBoxEdit1.TabIndex = 4;
             // 
             // contextMenuStrip1
@@ -70,12 +70,12 @@ namespace hanee.ThreeD
             // 
             // ControlCommandBar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.comboBoxEdit1);
             this.Controls.Add(this.labelControlMessage);
             this.Name = "ControlCommandBar";
-            this.Size = new System.Drawing.Size(501, 21);
+            this.Size = new System.Drawing.Size(501, 22);
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             this.ResumeLayout(false);
