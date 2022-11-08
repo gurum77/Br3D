@@ -12,7 +12,7 @@ namespace hanee.ThreeD
         // alphabet인지?
         static public bool IsAlphabet(this Keys keys)
         {
-            if (keys >= Keys.A || keys <= Keys.Z)
+            if (keys >= Keys.A && keys <= Keys.Z)
                 return true;
 
             return false;

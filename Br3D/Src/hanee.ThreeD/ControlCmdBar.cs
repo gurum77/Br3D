@@ -86,6 +86,11 @@ namespace hanee.ThreeD
         private void UpdateCmdList()
         {
             var str = textEdit1.Text.ToLower();
+
+            // command 입력상태에서는 space가 있으면 안됨.
+            if (status == Status.command)
+                str = str.Trim();
+
             if(string.IsNullOrEmpty(str))
             {
                 VisibleCmdList(false);
@@ -142,7 +147,7 @@ namespace hanee.ThreeD
         {
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
             {
-                if (status == Status.command)
+                if (status == Status.command && listBoxControl1.SelectedItem != null)
                 {
                     var commandKey = listBoxControl1.SelectedItem.ToString().ToLower();
                     if (cmds.TryGetValue(commandKey, out Action act) && act != null)

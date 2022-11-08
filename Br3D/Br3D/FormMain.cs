@@ -1,4 +1,5 @@
-﻿using Br3D.Properties;
+﻿using Br3D.Actions;
+using Br3D.Properties;
 using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Eyeshot.Translators;
@@ -22,7 +23,7 @@ namespace Br3D
         HModel hModel => controlModel?.hModel;
         Model model => hModel;
         Dictionary<object, Action> functionByElement = new Dictionary<object, Action>();
-        string opendFilePath = "";
+        public string opendFilePath = "";
         bool modifiedFile = false;
         bool isDwg => string.IsNullOrEmpty(opendFilePath) ? false : Path.GetExtension(opendFilePath).ToLower().EndsWith("dwg");
         GripManager gripManager => hModel?.gripManager;
@@ -206,7 +207,7 @@ namespace Br3D
 
 
         // 옵션을 적용한다.
-        private void ApplyOptions(bool regen = false)
+        public void ApplyOptions(bool regen = false)
         {
             // 배경색
             foreach (Viewport vp in model.Viewports)
@@ -322,7 +323,7 @@ namespace Br3D
         }
 
 
-        private void Translate()
+        public void Translate()
         {
             InitRibbonButtonMethod();
             controlScriptCad1.Translate();
@@ -620,7 +621,7 @@ namespace Br3D
         }
 
 
-        void InitTileElementStatus()
+        public void InitTileElementStatus()
         {
             barButtonItemLanguageKorean.Down = false;
             barButtonItemLanguageEnglish.Down = false;
@@ -660,7 +661,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemSaveAs, SaveAs, LanguageHelper.Tr("Save As"), "SaveAs", "saveas");
             SetFunctionByElement(barButtonItemSaveImage, SaveImage, LanguageHelper.Tr("Save Image"), "SaveImage", "si");
             SetFunctionByElement(barButtonItemWorkspace, Workspace, LanguageHelper.Tr("Workspace"), "Workspace", "ws");
-            SetFunctionByElement(barButtonItemExit, Close, LanguageHelper.Tr("Exit"), "Exit", null);
+            SetFunctionByElement(barButtonItemExit, Exit, LanguageHelper.Tr("Exit"), "Exit", null);
 
             // draw
             SetFunctionByElement(barButtonItemDrawLine, Line, LanguageHelper.Tr("Line"), "Line", "l");
@@ -700,7 +701,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemDimLeader, DimLeader, LanguageHelper.Tr("Leader"), "Leader", "le");
 
             // edit
-            SetFunctionByElement(barButtonItemErase, EraseEntity, LanguageHelper.Tr("Erase"), "Earse", "e");
+            SetFunctionByElement(barButtonItemErase, EraseEntity, LanguageHelper.Tr("Erase"), "Erase", "e");
             SetFunctionByElement(barButtonItemMove, MoveEntity, LanguageHelper.Tr("Move"), "Move", "m");
             SetFunctionByElement(barButtonItemCopy, CopyEntity, LanguageHelper.Tr("Copy"), "Copy", "c");
             SetFunctionByElement(barButtonItemScale, ScaleEntity, LanguageHelper.Tr("Scale"), "Scale", "sc");
@@ -751,7 +752,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemOsnapIntersection, Intersection, LanguageHelper.Tr("Intersection Point"), "Int", null);
             SetFunctionByElement(barButtonItemOsnapMiddle, Middle, LanguageHelper.Tr("Midle Point"), "Mid", null);
             SetFunctionByElement(barButtonItemOsnapCenter, Center, LanguageHelper.Tr("Center Point"), "Cen", null);
-            SetFunctionByElement(barButtonItemOsnapPoint, Point, LanguageHelper.Tr("Point"), null, null);
+            SetFunctionByElement(barButtonItemOsnapPoint, Point, LanguageHelper.Tr("Point"), "Node", null);
 
             // tools
             SetFunctionByElement(barButtonItemSingleView, ViewportSingle, LanguageHelper.Tr("Single"), "Single", null);
@@ -765,8 +766,8 @@ namespace Br3D
             SetFunctionByElement(barButtonItemList, List, LanguageHelper.Tr("List"), "List", "list");
 
             // options
-            SetFunctionByElement(barButtonItem2D, Set2DView, LanguageHelper.Tr("2D View"), null, null);
-            SetFunctionByElement(barButtonItem3D, Set3DView, LanguageHelper.Tr("3D View"), null, null);
+            SetFunctionByElement(barButtonItem2D, Set2DView, LanguageHelper.Tr("2D View"), "2D", null);
+            SetFunctionByElement(barButtonItem3D, Set3DView, LanguageHelper.Tr("3D View"), "3D", null);
             SetFunctionByElement(barButtonItemRendered, Rendered, LanguageHelper.Tr("Rendered"), null, null);
             SetFunctionByElement(barButtonItemShaded, Shaded, LanguageHelper.Tr("Shaded"), null, null);
             SetFunctionByElement(barButtonItemHiddenLines, HiddenLines, LanguageHelper.Tr("Hidden lines"), null, null);
@@ -782,7 +783,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemLanguageEnglish, English, LanguageHelper.Tr("English"), "English", null);
             SetFunctionByElement(barButtonItemHomepage, Homepage, LanguageHelper.Tr("Homepage"), "Homepage", null);
             SetFunctionByElement(barButtonItemCheckForUpdate, CheckForUpdate, LanguageHelper.Tr("Check For Update"), "CheckForUpdate", null);
-            SetFunctionByElement(barButtonItemOptions, RunOptions, LanguageHelper.Tr("Options"), null, null);
+            SetFunctionByElement(barButtonItemOptions, RunOptions, LanguageHelper.Tr("Options"), "Options", null);
             SetFunctionByElement(barButtonItemAbout, About, LanguageHelper.Tr("About"), "About", null);
         }
 
@@ -802,6 +803,7 @@ namespace Br3D
         async void UpDownTerrain() => await new ActionUpDownTerrain(model).RunAsync();
 
 
+        void Exit() => new ActionExit(model, this).Run();
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
         async void DrawRegion() => await new ActionRegion(model).RunAsync();
         async void InsertImage() => await new ActionInsertImage(model).RunAsync();
@@ -874,29 +876,9 @@ namespace Br3D
         void LineType() => new ActionLineType(model, this).Run();
         void TextStyle() => new ActionTextStyle(model, this).Run();
         void Layer() => new ActionLayer(model, this).Run();
-        void About() => new FormAbout().ShowDialog();
-        void RunOptions()
-        {
-            FormOptions form = new FormOptions();
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                bool regen = Options.Instance.IsNeedRegen(form.lastOptions);
-                if (regen)
-                {
-                    if (form.lastOptions.curLinetypeScale != Options.Instance.curLinetypeScale)
-                    {
-                        // ltscale이 변경되었으면 객체에 반영해야 함
-                        foreach (var ent in model.Entities)
-                        {
-                            ent.LineTypeScale = Options.Instance.curLinetypeScale;
-                        }
-                    }
-                }
-
-                ApplyOptions(regen);
-            }
-        }
-        void Homepage() => System.Diagnostics.Process.Start("http://hileejaeho.cafe24.com/kr-br3d/");
+        void About() => new ActionAbout(model).Run();
+        void RunOptions() => new ActionOptions(model, this).Run();
+        void Homepage() => new ActionHomepage(model).Run();
         void Language() { }
 
         void Set2DView() => Flag2D3D(true);
@@ -918,25 +900,21 @@ namespace Br3D
             FlagDisplayMode(displayType.Wireframe);
         }
 
-        void ShowBoundary()
+        public void ShowBoundary()
         {
             ShowBoundary(!model.BoundingBox.Visible);
         }
 
         void Korean()
         {
-            Options.Instance.language = "ko-KR";
-            InitTileElementStatus();
-            LanguageHelper.Load(Options.Instance.language);
-            Translate();
+            var ac = new ActionLanguage(model, this, "ko-KR");
+            ac.Run();
         }
 
         void English()
         {
-            Options.Instance.language = "en-US";
-            InitTileElementStatus();
-            LanguageHelper.Load(Options.Instance.language);
-            Translate();
+            var ac = new ActionLanguage(model, this, "en-US");
+            ac.Run();
         }
 
         private void Model_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -1028,40 +1006,19 @@ namespace Br3D
 
         void FlagOrthoMode(BarButtonItem barButtonItem)
         {
-            HModel hModel = model as HModel;
-            if (hModel == null)
-                return;
-
-            hModel.orthoModeManager.enabled = !hModel.orthoModeManager.enabled;
-            barButtonItem.Down = hModel.orthoModeManager.enabled;
+            new ActionOrthoMode(model, barButtonItem).Run();
         }
 
         // 그리드 스냅
         void FlagGridSnap(BarButtonItem barButtonItem)
         {
-            HModel hModel = model as HModel;
-            if (hModel == null)
-                return;
-
-            hModel.gridSnapping.enabled = !hModel.gridSnapping.enabled;
-            barButtonItem.Down = hModel.gridSnapping.enabled;
+            new ActionGridSnap(model, barButtonItem).Run();
         }
 
         // display mode 설정 / 버튼 체크
         void FlagDisplayMode(displayType displayMode)
         {
-            if (hModel == null)
-                return;
-            if (displayMode == displayType.Rendered)
-                hModel.ActiveViewport.DisplayMode = displayType.Rendered;
-            else if (displayMode == displayType.Shaded)
-                hModel.ActiveViewport.DisplayMode = displayType.Shaded;
-            else if (displayMode == displayType.HiddenLines)
-                hModel.ActiveViewport.DisplayMode = displayType.HiddenLines;
-            else if (displayMode == displayType.Wireframe)
-                hModel.ActiveViewport.DisplayMode = displayType.Wireframe;
-            hModel.Invalidate();
-            UpdateDisplayModeButton();
+            new ActionDisplayMode(model, this, displayMode).Run();
         }
 
         // grid snap, osnap, ortho mode 버튼을 현재 상태로 변경
@@ -1076,7 +1033,7 @@ namespace Br3D
             barButtonItemOsnapPoint.Down = hModel.Snapping.IsActiveObjectSnap(Snapping.objectSnapType.Point);
         }
 
-        void UpdateDisplayModeButton()
+        public void UpdateDisplayModeButton()
         {
             if (hModel == null)
                 return;
@@ -1097,17 +1054,10 @@ namespace Br3D
         // 2D/3D View 설정 / 버튼 체크
         void Flag2D3D(bool set2DView)
         {
-            if (hModel == null)
-                return;
-
-            if (set2DView)
-                hModel.Set2DView();
-            else
-                hModel.Set3DView();
-            Update2D3DButton();
+            new Action2D3DView(model, this, set2DView).Run();
         }
 
-        void Update2D3DButton()
+        public void Update2D3DButton()
         {
             if (hModel == null)
                 return;
@@ -1122,15 +1072,15 @@ namespace Br3D
         // 
         void OrthoMode() => FlagOrthoMode(barButtonItemOrthoMode);
         void GridSnap() => FlagGridSnap(barButtonItemGridSnap);
-        void End() => controlModel.End();
-        void Middle() => controlModel.Middle();
-        void Point() => controlModel.Point();
-        void Intersection() => controlModel.Intersection();
-        void Center() => controlModel.Center();
-        void ViewportSingle() => controlModel.ViewportSingle();
-        void Viewport1x1() => controlModel.Viewport1x1();
-        void Viewport1x2() => controlModel.Viewport1x2();
-        void Viewport2x2() => controlModel.Viewport2x2();
+        void End() => new ActionOsnap(model, controlModel, Snapping.objectSnapType.End).Run();
+        void Middle() => new ActionOsnap(model, controlModel, Snapping.objectSnapType.Mid).Run();
+        void Point() => new ActionOsnap(model, controlModel, Snapping.objectSnapType.Point).Run();
+        void Intersection() => new ActionOsnap(model, controlModel, Snapping.objectSnapType.Intersect).Run();
+        void Center() => new ActionOsnap(model, controlModel, Snapping.objectSnapType.Center).Run();
+        void ViewportSingle() => new ActionViewport(model, controlModel, ActionViewport.Viewport.single).Run();
+        void Viewport1x1() => new ActionViewport(model, controlModel, ActionViewport.Viewport.v1x1).Run();
+        void Viewport1x2() => new ActionViewport(model, controlModel, ActionViewport.Viewport.v1x2).Run();
+        void Viewport2x2() => new ActionViewport(model, controlModel, ActionViewport.Viewport.v2x2).Run();
 
 
         async void Coorindates()
@@ -1165,64 +1115,16 @@ namespace Br3D
 
         void ClearAnnotations()
         {
-            model.ActiveViewport.Labels.Clear();
-            model.Invalidate();
+            new ActionClearAnnotations(model).Run();
         }
 
         private void SaveImage()
         {
-            var dlg = new XtraSaveFileDialog();
-            dlg.Filter = "Bitmap (*.bmp)|*.bmp|" +
-                "Portable Network Graphics (*.png)|*.png|" +
-                "Windows metafile (*.wmf)|*.wmf|" +
-                "Enhanced Windows Metafile (*.emf)|*.emf";
-
-            dlg.FilterIndex = 2;
-            dlg.RestoreDirectory = true;
-
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-
-                if (!Options.Instance.saveImageWithUI)
-                {
-                    ShowGrid(false);
-                    ShowToolbar(false);
-                    ShowSymbol(false);
-                    ShowBoundary(false);
-                }
-
-                double lineWeightFactor = 1;
-                switch (dlg.FilterIndex)
-                {
-
-                    case 1:
-                        model.WriteToFileRaster(2, lineWeightFactor, dlg.FileName, System.Drawing.Imaging.ImageFormat.Bmp, Options.Instance.saveImageWithBackground);
-                        break;
-                    case 2:
-                        model.WriteToFileRaster(2, lineWeightFactor, dlg.FileName, System.Drawing.Imaging.ImageFormat.Png, Options.Instance.saveImageWithBackground);
-                        break;
-                    case 3:
-                        model.WriteToFileRaster(2, lineWeightFactor, dlg.FileName, System.Drawing.Imaging.ImageFormat.Wmf, Options.Instance.saveImageWithBackground);
-                        break;
-                    case 4:
-                        model.WriteToFileRaster(2, lineWeightFactor, dlg.FileName, System.Drawing.Imaging.ImageFormat.Emf, Options.Instance.saveImageWithBackground);
-                        break;
-
-                }
-
-                if (!Options.Instance.saveImageWithUI)
-                {
-                    ShowGrid(barButtonItemShowGrid.Down);
-                    ShowToolbar(barButtonItemShowToolbar.Down);
-                    ShowSymbol(barButtonItemShowSymbol.Down);
-                    ShowBoundary(barButtonItemShowBoundary.Down);
-                }
-
-            }
+            new ActionSaveImage(model, this).Run();
         }
 
         // 편집된 내용 저장 체크
-        bool CheckSaveForModifiedFile()
+        public bool CheckSaveForModifiedFile()
         {
             // 이미 편집중인 내용이 있으면 저장할지 묻는다.
             if (modifiedFile)
@@ -1242,74 +1144,36 @@ namespace Br3D
 
         void New()
         {
-            if (!CheckSaveForModifiedFile())
-                return;
-
-            NewFile();
+            new ActionNew(model, this).Run();
         }
 
         // 현재 파일 다시 로딩하기
         void Reload()
         {
-            var re = XtraMessageBox.Show(LanguageHelper.Tr("Do you want to reload the current file?"), LanguageHelper.Tr("Reload"), MessageBoxButtons.YesNo);
-            if (re == DialogResult.No)
-                return;
-
-            Import(opendFilePath, true);
+            new ActionReload(model, this).Run();
         }
 
         void Open()
         {
-            if (!CheckSaveForModifiedFile())
-                return;
-
-            // 파일 선택
-            var dlg = new XtraOpenFileDialog();
-            Dictionary<string, string> additionalSupportFormats = new Dictionary<string, string>();
-            dlg.Filter = FileHelper.FilterForOpenDialog(additionalSupportFormats);
-            dlg.FilterIndex = 0;
-            dlg.AddExtension = true;
-            dlg.CheckFileExists = true;
-            dlg.CheckPathExists = true;
-            if (dlg.ShowDialog() != DialogResult.OK)
-                return;
-
-            // 이미 열려 있는 파일이면 리턴
-            if (opendFilePath.Equals(dlg.FileName))
-                return;
-
-            Import(dlg.FileName);
+            new ActionOpen(model, this).Run();
         }
 
         // 파일이 열려 있으면 바로 저장
         void Save()
         {
-            if (string.IsNullOrEmpty(opendFilePath))
-            {
-                SaveAs();
-            }
-            else
-            {
-                Export(opendFilePath);
-            }
+            new ActionSave(model, this).Run();
         }
 
-        void SaveAs()
+        public void SaveAs()
         {
-            var dlg = new XtraSaveFileDialog();
-            dlg.Filter = FileHelper.FilterForSaveDialog();
-            dlg.DefaultExt = "dwg";
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                Export(dlg.FileName);
-            }
+            new ActionSaveAs(model, this).Run();
         }
 
         // ribbon - import
         // iges, igs, stl, step, stp, obj, las, dwg, dxf, ifc, ifczip, 3ds, lus
 
         // openMode : 파일읽기를 설공하면 현재 상태를 초기화 하고 연다.
-        void Import(string pathFileName, bool openMode = true)
+        public void Import(string pathFileName, bool openMode = true)
         {
             this.openMode = openMode;
 
@@ -1332,7 +1196,7 @@ namespace Br3D
 
         }
 
-        void Export(string pathFileName)
+        public void Export(string pathFileName)
         {
             try
             {
@@ -1353,7 +1217,7 @@ namespace Br3D
         }
 
 
-        void NewFile()
+        public void NewFile()
         {
             model.Clear();
             model.Invalidate();
@@ -1485,7 +1349,7 @@ namespace Br3D
             }
         }
 
-        void ShowGrid(bool visible)
+        public void ShowGrid(bool visible)
         {
             foreach (Viewport v in model.Viewports)
             {
@@ -1504,7 +1368,7 @@ namespace Br3D
             model.Invalidate();
         }
 
-        void ShowToolbar(bool visible)
+        public void ShowToolbar(bool visible)
         {
             foreach (Viewport v in model.Viewports)
             {
@@ -1520,13 +1384,13 @@ namespace Br3D
             model.Invalidate();
         }
 
-        void ShowBoundary(bool visible)
+        public void ShowBoundary(bool visible)
         {
             model.BoundingBox.Visible = visible;
             model.Invalidate();
         }
 
-        void ShowSymbol(bool visible)
+        public void ShowSymbol(bool visible)
         {
             foreach (Viewport v in model.Viewports)
             {

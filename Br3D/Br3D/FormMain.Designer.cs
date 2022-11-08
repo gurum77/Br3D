@@ -2252,9 +2252,9 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemLanguageEnglish;
         private DevExpress.XtraBars.BarButtonItem barButtonItemMultilineText;
         private DevExpress.XtraBars.BarButtonItem barButtonItemInsertImage;
-        private DevExpress.XtraBars.BarButtonItem barButtonItemShowGrid;
-        private DevExpress.XtraBars.BarButtonItem barButtonItemShowToolbar;
-        private DevExpress.XtraBars.BarButtonItem barButtonItemShowSymbol;
+        public DevExpress.XtraBars.BarButtonItem barButtonItemShowGrid;
+        public DevExpress.XtraBars.BarButtonItem barButtonItemShowToolbar;
+        public DevExpress.XtraBars.BarButtonItem barButtonItemShowSymbol;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.BarButtonItem barButtonItemOptions;
         private DevExpress.XtraBars.BarButtonItem barButtonItemWorkspace;
@@ -2328,7 +2328,7 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemExtractFace;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup9;
         private DevExpress.XtraBars.BarButtonItem barButtonItemGridSnap;
-        private DevExpress.XtraBars.BarButtonItem barButtonItemShowBoundary;
+        public DevExpress.XtraBars.BarButtonItem barButtonItemShowBoundary;
         private DevExpress.XtraBars.Docking.DockPanel dockPanelCmd;
         private DevExpress.XtraBars.Docking.ControlContainer controlContainer2;
         private ControlCmdBar controlCmdBar1;
