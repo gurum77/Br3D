@@ -17,10 +17,21 @@ namespace hanee.ThreeD
         public ControlCmdBar()
         {
             InitializeComponent();
-            textEdit1.KeyDown += TextEdit1_KeyDown;
+            textEdit1.KeyUp += TextEdit1_KeyUp;
             textEdit1.TextChanged += TextEdit1_TextChanged;
         }
 
+        
+        // text edit의 유효한 text를 리턴
+        string GetValidTextEditText()
+        {
+            var str = textEdit1.Text;
+            if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingText] && str.Length > 0 && str.EndsWith(" "))
+            {
+                str = str.Remove(str.Length - 1, 1);
+            }
+            return str;
+        }
         private void TextEdit1_TextChanged(object sender, EventArgs e)
         {
             UpdateCmdList();
@@ -91,7 +102,7 @@ namespace hanee.ThreeD
             if (status == Status.command)
                 str = str.Trim();
 
-            if(string.IsNullOrEmpty(str))
+            if (string.IsNullOrEmpty(str))
             {
                 VisibleCmdList(false);
                 return;
@@ -103,7 +114,7 @@ namespace hanee.ThreeD
             var cmdList = new List<string>();
             foreach (var cmd in cmds)
             {
-                if(cmd.Key.StartsWith(str))
+                if (cmd.Key.StartsWith(str))
                     cmdList.Add(cmd.Key);
             }
 
@@ -122,7 +133,7 @@ namespace hanee.ThreeD
             cmds.Add(commandKey, action);
         }
 
-      
+
         // command를 찾는다.
         public string FindCommand(Action act)
         {
@@ -141,27 +152,46 @@ namespace hanee.ThreeD
             richTextBox1.Clear();
         }
 
+        void TextEdit1_KeyEvent(KeyEventArgs e)
+        {
+            
+        }
+
 
         // enter를 누르면 명령을 실행한다.
-        private void TextEdit1_KeyDown(object sender, KeyEventArgs e)
+        private void TextEdit1_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
             {
-                if (status == Status.command && listBoxControl1.SelectedItem != null)
+                // command 입력 상태인 경우
+                if (status == Status.command)
                 {
-                    var commandKey = listBoxControl1.SelectedItem.ToString().ToLower();
-                    if (cmds.TryGetValue(commandKey, out Action act) && act != null)
+                    // list box가 선택되어 있는 상태라면 해당 action을 찾아서 실행한다.
+                    if (listBoxControl1.SelectedItem != null)
                     {
-                        var command = FindCommand(act);
-                        if (!string.IsNullOrEmpty(command))
-                            SetTextEdit(command);
-                        act();
+                        var commandKey = listBoxControl1.SelectedItem.ToString().ToLower();
+                        if (cmds.TryGetValue(commandKey, out Action act) && act != null)
+                        {
+                            var command = FindCommand(act);
+                            if (!string.IsNullOrEmpty(command))
+                                SetTextEdit(command);
+                            act();
+                        }
+                    }
+                }
+                // command 입력 상태가 아닌 경우 (text 입력)
+                else
+                {
+                    if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingText])
+                    {
+                        ActionBase.text = GetValidTextEditText();
+                        ActionBase.EndInput(ActionBase.UserInput.GettingText);
                     }
                 }
             }
-            else if(e.KeyCode == Keys.Escape)
+            else if (e.KeyCode == Keys.Escape)
             {
-                if(status == Status.command)
+                if (status == Status.command)
                     textEdit1.Text = "";
             }
         }

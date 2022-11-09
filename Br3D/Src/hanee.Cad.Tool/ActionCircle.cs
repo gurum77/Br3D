@@ -1,6 +1,7 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using hanee.Geometry;
 using hanee.ThreeD;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace hanee.Cad.Tool
             secondPoint = null;
             thirdPoint = null;
         }
-        public ActionCircle(Environment environment, Method defaultMethod=Method.none) : base(environment)
+        public ActionCircle(devDept.Eyeshot.Environment environment, Method defaultMethod=Method.none) : base(environment)
         {
             this.defaultMethod = defaultMethod;
             InitPoints();
@@ -39,7 +40,7 @@ namespace hanee.Cad.Tool
         public override async void Run()
         { await RunAsync(); }
 
-        protected override void OnMouseMove(Environment environment, MouseEventArgs e)
+        protected override void OnMouseMove(devDept.Eyeshot.Environment environment, MouseEventArgs e)
         {
             base.OnMouseMove(environment, e);
 
@@ -147,23 +148,23 @@ namespace hanee.Cad.Tool
             {
                 InitPoints();
 
-                KeyValuePair<Point3D, KeyEventArgs> pk = new KeyValuePair<Point3D, KeyEventArgs>(null, null);
+                KeyValuePair<Point3D, string> pk = new KeyValuePair<Point3D, string>(null, null);
 
                 if(defaultMethod == Method.none)
                 {
-                    pk = await GetPoint3DOrKey(LanguageHelper.Tr("Center point(3:3 Points, 2:2 Points)"), -1, new KeyEventArgs(Keys.D3), new KeyEventArgs(Keys.D2));
+                    pk = await GetPoint3DOrText(LanguageHelper.Tr("Center point(3:3 Points, 2:2 Points)"), -1, "3", "2");
                     SetAutoWorkspace();
                 }
                 else if(defaultMethod == Method.centerRadius)
                 {
-                    pk = await GetPoint3DOrKey(LanguageHelper.Tr("Center point"));
+                    pk = await GetPoint3DOrText(LanguageHelper.Tr("Center point"));
                     SetAutoWorkspace();
                 }
                
                 if (IsCanceled() || IsEntered())
                     break;
 
-                if (defaultMethod == Method.threePoints || (pk.Value != null && pk.Value.KeyData == Keys.D3))
+                if (defaultMethod == Method.threePoints || (pk.Value != null && pk.Value.EqualsIgnoreCase("3")))
                 {
                     method = Method.threePoints;
 
@@ -182,7 +183,7 @@ namespace hanee.Cad.Tool
                     if (IsCanceled() || IsEntered())
                         break;
                 }
-                else if(defaultMethod == Method.twoPoints || (pk.Value != null && pk.Value.KeyData == Keys.D2))
+                else if(defaultMethod == Method.twoPoints || (pk.Value != null && pk.Value.EqualsIgnoreCase("2")))
                 {
                     method = Method.twoPoints;
 

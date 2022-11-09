@@ -29,6 +29,12 @@ namespace hanee.Geometry
 
     public static class StringHelper
     {
+        // string 비교
+        public static bool EqualsIgnoreCase(this string str, string otherStr)
+        {
+            return str.Equals(otherStr, StringComparison.OrdinalIgnoreCase);
+        }
+
      
         public static List<HeadValue> ToStrings(this string str, params char[] heads)
         {

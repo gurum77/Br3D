@@ -1,5 +1,6 @@
 ﻿using devDept.Eyeshot;
 using devDept.Geometry;
+using hanee.Geometry;
 using hanee.ThreeD;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +25,7 @@ namespace hanee.Cad.Tool
         public async override void Run()
         { await RunAsync(); }
 
-        protected override void OnMouseMove(Environment environment, MouseEventArgs e)
+        protected override void OnMouseMove(devDept.Eyeshot.Environment environment, MouseEventArgs e)
         {
             base.OnMouseMove(environment, e);
 
@@ -92,31 +93,31 @@ namespace hanee.Cad.Tool
                 Point3D insertionPoint = null;
                 while (true)
                 {
-                    var ptOrKey = await GetPoint3DOrKey(LanguageHelper.Tr("Insertion point([L] By Left-bottom, [C] By Center, [B] By Base point"));
+                    var pk = await GetPoint3DOrText(LanguageHelper.Tr("Insertion point([L] By Left-bottom, [C] By Center, [B] By Base point"), -1, "l", "c", "b");
                     if (IsCanceled())
                         break;
                     if (IsEntered())
                         break;
 
-                    if (ptOrKey.Key != null)
+                    if (pk.Key != null)
                     {
-                        insertionPoint = ptOrKey.Key;
+                        insertionPoint = pk.Key;
                         break;
                     }
 
                     // 좌측하단 기준이 아닌데 좌측하단으로 바꾸는 경우
                     Vector3D newVec = null;
-                    if (ptOrKey.Value.KeyCode == Keys.L && basePointType != BasePoint.leftBottom)
+                    if (pk.Value.EqualsIgnoreCase("l") && basePointType != BasePoint.leftBottom)
                     {
                         newVec = leftBottom.AsVector * -1;
                         basePointType = BasePoint.leftBottom;
                     }
-                    else if (ptOrKey.Value.KeyCode == Keys.C && basePointType != BasePoint.center)
+                    else if (pk.Value.EqualsIgnoreCase("c") && basePointType != BasePoint.center)
                     {
                         newVec = center.AsVector * -1;
                         basePointType = BasePoint.center;
                     }
-                    else if (ptOrKey.Value.KeyCode == Keys.B && basePointType != BasePoint.basePoint)
+                    else if (pk.Value.EqualsIgnoreCase("b") && basePointType != BasePoint.basePoint)
                     {
                         newVec = basePoint.AsVector * -1;
                         basePointType = BasePoint.basePoint;

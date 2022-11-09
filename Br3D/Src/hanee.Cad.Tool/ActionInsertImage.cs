@@ -72,7 +72,7 @@ namespace hanee.Cad.Tool
                 Point3D insertionPoint = null;
                 while (true)
                 {
-                    var pt = await GetPoint3DOrKey(LanguageHelper.Tr("Insertion point([S] Scale)"));
+                    var pt = await GetPoint3DOrText(LanguageHelper.Tr("Insertion point([S] Scale)"));
                     if (IsCanceled())
                         break;
                     if (IsEntered())

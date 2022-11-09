@@ -53,12 +53,12 @@ namespace hanee.Cad.Tool
                 CalcBaseLength();
 
                 DynamicInputManager.Init();
-                var pointOrKey = await GetPoint3DOrKey(LanguageHelper.Tr("From point(R : Reference)"));
+                var pk = await GetPoint3DOrText(LanguageHelper.Tr("From point(R : Reference)"), -1, "r");
                 if (IsCanceled())
                     break;
 
                 // 참조인 경우
-                if(pointOrKey.Key == null)
+                if(pk.Key == null)
                 {
                     var refPt1 = await GetPoint3D(LanguageHelper.Tr("From reference point"));
                     if (IsCanceled())
@@ -76,7 +76,7 @@ namespace hanee.Cad.Tool
                 }
                 else
                 {
-                    fromPoint = pointOrKey.Key;
+                    fromPoint = pk.Key;
                 }
 
                 if (fromPoint == null)

@@ -24,37 +24,14 @@ namespace hanee.ThreeD
             SelectingEdge,
             SelectingEntities, // 2개 이상의 객체를 선택한다.
             GettingKey,    // key 를 입력받는다.
+            GettingText,    // text를 입력받는다.
             Count
         }
 
         // 스냅 간격
         static public double GridSnap = 0.001;  // float로 하면 안됨(좌표 계산시 소수점 쓰레기가 발생함)
 
-        static public void DisableHideDynamicInput()
-        {
-            DynamicInputManager.disableHideDynamicInput = true;
-        }
-
-        static public void EnableHideDynamicInput()
-        {
-            DynamicInputManager.disableHideDynamicInput = false;
-        }
-
-        static public void ModifyPointByGridSnap(ref Point3D point3D)
-        {
-            if (Point3D == null)
-                return;
-
-            if (point3D == null)
-                return;
-
-            if (ActionBase.GridSnap == 0)
-                return;
-
-            point3D.X = (int)(point3D.X / ActionBase.GridSnap) * GridSnap;
-            point3D.Y = (int)(point3D.Y / ActionBase.GridSnap) * GridSnap;
-            point3D.Z = (int)(point3D.Z / ActionBase.GridSnap) * GridSnap;
-        }
+       
 
         // end action할때 unselect all을 할지?
         static public bool IsUnselectAllOnEndAction = true;
@@ -90,6 +67,7 @@ namespace hanee.ThreeD
             set { point = value; }
         }
 
+        static public string text { get; set; }
         static protected KeyEventArgs key = new KeyEventArgs(Keys.A);
         static public KeyEventArgs Key
         {
@@ -132,6 +110,31 @@ namespace hanee.ThreeD
         }
 
 
+        static public void DisableHideDynamicInput()
+        {
+            DynamicInputManager.disableHideDynamicInput = true;
+        }
+
+        static public void EnableHideDynamicInput()
+        {
+            DynamicInputManager.disableHideDynamicInput = false;
+        }
+
+        static public void ModifyPointByGridSnap(ref Point3D point3D)
+        {
+            if (Point3D == null)
+                return;
+
+            if (point3D == null)
+                return;
+
+            if (ActionBase.GridSnap == 0)
+                return;
+
+            point3D.X = (int)(point3D.X / ActionBase.GridSnap) * GridSnap;
+            point3D.Y = (int)(point3D.Y / ActionBase.GridSnap) * GridSnap;
+            point3D.Z = (int)(point3D.Z / ActionBase.GridSnap) * GridSnap;
+        }
 
         // 임시 객체를 이동한다.
         static public void MoveTempEtt(devDept.Eyeshot.Model model, Vector3D vMove)
@@ -313,6 +316,29 @@ namespace hanee.ThreeD
         static public devDept.Eyeshot.Model.SelectedItem LastSelectedItem = null;
         static public Dictionary<Type, bool> selectableTypes = new Dictionary<Type, bool>();
         static public KeyEventArgs[] availableKeys;
+        static public string[] availableTexts;
+
+        static public bool HasAvailableTexts()
+        {
+            if (availableTexts == null || availableTexts.Length == 0)
+                return false;
+            return true;
+        }
+
+        static public bool IsAvailableText(string text)
+        {
+            if (availableTexts == null || availableTexts.Length == 0)
+                return true;
+
+            foreach(var te in availableTexts)
+            {
+                if (te.ToLower().Equals(text.ToLower()))
+                    return true;
+            }
+
+            return false;
+        }
+
         static public bool HasAvailableKeys()
         {
             if (availableKeys == null || availableKeys.Length == 0)
@@ -763,7 +789,10 @@ namespace hanee.ThreeD
             // space, enter는 다음 step으로 진행
             else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
             {
-                Entered = true;
+                // text 입력중일때는 entered로 보지 않는다.
+                // entered는 아무 입력없이 다음 단계로 넘어가는 enter를 의미한다.
+                if(!userInputting[(int)UserInput.GettingText])
+                    Entered = true;
             }
             // shfit, control, alt키를 누르는건 무시한다.
             else if (e.KeyCode == Keys.Shift || e.KeyCode == Keys.ShiftKey || e.KeyCode == Keys.ControlKey || e.KeyCode == Keys.Alt || e.KeyCode == Keys.Control)
@@ -821,6 +850,63 @@ namespace hanee.ThreeD
 
 
             return point3D;
+        }
+
+        // user input이 끝났는지?
+        bool FinishedUserInput(params ActionBase.UserInput[] userInputs)
+        {
+            foreach (var ui in userInputs)
+            {
+                if (!ActionBase.userInputting[(int)ui])
+                    return true;
+            }
+            return false;
+        }
+
+        // input을 시작하고 사용자가 입력을 할때까지 기다린다.
+        async Task StartAndWaitUserInput(string message, int stepId, params ActionBase.UserInput[] userInputs)
+        {
+            // 시작
+            ActionBase.StartInput(environment, message, stepId, userInputs);
+
+            // 대기
+            while (!FinishedUserInput(userInputs))
+            {
+                // 스탭이 중지되었다면 그냥 보낸다.
+                if (ActionBase.IsStopedCurrentStep)
+                {
+                    ActionBase.EndInput(userInputs);
+                    break;
+                }
+
+                await Task.Delay(100);
+            }
+
+            // cursor text를 초기화 한다.
+            ActionBase.InitCursorText();
+        }
+
+
+        // 마우스로 point3D를 입력받거나 text를 입력받는다.
+        public async Task<KeyValuePair<Point3D, string>> GetPoint3DOrText(string message = null, int stepID = -1, params string[] availableTexts)
+        {
+            ActionBase.availableTexts   = availableTexts;
+
+            await StartAndWaitUserInput(message, stepID, UserInput.GettingPoint3D, UserInput.GettingText);
+            
+            // 정상 입력이 아닌 경우라면 null을 준다.
+            // 그래야 사용하는 곳에서 어떤 값이 입력 되었는지 알수 있다.
+            var resultPoint3D = point3D;
+            var resultText = text;
+            if (ActionBase.userInputting[(int)UserInput.GettingPoint3D])
+                resultPoint3D = null;
+            if (ActionBase.userInputting[(int)UserInput.GettingText])
+                resultText = null;
+
+            // 입력을 완전히 종료
+            EndInput(UserInput.GettingPoint3D, UserInput.GettingText);
+
+            return new KeyValuePair<Point3D, string>(resultPoint3D, resultText);
         }
 
         // 마우스로 point3D를 입력받거나 key를 입력받는다.

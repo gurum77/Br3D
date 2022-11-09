@@ -52,25 +52,25 @@ namespace hanee.Cad.Tool
 
             while (true)
             {
-                KeyValuePair<Point3D, KeyEventArgs> pk;
+                KeyValuePair<Point3D, string> pk;
                 Point3D point = null;
                 if (points.Count == 0)
-                    pk = await GetPoint3DOrKey(LanguageHelper.Tr("Point(W : Width)"), -1, new KeyEventArgs(Keys.W));
+                    pk = await GetPoint3DOrText(LanguageHelper.Tr("Point(W : Width)"), -1, "w");
                 else if (points.Count < 3)
-                    pk = await GetPoint3DOrKey(LanguageHelper.Tr("Next point(W : Width)"), -1, new KeyEventArgs(Keys.W));
+                    pk = await GetPoint3DOrText(LanguageHelper.Tr("Next point(W : Width)"), -1, "w");
                 else
-                    pk = await GetPoint3DOrKey(LanguageHelper.Tr("Next point(W : Width, C : Close)"), -1, new KeyEventArgs(Keys.W), new KeyEventArgs(Keys.C));
+                    pk = await GetPoint3DOrText(LanguageHelper.Tr("Next point(W : Width, C : Close)"), -1, "w", "c");
 
                 
 
-                if (pk.Value != null && pk.Value.KeyCode == Keys.C)
+                if (pk.Value != null && pk.Value.EqualsIgnoreCase("c"))
                 {
                     // C를 누르며 입력 완료
                     point = points[0].Clone() as Point3D;
                     points.Add(point);
                     Entered = true;
                 }
-                else if (pk.Value != null && pk.Value.KeyCode == Keys.W)
+                else if (pk.Value != null && pk.Value.EqualsIgnoreCase("w"))
                 {
                     FormInputMessage form = new FormInputMessage();
                     form.Text = LanguageHelper.Tr("Width(> 0)");
