@@ -75,6 +75,19 @@ namespace hanee.Geometry
             return values;
         }
 
+        // token 들 앞뒤로 공백을 만들어 준다.(그래야 ToDoubles에서 값을 분리해서 인식할 수 있음)
+        public static string MakeHeadSpace(this string str, params char[] tokens)
+        {
+            var str2 = str.Clone() as string;
+            foreach (var token in tokens)
+            {
+                str2 = str2.Replace(token.ToString(), $" {token} ");
+            }
+
+
+            return str2;
+        }
+
         // string을 공백 또는 ,로 구분했을때 숫자만 추출
         public static List<HeadValue> ToDoubles(this string str, params char[] heads)
         {
@@ -135,15 +148,23 @@ namespace hanee.Geometry
             return points;
         }
 
+        // token으로 분리된 문자를 Point3D로 변환
+        public static Point3D ToPoint3DByToken(this string str, char token=' ')
+        {
+            var values = str.Split(token);
+            if (values == null || values.Length < 2)
+                return null;
+
+            var pt = new Point3D(values[0].ToDouble(), values[1].ToDouble(), 0);
+            if(values.Length > 2)
+                pt.Z = values[2].ToDouble();
+            return pt;
+        }
 
         // 공백으로 분리된 문자를 Point3D로 변환
         public static Point3D ToPoint3DBySpace(this string str)
         {
-            var values = str.Split(' ');
-            if (values == null || values.Length != 3)
-                return null;
-
-            return new Point3D(values[0].ToDouble(), values[1].ToDouble(), values[2].ToDouble());
+            return str.ToPoint3DByToken(' ');
         }
 
         // string을 Point3D로 변환

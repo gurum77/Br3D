@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hanee.Geometry;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -21,7 +22,7 @@ namespace hanee.ThreeD
             textEdit1.TextChanged += TextEdit1_TextChanged;
         }
 
-        
+
         // text edit의 유효한 text를 리턴
         string GetValidTextEditText()
         {
@@ -154,7 +155,7 @@ namespace hanee.ThreeD
 
         void TextEdit1_KeyEvent(KeyEventArgs e)
         {
-            
+
         }
 
 
@@ -182,10 +183,65 @@ namespace hanee.ThreeD
                 // command 입력 상태가 아닌 경우 (text 입력)
                 else
                 {
-                    if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingText])
+                    var text = GetValidTextEditText();
+                    // 아무것도 입력안하고 space, enter를 하면 다음 단계로 넘어간다.
+                    if (string.IsNullOrEmpty(text))
                     {
-                        ActionBase.text = GetValidTextEditText();
-                        ActionBase.EndInput(ActionBase.UserInput.GettingText);
+                        ActionBase.Entered = true;
+                    }
+                    // 뭔가 입력이 되어 있다면 데이타(좌표)입력으로 처리한다.
+                    else
+                    {
+                        // 좌표 입력인지?
+                        if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingPoint3D])
+                        {
+                            var pt = text.ToPoint3DByToken(',');
+                            // 유효한 좌표 입력인 경우 좌표값 설정하고 종료
+                            if (pt != null)
+                            {
+                                ActionBase.Point3D = pt;
+                                ActionBase.EndInput(ActionBase.UserInput.GettingPoint3D);
+                                return;
+                            }
+
+                            // null인경우 상대좌표인지 판단
+                            if (text.Contains("@") && text.Contains("<"))
+                            {
+                                text = text.MakeHeadSpace('@', '<');
+                                var values = text.ToDoubles('@', '<');
+                                if(values != null && values.Count == 2 && ActionBase.GetOrthoModeManager()?.startPoint!=null)
+                                {
+                                    var dist = (double)values[0].value;
+                                    var deg = (double)values[1].value;
+
+                                    ActionBase.Point3D = ActionBase.GetOrthoModeManager().startPoint + deg.ToRadians().ToVector().To3D() * dist;
+                                    ActionBase.EndInput(ActionBase.UserInput.GettingPoint3D);
+                                    return;
+                                }
+                            }
+
+                            // 숫자 1개인지?
+                            if (double.TryParse(text, out double distTmp) && ActionBase.GetOrthoModeManager()?.startPoint != null)
+                            {
+                                var vec = (ActionBase.Point3D - ActionBase.GetOrthoModeManager()?.startPoint).ToDir();
+                                ActionBase.Point3D = ActionBase.GetOrthoModeManager().startPoint + vec * distTmp;
+                                ActionBase.EndInput(ActionBase.UserInput.GettingPoint3D);
+                                return;
+                            }
+
+                        }
+
+                        // text 입력인지?
+                        if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingText])
+                        {
+                            // 유효한 text 입력인 경우 text 값 설정하고 종료
+                            if (ActionBase.IsAvailableText(text))
+                            {
+                                ActionBase.text = text;
+                                ActionBase.EndInput(ActionBase.UserInput.GettingText);
+                                return;
+                            }
+                        }
                     }
                 }
             }

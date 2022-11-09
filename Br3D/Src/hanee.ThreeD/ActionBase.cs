@@ -1,6 +1,7 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using hanee.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -332,7 +333,7 @@ namespace hanee.ThreeD
 
             foreach(var te in availableTexts)
             {
-                if (te.ToLower().Equals(text.ToLower()))
+                if (te.EqualsIgnoreCase(text))
                     return true;
             }
 
@@ -789,10 +790,10 @@ namespace hanee.ThreeD
             // space, enter는 다음 step으로 진행
             else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
             {
-                // text 입력중일때는 entered로 보지 않는다.
-                // entered는 아무 입력없이 다음 단계로 넘어가는 enter를 의미한다.
-                if(!userInputting[(int)UserInput.GettingText])
-                    Entered = true;
+                // enter, space는 cmdbar 입력상황에 따라 판단해야함
+                // enter, space에 대한 처리는 cmdbar에서만 한다.
+                //if(!userInputting[(int)UserInput.GettingText])
+                //    Entered = true;
             }
             // shfit, control, alt키를 누르는건 무시한다.
             else if (e.KeyCode == Keys.Shift || e.KeyCode == Keys.ShiftKey || e.KeyCode == Keys.ControlKey || e.KeyCode == Keys.Alt || e.KeyCode == Keys.Control)
@@ -1342,6 +1343,12 @@ namespace hanee.ThreeD
 
         protected OrthoModeManager orthoModeManager => (GetModel() as HModel)?.orthoModeManager;
 
+        static public OrthoModeManager GetOrthoModeManager()
+        {
+            if (ActionBase.runningAction == null)
+                return null;
+            return ActionBase.runningAction.orthoModeManager;
+        }
         protected void SetOrthoModeStartPoint(Point3D startPoint)
         {
             if (orthoModeManager == null)
