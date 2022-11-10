@@ -1,4 +1,5 @@
-﻿using hanee.Geometry;
+﻿using devDept.Geometry;
+using hanee.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -192,43 +193,41 @@ namespace hanee.ThreeD
                     // 뭔가 입력이 되어 있다면 데이타(좌표)입력으로 처리한다.
                     else
                     {
+                        Point3D startPoint = ActionBase.GetOrthoModeManager()?.startPoint;
+
+                        // 거리 입력인지?
+                        if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingDist])
+                        {
+                            // 숫자로 변환 가능한지?
+                            if(double.TryParse(text, out double dist))
+                            {
+                                ActionBase.dist = dist;
+                                ActionBase.EndInput(ActionBase.UserInput.GettingDist);
+                                return;
+                            }
+
+                            // 숫자로 변환 안되면 좌표로 변환
+                            var pt = ParseToPoint3D(text);
+                            if (pt != null && startPoint != null)
+                            {
+                                ActionBase.dist = pt.DistanceTo(startPoint);
+                                ActionBase.EndInput(ActionBase.UserInput.GettingDist);
+                                return;
+                            }
+                        }
+
+
                         // 좌표 입력인지?
                         if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingPoint3D])
                         {
-                            var pt = text.ToPoint3DByToken(',');
                             // 유효한 좌표 입력인 경우 좌표값 설정하고 종료
+                            Point3D pt = ParseToPoint3D(text);
                             if (pt != null)
                             {
                                 ActionBase.Point3D = pt;
                                 ActionBase.EndInput(ActionBase.UserInput.GettingPoint3D);
                                 return;
                             }
-
-                            // null인경우 상대좌표인지 판단
-                            if (text.Contains("@") && text.Contains("<"))
-                            {
-                                text = text.MakeHeadSpace('@', '<');
-                                var values = text.ToDoubles('@', '<');
-                                if(values != null && values.Count == 2 && ActionBase.GetOrthoModeManager()?.startPoint!=null)
-                                {
-                                    var dist = (double)values[0].value;
-                                    var deg = (double)values[1].value;
-
-                                    ActionBase.Point3D = ActionBase.GetOrthoModeManager().startPoint + deg.ToRadians().ToVector().To3D() * dist;
-                                    ActionBase.EndInput(ActionBase.UserInput.GettingPoint3D);
-                                    return;
-                                }
-                            }
-
-                            // 숫자 1개인지?
-                            if (double.TryParse(text, out double distTmp) && ActionBase.GetOrthoModeManager()?.startPoint != null)
-                            {
-                                var vec = (ActionBase.Point3D - ActionBase.GetOrthoModeManager()?.startPoint).ToDir();
-                                ActionBase.Point3D = ActionBase.GetOrthoModeManager().startPoint + vec * distTmp;
-                                ActionBase.EndInput(ActionBase.UserInput.GettingPoint3D);
-                                return;
-                            }
-
                         }
 
                         // text 입력인지?
@@ -250,6 +249,40 @@ namespace hanee.ThreeD
                 if (status == Status.command)
                     textEdit1.Text = "";
             }
+        }
+
+        // 사용자가 입력한 text를 point로 변환
+        private Point3D ParseToPoint3D(string text)
+        {
+            var pt = text.ToPoint3DByToken(',');
+            // 유효한 좌표 입력인 경우 좌표값 설정하고 종료
+            if (pt != null)
+            {
+                return pt;
+            }
+
+            // null인경우 상대좌표인지 판단
+            if (text.Contains("@") && text.Contains("<"))
+            {
+                text = text.MakeHeadSpace('@', '<');
+                var values = text.ToDoubles('@', '<');
+                if (values != null && values.Count == 2 && ActionBase.GetOrthoModeManager()?.startPoint != null)
+                {
+                    var dist = (double)values[0].value;
+                    var deg = (double)values[1].value;
+
+                    return ActionBase.GetOrthoModeManager().startPoint + deg.ToRadians().ToVector().To3D() * dist;
+                }
+            }
+
+            // 숫자 1개인지?
+            if (double.TryParse(text, out double distTmp) && ActionBase.GetOrthoModeManager()?.startPoint != null)
+            {
+                var vec = (ActionBase.Point3D - ActionBase.GetOrthoModeManager()?.startPoint).ToDir();
+                return ActionBase.GetOrthoModeManager().startPoint + vec * distTmp;
+            }
+
+            return null;
         }
     }
 }

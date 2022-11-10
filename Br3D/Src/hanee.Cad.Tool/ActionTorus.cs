@@ -22,33 +22,35 @@ namespace hanee.Cad.Tool
         {
             base.OnMouseMove(environment, e);
 
-            if (radiusPoint == null || heightPoint == null)
+            if (radius == null || height == null)
                 return;
-            PreviewLabel.PreviewDistanceLabel(model, radiusPoint, heightPoint, 1, true, "R2=");
+
+            //PreviewLabel.PreviewDistanceLabel(model, radiusPoint, heightPoint, 1, true, "R2=");
         }
         protected override Entity Make3D(bool tempEntity)
         {
-            if (centerPoint == null || radiusPoint == null || heightPoint == null)
-                return null;
+            return null;
+            //if (centerPoint == null || radiusPoint == null || heightPoint == null)
+            //    return null;
 
-            var radius = centerPoint.DistanceTo(radiusPoint);
-            var height = radiusPoint.DistanceTo(heightPoint);
-            if (radius == 0 || height == 0)
-                return null;
+            //var radius = centerPoint.DistanceTo(radiusPoint);
+            //var height = radiusPoint.DistanceTo(heightPoint);
+            //if (radius == 0 || height == 0)
+            //    return null;
 
-            var reverseHeight = height < 0;
-            height = Math.Abs(height);
+            //var reverseHeight = height < 0;
+            //height = Math.Abs(height);
 
-            Entity torus;
-            if (tempEntity)
-                torus = Mesh.CreateTorus(radius, height, 20, 20);
-            else
-                torus = Brep.CreateTorus(radius, height, Math.Min(0.001, (radius/10)));
-            torus.TransformBy(new Transformation(centerPoint, oldPlane.AxisX, oldPlane.AxisY, oldPlane.AxisZ));
-            GetHModel()?.entityPropertiesManager?.SetDefaultProperties(torus, tempEntity);
+            //Entity torus;
+            //if (tempEntity)
+            //    torus = Mesh.CreateTorus(radius, height, 20, 20);
+            //else
+            //    torus = Brep.CreateTorus(radius, height, Math.Min(0.001, (radius/10)));
+            //torus.TransformBy(new Transformation(centerPoint, oldPlane.AxisX, oldPlane.AxisY, oldPlane.AxisZ));
+            //GetHModel()?.entityPropertiesManager?.SetDefaultProperties(torus, tempEntity);
 
             
-            return torus;
+            //return torus;
         }
     }
 }

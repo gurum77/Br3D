@@ -26,13 +26,14 @@ namespace hanee.ThreeD
             SelectingEntities, // 2개 이상의 객체를 선택한다.
             GettingKey,    // key 를 입력받는다.
             GettingText,    // text를 입력받는다.
+            GettingDist,  // 거리를 력받는다.
             Count
         }
 
         // 스냅 간격
         static public double GridSnap = 0.001;  // float로 하면 안됨(좌표 계산시 소수점 쓰레기가 발생함)
 
-       
+
 
         // end action할때 unselect all을 할지?
         static public bool IsUnselectAllOnEndAction = true;
@@ -67,6 +68,8 @@ namespace hanee.ThreeD
             get { return point; }
             set { point = value; }
         }
+
+        static public double dist { get; set; }
 
         static public string text { get; set; }
         static protected KeyEventArgs key = new KeyEventArgs(Keys.A);
@@ -331,7 +334,7 @@ namespace hanee.ThreeD
             if (availableTexts == null || availableTexts.Length == 0)
                 return true;
 
-            foreach(var te in availableTexts)
+            foreach (var te in availableTexts)
             {
                 if (te.EqualsIgnoreCase(text))
                     return true;
@@ -411,7 +414,8 @@ namespace hanee.ThreeD
 
             if (userInputting[(int)UserInput.GettingPoint] == true)
                 SetPointByMouseEventArgs(environment, e);
-            if (userInputting[(int)UserInput.GettingPoint3D] == true)
+            if (userInputting[(int)UserInput.GettingPoint3D] == true ||
+                userInputting[(int)UserInput.GettingDist] == true)
                 SetPoint3DByMouseEventArgs(environment, e);
 
             // 객체 선택중이고 dynamic highlight 해야하는 경우
@@ -662,6 +666,18 @@ namespace hanee.ThreeD
                 ActionBase.EndInput(UserInput.GettingPoint3D);
             }
 
+            if (userInputting[(int)UserInput.GettingDist] == true)
+            {
+                SetPoint3DByMouseEventArgs(environment, e);
+
+                var startPoint = GetOrthoModeStartPoint();
+                if (startPoint != null)
+                {
+                    dist = point3D.DistanceTo(startPoint);
+                    ActionBase.EndInput(UserInput.GettingDist);
+                }
+            }
+
             if (userInputting[(int)UserInput.SelectingLabel] == true)
             {
                 var model = environment as Model;
@@ -887,14 +903,25 @@ namespace hanee.ThreeD
             ActionBase.InitCursorText();
         }
 
+        // 거리를 입력받는다.
+        // 거리 입력시 마우스로도 입력받을 수 있다.
+        public async Task<double> GetDist(string message = null, int stepID = -1, double? min = null, double? max = null)
+        {
+            await StartAndWaitUserInput(message, stepID, UserInput.GettingDist);
+
+            // 입력을 완전히 종료
+            EndInput(UserInput.GettingDist);
+
+            return dist;
+        }
 
         // 마우스로 point3D를 입력받거나 text를 입력받는다.
         public async Task<KeyValuePair<Point3D, string>> GetPoint3DOrText(string message = null, int stepID = -1, params string[] availableTexts)
         {
-            ActionBase.availableTexts   = availableTexts;
+            ActionBase.availableTexts = availableTexts;
 
             await StartAndWaitUserInput(message, stepID, UserInput.GettingPoint3D, UserInput.GettingText);
-            
+
             // 정상 입력이 아닌 경우라면 null을 준다.
             // 그래야 사용하는 곳에서 어떤 값이 입력 되었는지 알수 있다.
             var resultPoint3D = point3D;
@@ -1343,12 +1370,23 @@ namespace hanee.ThreeD
 
         protected OrthoModeManager orthoModeManager => (GetModel() as HModel)?.orthoModeManager;
 
+
         static public OrthoModeManager GetOrthoModeManager()
         {
             if (ActionBase.runningAction == null)
                 return null;
             return ActionBase.runningAction.orthoModeManager;
         }
+
+        static public Point3D GetOrthoModeStartPoint()
+        {
+            var mng = GetOrthoModeManager();
+            if (mng == null)
+                return null;
+
+            return mng.startPoint;
+        }
+
         protected void SetOrthoModeStartPoint(Point3D startPoint)
         {
             if (orthoModeManager == null)

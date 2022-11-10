@@ -20,13 +20,15 @@ namespace hanee.Cad.Tool
         }
         Method method = Method.centerRadius;
         public Method defaultMethod = Method.none;  // 기본 method가 있는 경우라면 command 입력시 옵션을 입력받지 않는다.
-        protected Point3D centerPoint, radiusPoint, firstPoint, secondPoint, thirdPoint;
+        protected Point3D centerPoint, /*radiusPoint, */firstPoint, secondPoint, thirdPoint;
+        protected double radius;
 
         void InitPoints()
         {
             method = Method.centerRadius;
             centerPoint = null;
-            radiusPoint = null;
+            radius = 0;
+            //radiusPoint = null;
             firstPoint = null;
             secondPoint = null;
             thirdPoint = null;
@@ -50,8 +52,8 @@ namespace hanee.Cad.Tool
                 if (centerPoint == null)
                     return;
 
-                radiusPoint = point3D;
-                PreviewLabel.PreviewDistanceLabel(model, centerPoint, radiusPoint, 0, true);
+                radius = centerPoint.DistanceTo(point3D);
+                PreviewLabel.PreviewDistanceLabel(model, centerPoint, point3D, 0, true);
             }
             else if(method == Method.threePoints)
             {
@@ -102,9 +104,8 @@ namespace hanee.Cad.Tool
 
             if (method == Method.centerRadius)
             {
-                if (centerPoint == null || radiusPoint == null)
+                if (centerPoint == null)
                     return null;
-                var radius = centerPoint.DistanceTo(radiusPoint);
                 if (radius <= Define.MinimumRadius)
                     return null;
 
@@ -203,9 +204,10 @@ namespace hanee.Cad.Tool
                     centerPoint = pk.Key;
                     SetOrthoModeStartPoint(centerPoint);
                     DynamicInputManager.ActiveLengthFactor(centerPoint, 1, LanguageHelper.Tr("Radius"));
-                    radiusPoint = await GetPoint3D(LanguageHelper.Tr("Radius point"));
+                    radius = await GetDist(LanguageHelper.Tr("Radius"), -1, 0.00001, 100000);
                     if (IsCanceled() || IsEntered())
                         break;
+                    
                 }
 
                 SetOrthoModeStartPoint(null);

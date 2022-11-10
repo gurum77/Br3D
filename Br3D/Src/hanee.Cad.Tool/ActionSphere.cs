@@ -15,21 +15,17 @@ namespace hanee.Cad.Tool
             if (centerPoint == null)
                 return;
 
-            radiusPoint = point3D;
-
-
             var circle = MakeEntity(true);
             if (circle == null)
                 return;
 
             SetTempEtt(environment, circle);
 
-            PreviewLabel.PreviewDistanceLabel(model, centerPoint, radiusPoint, 0, true, "R=");
+            PreviewLabel.PreviewDistanceLabel(model, centerPoint, point3D, 0, true, "R=");
         }
 
         protected override Entity MakeEntity(bool tempEntity = false)
         {
-            var radius = centerPoint.DistanceTo(radiusPoint);
             if (radius <= 0.001)
                 return null;
 
