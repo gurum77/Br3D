@@ -127,7 +127,7 @@ namespace hanee.ThreeD
         {
             foreach (Entity ent in entities)
             {
-                if (ent is ICurve)
+                if (ent is ICurve || ent is Mesh)
                     ent.Regen(0.001);
             }
         }

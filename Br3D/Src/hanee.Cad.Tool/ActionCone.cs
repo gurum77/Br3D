@@ -16,20 +16,22 @@ namespace hanee.Cad.Tool
 
         protected override Entity Make3D(bool tempEntity)
         {
-            if (centerPoint == null || radius == null || height== null)
+            if (centerPoint == null || radius == null)
                 return null;
 
-            if (radius == 0 || height == 0)
+            // 높이
+            var curHeight = height == null ? secPlane.DistanceTo(point3D) : height.Value;
+            if (radius == 0 || curHeight  == 0)
                 return null;
 
-            var reverseHeight = height < 0;
-            height = Math.Abs(height.Value);
+            var reverseHeight = curHeight < 0;
+            curHeight = Math.Abs(curHeight);
             Entity cone = null;
             if (tempEntity)
-                cone = Mesh.CreateCone(radius.Value, 0, height.Value, 10);
+                cone = Mesh.CreateCone(radius.Value, 0, curHeight, 10);
             else
-                cone = Brep.CreateCone(radius.Value, height.Value);
-            cone.TransformBy(new Transformation(centerPoint, oldPlane.AxisX, oldPlane.AxisY, reverseHeight ? oldPlane.AxisZ * -1: oldPlane.AxisZ));
+                cone = Brep.CreateCone(radius.Value, curHeight);
+            cone.TransformBy(new Transformation(centerPoint, secPlane.AxisX, secPlane.AxisY, reverseHeight ? secPlane.AxisZ * -1: secPlane.AxisZ));
             GetHModel()?.entityPropertiesManager?.SetDefaultProperties(cone, tempEntity);
             return cone;
         }

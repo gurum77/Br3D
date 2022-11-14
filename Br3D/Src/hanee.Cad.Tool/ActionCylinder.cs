@@ -15,6 +15,7 @@ namespace hanee.Cad.Tool
         protected bool disableWorkplaneForHeight = true;
         protected bool activeDynamicInputManagerForRadius = true;
         protected Plane oldPlane;
+        protected Plane secPlane;   // 단면의 plane
         protected Point3D centerPoint/*, radiusPoint, heightPoint*/;
         protected double? radius = null;
         protected double? height = null;
@@ -26,34 +27,35 @@ namespace hanee.Cad.Tool
         public override async void Run()
         { await RunAsync(); }
 
-
         virtual protected Entity Make3D(bool tempEntity)
         {
-            if (centerPoint == null || radius == null || height == null)
+            if (centerPoint == null || radius == null)
                 return null;
 
-            if (radius.Value == 0 || height.Value == 0)
+            // 높이
+            var curHeight = height == null ? secPlane.DistanceTo(point3D) : height.Value;
+            if (radius == 0 || curHeight == 0)
                 return null;
 
-            var reverseHeight = height.Value < 0;
-            height = Math.Abs(height.Value);
+            var reverseHeight = curHeight < 0;
+            curHeight = Math.Abs(curHeight);
 
             Entity cylinder = null;
             if (tempEntity)
-                cylinder = Mesh.CreateCylinder(radius.Value, height.Value, 10);
+                cylinder = Mesh.CreateCylinder(radius.Value, curHeight, 10);
             else
-                cylinder = Brep.CreateCylinder(radius.Value, height.Value);
-            cylinder.TransformBy(new Transformation(centerPoint, oldPlane.AxisX, oldPlane.AxisY, reverseHeight ? oldPlane.AxisZ * -1 : oldPlane.AxisZ));
+                cylinder = Brep.CreateCylinder(radius.Value, curHeight);
+            cylinder.TransformBy(new Transformation(centerPoint, secPlane.AxisX, secPlane.AxisY, reverseHeight ? secPlane.AxisZ * -1 : secPlane.AxisZ));
             GetHModel()?.entityPropertiesManager?.SetDefaultProperties(cylinder, tempEntity);
             return cylinder;
         }
+
         virtual protected Entity MakeSection()
         {
             if (centerPoint == null || (point3D == null && radius == null))
                 return null;
 
-
-            var wp = GetWorkplane();
+            var wp = secPlane == null ?  GetWorkplane() : secPlane;
             var curRadius = radius == null ? wp.DistanceTo(centerPoint, point3D) : radius.Value;
             if (curRadius <= 0)
                 return null;
@@ -87,26 +89,28 @@ namespace hanee.Cad.Tool
             if (centerPoint == null)
                 return;
 
-            var wp = GetWorkplane();
-            
+            // 단면 그리기
+            var section = MakeSection();
+            SetTempEtt(environment, section);
+
+            // 단면 R 치수 표기
+            // 반지름 입력 전
             if(radius == null)
             {
-                var section = MakeSection();
-                SetTempEtt(environment, section);
-                var radiusPoint = radius == null ? point3D : centerPoint + wp.AxisX * radius.Value;
-                PreviewLabel.PreviewDistanceLabel(model, centerPoint, radiusPoint, 0, true, "R=", wp);
+                PreviewLabel.PreviewDistanceLabel(model, centerPoint, point3D, 0, true, "R=");
             }
-            else
+            // 반지름 입력 후
+            else if(secPlane != null && radius != null)
             {
-                PreviewLabel.PreviewDistanceLabel(model, centerPoint, centerPoint, 0, false, $"R={radius:0.000}");
+                PreviewLabel.PreviewDistanceLabel(model, centerPoint, centerPoint + secPlane.AxisX * radius.Value, 0, true, "R=");
             }
             
 
-
+            // 높이 치수
             if (radius != null)
             {
-                var curHeight = oldPlane.DistanceTo(point3D);
-                PreviewLabel.PreviewHeightLabel(model, centerPoint, curHeight, 1, oldPlane, true, "H=");
+                var curHeight = secPlane.DistanceTo(point3D);
+                PreviewLabel.PreviewHeightLabel(model, centerPoint, curHeight, 1, secPlane, true, "H=");
             }
 
             var cyl = Make3D(true);
@@ -130,10 +134,11 @@ namespace hanee.Cad.Tool
                     break;
 
                 SetAutoWorkspace(centerPoint);
+                secPlane = GetWorkplane();
 
                 if (activeDynamicInputManagerForRadius)
                     DynamicInputManager.ActiveLengthFactor(centerPoint, 1, LanguageHelper.Tr("Radius"));
-                radius = await GetDist(LanguageHelper.Tr("Radius"));
+                radius = await GetDist(LanguageHelper.Tr("Radius"), centerPoint);
                 SetOrthoModeStartPoint(null);
                 DynamicInputManager.Init();
                 if (IsCanceled() || IsEntered())
@@ -146,7 +151,7 @@ namespace hanee.Cad.Tool
                     ws.enabled = false;
                 if (activeDynamicInputManagerForRadius)
                     DynamicInputManager.ActiveLengthFactor(centerPoint, 1, LanguageHelper.Tr("Height"), ws.plane.AxisZ);
-                height = await GetDist(LanguageHelper.Tr("Height"));
+                height = await GetDist(LanguageHelper.Tr("Height"), centerPoint, -1, null, null, secPlane);
                 SetOrthoModeStartPoint(null);
                 DynamicInputManager.Init();
                 if (IsCanceled() || IsEntered())

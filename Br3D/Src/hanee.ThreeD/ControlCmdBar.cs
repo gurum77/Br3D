@@ -39,6 +39,16 @@ namespace hanee.ThreeD
             UpdateCmdList();
         }
 
+        internal Status GetStatus()
+        {
+            return status;
+        }
+
+        internal string GetCmdMessage()
+        {
+            return labelControl1.Text;
+        }
+
         // 현재 cmd line의 내용을 history에 등록한다.
         public void AddHistory()
         {
@@ -75,6 +85,13 @@ namespace hanee.ThreeD
                 textEdit1.AppendText(((char)key.KeyValue).ToString());
             }
 
+        }
+
+        public void AddCmdText(string text)
+        {
+            textEdit1.Text = textEdit1.Text + text;
+
+            FocusTextEdit();
         }
 
         public void SetCmdMessage(string message, Status status)

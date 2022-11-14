@@ -36,20 +36,20 @@ namespace hanee.Cad.Tool
                 var wp = GetWorkplane();
 
                 
-                width = await GetDist(LanguageHelper.Tr("Width"));
+                width = await GetDist(LanguageHelper.Tr("Width"), basePoint);
 
                 SetOrthoModeStartPoint(basePoint + wp.AxisX * width.Value);
                 if (IsCanceled() || IsEntered())
                     break;
 
                 
-                height = await GetDist(LanguageHelper.Tr("Height"));
+                height = await GetDist(LanguageHelper.Tr("Height"), basePoint);
                 SetOrthoModeStartPoint(basePoint + wp.AxisY * height.Value); 
                 if (IsCanceled() || IsEntered())
                     break;
 
                 
-                length = await GetDist(LanguageHelper.Tr("Length"));
+                length = await GetDist(LanguageHelper.Tr("Length"), basePoint);
                 SetOrthoModeStartPoint(null);
                 if (IsCanceled() || IsEntered())
                     break;

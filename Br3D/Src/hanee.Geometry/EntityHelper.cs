@@ -61,7 +61,14 @@ namespace hanee.Geometry
                 t.Center.CopyFrom(s.Center);
                 t.Radius = s.Radius;
             }
-            
+            else if(ent is Mesh)
+            {
+                var t = (Mesh)ent;
+                var s = (Mesh)source;
+                t.Faces = s.Faces;
+                t.Triangles = s.Triangles;
+                t.Vertices = s.Vertices;
+            }
             else
             {
                 // brep는 복사불가하다. 

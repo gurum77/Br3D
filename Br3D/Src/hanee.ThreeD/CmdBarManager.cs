@@ -34,6 +34,31 @@ namespace hanee.ThreeD
 
             cmdBar.FocusTextEdit(key);
         }
+
+        // 현재 cmd text message를 추가한다.
+        static public void AddCmdText(string text)
+        {
+            if (cmdBar == null)
+                return;
+
+            cmdBar.AddCmdText(text);
+        }
+
+        static public ControlCmdBar.Status GetStatus()
+        {
+            if (cmdBar == null)
+                return ControlCmdBar.Status.command;
+
+            return cmdBar.GetStatus();
+        }
+        static public string GetCmdMessage()
+        {
+            if (cmdBar == null)
+                return null;
+
+            return cmdBar.GetCmdMessage();
+        }
+
         // cmd message 설정
         // 현재 message는 history로 올린다.
         static public void SetCmdMessage(string message, ControlCmdBar.Status status)

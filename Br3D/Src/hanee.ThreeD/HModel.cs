@@ -967,7 +967,13 @@ namespace hanee.ThreeD
                         point.Y += (drawingFont.Height+3);
                         DrawMouseText(t, point, true);
                     }
+                }
 
+                // 거리 입력중이고, 2 click활성화 되어 있고, startPoint가 있는 경우 미리보기 선을 그린다.
+                if(ActionBase.userInputting[(int)ActionBase.UserInput.GettingDist] && ActionBase.GetOrthoModeStartPoint() != null)
+                {
+                    Point3D[] vertices = new Point3D[] { ActionBase.GetOrthoModeStartPoint(), ActionBase.Point3D };
+                    DrawPreviewLinearPathByVertices(vertices);
                 }
 
 

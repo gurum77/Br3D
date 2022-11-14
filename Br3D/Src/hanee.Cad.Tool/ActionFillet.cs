@@ -78,7 +78,11 @@ namespace hanee.Cad.Tool
             StartAction();
 
             var entityTypes = new Dictionary<Type, bool>();
-            entityTypes.Add(typeof(ICurve), true);
+            entityTypes.Add(typeof(Line), true);
+            entityTypes.Add(typeof(LinearPath), true);
+            entityTypes.Add(typeof(Arc), true);
+
+
             var regenOptions = new RegenOptions();
             while (true)
             {
@@ -90,16 +94,16 @@ namespace hanee.Cad.Tool
                 // 객체를 선택할때까지 반복
                 while (true)
                 {
-                    var firstEntityOrKey = await GetEntityOrKey(LanguageHelper.Tr("Select first curve") + $"({LanguageHelper.Tr("Radius")} : {radius}, R : {LanguageHelper.Tr("Input radius")})", -1, true, entityTypes);
-                    if (IsCanceled())
+                    var firstEntityOrKey = await GetEntityOrText(LanguageHelper.Tr("Select first curve") + $"({LanguageHelper.Tr("Radius")} : {radius}, R : {LanguageHelper.Tr("Input radius")})", -1, true, entityTypes, "r");
+                    if (IsCanceled() || IsEntered())
                         break;
 
                     // 반지름 입력
-                    if (firstEntityOrKey.Key == null && firstEntityOrKey.Value.KeyCode == Keys.R)
+                    if (firstEntityOrKey.Key == null && firstEntityOrKey.Value.EqualsIgnoreCase("R"))
                     {
-                        FormInputMessage form = new FormInputMessage(LanguageHelper.Tr("Radius"));
-                        if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                            radius = form.RichTextBox.Text.ToString().ToDouble();
+                        radius = await GetDist(LanguageHelper.Tr("Radius"), null, -1, null, null, null, true);
+                        if (IsCanceled() || IsEntered())
+                            break;
                     }
                     else
                     {
@@ -211,22 +215,20 @@ namespace hanee.Cad.Tool
                             entities.Regen(regenOptions);
 
                             environment.Entities.AddRange(entities);
-
                         }
-                        else
+                    }
+                    else
+                    {
+                        Curve.Fillet(firstCurve, secondCurve, radius, flip1, flip2, trim, trim, out Arc filletArc);
+                        if (filletArc != null)
                         {
+                            var entities = new EntityList();
+                            entities.Add(firstEntity);
+                            entities.Add(secondEntity);
+                            entities.Add(filletArc);
+                            entities.Regen(regenOptions);
 
-                            Curve.Fillet(firstCurve, secondCurve, radius, flip1, flip2, trim, trim, out Arc filletArc);
-                            if (filletArc != null)
-                            {
-                                var entities = new EntityList();
-                                entities.Add(firstEntity);
-                                entities.Add(secondEntity);
-                                entities.Add(filletArc);
-                                entities.Regen(regenOptions);
-
-                                environment.Entities.AddRange(entities);
-                            }
+                            environment.Entities.AddRange(entities);
                         }
                     }
                 }
@@ -236,7 +238,7 @@ namespace hanee.Cad.Tool
                 }
 
 
-
+                break;
             }
 
             EndAction();
