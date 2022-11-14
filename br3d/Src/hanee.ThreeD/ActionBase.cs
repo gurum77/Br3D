@@ -69,7 +69,9 @@ namespace hanee.ThreeD
             set { point = value; }
         }
 
+        static public bool enabled2PointsForDist { get; set; } = false;
         static public double dist { get; set; }
+        static Plane planeForDistNormal { get; set; }   // 거리를 법선 방향으로 계산하기 위한 plane
 
         static public string text { get; set; }
         static protected KeyEventArgs key = new KeyEventArgs(Keys.A);
@@ -673,8 +675,30 @@ namespace hanee.ThreeD
                 var startPoint = GetOrthoModeStartPoint();
                 if (startPoint != null)
                 {
-                    dist = point3D.DistanceTo(startPoint);
+                    if (planeForDistNormal == null)
+                        dist = point3D.DistanceTo(startPoint);
+                    else
+                        dist = point3D.DistanceTo(planeForDistNormal);
                     ActionBase.EndInput(UserInput.GettingDist);
+                }
+                else
+                {
+                    // startPoint가 없는 경우 2click 활성화면 이번에 입력한 좌표를 startPoint로 설정
+                    if (ActionBase.enabled2PointsForDist)
+                    {
+                        ActionBase.SetOrthoModeStartPoint(point3D);
+
+                        var cmdMessage = CmdBarManager.GetCmdMessage();
+                        var status = CmdBarManager.GetStatus();
+                        CmdBarManager.AddCmdText(point3D.ToString());
+
+                        CmdBarManager.AddHistory();
+                        CmdBarManager.SetCmdMessage(cmdMessage, status);
+                    }
+                    else
+                    {
+                        ActionBase.cursorText = ActionBase.cursorText + " : Disable input by click";
+                    }
                 }
             }
 
@@ -905,8 +929,12 @@ namespace hanee.ThreeD
 
         // 거리를 입력받는다.
         // 거리 입력시 마우스로도 입력받을 수 있다.
-        public async Task<double> GetDist(string message = null, int stepID = -1, double? min = null, double? max = null)
+        public async Task<double> GetDist(string message = null, Point3D startPoint = null, int stepID = -1, double? min = null, double? max = null, Plane planeForDistNormal = null, bool enabled2PointsForDist = false)
         {
+            // dist를 입력받을때는 마우스 입력도 가능하게 하기 위해서 startPoint를 입력받아야 함.
+            SetOrthoModeStartPoint(startPoint);
+            ActionBase.enabled2PointsForDist = enabled2PointsForDist;
+            ActionBase.planeForDistNormal = planeForDistNormal;
             await StartAndWaitUserInput(message, stepID, UserInput.GettingDist);
 
             // 입력을 완전히 종료
@@ -1252,6 +1280,37 @@ namespace hanee.ThreeD
             return selectedEntities;
         }
 
+
+        // 객체 1개와 text를 선택는다.
+        public async Task<KeyValuePair<Entity, string>> GetEntityOrText(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null, params string[] availableTexts)
+        {
+            ActionBase.dynamicHighlight = dynamicHighlight;
+            ActionBase.selectableTypes = selectableType;
+            ActionBase.availableTexts = availableTexts;
+            ActionBase.selectedEntity = null;
+
+            await StartAndWaitUserInput(message, stepID, UserInput.SelectingEntity, UserInput.GettingText);
+
+
+            if (ActionBase.selectedEntity != null)
+            {
+                ActionBase.selectedEntity.Selected = true;
+                environment.Invalidate();
+            }
+
+            var resultEntity = ActionBase.selectedEntity;
+            var resultText = ActionBase.text;
+            if (ActionBase.userInputting[(int)UserInput.SelectingEntity])
+                resultEntity = null;
+            if (ActionBase.userInputting[(int)UserInput.GettingText])
+                resultText = null;
+
+            ActionBase.EndInput(UserInput.SelectingEntity, UserInput.GettingText);
+
+            return new KeyValuePair<Entity, string>(resultEntity, resultText);
+        }
+
+
         // 객체 1개를 선택받는다.
         public async Task<KeyValuePair<Entity, KeyEventArgs>> GetEntityOrKey(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null, params KeyEventArgs[] availableKeys)
         {
@@ -1387,11 +1446,12 @@ namespace hanee.ThreeD
             return mng.startPoint;
         }
 
-        protected void SetOrthoModeStartPoint(Point3D startPoint)
+        static public void SetOrthoModeStartPoint(Point3D startPoint)
         {
-            if (orthoModeManager == null)
+            var mng = GetOrthoModeManager();
+            if (mng == null)
                 return;
-            orthoModeManager.startPoint = startPoint;
+            mng.startPoint = startPoint;
         }
         protected Point3D GetOrthoPoint3D(MouseEventArgs e, Point3D curPoint)
         {
