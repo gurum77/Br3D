@@ -33,7 +33,7 @@ namespace hanee.Cad.Tool
 
                 
 
-                FormBlock form = new FormBlock(environment as Model, FormBlock.Mode.newBlockName);
+                FormBlock form = new FormBlock(environment as Model, FormBlock.Mode.newBlockName, entities);
                 if (form.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
                     break;
 

@@ -25,8 +25,10 @@ namespace hanee.Cad.Tool
         }
         Model mainModel { get; set; }
         Mode mode { get; set; } = Mode.newBlockName;
-        
-        public FormBlock(Model mainModel, Mode mode)
+        List<Entity> newBlockEntities = null;
+
+
+        public FormBlock(Model mainModel, Mode mode, List<Entity> newBlockEntities=null)
         {
             InitializeComponent();
 
@@ -34,13 +36,38 @@ namespace hanee.Cad.Tool
             if (mainModel == null)
                 System.Diagnostics.Debug.Assert(false);
 
+            this.Shown += FormBlock_Shown;
+            model1.HandleCreated += Model1_HandleCreated;
+
             this.mode = mode;
             this.mainModel = mainModel;
             this.mainModel.CopyTo(model1, false);
+            this.newBlockEntities = newBlockEntities;
 
+            simpleButtonDel.Visible = mode == Mode.existBlockName;
             panelControlExistBlockOptions.Visible = mode == Mode.existBlockName;
 
             Translate();
+        }
+
+        private void Model1_HandleCreated(object sender, EventArgs e)
+        {
+            if (mode == Mode.newBlockName && newBlockEntities != null)
+            {
+                model1.Entities.Clear();
+                foreach (var ent in newBlockEntities)
+                {
+                    model1.Entities.Add(ent.Clone() as Entity);
+                }
+                model1.Entities.Regen();
+                model1.Invalidate();
+                model1.ZoomFit();
+            }
+        }
+
+        private void FormBlock_Shown(object sender, EventArgs e)
+        {
+        
         }
 
         private void Translate()
@@ -57,6 +84,7 @@ namespace hanee.Cad.Tool
         private void FormBlock_Load(object sender, EventArgs e)
         {
             InitCombo();
+
             model1.Set2DViewStyle();
         }
 
@@ -135,8 +163,6 @@ namespace hanee.Cad.Tool
                     XtraMessageBox.Show(msg);
                     return;
                 }
-
-                
             }
 
             DialogResult = DialogResult.OK;

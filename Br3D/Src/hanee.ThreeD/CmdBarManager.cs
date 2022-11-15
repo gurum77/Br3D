@@ -12,6 +12,7 @@ namespace hanee.ThreeD
 
         static ControlCmdBar cmdBar { get; set; } = null;
 
+      
         static public string FindCommand(Action act)
         {
             if (cmdBar == null)

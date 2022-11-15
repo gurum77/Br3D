@@ -15,6 +15,7 @@ namespace hanee.ThreeD
         }
 
         Dictionary<string, Action> cmds = new Dictionary<string, Action>();
+        public Action lastCmd { get; set; }
         Status status { get; set; } = Status.command;
         public ControlCmdBar()
         {
@@ -194,7 +195,24 @@ namespace hanee.ThreeD
                             var command = FindCommand(act);
                             if (!string.IsNullOrEmpty(command))
                                 SetTextEdit(command);
+
+                            // lastCmd 저장
+                            lastCmd = act;
                             act();
+                        }
+                    }
+                    // list box가 선택되어 있지 않은 상태라면 마지막 action을 실행한다.
+                    else
+                    {
+                        var commandKey = textEdit1.Text;
+                        commandKey = commandKey.Trim();
+                        if (string.IsNullOrEmpty(commandKey) && lastCmd != null)
+                        {
+                            var command = FindCommand(lastCmd);
+                            if (!string.IsNullOrEmpty(command))
+                                SetTextEdit(command);
+
+                            lastCmd();
                         }
                     }
                 }
