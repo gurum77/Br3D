@@ -22,7 +22,8 @@ namespace Br3D
         ControlModel controlModel = null;
         HModel hModel => controlModel?.hModel;
         Model model => hModel;
-        Dictionary<object, Action> functionByElement = new Dictionary<object, Action>();
+        // object key(command string), Action, Stop Action이 필요한지?
+        Dictionary<object, KeyValuePair<Action, bool>> functionByElement = new Dictionary<object, KeyValuePair<Action, bool>>();
         public string opendFilePath = "";
         bool modifiedFile = false;
         bool isDwg => string.IsNullOrEmpty(opendFilePath) ? false : Path.GetExtension(opendFilePath).ToLower().EndsWith("dwg");
@@ -631,22 +632,22 @@ namespace Br3D
                 barButtonItemLanguageEnglish.Down = true;
         }
 
-        void SetFunctionByElement(BarButtonItem barButtonItem, Action action, string caption, string command, string shortcut)
+        void SetFunctionByElement(BarButtonItem barButtonItem, Action action, string caption, string command, string shortcut, bool needStopAction=true)
         {
             barButtonItem.Caption = caption;
 
             if (functionByElement.ContainsKey(barButtonItem))
                 return;
 
-            functionByElement.Add(barButtonItem, action);
+            functionByElement.Add(barButtonItem, new KeyValuePair<Action, bool>(action, needStopAction));
             if (!string.IsNullOrEmpty(command))
             {
-                controlCmdBar1.AddCommand(command, command, action);
+                controlCmdBar1.AddCommand(command, command, action, needStopAction);
             }
 
             if (!string.IsNullOrEmpty(shortcut))
             {
-                controlCmdBar1.AddCommand(shortcut, command, action);
+                controlCmdBar1.AddCommand(shortcut, command, action, needStopAction);
             }
         }
 
@@ -746,19 +747,19 @@ namespace Br3D
             SetFunctionByElement(barButtonItemVolume, Volume, LanguageHelper.Tr("Volume"), "Volume", "v");
 
             // osnap
-            SetFunctionByElement(barButtonItemOrthoMode, OrthoMode, LanguageHelper.Tr("Ortho mode"), "OrthoMode", "or");
-            SetFunctionByElement(barButtonItemGridSnap, GridSnap, LanguageHelper.Tr("Grid snap"), "GridSnap", "gs");
-            SetFunctionByElement(barButtonItemOsnapend, End, LanguageHelper.Tr("End Point"), "End", "end");
-            SetFunctionByElement(barButtonItemOsnapIntersection, Intersection, LanguageHelper.Tr("Intersection Point"), "Int", null);
-            SetFunctionByElement(barButtonItemOsnapMiddle, Middle, LanguageHelper.Tr("Midle Point"), "Mid", null);
-            SetFunctionByElement(barButtonItemOsnapCenter, Center, LanguageHelper.Tr("Center Point"), "Cen", null);
-            SetFunctionByElement(barButtonItemOsnapPoint, Point, LanguageHelper.Tr("Point"), "Node", null);
+            SetFunctionByElement(barButtonItemOrthoMode, OrthoMode, LanguageHelper.Tr("Ortho mode"), "OrthoMode", "or", false);
+            SetFunctionByElement(barButtonItemGridSnap, GridSnap, LanguageHelper.Tr("Grid snap"), "GridSnap", "gs", false);
+            SetFunctionByElement(barButtonItemOsnapend, End, LanguageHelper.Tr("End Point"), "End", "end", false);
+            SetFunctionByElement(barButtonItemOsnapIntersection, Intersection, LanguageHelper.Tr("Intersection Point"), "Int", null, false);
+            SetFunctionByElement(barButtonItemOsnapMiddle, Middle, LanguageHelper.Tr("Midle Point"), "Mid", null, false);
+            SetFunctionByElement(barButtonItemOsnapCenter, Center, LanguageHelper.Tr("Center Point"), "Cen", null, false);
+            SetFunctionByElement(barButtonItemOsnapPoint, Point, LanguageHelper.Tr("Point"), "Node", null, false);
 
             // tools
-            SetFunctionByElement(barButtonItemSingleView, ViewportSingle, LanguageHelper.Tr("Single"), "Single", null);
-            SetFunctionByElement(barButtonItem1x1View, Viewport1x1, LanguageHelper.Tr("1x1"), "1x1", null);
-            SetFunctionByElement(barButtonItem1x2View, Viewport1x2, LanguageHelper.Tr("1x2"), "1x2", null);
-            SetFunctionByElement(barButtonItem2x2View, Viewport2x2, LanguageHelper.Tr("2x2"), "2x2", null);
+            SetFunctionByElement(barButtonItemSingleView, ViewportSingle, LanguageHelper.Tr("Single"), "Single", null, false);
+            SetFunctionByElement(barButtonItem1x1View, Viewport1x1, LanguageHelper.Tr("1x1"), "1x1", null, false);
+            SetFunctionByElement(barButtonItem1x2View, Viewport1x2, LanguageHelper.Tr("1x2"), "1x2", null, false);
+            SetFunctionByElement(barButtonItem2x2View, Viewport2x2, LanguageHelper.Tr("2x2"), "2x2", null, false);
 
             SetFunctionByElement(barButtonItemLayer, Layer, LanguageHelper.Tr("Layer"), "Layer", "la");
             SetFunctionByElement(barButtonItemTextStyle, TextStyle, LanguageHelper.Tr("Text Style"), "TextStyle", "ts");
@@ -766,23 +767,23 @@ namespace Br3D
             SetFunctionByElement(barButtonItemList, List, LanguageHelper.Tr("List"), "List", "list");
 
             // options
-            SetFunctionByElement(barButtonItem2D, Set2DView, LanguageHelper.Tr("2D View"), "2D", null);
-            SetFunctionByElement(barButtonItem3D, Set3DView, LanguageHelper.Tr("3D View"), "3D", null);
-            SetFunctionByElement(barButtonItemRendered, Rendered, LanguageHelper.Tr("Rendered"), null, null);
-            SetFunctionByElement(barButtonItemShaded, Shaded, LanguageHelper.Tr("Shaded"), null, null);
-            SetFunctionByElement(barButtonItemHiddenLines, HiddenLines, LanguageHelper.Tr("Hidden lines"), null, null);
-            SetFunctionByElement(barButtonItemWireframe, Wireframe, LanguageHelper.Tr("Wireframe"), null, null);
+            SetFunctionByElement(barButtonItem2D, Set2DView, LanguageHelper.Tr("2D View"), "2D", null, false);
+            SetFunctionByElement(barButtonItem3D, Set3DView, LanguageHelper.Tr("3D View"), "3D", null, false);
+            SetFunctionByElement(barButtonItemRendered, Rendered, LanguageHelper.Tr("Rendered"), "Rendered", null, false);
+            SetFunctionByElement(barButtonItemShaded, Shaded, LanguageHelper.Tr("Shaded"), "Shaded", null, false);
+            SetFunctionByElement(barButtonItemHiddenLines, HiddenLines, LanguageHelper.Tr("Hidden lines"), "HiddenLines", null, false);
+            SetFunctionByElement(barButtonItemWireframe, Wireframe, LanguageHelper.Tr("Wireframe"), "Wireframe", null, false);
 
-            SetFunctionByElement(barButtonItemShowGrid, null, LanguageHelper.Tr("Grid"), null, null);
-            SetFunctionByElement(barButtonItemShowToolbar, null, LanguageHelper.Tr("Toolbar"), null, null);
-            SetFunctionByElement(barButtonItemShowSymbol, null, LanguageHelper.Tr("Symbol"), null, null);
+            SetFunctionByElement(barButtonItemShowGrid, null, LanguageHelper.Tr("Grid"), null, null, false);
+            SetFunctionByElement(barButtonItemShowToolbar, null, LanguageHelper.Tr("Toolbar"), null, null, false);
+            SetFunctionByElement(barButtonItemShowSymbol, null, LanguageHelper.Tr("Symbol"), null, null, false);
             SetFunctionByElement(barButtonItemShowBoundary, ShowBoundary, LanguageHelper.Tr("Boundary"), null, null);
 
-            SetFunctionByElement(barButtonItemLanguage, null, LanguageHelper.Tr("Language"), null, null);
-            SetFunctionByElement(barButtonItemLanguageKorean, Korean, LanguageHelper.Tr("Korean"), "Korean", null);
-            SetFunctionByElement(barButtonItemLanguageEnglish, English, LanguageHelper.Tr("English"), "English", null);
-            SetFunctionByElement(barButtonItemHomepage, Homepage, LanguageHelper.Tr("Homepage"), "Homepage", null);
-            SetFunctionByElement(barButtonItemCheckForUpdate, CheckForUpdate, LanguageHelper.Tr("Check For Update"), "CheckForUpdate", null);
+            SetFunctionByElement(barButtonItemLanguage, null, LanguageHelper.Tr("Language"), null, null, false);
+            SetFunctionByElement(barButtonItemLanguageKorean, Korean, LanguageHelper.Tr("Korean"), "Korean", null, false);
+            SetFunctionByElement(barButtonItemLanguageEnglish, English, LanguageHelper.Tr("English"), "English", null, false);
+            SetFunctionByElement(barButtonItemHomepage, Homepage, LanguageHelper.Tr("Homepage"), "Homepage", null, false);
+            SetFunctionByElement(barButtonItemCheckForUpdate, CheckForUpdate, LanguageHelper.Tr("Check For Update"), "CheckForUpdate", null, false);
             SetFunctionByElement(barButtonItemOptions, RunOptions, LanguageHelper.Tr("Options"), "Options", null);
             SetFunctionByElement(barButtonItemAbout, About, LanguageHelper.Tr("About"), "About", null);
         }
@@ -1329,17 +1330,18 @@ namespace Br3D
 
         private void ribbonControl1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (functionByElement.TryGetValue(e.Item, out Action act))
+            if (functionByElement.TryGetValue(e.Item, out KeyValuePair<Action,bool> actPair))
             {
-                if (act != null)
+                if (actPair.Key != null)
                 {
-                    ActionBase.StopAction();
+                    if(actPair.Value)
+                        ActionBase.StopAction();
 
-                    var command = CmdBarManager.FindCommand(act);
+                    var command = CmdBarManager.FindCommand(actPair.Key);
                     if(!string.IsNullOrEmpty(command))
                         CmdBarManager.SetTextEdit(command);
 
-                    act();
+                    actPair.Key();
                 }
 
             }

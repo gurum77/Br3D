@@ -21,11 +21,9 @@ namespace Br3D.Actions
             this.viewport = viewport;
         }
 
-
+        // viewport 는 action 진행에 영향을 주면 안되므로 start action / end action을 호출 하지 않는다.
         public override void Run()
         {
-            StartAction();
-
             if (viewport == Viewport.single)
                 controlModel.ViewportSingle();
             else if (viewport == Viewport.v1x1)
@@ -34,8 +32,6 @@ namespace Br3D.Actions
                 controlModel.Viewport1x2();
             else if (viewport == Viewport.v2x2)
                 controlModel.Viewport2x2();
-
-            EndAction();
         }
     }
 }

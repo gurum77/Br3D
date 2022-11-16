@@ -290,12 +290,25 @@ namespace hanee.ThreeD
             return false;
         }
 
+        // orthomode가 필요한지?
+        static public bool IsNeedOrthoMode(GripManager gripManager)
+        {
+            return IsNeedSnapping(gripManager);
+        }
+
         // snap찾기가 필요한지?
-        static public bool IsNeedSnapping()
+        static public bool IsNeedSnapping(GripManager gripManager)
         {
             if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingPoint3D] == true)
                 return true;
 
+            if(gripManager != null)
+            {
+                if (gripManager.EditingGripPoints())
+                    return true;
+            }
+            
+            
             return false;
         }
 

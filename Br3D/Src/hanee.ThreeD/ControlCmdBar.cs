@@ -14,7 +14,7 @@ namespace hanee.ThreeD
             input
         }
 
-        Dictionary<string, Action> cmds = new Dictionary<string, Action>();
+        Dictionary<string, KeyValuePair<Action, bool>> cmds = new Dictionary<string, KeyValuePair<Action, bool>>();
         public Action lastCmd { get; set; }
         Status status { get; set; } = Status.command;
         public ControlCmdBar()
@@ -146,13 +146,13 @@ namespace hanee.ThreeD
         }
 
         // command를 추가한다.
-        public void AddCommand(string command, string displayText, Action action)
+        public void AddCommand(string command, string displayText, Action action, bool needStopAction)
         {
             var commandKey = command.ToLower();
             if (cmds.ContainsKey(commandKey))
                 return;
 
-            cmds.Add(commandKey, action);
+            cmds.Add(commandKey, new KeyValuePair<Action, bool>( action, needStopAction));
         }
 
 
@@ -161,7 +161,7 @@ namespace hanee.ThreeD
         {
             foreach (var cmd in cmds)
             {
-                if (cmd.Value == act)
+                if (cmd.Value.Key == act)
                     return cmd.Key;
             }
 
@@ -202,15 +202,15 @@ namespace hanee.ThreeD
                 return;
 
             var commandKey = listBoxControl1.SelectedItem.ToString().ToLower();
-            if (cmds.TryGetValue(commandKey, out Action act) && act != null)
+            if (cmds.TryGetValue(commandKey, out KeyValuePair<Action, bool> actPair) && actPair.Key != null)
             {
-                var command = FindCommand(act);
+                var command = FindCommand(actPair.Key);
                 if (!string.IsNullOrEmpty(command))
                     SetTextEdit(command);
 
                 // lastCmd 저장
-                lastCmd = act;
-                act();
+                lastCmd = actPair.Key;
+                actPair.Key();
             }
         }
 

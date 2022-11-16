@@ -16,16 +16,12 @@ namespace Br3D.Actions
             this.barButtonItem = barButtonItem;
         }
 
+        // ortho mode는 action 진행에 영향을 주면 안되므로 start action / end action을 호출 하지 않는다.
         public override void Run()
         {
-            StartAction();
-
-
             var hModel = GetHModel();
             hModel.orthoModeManager.enabled = !hModel.orthoModeManager.enabled;
             barButtonItem.Down = hModel.orthoModeManager.enabled;
-
-            EndAction();
         }
     }
 }

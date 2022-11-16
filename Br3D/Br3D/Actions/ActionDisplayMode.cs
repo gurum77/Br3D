@@ -18,10 +18,9 @@ namespace Br3D.Actions
             this.formMain = formMain;
         }
 
+        // display mode 는 action 진행에 영향을 주면 안되므로 start action / end action을 호출 하지 않는다.
         public override void Run()
         {
-            StartAction();
-
             if (model == null)
                 return;
             if (displayMode == displayType.Rendered)
@@ -34,8 +33,6 @@ namespace Br3D.Actions
                 model.ActiveViewport.DisplayMode = displayType.Wireframe;
             model.Invalidate();
             formMain.UpdateDisplayModeButton();
-
-            EndAction();
         }
     }
 }

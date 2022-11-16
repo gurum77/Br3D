@@ -13,10 +13,9 @@ namespace Br3D.Actions
         }
 
 
+        // osnap 는 action 진행에 영향을 주면 안되므로 start action / end action을 호출 하지 않는다.
         public override void Run()
         {
-            StartAction();
-
             if (osnapType == Snapping.objectSnapType.End)
                 controlModel.End();
             else if (osnapType == Snapping.objectSnapType.Intersect)
@@ -27,10 +26,6 @@ namespace Br3D.Actions
                 controlModel.Center();
             else if (osnapType == Snapping.objectSnapType.Mid)
                 controlModel.Middle();
-
-
-
-            EndAction();
         }
     }
 }
