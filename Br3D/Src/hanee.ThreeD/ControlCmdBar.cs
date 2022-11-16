@@ -22,7 +22,9 @@ namespace hanee.ThreeD
             InitializeComponent();
             textEdit1.KeyUp += TextEdit1_KeyUp;
             textEdit1.TextChanged += TextEdit1_TextChanged;
+            listBoxControl1.KeyUp += ListBoxControl1_KeyUp;
         }
+
 
 
         // text edit의 유효한 text를 리턴
@@ -178,6 +180,51 @@ namespace hanee.ThreeD
         }
 
 
+        // textedit의 command를 실행한다.
+        void RunCommandOfTextEdit()
+        {
+            var commandKey = textEdit1.Text;
+            commandKey = commandKey.Trim();
+            if (!string.IsNullOrEmpty(commandKey) || lastCmd == null)
+                return;
+
+            var command = FindCommand(lastCmd);
+            if (!string.IsNullOrEmpty(command))
+                SetTextEdit(command);
+
+            lastCmd();
+        }
+
+        // list box의 command를 실행한다.
+        void RunCommandOfListBox()
+        {
+            if (listBoxControl1.SelectedItem == null)
+                return;
+
+            var commandKey = listBoxControl1.SelectedItem.ToString().ToLower();
+            if (cmds.TryGetValue(commandKey, out Action act) && act != null)
+            {
+                var command = FindCommand(act);
+                if (!string.IsNullOrEmpty(command))
+                    SetTextEdit(command);
+
+                // lastCmd 저장
+                lastCmd = act;
+                act();
+            }
+        }
+
+        private void ListBoxControl1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
+            {
+                if (status == Status.command)
+                {
+                    RunCommandOfListBox();
+                }
+            }
+        }
+
         // enter를 누르면 명령을 실행한다.
         private void TextEdit1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -189,31 +236,12 @@ namespace hanee.ThreeD
                     // list box가 선택되어 있는 상태라면 해당 action을 찾아서 실행한다.
                     if (listBoxControl1.SelectedItem != null)
                     {
-                        var commandKey = listBoxControl1.SelectedItem.ToString().ToLower();
-                        if (cmds.TryGetValue(commandKey, out Action act) && act != null)
-                        {
-                            var command = FindCommand(act);
-                            if (!string.IsNullOrEmpty(command))
-                                SetTextEdit(command);
-
-                            // lastCmd 저장
-                            lastCmd = act;
-                            act();
-                        }
+                        RunCommandOfListBox();
                     }
                     // list box가 선택되어 있지 않은 상태라면 마지막 action을 실행한다.
                     else
                     {
-                        var commandKey = textEdit1.Text;
-                        commandKey = commandKey.Trim();
-                        if (string.IsNullOrEmpty(commandKey) && lastCmd != null)
-                        {
-                            var command = FindCommand(lastCmd);
-                            if (!string.IsNullOrEmpty(command))
-                                SetTextEdit(command);
-
-                            lastCmd();
-                        }
+                        RunCommandOfTextEdit();
                     }
                 }
                 // command 입력 상태가 아닌 경우 (text 입력)
@@ -234,7 +262,7 @@ namespace hanee.ThreeD
                         if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingDist])
                         {
                             // 숫자로 변환 가능한지?
-                            if(double.TryParse(text, out double dist))
+                            if (double.TryParse(text, out double dist))
                             {
                                 ActionBase.dist = dist;
                                 ActionBase.EndInput(ActionBase.UserInput.GettingDist);
@@ -284,6 +312,30 @@ namespace hanee.ThreeD
                 if (status == Status.command)
                     textEdit1.Text = "";
             }
+            // text edit에서 
+            else if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            {
+                if (listBoxControl1.Visible && listBoxControl1.IsHandleCreated)
+                {
+                    listBoxControl1.Focus();
+
+                    var cmdList = listBoxControl1.DataSource as List<string>;
+                    if (cmdList == null)
+                        return;
+
+                    if (e.KeyCode == Keys.Down)
+                    {
+                        if(cmdList.Count > listBoxControl1.SelectedIndex+1)
+                            listBoxControl1.SelectedIndex++;
+                    }
+                    else if(e.KeyCode == Keys.Up)
+                    {
+                        if (listBoxControl1.SelectedIndex > 0)
+                            listBoxControl1.SelectedIndex--;
+                    }
+                }
+            }
+
         }
 
         // 사용자가 입력한 text를 point로 변환

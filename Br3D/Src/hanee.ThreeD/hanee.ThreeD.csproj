@@ -110,12 +110,6 @@
     <Compile Include="ControlCmdBar.Designer.cs">
       <DependentUpon>ControlCmdBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlCommandBar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ControlCommandBar.Designer.cs">
-      <DependentUpon>ControlCommandBar.cs</DependentUpon>
-    </Compile>
     <Compile Include="ControlDistanceAngleDynamicInput.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -223,9 +217,6 @@
   <ItemGroup>
     <EmbeddedResource Include="ControlCmdBar.resx">
       <DependentUpon>ControlCmdBar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ControlCommandBar.resx">
-      <DependentUpon>ControlCommandBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ControlDistanceAngleDynamicInput.resx">
       <DependentUpon>ControlDistanceAngleDynamicInput.cs</DependentUpon>

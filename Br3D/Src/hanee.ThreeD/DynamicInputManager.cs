@@ -16,7 +16,6 @@ namespace hanee.ThreeD
         }
 
         static public bool enabled { get; set; } = true;
-        static public ControlCommandBar controlCommandBar { get; set; } // command bar
         static public Control.ControlCollection parentControls { get; set; }
         static public devDept.Eyeshot.Environment environment { get; set; }
 

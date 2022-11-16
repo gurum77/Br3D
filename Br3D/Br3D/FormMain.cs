@@ -1304,7 +1304,9 @@ namespace Br3D
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            CmdBarManager.FocusTextEdit(new KeyEventArgs(keyData));
+            // view에 포커스가 있을때만 넘긴다.
+            if(model.Focused)
+                CmdBarManager.FocusTextEdit(new KeyEventArgs(keyData));
 
             HModel hModel = model as HModel;
             if (hModel != null)

@@ -117,13 +117,6 @@ namespace hanee.ThreeD
             }
             else
             {
-                if (DynamicInputManager.controlCommandBar != null && !DynamicInputManager.controlCommandBar.comboBoxEdit1.IsEditorActive)
-                {
-                    DynamicInputManager.controlCommandBar.comboBoxEdit1.Focus();
-                    
-                    return;
-                }
-
                 // esc 누르거나 delete로 객체가 삭제된 경우 grip point를 제거한다.
                 if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Delete)
                 {
