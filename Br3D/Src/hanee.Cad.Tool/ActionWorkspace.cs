@@ -1,6 +1,7 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using devDept.Geometry;
+using hanee.Geometry;
 using hanee.ThreeD;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -99,7 +100,7 @@ namespace hanee.Cad.Tool
 
             while (true)
             {
-                var face = await GetFaceOrKey(LanguageHelper.Tr(" Select workspace face(3 : 3 points, W : World, 1 : XY, 2 : XZ, 3 : YZ)"), -1, false);
+                var face = await GetFaceOrText(LanguageHelper.Tr(" Select workspace face(3 : 3 points, W : World, XY : XY, XZ : XZ, YZ : YZ)"), -1, false, "3", "W", "XY", "XZ", "YZ");
                 if (IsCanceled())
                     break;
 
@@ -114,35 +115,35 @@ namespace hanee.Cad.Tool
                     }
                 }
                 // 표준 좌표계로 설정
-                else if(face.Value?.KeyCode == Keys.W)
+                else if(face.Value != null && face.Value.EqualsIgnoreCase("W"))
                 {
                     break;
                 }
                 // xy평면
-                else if(face.Value?.KeyCode == Keys.D1)
+                else if(face.Value != null && face.Value.EqualsIgnoreCase("XY"))
                 {
                     point1 = new Point3D(0, 0, 0);
                     point2 = new Point3D(1, 0, 0);
                     point3 = new Point3D(0, 1, 0);
                 }
                 // xz 평면
-                else if(face.Value?.KeyCode == Keys.D2)
+                else if(face.Value != null && face.Value.EqualsIgnoreCase("XZ"))
                 {
                     point1 = new Point3D(0, 0, 0);
                     point2 = new Point3D(1, 0, 0);
                     point3 = new Point3D(0, 0, 1);
                 }
                 // yz평면
-                else if(face.Value?.KeyCode == Keys.D3)
+                else if(face.Value != null && face.Value.EqualsIgnoreCase("YZ"))
                 {
                     point1 = new Point3D(0, 0, 0);
                     point2 = new Point3D(0, 1, 0);
                     point3 = new Point3D(0, 0, 1);
                 }
-                else
+                else if(face.Value != null && face.Value.EqualsIgnoreCase("3"))
                 {
 
-                    point1 = await GetPoint3D(LanguageHelper.Tr("Origin point(f - Select face)"));
+                    point1 = await GetPoint3D(LanguageHelper.Tr("Origin point"));
                     if (IsCanceled())
                         break;
                     point2 = await GetPoint3D(LanguageHelper.Tr("X-axis point"));
