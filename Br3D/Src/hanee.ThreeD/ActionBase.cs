@@ -437,13 +437,13 @@ namespace hanee.ThreeD
             DynamicHighlight(environment, e);
 
             // dynamic input
-            if (!fromDynamicInput)
-            {
-                if (ActionBase.IsUserInputting())
-                    DynamicInputManager.ShowDynamicInput(environment);
-                else
-                    DynamicInputManager.HideDynamicInput();
-            }
+            //if (!fromDynamicInput)
+            //{
+            //    if (ActionBase.IsUserInputting())
+            //        DynamicInputManager.ShowDynamicInput(environment);
+            //    else
+            //        DynamicInputManager.HideDynamicInput();
+            //}
 
 
             if (runningAction != null)

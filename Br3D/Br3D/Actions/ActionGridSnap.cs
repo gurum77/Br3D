@@ -18,6 +18,8 @@ namespace Br3D.Actions
             var hModel = GetHModel();            
             hModel.gridSnapping.enabled = !hModel.gridSnapping.enabled;
             barButtonItem.Down = hModel.gridSnapping.enabled;
+
+            CmdBarManager.InitTextEdit();
         }
     }
 }

@@ -33,6 +33,8 @@ namespace Br3D.Actions
                 model.ActiveViewport.DisplayMode = displayType.Wireframe;
             model.Invalidate();
             formMain.UpdateDisplayModeButton();
+
+            CmdBarManager.InitTextEdit();
         }
     }
 }

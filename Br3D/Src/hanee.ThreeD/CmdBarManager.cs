@@ -70,6 +70,13 @@ namespace hanee.ThreeD
             cmdBar.SetCmdMessage(message, status);
         }
 
+        // 현재 입력상태를 history로 넘기고 초기화 한다.
+        static public void InitTextEdit()
+        {
+            AddHistory();
+            SetTextEdit("");
+        }
+
         // 리스토리 추가
         static public void AddHistory()
         {

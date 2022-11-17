@@ -22,6 +22,8 @@ namespace Br3D.Actions
             var hModel = GetHModel();
             hModel.orthoModeManager.enabled = !hModel.orthoModeManager.enabled;
             barButtonItem.Down = hModel.orthoModeManager.enabled;
+
+            CmdBarManager.InitTextEdit();
         }
     }
 }

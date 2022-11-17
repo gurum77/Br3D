@@ -32,6 +32,8 @@ namespace Br3D.Actions
                 controlModel.Viewport1x2();
             else if (viewport == Viewport.v2x2)
                 controlModel.Viewport2x2();
+
+            CmdBarManager.InitTextEdit();
         }
     }
 }

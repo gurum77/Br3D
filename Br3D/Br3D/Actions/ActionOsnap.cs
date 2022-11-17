@@ -26,6 +26,8 @@ namespace Br3D.Actions
                 controlModel.Center();
             else if (osnapType == Snapping.objectSnapType.Mid)
                 controlModel.Middle();
+
+            CmdBarManager.InitTextEdit();
         }
     }
 }

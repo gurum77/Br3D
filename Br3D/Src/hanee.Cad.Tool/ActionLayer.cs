@@ -23,6 +23,8 @@ namespace hanee.Cad.Tool
 
             formLayer.Show();
             formLayer.Owner = owner;
+
+            CmdBarManager.InitTextEdit();
         }
 
         private void FormLayer_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)

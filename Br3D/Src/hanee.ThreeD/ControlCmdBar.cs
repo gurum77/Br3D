@@ -15,6 +15,7 @@ namespace hanee.ThreeD
         }
 
         Dictionary<string, KeyValuePair<Action, bool>> cmds = new Dictionary<string, KeyValuePair<Action, bool>>();
+        Dictionary<string, string> displayCmdTexts = new Dictionary<string, string>(); // cmd를 표시할 text(정식/약어, 표시할 text)
         public Action lastCmd { get; set; }
         Status status { get; set; } = Status.command;
         public ControlCmdBar()
@@ -23,6 +24,27 @@ namespace hanee.ThreeD
             textEdit1.KeyUp += TextEdit1_KeyUp;
             textEdit1.TextChanged += TextEdit1_TextChanged;
             listBoxControl1.KeyUp += ListBoxControl1_KeyUp;
+            listBoxControl1.CustomItemDisplayText += ListBoxControl1_CustomItemDisplayText;
+            richTextBox1.KeyDown += RichTextBox1_KeyDown;
+        }
+
+        private void ListBoxControl1_CustomItemDisplayText(object sender, DevExpress.XtraEditors.CustomItemDisplayTextEventArgs e)
+        {
+            if(displayCmdTexts.TryGetValue(e.DisplayText, out string displayText))
+            {
+                if(!e.DisplayText.EqualsIgnoreCase(displayText))
+                {
+                    e.DisplayText = $"{e.DisplayText} --> {displayText}";
+                }
+            }
+        }
+
+        private void RichTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                textEdit1.Focus();
+            }
         }
 
 
@@ -59,17 +81,23 @@ namespace hanee.ThreeD
             if (string.IsNullOrEmpty(str))
                 return;
 
-            // 한줄 추가
-            richTextBox1.AppendText(str + "\n");
+            BeginInvoke(new Action(() =>
+            {
+                // 한줄 추가
+                richTextBox1.AppendText(str + "\n");
 
-            // 마지막 줄로 스크롤
-            richTextBox1.SelectionStart = richTextBox1.Text.Length;
-            richTextBox1.ScrollToCaret();
+                // 마지막 줄로 스크롤
+                richTextBox1.SelectionStart = richTextBox1.Text.Length;
+                richTextBox1.ScrollToCaret();
+            }));
         }
 
         internal void SetTextEdit(string text)
         {
-            textEdit1.Text = text;
+            BeginInvoke(new Action(() =>
+            {
+                textEdit1.Text = text;
+            }));
         }
 
         public void FocusTextEdit(KeyEventArgs key = null)
@@ -92,18 +120,19 @@ namespace hanee.ThreeD
 
         public void AddCmdText(string text)
         {
-            textEdit1.Text = textEdit1.Text + text;
-
-            FocusTextEdit();
+            SetTextEdit(textEdit1.Text + text);
         }
 
         public void SetCmdMessage(string message, Status status)
         {
-            labelControl1.Text = message;
-            textEdit1.Text = "";
-            this.status = status;
+            BeginInvoke(new Action(() =>
+            {
+                labelControl1.Text = message;
+                textEdit1.Text = "";
+                this.status = status;
 
-            FocusTextEdit();
+                FocusTextEdit();
+            }));
         }
 
         // cmd list를 표시하거나 숨김
@@ -152,7 +181,9 @@ namespace hanee.ThreeD
             if (cmds.ContainsKey(commandKey))
                 return;
 
-            cmds.Add(commandKey, new KeyValuePair<Action, bool>( action, needStopAction));
+            cmds.Add(commandKey, new KeyValuePair<Action, bool>(action, needStopAction));
+
+            displayCmdTexts.Add(commandKey, displayText);
         }
 
 
@@ -171,7 +202,10 @@ namespace hanee.ThreeD
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            BeginInvoke(new Action(() =>
+            {
+                richTextBox1.Clear();
+            }));
         }
 
         void TextEdit1_KeyEvent(KeyEventArgs e)
@@ -310,7 +344,9 @@ namespace hanee.ThreeD
             else if (e.KeyCode == Keys.Escape)
             {
                 if (status == Status.command)
-                    textEdit1.Text = "";
+                {
+                    SetTextEdit("");
+                }
             }
             // text edit에서 
             else if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
@@ -325,10 +361,10 @@ namespace hanee.ThreeD
 
                     if (e.KeyCode == Keys.Down)
                     {
-                        if(cmdList.Count > listBoxControl1.SelectedIndex+1)
+                        if (cmdList.Count > listBoxControl1.SelectedIndex + 1)
                             listBoxControl1.SelectedIndex++;
                     }
-                    else if(e.KeyCode == Keys.Up)
+                    else if (e.KeyCode == Keys.Up)
                     {
                         if (listBoxControl1.SelectedIndex > 0)
                             listBoxControl1.SelectedIndex--;
