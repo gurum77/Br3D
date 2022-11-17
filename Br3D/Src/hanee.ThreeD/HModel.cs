@@ -782,8 +782,6 @@ namespace hanee.ThreeD
         {
             cursorPoint = e.Location;
 
-            ActionBase.MouseMoveHandler(this, e);
-
             // If ObjectSnap is ON, we need to find closest vertex (if any)
             // 스냅을 해야 하는 경우 마우스 이동할때 마다 스냅가능 포인트를 검색한다.
             if (ActionBase.IsNeedSnapping(gripManager))
@@ -791,15 +789,22 @@ namespace hanee.ThreeD
                 Snapping.OnMouseMoveForSnap(e);
             }
 
-            gripManager.MouseMove(e);
-            selectionManager.OnMouseMove(e);
-
             // draw overlay가 호출된다.(back buffer에 그림)
             PaintBackBuffer();
 
             // back buffer를 화면에 표시
             SwapBuffers();
-            
+
+
+            ActionBase.MouseMoveHandler(this, e);
+
+            // OnMouseMoveForSnap 에서는 snap 정보가 초기화 되고, PaintBackBuffer 에서 snap 정보가 설정되므로 snap정보가 설정된 후에 좌표 입력 함수가 호출되어야 한다.
+            gripManager.MouseMove(e);
+            selectionManager.OnMouseMove(e);
+
+
+
+
             // 2D view일 때는 좌우로만 회전하도록 한다.
             if (IsTopViewOnly(ActiveViewport) && e.Button == MouseButtons.Middle && Control.ModifierKeys == Keys.Control)
             {

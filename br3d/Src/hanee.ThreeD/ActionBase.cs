@@ -290,12 +290,25 @@ namespace hanee.ThreeD
             return false;
         }
 
+        // orthomode가 필요한지?
+        static public bool IsNeedOrthoMode(GripManager gripManager)
+        {
+            return IsNeedSnapping(gripManager);
+        }
+
         // snap찾기가 필요한지?
-        static public bool IsNeedSnapping()
+        static public bool IsNeedSnapping(GripManager gripManager)
         {
             if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingPoint3D] == true)
                 return true;
 
+            if(gripManager != null)
+            {
+                if (gripManager.EditingGripPoints())
+                    return true;
+            }
+            
+            
             return false;
         }
 
@@ -1110,6 +1123,45 @@ namespace hanee.ThreeD
                 model.SelectionFilterMode = oldSelectionFilterType;
 
             return selectedFace;
+        }
+
+        // face 1개를 선택받는다
+        public async Task<KeyValuePair<devDept.Eyeshot.Model.SelectedFace, string>> GetFaceOrText(string message = null, int stepID = -1, bool dynamicHighlight = false, params string[] availableTexts )
+        {
+            ActionBase.availableTexts = availableTexts;
+            selectionFilterType oldSelectionFilterType = selectionFilterType.Entity;
+
+            devDept.Eyeshot.Model model = environment as devDept.Eyeshot.Model;
+            if (model != null)
+            {
+                oldSelectionFilterType = model.SelectionFilterMode;
+                model.SelectionFilterMode = selectionFilterType.Face;
+            }
+
+            await StartAndWaitUserInput(message, stepID, UserInput.SelectingFace, UserInput.GettingText);
+
+            // 정상 입력이 아닌 경우라면 null을 준다.
+            // 그래야 사용하는 곳에서 어떤 값이 입력 되었는지 알수 있다.
+            var resultFace = selectedFace;
+            var resultKey = text;
+            if (ActionBase.userInputting[(int)UserInput.SelectingFace])
+                resultFace = null;
+            if (ActionBase.userInputting[(int)UserInput.GettingKey])
+                resultKey = null;
+
+            if (selectedFace != null)
+            {
+                selectedFace.Item.Selected = true;
+                environment.Invalidate();
+            }
+
+            if (model != null)
+                model.SelectionFilterMode = oldSelectionFilterType;
+
+            // 입력을 완전히 종료
+            EndInput(UserInput.SelectingFace, UserInput.GettingText);
+
+            return new KeyValuePair<devDept.Eyeshot.Model.SelectedFace, string>(resultFace, resultKey);
         }
 
         // face 1개를 선택받는다

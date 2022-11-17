@@ -253,7 +253,7 @@ namespace hanee.ThreeD
             if (!EditingGripPoints())
                 return;
 
-            var newPt = ActionBase.GetPoint3DByMouseLocation(model, e.Location);
+            var newPt = ActionBase.GetPoint3DWithSnapAndOrthoMode(model, e);
             if (newPt == null)
                 return;
 
