@@ -11,18 +11,24 @@ namespace hanee.Cad.Tool
     public class ActionScale : ActionBase
     {
         protected Point3D fromPoint = null;
-        protected Point3D toPoint = null;
+        protected KeyValuePair<Point3D, string> toPoint = new KeyValuePair<Point3D, string>();
         protected Point3D lastPoint = null;
         double baseLength = 1;
         double lastFactor = 0;
 
         double GetFactor()
         {
+            // 입력한 factor가 있다면 그걸 리턴한다.
+            if(toPoint.Key == null && !string.IsNullOrEmpty(toPoint.Value) && double.TryParse(toPoint.Value, out double factor))
+            {
+                return factor;
+            }
+
             if (lastPoint == null)
                 return 0;
             
             var vec = point3D - fromPoint;
-            double factor = vec.AsVector.Length / baseLength;
+            factor = vec.AsVector.Length / baseLength;
             return factor;
         }
 
@@ -41,7 +47,7 @@ namespace hanee.Cad.Tool
             {
                 environment.TempEntities.Clear();
                 fromPoint = null;
-                toPoint = null;
+                toPoint = new KeyValuePair<Point3D, string>();
                 lastPoint = null;
 
                 var entities = await GetEntities(LanguageHelper.Tr("Select entities"));
@@ -84,8 +90,8 @@ namespace hanee.Cad.Tool
                 lastPoint = fromPoint.Clone() as Point3D;
 
                 // 배율
-                toPoint = await GetPoint3D(LanguageHelper.Tr("To point"));
-                if (IsCanceled())
+                toPoint = await GetPoint3DOrText(LanguageHelper.Tr("To point"));
+                if (IsCanceled())   
                     break;
 
                 Finish(entities);
