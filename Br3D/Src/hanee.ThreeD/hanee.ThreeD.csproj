@@ -110,30 +110,6 @@
     <Compile Include="ControlCmdBar.Designer.cs">
       <DependentUpon>ControlCmdBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlDistanceAngleDynamicInput.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ControlDistanceAngleDynamicInput.Designer.cs">
-      <DependentUpon>ControlDistanceAngleDynamicInput.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ControlDistanceFactorDynamicInput.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ControlDistanceFactorDynamicInput.Designer.cs">
-      <DependentUpon>ControlDistanceFactorDynamicInput.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ControlDynamicInputEdit.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ControlDynamicInputEdit.Designer.cs">
-      <DependentUpon>ControlDynamicInputEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ControlXyzDynamicInput.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ControlXyzDynamicInput.Designer.cs">
-      <DependentUpon>ControlXyzDynamicInput.cs</DependentUpon>
-    </Compile>
     <Compile Include="CurColorBarEditItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -150,7 +126,6 @@
     <Compile Include="EntityPropertiesManager.cs" />
     <Compile Include="DimensionOptionsHelper.cs" />
     <Compile Include="DisplayNameEx.cs" />
-    <Compile Include="DynamicInputManager.cs" />
     <Compile Include="EntityColor.cs" />
     <Compile Include="EventParams.cs" />
     <Compile Include="FileHelper.cs" />
@@ -217,18 +192,6 @@
   <ItemGroup>
     <EmbeddedResource Include="ControlCmdBar.resx">
       <DependentUpon>ControlCmdBar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ControlDistanceAngleDynamicInput.resx">
-      <DependentUpon>ControlDistanceAngleDynamicInput.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ControlDistanceFactorDynamicInput.resx">
-      <DependentUpon>ControlDistanceFactorDynamicInput.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ControlDynamicInputEdit.resx">
-      <DependentUpon>ControlDynamicInputEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ControlXyzDynamicInput.resx">
-      <DependentUpon>ControlXyzDynamicInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

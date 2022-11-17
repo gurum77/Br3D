@@ -49,8 +49,6 @@ namespace hanee.Cad.Tool
         {
             StartAction();
 
-            DisableHideDynamicInput();
-
             Point3D firstPoint = null;
 
             startPoint = await GetPoint3D(LanguageHelper.Tr("First point"));

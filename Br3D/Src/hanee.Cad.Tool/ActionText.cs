@@ -73,22 +73,12 @@ namespace hanee.Cad.Tool
                 SetOrthoModeStartPoint(insPoint);
 
                 // 높이
-                DynamicInputManager.ActiveLengthFactor(insPoint, 1, LanguageHelper.Tr("Height"));
-
                 heightPoint = await GetPoint3D(LanguageHelper.Tr("Height"));
                 if (IsCanceled())
                     break;
                 SetOrthoModeStartPoint(insPoint);
 
                 // 방향
-                DynamicInputManager.point3DType = DynamicInputManager.Point3DType.distanceAngle;
-                var formDi = DynamicInputManager.GetFormPoint3DDynamicInput() as ControlDistanceAngleDynamicInput;
-                if (formDi != null)
-                {
-                    DynamicInputManager.ShowDynamicInput(environment);
-                    formDi.fixedLength = 10000;
-                    formDi.controlDynamicInputEdit1.Visible = false;
-                }
                 dirPoint = await GetPoint3D(LanguageHelper.Tr("Direction"));
                 if (IsCanceled())
                     break;

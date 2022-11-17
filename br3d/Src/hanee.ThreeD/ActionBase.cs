@@ -115,17 +115,6 @@ namespace hanee.ThreeD
             }
         }
 
-
-        static public void DisableHideDynamicInput()
-        {
-            DynamicInputManager.disableHideDynamicInput = true;
-        }
-
-        static public void EnableHideDynamicInput()
-        {
-            DynamicInputManager.disableHideDynamicInput = false;
-        }
-
         static public void ModifyPointByGridSnap(ref Point3D point3D)
         {
             if (Point3D == null)
@@ -437,13 +426,13 @@ namespace hanee.ThreeD
             DynamicHighlight(environment, e);
 
             // dynamic input
-            if (!fromDynamicInput)
-            {
-                if (ActionBase.IsUserInputting())
-                    DynamicInputManager.ShowDynamicInput(environment);
-                else
-                    DynamicInputManager.HideDynamicInput();
-            }
+            //if (!fromDynamicInput)
+            //{
+            //    if (ActionBase.IsUserInputting())
+            //        DynamicInputManager.ShowDynamicInput(environment);
+            //    else
+            //        DynamicInputManager.HideDynamicInput();
+            //}
 
 
             if (runningAction != null)
@@ -549,9 +538,6 @@ namespace hanee.ThreeD
                 // ortho mode
                 pt = model.orthoModeManager.GetOrthoPoint3D(e, pt);
             }
-
-            // dynamic input에 의한 좌표 조정
-            DynamicInputManager.ModifyPoint3D(environment, ref pt);
 
             return pt;
         }

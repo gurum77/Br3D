@@ -33,8 +33,6 @@ namespace hanee.Cad.Tool
                 if (IsCanceled())
                     break;
 
-
-                DynamicInputManager.ActiveLengthFactor(startPoint, 1, LanguageHelper.Tr("Distance"));
                 var endPoint = await GetPoint3D(LanguageHelper.Tr("End point for offset"));
                 if (IsCanceled())
                     break;

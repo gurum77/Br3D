@@ -13,7 +13,6 @@ namespace hanee.Cad.Tool
         protected bool outlineSection = false;  // section을 그릴때 외곽선으로만 그릴지?
         // 높이 입력 받을때 workplane을 비활성화 할지?
         protected bool disableWorkplaneForHeight = true;
-        protected bool activeDynamicInputManagerForRadius = true;
         protected Plane oldPlane;
         protected Plane secPlane;   // 단면의 plane
         protected Point3D centerPoint/*, radiusPoint, heightPoint*/;
@@ -136,11 +135,8 @@ namespace hanee.Cad.Tool
                 SetAutoWorkspace(centerPoint);
                 secPlane = GetWorkplane();
 
-                if (activeDynamicInputManagerForRadius)
-                    DynamicInputManager.ActiveLengthFactor(centerPoint, 1, LanguageHelper.Tr("Radius"));
                 radius = await GetDist(LanguageHelper.Tr("Radius"), centerPoint);
                 SetOrthoModeStartPoint(null);
-                DynamicInputManager.Init();
                 if (IsCanceled() || IsEntered())
                     break;
 
@@ -149,11 +145,8 @@ namespace hanee.Cad.Tool
                 oldPlane = ws.plane;
                 if (disableWorkplaneForHeight)
                     ws.enabled = false;
-                if (activeDynamicInputManagerForRadius)
-                    DynamicInputManager.ActiveLengthFactor(centerPoint, 1, LanguageHelper.Tr("Height"), ws.plane.AxisZ);
                 height = await GetDist(LanguageHelper.Tr("Height"), centerPoint, -1, null, null, secPlane);
                 SetOrthoModeStartPoint(null);
-                DynamicInputManager.Init();
                 if (IsCanceled() || IsEntered())
                     break;
                 if (disableWorkplaneForHeight)

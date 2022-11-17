@@ -140,9 +140,7 @@ namespace hanee.Cad.Tool
                 ws.enabled = false;
 
                 var plane = GetSelectedEntityPlane();
-                DynamicInputManager.ActiveLengthFactor(plane.Origin, 1, LanguageHelper.Tr("Height"), plane.AxisZ);
                 var pt = await GetPoint3D(LanguageHelper.Tr("Height"));
-                DynamicInputManager.Init();
 
                 ws.enabled = oldEnable;
 

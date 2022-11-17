@@ -102,18 +102,6 @@ namespace hanee.ThreeD
             if (ActionBase.IsUserInputting())
             {
                 ActionBase.KeyUpHandler(e);
-
-                if (DynamicInputManager.enabled)
-                {
-                    if (keyData == Keys.Oem3)
-                    {
-                        DynamicInputManager.FlagPoint3DType();
-                    }
-                    else
-                    {
-                        DynamicInputManager.OnKeyUp(e);
-                    }
-                }
             }
             else
             {

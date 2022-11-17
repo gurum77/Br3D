@@ -202,8 +202,7 @@ namespace hanee.Cad.Tool
                 {
                     method = Method.centerRadius;
                     centerPoint = pk.Key;
-                    DynamicInputManager.ActiveLengthFactor(centerPoint, 1, LanguageHelper.Tr("Radius"));
-                    radius = await GetDist(LanguageHelper.Tr("Radius"), centerPoint , - 1, 0.00001, 100000);
+                                        radius = await GetDist(LanguageHelper.Tr("Radius"), centerPoint , - 1, 0.00001, 100000);
                     if (IsCanceled() || IsEntered())
                         break;
                     

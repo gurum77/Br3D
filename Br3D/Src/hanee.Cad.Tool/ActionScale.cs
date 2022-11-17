@@ -52,7 +52,6 @@ namespace hanee.Cad.Tool
                 entities.ToTempEntities(GetModel());
                 CalcBaseLength();
 
-                DynamicInputManager.Init();
                 var pk = await GetPoint3DOrText(LanguageHelper.Tr("From point(R : Reference)"), -1, "r");
                 if (IsCanceled())
                     break;
@@ -85,8 +84,6 @@ namespace hanee.Cad.Tool
                 lastPoint = fromPoint.Clone() as Point3D;
 
                 // 배율
-                DynamicInputManager.ActiveLengthFactor(fromPoint.Clone() as Point3D, baseLength, LanguageHelper.Tr("Scale"));
-                DynamicInputManager.disableFlagDynamicInput = true;
                 toPoint = await GetPoint3D(LanguageHelper.Tr("To point"));
                 if (IsCanceled())
                     break;
