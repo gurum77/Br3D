@@ -12,6 +12,7 @@ namespace Br3D.Actions
     class ActionOpen : ActionBase
     {
         FormMain formMain;
+        static public string fileName;
         public ActionOpen(devDept.Eyeshot.Environment environment, FormMain formMain) : base(environment)
         {
             this.formMain = formMain;
@@ -21,33 +22,49 @@ namespace Br3D.Actions
         {
             StartAction();
 
-            if (!formMain.CheckSaveForModifiedFile())
-                return;
+          
 
             // 파일 선택
-            var dlg = new XtraOpenFileDialog();
-            Dictionary<string, string> additionalSupportFormats = new Dictionary<string, string>();
-            dlg.Filter = FileHelper.FilterForOpenDialog(additionalSupportFormats);
-            dlg.FilterIndex = 0;
-            dlg.AddExtension = true;
-            dlg.CheckFileExists = true;
-            dlg.CheckPathExists = true;
-            if (dlg.ShowDialog() != DialogResult.OK)
+            if (string.IsNullOrEmpty(fileName))
             {
-                EndAction();
-                return;
+                var dlg = new XtraOpenFileDialog();
+                Dictionary<string, string> additionalSupportFormats = new Dictionary<string, string>();
+                dlg.Filter = FileHelper.FilterForOpenDialog(additionalSupportFormats);
+                dlg.FilterIndex = 0;
+                dlg.AddExtension = true;
+                dlg.CheckFileExists = true;
+                dlg.CheckPathExists = true;
+                if (dlg.ShowDialog() != DialogResult.OK)
+                {
+                    EndAction();
+                    return;
+                }
+
+                fileName = dlg.FileName;
             }
+
 
 
             // 이미 열려 있는 파일이면 리턴
-            if (formMain.opendFilePath.Equals(dlg.FileName))
+            if (formMain.opendFilePath.Equals(fileName))
             {
                 EndAction();
                 return;
             }
 
-            formMain.Import(dlg.FileName);
+            if (!formMain.CheckSaveForModifiedFile())
+            {
+                EndAction();
+                return;
+            }
 
+
+            formMain.Import(fileName);
+            
+            // mur list 등록
+            MRUManager.AddItem(fileName);
+
+            fileName = "";
 
             EndAction();
         }

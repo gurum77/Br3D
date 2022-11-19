@@ -2,6 +2,7 @@
 using devDept.Eyeshot.Entities;
 using hanee.Geometry;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -77,6 +78,7 @@ namespace hanee.ThreeD
         public XmlColor backgroundColor2D { get; set; } = new XmlColor(Color.Black);
         public bool saveImageWithUI { get; set; } = false;    // 이미지 저장할때 UI 포함(툴바등..)
         public bool saveImageWithBackground { get; set; } = false;  // 이미지 저장할때 배경 포함
+        public List<string> recentFiles { get; set; } = new List<string>();
 
         public object Clone()
         {
@@ -105,6 +107,8 @@ namespace hanee.ThreeD
             obj.backgroundColor2D.colorValue = this.backgroundColor2D.colorValue;
             obj.saveImageWithUI = this.saveImageWithUI;
             obj.saveImageWithBackground = this.saveImageWithBackground;
+
+            obj.recentFiles = this.recentFiles;
 
             return obj;
         }

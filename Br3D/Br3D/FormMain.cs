@@ -98,6 +98,7 @@ namespace Br3D
             controlScriptCad1.model = model;
 
             CmdBarManager.Init(controlCmdBar1);
+            MRUManager.Init(popupMenuRecentFiles);
 
             simpleButtonInit.Visible = false;
             //this.Controls.Add(controlModel);  // form에 직접 add 하면 controlModel의 크기가 잘못 계산됨
@@ -141,8 +142,6 @@ namespace Br3D
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-
-
             EnableCmdBar(true);
             SetLTEnvironment();
 
@@ -1241,6 +1240,7 @@ namespace Br3D
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            MRUManager.Save();
             Options.Instance.SaveOptions();
 
             // 업데이트 체크
@@ -1428,12 +1428,12 @@ namespace Br3D
 
 
 
-
+        
 
 
         private void barButtonItemDrawCircle_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            
         }
 
         private void popupMenuDrawCircle_BeforePopup(object sender, System.ComponentModel.CancelEventArgs e)

@@ -16,6 +16,9 @@ namespace hanee.ThreeD
 
         Dictionary<string, KeyValuePair<Action, bool>> cmds = new Dictionary<string, KeyValuePair<Action, bool>>();
         Dictionary<string, string> displayCmdTexts = new Dictionary<string, string>(); // cmd를 표시할 text(정식/약어, 표시할 text)
+
+        
+
         public Action lastCmd { get; set; }
         Status status { get; set; } = Status.command;
         public ControlCmdBar()
@@ -236,7 +239,12 @@ namespace hanee.ThreeD
                 return;
 
             var commandKey = listBoxControl1.SelectedItem.ToString().ToLower();
-            if (cmds.TryGetValue(commandKey, out KeyValuePair<Action, bool> actPair) && actPair.Key != null)
+            RunCommand(commandKey);  
+        }
+
+        internal void RunCommand(string cmdKey)
+        {
+            if (cmds.TryGetValue(cmdKey, out KeyValuePair<Action, bool> actPair) && actPair.Key != null)
             {
                 var command = FindCommand(actPair.Key);
                 if (!string.IsNullOrEmpty(command))
