@@ -11,7 +11,6 @@ E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\hanee.Geometry.dll
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\hanee.ThreeD.dll
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\devDept.Graphics.Win.v2021.dll
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\DevExpress.XtraBars.v21.2.dll
-E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\DevExpress.XtraLayout.v21.2.dll
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\NGettext.dll
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\devDept.Eyeshot.Control.x64.Win.v2021.dll
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\devDept.Graphics.Shaders.v2021.dll
@@ -35,7 +34,6 @@ E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\DevExpress.Utils.v
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\DevExpress.XtraEditors.v21.2.xml
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\devDept.Graphics.Win.v2021.xml
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\DevExpress.XtraBars.v21.2.xml
-E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\DevExpress.XtraLayout.v21.2.xml
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\NGettext.xml
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\devDept.Eyeshot.Control.x64.Win.v2021.xml
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\devDept.Meshing.v2021.xml
@@ -62,10 +60,6 @@ E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\de\DevExpress.Xtra
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\es\DevExpress.XtraBars.v21.2.resources.dll
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\ja\DevExpress.XtraBars.v21.2.resources.dll
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\ru\DevExpress.XtraBars.v21.2.resources.dll
-E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\de\DevExpress.XtraLayout.v21.2.resources.dll
-E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\es\DevExpress.XtraLayout.v21.2.resources.dll
-E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\ja\DevExpress.XtraLayout.v21.2.resources.dll
-E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\ru\DevExpress.XtraLayout.v21.2.resources.dll
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\de\DevExpress.Pdf.v21.2.Core.resources.dll
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\es\DevExpress.Pdf.v21.2.Core.resources.dll
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\ja\DevExpress.Pdf.v21.2.Core.resources.dll
