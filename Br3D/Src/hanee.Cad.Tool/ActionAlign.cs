@@ -79,7 +79,8 @@ namespace hanee.Cad.Tool
             environment.TempEntities.AddRange(entities);
         }
 
-        private Entity MakeAxis(Point3D pt1, Point3D pt2, Color color)
+        // 축을 그린다.
+        static public Entity MakeAxis(Point3D pt1, Point3D pt2, Color color)
         {
             var alpha = 100;
             var l = new Line(pt1, pt2);

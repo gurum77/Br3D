@@ -11,7 +11,7 @@ namespace hanee.Cad.Tool
     public class ActionRotate : ActionBase
     {
         protected Point3D fromPoint = null;
-        protected Point3D toPoint = null;
+        protected KeyValuePair<Point3D, string> toPoint = new KeyValuePair<Point3D, string>();
         protected Point3D lastPoint = null;
         double ?baseAngle = null;
         double lastRotationAngle = 0;
@@ -61,9 +61,15 @@ namespace hanee.Cad.Tool
 
         private double GetRotationAngle()
         {
+            // 참조방식이 아니고 입력한 angle이 있다면 그걸 리턴한다.
+            if (baseAngle == null && toPoint.Key == null && !string.IsNullOrEmpty(toPoint.Value) && double.TryParse(toPoint.Value, out double rotationAngle))
+            {
+                return rotationAngle.ToRadians();
+            }
+
             var curAngle = (point3D - fromPoint).AsVector;
             curAngle.Normalize();
-            var rotationAngle = curAngle.ToRadian();
+            rotationAngle = curAngle.ToRadian();
             if (baseAngle != null)
                 rotationAngle -= baseAngle.Value;
             return rotationAngle;
@@ -80,7 +86,7 @@ namespace hanee.Cad.Tool
             {
                 environment.TempEntities.Clear();
                 fromPoint = null;
-                toPoint = null;
+                toPoint = new KeyValuePair<Point3D, string>();
                 lastPoint = null;
 
                 var entities = await GetEntities(LanguageHelper.Tr("Select entities"));
@@ -122,7 +128,7 @@ namespace hanee.Cad.Tool
 
 
                 lastPoint = fromPoint.Clone() as Point3D;
-                toPoint = await GetPoint3D(LanguageHelper.Tr("Angle"));
+                toPoint = await GetPoint3DOrText(LanguageHelper.Tr("Angle"));
                 if (IsCanceled())
                     break;
 

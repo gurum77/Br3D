@@ -723,7 +723,9 @@ namespace Br3D
             SetFunctionByElement(barButtonItemSmartExtrude, SmartExtrude, LanguageHelper.Tr("Smart extrude"), "SmartExtrude", "se");
 
             SetFunctionByElement(barButtonItemExtractFace, ExtractFace, LanguageHelper.Tr("Extract face"), "ExtractFace", "ef");
+            SetFunctionByElement(barButtonItemSection, Section, LanguageHelper.Tr("Section"), "Section", "sec");
             
+
 
             // terrain
             SetFunctionByElement(barButtonItemCreateTerrain, CreateTerrain, LanguageHelper.Tr("Create terrain"), "CreateTerrain", "ct");
@@ -795,6 +797,7 @@ namespace Br3D
         async void SmartExtrude() => await new ActionSmartExtrude(model).RunAsync();
 
         async void ExtractFace() => await new ActionExtractFace(model).RunAsync();
+        async void Section() => await new ActionSection(model).RunAsync();
 
         async void CreateTerrain() => await new ActionCreateTerrain(model).RunAsync();
         async void ColoringTerrain() => await new ActionColoringTerrain(model).RunAsync();
@@ -976,17 +979,23 @@ namespace Br3D
                 // layer color을 background에 따라 변경(검은색을 흰색으로 또는 흰색을 검은색으로)
                 hModel.SetLayerColorByBackgroundColor();
 
-                opendFilePath = rfa.FileName;
-                this.Text = $"{VersionHelper.appName} - {opendFilePath}";
+                UpdateOpenedFilePath(rfa.FileName);
+
 
                 RegenAll();
             }
             else if (e.WorkUnit is WriteFileAsync wfa)
             {
                 modifiedFile = false;
-                opendFilePath = wfa.FileName;
-                this.Text = $"{VersionHelper.appName} - {opendFilePath}";
+
+                UpdateOpenedFilePath(wfa.FileName);
             }
+        }
+
+        private void UpdateOpenedFilePath(string fileName)
+        {
+            opendFilePath = fileName;
+            this.Text = $"{VersionHelper.appName} - {opendFilePath}";
         }
 
         private void RefreshDataSource()
@@ -1146,6 +1155,7 @@ namespace Br3D
         void New()
         {
             new ActionNew(model, this).Run();
+            
         }
 
         // 현재 파일 다시 로딩하기
@@ -1224,6 +1234,9 @@ namespace Br3D
             model.Invalidate();
 
             UpdateCurCombos();
+
+            UpdateOpenedFilePath("");
+            modifiedFile = false;
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)

@@ -339,13 +339,15 @@ namespace hanee.ThreeD
 
             foreach (ICurve curveSeg in composite.CurveList)
             {
-                if (curveSeg is Curve)
-                {
-                    SnapPoint[] curSnapPoints = GetSnapPoints_Curve((Curve)curveSeg);
-                    foreach (var s in curSnapPoints)
-                        polyLineSnapPoints.Add(s);
-                }
+                var ent = curveSeg as Entity;
+                if (ent == null)
+                    continue;
 
+                var points = GetSnapPointsFromEntity(ent, new System.Drawing.Point(0, 0), null);
+                if (points == null)
+                    continue;
+
+                polyLineSnapPoints.AddRange(points);
             }
 
 
