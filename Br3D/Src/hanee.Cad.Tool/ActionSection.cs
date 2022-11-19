@@ -109,14 +109,14 @@ namespace hanee.Cad.Tool
                 var lineWidth = 0.5;
                 while (true)
                 {
-                    var pk = await GetPoint3DOrText(LanguageHelper.Tr("Point to place section(Enter : place at origin, W : width"), -1, "w");
+                    var pk = await GetPoint3DOrText(LanguageHelper.Tr("Point to place section(Enter : place at origin, W : line weight"), -1, "w");
                     if (IsCanceled() || IsEntered())
                         break;
 
                     // 선 두께 입력인지?
                     if (pk.Key == null && pk.Value.EqualsIgnoreCase("w"))
                     {
-                        lineWidth = await GetDist(LanguageHelper.Tr("Line width"));
+                        lineWidth = await GetDist(LanguageHelper.Tr("Line weight"));
                         if (IsCanceled() || IsEntered())
                             break;
                     }
