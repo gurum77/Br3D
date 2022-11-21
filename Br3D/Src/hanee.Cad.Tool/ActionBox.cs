@@ -58,8 +58,8 @@ namespace hanee.Cad.Tool
                 if (box == null)
                     break;
 
-                GetModel().Entities.Add(box);
-
+                AddEntity(box);
+                
                 basePoint = null;
                 width = null;
                 height = null;

@@ -82,9 +82,7 @@ namespace hanee.Cad.Tool
                 Line line = MakeLine();
                 if (line != null)
                 {
-                    environment.Entities.Add(line);
-                    environment.Entities.RegenAllCurved();
-                    environment.Invalidate();
+                    AddEntity(line);
 
                     lineCount++;
 

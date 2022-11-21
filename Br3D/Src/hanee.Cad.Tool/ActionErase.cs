@@ -22,9 +22,7 @@ namespace hanee.Cad.Tool
                 var entities = await GetEntities(LanguageHelper.Tr("Select entities(Enter : erase)"));
                 if (IsCanceled())
                     break;
-                
-                GetModel().Entities.DeleteSelected();
-                GetModel().Invalidate();
+                DeleteSelectedEntities();
             }
 
             EndAction();

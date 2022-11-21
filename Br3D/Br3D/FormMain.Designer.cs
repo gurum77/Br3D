@@ -32,7 +32,7 @@ namespace Br3D
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.TileItemElement tileItemElement2 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement1 = new DevExpress.XtraEditors.TileItemElement();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tileNavSubItemInsertImage = new DevExpress.XtraBars.Navigation.TileNavSubItem();
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
@@ -243,6 +243,8 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.barButtonItemUndo = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemRedo = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
@@ -283,8 +285,8 @@ namespace Br3D
             // 
             // 
             this.tileNavSubItemInsertImage.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement2.Text = "Image";
-            this.tileNavSubItemInsertImage.Tile.Elements.Add(tileItemElement2);
+            tileItemElement1.Text = "Image";
+            this.tileNavSubItemInsertImage.Tile.Elements.Add(tileItemElement1);
             this.tileNavSubItemInsertImage.Tile.Name = "tileBarItem1";
             // 
             // dockManager1
@@ -822,10 +824,14 @@ namespace Br3D
             this.barButtonItemExtractFace,
             this.barButtonItemGridSnap,
             this.barButtonItemShowBoundary,
-            this.barButtonItemSection});
+            this.barButtonItemSection,
+            this.barButtonItemUndo,
+            this.barButtonItemRedo});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 134;
+            this.ribbonControl1.MaxItemId = 138;
             this.ribbonControl1.Name = "ribbonControl1";
+            this.ribbonControl1.PageHeaderItemLinks.Add(this.barButtonItemUndo);
+            this.ribbonControl1.PageHeaderItemLinks.Add(this.barButtonItemRedo);
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageHome,
             this.ribbonPageDraw,
@@ -2092,6 +2098,18 @@ namespace Br3D
             // 
             this.colorDialog1.FullOpen = true;
             // 
+            // barButtonItemUndo
+            // 
+            this.barButtonItemUndo.Id = 134;
+            this.barButtonItemUndo.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemUndo.ImageOptions.SvgImage")));
+            this.barButtonItemUndo.Name = "barButtonItemUndo";
+            // 
+            // barButtonItemRedo
+            // 
+            this.barButtonItemRedo.Id = 137;
+            this.barButtonItemRedo.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemRedo.ImageOptions.SvgImage")));
+            this.barButtonItemRedo.Name = "barButtonItemRedo";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2356,5 +2374,7 @@ namespace Br3D
         private ControlCmdBar controlCmdBar1;
         private DevExpress.XtraBars.BarButtonItem barButtonItemSection;
         private DevExpress.XtraBars.PopupMenu popupMenuRecentFiles;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemUndo;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemRedo;
     }
 }

@@ -213,9 +213,8 @@ namespace hanee.Cad.Tool
                 var circle = MakeEntity();
                 if (circle != null)
                 {
-                    environment.Entities.Add(circle);
                     environment.TempEntities.Clear();
-                    environment.Invalidate();
+                    AddEntity(circle);
                 }
 
                 InitPoints();

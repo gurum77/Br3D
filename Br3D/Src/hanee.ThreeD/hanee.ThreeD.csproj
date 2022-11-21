@@ -82,6 +82,9 @@
     <Reference Include="DevExpress.XtraBars.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="GuiLabs.Undo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GuiLabs.Undo.1.0.2\lib\netstandard2.0\GuiLabs.Undo.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NGettext, Version=0.6.1.0, Culture=neutral, PublicKeyToken=08d3d1c89dfd2985, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\..\MyProjects\C#\Br3D\Br3D\packages\NGettext.0.6.7\lib\net46\NGettext.dll</HintPath>
@@ -97,6 +100,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionBase.cs" />
+    <Compile Include="ActionManagerHelper.cs" />
+    <Compile Include="ActionUndo.cs" />
     <Compile Include="AngleText.cs" />
     <Compile Include="ArcGripManager.cs" />
     <Compile Include="BlockReferenceGripManager.cs" />
@@ -121,6 +126,7 @@
     </Compile>
     <Compile Include="CurveGripManager.cs" />
     <Compile Include="Define.cs" />
+    <Compile Include="DeleteAction.cs" />
     <Compile Include="DistanceText.cs" />
     <Compile Include="EntitiesHelper.cs" />
     <Compile Include="EntityPropertiesManager.cs" />
@@ -169,6 +175,7 @@
     <Compile Include="SplashScreenManagerHelper.cs" />
     <Compile Include="TempEntityListHelper.cs" />
     <Compile Include="TextGripManager.cs" />
+    <Compile Include="AddAction.cs" />
     <Compile Include="Units.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Snapping.cs" />

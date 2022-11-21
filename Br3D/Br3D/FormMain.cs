@@ -663,6 +663,8 @@ namespace Br3D
             SetFunctionByElement(barButtonItemWorkspace, Workspace, LanguageHelper.Tr("Workspace"), "Workspace", "ws");
             SetFunctionByElement(barButtonItemExit, Exit, LanguageHelper.Tr("Exit"), "Exit", null);
 
+            SetFunctionByElement(barButtonItemUndo, Undo, LanguageHelper.Tr("Undo"), "Undo", "u");
+
             // draw
             SetFunctionByElement(barButtonItemDrawLine, Line, LanguageHelper.Tr("Line"), "Line", "l");
             SetFunctionByElement(barButtonItemDrawCircle, Circle, LanguageHelper.Tr("Circle"), "Circle", "c");
@@ -807,6 +809,8 @@ namespace Br3D
 
 
         void Exit() => new ActionExit(model, this).Run();
+        void Undo() => new ActionUndo(model).Run();
+
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
         async void DrawRegion() => await new ActionRegion(model).RunAsync();
         async void InsertImage() => await new ActionInsertImage(model).RunAsync();
