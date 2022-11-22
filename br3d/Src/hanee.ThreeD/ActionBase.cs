@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Environment = devDept.Eyeshot.Environment;
 using Label = devDept.Eyeshot.Labels.Label;
+using GuiLabs.Undo;
 namespace hanee.ThreeD
 {
     abstract public class ActionBase
@@ -45,6 +46,32 @@ namespace hanee.ThreeD
 
         static public bool[] userInputting = new bool[(int)UserInput.Count];
         static public Workspace tempWorkspace = new Workspace();
+        static public ActionManager actionManager = new ActionManager();
+
+        protected void TransformEntities(Transformation trans, params Entity[] entities)
+        {
+            var ac = new TransformAction(model, trans, entities);
+            actionManager.RecordAction(ac);
+        }
+
+        protected void AddEntities(params Entity [] entities)
+        {
+            var ac = new AddAction(model, entities);
+            actionManager.RecordAction(ac);
+        }
+
+        protected void DeleteEntities(params Entity[] entities)
+        {
+            var ac = new DeleteAction(model, entities);
+            actionManager.RecordAction(ac);
+        }
+        protected void DeleteSelectedEntities()
+        {
+            var entities = model.GetAllSelectedEntities();
+            if (entities == null)
+                return;
+            DeleteEntities(entities.ToArray());
+        }
 
         static protected Point3D point3D = new Point3D();
         static public Point3D Point3D
