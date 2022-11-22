@@ -116,7 +116,6 @@ namespace hanee.Cad.Tool
             if (cyl == null)
                 return;
 
-            cyl.Regen(0.001);
             environment.TempEntities.Clear();
             environment.TempEntities.Add(cyl);
             environment.Invalidate();
@@ -156,14 +155,12 @@ namespace hanee.Cad.Tool
                 if (cylinder == null)
                     break;
 
-                GetModel().Entities.Add(cylinder);
+                GetModel().TempEntities.Clear();
+                AddEntities(cylinder);
 
                 centerPoint = null;
                 radius = null;
                 height = null;
-                GetModel().TempEntities.Clear();
-                GetModel().Entities.Regen();
-                GetModel().Invalidate();
                 break;
             }
 

@@ -51,10 +51,11 @@ namespace hanee.Cad.Tool
                     break;
 
                 var ent = Brep.Loft(curves.ToArray());
-                GetHModel()?.entityPropertiesManager?.SetDefaultProperties(ent, false);
-                environment.Entities.Add(ent);
-                environment.Entities.Regen();
-                environment.Invalidate();
+                if (ent != null)
+                {
+                    GetHModel()?.entityPropertiesManager?.SetDefaultProperties(ent, false);
+                    AddEntities(ent);
+                }
                 break;
             }
 

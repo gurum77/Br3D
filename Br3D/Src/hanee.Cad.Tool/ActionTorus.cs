@@ -49,14 +49,12 @@ namespace hanee.Cad.Tool
                 if (ent == null)
                     break;
 
-                GetModel().Entities.Add(ent);
+                GetModel().TempEntities.Clear();
+                AddEntities(ent);
 
                 centerPoint = null;
                 majorRadius = null;
                 minorRadius = null;
-                GetModel().TempEntities.Clear();
-                GetModel().Entities.Regen();
-                GetModel().Invalidate();
                 break;
             }
 

@@ -56,7 +56,7 @@ namespace hanee.ThreeD
         string GetValidTextEditText()
         {
             var str = textEdit1.Text;
-            if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingText] && str.Length > 0 && str.EndsWith(" "))
+            if (str.Length > 0 && str.EndsWith(" "))
             {
                 str = str.Remove(str.Length - 1, 1);
             }

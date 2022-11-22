@@ -151,9 +151,7 @@ namespace hanee.Cad.Tool
                 }
 
                 // 객체 추가
-                model.Entities.AddRange(entities);
-                model.Entities.RegenAllCurved();
-                model.Invalidate();
+                AddEntities(entities.ToArray());
 
                 break;
             }

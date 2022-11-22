@@ -65,10 +65,12 @@ namespace hanee.Cad.Tool
                 var tempCircle = new Circle(selectedCircle.Plane, selectedCircle.Center, selectedCircle.Radius);
                 
                 var dim = radius ? new RadialDim(tempCircle, pt, Define.DefaultTextHeight) : new DiametricDim(tempCircle, pt, Define.DefaultTextHeight);
-                GetHModel()?.entityPropertiesManager?.SetDefaultProperties(dim);
-                GetHModel().Entities.Regen();
-                GetHModel().Entities.Add(dim);
-
+                if (dim != null)
+                {
+                    GetHModel()?.entityPropertiesManager?.SetDefaultProperties(dim);
+                    AddEntities(dim);
+                }
+                break;
             }
 
             EndAction();

@@ -118,37 +118,7 @@ namespace hanee.Cad.Tool
                 extPt1 = ws.PointAt(extPt12D);
                 extPt2 = ws.PointAt(extPt22D);
             }
-            //else if (dimDirection == DimDirection.aligned)
-            //{
-            //    if (secondPoint2D.X < firstPoint2D.X || secondPoint2D.Y < firstPoint2D.Y)
-            //    {
-            //        Point2D p0 = firstPoint2D;
-            //        Point2D p1 = secondPoint2D;
-
-            //        Utility.Swap(ref p0, ref p1);
-
-            //        firstPoint2D = p0;
-            //        secondPoint2D = p1;
-            //    }
-
-            //    axisX = new Vector3D(firstPoint, secondPoint);
-            //    Vector3D axisY = Vector3D.Cross(Vector3D.AxisZ, axisX);
-
-            //    var drawingPlane = new Plane(firstPoint, axisX, axisY);
-
-            //    Vector2D v1 = new Vector2D(firstPoint, secondPoint);
-            //    Vector2D v2 = new Vector2D(firstPoint, current);
-
-            //    double sign = System.Math.Sign(Vector2D.SignedAngleBetween(v1, v2));
-
-            //    //offset p0-p1 at current
-            //    Segment2D segment = new Segment2D(firstPoint, secondPoint);
-            //    double offsetDist = current.DistanceTo(segment);
-            //    extPt1 = firstPoint + sign * drawingPlane.AxisY * (offsetDist + Define.DefaultTextHeight / 2);
-            //    extPt2 = secondPoint + sign * drawingPlane.AxisY * (offsetDist + Define.DefaultTextHeight / 2);
-            //    pt1 = firstPoint + sign * drawingPlane.AxisY * offsetDist;
-            //    pt2 = secondPoint + sign * drawingPlane.AxisY * offsetDist;
-            //}
+           
 
         }
 
@@ -191,18 +161,18 @@ namespace hanee.Cad.Tool
                 if (IsCanceled())
                     break;
 
+                environment.TempEntities.Clear();
 
                 GetDimInfo(textPoint, out Vector3D axisX, out Point3D extPt1, out Point3D extPt2, out Point3D pt1, out Point3D pt2);
                 var plane = ws.plane;
 
                 textPoint = ((firstPoint + secondPoint) / 2).IntersectionWith(ws.plane.AxisY, textPoint, axisX);
                 var dim = new LinearDim(plane, firstPoint, secondPoint, textPoint, Define.DefaultTextHeight);
-                environment.Entities.Add(dim);
-                environment.Entities.Regen();
-
-                environment.TempEntities.Clear();
-                environment.Invalidate();
-
+                if (dim != null)
+                {
+                    AddEntities(dim);
+                }
+                break;
             }
 
 

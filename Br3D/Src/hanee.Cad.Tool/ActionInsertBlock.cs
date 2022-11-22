@@ -54,10 +54,8 @@ namespace hanee.Cad.Tool
                     break;
 
                 br.InsertionPoint = insertionPoint;
-                
-                environment.Entities.Add(br);
-                environment.Entities.Regen(new RegenOptions());
-                environment.Invalidate();
+
+                AddEntities(br);
                 break;
             }
             EndAction();

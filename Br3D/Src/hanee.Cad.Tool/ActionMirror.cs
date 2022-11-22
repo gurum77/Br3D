@@ -53,12 +53,8 @@ namespace hanee.Cad.Tool
                 var mirror = GetMirror(firstPoint, secondPoint);
                 if (mirror == null)
                     continue;
-                foreach (var ent in entities)
-                {
-                    ent.TransformBy(mirror);
-                }
-                GetModel().Entities.Regen(regenOptions);
-                GetModel().Invalidate();
+
+                TransformEntities(mirror, entities.ToArray());
                 break;
             }
 

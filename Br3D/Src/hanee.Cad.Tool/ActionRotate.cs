@@ -147,13 +147,8 @@ namespace hanee.Cad.Tool
             if (angle == 0)
                 return;
 
-            var entityList = new EntityList();
-            entityList.AddRange(entities);
-            entityList.Rotate(angle, Vector3D.AxisZ, fromPoint);
-
-            GetModel().Entities.Regen();
-            GetModel().Invalidate();
-
+            var trans = new Rotation(angle, Vector3D.AxisZ, fromPoint);
+            TransformEntities(trans, entities.ToArray());
         }
 
         void CalcBaseAngle()

@@ -50,7 +50,7 @@ namespace hanee.Cad.Tool
                     var arc = MakeArc();
                     if (arc != null)
                     {
-                        AddEntity(arc);
+                        AddEntities(arc);
                     }
 
                     pt1 = null;
@@ -81,7 +81,7 @@ namespace hanee.Cad.Tool
                     SetOrthoModeStartPoint(null);
                     var arc = MakeArc();
                     if(arc != null)
-                        AddEntity(arc);
+                        AddEntities(arc);
 
                     pt1 = null;
                     pt2 = null;

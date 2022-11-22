@@ -214,7 +214,7 @@ namespace hanee.Cad.Tool
                 if (circle != null)
                 {
                     environment.TempEntities.Clear();
-                    AddEntity(circle);
+                    AddEntities(circle);
                 }
 
                 InitPoints();

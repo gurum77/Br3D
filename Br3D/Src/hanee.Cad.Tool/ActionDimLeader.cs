@@ -69,14 +69,16 @@ namespace hanee.Cad.Tool
                 var plane = GetWorkplane();
                 var leader = new Leader(plane, points);
                 leader.ArrowheadSize = Define.DefaultTextHeight;
-                environment.Entities.Add(leader);
 
                 var insPoint = points[points.Count - 1];
                 var text = ActionText.MakeText(insPoint,  insPoint + plane.AxisX, leader.ArrowheadSize, form.RichTextBox, plane);
-                environment.Entities.Add(text);
-
                 environment.TempEntities.Clear();
-                environment.Invalidate();
+
+                if(leader != null && text != null)
+                {
+                    AddEntities(leader, text);
+                }
+                break;
             }
 
             EndAction();

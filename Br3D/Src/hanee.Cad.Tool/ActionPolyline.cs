@@ -103,7 +103,7 @@ namespace hanee.Cad.Tool
                         var pline = MakePolyline(points);
                         if (pline != null)
                         {
-                            GetModel().Entities.Add((Entity)pline);
+                            AddEntities((Entity)pline);
                         }
                     }
                     break;

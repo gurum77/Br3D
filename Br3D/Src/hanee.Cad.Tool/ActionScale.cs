@@ -179,12 +179,8 @@ namespace hanee.Cad.Tool
             if (factor == 0)
                 return;
 
-            var entityList = new EntityList();
-            entityList.AddRange(entities);
-            entityList.Scale(fromPoint, factor);
-
-            GetModel().Entities.Regen();
-            GetModel().Invalidate();
+            var trans = new Scaling(fromPoint, factor);
+            TransformEntities(trans, entities.ToArray());
         }
     }
 }

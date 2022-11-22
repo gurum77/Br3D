@@ -82,7 +82,7 @@ namespace hanee.Cad.Tool
                 Line line = MakeLine();
                 if (line != null)
                 {
-                    AddEntity(line);
+                    AddEntities(line);
 
                     lineCount++;
 

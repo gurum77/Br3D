@@ -91,12 +91,14 @@ namespace hanee.Cad.Tool
                 {
                     var height = insPoint.DistanceTo(heightPoint);
                     var text = MakeText(insPoint, dirPoint, height, form.RichTextBox, GetWorkplane());
-                    environment.Entities.Add(text);
+                    if (text != null)
+                        AddEntities(text);
                 }
                 else
                     break;
 
                 Init();
+                break;
             }
 
 

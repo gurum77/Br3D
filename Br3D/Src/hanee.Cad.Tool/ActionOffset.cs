@@ -82,9 +82,7 @@ namespace hanee.Cad.Tool
                     if (offsetEnt == null)
                         continue;
 
-                    offsetEnt.Regen(regenParams);
-                    GetModel().Entities.Add(offsetEnt);
-                    GetModel().Invalidate();
+                    AddEntities(offsetEnt);
                 }
 
                 break;

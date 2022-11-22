@@ -23,6 +23,7 @@ namespace hanee.Cad.Tool
                 if (IsCanceled())
                     break;
                 DeleteSelectedEntities();
+                break;
             }
 
             EndAction();

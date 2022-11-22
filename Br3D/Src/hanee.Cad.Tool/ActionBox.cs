@@ -58,7 +58,7 @@ namespace hanee.Cad.Tool
                 if (box == null)
                     break;
 
-                AddEntity(box);
+                AddEntities(box);
                 
                 basePoint = null;
                 width = null;

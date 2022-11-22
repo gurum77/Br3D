@@ -100,7 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionBase.cs" />
-    <Compile Include="ActionManagerHelper.cs" />
+    <Compile Include="ActionRedo.cs" />
     <Compile Include="ActionUndo.cs" />
     <Compile Include="AngleText.cs" />
     <Compile Include="ArcGripManager.cs" />
@@ -176,6 +176,7 @@
     <Compile Include="TempEntityListHelper.cs" />
     <Compile Include="TextGripManager.cs" />
     <Compile Include="AddAction.cs" />
+    <Compile Include="TransformAction.cs" />
     <Compile Include="Units.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Snapping.cs" />

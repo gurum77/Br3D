@@ -161,10 +161,7 @@ namespace hanee.Cad.Tool
             if (firstSourcePoint != null && secondSourcePoint == null && thirdSourcePoint == null && firstDestPoint != null)
             {
                 var vec = (firstDestPoint - firstSourcePoint).AsVector;
-                foreach (var ent in entities)
-                {
-                    ent.Translate(vec);
-                }
+                TransformEntities(new Translation(vec), entities.ToArray());
             }
             else if(firstSourcePoint != null && secondSourcePoint != null && firstDestPoint != null && secondDestPoint != null)
             {
@@ -182,14 +179,8 @@ namespace hanee.Cad.Tool
 
                 var trans = new Transformation();
                 trans.Rotation(sourcePlane, destinationPlane);
-                foreach (var ent in entities)
-                {
-                    ent.TransformBy(trans);
-                }
+                TransformEntities(trans, entities.ToArray());
             }
-
-            environment.Entities.Regen(new devDept.Eyeshot.RegenOptions());
-            environment.Invalidate();
 
             EndAction();
             return true;

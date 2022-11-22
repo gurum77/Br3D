@@ -102,8 +102,10 @@ namespace hanee.Cad.Tool
                 var plane = GetWorkplane();
                 plane.Origin = insertionPoint;
                 var pic = new Picture(plane, image.Width * scale, image.Height * scale, image);
-                environment.Entities.Add(pic);
-                environment.Invalidate();
+                if (pic != null)
+                {
+                    AddEntities(pic);
+                }
 
                 break;
             }

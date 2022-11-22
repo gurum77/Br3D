@@ -6,22 +6,28 @@ namespace hanee.ThreeD
 {
     class AddAction : AbstractAction
     {
-        Entity entity;
+        Entity [] entities ;
         Model model;
-        public AddAction(Model model, Entity entity)
+        public AddAction(Model model, params Entity [] entities)
         {
             this.model = model;
-            this.entity = entity;
+            this.entities = entities;
         }
         protected override void ExecuteCore()
         {
-            model.Entities.Add(entity);
+            if (entities == null)
+                return;
+
+            model.Entities.AddRange(entities);
             model.Invalidate();
         }
 
         protected override void UnExecuteCore()
         {
-            model.Entities.Remove(entity);
+            if (entities == null)
+                return;
+            foreach (var ent in entities)
+                model.Entities.Remove(ent);
             model.Invalidate();
         }
     }

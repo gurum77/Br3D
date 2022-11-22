@@ -10,6 +10,8 @@
         {
             if (actionManager.CanUndo)
                 actionManager.Undo();
+
+            CmdBarManager.InitTextEdit();
         }
     }
 }

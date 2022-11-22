@@ -47,9 +47,7 @@ namespace hanee.Cad.Tool
                     if (ent != null)
                     {
                         GetHModel()?.entityPropertiesManager?.SetDefaultProperties(ent, false);
-                        environment.Entities.Add(ent);
-                        environment.Entities.Regen();
-                        environment.Invalidate();
+                        AddEntities(ent);
                     }
                 }
 

@@ -24,9 +24,8 @@ namespace hanee.Cad.Tool
                 entityList.Add(ent.Clone() as Entity);
             }
             entityList.Translate(vec.X, vec.Y, vec.Z);
-            GetModel().Entities.AddRange(entityList);
-            GetModel().Entities.Regen();
-            GetModel().Invalidate();
+
+            AddEntities(entityList.ToArray());
         }
     }
 }

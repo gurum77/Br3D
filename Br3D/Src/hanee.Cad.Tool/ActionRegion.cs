@@ -56,17 +56,19 @@ namespace hanee.Cad.Tool
                         contours.Add(holeCurve);
                     }
                 }
+                    
+                environment.TempEntities.Clear();
 
                 // region
                 try
                 {
                     var region = new Region(contours);
-                    GetHModel()?.entityPropertiesManager?.SetDefaultProperties(region, false);
-                    contours.ForEach(x => environment.Entities.Remove(x as Entity));
-                    environment.Entities.Add(region);
-                    environment.Entities.Regen();
-                    environment.TempEntities.Clear();
-                    environment.Invalidate();
+                    if (region != null)
+                    {
+                        DeleteEntities(contours.ConvertAll<Entity>(x => (Entity)x).ToArray());
+                        GetHModel()?.entityPropertiesManager?.SetDefaultProperties(region, false);
+                        AddEntities(region);
+                    }
                 }
                 catch (Exception ex)
                 {

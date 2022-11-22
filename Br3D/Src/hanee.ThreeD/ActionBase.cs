@@ -47,17 +47,30 @@ namespace hanee.ThreeD
         static public bool[] userInputting = new bool[(int)UserInput.Count];
         static public Workspace tempWorkspace = new Workspace();
         static public ActionManager actionManager = new ActionManager();
-        protected void AddEntity(Entity ent)
+
+        protected void TransformEntities(Transformation trans, params Entity[] entities)
         {
-            actionManager.AddEntity(model, ent);
+            var ac = new TransformAction(model, trans, entities);
+            actionManager.RecordAction(ac);
         }
 
+        protected void AddEntities(params Entity [] entities)
+        {
+            var ac = new AddAction(model, entities);
+            actionManager.RecordAction(ac);
+        }
+
+        protected void DeleteEntities(params Entity[] entities)
+        {
+            var ac = new DeleteAction(model, entities);
+            actionManager.RecordAction(ac);
+        }
         protected void DeleteSelectedEntities()
         {
             var entities = model.GetAllSelectedEntities();
             if (entities == null)
                 return;
-            actionManager.DeleteEntities(model, entities.ToArray());
+            DeleteEntities(entities.ToArray());
         }
 
         static protected Point3D point3D = new Point3D();

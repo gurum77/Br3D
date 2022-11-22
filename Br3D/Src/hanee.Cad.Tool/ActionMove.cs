@@ -81,11 +81,8 @@ namespace hanee.Cad.Tool
 
         virtual protected void Finish(List<Entity> entities, Vector3D vec)
         {
-            var entityList = new EntityList();
-            entityList.AddRange(entities);
-            entityList.Translate(vec.X, vec.Y, vec.Z);
-            GetModel().Entities.Regen();
-            GetModel().Invalidate();
+            var trans = new Translation(vec);
+            TransformEntities(trans, entities.ToArray());
         }
     }
 }
