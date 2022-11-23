@@ -238,7 +238,7 @@ namespace Br3D
             model.Invalidate();
         }
 
-      
+
         // lt 버전인 경우 LT 버전에 맞게 환경을 설정한다.
         private void SetLTEnvironment()
         {
@@ -257,7 +257,7 @@ namespace Br3D
             barButtonItemSaveAs.Visibility = BarItemVisibility.Never;
 
             EnableCmdBar(false);
-            
+
             // 편집 리본탭 숨김
             ribbonPageDraw.Visible = false;
             ribbonPageDraw3D.Visible = false;
@@ -312,12 +312,19 @@ namespace Br3D
         // 마우스 커서 아래에 있는 memo를 리턴한다.
         private Memo GetMemoUnderMouseCursor(System.Drawing.Point location)
         {
-            int index = model.GetLabelUnderMouseCursor(location);
-            if (index != -1)
+            try
             {
-                //get the entity
-                var label = model.ActiveViewport.Labels[index];
-                return label as Memo;
+                int index = model.GetLabelUnderMouseCursor(location);
+                if (index != -1)
+                {
+                    //get the entity
+                    var label = model.ActiveViewport.Labels[index];
+                    return label as Memo;
+                }
+            }
+            catch
+            {
+                
             }
             return null;
         }
@@ -420,7 +427,7 @@ namespace Br3D
 
             if (e.Button == MouseButtons.Left)
             {
-                
+
 
                 bool gripEditing = gripManager != null && gripManager.EditingGripPoints();
                 if (!gripEditing && ActionBase.runningAction == null)
@@ -631,7 +638,7 @@ namespace Br3D
                 barButtonItemLanguageEnglish.Down = true;
         }
 
-        void SetFunctionByElement(BarButtonItem barButtonItem, Action action, string caption, string command, string shortcut, bool needStopAction=true)
+        void SetFunctionByElement(BarButtonItem barButtonItem, Action action, string caption, string command, string shortcut, bool needStopAction = true)
         {
             barButtonItem.Caption = caption;
 
@@ -726,7 +733,7 @@ namespace Br3D
 
             SetFunctionByElement(barButtonItemExtractFace, ExtractFace, LanguageHelper.Tr("Extract face"), "ExtractFace", "ef");
             SetFunctionByElement(barButtonItemSection, Section, LanguageHelper.Tr("Section"), "Section", "sec");
-            
+
 
 
             // terrain
@@ -1160,7 +1167,7 @@ namespace Br3D
         void New()
         {
             new ActionNew(model, this).Run();
-            
+
         }
 
         // 현재 파일 다시 로딩하기
@@ -1325,7 +1332,7 @@ namespace Br3D
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             // view에 포커스가 있을때만 넘긴다.
-            if(model.Focused)
+            if (model.Focused)
                 CmdBarManager.FocusTextEdit(new KeyEventArgs(keyData));
 
             HModel hModel = model as HModel;
@@ -1349,15 +1356,15 @@ namespace Br3D
 
         private void ribbonControl1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (functionByElement.TryGetValue(e.Item, out KeyValuePair<Action,bool> actPair))
+            if (functionByElement.TryGetValue(e.Item, out KeyValuePair<Action, bool> actPair))
             {
                 if (actPair.Key != null)
                 {
-                    if(actPair.Value)
+                    if (actPair.Value)
                         ActionBase.StopAction();
 
                     var command = CmdBarManager.FindCommand(actPair.Key);
-                    if(!string.IsNullOrEmpty(command))
+                    if (!string.IsNullOrEmpty(command))
                         CmdBarManager.SetTextEdit(command);
 
                     actPair.Key();
@@ -1434,12 +1441,12 @@ namespace Br3D
 
 
 
-        
+
 
 
         private void barButtonItemDrawCircle_ItemClick(object sender, ItemClickEventArgs e)
         {
-            
+
         }
 
         private void popupMenuDrawCircle_BeforePopup(object sender, System.ComponentModel.CancelEventArgs e)

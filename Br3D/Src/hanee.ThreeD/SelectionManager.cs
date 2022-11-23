@@ -305,6 +305,7 @@ namespace hanee.ThreeD
         internal void ClearSelection()
         {
             hModel.Entities.ClearSelection();
+            step = Step.firstPoint;
         }
 
         internal static void NormalizeBox(ref System.Drawing.Point p1, ref System.Drawing.Point p2)
