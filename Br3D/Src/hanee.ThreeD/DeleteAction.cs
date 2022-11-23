@@ -18,16 +18,10 @@ namespace hanee.ThreeD
         protected override void ExecuteCore()
         {
             if (entities == null)
-            {
                 return;
-            }
 
-            foreach (var ent in entities)
-            {
-                model.Entities.Remove(ent);
-                model.Invalidate();
-
-            }
+            model.Entities.RemoveRange(entities);
+            model.Invalidate();
         }
 
         protected override void UnExecuteCore()

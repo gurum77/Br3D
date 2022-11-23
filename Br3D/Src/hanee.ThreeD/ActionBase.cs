@@ -47,6 +47,60 @@ namespace hanee.ThreeD
         static public bool[] userInputting = new bool[(int)UserInput.Count];
         static public Workspace tempWorkspace = new Workspace();
         static public ActionManager actionManager = new ActionManager();
+        static public EditAction opendEditAction = null;
+        static public Transaction transaction = null;
+        
+        protected void CreateTransaction()
+        {
+            if(transaction != null)
+            {
+                CommitTransation();
+            }
+
+            transaction = Transaction.Create(actionManager);
+        }
+
+        protected void CancelTransaction()
+        {
+            transaction = null;
+        }
+
+
+        protected void CommitTransation()
+        {
+            if (transaction == null)
+                return;
+
+            transaction.Commit();
+            transaction = null;
+        }
+
+        // edit 시작(편집전)
+        protected void StartEditEntities(params Entity[] originEntities)
+        {
+            if(opendEditAction != null)
+            {
+                System.Diagnostics.Debug.Assert(false);
+                return;
+            }
+
+            opendEditAction = new EditAction(model, originEntities);
+        }
+
+        // edit 종료(편집후)
+        protected void EndEditEntitites()
+        {
+            // 열려있는 edit action이 없으면 실행 불가
+            if (opendEditAction == null)
+            {
+                System.Diagnostics.Debug.Assert(false);
+                return;
+            }
+
+            opendEditAction.EndEdit();
+            actionManager.RecordAction(opendEditAction);
+        }
+
 
         protected void TransformEntities(Transformation trans, params Entity[] entities)
         {

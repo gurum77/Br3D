@@ -26,8 +26,8 @@ namespace hanee.ThreeD
         {
             if (entities == null)
                 return;
-            foreach (var ent in entities)
-                model.Entities.Remove(ent);
+
+            model.Entities.RemoveRange(entities);
             model.Invalidate();
         }
     }

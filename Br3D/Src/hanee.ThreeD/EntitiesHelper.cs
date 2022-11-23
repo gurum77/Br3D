@@ -9,6 +9,16 @@ namespace hanee.ThreeD
 {
     static public class EntitiesHelper
     {
+        // 객체를 한번에 제거한다.
+        static public void RemoveRange(this EntityList entities, params Entity[] entitiesToRemove)
+        {
+            if (entitiesToRemove == null)
+                return;
+
+            foreach (var e in entitiesToRemove)
+                entities.Remove(e);
+        }
+
         static public void Translate(this Entity[] entities, Vector3D vec)
         {
             foreach (Entity ent in entities)

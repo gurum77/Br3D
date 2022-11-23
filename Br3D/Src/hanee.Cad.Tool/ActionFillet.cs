@@ -201,6 +201,9 @@ namespace hanee.Cad.Tool
 
                 try
                 {
+                    CreateTransaction();
+                    StartEditEntities(firstEntity, secondEntity);
+
                     // circle은 trim 을 할수 없음.
                     bool trim = firstCurve.IsClosed || secondCurve.IsClosed ? false : true;
                     if (chamfer)
@@ -208,13 +211,8 @@ namespace hanee.Cad.Tool
                         Curve.Chamfer(firstCurve, secondCurve, radius, flip1, flip2, trim, trim, out Line filletLine);
                         if (filletLine != null)
                         {
-                            var entities = new EntityList();
-                            entities.Add(firstEntity);
-                            entities.Add(secondEntity);
-                            entities.Add(filletLine);
-                            entities.Regen(regenOptions);
-
-                            environment.Entities.AddRange(entities);
+                            EndEditEntitites();
+                            AddEntities(filletLine);
                         }
                     }
                     else
@@ -222,18 +220,17 @@ namespace hanee.Cad.Tool
                         Curve.Fillet(firstCurve, secondCurve, radius, flip1, flip2, trim, trim, out Arc filletArc);
                         if (filletArc != null)
                         {
-                            var entities = new EntityList();
-                            entities.Add(firstEntity);
-                            entities.Add(secondEntity);
-                            entities.Add(filletArc);
-                            entities.Regen(regenOptions);
-
-                            environment.Entities.AddRange(entities);
+                            EndEditEntitites();
+                            AddEntities(filletArc);
                         }
                     }
+
+                    CommitTransation();
                 }
                 catch (Exception e)
                 {
+                    CancelTransaction();
+
                     MessageBox.Show(e.Message);
                 }
 
