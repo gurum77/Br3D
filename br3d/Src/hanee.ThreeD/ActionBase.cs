@@ -369,7 +369,8 @@ namespace hanee.ThreeD
         // snap찾기가 필요한지?
         static public bool IsNeedSnapping(GripManager gripManager)
         {
-            if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingPoint3D] == true)
+            if (ActionBase.userInputting[(int)ActionBase.UserInput.GettingPoint3D] == true ||
+                ActionBase.userInputting[(int)ActionBase.UserInput.GettingDist] == true)
                 return true;
 
             if(gripManager != null)
