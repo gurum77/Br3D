@@ -51,11 +51,12 @@ namespace hanee.Cad.Tool
                 var results = Calc();
                 if (results != null)
                 {
-                    environment.Entities.Remove(ent1);
-                    environment.Entities.Remove(ent2);
-                    environment.Entities.AddRange(results);
-                    environment.Entities.Regen();
-                    environment.Invalidate();
+                    CreateTransaction();
+                    DeleteEntities(ent1, ent2);
+                    foreach (var r in results)
+                        r.Regen(0.0010);
+                    AddEntities(results);
+                    CommitTransation();
                 }
 
                 break;

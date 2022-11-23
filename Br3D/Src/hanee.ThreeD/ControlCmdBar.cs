@@ -31,6 +31,8 @@ namespace hanee.ThreeD
             richTextBox1.KeyDown += RichTextBox1_KeyDown;
         }
 
+      
+
         private void ListBoxControl1_CustomItemDisplayText(object sender, DevExpress.XtraEditors.CustomItemDisplayTextEventArgs e)
         {
             if(displayCmdTexts.TryGetValue(e.DisplayText, out string displayText))
@@ -270,6 +272,7 @@ namespace hanee.ThreeD
         // enter를 누르면 명령을 실행한다.
         private void TextEdit1_KeyUp(object sender, KeyEventArgs e)
         {
+       
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
             {
                 // command 입력 상태인 경우

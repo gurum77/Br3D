@@ -24,7 +24,14 @@ namespace hanee.Cad.Tool
 
 
             var entityTypes = new Dictionary<Type, bool>();
-            entityTypes.Add(typeof(ICurve), true);
+            entityTypes.Add(typeof(Line), true);
+            entityTypes.Add(typeof(LinearPath), true);
+            entityTypes.Add(typeof(Arc), true);
+            entityTypes.Add(typeof(Circle), true);
+            entityTypes.Add(typeof(Curve), true);
+            entityTypes.Add(typeof(Ellipse), true);
+            entityTypes.Add(typeof(EllipticalArc), true);
+            entityTypes.Add(typeof(CompositeCurve), true);
 
             // 기준 객체 선택
             var entities = await GetEntities(LanguageHelper.Tr("Select entities"), -1, false, entityTypes);
@@ -55,7 +62,7 @@ namespace hanee.Cad.Tool
                 if (matchParams == null)
                     continue;
 
-                var newEntities = new EntityList();
+                var newEntities = new List<Entity>();
 
                 ICurve[] trimmedCurves = null;
                 double u;
@@ -107,11 +114,10 @@ namespace hanee.Cad.Tool
                 // 새로운 객체가 생겼으면 기존 객체 삭제하고 새로운 객체를 db에 추가
                 if (newEntities.Count > 0)
                 {
-                    newEntities.Regen(null);
-                    GetModel().Entities.AddRange(newEntities);
-
-                    GetModel().Entities.Remove(entityToTrim);
-                    GetModel().Invalidate();
+                    CreateTransaction();
+                    AddEntities(newEntities.ToArray());
+                    DeleteEntities(entityToTrim);
+                    CommitTransation();
                 }
             }
 

@@ -160,18 +160,27 @@ namespace hanee.Cad.Tool
             var reverseHeight = length < 0;
             length = Math.Abs(length.Value);
 
-            Entity box = null;
-            if (tempEntity)
-                box = Mesh.CreateBox(width.Value, height.Value, length.Value);
-            else
-                box = Brep.CreateBox(width.Value, height.Value, length.Value);
+            try
+            {
+                Entity box = null;
+                if (tempEntity)
+                    box = Mesh.CreateBox(width.Value, height.Value, length.Value);
+                else
+                    box = Brep.CreateBox(width.Value, height.Value, length.Value);
 
-            var wp = GetWorkplane();
-            var leftBottom = basePoint;
-            box.TransformBy(new Transformation(leftBottom, wp.AxisX, wp.AxisY, reverseHeight ? wp.AxisZ * -1 : wp.AxisZ));
-            GetHModel()?.entityPropertiesManager?.SetDefaultProperties(box, tempEntity);
+                var wp = GetWorkplane();
+                var leftBottom = basePoint;
+                box.TransformBy(new Transformation(leftBottom, wp.AxisX, wp.AxisY, reverseHeight ? wp.AxisZ * -1 : wp.AxisZ));
+                GetHModel()?.entityPropertiesManager?.SetDefaultProperties(box, tempEntity);
+                return box;
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
+            
 
-            return box;
+            
         }
     }
 }

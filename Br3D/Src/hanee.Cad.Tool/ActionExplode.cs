@@ -1,6 +1,7 @@
 ﻿using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using hanee.ThreeD;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace hanee.Cad.Tool
@@ -26,9 +27,11 @@ namespace hanee.Cad.Tool
                 if (IsCanceled())
                     break;
 
-                var explodedEntities = new EntityList();
-                var entitiesToDelete = new EntityList();  // 삭제할 객체
-               
+                var explodedEntities = new List<Entity>();
+                var entitiesToDelete = new List<Entity>();  // 삭제할 객체
+
+                CreateTransaction();
+
                 foreach (var ent in entities)
                 {
                     ICurve curve = ent as ICurve;
@@ -64,16 +67,9 @@ namespace hanee.Cad.Tool
                     }
                 }
 
-                foreach (var ed in entitiesToDelete)
-                {
-                    GetModel().Entities.Remove(ed);
-                }
-
-                explodedEntities.Regen(regenOptions);
-                GetModel().Entities.AddRange(explodedEntities);
-                
-                GetModel().Invalidate();
-
+                DeleteEntities(entitiesToDelete.ToArray());
+                AddEntities(explodedEntities.ToArray());
+                CommitTransation();
                 break;
             }
 
