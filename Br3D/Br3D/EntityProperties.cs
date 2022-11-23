@@ -15,7 +15,7 @@ namespace Br3D
         {
             this.ent = ent;
         }
-
+        
         public string EntityType { get => ent.GetType().Name; }
         public bool Visible { get => ent.Visible; set => ent.Visible = value; }
         public Color Color { get => ent.Color; set => ent.Color = value; }

@@ -145,3 +145,4 @@ E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\obj\Release\hanee.Terrain.Tool
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\obj\Release\hanee.Terrain.Tool.csproj.CopyComplete
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\obj\Release\hanee.Terrain.Tool.dll
 E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\obj\Release\hanee.Terrain.Tool.pdb
+E:\MyProjects\C#\Br3D\Br3D\Src\hanee.Terrain.Tool\bin\Release\GuiLabs.Undo.dll
