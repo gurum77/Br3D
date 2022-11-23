@@ -28,6 +28,7 @@ namespace hanee.Cad.Tool
 
             lastVec = point3D.AsVector;
             environment.TempEntities.Translate(lastVec);
+            environment.TempEntities.RegenAfterModify();
         }
 
         public async Task<bool> RunAsync()

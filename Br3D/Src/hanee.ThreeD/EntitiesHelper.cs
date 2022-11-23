@@ -104,9 +104,6 @@ namespace hanee.ThreeD
                 var explodedEntities = br.Explode(environment.Blocks);
                 foreach (var ee in explodedEntities)
                 {
-                    if (ee is BlockReference)
-                        continue;
-
                     AddEntityToTempEntities(ee, environment, clone);
                 }
             }
@@ -124,7 +121,11 @@ namespace hanee.ThreeD
             {
                 if (ent is Mesh && (ent.Vertices == null || ent.Vertices.Length == 0))
                     return;
+                
                 var tempEnt = !clone ? ent : ent.Clone() as Entity;
+                if (tempEnt.BoxMin == null || tempEnt.BoxMax == null)
+                    tempEnt.Regen(0.001);
+
                 SetTempEntityColor(tempEnt, environment);
                 environment.TempEntities.Add(tempEnt);
             }

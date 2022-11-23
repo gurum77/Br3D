@@ -46,7 +46,7 @@ namespace hanee.Cad.Tool
 
             simpleButtonDel.Visible = mode == Mode.existBlockName;
             panelControlExistBlockOptions.Visible = mode == Mode.existBlockName;
-
+            
             Translate();
         }
 
@@ -67,7 +67,7 @@ namespace hanee.Cad.Tool
 
         private void FormBlock_Shown(object sender, EventArgs e)
         {
-        
+            comboBoxEditBlock.Focus();
         }
 
         private void Translate()
