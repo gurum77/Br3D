@@ -857,44 +857,12 @@ namespace hanee.ThreeD
 
         public static string FilterForSaveDialog()
         {
-            Dictionary<string, string> supportFormats = new Dictionary<string, string>
-            {
-                { "All", "*.*" },
-                { "AutoCAD", "*.dwg; *.dxf" },
-                { "IGES", "*.igs; *.iges" },
-                { "STEP", "*.stp; *.step" },
-                { "Stereolithography", ".stl" },
-                { "WaveFront OBJ", "*.obj" },
-                { "WebGL", "*.html" },
-                { "Points", "*.asc" },
-                { "XML", "*.xml" },
-                { "PRC", "*.prc" }
-            };
-
-
-            return HModel.FilterBySupportFormats(supportFormats);
-
+            return FileHelper.FilterForSaveDialog();
         }
+
         public static string FilterForOpenDialog()
         {
-            Dictionary<string, string> supportFormats = new Dictionary<string, string>
-            {
-                { "All", "*.*" },
-                { "AutoCAD", "*.dwg; *.dxf" },
-                { "IFC", "*.ifc" },
-                { "3DS", ".dwg; *.dxf" },
-                { "JT", "*.jt" },
-                { "STEP", "*.stp; *.step" },
-                { "IGES", "*.igs; *.iges" },
-                { "WaveFront OBJ", "*.obj" },
-                { "Stereolithography", "*.stl" },
-                { "Laser LAS", "*.las" },
-                { "Points", "*.asc" },
-                { "LUSAS", "*.las" },
-                { "EMF", "*.emf" }
-            };
-
-            return HModel.FilterBySupportFormats(supportFormats);
+            return FileHelper.FilterForOpenDialog();
         }
 
         public static string FilterBySupportFormats(Dictionary<string, string> supportFormats)
@@ -1063,6 +1031,10 @@ namespace hanee.ThreeD
             {
                 rf = new devDept.Eyeshot.Translators.ReadJT(filename);
             }
+            else if (ext == ".GCODE" || ext == ".NCC")
+            {
+                rf = new devDept.Eyeshot.Translators.ReadGCode(filename, false);
+            }
             else
             {
                 rf = null;
@@ -1185,6 +1157,10 @@ namespace hanee.ThreeD
                 WriteParamsWithMaterials writeParamTmp = new WriteParamsWithMaterials(vp);
 
                 wf = new WriteWebGL(writeParamTmp, null, filename);
+            }
+            else if (ext == ".XML")
+            {
+                wf = new WriteXML(writeParam, filename);
             }
             else if (ext == ".XML")
             {

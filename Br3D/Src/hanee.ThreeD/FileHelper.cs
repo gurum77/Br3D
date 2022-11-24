@@ -54,7 +54,7 @@ namespace hanee.ThreeD
             supportFormats.Add("AutoCAD", "*.dwg; *.dxf");
             supportFormats.Add("IFC", "*.ifc");
             supportFormats.Add("3DS", "*.3ds");
-            supportFormats.Add("GCode", "*.gcode");
+            supportFormats.Add("GCode", "*.gcode; *.ncc");
             supportFormats.Add("JT", "*.jt");
             supportFormats.Add("STEP", "*.stp; *.step");
             supportFormats.Add("IGES", "*.igs; *.iges");
@@ -180,7 +180,7 @@ namespace hanee.ThreeD
             {
                 rf = new devDept.Eyeshot.Translators.ReadPDF(filename);
             }
-            else if (ext == ".GCODE")
+            else if (ext == ".GCODE" || ext == ".NCC")
             {
                 rf = new devDept.Eyeshot.Translators.ReadGCode(filename);
             }

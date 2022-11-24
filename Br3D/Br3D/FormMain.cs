@@ -980,6 +980,11 @@ namespace Br3D
         {
             if (e.WorkUnit is ReadFileAsync rfa)
             {
+                if(!string.IsNullOrEmpty(rfa.Log))
+                {
+                    MessageBox.Show(rfa.Log);
+                    return;
+                }
                 // 파일 열기에 성공했으면 new 를 한다.
                 if (openMode)
                 {
