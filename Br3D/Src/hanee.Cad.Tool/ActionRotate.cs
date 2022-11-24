@@ -62,7 +62,7 @@ namespace hanee.Cad.Tool
         private double GetRotationAngle()
         {
             // 참조방식이 아니고 입력한 angle이 있다면 그걸 리턴한다.
-            if (baseAngle == null && toPoint.Key == null && !string.IsNullOrEmpty(toPoint.Value) && double.TryParse(toPoint.Value, out double rotationAngle))
+            if ((baseAngle == null || baseAngle == 0) && toPoint.Key == null && !string.IsNullOrEmpty(toPoint.Value) && double.TryParse(toPoint.Value, out double rotationAngle))
             {
                 return rotationAngle.ToRadians();
             }
