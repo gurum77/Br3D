@@ -120,6 +120,7 @@
     <Compile Include="ActionCone.cs" />
     <Compile Include="ActionCopy.cs" />
     <Compile Include="ActionCylinder.cs" />
+    <Compile Include="ActionDimStyle.cs" />
     <Compile Include="ActionExtractFace.cs" />
     <Compile Include="ActionIntersection.cs" />
     <Compile Include="ActionSection.cs" />
@@ -170,6 +171,12 @@
     </Compile>
     <Compile Include="FormBlock.Designer.cs">
       <DependentUpon>FormBlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDimStyle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDimStyle.Designer.cs">
+      <DependentUpon>FormDimStyle.cs</DependentUpon>
     </Compile>
     <Compile Include="LineTypeControl.cs">
       <SubType>UserControl</SubType>
@@ -256,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormBlock.resx">
       <DependentUpon>FormBlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDimStyle.resx">
+      <DependentUpon>FormDimStyle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LineTypeControl.resx">
       <DependentUpon>LineTypeControl.cs</DependentUpon>

@@ -168,6 +168,7 @@ namespace hanee.Cad.Tool
 
                 textPoint = ((firstPoint + secondPoint) / 2).IntersectionWith(ws.plane.AxisY, textPoint, axisX);
                 var dim = new LinearDim(plane, firstPoint, secondPoint, textPoint, Define.DefaultTextHeight);
+                
                 if (dim != null)
                 {
                     AddEntities(dim);

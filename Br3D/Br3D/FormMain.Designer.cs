@@ -199,6 +199,8 @@ namespace Br3D
             this.barButtonItemGridSnap = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemShowBoundary = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemSection = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemUndo = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemRedo = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -243,8 +245,7 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.barButtonItemUndo = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItemRedo = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDimStyle = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
@@ -826,9 +827,10 @@ namespace Br3D
             this.barButtonItemShowBoundary,
             this.barButtonItemSection,
             this.barButtonItemUndo,
-            this.barButtonItemRedo});
+            this.barButtonItemRedo,
+            this.barButtonItemDimStyle});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 138;
+            this.ribbonControl1.MaxItemId = 139;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.barButtonItemUndo);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.barButtonItemRedo);
@@ -1703,6 +1705,18 @@ namespace Br3D
             this.barButtonItemSection.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemSection.ImageOptions.SvgImage")));
             this.barButtonItemSection.Name = "barButtonItemSection";
             // 
+            // barButtonItemUndo
+            // 
+            this.barButtonItemUndo.Id = 134;
+            this.barButtonItemUndo.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemUndo.ImageOptions.SvgImage")));
+            this.barButtonItemUndo.Name = "barButtonItemUndo";
+            // 
+            // barButtonItemRedo
+            // 
+            this.barButtonItemRedo.Id = 137;
+            this.barButtonItemRedo.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemRedo.ImageOptions.SvgImage")));
+            this.barButtonItemRedo.Name = "barButtonItemRedo";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -1943,6 +1957,7 @@ namespace Br3D
             this.ribbonPageGroupTools.ItemLinks.Add(this.barButtonItemLayer);
             this.ribbonPageGroupTools.ItemLinks.Add(this.barButtonItemTextStyle);
             this.ribbonPageGroupTools.ItemLinks.Add(this.barButtonItemLineType);
+            this.ribbonPageGroupTools.ItemLinks.Add(this.barButtonItemDimStyle);
             this.ribbonPageGroupTools.ItemLinks.Add(this.barButtonItemList);
             this.ribbonPageGroupTools.Name = "ribbonPageGroupTools";
             this.ribbonPageGroupTools.Text = "Settings";
@@ -2098,17 +2113,12 @@ namespace Br3D
             // 
             this.colorDialog1.FullOpen = true;
             // 
-            // barButtonItemUndo
+            // barButtonItemDimStyle
             // 
-            this.barButtonItemUndo.Id = 134;
-            this.barButtonItemUndo.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemUndo.ImageOptions.SvgImage")));
-            this.barButtonItemUndo.Name = "barButtonItemUndo";
-            // 
-            // barButtonItemRedo
-            // 
-            this.barButtonItemRedo.Id = 137;
-            this.barButtonItemRedo.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemRedo.ImageOptions.SvgImage")));
-            this.barButtonItemRedo.Name = "barButtonItemRedo";
+            this.barButtonItemDimStyle.Caption = "Dim Style";
+            this.barButtonItemDimStyle.Id = 138;
+            this.barButtonItemDimStyle.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemDimStyle.ImageOptions.SvgImage")));
+            this.barButtonItemDimStyle.Name = "barButtonItemDimStyle";
             // 
             // FormMain
             // 
@@ -2376,5 +2386,6 @@ namespace Br3D
         private DevExpress.XtraBars.PopupMenu popupMenuRecentFiles;
         private DevExpress.XtraBars.BarButtonItem barButtonItemUndo;
         private DevExpress.XtraBars.BarButtonItem barButtonItemRedo;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDimStyle;
     }
 }
