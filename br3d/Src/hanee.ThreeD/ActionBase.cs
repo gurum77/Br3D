@@ -1376,26 +1376,34 @@ namespace hanee.ThreeD
             return selectedLabel;
         }
 
+        // 객체 여러개와 text를 선택는다.
+        public async Task<KeyValuePair<List<Entity>, string>> GetEntitiesOrText(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null, params string[] availableTexts)
+        {
+            ActionBase.dynamicHighlight = dynamicHighlight;
+            ActionBase.selectableTypes = selectableType;
+            ActionBase.availableTexts = availableTexts;
+
+            await StartAndWaitUserInput(message, stepID, UserInput.SelectingEntities, UserInput.GettingText);
+
+            var resultEntities= selectedEntities;
+            var resultText = ActionBase.text;
+            if (ActionBase.userInputting[(int)UserInput.SelectingEntities])
+                resultEntities = null;
+            if (ActionBase.userInputting[(int)UserInput.GettingText])
+                resultText = null;
+
+            ActionBase.EndInput(UserInput.SelectingEntities, UserInput.GettingText);
+
+            return new KeyValuePair<List<Entity>, string>(resultEntities, resultText);
+        }
+
         // 객체 여러개를 선택받는다.
         public async Task<List<Entity>> GetEntities(string message = null, int stepID = -1, bool dynamicHighlight = false, Dictionary<Type, bool> selectableType = null)
         {
-            ActionBase.StartInput(environment, message, stepID, UserInput.SelectingEntities);
             ActionBase.dynamicHighlight = dynamicHighlight;
             ActionBase.selectableTypes = selectableType;
 
-            while (ActionBase.userInputting[(int)UserInput.SelectingEntities] == true)
-            {
-                // 스탭이 중지되었다면 그냥 보낸다.
-                if (ActionBase.IsStopedCurrentStep)
-                {
-                    ActionBase.EndInput(UserInput.SelectingEntities);
-                    break;
-                }
-
-                await Task.Delay(100);
-            }
-
-            ActionBase.InitCursorText();
+            await StartAndWaitUserInput(message, stepID, UserInput.SelectingEntities);
 
             return selectedEntities;
         }
