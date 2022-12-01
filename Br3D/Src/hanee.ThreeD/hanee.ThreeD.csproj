@@ -159,6 +159,7 @@
     <Compile Include="LineTypeHelper.cs" />
     <Compile Include="MaterialHelper.cs" />
     <Compile Include="DesignHelper.cs" />
+    <Compile Include="ModelHelper.cs" />
     <Compile Include="ObjectManipulatorHelper.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="OptionsHelper.cs" />

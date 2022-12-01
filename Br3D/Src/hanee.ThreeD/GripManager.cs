@@ -226,7 +226,7 @@ namespace hanee.ThreeD
             }
             
             // 아니면 그립을 생성함.
-            if (selectedEntities != null)
+            if (selectedEntities != null && selectedEntities.Count < 10)
             {
                 foreach (var ent in selectedEntities)
                 {

@@ -44,6 +44,7 @@ namespace hanee.ThreeD
         }
 
         public static Font drawingFont = new Font("Tahoma", 10.0f, FontStyle.Bold);
+        public static bool playing { get; set; } = false;
         public System.Drawing.Point cursorPoint;
         System.Drawing.Point lastMouseDownPoint { get; set; }
         public Dictionary<Viewport, bool> topViewOnlys = new Dictionary<Viewport, bool>();
@@ -159,7 +160,9 @@ namespace hanee.ThreeD
             // eyeshot액션이 동작중이면 리턴
             if (this.ActionMode != actionType.None &&
                 this.ActionMode != actionType.SelectVisibleByPickDynamic)
+            {
                 return;
+            }
 
             if (e.Button == MouseButtons.Left)
             {
@@ -766,33 +769,54 @@ namespace hanee.ThreeD
         //    return indices;
         //}
 
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+  
+            base.OnMouseUp(e);
+
+            if (this.IsBusy())
+                return;
+
+            if(ActionMode == actionType.Rotate)
+            {
+                ActionMode = actionType.None;
+            }
+        }
+
         protected override void OnMouseMove(System.Windows.Forms.MouseEventArgs e)
         {
-            cursorPoint = e.Location;
-
-            // If ObjectSnap is ON, we need to find closest vertex (if any)
-            // 스냅을 해야 하는 경우 마우스 이동할때 마다 스냅가능 포인트를 검색한다.
-            if (ActionBase.IsNeedSnapping(gripManager))
+            if (!this.IsBusy())
             {
-                Snapping.OnMouseMoveForSnap(e);
+
+                // pan이어야 하는데 rotate가 동작하면 pan으로 바꾼다.
+                if (e.Button == MouseButtons.Middle && Control.ModifierKeys != Keys.Control && ActionMode == actionType.Rotate)
+                {
+                    ActionMode = actionType.Pan;
+                }
+                cursorPoint = e.Location;
+
+                // If ObjectSnap is ON, we need to find closest vertex (if any)
+                // 스냅을 해야 하는 경우 마우스 이동할때 마다 스냅가능 포인트를 검색한다.
+                if (ActionBase.IsNeedSnapping(gripManager))
+                {
+                    Snapping.OnMouseMoveForSnap(e);
+                }
+
+                // draw overlay가 호출된다.(back buffer에 그림)
+                PaintBackBuffer();
+
+                // back buffer를 화면에 표시
+                SwapBuffers();
+
+
+                ActionBase.MouseMoveHandler(this, e);
+
+                // OnMouseMoveForSnap 에서는 snap 정보가 초기화 되고, PaintBackBuffer 에서 snap 정보가 설정되므로 snap정보가 설정된 후에 좌표 입력 함수가 호출되어야 한다.
+                gripManager.MouseMove(e);
+                selectionManager.OnMouseMove(e);
             }
 
-            // draw overlay가 호출된다.(back buffer에 그림)
-            PaintBackBuffer();
-
-            // back buffer를 화면에 표시
-            SwapBuffers();
-
-
-            ActionBase.MouseMoveHandler(this, e);
-
-            // OnMouseMoveForSnap 에서는 snap 정보가 초기화 되고, PaintBackBuffer 에서 snap 정보가 설정되므로 snap정보가 설정된 후에 좌표 입력 함수가 호출되어야 한다.
-            gripManager.MouseMove(e);
-            selectionManager.OnMouseMove(e);
-
-
-
-
+                     
             // 2D view일 때는 좌우로만 회전하도록 한다.
             if (IsTopViewOnly(ActiveViewport) && e.Button == MouseButtons.Middle && Control.ModifierKeys == Keys.Control)
             {
@@ -801,6 +825,7 @@ namespace hanee.ThreeD
             }
             else
             {
+            
                 base.OnMouseMove(e);
             }
         }
@@ -896,6 +921,9 @@ namespace hanee.ThreeD
 
         protected override void DrawOverlay(HModel.DrawSceneParams myParams)
         {
+            if (this.IsBusy())
+                return;
+
             selectionManager.DrawOvery();
 
             // snap 그리기

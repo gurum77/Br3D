@@ -343,6 +343,10 @@
       <Project>{2e30f919-d89a-4574-9e73-056a4842cc63}</Project>
       <Name>hanee.Cad.Tool</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Src\hanee.Cam\hanee.Cam.csproj">
+      <Project>{2A36AF24-A3AC-45F9-B8C1-3A90CFF9E655}</Project>
+      <Name>hanee.Cam</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Src\hanee.Geometry\hanee.Geometry.csproj">
       <Project>{8a7185a8-b093-4391-984f-0e73f4e08541}</Project>
       <Name>hanee.Geometry</Name>

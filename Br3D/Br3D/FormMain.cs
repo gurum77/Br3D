@@ -6,6 +6,7 @@ using devDept.Eyeshot.Translators;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using hanee.Cad.Tool;
+using hanee.Cam;
 using hanee.Terrain.Tool;
 using hanee.ThreeD;
 using System;
@@ -65,8 +66,6 @@ namespace Br3D
             ribbonStatusBar1.ItemLinks.Add(barButtonItemOsnapMiddle);
             ribbonStatusBar1.ItemLinks.Add(barButtonItemOsnapCenter);
             ribbonStatusBar1.ItemLinks.Add(barButtonItemOsnapPoint);
-
-
         }
 
         // control model을 초기화한다.
@@ -276,6 +275,9 @@ namespace Br3D
 
         private void Model_MouseMove(object sender, MouseEventArgs e)
         {
+            if (model != null && model.IsBusy)
+                return;
+
             UpdateCoordinatesControl(e);
             if (e.Button != MouseButtons.None)
                 return;
@@ -427,8 +429,6 @@ namespace Br3D
 
             if (e.Button == MouseButtons.Left)
             {
-
-
                 bool gripEditing = gripManager != null && gripManager.EditingGripPoints();
                 if (!gripEditing && ActionBase.runningAction == null)
                 {
@@ -745,6 +745,8 @@ namespace Br3D
             SetFunctionByElement(barButtonItemUpDownTerrain, UpDownTerrain, LanguageHelper.Tr("Up/down terrain"), "UpDownTerrain", "udt");
 
 
+            // cam
+            SetFunctionByElement(barButtonItemPlayCam, PlayCam, LanguageHelper.Tr("Play"), "Play cam", null);
 
 
             // annotation
@@ -816,6 +818,8 @@ namespace Br3D
         async void ImportTerrain() => await new ActionImportTerrain(model).RunAsync();
         async void ExportTerrain() => await new ActionExportTerrain(model).RunAsync();
         async void UpDownTerrain() => await new ActionUpDownTerrain(model).RunAsync();
+
+        void PlayCam() => new ActionPlayCam(model, opendFilePath).Run();
 
 
         void Exit() => new ActionExit(model, this).Run();
@@ -980,7 +984,7 @@ namespace Br3D
         {
             if (e.WorkUnit is ReadFileAsync rfa)
             {
-                if(!string.IsNullOrEmpty(rfa.Log))
+                if(rfa.Result != true &&  !string.IsNullOrEmpty(rfa.Log))
                 {
                     MessageBox.Show(rfa.Log);
                     return;
@@ -1000,6 +1004,12 @@ namespace Br3D
                 hModel.SetLayerColorByBackgroundColor();
 
                 UpdateOpenedFilePath(rfa.FileName);
+
+                // gcode는 테두리를 만든다.
+                if (rfa is ReadGCode && model is Manufacture mu)
+                {
+                    mu.DrawGCode(new devDept.Eyeshot.Milling.EndMill(0.6, 0.3));
+                }
 
 
                 RegenAll();
