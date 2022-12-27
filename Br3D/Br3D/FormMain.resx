@@ -1814,7 +1814,7 @@
         DQogIDwvZz4NCjwvc3ZnPgs=
 </value>
   </data>
-  <data name="barButtonItemCamPlay.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v21.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="barButtonItemPlaySimulation.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v21.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjIxLjIsIFZlcnNpb249MjEuMi4z
         LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
@@ -1970,6 +1970,31 @@
         bnRzPSIwLDMwIDAsMTQgNiwyMCAxMiwxNCAyNCwyNiAyNCwzMCAgICIgY2xhc3M9IlllbGxvdyIgLz4N
         CiAgICAgIDxwb2x5Z29uIHBvaW50cz0iMTYsNCAxMCwxMCA0LDQgNCwxMCAxMCwxNiAxNiwxMCAyOCwy
         MiAyOCwxNiAgICIgY2xhc3M9IlJlZCIgLz4NCiAgICA8L2c+DQogIDwvZz4NCjwvc3ZnPgs=
+</value>
+  </data>
+  <data name="ribbonPageCam.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v21.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjIxLjIsIFZlcnNpb249MjEuMi4z
+        LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
+        dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAADYEAAAC77u/
+        PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgi
+        IHZpZXdCb3g9IjAgMCAzMiAzMiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+        MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3Bh
+        Y2U9InByZXNlcnZlIiBpZD0iTGF5ZXJfMSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAg
+        MzIgMzIiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLkJsYWNre2ZpbGw6IzcyNzI3Mjt9Cgku
+        WWVsbG93e2ZpbGw6I0ZGQjExNTt9CgkuQmx1ZXtmaWxsOiMxMTc3RDc7fQoJLlJlZHtmaWxsOiNEMTFD
+        MUM7fQoJLldoaXRle2ZpbGw6I0ZGRkZGRjt9CgkuR3JlZW57ZmlsbDojMDM5QzIzO30KCS5zdDB7Zmls
+        bDojNzI3MjcyO30KCS5zdDF7b3BhY2l0eTowLjU7fQoJLnN0MntvcGFjaXR5OjAuNzU7fQo8L3N0eWxl
+        Pg0KICA8ZyBpZD0iU2FsZXNBbmFseXNpc18xXyI+DQogICAgPHBhdGggZD0iTTEyLDQuMWMzLjEsMC40
+        LDUuNSwyLjksNS45LDUuOUgxMlY0LjF6IE0xMiwxMmgtMnYtMlY0LjFDNi42LDQuNiw0LDcuNSw0LDEx
+        YzAsMy45LDMuMSw3LDcsNyAgIGMzLjUsMCw2LjQtMi42LDYuOS02SDEyeiIgY2xhc3M9IkJsdWUiIC8+
+        DQogICAgPHBhdGggZD0iTTE2LDI2SDFjLTAuNSwwLTEtMC41LTEtMVYxYzAtMC41LDAuNS0xLDEtMWgy
+        MGMwLjUsMCwxLDAuNSwxLDF2MTNoLTJWMkgydjIyaDE0VjI2eiBNMjIsMjggICBjLTEuMSwwLTIsMC45
+        LTIsMmMwLDEuMSwwLjksMiwyLDJjMS4xLDAsMi0wLjksMi0yQzI0LDI4LjksMjMuMSwyOCwyMiwyOHog
+        TTMwLDMwYzAsMS4xLTAuOSwyLTIsMmMtMS4xLDAtMi0wLjktMi0yICAgYzAtMS4xLDAuOS0yLDItMkMy
+        OS4xLDI4LDMwLDI4LjksMzAsMzB6IE0zMiwyNHYySDE4di02aC0ydi0yaDR2NkgzMnogTTIyLDIxdi00
+        YzAtMC41LDAuNS0xLDEtMWg2YzAuNSwwLDEsMC41LDEsMXY0ICAgYzAsMC41LTAuNSwxLTEsMWgtNkMy
+        Mi41LDIyLDIyLDIxLjUsMjIsMjF6IiBjbGFzcz0iQmxhY2siIC8+DQogIDwvZz4NCjwvc3ZnPgs=
 </value>
   </data>
   <data name="ribbonPageAnnotation.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v21.2" mimetype="application/x-microsoft.net.object.bytearray.base64">

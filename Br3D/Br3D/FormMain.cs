@@ -352,6 +352,7 @@ namespace Br3D
             ribbonPageTerrain.Text = LanguageHelper.Tr("Terrain");
             ribbonPageEdit.Text = LanguageHelper.Tr("Edit");
             ribbonPageEdit3D.Text = LanguageHelper.Tr("Edit 3D");
+            ribbonPageCam.Text = LanguageHelper.Tr("Cam");
             ribbonPageHome.Text = LanguageHelper.Tr("Home");
             ribbonPageOptions.Text = LanguageHelper.Tr("Options");
             ribbonPageTools.Text = LanguageHelper.Tr("Tools");
@@ -739,6 +740,7 @@ namespace Br3D
             // terrain
             SetFunctionByElement(barButtonItemCreateTerrain, CreateTerrain, LanguageHelper.Tr("Create terrain"), "CreateTerrain", "ct");
             SetFunctionByElement(barButtonItemColoringTerrain, ColoringTerrain, LanguageHelper.Tr("Coloring terrain"), "ColoringTerrain", "crt");
+
             SetFunctionByElement(barButtonItemCreateContour, CreateContour, LanguageHelper.Tr("Create contour"), "CreateContour", "crc");
             SetFunctionByElement(barButtonItemImportTerrain, ImportTerrain, LanguageHelper.Tr("Import terrain"), "ImportTerrain", "it");
             SetFunctionByElement(barButtonItemExportTerrain, ExportTerrain, LanguageHelper.Tr("Export terrain"), "ExportTerrain", "et");
@@ -746,7 +748,7 @@ namespace Br3D
 
 
             // cam
-            SetFunctionByElement(barButtonItemPlayCam, PlayCam, LanguageHelper.Tr("Play"), "Play cam", null);
+            SetFunctionByElement(barButtonItemPlaySimulation, CamSimulation, LanguageHelper.Tr("Simulation"), "CamSimulation", null);
 
 
             // annotation
@@ -819,7 +821,7 @@ namespace Br3D
         async void ExportTerrain() => await new ActionExportTerrain(model).RunAsync();
         async void UpDownTerrain() => await new ActionUpDownTerrain(model).RunAsync();
 
-        void PlayCam() => new ActionPlayCam(model, opendFilePath).Run();
+        void CamSimulation() => new ActionCamSimulation(model, opendFilePath).Run();
 
 
         void Exit() => new ActionExit(model, this).Run();

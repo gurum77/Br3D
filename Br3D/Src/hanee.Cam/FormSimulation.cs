@@ -20,7 +20,8 @@ namespace hanee.Cam
         {
             InitializeComponent();
             this.nccFileName = nccFileName;
-            
+
+            this.Text = LanguageHelper.Tr("Simulation");
         }
 
         private void FormSimulation_Load(object sender, EventArgs e)
