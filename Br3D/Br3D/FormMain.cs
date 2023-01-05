@@ -669,6 +669,8 @@ namespace Br3D
             SetFunctionByElement(barButtonItemSaveAs, SaveAs, LanguageHelper.Tr("Save As"), "SaveAs", "saveas");
             SetFunctionByElement(barButtonItemSaveImage, SaveImage, LanguageHelper.Tr("Save Image"), "SaveImage", "si");
             SetFunctionByElement(barButtonItemWorkspace, Workspace, LanguageHelper.Tr("Workspace"), "Workspace", "ws");
+            SetFunctionByElement(barButtonItemClippingPlane, ClippingPlane, LanguageHelper.Tr("Clipping Plane"), "ClippingPlane", "cp");
+            
             SetFunctionByElement(barButtonItemExit, Exit, LanguageHelper.Tr("Exit"), "Exit", null);
 
             SetFunctionByElement(barButtonItemUndo, Undo, LanguageHelper.Tr("Undo"), "Undo", "u");
@@ -770,6 +772,9 @@ namespace Br3D
             SetFunctionByElement(barButtonItemOsnapCenter, Center, LanguageHelper.Tr("Center Point"), "Cen", null, false);
             SetFunctionByElement(barButtonItemOsnapPoint, Point, LanguageHelper.Tr("Point"), "Node", null, false);
 
+            // group
+            SetFunctionByElement(barButtonItemGroup, Group, LanguageHelper.Tr("Group"), "Group", "G", false);
+
             // tools
             SetFunctionByElement(barButtonItemSingleView, ViewportSingle, LanguageHelper.Tr("Single"), "Single", null, false);
             SetFunctionByElement(barButtonItem1x1View, Viewport1x1, LanguageHelper.Tr("1x1"), "1x1", null, false);
@@ -828,6 +833,7 @@ namespace Br3D
         void Undo() => new ActionUndo(model).Run();
         void Redo() => new ActionRedo(model).Run();
 
+        async void ClippingPlane() => await new ActionClippingPlane(model).RunAsync();
         async void Workspace() => await new ActionWorkspace(model).RunAsync();
         async void DrawRegion() => await new ActionRegion(model).RunAsync();
         async void InsertImage() => await new ActionInsertImage(model).RunAsync();
@@ -908,39 +914,15 @@ namespace Br3D
 
         void Set2DView() => Flag2D3D(true);
         void Set3DView() => Flag2D3D(false);
-        void Rendered()
-        {
-            FlagDisplayMode(displayType.Rendered);
-        }
-        void Shaded()
-        {
-            FlagDisplayMode(displayType.Shaded);
-        }
-        void HiddenLines()
-        {
-            FlagDisplayMode(displayType.HiddenLines);
-        }
-        void Wireframe()
-        {
-            FlagDisplayMode(displayType.Wireframe);
-        }
+        void Rendered() => FlagDisplayMode(displayType.Rendered);
+        void Shaded() => FlagDisplayMode(displayType.Shaded);
+        void HiddenLines() => FlagDisplayMode(displayType.HiddenLines);
+        void Wireframe() => FlagDisplayMode(displayType.Wireframe);
 
-        public void ShowBoundary()
-        {
-            ShowBoundary(!model.BoundingBox.Visible);
-        }
+        public void ShowBoundary() => ShowBoundary(!model.BoundingBox.Visible);
 
-        void Korean()
-        {
-            var ac = new ActionLanguage(model, this, "ko-KR");
-            ac.Run();
-        }
-
-        void English()
-        {
-            var ac = new ActionLanguage(model, this, "en-US");
-            ac.Run();
-        }
+        void Korean() => new ActionLanguage(model, this, "ko-KR").Run();
+        void English() => new ActionLanguage(model, this, "en-US").Run();
 
         private void Model_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -1114,6 +1096,9 @@ namespace Br3D
         // 
         void OrthoMode() => FlagOrthoMode(barButtonItemOrthoMode);
         void GridSnap() => FlagGridSnap(barButtonItemGridSnap);
+
+        async void Group() => await new ActionGroup(model).RunAsync();
+
         void End() => new ActionOsnap(model, controlModel, Snapping.objectSnapType.End).Run();
         void Middle() => new ActionOsnap(model, controlModel, Snapping.objectSnapType.Mid).Run();
         void Point() => new ActionOsnap(model, controlModel, Snapping.objectSnapType.Point).Run();
@@ -1125,45 +1110,13 @@ namespace Br3D
         void Viewport2x2() => new ActionViewport(model, controlModel, ActionViewport.Viewport.v2x2).Run();
 
 
-        async void Coorindates()
-        {
-            ActionID ac = new ActionID(model, ActionID.ShowResult.label);
-            await ac.RunAsync();
-        }
-
-        async void Distance()
-        {
-            ActionDist ac = new ActionDist(model, ActionDist.ShowResult.label);
-            await ac.RunAsync();
-        }
-
-        async void Volume()
-        {
-            ActionVolume ac = new ActionVolume(model, ActionVolume.ShowResult.form);
-            await ac.RunAsync();
-        }
-
-        async void Area()
-        {
-            ActionArea ac = new ActionArea(model, ActionArea.ShowResult.form);
-            await ac.RunAsync();
-        }
-
-        async void Memo()
-        {
-            ActionMemo ac = new ActionMemo(model);
-            await ac.RunAsync();
-        }
-
-        void ClearAnnotations()
-        {
-            new ActionClearAnnotations(model).Run();
-        }
-
-        private void SaveImage()
-        {
-            new ActionSaveImage(model, this).Run();
-        }
+        async void Coorindates() => await new ActionID(model, ActionID.ShowResult.label).RunAsync();
+        async void Distance() => await new ActionDist(model, ActionDist.ShowResult.label).RunAsync();
+        async void Volume() => await new ActionVolume(model, ActionVolume.ShowResult.form).RunAsync();
+        async void Area() => await new ActionArea(model, ActionArea.ShowResult.form).RunAsync();
+        async void Memo() => await new ActionMemo(model).RunAsync();
+        void ClearAnnotations() => new ActionClearAnnotations(model).Run();
+        private void SaveImage() => new ActionSaveImage(model, this).Run();
 
         // 편집된 내용 저장 체크
         public bool CheckSaveForModifiedFile()
@@ -1184,33 +1137,15 @@ namespace Br3D
         }
 
 
-        void New()
-        {
-            new ActionNew(model, this).Run();
-
-        }
+        void New() => new ActionNew(model, this).Run();
 
         // 현재 파일 다시 로딩하기
-        void Reload()
-        {
-            new ActionReload(model, this).Run();
-        }
-
-        void Open()
-        {
-            new ActionOpen(model, this).Run();
-        }
+        void Reload() => new ActionReload(model, this).Run();
+        void Open() => new ActionOpen(model, this).Run();
 
         // 파일이 열려 있으면 바로 저장
-        void Save()
-        {
-            new ActionSave(model, this).Run();
-        }
-
-        public void SaveAs()
-        {
-            new ActionSaveAs(model, this).Run();
-        }
+        void Save() => new ActionSave(model, this).Run();
+        public void SaveAs() => new ActionSaveAs(model, this).Run();
 
         // ribbon - import
         // iges, igs, stl, step, stp, obj, las, dwg, dxf, ifc, ifczip, 3ds, lus

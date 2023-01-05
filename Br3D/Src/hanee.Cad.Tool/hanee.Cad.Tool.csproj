@@ -122,6 +122,8 @@
     <Compile Include="ActionCylinder.cs" />
     <Compile Include="ActionDimStyle.cs" />
     <Compile Include="ActionExtractFace.cs" />
+    <Compile Include="ActionClippingPlane.cs" />
+    <Compile Include="ActionGroup.cs" />
     <Compile Include="ActionIntersection.cs" />
     <Compile Include="ActionSection.cs" />
     <Compile Include="ActionSmartExtrude.cs" />

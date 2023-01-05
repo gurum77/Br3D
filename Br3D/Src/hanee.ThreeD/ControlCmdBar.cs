@@ -79,10 +79,8 @@ namespace hanee.ThreeD
             return labelControl1.Text;
         }
 
-        // 현재 cmd line의 내용을 history에 등록한다.
-        public void AddHistory()
+        public void AddHistory(string str)
         {
-            var str = labelControl1.Text + textEdit1.Text;
             if (string.IsNullOrEmpty(str))
                 return;
 
@@ -95,6 +93,12 @@ namespace hanee.ThreeD
                 richTextBox1.SelectionStart = richTextBox1.Text.Length;
                 richTextBox1.ScrollToCaret();
             }));
+        }
+
+        // 현재 cmd line의 내용을 history에 등록한다.
+        public void AddHistory()
+        {
+            AddHistory(labelControl1.Text + textEdit1.Text);
         }
 
         internal void SetTextEdit(string text)

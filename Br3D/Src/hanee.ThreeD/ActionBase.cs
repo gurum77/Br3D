@@ -1024,6 +1024,25 @@ namespace hanee.ThreeD
             return dist;
         }
 
+        // text를 입력받는다.
+        public async Task<string> GetText(string message = null, int stepID = -1, params string[] availableTexts)
+        {
+            ActionBase.availableTexts = availableTexts;
+
+            await StartAndWaitUserInput(message, stepID, UserInput.GettingText);
+
+            // 정상 입력이 아닌 경우라면 null을 준다.
+            // 그래야 사용하는 곳에서 어떤 값이 입력 되었는지 알수 있다.
+            var resultText = text;
+            if (ActionBase.userInputting[(int)UserInput.GettingText])
+                resultText = null;
+
+            // 입력을 완전히 종료
+            EndInput(UserInput.GettingText);
+
+            return resultText;
+        }
+
         // 마우스로 point3D를 입력받거나 text를 입력받는다.
         public async Task<KeyValuePair<Point3D, string>> GetPoint3DOrText(string message = null, int stepID = -1, params string[] availableTexts)
         {

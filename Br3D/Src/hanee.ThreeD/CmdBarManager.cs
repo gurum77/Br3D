@@ -85,13 +85,22 @@ namespace hanee.ThreeD
             SetTextEdit("");
         }
 
-        // 리스토리 추가
+        // 히스토리 추가
         static public void AddHistory()
         {
             if (cmdBar == null)
                 return;
 
             cmdBar.AddHistory();
+        }
+
+        // 히스토리 추가
+        static public void AddHistory(string str)
+        {
+            if (cmdBar == null)
+                return;
+
+            cmdBar.AddHistory(str);
         }
     }
 }

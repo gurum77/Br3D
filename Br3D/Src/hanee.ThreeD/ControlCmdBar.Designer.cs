@@ -29,11 +29,12 @@ namespace hanee.ThreeD
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.sidePanel1 = new DevExpress.XtraEditors.SidePanel();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
             this.sidePanel1.SuspendLayout();
@@ -52,20 +53,20 @@ namespace hanee.ThreeD
             this.sidePanel1.Controls.Add(this.textEdit1);
             this.sidePanel1.Controls.Add(this.labelControl1);
             this.sidePanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.sidePanel1.Location = new System.Drawing.Point(0, 109);
+            this.sidePanel1.Location = new System.Drawing.Point(0, 117);
             this.sidePanel1.Name = "sidePanel1";
             this.sidePanel1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 0);
-            this.sidePanel1.Size = new System.Drawing.Size(531, 26);
+            this.sidePanel1.Size = new System.Drawing.Size(531, 28);
             this.sidePanel1.TabIndex = 1;
             this.sidePanel1.Text = "sidePanel1";
             // 
             // textEdit1
             // 
             this.textEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textEdit1.Location = new System.Drawing.Point(67, 2);
+            this.textEdit1.Location = new System.Drawing.Point(68, 2);
             this.textEdit1.Name = "textEdit1";
             this.textEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.textEdit1.Size = new System.Drawing.Size(464, 18);
+            this.textEdit1.Size = new System.Drawing.Size(463, 20);
             this.textEdit1.TabIndex = 5;
             // 
             // labelControl1
@@ -76,7 +77,7 @@ namespace hanee.ThreeD
             this.labelControl1.Location = new System.Drawing.Point(5, 2);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.labelControl1.Size = new System.Drawing.Size(62, 16);
+            this.labelControl1.Size = new System.Drawing.Size(63, 17);
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "Command :";
             // 
@@ -87,7 +88,7 @@ namespace hanee.ThreeD
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(531, 109);
+            this.richTextBox1.Size = new System.Drawing.Size(531, 117);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -111,19 +112,19 @@ namespace hanee.ThreeD
             | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxControl1.Location = new System.Drawing.Point(67, 0);
             this.listBoxControl1.Name = "listBoxControl1";
-            this.listBoxControl1.Size = new System.Drawing.Size(206, 109);
+            this.listBoxControl1.Size = new System.Drawing.Size(206, 117);
             this.listBoxControl1.TabIndex = 6;
             this.listBoxControl1.Visible = false;
             // 
             // ControlCmdBar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.listBoxControl1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.sidePanel1);
             this.Name = "ControlCmdBar";
-            this.Size = new System.Drawing.Size(531, 135);
+            this.Size = new System.Drawing.Size(531, 145);
             this.sidePanel1.ResumeLayout(false);
             this.sidePanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();

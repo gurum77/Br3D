@@ -1,9 +1,45 @@
 ﻿using devDept.Eyeshot;
+using devDept.Eyeshot.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace hanee.ThreeD
 {
     static public class ModelHelper
     {
+        static public List<Entity> GetEntitiesInGroup(this Model model, int groupIndex)
+        {
+            return model.Entities.FindAll(ent => ent.GroupIndex == groupIndex);
+        }
+
+        // 모든 group index를 리턴
+        static public List<int> GetAllGroupIndexes(this Model model)
+        {
+            var groupIndexes = new Dictionary<int, bool>();
+            foreach(var ent in model.Entities)
+            {
+                if (ent.GroupIndex < 0)
+                    continue;
+                if (groupIndexes.ContainsKey(ent.GroupIndex))
+                    continue;
+                groupIndexes.Add(ent.GroupIndex, true);
+            }
+
+            return groupIndexes.Keys.ToList();
+        }
+
+        static public int GetLastGroupIndex(this Model model)
+        {
+            int lastGroupIndex = 0;
+            foreach(var ent in model.Entities)
+            {
+                if (lastGroupIndex < ent.GroupIndex)
+                    lastGroupIndex = ent.GroupIndex;
+            }
+
+            return lastGroupIndex;
+        }
+
         static public bool IsBusy(this Model model)
         {
             if (model.IsBusy)

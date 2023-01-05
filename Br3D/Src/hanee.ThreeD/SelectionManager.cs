@@ -224,10 +224,56 @@ namespace hanee.ThreeD
                 }
             }
 
+            // 같은 그룹의 객체를 몯두 선택해준다.
+            entities = SelectSameGroupedEntities(entities);
+
             hModel.Invalidate();
             return entities;
         }
 
+        // 같은 그룹의 객체를 모두 선택한다.
+        private List<Entity> SelectSameGroupedEntities(List<Entity> entities)
+        {
+            var entitiesInGroups = new Dictionary<Entity, bool>();
+
+            // group index
+            var groups = new Dictionary<int, bool>();
+            foreach (var ent in entities)
+            {
+                if (ent.GroupIndex < 0)
+                    continue;
+                if (groups.ContainsKey(ent.GroupIndex))
+                    continue;
+                groups.Add(ent.GroupIndex, true);
+                entitiesInGroups.Add(ent, true);
+            }
+
+            // 선택한 객체중에서 그룹이 없으면 그냥 리턴
+            if (groups.Count == 0)
+                return entities;
+
+            // 선택한 그룹의 객체를 선택
+            foreach (var ent in hModel.Entities)
+            {
+                if (ent.GroupIndex < 0)
+                    continue;
+                if (!groups.ContainsKey(ent.GroupIndex))
+                    continue;
+
+                // 이미 선택되어 있으면 통과
+                if (entitiesInGroups.ContainsKey(ent))
+                    continue;
+
+                ent.Selected = true;
+                entitiesInGroups.Add(ent, true);
+            }
+
+            // 최종 선택한 객체를 리턴
+            entities.Clear();
+            entities.AddRange(entitiesInGroups.Keys);
+            return entities;
+        }
+        
         void DrawSelectionBox(System.Drawing.Point p1, System.Drawing.Point p2, Color transparentColor, bool drawBorder, bool dottedBorder)
         {
             p1.Y = (int)(hModel.Height - p1.Y);
