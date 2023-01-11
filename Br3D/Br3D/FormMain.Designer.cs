@@ -204,6 +204,7 @@ namespace Br3D
             this.barButtonItemDimStyle = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemPlaySimulation = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemClippingPlane = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemGroup = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -234,6 +235,7 @@ namespace Br3D
             this.ribbonPageGroupTools = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupOrthoMode = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupOsnap = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup11 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageOptions = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupViewport = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -250,8 +252,7 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.ribbonPageGroup11 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.barButtonItemGroup = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemUpAxis = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
@@ -837,9 +838,10 @@ namespace Br3D
             this.barButtonItemDimStyle,
             this.barButtonItemPlaySimulation,
             this.barButtonItemClippingPlane,
-            this.barButtonItemGroup});
+            this.barButtonItemGroup,
+            this.barButtonItemUpAxis});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 142;
+            this.ribbonControl1.MaxItemId = 144;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.barButtonItemUndo);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.barButtonItemRedo);
@@ -1748,6 +1750,13 @@ namespace Br3D
             this.barButtonItemClippingPlane.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemClippingPlane.ImageOptions.SvgImage")));
             this.barButtonItemClippingPlane.Name = "barButtonItemClippingPlane";
             // 
+            // barButtonItemGroup
+            // 
+            this.barButtonItemGroup.Caption = "Group";
+            this.barButtonItemGroup.Id = 141;
+            this.barButtonItemGroup.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemGroup.ImageOptions.SvgImage")));
+            this.barButtonItemGroup.Name = "barButtonItemGroup";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -2027,6 +2036,12 @@ namespace Br3D
             this.ribbonPageGroupOsnap.Name = "ribbonPageGroupOsnap";
             this.ribbonPageGroupOsnap.Text = "Osnap";
             // 
+            // ribbonPageGroup11
+            // 
+            this.ribbonPageGroup11.ItemLinks.Add(this.barButtonItemGroup);
+            this.ribbonPageGroup11.Name = "ribbonPageGroup11";
+            this.ribbonPageGroup11.Text = "ribbonPageGroup11";
+            // 
             // ribbonPageOptions
             // 
             this.ribbonPageOptions.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -2043,6 +2058,7 @@ namespace Br3D
             // 
             this.ribbonPageGroup6.ItemLinks.Add(this.barSubItem2D3D);
             this.ribbonPageGroup6.ItemLinks.Add(this.barSubItemDisplayMode);
+            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItemUpAxis);
             this.ribbonPageGroup6.Name = "ribbonPageGroup6";
             this.ribbonPageGroup6.Text = "ribbonPageGroup6";
             // 
@@ -2161,18 +2177,12 @@ namespace Br3D
             // 
             this.colorDialog1.FullOpen = true;
             // 
-            // ribbonPageGroup11
+            // barButtonItemUpAxis
             // 
-            this.ribbonPageGroup11.ItemLinks.Add(this.barButtonItemGroup);
-            this.ribbonPageGroup11.Name = "ribbonPageGroup11";
-            this.ribbonPageGroup11.Text = "ribbonPageGroup11";
-            // 
-            // barButtonItemGroup
-            // 
-            this.barButtonItemGroup.Caption = "Group";
-            this.barButtonItemGroup.Id = 141;
-            this.barButtonItemGroup.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemGroup.ImageOptions.SvgImage")));
-            this.barButtonItemGroup.Name = "barButtonItemGroup";
+            this.barButtonItemUpAxis.Caption = "UpAxisZ";
+            this.barButtonItemUpAxis.Id = 143;
+            this.barButtonItemUpAxis.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemUpAxis.ImageOptions.SvgImage")));
+            this.barButtonItemUpAxis.Name = "barButtonItemUpAxis";
             // 
             // FormMain
             // 
@@ -2447,5 +2457,6 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemClippingPlane;
         private DevExpress.XtraBars.BarButtonItem barButtonItemGroup;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup11;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemUpAxis;
     }
 }

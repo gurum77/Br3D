@@ -27,7 +27,7 @@ namespace hanee.Cad.Tool
                 // group 리스트 보기
                 if (et.Value != null && et.Value.EqualsIgnoreCase("l"))
                 {
-                    CmdBarManager.AddHistory();
+                    CmdBarManager.InitTextEdit();
                     var groupsIndexes = model.GetAllGroupIndexes();
                     foreach (var gi in groupsIndexes)
                     {

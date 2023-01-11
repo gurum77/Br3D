@@ -775,6 +775,11 @@ namespace Br3D
             // group
             SetFunctionByElement(barButtonItemGroup, Group, LanguageHelper.Tr("Group"), "Group", "G", false);
 
+            // axis
+            SetFunctionByElement(barButtonItemUpAxis, UpAxis, LanguageHelper.Tr("UpAxis"), "UpAxis", "UpAxis", false);
+            
+
+
             // tools
             SetFunctionByElement(barButtonItemSingleView, ViewportSingle, LanguageHelper.Tr("Single"), "Single", null, false);
             SetFunctionByElement(barButtonItem1x1View, Viewport1x1, LanguageHelper.Tr("1x1"), "1x1", null, false);
@@ -1098,6 +1103,32 @@ namespace Br3D
         void GridSnap() => FlagGridSnap(barButtonItemGridSnap);
 
         async void Group() => await new ActionGroup(model).RunAsync();
+        void UpAxis()
+        {
+            if (model.OrientationMode == devDept.Graphics.orientationType.UpAxisZ)
+            {
+                model.OrientationMode = devDept.Graphics.orientationType.UpAxisY;
+            }
+            else
+            {
+                model.OrientationMode = devDept.Graphics.orientationType.UpAxisZ;
+            }
+
+            if(model.Viewports.Count > 0)
+                model.Viewports[0].SetView(viewType.Isometric);
+            if (model.Viewports.Count > 1)
+                model.Viewports[1].SetView(viewType.Top);
+            if (model.Viewports.Count > 2)
+                model.Viewports[2].SetView(viewType.Front);
+            if (model.Viewports.Count > 3)
+                model.Viewports[3].SetView(viewType.Right);
+
+            foreach (Viewport v in model.Viewports)
+                v.ZoomFit();
+
+            model.Invalidate();
+        }
+        
 
         void End() => new ActionOsnap(model, controlModel, Snapping.objectSnapType.End).Run();
         void Middle() => new ActionOsnap(model, controlModel, Snapping.objectSnapType.Mid).Run();
