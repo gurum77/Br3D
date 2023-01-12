@@ -903,9 +903,13 @@ namespace Br3D
 
 
             // object tree 갱신
-            ObjectTreeListHelper.RegenAsync(treeListObject, model, isDwg);
-
+            RegenObjectTreeList();
             RefreshDataSource();
+        }
+
+        void RegenObjectTreeList()
+        {
+            ObjectTreeListHelper.RegenAsync(treeListObject, model, isDwg);
         }
         void List() => new ActionList(model).Run();
         async void DimStyle() => await new ActionDimStyle(model).RunAsync();
@@ -1102,7 +1106,7 @@ namespace Br3D
         void OrthoMode() => FlagOrthoMode(barButtonItemOrthoMode);
         void GridSnap() => FlagGridSnap(barButtonItemGridSnap);
 
-        async void Group() => await new ActionGroup(model).RunAsync();
+        async void Group() => await new ActionGroup(model, RegenObjectTreeList).RunAsync();
         void UpAxis()
         {
             if (model.OrientationMode == devDept.Graphics.orientationType.UpAxisZ)

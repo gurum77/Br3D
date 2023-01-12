@@ -3,6 +3,7 @@ using devDept.Eyeshot;
 using devDept.Eyeshot.Entities;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
+using hanee.ThreeD;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -290,6 +291,17 @@ namespace Br3D
         {
             List<string> properties = new List<string>();
             properties.Add("Root");
+
+            // 그룹에 속해 있으면 그룹으로 넣는다.
+            if (ent is Entity entity)
+            {
+                if(entity.GroupIndex > -1)
+                {
+                    properties.Add(LanguageHelper.Tr("Group"));
+                    properties.Add(entity.GroupIndex.ToString());
+                }
+            }
+
             if (ent is devDept.Eyeshot.Translators.IEyeIfcObject)
             {
                 var ifc = ent as devDept.Eyeshot.Translators.IEyeIfcObject;
