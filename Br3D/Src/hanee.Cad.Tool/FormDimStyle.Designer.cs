@@ -29,11 +29,35 @@ namespace hanee.Cad.Tool
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.propertyGridControl1 = new DevExpress.XtraVerticalGrid.PropertyGridControl();
+            ((System.ComponentModel.ISupportInitialize)(this.propertyGridControl1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // propertyGridControl1
+            // 
+            this.propertyGridControl1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.propertyGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGridControl1.Location = new System.Drawing.Point(0, 0);
+            this.propertyGridControl1.Name = "propertyGridControl1";
+            this.propertyGridControl1.OptionsView.AllowReadOnlyRowAppearance = DevExpress.Utils.DefaultBoolean.True;
+            this.propertyGridControl1.Size = new System.Drawing.Size(379, 515);
+            this.propertyGridControl1.TabIndex = 0;
+            // 
+            // FormDimStyle
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(379, 515);
+            this.Controls.Add(this.propertyGridControl1);
+            this.Name = "FormDimStyle";
             this.Text = "FormDimStyle";
+            ((System.ComponentModel.ISupportInitialize)(this.propertyGridControl1)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private DevExpress.XtraVerticalGrid.PropertyGridControl propertyGridControl1;
     }
 }

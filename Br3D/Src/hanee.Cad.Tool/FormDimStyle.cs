@@ -11,6 +11,9 @@ namespace hanee.Cad.Tool
             InitializeComponent();
 
             this.entities = entities;
+            propertyGridControl1.SelectedObjects = entities.ToArray();
+
+
         }
     }
 }
