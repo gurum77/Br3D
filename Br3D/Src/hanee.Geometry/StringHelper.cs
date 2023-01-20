@@ -38,12 +38,13 @@ namespace hanee.Geometry
      
         public static List<HeadValue> ToStrings(this string str, params char[] heads)
         {
-            char[] tokens = { ' ', ',', '=', '\n', '\t' };
+            char[] tokens = { ' ', ',', '=', '\n', '\t', '{', '}', '[', ']', '(', ')' };
             var texts = str.Split(tokens, StringSplitOptions.RemoveEmptyEntries);
 
             var values = new List<HeadValue>();
             const char emptyHead = ' ';
             char head = emptyHead;
+            char lastHead = ' ';
             foreach (var text in texts)
             {
                 // 헤더인지?
@@ -67,9 +68,13 @@ namespace hanee.Geometry
                 // head가 없으면 숫자인지 보지도 말자.
                 if (head == emptyHead)
                     continue;
+                // 마지막에 찾은 head가 반복 되면 무시한다.
+                if (head == lastHead)
+                    continue;
 
                 values.Add(new HeadValue(head, text));
                 head = emptyHead;
+                lastHead = head;
             }
 
             return values;
