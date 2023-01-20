@@ -168,6 +168,7 @@
     <Compile Include="ControlScriptCad.Designer.cs">
       <DependentUpon>ControlScriptCad.cs</DependentUpon>
     </Compile>
+    <Compile Include="DimStyleProperties.cs" />
     <Compile Include="FormBlock.cs">
       <SubType>Form</SubType>
     </Compile>

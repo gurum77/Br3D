@@ -23,6 +23,7 @@ namespace hanee.ThreeD
             return true;
         }
 
+        // linear dim을 선택하면 linear dim의 plane으로 workspace를 시작한다.
         public List<GripPoint> GetGripPoints(Entity entity, Model model)
         {
             var ld = entity as LinearDim;

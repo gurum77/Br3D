@@ -1,4 +1,5 @@
-﻿using devDept.Eyeshot.Entities;
+﻿using devDept.Eyeshot;
+using devDept.Eyeshot.Entities;
 using hanee.Geometry;
 using hanee.ThreeD;
 using System.Collections.Generic;
@@ -43,8 +44,13 @@ namespace hanee.Cad.Tool
                 FormDimStyle form = new FormDimStyle(entities);
                 if(form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
+                    var data = new RegenParams(0.001, model);
+                    entities.ForEach(ent => ent.Regen(data));
 
+                    model.Entities.Regen();
+                    model.Invalidate();
                 }
+
                 break;
             }
 
