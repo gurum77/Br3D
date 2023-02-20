@@ -245,7 +245,11 @@ namespace hanee.ThreeD
                 return;
 
             var commandKey = listBoxControl1.SelectedItem.ToString().ToLower();
-            RunCommand(commandKey);  
+
+            RunCommand(commandKey);
+
+            VisibleCmdList(false);
+            SetTextEdit("");
         }
 
         internal void RunCommand(string cmdKey)

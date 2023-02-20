@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-12 08:57+0900\n"
-"PO-Revision-Date: 2023-01-12 08:58+0900\n"
+"POT-Creation-Date: 2023-02-21 08:45+0900\n"
+"PO-Revision-Date: 2023-02-21 08:45+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ko_KR\n"
@@ -113,7 +113,7 @@ msgstr "정의"
 msgid "Scale"
 msgstr "스케일"
 
-#: Br3D/Define.cs:16
+#: Br3D/Define.cs:16 Src/hanee.Cad.Tool/FormDimStyle.cs:37
 msgid "Method"
 msgstr "지정방법"
 
@@ -212,6 +212,7 @@ msgid "Block"
 msgstr "블럭"
 
 #: Br3D/FormMain.cs:385 Br3D/FormMain.cs:691
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:45
 msgid "Text"
 msgstr "문자"
 
@@ -240,7 +241,7 @@ msgstr "레이어"
 #: Br3D/FormMain.cs:392 Br3D/FormOptions.cs:40
 #: Src/hanee.Cad.Tool/ActionList.cs:47
 #: Src/hanee.Cad.Tool/ControlScriptCad.cs:31
-#: Src/hanee.Cad.Tool/LayerControl.cs:60
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:36 Src/hanee.Cad.Tool/LayerControl.cs:60
 msgid "Color"
 msgstr "색상"
 
@@ -248,8 +249,8 @@ msgstr "색상"
 msgid "Color Type"
 msgstr "색상 종류"
 
-#: Br3D/FormMain.cs:394 Src/hanee.Cad.Tool/ActionGroup.cs:37
-#: Src/hanee.Cad.Tool/ActionGroup.cs:49
+#: Br3D/FormMain.cs:394 Src/hanee.Cad.Tool/ActionGroup.cs:40
+#: Src/hanee.Cad.Tool/ActionGroup.cs:52
 msgid "Group Index"
 msgstr "그룹"
 
@@ -270,7 +271,7 @@ msgid "Block Name"
 msgstr "블럭명"
 
 #: Br3D/FormMain.cs:400 Src/hanee.Cad.Tool/ActionList.cs:92
-#: Src/hanee.Cad.Tool/ActionText.cs:88
+#: Src/hanee.Cad.Tool/ActionText.cs:88 Src/hanee.Cad.Tool/FormDimStyle.cs:35
 msgid "Contents"
 msgstr "내용"
 
@@ -320,7 +321,7 @@ msgstr "새로 만들기"
 msgid "Open"
 msgstr "열기"
 
-#: Br3D/FormMain.cs:668 Br3D/FormMain.cs:1158
+#: Br3D/FormMain.cs:668 Br3D/FormMain.cs:1162
 msgid "Save"
 msgstr "저장"
 
@@ -460,7 +461,7 @@ msgstr "직경"
 msgid "Radius"
 msgstr "반지름"
 
-#: Br3D/FormMain.cs:714
+#: Br3D/FormMain.cs:714 Src/hanee.Cad.Tool/FormDimStyle.cs:29
 msgid "Leader"
 msgstr "지시선"
 
@@ -614,7 +615,7 @@ msgstr "중심점"
 msgid "Point"
 msgstr "점"
 
-#: Br3D/FormMain.cs:776
+#: Br3D/FormMain.cs:776 Br3D/ObjectTreeListHelper.cs:300
 msgid "Group"
 msgstr "그룹"
 
@@ -714,23 +715,23 @@ msgstr "업데이트 체크"
 msgid "About"
 msgstr "About"
 
-#: Br3D/FormMain.cs:1158
+#: Br3D/FormMain.cs:1162
 msgid "Do you want to save the file you are editing?"
 msgstr "편집중인 파일을 저장하시겠습니까?"
 
-#: Br3D/FormMain.cs:1194
+#: Br3D/FormMain.cs:1225
 msgid "Unsupported file."
 msgstr "지원하지 않는 파일입니다."
 
-#: Br3D/FormMain.cs:1269
+#: Br3D/FormMain.cs:1300
 msgid "Install now?"
 msgstr "지금 설치하시겠습니까?"
 
-#: Br3D/FormMain.cs:1269
+#: Br3D/FormMain.cs:1300
 msgid " update available"
 msgstr " 업데이트 가능"
 
-#: Br3D/FormMain.cs:1279
+#: Br3D/FormMain.cs:1310
 msgid "Update check failed! - wyUpdate.exe not found!"
 msgstr "업데이트 체크 실패! - wyUpdate.exe가 없습니다!"
 
@@ -829,7 +830,7 @@ msgstr "중심점"
 #: Src/hanee.Cad.Tool/ActionAngle.cs:40 Src/hanee.Cad.Tool/ActionArc.cs:36
 #: Src/hanee.Cad.Tool/ActionCircle.cs:172
 #: Src/hanee.Cad.Tool/ActionCircle.cs:191
-#: Src/hanee.Cad.Tool/ActionDimLinear.cs:136
+#: Src/hanee.Cad.Tool/ActionDimLinear.cs:106
 #: Src/hanee.Cad.Tool/ActionLine.cs:54 Src/hanee.Cad.Tool/ActionMirror.cs:41
 msgid "First point"
 msgstr "첫번째 점"
@@ -837,7 +838,7 @@ msgstr "첫번째 점"
 #: Src/hanee.Cad.Tool/ActionAngle.cs:44 Src/hanee.Cad.Tool/ActionArc.cs:41
 #: Src/hanee.Cad.Tool/ActionCircle.cs:178
 #: Src/hanee.Cad.Tool/ActionCircle.cs:197
-#: Src/hanee.Cad.Tool/ActionDimLinear.cs:147
+#: Src/hanee.Cad.Tool/ActionDimLinear.cs:118
 #: Src/hanee.Cad.Tool/ActionMirror.cs:48
 msgid "Second point"
 msgstr "두번째 점"
@@ -926,7 +927,7 @@ msgstr "문자 위치 - 직경"
 msgid "Point(Enter : Finish)"
 msgstr "점(엔터 : 종료)"
 
-#: Src/hanee.Cad.Tool/ActionDimStyle.cs:25
+#: Src/hanee.Cad.Tool/ActionDimStyle.cs:26
 msgid "Select dimensions(A:All dimensions)"
 msgstr "치수 선택(A:모든 치수)"
 
@@ -970,19 +971,19 @@ msgstr "다른 객체 선택"
 msgid "Select fillet arc"
 msgstr "필렛 아크 선택"
 
-#: Src/hanee.Cad.Tool/ActionGroup.cs:24
+#: Src/hanee.Cad.Tool/ActionGroup.cs:27
 msgid "Select entities(L : List, I : Group index)"
 msgstr "객체 선택(L : 목록보기, I : 그룹 번호 입력)"
 
-#: Src/hanee.Cad.Tool/ActionGroup.cs:31
+#: Src/hanee.Cad.Tool/ActionGroup.cs:34
 msgid "***** Group List *****"
 msgstr "***** 그룹 목록 *****"
 
-#: Src/hanee.Cad.Tool/ActionGroup.cs:38
+#: Src/hanee.Cad.Tool/ActionGroup.cs:41
 msgid "Entities"
 msgstr "객체"
 
-#: Src/hanee.Cad.Tool/ActionGroup.cs:67
+#: Src/hanee.Cad.Tool/ActionGroup.cs:70
 msgid "G : Group, U : Ungroup"
 msgstr "G : 그룹, U : 그룹해제"
 
@@ -1252,6 +1253,54 @@ msgstr "새 블럭"
 msgid " is not found"
 msgstr " 는 없습니다"
 
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:27
+msgid "First"
+msgstr "첫번째"
+
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:28
+msgid "Second"
+msgstr "두번째"
+
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:31
+msgid "Prefix"
+msgstr "접두사"
+
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:32
+msgid "Suffix"
+msgstr "접미사"
+
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:33
+msgid "Head size"
+msgstr "크기"
+
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:34 Src/hanee.Cad.Tool/FormDimStyle.cs:38
+msgid "Location"
+msgstr "위치"
+
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:40
+msgid "Tolerance type"
+msgstr "공차 종류"
+
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:41
+msgid "Upper"
+msgstr "위"
+
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:42
+msgid "Lower"
+msgstr "아래"
+
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:43
+msgid "Precision"
+msgstr "자릿수"
+
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:46
+msgid "Arrow"
+msgstr "화살표"
+
+#: Src/hanee.Cad.Tool/FormDimStyle.cs:47
+msgid "Tolerance"
+msgstr "공차"
+
 #: Src/hanee.Cad.Tool/FormLayer.cs:26 Src/hanee.Cad.Tool/FormLineType.cs:29
 #: Src/hanee.Cad.Tool/FormResult.cs:19 Src/hanee.Cad.Tool/FormTextStyle.cs:29
 msgid "Close"
@@ -1370,6 +1419,12 @@ msgstr "색 업데이트"
 #: Src/hanee.ThreeD/CurColorBarEditItem.cs:57
 msgid "More colors"
 msgstr "더 많은 색"
+
+#~ msgid "Left"
+#~ msgstr "남음"
+
+#~ msgid "Right"
+#~ msgstr "오른쪽"
 
 #~ msgid "Line width"
 #~ msgstr "선 두께"
@@ -1632,9 +1687,6 @@ msgstr "더 많은 색"
 
 #~ msgid "Folder(s)"
 #~ msgstr "폴더"
-
-#~ msgid "Left"
-#~ msgstr "남음"
 
 #~ msgid "Dark"
 #~ msgstr "어두움"
@@ -1909,9 +1961,6 @@ msgstr "더 많은 색"
 
 #~ msgid "By date created"
 #~ msgstr "생성시간 순"
-
-#~ msgid "By size"
-#~ msgstr "크기 순"
 
 #~ msgid "By type"
 #~ msgstr "유형 순"

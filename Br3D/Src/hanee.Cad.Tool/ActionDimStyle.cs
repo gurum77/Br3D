@@ -41,7 +41,7 @@ namespace hanee.Cad.Tool
                     entities = ek.Key;
                 }
 
-                FormDimStyle form = new FormDimStyle(entities);
+                FormDimStyle form = new FormDimStyle(entities, model);
                 if(form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = new RegenParams(0.001, model);

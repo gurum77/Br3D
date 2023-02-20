@@ -21,13 +21,7 @@ namespace Br3D.Actions
         {
             StartAction();
 
-            var dlg = new XtraSaveFileDialog();
-            dlg.Filter = FileHelper.FilterForSaveDialog();
-            dlg.DefaultExt = "dwg";
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                formMain.Export(dlg.FileName);
-            }
+            formMain.SaveAs();
 
             EndAction();
         }

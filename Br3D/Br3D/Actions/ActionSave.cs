@@ -1,9 +1,11 @@
-﻿using hanee.ThreeD;
+﻿using DevExpress.XtraEditors;
+using hanee.ThreeD;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Br3D.Actions
 {
@@ -18,15 +20,8 @@ namespace Br3D.Actions
         public override void Run()
         {
             StartAction();
-            
-            if (string.IsNullOrEmpty(formMain.opendFilePath))
-            {
-                formMain.SaveAs();
-            }
-            else
-            {
-                formMain.Export(formMain.opendFilePath);
-            }
+
+            formMain.Save();
 
             EndAction();
         }

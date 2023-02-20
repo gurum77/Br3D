@@ -1179,8 +1179,35 @@ namespace Br3D
         void Open() => new ActionOpen(model, this).Run();
 
         // 파일이 열려 있으면 바로 저장
-        void Save() => new ActionSave(model, this).Run();
-        public void SaveAs() => new ActionSaveAs(model, this).Run();
+        // saveas는 액션을 호출하지 말자. saveas, save, export는 서로 호출하는 관계여서 action이 중복됨
+        public void Save()
+        {
+            if (string.IsNullOrEmpty(opendFilePath))
+            {
+                var dlg = new XtraSaveFileDialog();
+                dlg.Filter = FileHelper.FilterForSaveDialog();
+                dlg.DefaultExt = "dwg";
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    Export(dlg.FileName);
+                }
+            }
+            else
+            {
+                Export(opendFilePath);
+            }
+        }
+        // saveas는 액션을 호출하지 말자. saveas, save, export는 서로 호출하는 관계여서 action이 중복됨
+        public void SaveAs()
+        {
+            var dlg = new XtraSaveFileDialog();
+            dlg.Filter = FileHelper.FilterForSaveDialog();
+            dlg.DefaultExt = "dwg";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                Export(dlg.FileName);
+            }
+        }
 
         // ribbon - import
         // iges, igs, stl, step, stp, obj, las, dwg, dxf, ifc, ifczip, 3ds, lus
