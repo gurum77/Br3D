@@ -776,11 +776,6 @@ namespace hanee.ThreeD
 
             if (this.IsBusy())
                 return;
-
-            if(ActionMode == actionType.Rotate)
-            {
-                ActionMode = actionType.None;
-            }
         }
 
         protected override void OnMouseMove(System.Windows.Forms.MouseEventArgs e)
