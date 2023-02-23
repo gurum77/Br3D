@@ -32,7 +32,7 @@ namespace Br3D
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.TileItemElement tileItemElement1 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement2 = new DevExpress.XtraEditors.TileItemElement();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tileNavSubItemInsertImage = new DevExpress.XtraBars.Navigation.TileNavSubItem();
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
@@ -45,6 +45,14 @@ namespace Br3D
             this.repositoryItemComboBoxLayerName = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemComboBoxLineType = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemComboBoxBlock = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.categoryRender = new DevExpress.XtraVerticalGrid.Rows.CategoryRow();
+            this.rowShowEdges = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
+            this.rowEdgeThickness = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
+            this.rowShowInternalWires = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
+            this.rowSilhouetteDrawing = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
+            this.rowPlanarReflections = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
+            this.rowPlanarReflectionsIntensity = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
+            this.rowRealisticShadowQuality = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
             this.categoryGeneral = new DevExpress.XtraVerticalGrid.Rows.CategoryRow();
             this.rowEntityType = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
             this.rowVisible = new DevExpress.XtraVerticalGrid.Rows.EditorRow();
@@ -205,6 +213,8 @@ namespace Br3D
             this.barButtonItemPlaySimulation = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemClippingPlane = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemGroup = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemUpAxis = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemRenderOptions = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -252,7 +262,6 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.barButtonItemUpAxis = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
@@ -293,8 +302,8 @@ namespace Br3D
             // 
             // 
             this.tileNavSubItemInsertImage.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement1.Text = "Image";
-            this.tileNavSubItemInsertImage.Tile.Elements.Add(tileItemElement1);
+            tileItemElement2.Text = "Image";
+            this.tileNavSubItemInsertImage.Tile.Elements.Add(tileItemElement2);
             this.tileNavSubItemInsertImage.Tile.Name = "tileBarItem1";
             // 
             // dockManager1
@@ -380,6 +389,7 @@ namespace Br3D
             this.repositoryItemComboBoxLineType,
             this.repositoryItemComboBoxBlock});
             this.propertyGridControl1.Rows.AddRange(new DevExpress.XtraVerticalGrid.Rows.BaseRow[] {
+            this.categoryRender,
             this.categoryGeneral,
             this.categoryCircle,
             this.categoryBlock,
@@ -415,6 +425,61 @@ namespace Br3D
             this.repositoryItemComboBoxBlock.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemComboBoxBlock.Name = "repositoryItemComboBoxBlock";
+            // 
+            // categoryRender
+            // 
+            this.categoryRender.ChildRows.AddRange(new DevExpress.XtraVerticalGrid.Rows.BaseRow[] {
+            this.rowShowEdges,
+            this.rowEdgeThickness,
+            this.rowShowInternalWires,
+            this.rowSilhouetteDrawing,
+            this.rowPlanarReflections,
+            this.rowPlanarReflectionsIntensity,
+            this.rowRealisticShadowQuality});
+            this.categoryRender.Name = "categoryRender";
+            this.categoryRender.Properties.Caption = "Render";
+            // 
+            // rowShowEdges
+            // 
+            this.rowShowEdges.Name = "rowShowEdges";
+            this.rowShowEdges.Properties.Caption = "Show edges";
+            this.rowShowEdges.Properties.FieldName = "showEdges";
+            // 
+            // rowEdgeThickness
+            // 
+            this.rowEdgeThickness.Name = "rowEdgeThickness";
+            this.rowEdgeThickness.Properties.Caption = "Edge thickness";
+            this.rowEdgeThickness.Properties.FieldName = "edgeThickness";
+            // 
+            // rowShowInternalWires
+            // 
+            this.rowShowInternalWires.Name = "rowShowInternalWires";
+            this.rowShowInternalWires.Properties.Caption = "Show internal wires";
+            this.rowShowInternalWires.Properties.FieldName = "showInternalWires";
+            // 
+            // rowSilhouetteThickness
+            // 
+            this.rowSilhouetteDrawing.Name = "rowSilhouetteDrawing";
+            this.rowSilhouetteDrawing.Properties.Caption = "Silhouettes drawing";
+            this.rowSilhouetteDrawing.Properties.FieldName = "silhouettesDrawing";
+            // 
+            // rowPlanarReflections
+            // 
+            this.rowPlanarReflections.Name = "rowPlanarReflections";
+            this.rowPlanarReflections.Properties.Caption = "Planar reflections";
+            this.rowPlanarReflections.Properties.FieldName = "planarReflections";
+            // 
+            // rowPlanarReflectionsIntensity
+            // 
+            this.rowPlanarReflectionsIntensity.Name = "rowPlanarReflectionsIntensity";
+            this.rowPlanarReflectionsIntensity.Properties.Caption = "Planar Reflections Intensity";
+            this.rowPlanarReflectionsIntensity.Properties.FieldName = "planarReflectionsIntensity";
+            // 
+            // rowRealisticShadowQuality
+            // 
+            this.rowRealisticShadowQuality.Name = "rowRealisticShadowQuality";
+            this.rowRealisticShadowQuality.Properties.Caption = "Realistic shadow quality";
+            this.rowRealisticShadowQuality.Properties.FieldName = "realisticShadowQuality";
             // 
             // categoryGeneral
             // 
@@ -839,9 +904,10 @@ namespace Br3D
             this.barButtonItemPlaySimulation,
             this.barButtonItemClippingPlane,
             this.barButtonItemGroup,
-            this.barButtonItemUpAxis});
+            this.barButtonItemUpAxis,
+            this.barButtonItemRenderOptions});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 144;
+            this.ribbonControl1.MaxItemId = 145;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.barButtonItemUndo);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.barButtonItemRedo);
@@ -1757,6 +1823,21 @@ namespace Br3D
             this.barButtonItemGroup.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemGroup.ImageOptions.SvgImage")));
             this.barButtonItemGroup.Name = "barButtonItemGroup";
             // 
+            // barButtonItemUpAxis
+            // 
+            this.barButtonItemUpAxis.Caption = "UpAxisZ";
+            this.barButtonItemUpAxis.Id = 143;
+            this.barButtonItemUpAxis.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemUpAxis.ImageOptions.SvgImage")));
+            this.barButtonItemUpAxis.Name = "barButtonItemUpAxis";
+            // 
+            // barButtonItemRenderOptions
+            // 
+            this.barButtonItemRenderOptions.Caption = "Render options";
+            this.barButtonItemRenderOptions.Id = 144;
+            this.barButtonItemRenderOptions.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemRenderOptions.ImageOptions.SvgImage")));
+            this.barButtonItemRenderOptions.Name = "barButtonItemRenderOptions";
+            this.barButtonItemRenderOptions.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText;
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -2059,6 +2140,7 @@ namespace Br3D
             this.ribbonPageGroup6.ItemLinks.Add(this.barSubItem2D3D);
             this.ribbonPageGroup6.ItemLinks.Add(this.barSubItemDisplayMode);
             this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItemUpAxis);
+            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItemRenderOptions);
             this.ribbonPageGroup6.Name = "ribbonPageGroup6";
             this.ribbonPageGroup6.Text = "ribbonPageGroup6";
             // 
@@ -2176,13 +2258,6 @@ namespace Br3D
             // colorDialog1
             // 
             this.colorDialog1.FullOpen = true;
-            // 
-            // barButtonItemUpAxis
-            // 
-            this.barButtonItemUpAxis.Caption = "UpAxisZ";
-            this.barButtonItemUpAxis.Id = 143;
-            this.barButtonItemUpAxis.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemUpAxis.ImageOptions.SvgImage")));
-            this.barButtonItemUpAxis.Name = "barButtonItemUpAxis";
             // 
             // FormMain
             // 
@@ -2376,7 +2451,6 @@ namespace Br3D
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
         private ControlAds controlAds1;
-        private DevExpress.XtraBars.Docking.AutoHideContainer hideContainerLeft;
         private DevExpress.XtraBars.BarButtonItem barButtonItemDrawBox;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageDraw3D;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
@@ -2458,5 +2532,15 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemGroup;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup11;
         private DevExpress.XtraBars.BarButtonItem barButtonItemUpAxis;
+        private DevExpress.XtraVerticalGrid.Rows.CategoryRow categoryRender;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowShowEdges;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowEdgeThickness;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowShowInternalWires;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowSilhouetteDrawing;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowPlanarReflections;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowPlanarReflectionsIntensity;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemRenderOptions;
+        private DevExpress.XtraVerticalGrid.Rows.EditorRow rowRealisticShadowQuality;
+        private DevExpress.XtraBars.Docking.AutoHideContainer hideContainerLeft;
     }
 }

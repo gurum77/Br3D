@@ -68,6 +68,7 @@ namespace Br3D
             hModel.BoundingBox.Visible = true;
         }
 
+
         private void InitGraphics()
         {
             hModel.AntiAliasing = true;
@@ -416,7 +417,12 @@ namespace Br3D
 
         public void RefreshPropertyGridControl(object selectedObj)
         {
-            if (selectedObj is Entity)
+            if(selectedObj == null)
+            {
+                ModelProperties modelProperties = new ModelProperties(hModel);
+                propertyGridControl1.SelectedObject = modelProperties;
+            }
+            else if (selectedObj is Entity)
             {
                 EntityProperties entityProperties = new EntityProperties(selectedObj as Entity);
                 propertyGridControl1.SelectedObject = entityProperties;

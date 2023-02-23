@@ -38,3 +38,8 @@
 /Br3D/Src/hanee.Cam/obj/Debug
 /Br3D/Src/hanee.Cam/bin/Release
 /Br3D/Src/hanee.Cam/obj
+
+Setup_Br3D.exe
+Setup_Br3DLT.exe
+*.wyu
+/Src/hanee.terrain.Tool/bin/Release

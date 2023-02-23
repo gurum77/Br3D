@@ -131,6 +131,10 @@ namespace Br3D
             Update2D3DButton();
             UpdateDisplayModeButton();
             UpdateSnapButton();
+
+            // properties grid 초기화
+            controlModel.RefreshPropertyGridControl(null);
+
         }
 
 
@@ -326,7 +330,7 @@ namespace Br3D
             }
             catch
             {
-                
+
             }
             return null;
         }
@@ -379,11 +383,19 @@ namespace Br3D
             dockPanelProperties.Text = LanguageHelper.Tr("Properties");
 
             // propertygrid
+            categoryRender.Properties.Caption = LanguageHelper.Tr("Render");
             categoryGeneral.Properties.Caption = LanguageHelper.Tr("General");
             categoryBlock.Properties.Caption = LanguageHelper.Tr("Block");
             categoryLineType.Properties.Caption = LanguageHelper.Tr("Line Type");
             categoryText.Properties.Caption = LanguageHelper.Tr("Text");
 
+            rowShowEdges.Properties.Caption = LanguageHelper.Tr("Show Edges");
+            rowEdgeThickness.Properties.Caption = LanguageHelper.Tr("Edge Thickness");
+            rowShowInternalWires.Properties.Caption = LanguageHelper.Tr("Show Internal Wires");
+            rowSilhouetteDrawing.Properties.Caption = LanguageHelper.Tr("Silhouette Drawing");
+            rowPlanarReflections.Properties.Caption = LanguageHelper.Tr("Planar Reflections");
+            rowPlanarReflectionsIntensity.Properties.Caption = LanguageHelper.Tr("Planar Reflections Intensity");
+            rowRealisticShadowQuality.Properties.Caption = LanguageHelper.Tr("Realistic Shadow Quality");
             rowEntityType.Properties.Caption = LanguageHelper.Tr("Entity Type");
             rowVisible.Properties.Caption = LanguageHelper.Tr("Visible");
             rowBoxMax.Properties.Caption = LanguageHelper.Tr("Max");
@@ -406,6 +418,7 @@ namespace Br3D
             rowBackward.Properties.Caption = LanguageHelper.Tr("Backward");
             rowUpsideDown.Properties.Caption = LanguageHelper.Tr("Upside Down");
             rowAlignment.Properties.Caption = LanguageHelper.Tr("Alignment");
+            
 
 
         }
@@ -507,18 +520,24 @@ namespace Br3D
 
         private void PropertyGridControl1_CellValueChanged(object sender, DevExpress.XtraVerticalGrid.Events.CellValueChangedEventArgs e)
         {
-            var entProp = propertyGridControl1.SelectedObject as EntityProperties;
-            if (entProp == null)
-                return;
-
             try
             {
-                model.TempEntities.Clear();
-                model.Entities.Regen();
+                var modelProp = propertyGridControl1.SelectedObject as ModelProperties;
+                if (modelProp != null)
+                {
+                    model.Invalidate();
+                }
 
-                propertyGridControl1.UpdateData();
+                var entProp = propertyGridControl1.SelectedObject as EntityProperties;
+                if (entProp != null)
+                {
+                    model.TempEntities.Clear();
+                    model.Entities.Regen();
 
-                model.Invalidate();
+                    propertyGridControl1.UpdateData();
+
+                    model.Invalidate();
+                }
             }
             catch (Exception ex)
             {
@@ -670,7 +689,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemSaveImage, SaveImage, LanguageHelper.Tr("Save Image"), "SaveImage", "si");
             SetFunctionByElement(barButtonItemWorkspace, Workspace, LanguageHelper.Tr("Workspace"), "Workspace", "ws");
             SetFunctionByElement(barButtonItemClippingPlane, ClippingPlane, LanguageHelper.Tr("Clipping Plane"), "ClippingPlane", "cp");
-            
+
             SetFunctionByElement(barButtonItemExit, Exit, LanguageHelper.Tr("Exit"), "Exit", null);
 
             SetFunctionByElement(barButtonItemUndo, Undo, LanguageHelper.Tr("Undo"), "Undo", "u");
@@ -777,7 +796,7 @@ namespace Br3D
 
             // axis
             SetFunctionByElement(barButtonItemUpAxis, UpAxis, LanguageHelper.Tr("UpAxis"), "UpAxis", "UpAxis", false);
-            
+
 
 
             // tools
@@ -790,7 +809,7 @@ namespace Br3D
             SetFunctionByElement(barButtonItemTextStyle, TextStyle, LanguageHelper.Tr("Text Style"), "TextStyle", "ts");
             SetFunctionByElement(barButtonItemLineType, LineType, LanguageHelper.Tr("Line Type"), "LineType", "lt");
             SetFunctionByElement(barButtonItemDimStyle, DimStyle, LanguageHelper.Tr("Dim Style"), "DimStyle", "ds");
-            
+
             SetFunctionByElement(barButtonItemList, List, LanguageHelper.Tr("List"), "List", "list");
 
             // options
@@ -800,6 +819,8 @@ namespace Br3D
             SetFunctionByElement(barButtonItemShaded, Shaded, LanguageHelper.Tr("Shaded"), "Shaded", null, false);
             SetFunctionByElement(barButtonItemHiddenLines, HiddenLines, LanguageHelper.Tr("Hidden lines"), "HiddenLines", null, false);
             SetFunctionByElement(barButtonItemWireframe, Wireframe, LanguageHelper.Tr("Wireframe"), "Wireframe", null, false);
+            SetFunctionByElement(barButtonItemRenderOptions, RenderOptions, LanguageHelper.Tr("Render options"), "RenderOptions", "ro", false);
+            
 
             SetFunctionByElement(barButtonItemShowGrid, null, LanguageHelper.Tr("Grid"), null, null, false);
             SetFunctionByElement(barButtonItemShowToolbar, null, LanguageHelper.Tr("Toolbar"), null, null, false);
@@ -927,6 +948,12 @@ namespace Br3D
         void Shaded() => FlagDisplayMode(displayType.Shaded);
         void HiddenLines() => FlagDisplayMode(displayType.HiddenLines);
         void Wireframe() => FlagDisplayMode(displayType.Wireframe);
+        void RenderOptions()
+        {
+            panelContainer1.Show();
+            propertyGridControl1.Show();
+            controlModel.RefreshPropertyGridControl(null);
+        }
 
         public void ShowBoundary() => ShowBoundary(!model.BoundingBox.Visible);
 
@@ -977,7 +1004,7 @@ namespace Br3D
         {
             if (e.WorkUnit is ReadFileAsync rfa)
             {
-                if(rfa.Result != true &&  !string.IsNullOrEmpty(rfa.Log))
+                if (rfa.Result != true && !string.IsNullOrEmpty(rfa.Log))
                 {
                     MessageBox.Show(rfa.Log);
                     return;
@@ -1118,7 +1145,7 @@ namespace Br3D
                 model.OrientationMode = devDept.Graphics.orientationType.UpAxisZ;
             }
 
-            if(model.Viewports.Count > 0)
+            if (model.Viewports.Count > 0)
                 model.Viewports[0].SetView(viewType.Isometric);
             if (model.Viewports.Count > 1)
                 model.Viewports[1].SetView(viewType.Top);
@@ -1132,7 +1159,7 @@ namespace Br3D
 
             model.Invalidate();
         }
-        
+
 
         void End() => new ActionOsnap(model, controlModel, Snapping.objectSnapType.End).Run();
         void Middle() => new ActionOsnap(model, controlModel, Snapping.objectSnapType.Mid).Run();

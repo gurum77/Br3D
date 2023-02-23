@@ -220,6 +220,7 @@
     <Compile Include="FormOptions.Designer.cs">
       <DependentUpon>FormOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModelProperties.cs" />
     <Compile Include="MRUManager.cs" />
     <Compile Include="ObjectTreeListHelper.cs" />
     <Compile Include="Program.cs" />
