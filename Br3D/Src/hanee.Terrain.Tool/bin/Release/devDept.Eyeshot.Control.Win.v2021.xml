@@ -2544,6 +2544,11 @@
             Gets the motion end point.
             </summary>
         </member>
+        <member name="M:devDept.Eyeshot.Entities.Toolpath.Motion.Length">
+            <summary>
+            Gets the motion length.
+            </summary>
+        </member>
         <member name="P:devDept.Eyeshot.Entities.Toolpath.Tool">
             <summary>
             Gets or sets tool number.
@@ -2580,6 +2585,12 @@
             <summary>
             Gets or sets next 3D point.
             </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Entities.Toolpath.LinearMotion.Length">
+            <summary>
+            Gets linear motion length.
+            </summary>
+            <returns>A value representing the linear motion length.</returns>
         </member>
         <member name="T:devDept.Eyeshot.Entities.Toolpath.CircularMotion">
             <summary>
@@ -2631,6 +2642,12 @@
             <summary>
             Gets or sets arc angle.
             </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Entities.Toolpath.CircularMotion.Length">
+            <summary>
+            Gets the circular motion length
+            </summary>
+            <returns>A value representing the circular motion length</returns>
         </member>
         <member name="F:devDept.Eyeshot.Entities.Toolpath.CircularMotion.points">
             <summary>
@@ -5997,6 +6014,16 @@
             <param name="weldMaxGap">The welding maximum acceptable gap between vertices. Zero for auto-estimation.</param>
             <returns>The resulting <see cref="T:devDept.Eyeshot.Entities.Mesh"/> object.</returns>
         </member>
+        <member name="M:devDept.Eyeshot.Entities.Brep.CloneAndMeshSkin3(System.Double[])">
+            <summary>
+            Clone the Brep, rebuild, convert linear edges as Nurbs and mesh (mesher) using the specified edge max lengths.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Entities.Brep.GetMidPoint(devDept.Eyeshot.Entities.Brep.Face,devDept.Geometry.Point3D,devDept.Geometry.Point3D)">
+            <summary>
+            Generates the mid point on the edge that contains P1 and P2.
+            </summary>
+        </member>
         <member name="T:devDept.Eyeshot.Entities.Brep.silhouettesDrawingType">
             <summary>
             The Brep silhouettes drawing type.
@@ -6269,12 +6296,23 @@
         </member>
         <member name="M:devDept.Eyeshot.Entities.Brep.Intersection(devDept.Eyeshot.Entities.Brep,devDept.Eyeshot.Entities.Brep)">
             <summary>
-             Compute the Intersection of the solidA with the solidB. 
+              <para>Compute the Intersection of the solidA (gray in the sample picture below)
+            with the solidB (blue), and return the resulting array of <see cref="T:devDept.Eyeshot.Entities.Brep" />
+            (green). The returned array may have more than one element if multiple disjoint
+            intersections are found.</para>
+              <para>
+                <img src="intersection.png" />
+              </para>
             </summary>
-            <seealso cref="M:devDept.Eyeshot.Entities.Brep.FixTopology(devDept.Eyeshot.Entities.Brep@)"> FixTopology method</seealso>
-            <param name="solidA"></param>
-            <param name="solidB"></param>
-            <returns>An array of solids if the operation is successful, null/Nothing otherwise.</returns>
+            <param name="solidA">First solid</param>
+            <param name="solidB">Second solid</param>
+            <returns>
+            An array of <see cref="T:devDept.Eyeshot.Entities.Brep" /> containing the intersections if the operation is
+            successful. If the operation is successful but no intersections are found, an
+            empty array is returned. Otherwise, if due to an error the algorithm fails to
+            compute the intersections, null/Nothing is returned.
+            </returns>
+            <seealso cref="M:devDept.Eyeshot.Entities.Brep.FixTopology(devDept.Eyeshot.Entities.Brep@)">FixTopology method</seealso>
         </member>
         <member name="M:devDept.Eyeshot.Entities.Brep.Union(devDept.Eyeshot.Entities.Brep,devDept.Eyeshot.Entities.Brep)">
             <summary>
@@ -6309,6 +6347,7 @@
             <param name="solid">The Brep entity to mirror</param>
             <returns> The resulting Brep union between the original input Brep and the mirrored one.</returns>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:devDept.Eyeshot.Entities.Brep.MergeAndKeepFaces(devDept.Eyeshot.Entities.Brep,devDept.Eyeshot.Entities.Brep,devDept.Eyeshot.MaterialKeyedCollection)" -->
         <member name="M:devDept.Eyeshot.Entities.Brep.SplitDisjoint(devDept.Eyeshot.Entities.Brep)">
             <summary>
             Divides the Brep into separate entities that do not connect each other.
@@ -6374,12 +6413,12 @@
         </member>
         <member name="F:devDept.Eyeshot.Entities.Brep.Edge.ShellIndex">
             <summary>
-            Index of the owner shell (available only after entity regeneration). Zero represents outer shell.
+            Index of the owner shell. Zero represents outer shell.
             </summary>
         </member>
         <member name="F:devDept.Eyeshot.Entities.Brep.Edge.Parents">
             <summary>
-            Parent faces (available only after entity regeneration). Can be an array of one or two items. To be used in conjunction with <see cref="F:devDept.Eyeshot.Entities.Brep.Edge.ShellIndex"/>.
+            Parent faces. Can be an array of one or two items. To be used in conjunction with <see cref="F:devDept.Eyeshot.Entities.Brep.Edge.ShellIndex"/>.
             </summary>
         </member>
         <member name="M:devDept.Eyeshot.Entities.Brep.Edge.#ctor(devDept.Eyeshot.Entities.ICurve,System.Int32,System.Int32)">
@@ -6492,6 +6531,11 @@
             <param name="edges">The <see cref="P:devDept.Eyeshot.Entities.Brep.Edges"/> array.</param>
             <returns>An array of <see cref="T:devDept.Eyeshot.Entities.ICurve"/> representing the geometric trim loops.</returns>
             <remarks>If curve tessellation is present, it's preserved.</remarks>
+        </member>
+        <member name="M:devDept.Eyeshot.Entities.Brep.Face.GetMaxLengths(System.Collections.Generic.IList{devDept.Eyeshot.Entities.Brep.Edge},System.Double[])">
+            <summary>
+            Gets an array of unique edge's max lengths values.
+            </summary>
         </member>
         <member name="P:devDept.Eyeshot.Entities.Brep.Face.TextureScaleU">
             <summary>
@@ -12247,6 +12291,33 @@
             <param name="seg">The 3D segment representing the viewing direction</param>
             <returns>The sorted list of triangles intersecting the provided segment.</returns>
         </member>
+        <member name="M:devDept.Eyeshot.Entities.FemMesh.GetNodesByFace(System.Int32,devDept.Eyeshot.Entities.Brep)">
+            <summary>
+            Returns nodes on the specified Brep face.
+            </summary>
+            <param name="index">The face index</param>
+            <param name="brep">The originating Brep entity</param>
+            <returns>Te array of FEM nodes</returns>
+            <seealso cref="!:VolumeMesher"/>
+        </member>
+        <member name="M:devDept.Eyeshot.Entities.FemMesh.GetNodesByEdge(System.Int32,devDept.Eyeshot.Entities.Brep)">
+            <summary>
+            Returns nodes on the specified Brep edge.
+            </summary>
+            <param name="index">The edge index</param>
+            <param name="brep">The originating Brep entity</param>
+            <returns>The array of FEM nodes</returns>
+            <seealso cref="!:VolumeMesher"/>
+        </member>
+        <member name="M:devDept.Eyeshot.Entities.FemMesh.GetNodesByVertex(System.Int32,devDept.Eyeshot.Entities.Brep)">
+            <summary>
+            Returns nodes on the specified Brep vertex.
+            </summary>
+            <param name="index">The vertex index</param>
+            <param name="brep">The originating Brep entity</param>
+            <returns>The array of FEM nodes</returns>
+            <seealso cref="!:VolumeMesher"/>
+        </member>
         <member name="M:devDept.Eyeshot.Entities.FemMesh.ComputePlot(devDept.Eyeshot.Environment,devDept.Eyeshot.Legend,System.Boolean)">
             <summary>
             Computes results according to plotMode settings.
@@ -13722,8 +13793,9 @@
         </member>
         <member name="P:devDept.Eyeshot.Entities.FemMesh.Skin">
             <summary>
-            Gets the underlying Mesh.
+            Gets the boundary <see cref="T:devDept.Eyeshot.Entities.Mesh"/>. The mesh will contain the same array of FemMesh vertices and the array of triangles that lay on the FemMesh surface.
             </summary>
+            <see cref="M:devDept.Eyeshot.Entities.FemMesh.ConvertToMesh(System.Boolean)"/>
         </member>
         <member name="M:devDept.Eyeshot.Entities.FemMesh.MergeWith(devDept.Eyeshot.Entities.FemMesh,System.Boolean)">
             <summary>
@@ -13758,6 +13830,7 @@
             </summary>
             <param name="includeDisplacements">When true, the mesh will include displacements</param>
             <returns>The resulting Mesh object.</returns>
+            <seealso cref="P:devDept.Eyeshot.Entities.FemMesh.Skin"/>
         </member>
         <member name="M:devDept.Eyeshot.Entities.FemMesh.Slice(devDept.Geometry.Plane,devDept.Eyeshot.Legend,System.Double)">
             <summary>
@@ -16599,11 +16672,24 @@
             <returns>An array of solids if the operation is successful, null/Nothing otherwise.</returns> 
         </member>
         <member name="M:devDept.Eyeshot.Entities.Solid.Intersection``1(``0,``0,System.Double)">
-            <summary>Boolean Intersection between two solids.</summary>
-            <returns>An array of solids if the operation is successful, null/Nothing otherwise.</returns>
+            <summary>
+              <para>Boolean Intersection between two solids. The method will compute the
+            intersection between the two specified solids (gray and blue in the image below)
+            and return an array with the result (green). The returned array may have more
+            than one element if multiple disjoint intersections are found.</para>
+              <para>
+                <img src="intersection.png" />
+              </para>
+            </summary>
             <param name="a">First operand</param>
             <param name="b">Second operand</param>
             <param name="tol">Optional tolerance, start with domain size * 1e-6</param>
+            <returns>
+            An array of solids if the operation is successful. If the operation is
+            successful but no intersections are found, an empty array is returned.
+            Otherwise, if due to an error the algorithm fails to compute the
+            intersections, null/Nothing is returned.
+            </returns>
         </member>
         <member name="M:devDept.Eyeshot.Entities.Solid.Intersection``1(``0,``0,System.Boolean,System.Double)">
             <summary>Boolean Intersection between two solids.</summary>
@@ -18858,10 +18944,12 @@
             Gets or sets the Autodesk miscellaneous properties of the entity. 
             </summary>
         </member>
-        <member name="M:devDept.Eyeshot.Entities.AutodeskMiscProperties.#ctor">
+        <member name="T:devDept.Eyeshot.Entities.AutodeskMiscProperties">
             <summary>
-             The AutodeskMiscProperties class stores some of the data that are specific to AutoCAD entities, such as XData and curves thickness.
+             Class that stores some data specific to AutoCAD entities, such as XData and curves thickness.
              </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Entities.AutodeskMiscProperties.#ctor">
             <summary>
             Empty constructor
             </summary>
@@ -18899,12 +18987,14 @@
             <remarks> The thickness value is meaningful only for Line, Arc, Circle, LinearPath and Solid entities.</remarks>
         </member>
         <member name="P:devDept.Eyeshot.Entities.AutodeskMiscProperties.ExtrusionDir">
-            <summary>
-            Gets or sets the normal (unit length) for the extrusion by the Thickness value.
-            </summary>
              <summary>
             Gets or sets the extrusion direction (unit length).
              </summary>
+        </member>
+        <member name="P:devDept.Eyeshot.Entities.AutodeskMiscProperties.UnparsedDimensionText">
+            <summary>
+            Gets or sets the unparsed dimension text. It is meaningful just for dimension entities.
+            </summary>
         </member>
         <member name="M:devDept.Eyeshot.Entities.AutodeskMiscProperties.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
@@ -19008,7 +19098,7 @@
         <member name="M:devDept.Eyeshot.Entities.IBbox.GetBb(devDept.Geometry.Point3D@,devDept.Geometry.Point3D@)">
             <summary>
             Computes the boxMin and boxMax. For ICurves, at first we wanted it to give the same result as the controlBoundingBox of the ICurve's GetNurbsForm(),
-            now it can be smaller (exact) for Circles, Arcs, Ellipses and EllipicalArcs, because it callse GetTightBbox(). 
+            now it can be smaller (exact) for Circles, Arcs, Ellipses and EllipicalArcs, because it calls GetTightBbox(). 
             </summary>
         </member>
         <member name="T:devDept.Eyeshot.Entities.ICurve">
@@ -20370,6 +20460,26 @@
             <param name="tol">The tessellation tolerance</param>
             <returns>The resulting array of closed contours. Use planeNormal only for lines.</returns>
         </member>
+        <member name="M:devDept.Eyeshot.Entities.LinearPath.Inflate(System.Double,System.Double,System.Double,System.Double,System.Boolean)">
+            <summary>
+            Inflates a LinearPath in 3D given an elliptical section.
+            </summary>
+            <param name="rX">X radius of the elliptical section</param>
+            <param name="rY">Y radius of the elliptical section</param>
+            <param name="angleLimit">Limit that controls the stretching of the section while it follows curves along the path. Under this tolerance no stretch is applied.</param>
+            <param name="smoothingAngle">Smoothing angles using in the process  of mesh creation</param>
+            <param name="fillCaps">True if ends of opened linear paths must be filled with triangles fan</param>
+            <returns>A mesh representing the inflation of the LinearPath</returns>
+        </member>
+        <member name="M:devDept.Eyeshot.Entities.LinearPath.CreateTriangles(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Compute the actual triangulation of the mesh
+            </summary>
+            <param name="rows">It represents how many sections the extruded path has</param>
+            <param name="cols">It represents how many vertices the section of the extruded path has</param>
+            <param name="fillCaps">True if ends of opened linear paths must be filled with triangles fan</param>
+            <returns>Triangles forming the mesh</returns>
+        </member>
         <member name="M:devDept.Eyeshot.Entities.LinearPath.Offset(System.Double)">
             <summary>
             Offsets the curve of the specified amount.
@@ -20896,20 +21006,21 @@
             Checks if the control points of the curve are on the positive X side of the seam plane.
             </summary>
         </member>
-        <member name="M:devDept.Eyeshot.Entities.RevolvedSurface.InterferesWithSeam(devDept.Eyeshot.Entities.ICurve,System.Double,devDept.Geometry.Plane)">
+        <member name="M:devDept.Eyeshot.Entities.RevolvedSurface.InterferesWithSeam(devDept.Eyeshot.Entities.ICurve,System.Double,devDept.Geometry.Plane,devDept.Eyeshot.Entities.Surface)">
             <summary>
-            Checks if the curve crosses the seam (half-plane)
+            Checks if the 2D projection of each curve control leg crosses the positive side of the X axis (seam half-plane)
             </summary>
         </member>
-        <member name="M:devDept.Eyeshot.Entities.RevolvedSurface.InterferesWithAxisX(devDept.Eyeshot.Entities.ICurve,System.Double,devDept.Geometry.Segment3D,System.Double)">
+        <member name="M:devDept.Eyeshot.Entities.RevolvedSurface.InterferesWithAxisX(devDept.Geometry.Plane,devDept.Geometry.Plane,devDept.Eyeshot.Entities.ICurve,System.Double)">
             <summary>
-            Checks if the curve is close to seam but not perfectly on it.
+            Checks if the 2D projection of each curve control leg (generated by rotating the endpoints on the seam plane)
+            crosses the positive side of the X axis of the seam plane translated by major radius along the X axis.
             </summary>
+            <param name="pln">Torus plane</param>
+            <param name="seamPlane">The seam plane</param>
             <param name="curve">The curve</param>
-            <param name="seamPlane">The revolved surface seam plane</param>
-            <param name="exactlyOnSeam">True when exactly on seam</param>
-            <param name="crossing">True when crosses the seam</param>
-            <returns>True if the curve is close to seam but not perfectly on it.</returns>
+            <param name="angle">The angle to be tested</param>
+            <returns>True if the curve interferes with seam, false otherwise.</returns>
         </member>
         <member name="M:devDept.Eyeshot.Entities.RevolvedSurface.GetRevArcAndNurbsRevArc(System.Boolean)">
             <summary>
@@ -21330,6 +21441,13 @@
             and invoke the procedure on each half.
             </summary>
         </member>
+        <member name="M:devDept.Eyeshot.Entities.SurfTessellator.TriangulateAndSmooth(TriangleNet.Geometry.Polygon,System.Double[],System.Double,devDept.Geometry.Point2D[]@,devDept.Geometry.IndexTriangle[]@)">
+            <summary>
+            Triangulate or mesh (with or without smoothing) the 2D domain.
+            </summary>
+            <param name="maxLengths">When null, meshing is disabled. When not null contains one maxLength per edge.</param>
+            <param name="faceMaxLength">When zero, adaptive meshing. When bigger then zero, equal size meshing.</param>
+        </member>
         <member name="M:devDept.Eyeshot.Entities.SurfTessellator.CheckEdgeAngle(devDept.Geometry.Point3D[]@,devDept.Geometry.IndexTriangle[]@,System.Double,System.Double,devDept.Eyeshot.Entities.Surface,System.Double)">
             <summary>
             Checks angle between edge end point normals and refines the mesh locally if necessary.
@@ -21550,7 +21668,7 @@
         </member>
         <member name="P:devDept.Eyeshot.Entities.Ellipse.FocalDistance">
             <summary>
-            Distance between foci, commonly called "2c".
+            Distance from the center to a focus, commonly called "c".
             </summary>
         </member>
         <member name="M:devDept.Eyeshot.Entities.Ellipse.GetFoci(devDept.Geometry.Point3D@,devDept.Geometry.Point3D@)">
@@ -29966,7 +30084,7 @@
             Initialize the interpolator at the given distance from
             the start of the path.
             </summary>
-            <param name="distance">The desired distance from the start of the path</param>
+            <param name="dist">The desired distance from the start of the path</param>
             <returns>The first point of the interpolated path.</returns>
         </member>
         <member name="M:devDept.Eyeshot.SweepInterpolator.Ready">
@@ -30058,6 +30176,14 @@
             <summary>
             Manufacture control definition.
             </summary>
+        </member>
+        <member name="P:devDept.Eyeshot.Manufacture.ShortcutKeys">
+            <summary>
+            Gets or sets the keyboard shortcuts.
+            </summary>
+            <remarks>
+            For the manufacture environment they include also the Start, Pause, Next and Previous shortcut. 
+            </remarks>
         </member>
         <member name="P:devDept.Eyeshot.Manufacture.SimulationTimeLine">
             <summary>
@@ -30213,6 +30339,11 @@
             Gets or sets the &quot;Cutting stock...&quot; text string.
             </summary>
         </member>
+        <member name="M:devDept.Eyeshot.Manufacture.ResetTimeLine">
+            <summary>
+            Resets the simulation timeline.
+            </summary>
+        </member>
         <member name="P:devDept.Eyeshot.Manufacture.ClearancePlane">
             <summary>
             Gets or sets the machining clearance plane.
@@ -30315,6 +30446,15 @@
             <param name="stepDown">The step down</param>
             <param name="stepOver">The step over</param>
         </member>
+        <member name="M:devDept.Eyeshot.Milling.Pocket3D.GetRawPasses(System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Computes the polygonal regions representing the area to be pocketed for each level.
+            </summary>
+            <param name="worker">The work unit background worker</param>
+            <param name="doWorkEventArgs">The work unit even arguments</param>
+            <returns>The resulting array of tuples.</returns>
+            <seealso cref="T:devDept.Eyeshot.WorkUnit"/>
+        </member>
         <member name="T:devDept.Eyeshot.Milling.Contour3D">
             <summary>
             <para>Z-Level finishing class definition.</para>
@@ -30342,6 +30482,22 @@
             <param name="zAxis">The Z axis range</param>
             <param name="stepDown">The step down amount</param>
         </member>
+        <member name="M:devDept.Eyeshot.Milling.Contour3D.GetRawPasses(System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Computes the polygonal loops representing the contours.
+            </summary>
+            <param name="worker">The work unit background worker</param>
+            <param name="doWorkEventArgs">The work unit even arguments</param>
+            <returns>The resulting array of tuples.</returns>
+            <seealso cref="T:devDept.Eyeshot.WorkUnit"/>
+        </member>
+        <member name="M:devDept.Eyeshot.Milling.Contour3D.DiscardLoopsOutsideBoundary(devDept.Geometry.PolyRegion2D,devDept.Geometry.Point3D[][],System.Boolean,devDept.Eyeshot.Translators.WriteFileParams)">
+            <summary>
+            Discards loops outside boundary (the actual boundary or stock boundary) when defined.
+            </summary>
+            <param name="pocket">When true, for each outside loop removed, the inner loops are reversed in orientation. This is necessary to understand
+            pocket area in multiple nested loops. See Machining.GetRawPasses() used by Pocket2D and Pocket3D</param>
+        </member>
         <member name="M:devDept.Eyeshot.Milling.Contour3D.FindClosestPoint2D(devDept.Geometry.Point3D,devDept.Geometry.Point3D[])">
             <summary>
             Returns the index of the closest (2D) point to the specified one.
@@ -30358,11 +30514,6 @@
         <member name="M:devDept.Eyeshot.Milling.Contour3D.RotateArraysAndOrder(devDept.Geometry.Point3D[][])">
             <summary>
             Moves loops start point close to the geometry box min and sorts the loop by distance from geometry box min.
-            </summary>
-        </member>
-        <member name="M:devDept.Eyeshot.Milling.Contour3D.DiscardLoopsOutsideBoundary(devDept.Geometry.Point3D[][][],devDept.Eyeshot.Entities.Region)">
-            <summary>
-            Discards loops completely outside the boundary.
             </summary>
         </member>
         <member name="M:devDept.Eyeshot.Milling.MyWaterline.SetFibersZ(System.Double)">
@@ -30752,6 +30903,11 @@
             2D contour class definition.
             </summary>
         </member>
+        <member name="P:devDept.Eyeshot.Milling.Contour2D.Flips">
+            <summary>
+            Gets or sets the array of booleans you need to flip contour direction/side.
+            </summary>
+        </member>
         <member name="P:devDept.Eyeshot.Milling.Contour2D.OrderByDepth">
             <summary>
             When true, the passes are ordered top down.
@@ -30790,6 +30946,14 @@
             <param name="zRange">The z range interval</param>
             <param name="stepDown">The step down</param>
             <param name="stepOver">The step over</param>
+        </member>
+        <member name="M:devDept.Eyeshot.Milling.Pocket2D.GetRawPass(System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Computes the polygonal regions representing the area to be pocketed.
+            </summary>
+            <param name="worker"></param>
+            <param name="doWorkEventArgs"></param>
+            <returns>The resulting array of polygonal regions.</returns>
         </member>
         <member name="T:devDept.Eyeshot.Milling.Parallel2D">
             <summary>
@@ -32074,10 +32238,20 @@
             <param name="zRange">The z range interval</param>
             <param name="stepDown">The step down</param>
         </member>
-        <member name="M:devDept.Eyeshot.Milling.Machining.GetOuterRegion(devDept.Eyeshot.Milling.EndMill,devDept.Eyeshot.Entities.Region,System.Double,System.Boolean)">
+        <member name="M:devDept.Eyeshot.Milling.Machining.GetOuterRegion(devDept.Eyeshot.Milling.EndMill,devDept.Eyeshot.Entities.Region,devDept.Geometry.Point2D,devDept.Geometry.Point2D,System.Double,System.Boolean)">
             <summary>
-            Returns a regenerated stock region or the geometry bounding rectangle (with offset by radius if requested).
+            Returns a regenerated stock region or the geometry bounding rectangle (with offset by cutter radius if requested).
             </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Milling.Machining.GetOuterRegion(devDept.Eyeshot.Milling.EndMill,devDept.Eyeshot.Entities.Region,devDept.Eyeshot.Entities.Region,devDept.Eyeshot.Milling.GeometryBase)">
+            <summary>
+            Gets the outer region following this order boundary, stock, geometry bounding rectangle.
+            </summary>
+            <param name="cutter">The cutter</param>
+            <param name="boundary">The boundary, can be null/Nothing</param>
+            <param name="stock">The boundary, can be null/Nothing</param>
+            <param name="geometry">The machining geometry</param>
+            <returns>The resulting region.</returns>
         </member>
         <member name="M:devDept.Eyeshot.Milling.Machining.GetRetractPlane(devDept.Geometry.Point3D,devDept.Geometry.Point3D,System.String)">
             <summary>
@@ -32212,7 +32386,7 @@
             a list of passes, each paired with the indices in the original array.
             </returns>
         </member>
-        <member name="M:devDept.Eyeshot.Milling.Machining.CreateToolpath(System.Collections.Generic.IList{devDept.Eyeshot.Milling.Stroke[]},System.Text.StringBuilder,System.Boolean,System.Double)">
+        <member name="M:devDept.Eyeshot.Milling.Machining.CreateToolpath(System.Collections.Generic.IList{devDept.Eyeshot.Milling.Stroke[]},System.Text.StringBuilder,System.Boolean,System.Double,System.Boolean[])">
             <summary>
             Creates the toolpath adding lead movements.
             </summary>
@@ -32316,7 +32490,7 @@
             the specified value.
             </summary>
         </member>
-        <member name="M:devDept.Eyeshot.Milling.Machining.GetTransformedBoundary(devDept.Eyeshot.Entities.Region)">
+        <member name="M:devDept.Eyeshot.Milling.Machining.GetTransformedBoundary(devDept.Eyeshot.Entities.Region,devDept.Eyeshot.Milling.GeometryBase)">
             <summary>
             Returns a copy of the specified <see cref="T:devDept.Eyeshot.Entities.Region"/> transformed by setup inverse matrix.
             </summary>
@@ -32333,6 +32507,13 @@
         <member name="P:devDept.Eyeshot.Milling.Stroke.Z">
             <summary>
             Get the height (Z-coordinate) of the first point of the stroke.
+            </summary>
+        </member>
+        <member name="F:devDept.Eyeshot.Milling.Stroke.Flip">
+            <summary>
+            If true, the stroke direction is inverted (points should be
+            considered in reverse order). Used by 2D contour machining
+            and specified by the user.
             </summary>
         </member>
         <member name="M:devDept.Eyeshot.Milling.Stroke.#ctor(devDept.Geometry.Point3D[])">
@@ -32522,6 +32703,11 @@
             <param name="color">The boundary color</param>
             <returns>A <see cref="T:devDept.Eyeshot.Milling.MachiningBoundary"/> object.</returns>
         </member>
+        <member name="M:devDept.Eyeshot.Milling.Machining3D.RemoveCloseLevels(System.Collections.Generic.HashSet{System.Double}@,System.Double[],System.Double,System.Double,System.Double)">
+            <summary>
+            Removes standard levels closer than stepDown / 10 to flat levels.
+            </summary>
+        </member>
         <member name="T:devDept.Eyeshot.Milling.MachiningBoundary">
             <summary>
             Machining boundary entity definition. A <see cref="T:devDept.Eyeshot.Entities.Region"/> with a thick and always on top edge drawing.
@@ -32685,7 +32871,7 @@
             Gets Z heights for all flat areas.
             </summary>
         </member>
-        <member name="M:devDept.Eyeshot.Milling.Geometry3D.GetInsideFlatZ(devDept.Eyeshot.Entities.Region,System.Double,devDept.Eyeshot.Model)">
+        <member name="M:devDept.Eyeshot.Milling.Geometry3D.GetInsideFlatZ(devDept.Geometry.PolyRegion2D,System.Double,devDept.Eyeshot.Model)">
             <summary>
             Computes Z heights for flat areas overlapping with the specified boundary.
             </summary>
@@ -32693,16 +32879,20 @@
             <param name="tol">The Z values comparison tolerance</param>
             <returns>The array of Z values.</returns>
         </member>
-        <member name="M:devDept.Eyeshot.Milling.Geometry3D.Magnitude(System.Double)">
+        <member name="M:devDept.Eyeshot.Milling.Geometry3D.FilterValuesZ(System.Collections.Generic.IEnumerable{System.Double},devDept.Geometry.Interval)">
             <summary>
-            see https://stackoverflow.com/a/52335468/261010
+            Filters Z heights depending on the Z range magnitude.
             </summary>
         </member>
-        <member name="M:devDept.Eyeshot.Milling.Geometry3D.GetEqualityComparer(System.Int32)">
+        <member name="M:devDept.Eyeshot.Milling.Geometry3D.FilterValuesZ(System.Collections.Generic.IEnumerable{System.Double},System.Double)">
             <summary>
-            Gets a comparer that compares values at different level of magnitude, see: https://stackoverflow.com/a/62652306/261010
+            Filters Z heights depending on the Z range magnitude.
             </summary>
-            <param name="magOffset">The magnitude offset</param>
+        </member>
+        <member name="M:devDept.Eyeshot.Milling.Geometry3D.Magnitude(System.Double)">
+            <summary>
+            Returns the magnitude of a number.
+            </summary>
         </member>
         <member name="F:devDept.Eyeshot.Milling.Geometry3D.IsReadyParallel">
             <summary>
@@ -32722,11 +32912,6 @@
         <member name="M:devDept.Eyeshot.Milling.Geometry3D.PreProcessWaterline">
             <summary>
             Prepares geometry for <see cref="T:devDept.Eyeshot.Milling.Machining3D">3D machining</see> operations.
-            </summary>
-        </member>
-        <member name="T:devDept.Eyeshot.Milling.ZhEqualityComparer">
-            <summary>
-            See https://stackoverflow.com/a/62652306/261010
             </summary>
         </member>
         <member name="T:devDept.Eyeshot.Milling.Parallel3D">
@@ -32889,7 +33074,7 @@
         </member>
         <member name="F:devDept.Eyeshot.Translators.ReadPDF.Pages">
             <summary>
-            Gets the entities resulting from file reading for each page.
+            Gets the pages read from file.
             </summary>
         </member>
         <member name="P:devDept.Eyeshot.Translators.ReadPDF.PagesToLoad">
@@ -32915,6 +33100,26 @@
         <member name="T:devDept.Eyeshot.Translators.ReadPDF.ReadParams">
             <summary>
             Class with the data needed to read the PDF format.
+            </summary>
+        </member>
+        <member name="T:devDept.Eyeshot.Translators.PdfPage">
+            <summary>
+            This class represent a page of the PDF document. It contains all the entities in the page, as well as its viewports and their relative scale factor.
+            </summary>
+        </member>
+        <member name="P:devDept.Eyeshot.Translators.PdfPage.Size">
+            <summary>
+            Gets or sets the size of the page in millimeters.
+            </summary>
+        </member>
+        <member name="P:devDept.Eyeshot.Translators.PdfPage.Entities">
+            <summary>
+            Gets the list of the entities contained in the page.
+            </summary>
+        </member>
+        <member name="P:devDept.Eyeshot.Translators.PdfPage.Viewports">
+            <summary>
+            Gets the list of the extents of the PDF viewports in millimeters contained in the page, as well as their custom scale factor.
             </summary>
         </member>
         <member name="T:devDept.Eyeshot.Translators.WriteFileParams">
@@ -33293,6 +33498,16 @@
             </summary>
             <remarks>If zero the deviation is computed based on the elements size.</remarks>
         </member>
+        <member name="P:devDept.Eyeshot.Translators.ReadIFC.ImportGrids">
+            <summary>
+            Gets or sets if to import the grids.
+            </summary>
+        </member>
+        <member name="P:devDept.Eyeshot.Translators.ReadIFC.ImportAnnotations">
+            <summary>
+            Gets or sets if to import the annotations.
+            </summary>
+        </member>
         <member name="M:devDept.Eyeshot.Translators.ReadIFC.ReadIfcFile(System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
             <summary>
             Reads a IFC file.
@@ -33331,6 +33546,24 @@
             <summary>
             Convert the Entity to IIfcEntity and load the IFC properties.
             </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Translators.ReadIFC.ManageSlopeOnEdges(devDept.Eyeshot.Entities.Line[],System.Int32,System.Int32,System.Double)">
+            <summary>
+            If an edge is rotated for the presence of a slope, a new intersection point is computed to manage this new setting between two consecutive edges
+            </summary>
+            <param name="linearEdges">Edges of the profile</param>
+            <param name="ix1">Index of first edge</param>
+            <param name="ix2">Index of second edge</param>
+            <param name="problemSize">Size of the problem to check for intersection point correctness</param>
+        </member>
+        <member name="M:devDept.Eyeshot.Translators.ReadIFC.GetProfileContoursWithFillets(devDept.Eyeshot.Entities.Line[],System.Int32[],System.Double[])">
+            <summary>
+            Builds a contour list for a beam profile, trying to create fillets after the given edges with the corresponding fillet radius
+            </summary>
+            <param name="linearEdges">Edges that will build up the contours list</param>
+            <param name="ixEdgesToFillet">Indices of the edges after which try and build a fillet</param>
+            <param name="filletRadii">Radii of the filleting operation</param>
+            <returns></returns>
         </member>
         <member name="M:devDept.Eyeshot.Translators.ReadIFC.IfcToEyeshotCurveParameter(devDept.Eyeshot.Entities.ICurve,System.Double)">
             <summary>
@@ -42816,6 +43049,10 @@
             <exclude/>
             <excludetoc/>
         </member>
+        <member name="T:devDept.Eyeshot.Converters.ManufactureShortcutKeysSettingsConverter">
+            <exclude/>
+            <excludetoc/>
+        </member>
         <member name="T:devDept.Eyeshot.Converters.ZoomConverter">
             <exclude/>
             <excludetoc/>
@@ -43815,7 +44052,7 @@
             <param name="smoothingMode">The smoothing mode</param>
             <param name="smoothingPasses">Number of smoothing passes</param>
         </member>
-        <member name="M:devDept.Eyeshot.Triangulation.Mesher.InitializeMesher(devDept.Eyeshot.Entities.ICurve,System.Collections.Generic.IList{devDept.Eyeshot.Entities.ICurve},System.Collections.Generic.IList{devDept.Eyeshot.Entities.ICurve},System.Double,devDept.Eyeshot.Triangulation.mesherSmoothingType,System.Int32)">
+        <member name="M:devDept.Eyeshot.Triangulation.Mesher.InitializeMesher(devDept.Eyeshot.Entities.ICurve,System.Collections.Generic.IList{devDept.Eyeshot.Entities.ICurve},System.Collections.Generic.IList{devDept.Eyeshot.Entities.ICurve})">
             <summary>
             Initialize the mesher
             </summary>
@@ -43834,6 +44071,357 @@
         <member name="M:devDept.Eyeshot.Triangulation.Mesher.UpdateMinDist(devDept.Geometry.Point3D,devDept.Geometry.Point3D,System.Double@)">
             <summary>
             Takes the square distance between two points and updates the minimum if necessary.
+            </summary>
+        </member>
+        <member name="T:devDept.Eyeshot.Triangulation.SurfaceMesher">
+            <summary>
+            Mesher for surfaces, triangulate 2D points on the uv plane taking into account
+            their corresponding positions in the 3D space. Distances are computed using the
+            <see cref="T:devDept.Eyeshot.Triangulation.SurfaceMetric"/> class, and compared to the specified element size,
+            which is constant and relative to the 3D euclidean distance.
+            </summary>
+        </member>
+        <member name="F:devDept.Eyeshot.Triangulation.SurfaceMesher._metric">
+            <summary>
+            Define the way distances are computed while triangulating.
+            </summary>
+        </member>
+        <member name="F:devDept.Eyeshot.Triangulation.SurfaceMesher._tolerance2D">
+            <summary>
+            Define the minimum tolerance used to decide whether a 2D
+            triangle is collapsed or not. The tolerance is used during the
+            smoothing process (<see cref="M:devDept.Eyeshot.Triangulation.SurfaceMesher.DoSmoothing(System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)"/>).
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.#ctor(devDept.Eyeshot.Entities.Surface,devDept.Geometry.Polygon2D[],System.Double,System.Double,System.Double,devDept.Eyeshot.Triangulation.mesherSmoothingType,System.Int32)">
+            <summary>
+            Standard constructor.
+            </summary>
+            <param name="surface">Surface to be meshed</param>
+            <param name="polygons">Surface contours (outer contour first followed by inner contours)</param>
+            <param name="uScale">
+            U scale of the given points with regards to the surface domain; the position of one point P on the
+            surface is computed as PointAt(P.X/uScale, P.Y/vScale): if the points coordinate correspond exactly
+            to their position in the uv domain, uScale and vScale should equal 1.
+            </param>
+            <param name="vScale">V scale of the given points with regards to the surface domain</param>
+            <param name="elementSize">Expected size of each edge in the 3D space</param>
+            <param name="smoothingType">
+            Smoothing type; <see cref="F:devDept.Eyeshot.Triangulation.mesherSmoothingType.Laplacian"/> is more reliable in most situations.
+            </param>
+            <param name="smoothingPasses">
+            Number of smoothing iterations; due to the implementation of the meshing and smoothing algorithm, any
+            number less than 10 usually leads to bad results
+            </param>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.AddPointsAlongEdge(devDept.Geometry.IndexLine,System.Int32@)">
+            <summary>
+            Adds points along the edge if possible (not too close to the others).
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.Subdivide(devDept.Eyeshot.Triangulation.PointTri,devDept.Eyeshot.Triangulation.PointTri)">
+            <summary>
+            Divide and conquer recursive algorithm to subdivide the edge until its length
+            is less than or equal to the element size.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.DoSmoothing(System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+             <summary>
+             Smooth the mesh, moving the vertices in order to minimize the difference
+             between each edge length and the element size. During the smoothing process,
+             the following operations are performed (in this order):
+             
+                 1. For each edge: flip it if it can get closer to the element size.
+            
+                 2. For each vertex: move it in order to improve the connected edges,
+                    and remove it if necessary.
+             
+                 3. For each edge: collapse it (remove it) if it can improve the lengths
+                    of the connected edges.
+            
+             The process is repeated <see cref="!:smoothingPasses"/> number of times.
+             </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.CollectSharedEdges">
+            <summary>
+            Collect and return the list of shared edges.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.Flip(devDept.Geometry.IndexLine,devDept.Geometry.IndexTriangle,devDept.Geometry.IndexTriangle)">
+            <summary>
+            Return an array with four indices, corresponding to the boundary vertices
+            of the specified triangles. The first vertex will be different from the
+            specified index line endpoints.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.IsPolygonConvex(System.Int32[])">
+            <summary>
+            Return true if the polygon corresponding to the specified vertices
+            is convex, return false otherwise.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.IsCollapsed(devDept.Geometry.IndexTriangle,devDept.Eyeshot.Triangulation.FastMetric)">
+            <summary>
+            Return true if the specified triangle is collapsed based on
+            the measures provided by the metric.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.HeronArea(devDept.Geometry.IndexTriangle,devDept.Eyeshot.Triangulation.FastMetric)">
+            <summary>
+            Compute the triangle area using Heron's formula with the specified metric.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.AbsTriangleArea2D(devDept.Geometry.Point2D,devDept.Geometry.Point2D,devDept.Geometry.Point2D)">
+            <summary>
+            Return the area of a 2D triangle, as an absolute value.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.Flip(devDept.Geometry.SharedEdge,System.Int32,System.Collections.Generic.LinkedList{devDept.Geometry.SharedEdge}[],devDept.Geometry.IndexTriangle[],devDept.Eyeshot.Triangulation.FastMetric)">
+            <summary>
+            If it is possible and if it improves the tessellation, flip the specified edge and
+            return true. Return false otherwise. The given list of shared edges is updated
+            and fixed.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.SharedEdgeInconsistency(System.Int32,System.Int32,devDept.Geometry.IndexTriangle)">
+            <summary>
+            Return true if the given triangle is not connected to the edge specified by
+            vertices v1 and v2.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.FlipIfNeeded(System.Collections.Generic.LinkedList{devDept.Geometry.SharedEdge}[],devDept.Eyeshot.Triangulation.FastMetric)">
+            <summary>
+            Iterate through the list of edges and flip those that can get closer to the
+            element size, improving the tessellation quality.
+            </summary>
+            <returns>The updated version of the list of shared edges.</returns>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.ConnectedTriangles">
+            <summary>
+            For each vertex, return a linked list of the connected triangles.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.TriangleContains(devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle,System.Int32)">
+            <summary>
+            Return true if the specified triangle contains the specified vertex.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.OtherVertex(devDept.Geometry.IndexTriangle,System.Int32,System.Int32)">
+            <summary>
+            Return the vertex of the specified triangle that is different from v1 and v2. If the triangle
+            does not contain v1 or v2, no error is thrown although the result will not be valid.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.ConnectedVertices(devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle@,devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle@,devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle@,System.Int32)">
+            <summary>
+            Return a list of unique vertices connected to the one specified (the central vertex). The central vertex
+            has to be connected to three triangles: these will be sorted in counter or counter-clockwise order, in accordance
+            with the direction of the first triangle. The returned list of vertices will be sorted in the same way.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.ConnectedVertices(devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle@,devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle@,devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle@,devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle@,System.Int32)">
+            <summary>
+            Return a list of unique vertices connected to the one specified (the central vertex). The central vertex
+            has to be connected to four triangles: these will be sorted in counter or counter-clockwise order, in accordance
+            with the direction of the first triangle. The returned list of vertices will be sorted in the same way.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.ConnectedVertices(System.Collections.Generic.LinkedList{devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle},System.Int32)">
+            <summary>
+            Return a list of unique vertices connected to the one specified (the central vertex). The list of connected
+            triangles will be sorted in counter or counter-clockwise order, in accordance with the direction of the first
+            triangle. The returned list of vertices will be sorted in the same way.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.StarError(System.Int32,System.Collections.Generic.LinkedList{devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle},devDept.Eyeshot.Triangulation.FastMetric)">
+            <summary>
+            Return the total error (absolute value of the difference from the element size)
+            for all edges connected to the specified vertex.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.Collapse(System.Int32,System.Int32,System.Int32,System.Int32,devDept.Geometry.Point2D,System.Collections.Generic.LinkedList{devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle},devDept.Eyeshot.Triangulation.FastMetric)">
+            <summary>
+            Collapse the specified edge, replacing the end points with a single vertex. Deleted triangles
+            and vertices are set to null but not removed from the lists.
+            </summary>
+            <param name="t1">Index of the dad triangle (to be removed)</param>
+            <param name="t2">Index of the mum triangle (to be removed)</param>
+            <param name="v1">Index of the first vertex</param>
+            <param name="v2">Index of the second vertex</param>
+            <param name="newPoint">Collapse point</param>
+            <param name="connTrianglesV2">Triangles connected to v2</param>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.CanCollapse(System.Collections.Generic.LinkedList{devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle}[],System.Int32[],devDept.Geometry.Point2D)">
+            <summary>
+            Return true if the specified edge can be collapsed to the given collapse point without creating
+            invalid triangles. The endPoints array specifies the edge to collapse and it must contain two elements.
+            </summary>
+            <seealso cref="M:devDept.Eyeshot.Triangulation.SurfaceMesher.ConsistentNormals(devDept.Geometry.IndexTriangle,System.Int32,devDept.Geometry.Point2D)"/>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.CollapseIfNeeded(System.Collections.Generic.LinkedList{devDept.Geometry.SharedEdge}[],System.Collections.Generic.LinkedList{devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle}[],devDept.Eyeshot.Triangulation.FastMetric)">
+            <summary>
+            Collapse all the edges that would improve the tessellation if collapsed.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.XyCross(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Z coordinate of the cross product between two 2D vectors lying on the XY plane.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.XyNormal(devDept.Geometry.Point2D,devDept.Geometry.Point2D,devDept.Geometry.Point2D)">
+            <summary>
+            Z coordinate of the normal of a triangle lying on the XY plane.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.ConsistentNormals(devDept.Geometry.IndexTriangle,System.Int32,devDept.Geometry.Point2D)">
+            <summary>
+            Given a triangle, a point, and a new position for the point, return true
+            if the triangle normal does not change when computed using the new position.
+            
+               v1     
+            +--+       +       In this example, translating the first vertex to the new     
+             \ |       |\      position changes the direction from clockwise to counter
+              \|  -->  | \     clockwise, therefore flipping the normal. In this case,
+               +       +--+    the method would return false.
+               v2     v1  v2
+            
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.ConsistentNormals(devDept.Geometry.IndexTriangle,devDept.Geometry.IndexTriangle)">
+            <summary>
+            Compare the normals of the two specified triangles and return true
+            if they are equivalent.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.SuppressTriangle(System.Collections.Generic.LinkedList{devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle}[],devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle)">
+            <summary>
+            Remove the specified triangle from the list and update the connected triangles.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.SuppressVertex(System.Int32,devDept.Eyeshot.Triangulation.FastMetric)">
+            <summary>
+            Remove the specified vertex from the list, then update the list of triangles
+            and the fast metric.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.SuppressVertex(System.Int32,System.Collections.Generic.LinkedList{devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle}[],devDept.Eyeshot.Triangulation.FastMetric)">
+            <summary>
+            Remove the specified vertex from the list, then update the list of triangles,
+            the list of connected triangles and the fast metric.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.DissolveCentralVertex4(System.Int32,System.Collections.Generic.LinkedList{devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle}[],devDept.Eyeshot.Triangulation.FastMetric)">
+            <summary>
+            Remove the specified vertex, only if deleting it can improve the tessellation. The specified vertex 
+            should be connected to four triangles in order to be removed. If the vertex is removed, the given index
+            will not represent the original point anymore (see <see cref="!:SuppressVertex(int)"/>).
+            </summary>
+            <param name="vertex">Vertex to be removed</param>
+            <param name="connTriangles">Connected triangles array</param>
+            <param name="fastMetric">Fast metric</param>
+            <returns>True if the vertex has been deleted, false otherwise.</returns>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.DissolveCentralVertex3(System.Int32,System.Collections.Generic.LinkedList{devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle}[],devDept.Eyeshot.Triangulation.FastMetric)">
+            <summary>
+            Removes the specified vertex, only if deleting it can improve the tessellation. The specified vertex 
+            should be connected to three triangles in order to be removed. If the vertex is removed, the given index
+            will not represent the original point anymore (see <see cref="!:SuppressVertex(int)"/>).
+            </summary>
+            <param name="vertex">Vertex to be removed</param>
+            <param name="connTriangles">Connected triangles array</param>
+            <param name="fastMetric">Fast metric</param>
+            <returns>True if the vertex has been deleted, false otherwise.</returns>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.AddTriangle(System.Collections.Generic.LinkedList{devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle}[],System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Add a triangle and update the list of connected triangles.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMesher.AddTriangle(System.Collections.Generic.LinkedList{devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle}[],devDept.Eyeshot.Triangulation.Delaunay.DelaunayTriangle)">
+            <summary>
+            Add a triangle and update the list of connected triangles.
+            </summary>
+        </member>
+        <member name="T:devDept.Eyeshot.Triangulation.Metric">
+            <summary>
+            Define a metric for 2D points, a distance function that gives a distance
+            between each pair of 2D point elements of a set.
+            </summary>
+        </member>
+        <member name="T:devDept.Eyeshot.Triangulation.SurfaceMetric">
+            <summary>
+            Metric where each bi-dimensional point is considered as part of the u/v domain
+            of a surface. The distance function evaluates the distance between two points
+            in the u/v domain as their corresponding 3D euclidean distance on the surface.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.SurfaceMetric.Distance(devDept.Geometry.Point2D,devDept.Geometry.Point2D)">
+            <summary>
+            Return the distance between the point positions on the surface.
+            </summary>
+        </member>
+        <member name="T:devDept.Eyeshot.Triangulation.Metric2D">
+            <summary>
+            Simple metric that defines the distance as the 2D euclidean distance
+            between the points.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.Metric2D.Distance(devDept.Geometry.Point2D,devDept.Geometry.Point2D)">
+            <summary>
+            Return the distance between the 2D points.
+            </summary>
+        </member>
+        <member name="T:devDept.Eyeshot.Triangulation.FastMetric">
+            <summary>
+            Metric that handles a fixed set of points and may introduce ways to
+            optimize the distance computation for these points. The list of points
+            may be updated (point coordinates can be changed) but a point may never
+            be added or removed.
+            </summary>
+        </member>
+        <member name="F:devDept.Eyeshot.Triangulation.FastMetric.Vertices">
+            <summary>
+            List of mesh vertices to compute the cache.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.FastMetric.Distance(System.Int32,System.Int32)">
+            <summary>
+            Compute the distance between points with indices
+            pointA and pointB in the vertices list.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.FastMetric.Distance(devDept.Geometry.Point2D,System.Int32)">
+            <summary>
+            Compute the distance between pointA (not in the list)
+            and pointB (index in the list).
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.FastMetric.Update(System.Int32,devDept.Geometry.Point2D)">
+            <summary>
+            Update the position of point i in the vertices list.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.Triangulation.FastMetric.Update(System.Int32,System.Double,System.Double)">
+            <summary>
+            Update the position of point i in the vertices list.
+            </summary>
+        </member>
+        <member name="T:devDept.Eyeshot.Triangulation.DefaultFastMetric">
+            <summary>
+            Default fast metric, introducing no optimization and performing the exact
+            same operations of the metric class.
+            </summary>
+        </member>
+        <member name="T:devDept.Eyeshot.Triangulation.SurfaceFastMetric">
+            <summary>
+            Optimized <see cref="T:devDept.Eyeshot.Triangulation.SurfaceMetric"/> that stores a cache of 3D points
+            corresponding to the locations on the surface.
+            </summary>
+        </member>
+        <member name="F:devDept.Eyeshot.Triangulation.SurfaceFastMetric._surfaceVertices">
+            <summary>
+            Cache containing the point locations on the surface, to reduce
+            the number of invocations to <see cref="M:devDept.Eyeshot.Entities.Surface.PointAt(devDept.Geometry.Point2D)"/>.
             </summary>
         </member>
         <member name="T:devDept.Eyeshot.Triangulation.VolumeMesher">
@@ -43894,7 +44482,8 @@
             </summary>
             <param name="boundary">The boundary triangle mesh</param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:devDept.Eyeshot.Triangulation.VolumeMesher.#ctor(devDept.Eyeshot.Entities.Brep,System.Double,System.Boolean)" -->
+        <!-- Badly formed XML comment ignored for member "M:devDept.Eyeshot.Triangulation.VolumeMesher.#ctor(devDept.Eyeshot.Entities.Brep,System.Double,System.Boolean,devDept.Eyeshot.MaterialKeyedCollection)" -->
+        <!-- Badly formed XML comment ignored for member "M:devDept.Eyeshot.Triangulation.VolumeMesher.#ctor(devDept.Eyeshot.Entities.Brep,System.Double[],System.Boolean,devDept.Eyeshot.MaterialKeyedCollection)" -->
         <member name="M:devDept.Eyeshot.Triangulation.VolumeMesher.#ctor(System.Collections.Generic.IList{devDept.Geometry.Point3D},System.Collections.Generic.IList{devDept.Geometry.IndexTriangle})">
             <summary>
             Boundary vertices and triangles mesh constructor.
@@ -49882,6 +50471,80 @@
             <param name="navigationForward">The forward navigation movement shortcut</param>
             <param name="navigationBackward">The backward navigation movement shortcut</param>
         </member>
+        <member name="T:devDept.Eyeshot.ManufactureShortcutKeysSettings">
+            <summary>
+            Additional Manufacture keyboard shortcut settings.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.ManufactureShortcutKeysSettings.#ctor">
+            <summary>
+            Empty constructor.
+            </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.ManufactureShortcutKeysSettings.#ctor(System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="start"> The start simulation shortcut</param>
+            <param name="pause">The pause simulation shortcut</param>
+            <param name="next">The go to next shortcut</param>
+            <param name="previous">The go to previous  shortcut</param>
+        </member>
+        <member name="M:devDept.Eyeshot.ManufactureShortcutKeysSettings.#ctor(System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Windows.Forms.Keys)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="selectAll">The select all shortcut</param>
+            <param name="invertSelection">The invert selection shortcut</param>
+            <param name="deleteSelection">The delete selection shortcut</param>
+            <param name="zoomFit">The zoom fit shortcut</param>
+            <param name="zoomIn">The zoom in shortcut</param>
+            <param name="zoomOut">The zoom out shortcut</param>
+            <param name="copySelection">The copy selection shortcut</param>
+            <param name="pasteSelection">The paste selection shortcut</param>
+            <param name="cutSelection">The cut selection shortcut</param>
+            <param name="groupSelection">The group selection shortcut</param>
+            <param name="ungroupSelection">The ungroup selection shortcut</param>
+            <param name="rotateRight">The rotate right shortcut</param>
+            <param name="rotateUp">The rotate up shortcut</param>
+            <param name="rotateLeft">The rotate left shortcut</param>
+            <param name="rotateDown">The rotate down shortcut</param>
+            <param name="panRight">The pan right shortcut</param>
+            <param name="panUp">The pan up shortcut</param>
+            <param name="panLeft">The pan left shortcut</param>
+            <param name="panDown">The pan down shortcut</param>
+            <param name="cancelBackgroundWork">The cancel background work shortcut</param>
+            <param name="navigationRight">The right navigation movement shortcut</param>
+            <param name="navigationLeft">The left navigation movement shortcut</param>
+            <param name="navigationUp">The up navigation movement shortcut</param>
+            <param name="navigationDown">The down navigation movement shortcut</param>
+            <param name="navigationForward">The forward navigation movement shortcut</param>
+            <param name="navigationBackward">The backward navigation movement shortcut</param>
+            <param name="start"> The start simulation shortcut</param>
+            <param name="pause">The pause simulation shortcut</param>
+            <param name="next">The go to next shortcut</param>
+            <param name="previous">The go to previous  shortcut</param>
+        </member>
+        <member name="P:devDept.Eyeshot.ManufactureShortcutKeysSettings.Start">
+            <summary>
+            Gets or sets the start shortcut.
+            </summary>
+        </member>
+        <member name="P:devDept.Eyeshot.ManufactureShortcutKeysSettings.Pause">
+            <summary>
+            Gets or sets the pause shortcut.
+            </summary>
+        </member>
+        <member name="P:devDept.Eyeshot.ManufactureShortcutKeysSettings.Previous">
+            <summary>
+            Gets or sets the previous shortcut.
+            </summary>
+        </member>
+        <member name="P:devDept.Eyeshot.ManufactureShortcutKeysSettings.Next">
+            <summary>
+            Gets or sets the next shortcut.
+            </summary>
+        </member>
         <member name="T:devDept.Eyeshot.ZoomSettings">
             <summary>Zoom command settings.</summary>
         </member>
@@ -50741,6 +51404,16 @@
             <param name="dashedHiddenLinesPattern">Pattern used to draw the dashed hidden lines</param>
             <param name="wireColorMethod">Wires color method</param>
             <param name="polygonColor">Color used to draw the polygons when <paramref name="colorMethod"/> is <see cref="F:devDept.Eyeshot.hiddenLinesColorMethodType.SingleColor"/></param>
+        </member>
+        <member name="T:devDept.Eyeshot.MinimumDistance">
+            <summary>
+            Utility class to computes the minimum distance between BRep's vertices, edges, faces and BRep themselves.
+            </summary>
+            <remarks>As a side effect, you can use this class to compute minumum distance even between curves and points.</remarks>
+            <seealso cref="T:devDept.Eyeshot.ComputeDistances"/>
+        </member>
+        <member name="P:devDept.Eyeshot.MinimumDistance.PatchPair.Surfaces">
+            Key is patch -> its surface
         </member>
         <member name="T:devDept.Eyeshot.GfxDrawForSelectionParams">
             <summary>
@@ -58704,11 +59377,10 @@
             Empty constructor.
             </summary>
         </member>
-        <member name="M:devDept.Eyeshot.SimulationTimeLine.#ctor(System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Double,System.Boolean,System.Double)">
+        <member name="M:devDept.Eyeshot.SimulationTimeLine.#ctor(System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Double,System.Boolean,System.Double)">
             <summary>
             Standard constructor.
             </summary>
-            <param name="backGroundColor">The SimulationTimeLine background color</param>
             <param name="thumbColor">The timeline thumb color</param>
             <param name="cursorLocationColor">The color used to highlight the cursor location</param>
             <param name="safeMovementsColor">The SimulationTimeLine color of the movements with no collisions</param>
@@ -58729,17 +59401,17 @@
             Gets or sets SimulationTimeLine thickness factor (range 0-1).
             </summary>
         </member>
+        <member name="M:devDept.Eyeshot.SimulationTimeLine.Init">
+            <summary>
+            Initialize the TimeLine
+            </summary>
+        </member>
         <member name="P:devDept.Eyeshot.SimulationTimeLine.Visible">
             <summary>
             Gets or sets the SimulationTimeLine visibility.
             </summary>
         </member>
         <member name="P:devDept.Eyeshot.SimulationTimeLine.HoveringColor">
-            <summary>
-            Gets or sets the SimulationTimeLine background color.
-            </summary>
-        </member>
-        <member name="P:devDept.Eyeshot.SimulationTimeLine.BackgroundColor">
             <summary>
             Gets or sets the SimulationTimeLine background color.
             </summary>
@@ -58768,6 +59440,15 @@
             <summary>
             Gets or sets the scale of the SimulationTimeLine.
             </summary>
+        </member>
+        <member name="M:devDept.Eyeshot.SimulationTimeLine.GetToolTipText(devDept.Eyeshot.Entities.Toolpath.Motion,System.Int32,System.Boolean)">
+            <summary>
+            Gets the tooltip Text.
+            </summary>
+            <param name="motion">The motion.</param>
+            <param name="operationIndex">The operation index.</param>
+            <param name="collision">True if the holder collides with the simulation stock.</param>
+            <returns>The text of the ToolTip referred to the motion of the timeline under the mouse cursor.</returns>
         </member>
         <member name="P:devDept.Eyeshot.SimulationTimeLine.ViewportIndex">
             <summary>
@@ -61003,13 +61684,13 @@
             </summary>
             <returns>The resulting trimmed surface(s).</returns>
         </member>
-        <member name="M:devDept.Geometry.AnalyticSurf.GetUntrimmed(System.Collections.Generic.IList{devDept.Eyeshot.Entities.ICurve},System.Boolean,System.Boolean)">
+        <member name="M:devDept.Geometry.AnalyticSurf.GetUntrimmed(System.Collections.Generic.IList{devDept.Eyeshot.Entities.ICurve},System.Boolean,devDept.Eyeshot.Entities.Surface@)">
             <summary>
-            Gets the untrimmed parametric surface.
+            Gets the untrimmed parametric surface. Seams can be relocated to avoid the intersection with edge curves.
             </summary>
             <param name="edgeCurves">A collection of individual edge curves not organized into composite curves</param>
             <param name="sense">The surface sense, true for same sense.</param>
-            <param name="safePeriodical">When true, the periodical surface is rotated to avoid trim curves near the seam.</param>
+            <param name="notRotated">The original untrimmed surface (as defined in STEP file).</param>
             <returns>The resulting untrimmed surface.</returns>
         </member>
         <member name="M:devDept.Geometry.AnalyticSurf.GetVisualRep(System.Collections.Generic.IList{devDept.Eyeshot.Entities.ICurve},System.Collections.Generic.IList{devDept.Eyeshot.Entities.Entity})">
@@ -61389,6 +62070,22 @@
             <param name="point">The 2D point</param>
             <returns>True if the given point is inside the PolyRegion2D, false otherwise.</returns>
             <remarks>Takes for granted that the first (index = 0) polygon is the outer one.</remarks>
+            <seealso cref="!:SortAndOrient()"/>
+        </member>
+        <member name="M:devDept.Geometry.PolyRegion2D.IsPolygonInside(devDept.Geometry.Polygon2D)">
+            <summary>
+            Check if the specified 2D polygon is inside the PolyRegion2D.
+            </summary>
+            <param name="poly">The 2D polygon</param>
+            <returns>True if the given 2D polygon is inside the PolyRegion2D, false otherwise.</returns>
+            <seealso cref="!:SortAndOrient()"/>
+        </member>
+        <member name="M:devDept.Geometry.PolyRegion2D.IsPolygonOutside(devDept.Geometry.Polygon2D)">
+            <summary>
+            Check if the specified 2D polygon is outside the PolyRegion2D.
+            </summary>
+            <param name="poly">The 2D polygon</param>
+            <returns>True if the given 2D polygon is outside the PolyRegion2D, false otherwise.</returns>
             <seealso cref="!:SortAndOrient()"/>
         </member>
         <member name="M:devDept.Geometry.PolyRegion2D.IsPointInside(devDept.Geometry.Point2D,System.Double)">
@@ -61828,6 +62525,11 @@
             <param name="keepVertices">When true, the original curves tessellation is preserved.</param>
             <returns>The resulting Region array.</returns>
         </member>
+        <member name="M:devDept.Geometry.UtilityEx.DetectRegionsFromContours(System.Collections.Generic.IList{devDept.Eyeshot.Entities.ICurve})">
+            <summary>
+            For CAM only. The results can be regions with contours orientation flipped.
+            </summary>
+        </member>
         <member name="M:devDept.Geometry.UtilityEx.FindClosestCurve(devDept.Geometry.Point3D,System.Collections.Generic.IList{devDept.Eyeshot.Entities.ICurve},System.Boolean,System.Double@,System.Boolean@)">
             <summary>
             Finds the closest curve to the specified previous curve 3D end point.
@@ -61997,7 +62699,7 @@
             <param name="itfCurve">The curve to be checked</param>
             <returns>True if the curve is a <see cref="T:devDept.Eyeshot.Entities.Line"/> or a Nurbs curve with two control points and degree one</returns>
         </member>
-        <member name="M:devDept.Geometry.UtilityEx.RotateAwayFromSeam(devDept.Eyeshot.Entities.RevolvedSurface,System.Collections.Generic.IList{devDept.Eyeshot.Entities.ICurve},System.Double@)">
+        <member name="M:devDept.Geometry.UtilityEx.RotateAwayFromSeam(devDept.Geometry.Plane,System.Collections.Generic.IList{devDept.Eyeshot.Entities.ICurve},devDept.Eyeshot.Entities.Surface,System.Double@)">
             <summary>
             Attempts to rotate the surface three times to avoid proximity/ovelap with seam plane.
             </summary>
@@ -62005,7 +62707,7 @@
             <param name="trimLoops">The trim loops</param>
             <param name="angle">The rotation angle</param>
         </member>
-        <member name="M:devDept.Geometry.UtilityEx.RotateAwayFromAxisX(devDept.Eyeshot.Entities.Arc,devDept.Geometry.Segment3D,System.Double,System.Collections.Generic.IList{devDept.Eyeshot.Entities.ICurve},System.Double@)">
+        <member name="M:devDept.Geometry.UtilityEx.RotateAwayFromAxisX(devDept.Geometry.Plane,devDept.Geometry.Plane,System.Collections.Generic.IList{devDept.Eyeshot.Entities.ICurve},System.Double@)">
             <summary>
             Attempts to rotate an arc three times to avoid proximity/overlap with X axis.
             </summary>
@@ -62787,6 +63489,11 @@
         <member name="P:devDept.Serialization.AutodeskMiscPropertiesSurrogate.ExtrusionDir">
             <summary>
             See <see cref="P:devDept.Eyeshot.Entities.AutodeskMiscProperties.ExtrusionDir"/>.
+            </summary>
+        </member>
+        <member name="P:devDept.Serialization.AutodeskMiscPropertiesSurrogate.UnparsedDimensionText">
+            <summary>
+            See <see cref="P:devDept.Eyeshot.Entities.AutodeskMiscProperties.UnparsedDimensionText"/>
             </summary>
         </member>
         <member name="M:devDept.Serialization.AutodeskMiscPropertiesSurrogate.ConvertToObject">
@@ -66846,6 +67553,11 @@
         <member name="F:devDept.Serialization.FemMeshSurrogate.IsoEdges">
             <summary>
             See <see cref="F:devDept.Eyeshot.Entities.FemMesh.isoEdges"/>.
+            </summary>
+        </member>
+        <member name="F:devDept.Serialization.FemMeshSurrogate.SkinMinEdgeLen">
+            <summary>
+            The boundary mesh minimum edge length.
             </summary>
         </member>
         <member name="M:devDept.Serialization.FemMeshSurrogate.ConvertToObject">

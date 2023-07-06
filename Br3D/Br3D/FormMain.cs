@@ -776,6 +776,8 @@ namespace Br3D
             SetFunctionByElement(barButtonItemCoordinates, Coorindates, LanguageHelper.Tr("Coordinates"), "Coordinates", "coor");
             SetFunctionByElement(barButtonItemDistance, Distance, LanguageHelper.Tr("Distance"), "Distance", "di");
             SetFunctionByElement(barButtonItemMemo, Memo, LanguageHelper.Tr("Memo"), "Memo", "me");
+            SetFunctionByElement(barButtonItemRadius, Radius, LanguageHelper.Tr("Radius"), "Radius", "ra");
+            SetFunctionByElement(barButtonItemLength, Length, LanguageHelper.Tr("Length"), "Length", "le");
             SetFunctionByElement(barButtonItemClearAnnotations, ClearAnnotations, LanguageHelper.Tr("Clear annotations"), "ClearAnnotations", "ca");
 
             // measure
@@ -1177,6 +1179,8 @@ namespace Br3D
         async void Volume() => await new ActionVolume(model, ActionVolume.ShowResult.form).RunAsync();
         async void Area() => await new ActionArea(model, ActionArea.ShowResult.form).RunAsync();
         async void Memo() => await new ActionMemo(model).RunAsync();
+        async void Radius() => await new ActionRadius(model).RunAsync();
+        async void Length() => await new ActionLength(model).RunAsync();
         void ClearAnnotations() => new ActionClearAnnotations(model).Run();
         private void SaveImage() => new ActionSaveImage(model, this).Run();
 

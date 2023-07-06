@@ -507,48 +507,148 @@ namespace hanee.ThreeD
             // 객체 선택중이고 dynamic highlight 해야하는 경우
             DynamicHighlight(environment, e);
 
-            // dynamic input
-            //if (!fromDynamicInput)
-            //{
-            //    if (ActionBase.IsUserInputting())
-            //        DynamicInputManager.ShowDynamicInput(environment);
-            //    else
-            //        DynamicInputManager.HideDynamicInput();
-            //}
-
-
             if (runningAction != null)
                 runningAction.OnMouseMove(environment, e);
         }
         // 마우스 위치에서의 dynamic highlight
+        // 선택된게 있으면 true 를 리턴
         private static void DynamicHighlight(Environment environment, MouseEventArgs e)
         {
             if (!IsSelectingEntity() || !dynamicHighlight || e.Button == MouseButtons.Middle)
                 return;
 
-
-            environment.SetCurrent(null);
-
-            devDept.Eyeshot.Model.SelectedItem item = environment.GetItemUnderMouseCursor(e.Location);
-            if (item != null && item.Item != null && selectableTypes != null && selectableTypes.Count() > 0 && !selectableTypes.ContainsKey(item.Item.GetType()))
+            // eyeshot model의 action model가 dynamic highlight 상태이면 리턴
+            if (environment is Model model)
             {
-                item = null;
+                if (model.ActionMode == actionType.SelectVisibleByPickDynamic)
+                    return;
             }
 
-            // sub entity 선택중이면..
-            if (item != null && userInputting[(int)UserInput.SelectingSubEntity])
+            devDept.Eyeshot.Model.SelectedItem item = GetItemUnderMouseCursorByUserInputting(environment as Model, e);
+
+            // 마지막 선택과 같으면 highlight 유지
+            if (IsSameSelectedItem(LastSelectedItem, item))
+                return;
+
+            // 마지막 선택 clear
+            if (LastSelectedItem != null)
             {
+                if ( LastSelectedItem.Item is Brep lastBrep)
+                {
+                    lastBrep.ClearFacesSelection();
+                    lastBrep.ClearEdgesSelection(null);
+                }
+
+                LastSelectedItem.Item.Selected = false;
+                environment.Invalidate();
+            }
+
+            LastSelectedItem = item;
+
+            if (item == null)
+                return;
+
+
+            // 현재 선택을 highlight
+            if (item is Environment.SelectedFace sf)
+            {
+                if (item.Item is Brep sfBrep)
+                {
+                    sfBrep.SetFaceSelection(sf.Index, true);
+                }
+            }
+
+            if (item is Environment.SelectedEdge se)
+            {
+                if (item.Item is Brep seBrep)
+                {
+                    seBrep.SetEdgeSelection(se.Index, true);
+                }
+            }
+
+            if (item is Environment.SelectedItem si)
+            {
+                si.Item.Selected = true;
+            }
+
+
+            environment.Invalidate();
+            return;
+        }
+
+        private static bool IsSameSelectedItem(Environment.SelectedItem lastSelectedItem, Environment.SelectedItem item)
+        {
+            // null인지 체크
+            if (lastSelectedItem == null && item == null)
+                return true;
+            if (lastSelectedItem == null && item != null)
+                return false;
+            if (lastSelectedItem != null && item == null)
+                return false;
+
+            // 선택한 객체가 같은지 체크
+            if (lastSelectedItem.Item != item.Item)
+                return false;
+
+            // 선택한 종류가 같은지 체크
+            if (lastSelectedItem.GetType() != item.GetType())
+                return false;
+            
+            return true;
+        }
+
+        // 마우스 커서 위치에서의 selected item을 리턴
+        // 먼저 선택되는거 바로 리턴
+        private static Environment.SelectedItem GetItemUnderMouseCursorByUserInputting(Model model, MouseEventArgs e)
+        {
+            if (model == null)
+                return null;
+
+            var oldSelectionFilterMode = model.SelectionFilterMode;
+            
+            // edge 선택중인 경우
+            if (userInputting[(int)UserInput.SelectingEdge] == true)
+            {
+                model.SelectionFilterMode = selectionFilterType.Edge;
+                devDept.Eyeshot.Model.SelectedItem item = model.GetItemUnderMouseCursor(e.Location);
+                if (item is devDept.Eyeshot.Model.SelectedEdge)
+                {
+                    model.SelectionFilterMode = oldSelectionFilterMode;
+                    return item;
+                }
+            }
+
+            // face 선택중인 경우
+            if (userInputting[(int)UserInput.SelectingFace] == true)
+            {
+                model.SelectionFilterMode = selectionFilterType.Face;
+                devDept.Eyeshot.Model.SelectedItem item = model.GetItemUnderMouseCursor(e.Location);
+                if (item is devDept.Eyeshot.Model.SelectedFace)
+                {
+                    model.SelectionFilterMode = oldSelectionFilterMode;
+                    return item;
+                }
+            }
+
+            // sub entity 선택중인 경우
+            if (userInputting[(int)UserInput.SelectingSubEntity] == true)
+            {
+                model.SelectionFilterMode = selectionFilterType.Entity;
+
+                devDept.Eyeshot.Model.SelectedItem item = model.GetItemUnderMouseCursor(e.Location);
+
                 // sub 객체를 탐색한다.
                 while (item.Item is BlockReference)
                 {
                     try
                     {
                         BlockReference br = item.Item as BlockReference;
-                        if (environment.Blocks.Contains(br.BlockName))
-                            environment.SetCurrent(item.Item as BlockReference);
-                        item = environment.GetItemUnderMouseCursor(e.Location);
+                        if (model.Blocks.Contains(br.BlockName))
+                            model.SetCurrent(item.Item as BlockReference);
+                        item = model.GetItemUnderMouseCursor(e.Location);
                         if (item == null)
                             break;
+                        return item;
                     }
                     catch
                     {
@@ -558,37 +658,26 @@ namespace hanee.ThreeD
                 }
             }
 
-            // 현재 선택된 item이 마지막 선택과 다르면 갱신한다.
-            if (LastSelectedItem != item)
+            // 객체 선택 중인 경우 
+            if (userInputting[(int)UserInput.SelectingEntity] == true)
             {
-                bool highlightable = false;
-                var sf = item as Environment.SelectedFace;
-                if (sf != null)
-                {
-                    highlightable = item.Item is Brep;
-                }
+                model.SelectionFilterMode = selectionFilterType.Entity;
 
-                // 기존 highlight를 제거
-                if (LastSelectedItem != null && LastSelectedItem.Item is Brep lastBrep)
+                var items = model.GetAllItemsUnderMouseCursor(e.Location);
+                if(items != null)
                 {
-                    lastBrep.ClearFacesSelection();
-                }
-
-                LastSelectedItem = item;
-
-                if (highlightable)
-                {
-                    if (LastSelectedItem != null)
+                    foreach(var item in items)
                     {
-                        if (sf != null && item.Item is Brep brep)
+                        if (ActionBase.IsSelectableType(item.Item as Entity))
                         {
-                            brep.SetFaceSelection(sf.Index, true);
+                            model.SelectionFilterMode = oldSelectionFilterMode;
+                            return item;
                         }
                     }
                 }
-
-                environment.Invalidate();
             }
+
+            return null;
         }
 
         // mouse event args로 Point 좌표를 설정한다.
@@ -849,15 +938,24 @@ namespace hanee.ThreeD
 
             if (userInputting[(int)UserInput.SelectingEdge] == true)
             {
-                devDept.Eyeshot.Model.SelectedItem item = environment.GetItemUnderMouseCursor(e.Location);
-                if (item != null)
+                if(environment is Model model)
                 {
-                    if (item is devDept.Eyeshot.Model.SelectedEdge)
+                    var oldSelectionFilterMode = model.SelectionFilterMode;
+                    model.SelectionFilterMode = selectionFilterType.Edge;
+                    devDept.Eyeshot.Model.SelectedItem item = environment.GetItemUnderMouseCursor(e.Location);
+                    if (item != null)
                     {
-                        selectedEdge = (devDept.Eyeshot.Model.SelectedEdge)item;
-                        ActionBase.EndInput(UserInput.SelectingEdge);
+                        if (item is devDept.Eyeshot.Model.SelectedEdge)
+                        {
+                            selectedEdge = (devDept.Eyeshot.Model.SelectedEdge)item;
+                            ActionBase.EndInput(UserInput.SelectingEdge);
+                        }
                     }
+
+                    model.SelectionFilterMode = oldSelectionFilterMode;
                 }
+                
+                
             }
 
             if (userInputting[(int)UserInput.SelectingSubEntity] == true)
@@ -1127,6 +1225,24 @@ namespace hanee.ThreeD
         }
 
         // edge 1개를 선택받는다
+        public async Task<KeyValuePair<devDept.Eyeshot.Model.SelectedEdge, Entity>> GetEdgeOrEntity(string message = null, int stepID = -1, Dictionary<Type, bool> selectableType = null)
+        {
+            ActionBase.selectableTypes = selectableType;
+            await StartAndWaitUserInput(message, stepID, UserInput.SelectingEdge, UserInput.SelectingEntity);
+
+            var resultEdge = selectedEdge;
+            var resultEntity = selectedEntity;
+            if (ActionBase.userInputting[(int)UserInput.SelectingEdge])
+                resultEdge = null;
+            if (ActionBase.userInputting[(int)UserInput.SelectingEntity])
+                resultEntity = null;
+
+            // 입력 종료
+            EndInput(UserInput.SelectingEdge, UserInput.SelectingEntity);
+            return new KeyValuePair<Environment.SelectedEdge, Entity>(resultEdge, resultEntity);
+        }
+
+        // edge 1개를 선택받는다
         public async Task<devDept.Eyeshot.Model.SelectedEdge> GetEdge(string message = null, int stepID = -1)
         {
             ActionBase.StartInput(environment, message, stepID, UserInput.SelectingEdge);
@@ -1185,6 +1301,8 @@ namespace hanee.ThreeD
                 oldSelectionFilterType = model.SelectionFilterMode;
                 model.SelectionFilterMode = selectionFilterType.Face;
             }
+
+            environment.ActionMode = actionType.SelectVisibleByPickDynamic;
 
             while (ActionBase.userInputting[(int)UserInput.SelectingFace] == true)
             {

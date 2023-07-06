@@ -33,7 +33,9 @@
 /Br3D/Br3D/x64/ReleaseLT
 /Br3D/packages/System.Collections.4.3.0
 /Br3D/Src/hanee.Terrain.Tool/bin/Debug
+/Br3D/Src/hanee.Terrain.Tool/bin/Release
 /Br3D/Src/hanee.Terrain.Tool/obj/Debug
+/Br3D/Src/hanee.Terrain.Tool/obj/Release
 /Br3D/Src/hanee.Cam/bin/Debug
 /Br3D/Src/hanee.Cam/obj/Debug
 /Br3D/Src/hanee.Cam/bin/Release
@@ -42,4 +44,6 @@
 Setup_Br3D.exe
 Setup_Br3DLT.exe
 *.wyu
+*.bak
+*.pdb
 /Src/hanee.terrain.Tool/bin/Release

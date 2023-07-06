@@ -605,6 +605,11 @@
             Regen tol for extruding curves by thickness in Professional edition
             </summary>
         </member>
+        <member name="M:devDept.Eyeshot.Translators.ReadAutodesk.RemoveOrphanSeamEdges(devDept.Eyeshot.Entities.Brep)">
+            <summary>
+            Remove seam edges not connected to any other edges
+            </summary>
+        </member>
         <member name="M:devDept.Eyeshot.Translators.ReadAutodesk.CreateXRef(System.String,devDept.Geometry.Point3D,devDept.Eyeshot.Environment,System.String,devDept.Eyeshot.Translators.WriteAutodesk.blockExportType)">
             <summary>
             Creates a block with the loaded entities, adds it to the <see cref="T:devDept.Eyeshot.Environment"/>, marks it as external reference and returns a BlockReference to that block.
@@ -2002,6 +2007,11 @@
             Gets or sets a string indicating whether the layer belongs to an xReference.
             </summary>
         </member>
+        <member name="P:devDept.Eyeshot.LayerEx.XData">
+            <summary>
+            Gets or sets the XData value list.
+            </summary>
+        </member>
         <member name="M:devDept.Eyeshot.LayerEx.#ctor(System.String,System.Drawing.Color,System.String,System.Single,System.Boolean,System.Boolean)">
             <summary>
             
@@ -2114,6 +2124,13 @@
             <summary>
             See <see cref="P:devDept.Eyeshot.LayerEx.XRefName"/>.
             </summary>
+        </member>
+        <member name="P:devDept.Serialization.LayerExSurrogate.XData">
+            <summary>
+            See <see cref="P:devDept.Eyeshot.LayerEx.XData"/>.
+            </summary>
+            <remarks>ProtoBuf does not support serializing/deserializing object.</remarks>
+            <seealso cref="T:devDept.Serialization.ProtoObject"/>
         </member>
         <member name="M:devDept.Serialization.LayerExSurrogate.ConvertToObject">
              <inheritdoc />

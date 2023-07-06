@@ -32,7 +32,7 @@ namespace Br3D
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.TileItemElement tileItemElement2 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement1 = new DevExpress.XtraEditors.TileItemElement();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tileNavSubItemInsertImage = new DevExpress.XtraBars.Navigation.TileNavSubItem();
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
@@ -215,6 +215,7 @@ namespace Br3D
             this.barButtonItemGroup = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemUpAxis = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemRenderOptions = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemRadius = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageHome = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupFile = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupWorkspace = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -262,6 +263,8 @@ namespace Br3D
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButtonInit = new DevExpress.XtraEditors.SimpleButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemLength = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
             this.panelContainer1.SuspendLayout();
@@ -302,8 +305,8 @@ namespace Br3D
             // 
             // 
             this.tileNavSubItemInsertImage.Tile.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement2.Text = "Image";
-            this.tileNavSubItemInsertImage.Tile.Elements.Add(tileItemElement2);
+            tileItemElement1.Text = "Image";
+            this.tileNavSubItemInsertImage.Tile.Elements.Add(tileItemElement1);
             this.tileNavSubItemInsertImage.Tile.Name = "tileBarItem1";
             // 
             // dockManager1
@@ -457,7 +460,7 @@ namespace Br3D
             this.rowShowInternalWires.Properties.Caption = "Show internal wires";
             this.rowShowInternalWires.Properties.FieldName = "showInternalWires";
             // 
-            // rowSilhouetteThickness
+            // rowSilhouetteDrawing
             // 
             this.rowSilhouetteDrawing.Name = "rowSilhouetteDrawing";
             this.rowSilhouetteDrawing.Properties.Caption = "Silhouettes drawing";
@@ -905,9 +908,11 @@ namespace Br3D
             this.barButtonItemClippingPlane,
             this.barButtonItemGroup,
             this.barButtonItemUpAxis,
-            this.barButtonItemRenderOptions});
+            this.barButtonItemRenderOptions,
+            this.barButtonItemRadius,
+            this.barButtonItemLength});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 145;
+            this.ribbonControl1.MaxItemId = 147;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.barButtonItemUndo);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.barButtonItemRedo);
@@ -1838,6 +1843,13 @@ namespace Br3D
             this.barButtonItemRenderOptions.Name = "barButtonItemRenderOptions";
             this.barButtonItemRenderOptions.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText;
             // 
+            // barButtonItemRadius
+            // 
+            this.barButtonItemRadius.Caption = "Radius";
+            this.barButtonItemRadius.Id = 145;
+            this.barButtonItemRadius.ImageOptions.Image = global::Br3D.Properties.Resources.Annotation_Dimradius_Small;
+            this.barButtonItemRadius.Name = "barButtonItemRadius";
+            // 
             // ribbonPageHome
             // 
             this.ribbonPageHome.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -2062,6 +2074,8 @@ namespace Br3D
             this.ribbonPageGroupDrawAnnotation.ItemLinks.Add(this.barButtonItemCoordinates);
             this.ribbonPageGroupDrawAnnotation.ItemLinks.Add(this.barButtonItemDistance);
             this.ribbonPageGroupDrawAnnotation.ItemLinks.Add(this.barButtonItemMemo);
+            this.ribbonPageGroupDrawAnnotation.ItemLinks.Add(this.barButtonItemRadius);
+            this.ribbonPageGroupDrawAnnotation.ItemLinks.Add(this.barButtonItemLength);
             this.ribbonPageGroupDrawAnnotation.Name = "ribbonPageGroupDrawAnnotation";
             this.ribbonPageGroupDrawAnnotation.Text = "Draw";
             // 
@@ -2258,6 +2272,20 @@ namespace Br3D
             // colorDialog1
             // 
             this.colorDialog1.FullOpen = true;
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "Memo";
+            this.barButtonItem3.Id = 46;
+            this.barButtonItem3.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem3.ImageOptions.SvgImage")));
+            this.barButtonItem3.Name = "barButtonItem3";
+            // 
+            // barButtonItemLength
+            // 
+            this.barButtonItemLength.Caption = "Length";
+            this.barButtonItemLength.Id = 146;
+            this.barButtonItemLength.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemLength.ImageOptions.SvgImage")));
+            this.barButtonItemLength.Name = "barButtonItemLength";
             // 
             // FormMain
             // 
@@ -2542,5 +2570,8 @@ namespace Br3D
         private DevExpress.XtraBars.BarButtonItem barButtonItemRenderOptions;
         private DevExpress.XtraVerticalGrid.Rows.EditorRow rowRealisticShadowQuality;
         private DevExpress.XtraBars.Docking.AutoHideContainer hideContainerLeft;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemRadius;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemLength;
     }
 }

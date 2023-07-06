@@ -14,35 +14,32 @@
     <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.bonus_nefs`1.val``1(devDept.Meshing.dense2D{``0})" -->
     <!-- Badly formed XML comment ignored for member "T:devDept.Meshing.dense1D`1" -->
     <member name="M:devDept.Meshing.dense1D`1.#ctor(devDept.Meshing.dense1D{`0})">
-                           Copy constructor (shallow copy).
+                       Copy constructor (shallow copy).
             
-                           Shallow copy = share the same data. \n
-                           Data are not copied, only the smart pointer is copied.
+                       Shallow copy = share the same data. \n
+                       Data are not copied, only the smart pointer is copied.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.#ctor(devDept.Meshing.dense1D{`0},System.UInt32,System.UInt32)">
-                           Partial copy constructor (shallow copy).
+                       Partial copy constructor (shallow copy).
             
-                           Shallow copy = share the same data. \n
-                           Constructs a view on a vector with a shift of the first element.
+                       Shallow copy = share the same data. \n
+                       Constructs a view on a vector with a shift of the first element.
             
-                           \pre The value \p shift + \p size must be less than the underlying vector's size.
+                       \pre The value \p shift + \p size must be less than the underlying vector's size.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.data">
-                       Preallocated memory constructor (shallow copy).
-            
-                       The user remains responsible for memory management. \n
-                       The vector is not allowed to delete the pointer even in case of destruction or 
-                       reallocation (through reserve() or push_back()).
-            
-                       \param   n        The number of elements to consider starting from \p data.
-                       \param   data     The data array as a continuous vector. \n
-                                         Must have at least \p n elements. \n
-                                         Can be unaligned on a VEC_ALIGNMENT boundary.
+                    Preallocated memory constructor (shallow copy).
+                    
+                    The user remains responsible for memory management. \n
+                    The vector is not allowed to delete the pointer even in case of destruction or 
+                    reallocation (through reserve() or push_back()).
+                    
+                    \param   n        The number of elements to consider starting from \p data.
+                    \param   data     The data array as a continuous vector. \n
+                                      Must have at least \p n elements. \n
+                                      Can be unaligned on a VEC_ALIGNMENT boundary.
             @name Iterator access members 
             Pointer to the first element. Same as begin().
-        </member>
-    <member name="M:devDept.Meshing.dense1D`1.cdata">
-            Const pointer to the first element. Same as cbegin().
         </member>
     <member name="M:devDept.Meshing.dense1D`1.begin">
             STL-compatible begin (pointer to the first element).
@@ -69,34 +66,19 @@
     <member name="M:devDept.Meshing.dense1D`1.copy(devDept.Meshing.dense1D{`0})">
             Deep copy (data are copied).
         </member>
-    <member name="M:devDept.Meshing.dense1D`1.reallocate">
-            Change allocation (ensures no longer shared).
-        </member>
     <member name="M:devDept.Meshing.dense1D`1.equals(devDept.Meshing.dense1D{`0},devDept.Meshing.dense1D{`0})">
             @name Equality operators 
-                           Shallow equality.
-                           \return     True when objects are same (i.e. refer to same data).
-        </member>
-    <member name="M:devDept.Meshing.dense1D`1.is_valid(System.UInt32)">
-            @name Value and reference access operators 
-            Checks accessibility of element at position \p i.
+                       Shallow equality.
+                       \return     True when objects are same (i.e. refer to same data).
         </member>
     <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.dense1D`1.getAt(System.UInt32)" -->
     <member name="M:devDept.Meshing.dense1D`1.front">
-                           Returns the front element by value. 
-                           \pre Vector must not be empty.
-        </member>
-    <member name="M:devDept.Meshing.dense1D`1.frontref">
-                           Returns the front element by reference. 
-                           \pre Vector must not be empty.
+                       Returns the front element by value. 
+                       \pre Vector must not be empty.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.back">
-                           Returns the last element by value. 
-                           \pre Vector must not be empty.
-        </member>
-    <member name="M:devDept.Meshing.dense1D`1.backref">
-                           Returns the front element by reference. 
-                           \pre Vector must not be empty.
+                       Returns the last element by value. 
+                       \pre Vector must not be empty.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.entries">
             @name Size members 
@@ -105,61 +87,52 @@
     <member name="M:devDept.Meshing.dense1D`1.size">
             The number of elements in the vector (same as entries()).
         </member>
-    <member name="M:devDept.Meshing.dense1D`1.size_of">
-            The size in bytes of the content of the vector.
-        </member>
-    <member name="M:devDept.Meshing.dense1D`1.dim">
-            The size of the vector. Same as size().
-        </member>
-    <member name="M:devDept.Meshing.dense1D`1.ld">
-            The leading dimension of the vector. Same as size().
-        </member>
     <member name="M:devDept.Meshing.dense1D`1.empty">
             True when the vector is empty.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.capacity">
-                           Returns the capacity of the vector (always greater than or equal to size()).
+                       Returns the capacity of the vector (always greater than or equal to size()).
             
-                           Automatic reallocation occurs when size() reaches capacity(). \n
-                           It is then usually increased by a factor of two. \n
-                           \warning    Just like the STL vector, this invalidates the iterators.
+                       Automatic reallocation occurs when size() reaches capacity(). \n
+                       It is then usually increased by a factor of two. \n
+                       \warning    Just like the STL vector, this invalidates the iterators.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.push_back(`0)">
-                           Appends an element. 
-                           
-                           \return  True for success.
-                           \post    The size is increased by one.
+                       Appends an element. 
+                       
+                       \return  True for success.
+                       \post    The size is increased by one.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.push_back(`0,`0)">
-                           Appends two elements. 
-                           
-                           \return  True for success.
-                           \post    The size is increased by two.
+                       Appends two elements. 
+                       
+                       \return  True for success.
+                       \post    The size is increased by two.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.push_back(`0,`0,`0)">
-                           Appends three elements. 
-                           
-                           \return  True for success.
-                           \post    The size is increased by three.
+                       Appends three elements. 
+                       
+                       \return  True for success.
+                       \post    The size is increased by three.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.push_back(`0,`0,`0,`0)">
-                           Appends four elements. 
-                           
-                           \return  True for success.
-                           \post    The size is increased by four.
+                       Appends four elements. 
+                       
+                       \return  True for success.
+                       \post    The size is increased by four.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.push_back_n(`0,System.UInt32)">
-                           Appends an element n times. 
-                           
-                           \return  True for success.
-                           \post    The size is increased by \p n.
+                       Appends an element n times. 
+                       
+                       \return  True for success.
+                       \post    The size is increased by \p n.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.push_back(devDept.Meshing.dense1D{`0},System.Boolean)">
-                           Appends another vector (hard copy). 
+                       Appends another vector (hard copy). 
             
-                           \return     True for success.
-                           \post       The size is increased by x.size().
-                           \warning    The vectors should not overlap (checked in _DEBUG mode).
+                       \return     True for success.
+                       \post       The size is increased by x.size().
+                       \warning    The vectors should not overlap (checked in _DEBUG mode).
         </member>
     <member name="M:devDept.Meshing.dense1D`1.pop_back">
             Removes the last element, if any. 
@@ -168,49 +141,49 @@
             Removes the last n elements, if any. 
         </member>
     <member name="M:devDept.Meshing.dense1D`1.reserve(System.UInt32,System.UInt32)">
-                           Manual memory reservation without size change.
+                       Manual memory reservation without size change.
             
-                           Like the STL vector reserve() causes a reallocation manually. \n
-                           The main reason for using reserve() is efficiency. \n
-                           If you know the capacity to which your vector must eventually grow, then it is usually 
-                           more efficient to allocate that memory all at once rather than relying on the automatic 
-                           reallocation scheme. \n
-                           The other reason for using reserve() is that you can control the invalidation of iterators.
-                           reserve() has no effect for a value lesser than the current size.
+                       Like the STL vector reserve() causes a reallocation manually. \n
+                       The main reason for using reserve() is efficiency. \n
+                       If you know the capacity to which your vector must eventually grow, then it is usually 
+                       more efficient to allocate that memory all at once rather than relying on the automatic 
+                       reallocation scheme. \n
+                       The other reason for using reserve() is that you can control the invalidation of iterators.
+                       reserve() has no effect for a value lesser than the current size.
             
-                           \return  True for success.
+                       \return  True for success.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.resize(System.UInt32)">
-                           Changes the size of the vector (uninitialized).
+                       Changes the size of the vector (uninitialized).
             
-                           Elements under min(size(),n) are left unchanged. \n
-                           If \p n &gt; size(), new elements between size() and \p n are uninitialized. \n
-                           If \p n &gt; capacity(), a reallocation occurs and iterators are invalid. \n
+                       Elements under min(size(),n) are left unchanged. \n
+                       If \p n &gt; size(), new elements between size() and \p n are uninitialized. \n
+                       If \p n &gt; capacity(), a reallocation occurs and iterators are invalid. \n
             
-                           \note    When the data are not to be kept, it is a good practice to clear the vector before any resizing.
-                           \return  True for success.
+                       \note    When the data are not to be kept, it is a good practice to clear the vector before any resizing.
+                       \return  True for success.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.resize(System.UInt32,`0)">
-                           Changes the size of the vector (initialized).
+                       Changes the size of the vector (initialized).
             
-                           Elements under min(size(),n) are left unchanged. \n
-                           If \p n &gt; size(), new elements between size() and \p n are initialized to \p v. \n
-                           If \p n &gt; capacity(), a reallocation occurs and iterators are invalid. \n
+                       Elements under min(size(),n) are left unchanged. \n
+                       If \p n &gt; size(), new elements between size() and \p n are initialized to \p v. \n
+                       If \p n &gt; capacity(), a reallocation occurs and iterators are invalid. \n
             
-                           \note    When the data are not to be kept, it is a good practice to clear the vector before any resizing.
-                           \return  True for success.
+                       \note    When the data are not to be kept, it is a good practice to clear the vector before any resizing.
+                       \return  True for success.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.clear">
-                           Clears without deallocation. 
+                       Clears without deallocation. 
             
-                           The size is set to zero but capacity is left unchanged. \n
-                           No deallocation is performed.
+                       The size is set to zero but capacity is left unchanged. \n
+                       No deallocation is performed.
         </member>
     <member name="M:devDept.Meshing.dense1D`1.clear_hard">
-                           Clears with deallocation (if possible). 
+                       Clears with deallocation (if possible). 
             
-                           The size and the capacity are set to zero. \n
-                           Deallocation is performed (when there is no other vector pointing to the data).
+                       The size and the capacity are set to zero. \n
+                       Deallocation is performed (when there is no other vector pointing to the data).
         </member>
     <member name="M:devDept.Meshing.dense1D`1.sub_vector(System.UInt32,System.UInt32)">
             **@name Sub-vectors */
@@ -267,70 +240,50 @@
                    \see        DoubleMat, FloatMat, IntMat, UIntMat, matrix_fixed, dense1D.
         </member>
     <member name="T:devDept.Meshing.dense2D`1.segment_type">
-                           A segment_type is a view to a column of a matrix. \n
-                           It is equipped with members such as begin(), end() and size() which make it a candidate
-                           for most of the STL algorithms and cm2::vecscal, cm2::vecvec functions.
+                       A segment_type is a view to a column of a matrix. \n
+                       It is equipped with members such as begin(), end() and size() which make it a candidate
+                       for most of the STL algorithms and cm2::vecscal, cm2::vecvec functions.
             
-                           A segment_type is also an iterator through the segments (i.e. columns) of a matrix. \n
-                           A segment_type can be incremented and decremented to view the next or the previous segment
-                           in a matrix.
+                       A segment_type is also an iterator through the segments (i.e. columns) of a matrix. \n
+                       A segment_type can be incremented and decremented to view the next or the previous segment
+                       in a matrix.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.#ctor">
-                           Default constructor.
+                       Default constructor.
             
-                           Dimensions are null. Matrix is empty.
+                       Dimensions are null. Matrix is empty.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.#ctor(System.UInt32,System.UInt32)">
-                           Constructor with dimensions.
+                       Constructor with dimensions.
             
-                           Elements are uninitialized.
+                       Elements are uninitialized.
             
-                           \param   m  The number of rows.
-                           \param   n  The number of columns.
+                       \param   m  The number of rows.
+                       \param   n  The number of columns.
             
-                           \post    ld() == m, i.e. there is no jump between columns.
-                           \note    In case of allocation error, the size of the matrix is null 
-                                    (rows() = 0, cols() = 0, ld() = 0).
+                       \post    ld() == m, i.e. there is no jump between columns.
+                       \note    In case of allocation error, the size of the matrix is null 
+                                (rows() = 0, cols() = 0, ld() = 0).
         </member>
     <member name="M:devDept.Meshing.dense2D`1.#ctor(System.UInt32,System.UInt32,`0)">
-                           Constructor with a common initializing value.
+                       Constructor with a common initializing value.
             
-                           All elements are initialized to \p x.
+                       All elements are initialized to \p x.
             
-                           \param   m  The number of rows.
-                           \param   n  The number of cols.
-                           \param   x  The initializing value.
+                       \param   m  The number of rows.
+                       \param   n  The number of cols.
+                       \param   x  The initializing value.
             
-                           \post    ld() == m, i.e. there is no jump between columns.
-                           \note    In case of allocation error, the size of the matrix is null 
-                                    (rows() = 0, cols() = 0, ld() = 0).
+                       \post    ld() == m, i.e. there is no jump between columns.
+                       \note    In case of allocation error, the size of the matrix is null 
+                                (rows() = 0, cols() = 0, ld() = 0).
         </member>
     <member name="M:devDept.Meshing.dense2D`1.#ctor(devDept.Meshing.dense2D{`0})">
-                           Copy constructor (shallow copy).
+                       Copy constructor (shallow copy).
             
-                           The matrices share the same data.
-        </member>
-    <member name="M:devDept.Meshing.dense2D`1.#ctor(devDept.Meshing.dense1D{`0})">
-                           Constructor from a vector (one column).
-            
-                           \param   V0     The vector.
-            
-                           \note    The data are shared (shallow copy).
+                       The matrices share the same data.
         </member>
     <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.dense2D`1.#ctor(devDept.Meshing.dense2D{`0},System.UInt32,System.UInt32,System.UInt32,System.UInt32)" -->
-    <member name="M:devDept.Meshing.dense2D`1.#ctor(System.UInt32,System.UInt32,System.UInt32,`0)">
-                           Constructor from a preallocated array (shallow copy).
-            
-                           The user remains responsible for memory management.
-                           The matrix is not allowed to delete the pointer even in case of destruction or 
-                           reallocation (through \ref reserve or \ref push_back).
-            
-                           \param   m        The number of rows in the new matrix.
-                           \param   n        The number of cols in the new matrix.
-                           \param   ld       The leading size (stride from one column to the next).
-                           \param   data     The data array as a continuous vector.
-                                             Must have at least ld*n elements.
-        </member>
     <member name="M:devDept.Meshing.dense2D`1.CopyFrom(devDept.Meshing.dense2D{`0})">
             Shallow copy (data are shared).
         </member>
@@ -340,92 +293,63 @@
     <member name="M:devDept.Meshing.dense2D`1.copy(devDept.Meshing.dense2D{`0})">
             Deep copy (data are copied).
         </member>
-    <member name="M:devDept.Meshing.dense2D`1.equals(devDept.Meshing.dense2D{`0},devDept.Meshing.dense2D{`0})">
-            @name Equality operators 
-            Shallow equality.
-        </member>
     <member name="M:devDept.Meshing.dense2D`1.is_valid_col(System.UInt32)">
+            @name Equality operators 
             @name Columns
-                           The \ref col members return column copies (shallow copies).
+                       The \ref col members return column copies (shallow copies).
             Returns true if the j-th column can be accessed.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.segments">
             @name Segment iterators
-                           The segment_iterator and const_segment_iterator can be seen as views
-                           to the columns of the matrix. \n
-                           They are equipped with members such as begin(), end() and size() which make them candidates
-                           for most of the cm2::vecscal and cm2::vecvec template functions.
+                       The segment_iterator and const_segment_iterator can be seen as views
+                       to the columns of the matrix. \n
+                       They are equipped with members such as begin(), end() and size() which make them candidates
+                       for most of the cm2::vecscal and cm2::vecvec template functions.
             Nbr of segments (columns).
         </member>
     <member name="M:devDept.Meshing.dense2D`1.seg_begin">
             Iterator to the first segment.
         </member>
-    <member name="M:devDept.Meshing.dense2D`1.cseg_begin">
-            Iterator to the first segment (const).
-        </member>
     <member name="M:devDept.Meshing.dense2D`1.seg_end">
             Iterator to the past-the-end segment.
         </member>
-    <member name="M:devDept.Meshing.dense2D`1.cseg_end">
-            Iterator to the past-the-end segment (const).
-        </member>
     <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.dense2D`1.seg(System.UInt32)" -->
-    <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.dense2D`1.cseg(System.UInt32)" -->
     <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.dense2D`1.data_col(System.UInt32)" -->
-    <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.dense2D`1.cdata_col(System.UInt32)" -->
-    <member name="M:devDept.Meshing.dense2D`1.row_cend(System.UInt32)">
-            Const row iterator to the past-the-end element of row \p i (const).
-        </member>
-    <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.dense2D`1.getAt(System.UInt32,System.UInt32)" -->
     <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.dense2D`1.functorMethod(System.UInt32,System.UInt32)" -->
-    <member name="M:devDept.Meshing.dense2D`1.first_index">
-            @name Size members 
-            First index.
-        </member>
-    <member name="M:devDept.Meshing.dense2D`1.past_index">
-            Past-the-end index of columns.
-        </member>
     <member name="M:devDept.Meshing.dense2D`1.rows">
+            @name Size members 
             Number of rows.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.cols">
             Number of columns.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.ld">
-                           Returns the leading dimension.
+                       Returns the leading dimension.
             
-                           Leading dimension = stride from one column to the next.
+                       Leading dimension = stride from one column to the next.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.entries">
             Returns the number of elements in the matrix.
-        </member>
-    <member name="M:devDept.Meshing.dense2D`1.segments_entries">
-            Same as entries.
-        </member>
-    <member name="M:devDept.Meshing.dense2D`1.dim">
-                           Returns the dimension of the matrix.
-            
-                           When the matrix is not square the dimension is defined by `min(rows(), cols())`.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.empty">
             True when the matrix is empty.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.cols_capacity">
-                           Returns the column capacity of the matrix (always greater than or equal to `cols()`).
+                       Returns the column capacity of the matrix (always greater than or equal to `cols()`).
             
-                           This is the max number of columns, with number of rows constant, 
-                           to which the matrix can grow without performing any reallocation.
+                       This is the max number of columns, with number of rows constant, 
+                       to which the matrix can grow without performing any reallocation.
             
-                           If the matrix is empty, this function returns the raw capacity.
+                       If the matrix is empty, this function returns the raw capacity.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.push_back(devDept.Meshing.dense2D{`0})">
-                           Appends another matrix (hard copy). 
+                       Appends another matrix (hard copy). 
             
-                           \return     True for success.
-                           \post       The number of columns is increased by `A.cols()`.
-                           \pre        If none of the two matrices are empty upon entry, 
-                                       they must have the same number of rows.
-                           \warning    The matrices should not overlap (checked in _DEBUG mode).
+                       \return     True for success.
+                       \post       The number of columns is increased by `A.cols()`.
+                       \pre        If none of the two matrices are empty upon entry, 
+                                   they must have the same number of rows.
+                       \warning    The matrices should not overlap (checked in _DEBUG mode).
         </member>
     <member name="M:devDept.Meshing.dense2D`1.pop_back">
             Removes the last column (if any).
@@ -434,57 +358,54 @@
             Removes the last columns (if any).
         </member>
     <member name="M:devDept.Meshing.dense2D`1.reserve(System.UInt32,System.UInt32,System.UInt32)">
-                           Manual memory reservation without dimension change.
+                       Manual memory reservation without dimension change.
             
-                           The main reason for using reserve() is efficiency: 
-                           if you know the capacity to which your matrix must eventually grow, then it is  
-                           more efficient to allocate that memory all at once rather than resizing it several times. \n
-                           The other reason for using reserve() is that you can control the invalidation of iterators.
+                       The main reason for using reserve() is efficiency: 
+                       if you know the capacity to which your matrix must eventually grow, then it is  
+                       more efficient to allocate that memory all at once rather than resizing it several times. \n
+                       The other reason for using reserve() is that you can control the invalidation of iterators.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.resize(System.UInt32,System.UInt32)">
-                           Changes the dimensions of the matrix (uninitialized).
+                       Changes the dimensions of the matrix (uninitialized).
             
-                           Elements under min(rows(),m) and min(cols(),n) are left unchanged. \n
-                           If m &gt; rows(), new rows between rows() and \p m are uninitialized. \n
-                           If n &gt; cols(), new columns between cols() and \p n are uninitialized. \n
-                           A reallocation occurs and iterators are invalided when n*ld() &gt; capacity() or m &gt; ld(), 
+                       Elements under min(rows(),m) and min(cols(),n) are left unchanged. \n
+                       If m &gt; rows(), new rows between rows() and \p m are uninitialized. \n
+                       If n &gt; cols(), new columns between cols() and \p n are uninitialized. \n
+                       A reallocation occurs and iterators are invalided when n*ld() &gt; capacity() or m &gt; ld(), 
             
-                           \return  True for success.
-                           \note    When it is not necessary to keep the data, it is a good practice to clear the matrix before any resizing.
+                       \return  True for success.
+                       \note    When it is not necessary to keep the data, it is a good practice to clear the matrix before any resizing.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.resize(System.UInt32,System.UInt32,`0)">
-                           Changes the dimensions of the matrix (initialized).
+                       Changes the dimensions of the matrix (initialized).
             
-                           Elements under min(rows(),m) and min(cols(),n) are left unchanged. \n
-                           If m &gt; rows(), new rows between rows() and \p m are initialized to \p v. \n
-                           If n &gt; cols(), new columns between cols() and \p n are initialized to \p v. \n
-                           A reallocation occurs and iterators are invalided when n*ld() &gt; capacity() or m &gt; ld(), 
+                       Elements under min(rows(),m) and min(cols(),n) are left unchanged. \n
+                       If m &gt; rows(), new rows between rows() and \p m are initialized to \p v. \n
+                       If n &gt; cols(), new columns between cols() and \p n are initialized to \p v. \n
+                       A reallocation occurs and iterators are invalided when n*ld() &gt; capacity() or m &gt; ld(), 
             
-                           \return  True for success.
-                           \note    When it is not necessary to keep the data, it is a good practice to clear the matrix before any resizing.
+                       \return  True for success.
+                       \note    When it is not necessary to keep the data, it is a good practice to clear the matrix before any resizing.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.clear">
-                           Clears without deallocation. 
+                       Clears without deallocation. 
             
-                           The dimensions are set to zero. \n
-                           No deallocation is performed.
+                       The dimensions are set to zero. \n
+                       No deallocation is performed.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.clear_hard">
-                           Clears with deallocation. 
+                       Clears with deallocation. 
             
-                           The dimensions are set to zero. \n
-                           Deallocation is performed (when there is no other matrix or vector pointing to the data).
+                       The dimensions are set to zero. \n
+                       Deallocation is performed (when there is no other matrix or vector pointing to the data).
         </member>
     <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.dense2D`1.sub_matrix(System.UInt32,System.UInt32,System.UInt32,System.UInt32)" -->
     <member name="M:devDept.Meshing.dense2D`1.as_vector">
-                           Returns the matrix as a vector. 
-                           Data are shared.
-        </member>
-    <member name="M:devDept.Meshing.dense2D`1.is_unit_diagonal">
-            @name Miscellaneous 
-            Diagonal is not unity.
+                       Returns the matrix as a vector. 
+                       Data are shared.
         </member>
     <member name="M:devDept.Meshing.dense2D`1.has_contiguous_storage">
+            @name Miscellaneous 
             Is the data stored contiguously?
         </member>
     <member name="M:devDept.Meshing.dense2D`1.reserved_overlaps(devDept.Meshing.dense2D{`0})">
@@ -953,10 +874,6 @@
                        \pre  rows == ROWS
                        \pre  cols == COLS
         </member>
-    <member name="M:devDept.Meshing.matrix_fixed`1.#ctor(devDept.Meshing.matrix_fixed{`0})">
-                       Copy constructor.
-                       Hard copy.
-        </member>
     <member name="M:devDept.Meshing.matrix_fixed`1.#ctor(`0,System.UInt32,System.UInt32)">
                        Constructor from pre-allocated memory (deep copy).
             
@@ -968,75 +885,18 @@
             @name Operators 
             Copy operator (copy data).
         </member>
-    <member name="M:devDept.Meshing.matrix_fixed`1.first_index">
-            @name Size members 
-            First index.
-        </member>
-    <member name="M:devDept.Meshing.matrix_fixed`1.past_index">
-            Past-the-end index of columns.
-        </member>
     <member name="M:devDept.Meshing.matrix_fixed`1.rows">
+            @name Size members 
             Number of rows (constant static value = M).
         </member>
     <member name="M:devDept.Meshing.matrix_fixed`1.cols">
             Number of columns (constant static value = N).
-        </member>
-    <member name="M:devDept.Meshing.matrix_fixed`1.ld">
-            Leading dimension = stride from one column to the next one (constant static value = M).
-        </member>
-    <member name="M:devDept.Meshing.matrix_fixed`1.dim">
-                       Dimension of the matrix.
-            
-                       When the matrix is not square the dimension is defined by min(rows(), cols()).
-        </member>
-    <member name="M:devDept.Meshing.matrix_fixed`1.segments_entries">
-            Same as entries.
-        </member>
-    <member name="M:devDept.Meshing.matrix_fixed`1.is_valid_col(System.UInt32)">
-            @name Columns 
-            
-                       The \ref col members return column copies (_hard_ copies).
-                       Use the segment members for shallow copies (views).
-            Returns true if the j-th column can be accessed.
-        </member>
-    <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.matrix_fixed`1.col(System.UInt32)" -->
-    <member name="M:devDept.Meshing.matrix_fixed`1.segments">
-            @name Segment iterators
-                       The segment_iterator and const_segment_iterator can be seen as views
-                       to the column data of a matrix. \n
-                       They are equipped with members such as begin(), end() and size() which make them candidates
-                       for most of the cm2::vecscal and cm2::vecvec template functions.
-            Number of segments (constant static value = N).
-        </member>
-    <member name="M:devDept.Meshing.matrix_fixed`1.seg_begin">
-            Iterator to the first segment.
-        </member>
-    <member name="M:devDept.Meshing.matrix_fixed`1.cseg_begin">
-            Iterator to the first segment (const).
-        </member>
-    <member name="M:devDept.Meshing.matrix_fixed`1.seg_end">
-            Iterator to the past-the-end segment.
-        </member>
-    <member name="M:devDept.Meshing.matrix_fixed`1.cseg_end">
-            Iterator to the past-the-end segment (const).
         </member>
     <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.matrix_fixed`1.seg(System.UInt32)" -->
     <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.matrix_fixed`1.data_col(System.UInt32)" -->
     <member name="M:devDept.Meshing.matrix_fixed`1.functorMethod(System.UInt32,System.UInt32)">
             **
         </member>
-    <member name="M:devDept.Meshing.matrix_fixed`1.is_unit_diagonal">
-            @name Miscellaneous 
-            Diagonal is not unity.
-        </member>
-    <member name="M:devDept.Meshing.matrix_fixed`1.has_contiguous_storage">
-            Is the data stored contiguously?
-        </member>
-    <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.symmetric_fixed`1.seg``1(System.UInt32)" -->
-    <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.symmetric_full`1.#ctor(devDept.Meshing.symmetric_full{`0},System.UInt32)" -->
-    <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.symmetric_full`1.seg(System.UInt32)" -->
-    <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.symmetric_full`1.cseg``1(System.UInt32)" -->
-    <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.symmetric_full`1.sub_matrix(System.UInt32)" -->
     <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.vecscal.GlobalMembersvecscal.max_index``1(devDept.Meshing.vector_fixed{``0})" -->
     <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.vecscal.GlobalMembersvecscal.min_index``1(devDept.Meshing.dense1D{``0})" -->
     <!-- Badly formed XML comment ignored for member "M:devDept.Meshing.vecscal.GlobalMembersvecscal.mean``1(devDept.Meshing.dense1D{``0})" -->
@@ -1060,8 +920,8 @@
                    \see        dense1D, matrix_fixed, symmetric_fixed.
         </member>
     <member name="M:devDept.Meshing.vector_fixed`1.#ctor">
-                       Default constructor.
-                       Elements are uninitialized.
+                        Default constructor.
+                        Elements are uninitialized.
         </member>
     <member name="M:devDept.Meshing.vector_fixed`1.initialize(`0)">
                        Constructor with a common initializing value.
@@ -1096,12 +956,6 @@
                        Range check performed in DEBUG mode only.
             
                        \pre N = 6.
-        </member>
-    <member name="M:devDept.Meshing.vector_fixed`1.#ctor(`0,`0,`0,`0,`0,`0,`0,`0)">
-                       Constructor with 8 initializing values.
-                       Range check performed in DEBUG mode only.
-            
-                       \pre N = 8.
         </member>
     <member name="M:devDept.Meshing.vector_fixed`1.#ctor(System.UInt32,devDept.Meshing.vector_fixed{`0}@)">
                        Copy constructor. Hard copy.
@@ -1138,18 +992,8 @@
                        The number of elements in the vector.
                        This is a constant static value (= N).
         </member>
-    <member name="M:devDept.Meshing.vector_fixed`1.ld">
-            The leading dimension of the vector. Same as size().
-        </member>
-    <member name="M:devDept.Meshing.vector_fixed`1.size_of">
-                       The size in bytes of the content of the matrix.
-                       This is a constant static value (= N * sizeof(T)).
-        </member>
     <member name="M:devDept.Meshing.vector_fixed`1.empty">
             True when the vector is empty.
-        </member>
-    <member name="M:devDept.Meshing.vector_fixed`1.copy(devDept.Meshing.vector_fixed{`0}@)">
-            Deep copy.
         </member>
     <member name="T:devDept.Meshing.vector_num`1">
                    STL-style vector class modified for high performance. 
